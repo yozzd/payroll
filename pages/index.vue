@@ -1,5 +1,5 @@
 <template>
-  <div>
-    Hello
+  <div class="h-screen">
+    <Landing />
   </div>
 </template>
