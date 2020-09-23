@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  layout: 'layout1',
   head() {
     return {
       title: 'Dashboard',
