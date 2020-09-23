@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import {
+  Alert,
   Button,
   Form,
   FormItem,
@@ -10,6 +11,7 @@ import locale from 'element-ui/lib/locale';
 
 locale.use(lang);
 
+Vue.use(Alert);
 Vue.use(Button);
 Vue.use(Form);
 Vue.use(FormItem);

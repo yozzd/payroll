@@ -22,6 +22,7 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     '@/plugins/element-ui',
+    '@/plugins/auth',
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -35,8 +36,20 @@ export default {
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
-  modules: [
-  ],
+  modules: ['@nuxtjs/apollo'],
+  apollo: {
+    defaultOptions: {
+      $query: {
+        loadingKey: 'loading',
+        fetchPolicy: 'cache-and-network',
+      },
+    },
+    clientConfigs: {
+      default: '@/apollo/client/default.js',
+      upload: '@/apollo/client/upload.js',
+    },
+    errorHandler: '@/apollo/error-handler.js',
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {

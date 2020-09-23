@@ -12,7 +12,8 @@
     "lint": "npm run lint:js && npm run lint:style",
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "cross-env TEST=unit ava ./test/specs/**/*",
-    "test:e2e": "cross-env TEST=e2e ava ./test/e2e/**/*"
+    "test:e2e": "cross-env TEST=e2e ava ./test/e2e/**/*",
+    "server": "cross-env NODE_ENV=development nodemon server/index.js --watch server"
   },
   "dependencies": {
     "@nuxtjs/apollo": "^4.0.1-rc.3",

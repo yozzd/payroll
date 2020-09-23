@@ -6,6 +6,10 @@
       </div>
       <div class="flex items-center h-full">
         <div class="flex-1 flex-col space-y-8 px-12">
+          <ErrorHandler
+            v-if="errors"
+            :errors="errors"
+          />
           <el-form
             ref="form"
             :model="form"
@@ -60,18 +64,26 @@ export default {
           { required: true, message: 'This field is required', trigger: 'blur' },
         ],
       },
+      errors: [],
     };
   },
   methods: {
     submitForm(form) {
-      console.log(form);
-      this.$refs[form].validate((valid) => {
+      this.$refs[form].validate(async (valid) => {
         if (valid) {
-          console.log('submit!');
-          return true;
+          try {
+            await this.$auth.login({
+              username: this.form.username,
+              password: this.form.password,
+            });
+            return true;
+          } catch ({ graphQLErrors, networkError }) {
+            this.errors = graphQLErrors.length ? graphQLErrors : networkError.result.errors;
+            return false;
+          }
+        } else {
+          return false;
         }
-        console.log('error submit!!');
-        return false;
       });
     },
   },
