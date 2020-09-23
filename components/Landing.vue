@@ -16,6 +16,7 @@
             :rules="rules"
             :hide-required-asterisk="true"
             label-position="top"
+            @submit.native.prevent="submitForm('form')"
           >
             <el-form-item label="Username" prop="username">
               <el-input v-model="form.username"></el-input>
@@ -24,7 +25,7 @@
               <el-input v-model="form.password" show-password></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="submitForm('form')">
+              <el-button type="primary" native-type='submit'>
                 Login
               </el-button>
             </el-form-item>
