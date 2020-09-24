@@ -17,7 +17,8 @@
             v-for="year in years"
             :key="year"
             :label="year"
-            :value="year">
+            :value="year"
+          >
           </el-option>
         </el-select>
       </div>
@@ -26,11 +27,13 @@
       <el-table-column
         prop="period"
         label="Period"
-        width="180">
+        width="180"
+      >
       </el-table-column>
       <el-table-column
         prop="year"
-        label="Year">
+        label="Year"
+      >
       </el-table-column>
     </el-table>
 
@@ -72,13 +75,21 @@
             :auto-upload="false"
           >
             <i class="el-icon-upload"></i>
-            <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
+            <div class="el-upload__text">
+              Drop file here or <em>click to upload</em>
+            </div>
           </el-upload>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="showDialog = false">Cancel</el-button>
-        <el-button type="primary" @click="handleImport('form')">Import</el-button>
+        <el-button
+          type="primary"
+          :loading="loading"
+          @click="handleImport('form')"
+        >
+          Import
+        </el-button>
       </span>
     </el-dialog>
   </div>
@@ -96,6 +107,7 @@ export default {
 
     return {
       showDialog: false,
+      loading: false,
       form: {
         period: [],
         file: null,
@@ -137,6 +149,7 @@ export default {
       this.$refs[form].validate(async (valid) => {
         if (valid) {
           try {
+            this.loading = true;
             const client = this.$apolloProvider.clients.upload;
 
             await client.mutate({
@@ -151,6 +164,7 @@ export default {
             });
 
             this.showDialog = false;
+            this.loading = false;
             return true;
           } catch ({ graphQLErrors, networkError }) {
             this.errors = graphQLErrors.length ? graphQLErrors : networkError.result.errors;
