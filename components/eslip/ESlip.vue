@@ -161,6 +161,22 @@ export default {
                   to: this.form.period[1],
                 },
               },
+              update: (store, { data: { importESlip } }) => {
+                const cdata = store.readQuery({
+                  query: ESlips,
+                  variables: {
+                    year: this.form.year,
+                  },
+                });
+                cdata.eslips.push(importESlip);
+                store.writeQuery({
+                  query: ESlips,
+                  variables: {
+                    year: this.form.year,
+                  },
+                  data: cdata,
+                });
+              },
             });
 
             this.showDialog = false;
