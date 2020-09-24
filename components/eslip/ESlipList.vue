@@ -44,7 +44,7 @@ export default {
       return r.h0 !== '';
     },
     handleSelectionChange(a) {
-      this.multipleSelection = a;
+      this.multipleSelection = a.map((v) => v._id);
     },
   },
   apollo: {
