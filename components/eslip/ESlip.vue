@@ -16,7 +16,13 @@
       </div>
     </div>
 
-    <el-dialog title="Import" :visible.sync="showDialog" width="40%">
+    <el-dialog
+      title="Import"
+      :visible.sync="showDialog"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      width="40%"
+    >
       <el-form
         ref="form"
         :model="form"
@@ -33,6 +39,19 @@
             format="dd-MM-yyyy"
           >
           </el-date-picker>
+        </el-form-item>
+        <el-form-item label="File" prop="file">
+          <el-upload
+            drag
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :on-preview="handlePreview"
+            :on-remove="handleRemove"
+            :file-list="fileList"
+            :auto-upload="false"
+          >
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
+          </el-upload>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -62,6 +81,13 @@ export default {
               0: { type: 'object', required: 'true' },
               1: { type: 'object', required: 'true' },
             },
+          },
+        ],
+        file: [
+          {
+            type: 'object',
+            required: true,
+            message: 'This field is required',
           },
         ],
       },
