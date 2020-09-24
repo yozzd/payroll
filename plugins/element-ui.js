@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import {
   Alert,
+  Breadcrumb,
+  BreadcrumbItem,
   Button,
   DatePicker,
   Dialog,
@@ -25,6 +27,8 @@ import locale from 'element-ui/lib/locale';
 locale.use(lang);
 
 Vue.use(Alert);
+Vue.use(Breadcrumb);
+Vue.use(BreadcrumbItem);
 Vue.use(Button);
 Vue.use(DatePicker);
 Vue.use(Dialog);
