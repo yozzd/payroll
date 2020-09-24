@@ -2,6 +2,10 @@ html {
   font-family: sans-serif;
 }
 
+button:focus {
+  @apply outline-none;
+}
+
 .el-date-editor--daterange.el-input__inner {
   @apply w-full;
 }
