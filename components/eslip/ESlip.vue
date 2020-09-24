@@ -27,15 +27,22 @@
       <el-table-column
         prop="period"
         label="Period"
-        width="180"
       >
+        <template slot-scope="scope">
+          <el-link
+            :href="`/eslip/detail/${scope.row._id}`"
+            icon="el-icon-document"
+          >
+            {{ scope.row.period }}
+          </el-link>
+        </template>
       </el-table-column>
       <el-table-column
         prop="year"
         label="Year"
       >
       </el-table-column>
-      <el-table-column>
+      <el-table-column min-width="10">
         <template slot-scope="scope">
           <el-dropdown trigger="click" @command="c => handleCommand(c, scope.row._id)">
             <span class="el-dropdown-link flex space-x-1 items-center">
