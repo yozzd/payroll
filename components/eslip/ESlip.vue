@@ -12,9 +12,27 @@
       </div>
       <div class="flex-1"></div>
       <div>
-        Placeholder
+        <el-select v-model="form.year" @change="handleChange">
+          <el-option
+            v-for="year in years"
+            :key="year"
+            :label="year"
+            :value="year">
+          </el-option>
+        </el-select>
       </div>
     </div>
+    <el-table :data="eslips">
+      <el-table-column
+        prop="period"
+        label="Period"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="year"
+        label="Year">
+      </el-table-column>
+    </el-table>
 
     <el-dialog
       title="Import"
@@ -23,6 +41,11 @@
       :close-on-press-escape="false"
       width="40%"
     >
+      <ErrorHandler
+        v-if="errors"
+        :errors="errors"
+        class="mb-8"
+      />
       <el-form
         ref="form"
         :model="form"
@@ -62,15 +85,21 @@
 </template>
 
 <script>
+import { getYear } from 'date-fns';
+import { ESlips } from '../../apollo/query/eslip';
 import ImportESlip from '../../apollo/mutation/import';
 
 export default {
   data() {
+    const year = getYear(new Date());
+    const initYear = 2019;
+
     return {
       showDialog: false,
       form: {
         period: [],
         file: null,
+        year,
       },
       rules: {
         period: [
@@ -93,9 +122,14 @@ export default {
           },
         ],
       },
+      years: [...Array(year - (initYear - 1)).keys()].map((i) => i + initYear),
+      errors: [],
     };
   },
   methods: {
+    handleChange(v) {
+      this.form.year = v;
+    },
     handleUploadOnChange({ raw }) {
       this.form.file = raw;
     },
@@ -126,6 +160,21 @@ export default {
           return false;
         }
       });
+    },
+  },
+  apollo: {
+    $client: 'upload',
+    eslips: {
+      query: ESlips,
+      variables() {
+        return {
+          year: this.form.year,
+        };
+      },
+      prefetch: false,
+      error({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors.length ? graphQLErrors : networkError.result.errors;
+      },
     },
   },
 };

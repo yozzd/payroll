@@ -11,6 +11,10 @@ import {
   FormItem,
   Input,
   Link,
+  Option,
+  Select,
+  Table,
+  TableColumn,
   Upload,
 } from 'element-ui';
 import lang from 'element-ui/lib/locale/lang/en';
@@ -29,4 +33,8 @@ Vue.use(Form);
 Vue.use(FormItem);
 Vue.use(Input);
 Vue.use(Link);
+Vue.use(Option);
+Vue.use(Select);
+Vue.use(Table);
+Vue.use(TableColumn);
 Vue.use(Upload);
