@@ -35,6 +35,20 @@
         label="Year"
       >
       </el-table-column>
+      <el-table-column>
+        <template slot-scope="scope">
+          <el-dropdown trigger="click" @command="c => handleCommand(c, scope.row._id)">
+            <span class="el-dropdown-link flex space-x-1 items-center">
+              <i class="el-icon-more"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="delete">
+                Delete
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </template>
+      </el-table-column>
     </el-table>
 
     <el-dialog
@@ -99,6 +113,7 @@
 import { getYear } from 'date-fns';
 import { ESlips } from '../../apollo/query/eslip';
 import ImportESlip from '../../apollo/mutation/import';
+import ESlipDelete from '../../apollo/mutation/eslip';
 
 export default {
   data() {
@@ -149,6 +164,47 @@ export default {
       this.form.file = null;
       this.form.period = [];
       this.showDialog = false;
+    },
+    handleCommand(c, id) {
+      if (c === 'delete') this.handleConfirm(id);
+    },
+    handleConfirm(id) {
+      this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'Cancel',
+        type: 'warning',
+      }).then(async () => {
+        await this.$apollo.mutate({
+          mutation: ESlipDelete,
+          variables: {
+            id,
+          },
+          update: (store, { data: { eslipDelete } }) => {
+            const cdata = store.readQuery({
+              query: ESlips,
+              variables: {
+                year: this.form.year,
+              },
+            });
+            const index = cdata.eslips.findIndex((v) => v._id === eslipDelete._id);
+            if (index > -1) {
+              cdata.eslips.splice(index, 1);
+            }
+            store.writeQuery({
+              query: ESlips,
+              variables: {
+                year: this.form.year,
+              },
+              data: cdata,
+            });
+          },
+        });
+
+        this.$message({
+          type: 'success',
+          message: 'Delete completed',
+        });
+      }).catch(() => {});
     },
     handleImport(form) {
       this.$refs[form].validate(async (valid) => {

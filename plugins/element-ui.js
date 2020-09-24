@@ -10,6 +10,8 @@ import {
   Form,
   FormItem,
   Input,
+  Message,
+  MessageBox,
   Link,
   Option,
   Select,
@@ -38,3 +40,6 @@ Vue.use(Select);
 Vue.use(Table);
 Vue.use(TableColumn);
 Vue.use(Upload);
+
+Vue.prototype.$message = Message;
+Vue.prototype.$confirm = MessageBox.confirm;

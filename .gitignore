@@ -90,3 +90,4 @@ sw.*
 *.swp
 
 server/config
+static/eslip
