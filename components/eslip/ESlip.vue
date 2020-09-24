@@ -30,7 +30,7 @@
       >
         <template slot-scope="scope">
           <el-link
-            :href="`/eslip/detail/${scope.row._id}`"
+            :href="`/eslip/list/${scope.row._id}`"
             icon="el-icon-document"
           >
             {{ scope.row.period }}
