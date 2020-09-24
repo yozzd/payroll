@@ -5,6 +5,17 @@
       v-if="errors"
       :errors="errors"
     />
+    <div class="flex space-x-4 items-center">
+      <div class="flex-1">
+        {{ multipleSelection.length }} item(s) selected
+      </div>
+      <el-button type="primary" :loading="loadingSlip">
+        Generate
+      </el-button>
+      <el-button type="primary" :loading="loadingSend">
+        Send
+      </el-button>
+    </div>
     <el-table
       v-loading="$apollo.loading"
       :data="items"
