@@ -6,6 +6,11 @@ button:focus {
   @apply outline-none;
 }
 
+.el-form-item.is-error .el-upload-dragger,
+.el-form-item.is-error .el-upload-dragger:focus {
+    border-color: #F56C6C;
+}
+
 .px-80 {
   padding-left: 20rem;
   padding-right: 20rem;
