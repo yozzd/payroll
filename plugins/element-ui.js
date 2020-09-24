@@ -17,6 +17,7 @@ import {
   Message,
   MessageBox,
   Option,
+  Progress,
   Select,
   Table,
   TableColumn,
@@ -41,6 +42,7 @@ Vue.use(FormItem);
 Vue.use(Input);
 Vue.use(Link);
 Vue.use(Option);
+Vue.use(Progress);
 Vue.use(Select);
 Vue.use(Table);
 Vue.use(TableColumn);

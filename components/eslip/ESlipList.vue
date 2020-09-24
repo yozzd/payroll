@@ -1,6 +1,11 @@
 <template>
   <div class="flex flex-col space-y-4 mt-4 mb-8 px-12">
     <BreadNav :breadcrumb="breadcrumb" />
+    <el-progress
+      :text-inside="true"
+      :stroke-width="16"
+      :percentage="percentage"
+    ></el-progress>
     <ErrorHandler
       v-if="errors"
       :errors="errors"
@@ -71,6 +76,7 @@ export default {
       loadingSlip: false,
       loadingSend: false,
       multipleSelection: [],
+      percentage: 0,
       errors: [],
     };
   },
@@ -84,9 +90,12 @@ export default {
     async generate() {
       try {
         this.loadingSlip = true;
+        let count = 0;
+        this.percentage = 0;
+
         await Promise.all(
           this.multipleSelection.map(async (v) => {
-            await this.$apollo.mutate({
+            const { data } = await this.$apollo.mutate({
               mutation: GenerateESlip,
               variables: {
                 id: this.$route.params.id,
@@ -110,6 +119,10 @@ export default {
                 });
               },
             });
+            if (data.generateESlip.sStatus) {
+              count += 1;
+              this.percentage = ((count / this.multipleSelection.length) * 100).toFixed(2);
+            }
           }),
         );
 
