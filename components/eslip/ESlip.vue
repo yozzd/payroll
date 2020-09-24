@@ -82,7 +82,7 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="showDialog = false">Cancel</el-button>
+        <el-button @click="handleCancel">Cancel</el-button>
         <el-button
           type="primary"
           :loading="loading"
@@ -144,6 +144,11 @@ export default {
     },
     handleUploadOnChange({ raw }) {
       this.form.file = raw;
+    },
+    handleCancel() {
+      this.form.file = null;
+      this.form.period = [];
+      this.showDialog = false;
     },
     handleImport(form) {
       this.$refs[form].validate(async (valid) => {
