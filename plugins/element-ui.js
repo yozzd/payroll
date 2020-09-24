@@ -12,9 +12,10 @@ import {
   Form,
   FormItem,
   Input,
+  Link,
+  Loading,
   Message,
   MessageBox,
-  Link,
   Option,
   Select,
   Table,
@@ -45,5 +46,6 @@ Vue.use(Table);
 Vue.use(TableColumn);
 Vue.use(Upload);
 
+Vue.use(Loading.directive);
 Vue.prototype.$message = Message;
 Vue.prototype.$confirm = MessageBox.confirm;

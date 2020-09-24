@@ -5,7 +5,7 @@
       v-if="errors"
       :errors="errors"
     />
-    <el-table :data="items">
+    <el-table :data="items" v-loading="$apollo.loading">
       <el-table-column prop="b0" label="No. Karyawan"></el-table-column>
     </el-table>
   </div>
