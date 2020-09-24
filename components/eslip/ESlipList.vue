@@ -9,14 +9,25 @@
       <div class="flex-1">
         {{ multipleSelection.length }} item(s) selected
       </div>
-      <el-button type="primary" :loading="loadingSlip">
+      <el-button
+        type="primary"
+        :loading="loadingSlip"
+        :disabled="!multipleSelection.length"
+        @click="generate"
+      >
         Generate
       </el-button>
-      <el-button type="primary" :loading="loadingSend">
+      <el-button
+        type="primary"
+        :loading="loadingSend"
+        :disabled="!multipleSelection.length"
+        @click="send"
+      >
         Send
       </el-button>
     </div>
     <el-table
+      ref="eslipTable"
       v-loading="$apollo.loading"
       :data="items"
       size="small"
@@ -32,12 +43,25 @@
       <el-table-column prop="b0" label="No. Karyawan" width="120"></el-table-column>
       <el-table-column prop="c0" label="Nama Karyawan"></el-table-column>
       <el-table-column prop="h0" label="Email"></el-table-column>
+      <el-table-column label="E-Slip">
+        <template slot-scope="scope">
+          <el-link
+            v-if="scope.row.slipPath"
+            :href="scope.row.slipPath"
+            target="_blank"
+            class="link-sm"
+          >
+            {{ scope.row._id}}.pdf
+          </el-link>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
 
 <script>
 import { EmployeeESlip } from '../../apollo/query/eslip';
+import { GenerateESlip } from '../../apollo/mutation/eslip';
 
 export default {
   data() {
@@ -57,6 +81,52 @@ export default {
     handleSelectionChange(a) {
       this.multipleSelection = a.map((v) => v._id);
     },
+    async generate() {
+      try {
+        this.loadingSlip = true;
+        await Promise.all(
+          this.multipleSelection.map(async (v) => {
+            await this.$apollo.mutate({
+              mutation: GenerateESlip,
+              variables: {
+                id: this.$route.params.id,
+                eId: v,
+              },
+              update: (store, { data: { generateESlip } }) => {
+                const cdata = store.readQuery({
+                  query: EmployeeESlip,
+                  variables: {
+                    id: this.$route.params.id,
+                  },
+                });
+                const index = cdata.employeeESlip.employee.findIndex((e) => e._id === v);
+                cdata.employeeESlip.employee[index].slipPath = generateESlip.slipPath;
+                store.writeQuery({
+                  query: EmployeeESlip,
+                  variables: {
+                    id: this.$route.params.id,
+                  },
+                  data: cdata,
+                });
+              },
+            });
+          }),
+        );
+
+        this.loadingSlip = false;
+        this.multipleSelection = [];
+        this.$refs.eslipTable.clearSelection();
+        this.$message({
+          type: 'success',
+          message: 'Completed',
+        });
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors.length ? graphQLErrors : networkError.result.errors;
+        return false;
+      }
+    },
+    send() {},
   },
   apollo: {
     employeeESlip: {
