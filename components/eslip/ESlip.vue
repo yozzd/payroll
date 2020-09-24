@@ -43,10 +43,9 @@
         <el-form-item label="File" prop="file">
           <el-upload
             drag
-            action="https://jsonplaceholder.typicode.com/posts/"
-            :on-preview="handlePreview"
-            :on-remove="handleRemove"
-            :file-list="fileList"
+            action=""
+            accept=".xls, .xlsx"
+            :on-change="handleUploadOnChange"
             :auto-upload="false"
           >
             <i class="el-icon-upload"></i>
@@ -63,12 +62,15 @@
 </template>
 
 <script>
+import ImportESlip from '../../apollo/mutation/import';
+
 export default {
   data() {
     return {
       showDialog: false,
       form: {
         period: [],
+        file: null,
       },
       rules: {
         period: [
@@ -94,11 +96,27 @@ export default {
     };
   },
   methods: {
+    handleUploadOnChange({ raw }) {
+      this.form.file = raw;
+    },
     handleImport(form) {
       this.$refs[form].validate(async (valid) => {
         if (valid) {
           try {
-            console.log(this.form.period);
+            const client = this.$apolloProvider.clients.upload;
+
+            await client.mutate({
+              mutation: ImportESlip,
+              variables: {
+                input: {
+                  file: this.form.file,
+                  from: this.form.period[0],
+                  to: this.form.period[1],
+                },
+              },
+            });
+
+            this.showDialog = false;
             return true;
           } catch ({ graphQLErrors, networkError }) {
             this.errors = graphQLErrors.length ? graphQLErrors : networkError.result.errors;
