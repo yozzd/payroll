@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <el-dialog title="Import" :visible.sync="showDialog">
+    <el-dialog title="Import" :visible.sync="showDialog" width="40%">
       <el-form
         ref="form"
         :model="form"
@@ -37,7 +37,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="showDialog = false">Cancel</el-button>
-        <el-button type="primary" @click="handleImport('form')">Confirm</el-button>
+        <el-button type="primary" @click="handleImport('form')">Import</el-button>
       </span>
     </el-dialog>
   </div>

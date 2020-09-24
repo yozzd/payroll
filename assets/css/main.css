@@ -2,6 +2,10 @@ html {
   font-family: sans-serif;
 }
 
+.el-date-editor--daterange.el-input__inner {
+  @apply w-full;
+}
+
 .px-80 {
   padding-left: 20rem;
   padding-right: 20rem;
