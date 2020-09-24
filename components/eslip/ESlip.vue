@@ -23,7 +23,12 @@
         </el-select>
       </div>
     </div>
-    <el-table :data="eslips" v-loading="$apollo.loading">
+    <el-table
+      :data="eslips"
+      v-loading="$apollo.loading"
+      element-loading-text="Loading..."
+      element-loading-spinner="el-icon-loading"
+    >
       <el-table-column
         prop="period"
         label="Period"

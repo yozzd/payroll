@@ -33,9 +33,12 @@
     </div>
     <el-table
       ref="eslipTable"
-      v-loading="$apollo.loading"
+      v-loading="$apollo.loading || loadingSlip"
+      element-loading-text="Loading..."
+      element-loading-spinner="el-icon-loading"
       :data="items"
       size="small"
+      max-height="500"
       @selection-change="handleSelectionChange"
     >
       <el-table-column
