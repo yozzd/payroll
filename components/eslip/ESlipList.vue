@@ -33,7 +33,7 @@
     </div>
     <el-table
       ref="eslipTable"
-      v-loading="$apollo.loading || loadingSlip"
+      v-loading="$apollo.loading || loadingSlip || loadingSend"
       element-loading-text="Loading..."
       element-loading-spinner="el-icon-loading"
       :data="items"
@@ -69,7 +69,7 @@
 
 <script>
 import { EmployeeESlip } from '../../apollo/query/eslip';
-import { GenerateESlip } from '../../apollo/mutation/eslip';
+import { GenerateESlip, SendESlip } from '../../apollo/mutation/eslip';
 
 export default {
   data() {
@@ -124,7 +124,7 @@ export default {
             });
             if (data.generateESlip.sStatus) {
               count += 1;
-              this.percentage = ((count / this.multipleSelection.length) * 100).toFixed(2);
+              this.percentage = Math.round((count / this.multipleSelection.length) * 100);
             }
           }),
         );
@@ -136,13 +136,49 @@ export default {
           type: 'success',
           message: 'Completed',
         });
+
         return true;
       } catch ({ graphQLErrors, networkError }) {
         this.errors = graphQLErrors.length ? graphQLErrors : networkError.result.errors;
         return false;
       }
     },
-    send() {},
+    async send() {
+      try {
+        this.loadingSend = true;
+        let count = 0;
+        this.percentage = 0;
+
+        await Promise.all(
+          this.multipleSelection.map(async (v) => {
+            const { data } = await this.$apollo.mutate({
+              mutation: SendESlip,
+              variables: {
+                id: this.$route.params.id,
+                eId: v,
+              },
+            });
+            if (data.sendESlip.accepted.length) {
+              count += 1;
+              this.percentage = Math.round((count / this.multipleSelection.length) * 100);
+            }
+          }),
+        );
+
+        this.loadingSend = false;
+        this.multipleSelection = [];
+        this.$refs.eslipTable.clearSelection();
+        this.$message({
+          type: 'success',
+          message: 'Completed',
+        });
+
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors.length ? graphQLErrors : networkError.result.errors;
+        return false;
+      }
+    },
   },
   apollo: {
     employeeESlip: {
