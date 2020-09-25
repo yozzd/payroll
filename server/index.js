@@ -14,7 +14,7 @@ const User = require('./schema/user/model');
 const auth = require('./schema/auth/service');
 
 const host = '0.0.0.0';
-const port = 3006;
+const port = 3001;
 
 app.use(cors());
 authPassport.setup(User);
