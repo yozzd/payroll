@@ -32,7 +32,7 @@
     "graphql-tag": "^2.11.0",
     "graphql-upload": "^11.0.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.6",
+    "mongoose": "^5.10.7",
     "mongoose-timestamp2": "^0.1.10",
     "nanoid": "^3.1.12",
     "nodemailer": "^6.4.11",
