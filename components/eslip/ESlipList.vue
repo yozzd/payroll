@@ -59,7 +59,10 @@
               @visible-change="e => handleChange(e, scope)"
             >
               <i class="el-icon-search"></i>
-              <el-dropdown-menu slot="dropdown">
+              <el-dropdown-menu
+                slot="dropdown"
+                class="search"
+              >
                 <el-input
                   v-model="search"
                   placeholder="Search"
@@ -85,7 +88,10 @@
               @visible-change="e => handleChange(e, scope)"
             >
               <i class="el-icon-search"></i>
-              <el-dropdown-menu slot="dropdown">
+              <el-dropdown-menu
+                slot="dropdown"
+                class="search"
+              >
                 <el-input
                   v-model="search"
                   placeholder="Search"
@@ -111,7 +117,10 @@
               @visible-change="e => handleChange(e, scope)"
             >
               <i class="el-icon-search"></i>
-              <el-dropdown-menu slot="dropdown">
+              <el-dropdown-menu
+                slot="dropdown"
+                class="search"
+              >
                 <el-input
                   v-model="search"
                   placeholder="Search"
@@ -162,11 +171,8 @@ export default {
   },
   computed: {
     tableData() {
-      if (this.headerCol) {
-        return this.items.filter((data) => !this.search
-        || data[this.headerCol].toLowerCase().includes(this.search.toLowerCase()));
-      }
-      return this.items;
+      return this.items.filter((data) => !this.search
+      || data[this.headerCol].toLowerCase().includes(this.search.toLowerCase()));
     },
   },
   methods: {
@@ -177,12 +183,7 @@ export default {
       this.multipleSelection = a.map((v) => v._id);
     },
     handleChange(e, { column }) {
-      if (e) {
-        this.headerCol = column.property;
-      } else {
-        this.headerCol = '';
-        this.search = '';
-      }
+      if (e) this.headerCol = column.property;
     },
     async generate() {
       try {

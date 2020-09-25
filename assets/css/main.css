@@ -2,6 +2,10 @@ html {
   font-family: sans-serif;
 }
 
+.el-dropdown-menu.search {
+  @apply px-4;
+}
+
 .el-upload-dragger {
   width: 350px;
 }
