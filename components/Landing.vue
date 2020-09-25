@@ -25,7 +25,7 @@
               <el-input v-model="form.password" show-password></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" native-type='submit'>
+              <el-button type="primary" native-type="submit">
                 Login
               </el-button>
             </el-form-item>

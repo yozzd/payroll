@@ -24,8 +24,8 @@
       </div>
     </div>
     <el-table
-      :data="eslips"
       v-loading="$apollo.loading"
+      :data="eslips"
       element-loading-text="Loading..."
       element-loading-spinner="el-icon-loading"
     >
@@ -68,7 +68,7 @@
       :visible.sync="showDialog"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
-      width="40%"
+      width="31%"
     >
       <ErrorHandler
         v-if="errors"

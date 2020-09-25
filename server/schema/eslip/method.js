@@ -24,7 +24,7 @@ const generateESlip = async (p, e) => {
     const dob = format(new Date(`${d[2]} ${d[1]} ${d[0]}`), 'ddMMyy');
     await fs.ensureDir(`static/eslip/${dir}`);
 
-    let ctbl1 = [
+    const ctbl1 = [
       ['Basic Salary', '', '', { text: intpre0(e.q0).format(), alignment: 'right' }],
       ['Overtime', { text: floatpre2(e.r0).format(), alignment: 'right' }, 'Wage/173', { text: intpre0(e.s0).format(), alignment: 'right' }],
       ['Insentif', { text: floatpre2(e.t0).format(), alignment: 'right' }, intpre0(e.u0).format(), { text: intpre0(e.v0).format(), alignment: 'right' }],
@@ -70,9 +70,11 @@ const generateESlip = async (p, e) => {
     if (e.ay0) ctbl1.push(['Uang Penggantian Hak', '', '15%', { text: intpre0(e.ay0).format(), alignment: 'right' }]);
     if (e.az0) ctbl1.push(['Bonus', '', '', { text: intpre0(e.az0).format(), alignment: 'right' }]);
     ctbl1.push([{ text: 'Other additions are not taxable', colSpan: 2 }, '', '', { text: intpre0(e.ba0).format(), alignment: 'right' }]);
-    ctbl1.push([{ text: 'TOTAL EARNINGS', bold: true, alignment: 'right' }, '', '', { text: intpre0(e.br0).format(), bold: true, alignment: 'right', fillColor: '#EEEEEE' }]);
+    ctbl1.push([{ text: 'TOTAL EARNINGS', bold: true, alignment: 'right' }, '', '', {
+      text: intpre0(e.br0).format(), bold: true, alignment: 'right', fillColor: '#EEEEEE',
+    }]);
 
-    let ctbl2 = [
+    const ctbl2 = [
       ['Absent (Days)', floatpre3(e.bb0).format(), { text: intpre0(e.bc0).format(), alignment: 'right' }],
       ['Income Tax NPWP', '', { text: intpre0(e.be0).format(), alignment: 'right' }],
       ['Income Tax Non NPWP', '', { text: intpre0(e.bf0).format(), alignment: 'right' }],
@@ -84,13 +86,15 @@ const generateESlip = async (p, e) => {
       ['Canteen', '', { text: intpre0(e.bl0).format(), alignment: 'right' }],
       ['Retro Deductions', '', { text: intpre0(e.bm0).format(), alignment: 'right' }],
       ['Underpayment of Taxes', '', { text: intpre0(e.bn0).format(), alignment: 'right' }],
-      [{ text: 'TOTAL DEDUCTIONS', bold: true, alignment: 'right' }, '', { text: intpre0(e.bo0).format(), bold: true, alignment: 'right', fillColor: '#EEEEEE' }],
+      [{ text: 'TOTAL DEDUCTIONS', bold: true, alignment: 'right' }, '', {
+        text: intpre0(e.bo0).format(), bold: true, alignment: 'right', fillColor: '#EEEEEE',
+      }],
       ['', '', ''],
       [{ text: 'GROSS', bold: true }, '', { text: intpre0(e.bp0).format(), bold: true, alignment: 'right' }],
       [{ text: 'Government Borne Tax Returns', colSpan: 2 }, '', { text: intpre0(e.bq0).format(), bold: true, alignment: 'right' }],
     ];
 
-    let notes = [
+    const notes = [
       ['', 'Note :', '', ''],
       ['-', e.bt0, 'Approved by,', 'Received by,'],
       ['-', { text: 'If there is correction on the limit of complaint on the 15th of each month', rowSpan: 2 }, { text: 'PT. LABTECH PENTA INTERNATIONAL', bold: true }, { text: e.c0, bold: true }],
@@ -222,7 +226,7 @@ const generateESlip = async (p, e) => {
 
     return { sStatus: 1, slipPath: e.slipPath };
   } catch (err) {
-    if(typeof err === 'string') {
+    if (typeof err === 'string') {
       throw new GraphQLError(err);
     } else {
       throw new GraphQLError(err.message);
@@ -288,7 +292,7 @@ const sendESlip = async (p, e) => {
 
     return info;
   } catch (err) {
-    if(typeof err === 'string') {
+    if (typeof err === 'string') {
       throw new GraphQLError(err);
     } else {
       throw new GraphQLError(err.message);

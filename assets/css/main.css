@@ -2,6 +2,10 @@ html {
   font-family: sans-serif;
 }
 
+.el-upload-dragger {
+  width: 350px;
+}
+
 .link-sm {
   font-size: 12px;
 }

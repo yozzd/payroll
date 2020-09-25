@@ -36,7 +36,7 @@
       v-loading="$apollo.loading || loadingSlip || loadingSend"
       element-loading-text="Loading..."
       element-loading-spinner="el-icon-loading"
-      :data="items"
+      :data="tableData"
       size="small"
       max-height="500"
       @selection-change="handleSelectionChange"
@@ -48,9 +48,84 @@
         :selectable="selectDisable"
       ></el-table-column>
       <el-table-column type="index" width="50" align="center"></el-table-column>
-      <el-table-column prop="b0" label="No. Karyawan" width="120"></el-table-column>
-      <el-table-column prop="c0" label="Nama Karyawan"></el-table-column>
-      <el-table-column prop="h0" label="Email"></el-table-column>
+      <el-table-column prop="b0">
+        <template slot="header" slot-scope="scope">
+          <div class="flex">
+            <div class="flex-1">
+              No. Karyawan
+            </div>
+            <el-dropdown
+              trigger="click"
+              @visible-change="e => handleChange(e, scope)"
+            >
+              <i class="el-icon-search"></i>
+              <el-dropdown-menu slot="dropdown">
+                <el-input
+                  v-model="search"
+                  placeholder="Search"
+                />
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
+        </template>
+        <template slot-scope="scope">
+          <span>
+            {{ scope.row.b0 }}
+          </span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="c0">
+        <template slot="header" slot-scope="scope">
+          <div class="flex">
+            <div class="flex-1">
+              Nama Karyawan
+            </div>
+            <el-dropdown
+              trigger="click"
+              @visible-change="e => handleChange(e, scope)"
+            >
+              <i class="el-icon-search"></i>
+              <el-dropdown-menu slot="dropdown">
+                <el-input
+                  v-model="search"
+                  placeholder="Search"
+                />
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
+        </template>
+        <template slot-scope="scope">
+          <span>
+            {{ scope.row.c0 }}
+          </span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="h0">
+        <template slot="header" slot-scope="scope">
+          <div class="flex">
+            <div class="flex-1">
+              Email
+            </div>
+            <el-dropdown
+              trigger="click"
+              @visible-change="e => handleChange(e, scope)"
+            >
+              <i class="el-icon-search"></i>
+              <el-dropdown-menu slot="dropdown">
+                <el-input
+                  v-model="search"
+                  placeholder="Search"
+                />
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
+        </template>
+        <template slot-scope="scope">
+          <span>
+            {{ scope.row.h0 }}
+          </span>
+        </template>
+      </el-table-column>
       <el-table-column label="E-Slip">
         <template slot-scope="scope">
           <el-link
@@ -59,7 +134,7 @@
             target="_blank"
             class="link-sm"
           >
-            {{ scope.row._id}}.pdf
+            {{ scope.row._id }}.pdf
           </el-link>
         </template>
       </el-table-column>
@@ -80,8 +155,19 @@ export default {
       loadingSend: false,
       multipleSelection: [],
       percentage: 0,
+      search: '',
+      headerCol: '',
       errors: [],
     };
+  },
+  computed: {
+    tableData() {
+      if (this.headerCol) {
+        return this.items.filter((data) => !this.search
+        || data[this.headerCol].toLowerCase().includes(this.search.toLowerCase()));
+      }
+      return this.items;
+    },
   },
   methods: {
     selectDisable(r) {
@@ -89,6 +175,14 @@ export default {
     },
     handleSelectionChange(a) {
       this.multipleSelection = a.map((v) => v._id);
+    },
+    handleChange(e, { column }) {
+      if (e) {
+        this.headerCol = column.property;
+      } else {
+        this.headerCol = '';
+        this.search = '';
+      }
     },
     async generate() {
       try {
