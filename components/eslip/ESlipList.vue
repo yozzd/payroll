@@ -65,7 +65,7 @@
               >
                 <el-input
                   v-model="search"
-                  placeholder="Search"
+                  placeholder="No.Karyawan"
                 />
               </el-dropdown-menu>
             </el-dropdown>
@@ -94,7 +94,7 @@
               >
                 <el-input
                   v-model="search"
-                  placeholder="Search"
+                  placeholder="Nama Karyawan"
                 />
               </el-dropdown-menu>
             </el-dropdown>
@@ -123,7 +123,7 @@
               >
                 <el-input
                   v-model="search"
-                  placeholder="Search"
+                  placeholder="Email"
                 />
               </el-dropdown-menu>
             </el-dropdown>
