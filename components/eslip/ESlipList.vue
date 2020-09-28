@@ -14,6 +14,13 @@
       <div class="flex-1">
         {{ multipleSelection.length }} item(s) selected
       </div>
+      <div class="w-64">
+        <el-input
+          v-model="search"
+          placeholder="Search"
+          clearable
+        />
+      </div>
       <el-button
         type="primary"
         :loading="loadingSlip"
@@ -48,94 +55,10 @@
         :selectable="selectDisable"
       ></el-table-column>
       <el-table-column type="index" width="50" align="center"></el-table-column>
-      <el-table-column prop="b0">
-        <template slot="header" slot-scope="scope">
-          <div class="flex">
-            <div class="flex-1">
-              No. Karyawan
-            </div>
-            <el-dropdown
-              trigger="click"
-              @visible-change="e => handleChange(e, scope)"
-            >
-              <i class="el-icon-search"></i>
-              <el-dropdown-menu
-                slot="dropdown"
-                class="search"
-              >
-                <el-input
-                  v-model="search"
-                  placeholder="No.Karyawan"
-                />
-              </el-dropdown-menu>
-            </el-dropdown>
-          </div>
-        </template>
-        <template slot-scope="scope">
-          <span>
-            {{ scope.row.b0 }}
-          </span>
-        </template>
-      </el-table-column>
-      <el-table-column prop="c0">
-        <template slot="header" slot-scope="scope">
-          <div class="flex">
-            <div class="flex-1">
-              Nama Karyawan
-            </div>
-            <el-dropdown
-              trigger="click"
-              @visible-change="e => handleChange(e, scope)"
-            >
-              <i class="el-icon-search"></i>
-              <el-dropdown-menu
-                slot="dropdown"
-                class="search"
-              >
-                <el-input
-                  v-model="search"
-                  placeholder="Nama Karyawan"
-                />
-              </el-dropdown-menu>
-            </el-dropdown>
-          </div>
-        </template>
-        <template slot-scope="scope">
-          <span>
-            {{ scope.row.c0 }}
-          </span>
-        </template>
-      </el-table-column>
-      <el-table-column prop="h0">
-        <template slot="header" slot-scope="scope">
-          <div class="flex">
-            <div class="flex-1">
-              Email
-            </div>
-            <el-dropdown
-              trigger="click"
-              @visible-change="e => handleChange(e, scope)"
-            >
-              <i class="el-icon-search"></i>
-              <el-dropdown-menu
-                slot="dropdown"
-                class="search"
-              >
-                <el-input
-                  v-model="search"
-                  placeholder="Email"
-                />
-              </el-dropdown-menu>
-            </el-dropdown>
-          </div>
-        </template>
-        <template slot-scope="scope">
-          <span>
-            {{ scope.row.h0 }}
-          </span>
-        </template>
-      </el-table-column>
-      <el-table-column label="E-Slip">
+      <el-table-column prop="b0" label="No. Karyawan"></el-table-column>
+      <el-table-column prop="c0" label="Nama Karyawan"></el-table-column>
+      <el-table-column prop="h0" label="Email"></el-table-column>
+      <el-table-column label="File">
         <template slot-scope="scope">
           <el-link
             v-if="scope.row.slipPath"
@@ -152,6 +75,7 @@
 </template>
 
 <script>
+import MiniSearch from 'minisearch';
 import { EmployeeESlip } from '../../apollo/query/eslip';
 import { GenerateESlip, SendESlip } from '../../apollo/mutation/eslip';
 
@@ -167,12 +91,19 @@ export default {
       search: '',
       headerCol: '',
       errors: [],
+      miniSearch: new MiniSearch({
+        idField: '_id',
+        fields: ['b0', 'c0', 'h0'],
+        storeFields: ['_id', 'b0', 'c0', 'h0', 'slipPath'],
+      }),
     };
   },
   computed: {
     tableData() {
-      return this.items.filter((data) => !this.search
-      || data[this.headerCol].toLowerCase().includes(this.search.toLowerCase()));
+      if (this.search) {
+        return this.miniSearch.search(this.search, { prefix: true });
+      }
+      return this.items;
     },
   },
   methods: {
@@ -293,6 +224,15 @@ export default {
             { name: 'E-Slip', path: '/eslip' },
             { name: `${period} ${year}` },
           ];
+
+          // const miniSearch = new MiniSearch({
+          //   idField: '_id',
+          //   fields: ['b0', 'c0', 'h0'],
+          //   storeFields: ['_id', 'b0', 'c0', 'h0', 'slipPath'],
+          // });
+
+          this.miniSearch.addAll(this.items);
+          // console.log(miniSearch.search('1579', { prefix: true }));
         }
       },
       error({ graphQLErrors, networkError }) {
