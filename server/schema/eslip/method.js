@@ -240,7 +240,7 @@ const sendESlip = async (p, e) => {
 
     const transporter = nodemailer.createTransport({
       host: smtp.host,
-      port: 465,
+      port: smtp.port,
       secure: true,
       auth: {
         user: smtp.user,
@@ -275,9 +275,8 @@ const sendESlip = async (p, e) => {
     html += '<div>To open this password protected file, you need Adobe Reader.</div>';
 
     const message = {
-      from: `"Labtech Info" <${smtp.user}>`,
+      from: `"Labtech Info" <${smtp.sender}>`,
       to: e.h0,
-      // to: 'yozz@cddcdcdcdc.com',
       subject: 'Labtech Info - No Reply',
       html,
       attachments: [
