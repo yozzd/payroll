@@ -18,6 +18,12 @@ button:focus {
   @apply outline-none;
 }
 
+.el-table th,
+.el-breadcrumb__inner a,
+.el-breadcrumb__inner.is-link {
+  @apply font-normal;
+}
+
 .el-form-item.is-error .el-upload-dragger,
 .el-form-item.is-error .el-upload-dragger:focus {
     border-color: #F56C6C;

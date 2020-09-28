@@ -64,6 +64,7 @@
             v-if="scope.row.slipPath"
             :href="scope.row.slipPath"
             target="_blank"
+            type="primary"
             class="link-sm"
           >
             {{ scope.row._id }}.pdf

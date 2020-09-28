@@ -4,6 +4,7 @@
       <div>
         <el-link
           :underline="false"
+          type="primary"
           icon="el-icon-download"
           @click="showDialog = true"
         >
@@ -36,6 +37,7 @@
         <template slot-scope="scope">
           <el-link
             :href="`/eslip/list/${scope.row._id}`"
+            type="primary"
             icon="el-icon-document"
           >
             {{ scope.row.period }}
