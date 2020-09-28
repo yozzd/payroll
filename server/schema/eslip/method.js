@@ -113,7 +113,7 @@ const generateESlip = async (p, e) => {
             widths: [170, 200, 135],
             body: [
               [{
-                image: 'static/images/logo.png', width: 80, height: 20, rowSpan: 2, border: [false, false, false, false],
+                image: 'static/images/logo.png', width: 60, rowSpan: 2, border: [false, false, false, false],
               }, {
                 text: 'PT. LABTECH PENTA INTERNATIONAL', bold: true, fontSize: 8, border: [false, false, false, true],
               }, {
@@ -199,7 +199,7 @@ const generateESlip = async (p, e) => {
         },
         tbl2: {
           fontSize: 8,
-          margin: [-10, 20, -10, 0],
+          margin: [-10, 40, -10, 0],
         },
         tbl3: {
           fontSize: 8,
