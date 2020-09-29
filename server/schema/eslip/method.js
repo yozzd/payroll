@@ -19,10 +19,7 @@ const printer = new PdfPrinter(fonts);
 
 const generateESlip = async (p, e) => {
   try {
-    const d = e.e0.split('-');
-    const dir = format(new Date(p.from), 'yyyyMM');
-    const dob = format(new Date(`${d[2]} ${d[1]} ${d[0]}`), 'ddMMyy');
-    await fs.ensureDir(`static/eslip/${dir}`);
+    await fs.ensureDir(`static/eslip/${p.dir}`);
 
     const ctbl1 = [
       ['Basic Salary', '', '', { text: intpre0(e.q0).format(), alignment: 'right' }],
@@ -105,7 +102,7 @@ const generateESlip = async (p, e) => {
     if (e.bv0) notes.push(['-', e.bv0, '', '']);
 
     const docDefinition = {
-      userPassword: `${e.b0.slice(-3)}${dob}`,
+      userPassword: e.epass,
       content: [
         {
           style: 'tbl1',
@@ -219,10 +216,10 @@ const generateESlip = async (p, e) => {
     };
 
     const pdfDoc = printer.createPdfKitDocument(docDefinition);
-    pdfDoc.pipe(fs.createWriteStream(`static/eslip/${dir}/${e._id}.pdf`));
+    pdfDoc.pipe(fs.createWriteStream(`static/eslip/${p.dir}/${e._id}.pdf`));
     pdfDoc.end();
 
-    e.slipPath = `/eslip/${dir}/${e._id}.pdf`;
+    e.slipPath = `/eslip/${p.dir}/${e._id}.pdf`;
 
     return { sStatus: 1, slipPath: e.slipPath };
   } catch (err) {
@@ -236,8 +233,6 @@ const generateESlip = async (p, e) => {
 
 const sendESlip = async (p, e) => {
   try {
-    const dir = format(new Date(p.from), 'yyyyMM');
-
     const transporter = nodemailer.createTransport({
       host: smtp.host,
       port: smtp.port,
@@ -282,7 +277,7 @@ const sendESlip = async (p, e) => {
       attachments: [
         {
           filename: `${e._id}.pdf`,
-          path: `static/eslip/${dir}/${e._id}.pdf`,
+          path: `static/eslip/${p.dir}/${e._id}.pdf`,
         },
       ],
     };

@@ -112,4 +112,14 @@ ESlipSchema.pre('save', async function preSave(next) {
   return next();
 });
 
+ESlipSchema.virtual('dir').get(function() {
+  return format(new Date(this.from), 'yyyyMM');
+});
+
+EmployeeSchema.virtual('epass').get(function() {
+  const d = this.e0.split('-');
+  const dob = format(new Date(`${d[2]} ${d[1]} ${d[0]}`), 'ddMMyy');
+  return `${this.b0.slice(-3)}${dob}`;
+});
+
 module.exports = model('ESlip', ESlipSchema, 'eslip');
