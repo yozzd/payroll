@@ -1,5 +1,4 @@
 const fs = require('fs-extra');
-const { format } = require('date-fns');
 const {
   GraphQLList,
   GraphQLInt,
@@ -41,8 +40,7 @@ const Mutation = {
     },
     resolve: auth.hasRole('admin', async (_, { id }) => {
       const e = await ESlip.findOne({ _id: id }).select('from');
-      const dir = format(new Date(e.from), 'yyyyMM');
-      await fs.remove(`static/eslip/${dir}`);
+      await fs.remove(`static/eslip/${e.dir}`);
       await ESlip.findOneAndDelete({ _id: id });
       return { _id: id };
     }),
