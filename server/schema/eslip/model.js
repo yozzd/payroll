@@ -10,7 +10,7 @@ const EmployeeSchema = new Schema({
   e0: String, // Date
   // f0: Number, // Month
   // g0: Number, // Year
-  h0: String, // Email
+  h0: { type: String, trim: true }, // Email
   i0: String, // BankAccount
   j0: String, // Department
   k0: String, // Section
