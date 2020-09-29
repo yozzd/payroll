@@ -178,6 +178,7 @@ export default {
       this.form.file = null;
       this.form.period = [];
       this.showDialog = false;
+      this.$refs.form.clearValidate();
     },
     handleCommand(c, id) {
       if (c === 'delete') this.handleConfirm(id);
@@ -254,7 +255,7 @@ export default {
               },
             });
 
-            this.showDialog = false;
+            this.handleCancel();
             this.loading = false;
             return true;
           } catch ({ graphQLErrors, networkError }) {
