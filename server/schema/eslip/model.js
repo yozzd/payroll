@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 const { nanoid } = require('nanoid');
-const timestamps = require('mongoose-timestamp2');
 const { format, getYear, getMonth } = require('date-fns');
 
 const EmployeeSchema = new Schema({
@@ -91,7 +90,7 @@ const ESlipSchema = new Schema({
   period: String,
   employee: [EmployeeSchema],
   done: { type: Number, default: 0 },
-});
+}, { timestamps: true });
 
 ESlipSchema.pre('save', async function preSave(next) {
   const year = getYear(new Date(this.from));
@@ -112,7 +111,5 @@ ESlipSchema.pre('save', async function preSave(next) {
 
   return next();
 });
-
-ESlipSchema.plugin(timestamps);
 
 module.exports = model('ESlip', ESlipSchema, 'eslip');

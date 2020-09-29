@@ -1,14 +1,13 @@
 const { Schema, model } = require('mongoose');
 const { nanoid } = require('nanoid');
 const { genSalt, hash, compare } = require('bcrypt');
-const timestamps = require('mongoose-timestamp2');
 
 const UserSchema = new Schema({
   _id: { type: String, default: () => nanoid() },
   username: String,
   password: String,
   role: String,
-});
+}, { timestamps: true });
 
 UserSchema.pre('save', async function preSave(next) {
   if (!this.isModified('password')) {
@@ -28,7 +27,5 @@ UserSchema.methods = {
     return false;
   },
 };
-
-UserSchema.plugin(timestamps);
 
 module.exports = model('User', UserSchema, 'user');
