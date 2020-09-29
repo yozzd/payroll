@@ -1,7 +1,6 @@
 const { GraphQLError } = require('graphql');
 const PdfPrinter = require('pdfmake');
 const fs = require('fs-extra');
-const { format } = require('date-fns');
 const nodemailer = require('nodemailer');
 
 const { intpre0, floatpre2, floatpre3 } = require('../scalar/number');
@@ -28,7 +27,8 @@ const generateESlip = async (p, e) => {
       ['Official Overtime', { text: floatpre2(e.w0).format(), alignment: 'right' }, 'Wage/173', { text: intpre0(e.x0).format(), alignment: 'right' }],
     ];
 
-    if (e.y0 || e.z0 || e.aa0 || e.ab0 || e.ac0 || e.ad0 || e.ae0 || e.af0 || e.ag0 || e.ah0 || e.ai0 || e.aj0 || e.ak0) {
+    if (e.y0 || e.z0 || e.aa0 || e.ab0 || e.ac0 || e.ad0 || e.ae0
+      || e.af0 || e.ag0 || e.ah0 || e.ai0 || e.aj0 || e.ak0) {
       ctbl1.push(['', '', '', '']);
       ctbl1.push([{ text: 'FIXED ALLOWANCES', bold: true }, '', '', '']);
     }
