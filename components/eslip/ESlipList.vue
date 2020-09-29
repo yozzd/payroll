@@ -222,18 +222,11 @@ export default {
           this.items = employee;
 
           this.breadcrumb = [
-            { name: 'E-Slip', path: '/eslip' },
+            { name: 'E-Slip', path: '/eslip/' },
             { name: `${period} ${year}` },
           ];
 
-          // const miniSearch = new MiniSearch({
-          //   idField: '_id',
-          //   fields: ['b0', 'c0', 'h0'],
-          //   storeFields: ['_id', 'b0', 'c0', 'h0', 'slipPath'],
-          // });
-
           this.miniSearch.addAll(this.items);
-          // console.log(miniSearch.search('1579', { prefix: true }));
         }
       },
       error({ graphQLErrors, networkError }) {

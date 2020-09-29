@@ -35,13 +35,15 @@
         label="Period"
       >
         <template slot-scope="scope">
-          <el-link
-            :href="`/eslip/list/${scope.row._id}`"
-            type="primary"
-            icon="el-icon-document"
+          <nuxt-link
+            :to="`list/${scope.row._id}`"
+            class="el-link el-link--primary is-underline"
           >
-            {{ scope.row.period }}
-          </el-link>
+            <i class="el-icon-document"></i>
+            <span>
+              {{ scope.row.period }}
+            </span>
+          </nuxt-link>
         </template>
       </el-table-column>
       <el-table-column

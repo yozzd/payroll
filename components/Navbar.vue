@@ -38,7 +38,7 @@ export default {
   methods: {
     async handleCommand(c) {
       if (c === 'logout') await this.$auth.logout();
-      else if (c === 'eslip') this.$router.push({ name: 'eslip' });
+      else if (c === 'eslip') this.$router.push({ path: '/eslip/' });
     },
   },
 };
