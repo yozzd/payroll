@@ -14,7 +14,8 @@ html {
   font-size: 12px;
 }
 
-button:focus {
+button:focus,
+:focus {
   @apply outline-none;
 }
 
