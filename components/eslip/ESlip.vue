@@ -12,7 +12,7 @@
         </el-link>
       </div>
       <div class="flex-1"></div>
-      <div>
+      <div class="w-32">
         <el-select v-model="form.year" @change="handleChange">
           <el-option
             v-for="year in years"
