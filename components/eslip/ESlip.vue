@@ -70,6 +70,7 @@
       :visible.sync="showDialog"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
+      :before-close="handleCancel"
       width="31%"
     >
       <ErrorHandler
@@ -99,6 +100,7 @@
             drag
             action=""
             accept=".xls, .xlsx"
+            :file-list="fileList"
             :on-change="handleUploadOnChange"
             :auto-upload="false"
           >
@@ -142,6 +144,7 @@ export default {
         file: null,
         year,
       },
+      fileList: [],
       rules: {
         period: [
           {
@@ -175,10 +178,10 @@ export default {
       this.form.file = raw;
     },
     handleCancel() {
-      this.form.file = null;
-      this.form.period = [];
-      this.showDialog = false;
+      this.fileList = [];
+      this.$refs.form.resetFields();
       this.$refs.form.clearValidate();
+      this.showDialog = false;
     },
     handleCommand(c, id) {
       if (c === 'delete') this.handleConfirm(id);
