@@ -1,6 +1,7 @@
 <template>
   <div class="flex flex-col space-y-4 mt-4 mb-8 px-12">
-    <BreadNav :breadcrumb="breadcrumb" />
+    <el-page-header @back="goBack" :content="content">
+    </el-page-header>
     <el-progress
       :text-inside="true"
       :stroke-width="16"
@@ -84,7 +85,7 @@ import { GenerateESlip, SendESlip } from '../../apollo/mutation/eslip';
 export default {
   data() {
     return {
-      breadcrumb: [],
+      content: '',
       items: [],
       loadingSlip: false,
       loadingSend: false,
@@ -109,6 +110,9 @@ export default {
     },
   },
   methods: {
+    goBack() {
+      this.$router.push({ path: '/eslip/' });
+    },
     selectDisable(r) {
       return r.h0 !== '';
     },
@@ -221,12 +225,7 @@ export default {
         if (!loading) {
           const { employee, period, year } = data.employeeESlip;
           this.items = employee;
-
-          this.breadcrumb = [
-            { name: 'E-Slip', path: '/eslip/' },
-            { name: `${period} ${year}` },
-          ];
-
+          this.content = `${period} ${year}`;
           this.miniSearch.addAll(this.items);
         }
       },
