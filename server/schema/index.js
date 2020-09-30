@@ -2,6 +2,7 @@ const { GraphQLSchema, GraphQLObjectType } = require('graphql');
 const Auth = require('./auth/resolver');
 const ESlip = require('./eslip/resolver');
 const Import = require('./import/resolver');
+const Payroll = require('./payroll/resolver');
 const User = require('./user/resolver');
 
 const query = new GraphQLObjectType({
@@ -9,6 +10,7 @@ const query = new GraphQLObjectType({
   fields: {
     ...Auth.Query,
     ...ESlip.Query,
+    ...Payroll.Query,
     ...User.Query,
   },
 });
@@ -18,6 +20,7 @@ const mutation = new GraphQLObjectType({
   fields: {
     ...ESlip.Mutation,
     ...Import.Mutation,
+    ...Payroll.Mutation,
     ...User.Mutation,
   },
 });

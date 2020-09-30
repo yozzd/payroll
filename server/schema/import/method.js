@@ -2,6 +2,7 @@ const { GraphQLError } = require('graphql');
 const fs = require('fs-extra');
 const XLSX = require('xlsx');
 
+const Payroll = require('../payroll/model');
 const ESlip = require('../eslip/model');
 
 // const parseDate = ({
@@ -10,6 +11,50 @@ const ESlip = require('../eslip/model');
 //   if (D > 0) return new Date(`${y}-${m}-${d}`);
 //   return null;
 // };
+
+const processImportPayroll = async ({ file, from, to }) => {
+  const { filename, createReadStream } = await file;
+  const stream = createReadStream();
+
+  const tmp = `/tmp/${filename}`;
+  return new Promise((resolve, reject) => stream
+    .on('error', async (error) => {
+      if (stream.truncated) await fs.unlinkSync(tmp);
+      reject(error);
+    })
+    .pipe(fs.createWriteStream(tmp))
+    .on('finish', async () => {
+      const wb = XLSX.readFile(tmp);
+      const ws = wb.Sheets[wb.SheetNames];
+      const ft = XLSX.utils.sheet_to_json(ws);
+
+      try {
+        const payroll = new Payroll({
+          from,
+          to,
+        });
+
+        // for (let i = 2; i < ft.length; i += 1) {
+        //   eslip.employee.push({
+        //     b0: ft[i].__EMPTY_1 || '', // EmpNo
+        //     c0: ft[i].__EMPTY_2 || '', // EmpName
+        //     bw0: ft[i].__EMPTY_74 || '', // DateSlip
+        //   });
+        // }
+
+        const saved = await payroll.save();
+        return resolve(saved);
+      } catch (err) {
+        if (typeof err === 'string') {
+          reject(new GraphQLError(err));
+        } else {
+          reject(new GraphQLError(err.message));
+        }
+      }
+
+      return true;
+    }));
+};
 
 const processImportESlip = async ({ file, from, to }) => {
   const { filename, createReadStream } = await file;
@@ -125,4 +170,4 @@ const processImportESlip = async ({ file, from, to }) => {
     }));
 };
 
-module.exports = { processImportESlip };
+module.exports = { processImportPayroll, processImportESlip };

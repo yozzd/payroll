@@ -24,6 +24,48 @@
         </el-select>
       </div>
     </div>
+    <el-table
+      v-loading="$apollo.loading"
+      :data="payrollAll"
+      element-loading-text="Loading..."
+      element-loading-spinner="el-icon-loading"
+    >
+      <el-table-column
+        prop="period"
+        label="Period"
+      >
+        <template slot-scope="scope">
+          <nuxt-link
+            :to="`list/${scope.row._id}`"
+            class="el-link el-link--primary is-underline"
+          >
+            <i class="el-icon-document"></i>
+            <span>
+              {{ scope.row.period }}
+            </span>
+          </nuxt-link>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="year"
+        label="Year"
+      >
+      </el-table-column>
+      <el-table-column min-width="10">
+        <template slot-scope="scope">
+          <el-dropdown trigger="click" @command="c => handleCommand(c, scope.row._id)">
+            <span class="el-dropdown-link flex space-x-1 items-center">
+              <i class="el-icon-more"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="delete">
+                Delete
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </template>
+      </el-table-column>
+    </el-table>
 
     <el-dialog
       title="Import"
@@ -87,6 +129,7 @@
 
 <script>
 import { getYear } from 'date-fns';
+import { PayrollAll } from '../apollo/query/payroll';
 import { ImportPayroll } from '../apollo/mutation/import';
 
 export default {
@@ -141,6 +184,7 @@ export default {
       this.$refs.form.clearValidate();
       this.showDialog = false;
     },
+    handleCommand() {},
     handleImport(form) {
       this.$refs[form].validate(async (valid) => {
         if (valid) {
@@ -157,22 +201,22 @@ export default {
                   to: this.form.period[1],
                 },
               },
-              // update: (store, { data: { importESlip } }) => {
-              //   const cdata = store.readQuery({
-              //     query: ESlips,
-              //     variables: {
-              //       year: this.form.year,
-              //     },
-              //   });
-              //   cdata.eslips.push(importESlip);
-              //   store.writeQuery({
-              //     query: ESlips,
-              //     variables: {
-              //       year: this.form.year,
-              //     },
-              //     data: cdata,
-              //   });
-              // },
+              update: (store, { data: { importPayroll } }) => {
+                const cdata = store.readQuery({
+                  query: PayrollAll,
+                  variables: {
+                    year: this.form.year,
+                  },
+                });
+                cdata.eslips.push(importPayroll);
+                store.writeQuery({
+                  query: PayrollAll,
+                  variables: {
+                    year: this.form.year,
+                  },
+                  data: cdata,
+                });
+              },
             });
 
             this.handleCancel();
@@ -186,6 +230,21 @@ export default {
           return false;
         }
       });
+    },
+  },
+  apollo: {
+    $client: 'upload',
+    payrollAll: {
+      query: PayrollAll,
+      variables() {
+        return {
+          year: this.form.year,
+        };
+      },
+      prefetch: false,
+      error({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors.length ? graphQLErrors : networkError.result.errors;
+      },
     },
   },
 };
