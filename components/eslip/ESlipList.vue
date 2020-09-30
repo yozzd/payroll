@@ -18,6 +18,7 @@
         <el-input
           v-model="search"
           placeholder="Search"
+          :disabled="loadingSend || loadingSlip"
           clearable
         />
       </div>
