@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export default gql`
+export const ESlipDelete = gql`
   mutation eslipDelete($id: String!) {
     eslipDelete(id: $id) {
       _id

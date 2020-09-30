@@ -14,13 +14,24 @@ const Query = {
       year: { type: GraphQLInt },
     },
     resolve: auth.hasRole('admin', async (_, { year }) => {
-      const payroll = await Payroll.find({ year }).sort('-month');
-      return payroll;
+      const p = await Payroll.find({ year }).sort('-month');
+      return p;
     }),
   },
 };
 
-const Mutation = {};
+const Mutation = {
+  payrollDelete: {
+    type: PayrollType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('admin', async (_, { id }) => {
+      await Payroll.findOneAndDelete({ _id: id });
+      return { _id: id };
+    }),
+  },
+};
 
 module.exports = {
   Query,

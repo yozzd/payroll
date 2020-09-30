@@ -131,7 +131,7 @@
 import { getYear } from 'date-fns';
 import { ESlips } from '../../apollo/query/eslip';
 import { ImportESlip } from '../../apollo/mutation/import';
-import ESlipDelete from '../../apollo/mutation/eslip';
+import { ESlipDelete } from '../../apollo/mutation/eslip';
 
 export default {
   data() {

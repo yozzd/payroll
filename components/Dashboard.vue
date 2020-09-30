@@ -131,6 +131,7 @@
 import { getYear } from 'date-fns';
 import { PayrollAll } from '../apollo/query/payroll';
 import { ImportPayroll } from '../apollo/mutation/import';
+import { PayrollDelete } from '../apollo/mutation/payroll';
 
 export default {
   data() {
@@ -184,7 +185,47 @@ export default {
       this.$refs.form.clearValidate();
       this.showDialog = false;
     },
-    handleCommand() {},
+    handleCommand(c, id) {
+      if (c === 'delete') this.handleConfirm(id);
+    },
+    handleConfirm(id) {
+      this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'Cancel',
+        type: 'warning',
+      }).then(async () => {
+        await this.$apollo.mutate({
+          mutation: PayrollDelete,
+          variables: {
+            id,
+          },
+          update: (store, { data: { payrollDelete } }) => {
+            const cdata = store.readQuery({
+              query: PayrollAll,
+              variables: {
+                year: this.form.year,
+              },
+            });
+            const index = cdata.payrollAll.findIndex((v) => v._id === payrollDelete._id);
+            if (index > -1) {
+              cdata.payrollAll.splice(index, 1);
+            }
+            store.writeQuery({
+              query: PayrollAll,
+              variables: {
+                year: this.form.year,
+              },
+              data: cdata,
+            });
+          },
+        });
+
+        this.$message({
+          type: 'success',
+          message: 'Delete completed',
+        });
+      }).catch(() => {});
+    },
     handleImport(form) {
       this.$refs[form].validate(async (valid) => {
         if (valid) {
