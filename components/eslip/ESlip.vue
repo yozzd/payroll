@@ -136,7 +136,7 @@ import { ESlipDelete } from '../../apollo/mutation/eslip';
 export default {
   data() {
     const year = getYear(new Date());
-    const initYear = 2019;
+    const initY = 2019;
 
     return {
       showDialog: false,
@@ -168,7 +168,7 @@ export default {
           },
         ],
       },
-      years: [...Array(year - (initYear - 1)).keys()].map((i) => i + initYear),
+      years: [...Array(year - (initY - 1)).keys()].map((i) => i + initY).sort((a, b) => b - a),
       errors: [],
     };
   },
