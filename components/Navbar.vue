@@ -1,7 +1,7 @@
 <template>
   <div class="flex px-12 pt-3 h-16 space-x-8 items-baseline">
     <Brand />
-    <nuxt-link to="/dashboard" class="flex-1">
+    <nuxt-link to="/dashboard/" class="flex-1">
       Dashboard
     </nuxt-link>
     <el-dropdown trigger="click" @command="handleCommand">

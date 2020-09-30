@@ -19,7 +19,7 @@ export default class Auth {
       watchLoggedIn: true,
       initialState: { user: null, loggedIn: false },
       redirect: {
-        home: '/dashboard',
+        home: '/dashboard/',
         login: '/',
         callback: '/',
         logout: '/',

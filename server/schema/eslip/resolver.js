@@ -39,7 +39,7 @@ const Mutation = {
       id: { type: GraphQLString },
     },
     resolve: auth.hasRole('admin', async (_, { id }) => {
-      const e = await ESlip.findOne({ _id: id }).select('from');
+      const e = await ESlip.findOne({ _id: id });
       await fs.remove(`static/eslip/${e.dir}`);
       await ESlip.findOneAndDelete({ _id: id });
       return { _id: id };
