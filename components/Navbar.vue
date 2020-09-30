@@ -5,11 +5,8 @@
       Dashboard
     </nuxt-link>
     <el-dropdown trigger="click" @command="handleCommand">
-      <span class="el-dropdown-link flex space-x-1 items-center">
-        <div>
-          Extras
-        </div>
-        <i class="el-icon-arrow-down el-icon--right"></i>
+      <span class="el-dropdown-link">
+        Extras<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item command="eslip">
