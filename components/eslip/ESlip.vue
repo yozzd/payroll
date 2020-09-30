@@ -264,7 +264,7 @@ export default {
             this.loading = false;
             return true;
           } catch ({ graphQLErrors, networkError }) {
-            this.errors = graphQLErrors.length ? graphQLErrors : networkError.result.errors;
+            this.errors = graphQLErrors || networkError.result.errors;
             return false;
           }
         } else {
@@ -284,7 +284,7 @@ export default {
       },
       prefetch: false,
       error({ graphQLErrors, networkError }) {
-        this.errors = graphQLErrors.length ? graphQLErrors : networkError.result.errors;
+        this.errors = graphQLErrors || networkError.result.errors;
       },
     },
   },

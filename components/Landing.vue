@@ -79,7 +79,7 @@ export default {
             });
             return true;
           } catch ({ graphQLErrors, networkError }) {
-            this.errors = graphQLErrors.length ? graphQLErrors : networkError.result.errors;
+            this.errors = graphQLErrors || networkError.result.errors;
             return false;
           }
         } else {
