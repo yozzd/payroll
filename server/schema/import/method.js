@@ -34,13 +34,11 @@ const processImportPayroll = async ({ file, from, to }) => {
           to,
         });
 
-        // for (let i = 2; i < ft.length; i += 1) {
-        //   eslip.employee.push({
-        //     b0: ft[i].__EMPTY_1 || '', // EmpNo
-        //     c0: ft[i].__EMPTY_2 || '', // EmpName
-        //     bw0: ft[i].__EMPTY_74 || '', // DateSlip
-        //   });
-        // }
+        for (let i = 4; i < ft.length; i += 1) {
+          payroll.employee.push({
+            d0: ft[i].__EMPTY_3, // Nama Karyawan
+          });
+        }
 
         const saved = await payroll.save();
         return resolve(saved);

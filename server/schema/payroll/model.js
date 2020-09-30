@@ -2,6 +2,11 @@ const { Schema, model } = require('mongoose');
 const { nanoid } = require('nanoid');
 const { format, getYear, getMonth } = require('date-fns');
 
+const EmployeeSchema = new Schema({
+  _id: { type: String, default: () => nanoid() },
+  d0: String, // Nama Karyawan
+});
+
 const PayrollSchema = new Schema({
   _id: { type: String, default: () => nanoid() },
   from: Date,
@@ -9,6 +14,7 @@ const PayrollSchema = new Schema({
   year: Number,
   month: Number,
   period: String,
+  employee: [EmployeeSchema],
 }, { timestamps: true });
 
 PayrollSchema.pre('save', async function fn(next) {

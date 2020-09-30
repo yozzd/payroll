@@ -36,7 +36,7 @@
       >
         <template slot-scope="scope">
           <nuxt-link
-            :to="`list/${scope.row._id}`"
+            :to="`/payroll/list/${scope.row._id}`"
             class="el-link el-link--primary is-underline"
           >
             <i class="el-icon-document"></i>
@@ -249,7 +249,7 @@ export default {
                     year: this.form.year,
                   },
                 });
-                cdata.eslips.push(importPayroll);
+                cdata.payrollAll.push(importPayroll);
                 store.writeQuery({
                   query: PayrollAll,
                   variables: {

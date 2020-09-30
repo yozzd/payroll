@@ -5,6 +5,14 @@ const {
   GraphQLInt,
 } = require('graphql');
 
+const EmployeeType = new GraphQLObjectType({
+  name: 'EmployeeType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    d0: { type: GraphQLString },
+  }),
+});
+
 const PayrollType = new GraphQLObjectType({
   name: 'PayrollType',
   fields: () => ({
@@ -13,6 +21,7 @@ const PayrollType = new GraphQLObjectType({
     to: { type: GraphQLString },
     year: { type: GraphQLInt },
     period: { type: GraphQLString },
+    employee: { type: new GraphQLList(EmployeeType) },
   }),
 });
 
