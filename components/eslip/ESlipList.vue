@@ -24,7 +24,7 @@
       <el-button
         type="primary"
         :loading="loadingSlip"
-        :disabled="!multipleSelection.length"
+        :disabled="!multipleSelection.length || loadingSend"
         @click="generate"
       >
         Generate
@@ -32,7 +32,7 @@
       <el-button
         type="primary"
         :loading="loadingSend"
-        :disabled="!multipleSelection.length"
+        :disabled="!multipleSelection.length || loadingSlip"
         @click="send"
       >
         Send

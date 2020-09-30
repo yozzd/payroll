@@ -16,7 +16,7 @@ const Query = {
       year: { type: GraphQLInt },
     },
     resolve: auth.hasRole('admin', async (_, { year }) => {
-      const eslip = await ESlip.find({ year });
+      const eslip = await ESlip.find({ year }).sort('-month');
       return eslip;
     }),
   },
