@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col space-y-4 mt-4 mb-8 px-12">
-    <el-page-header @back="goBack" :content="content">
+    <el-page-header :content="content" @back="goBack">
     </el-page-header>
     <el-progress
       :text-inside="true"
