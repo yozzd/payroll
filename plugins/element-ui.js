@@ -20,6 +20,8 @@ import {
   Select,
   Table,
   TableColumn,
+  Tabs,
+  TabPane,
   Upload,
 } from 'element-ui';
 import lang from 'element-ui/lib/locale/lang/en';
@@ -44,6 +46,8 @@ Vue.use(Progress);
 Vue.use(Select);
 Vue.use(Table);
 Vue.use(TableColumn);
+Vue.use(Tabs);
+Vue.use(TabPane);
 Vue.use(Upload);
 
 Vue.use(Loading.directive);

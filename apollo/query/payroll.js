@@ -10,19 +10,11 @@ export const PayrollAll = gql`
   }
 `;
 
-export const EmployeeESlip = gql`
-  query employeeESlip($id: String!) {
-    employeeESlip(id: $id) {
-      _id
+export const PayrollPeriod = gql`
+  query payrollPeriod($id: String!) {
+    payrollPeriod(id: $id) {
       period
       year
-      employee {
-        _id
-        b0
-        c0
-        h0
-        slipPath
-      }
     }
   }
 `;

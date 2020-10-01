@@ -18,6 +18,16 @@ const Query = {
       return p;
     }),
   },
+  payrollPeriod: {
+    type: PayrollType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('admin', async (_, { id }) => {
+      const p = await Payroll.findOne({ _id: id }).select('period year');
+      return p;
+    }),
+  },
 };
 
 const Mutation = {
