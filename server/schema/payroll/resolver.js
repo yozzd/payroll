@@ -28,6 +28,30 @@ const Query = {
       return p;
     }),
   },
+  payrollEmployment: {
+    type: PayrollType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('admin', async (_, { id }) => {
+      const p = await Payroll.findOne({ _id: id })
+        .select({
+          '_id': 1,
+          'employee._id': 1,
+          'employee.d0': 1,
+          'employee.e0': 1,
+          'employee.h0': 1,
+          'employee.i0': 1,
+          'employee.k0': 1,
+          'employee.u0': 1,
+          'employee.v0': 1,
+          'employee.w0': 1,
+          'employee.x0': 1,
+          'employee.y0': 1
+        });
+      return p;
+    }),
+  },
 };
 
 const Mutation = {

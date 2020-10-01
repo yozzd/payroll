@@ -18,3 +18,24 @@ export const PayrollPeriod = gql`
     }
   }
 `;
+
+export const PayrollEmployment = gql`
+  query payrollEmployment($id: String!) {
+    payrollEmployment(id: $id) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        h0
+        i0
+        k0
+        u0
+        v0
+        w0
+        x0
+        y0
+      }
+    }
+  }
+`;
