@@ -22,6 +22,7 @@
       element-loading-spinner="el-icon-loading"
       :data="tableData"
       size="small"
+      height="500"
       max-height="500"
     >
       <el-table-column type="index" width="50" align="center" fixed></el-table-column>
