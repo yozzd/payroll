@@ -36,7 +36,7 @@
     "mongoose": "^5.10.7",
     "mongoose-timestamp2": "^0.1.10",
     "nanoid": "^3.1.12",
-    "nodemailer": "^6.4.11",
+    "nodemailer": "^6.4.12",
     "nuxt": "^2.14.6",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
