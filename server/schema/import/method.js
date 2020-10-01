@@ -5,12 +5,12 @@ const XLSX = require('xlsx');
 const Payroll = require('../payroll/model');
 const ESlip = require('../eslip/model');
 
-// const parseDate = ({
-//   D, y, m, d,
-// }) => {
-//   if (D > 0) return new Date(`${y}-${m}-${d}`);
-//   return null;
-// };
+const parseDate = ({
+  D, y, m, d,
+}) => {
+  if (D > 0) return new Date(`${y}-${m}-${d}`);
+  return null;
+};
 
 const processImportPayroll = async ({ file, from, to }) => {
   const { filename, createReadStream } = await file;
@@ -59,6 +59,15 @@ const processImportPayroll = async ({ file, from, to }) => {
         for (let i = 4; i < ft.length; i += 1) {
           payroll.employee.push({
             d0: ft[i].__EMPTY_3 || '', // Nama Karyawan
+            e0: ft[i].__EMPTY_4 || '', // No. Karyawan
+            g0: ft[i].__EMPTY_6 || 0, // Gaji Pokok
+            h0: ft[i].__EMPTY_7 || '', // Status Karyawan
+            i0: parseDate(XLSX.SSF.parse_date_code(ft[i].__EMPTY_8)), // Hired date
+            j0: ft[i].__EMPTY_9 || 0, // Hari Kerja
+            k0: parseDate(XLSX.SSF.parse_date_code(ft[i].__EMPTY_10)), // Resign/Finish Contract Date
+            m0: ft[i].__EMPTY_12 || '', // Note
+            n0: ft[i].__EMPTY_13 || '', // Jenis Kelamin
+            o0: parseDate(XLSX.SSF.parse_date_code(ft[i].__EMPTY_14)), // Birthday
           });
         }
 

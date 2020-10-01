@@ -5,6 +5,17 @@ const { format, getYear, getMonth } = require('date-fns');
 const EmployeeSchema = new Schema({
   _id: { type: String, default: () => nanoid() },
   d0: String, // Nama Karyawan
+  e0: String, // No. Karyawan
+  f0: Number, // Selisih GP dari Hari Kerja Normal
+  g0: Number, // Gaji Pokok
+  h0: String, // Status Karyawan
+  i0: Date, // Hired date
+  j0: Number, // Hari Kerja
+  k0: Date, // Resign / Finish Contract Date
+  l0: Number, // Gaji Berdasarkan Hari Kerja Normal
+  m0: String, // Note
+  n0: String, // Jenis Kelamin
+  o0: Date, // Birthday
 });
 
 const PayrollSchema = new Schema({
@@ -38,6 +49,16 @@ const PayrollSchema = new Schema({
   },
   employee: [EmployeeSchema],
 }, { timestamps: true });
+
+EmployeeSchema.pre('save', async function fn(next) {
+  this.i0 = this.i0 ? format(new Date(this.i0), 'yyyy-MM-dd') : null;
+  this.k0 = this.k0 ? format(new Date(this.k0), 'yyyy-MM-dd') : null;
+  this.l0 = Math.round((this.g0 / 21) * this.j0, 10);
+  this.o0 = this.o0 ? format(new Date(this.o0), 'yyyy-MM-dd') : null;
+  this.f0 = this.g0 - this.l0;
+
+  return next();
+});
 
 PayrollSchema.pre('save', async function fn(next) {
   const year = getYear(new Date(this.from));
