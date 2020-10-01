@@ -23,6 +23,7 @@ export default {
   plugins: [
     '@/plugins/element-ui',
     '@/plugins/auth',
+    { src: '@/plugins/vue-snip', mode: 'client' },
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

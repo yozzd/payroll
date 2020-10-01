@@ -1,6 +1,13 @@
 <template>
   <div>
-    <div class="flex space-x-4 items-center justify-end">
+    <ErrorHandler
+      v-if="errors"
+      :errors="errors"
+    />
+    <div class="flex space-x-4 items-center">
+      <div class="flex-1">
+        Total {{ items.length }} items
+      </div>
       <div class="w-64">
         <el-input
           v-model="search"
@@ -17,10 +24,53 @@
       size="small"
       max-height="500"
     >
-      <el-table-column type="index" width="50" align="center"></el-table-column>
-      <el-table-column prop="e0" label="No. Karyawan"></el-table-column>
-      <el-table-column prop="d0" label="Nama Karyawan"></el-table-column>
-      <el-table-column prop="h0" label="Status Karyawan"></el-table-column>
+      <el-table-column type="index" width="50" align="center" fixed></el-table-column>
+      <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
+      <el-table-column label="Nama Karyawan" width="200" fixed>
+        <template slot-scope="scope">
+          <client-only>
+            <p v-snip="1" :title="scope.row.d0">
+              {{ scope.row.d0 }}
+            </p>
+          </client-only>
+        </template>
+      </el-table-column>
+      <el-table-column prop="h0" label="Status Karyawan" width="110"></el-table-column>
+      <el-table-column prop="i0" label="Hired Date" width="100"></el-table-column>
+      <el-table-column
+        prop="k0"
+        label="Resign / Finish Contract Date"
+        width="100"
+      ></el-table-column>
+      <el-table-column label="Department" width="200">
+        <template slot-scope="scope">
+          <client-only>
+            <p v-snip="1" :title="scope.row.u0">
+              {{ scope.row.u0 }}
+            </p>
+          </client-only>
+        </template>
+      </el-table-column>
+      <el-table-column label="Section" width="200">
+        <template slot-scope="scope">
+          <client-only>
+            <p v-snip="1" :title="scope.row.v0">
+              {{ scope.row.v0 }}
+            </p>
+          </client-only>
+        </template>
+      </el-table-column>
+      <el-table-column prop="w0" label="Section Code" width="100"></el-table-column>
+      <el-table-column prop="x0" label="Grade" width="100"></el-table-column>
+      <el-table-column label="Jabatan" width="200">
+        <template slot-scope="scope">
+          <client-only>
+            <p v-snip="1" :title="scope.row.y0">
+              {{ scope.row.y0 }}
+            </p>
+          </client-only>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -38,7 +88,10 @@ export default {
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
-        storeFields: ['_id', 'd0', 'e0', 'h0'],
+        storeFields: [
+          '_id', 'd0', 'e0', 'h0', 'i0', 'k0',
+          'u0', 'v0', 'w0', 'x0', 'y0',
+        ],
       }),
     };
   },
