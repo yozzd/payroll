@@ -16,6 +16,18 @@ const EmployeeSchema = new Schema({
   m0: String, // Note
   n0: String, // Jenis Kelamin
   o0: Date, // Birthday
+  p0: String, // Status NPWP
+  q0: String, // No. NPWP
+  r0: String, // Status Tanggungan
+  s0: String, // Bank
+  t0: String, // No. Rekening
+  u0: String, // Department
+  v0: String, // Section
+  w0: String, // Section Code
+  x0: String, // Grade
+  y0: String, // Jabatan
+  z0: String, // JPK No. (Kartu Peserta Jamsostek)
+  aa0: String, // No. BPJS Kesehatan
 });
 
 const PayrollSchema = new Schema({

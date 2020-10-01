@@ -68,6 +68,18 @@ const processImportPayroll = async ({ file, from, to }) => {
             m0: ft[i].__EMPTY_12 || '', // Note
             n0: ft[i].__EMPTY_13 || '', // Jenis Kelamin
             o0: parseDate(XLSX.SSF.parse_date_code(ft[i].__EMPTY_14)), // Birthday
+            p0: ft[i].__EMPTY_15 || '', // Status NPWP
+            q0: ft[i].__EMPTY_16 || '', // No. NPWP
+            r0: ft[i].__EMPTY_17 || '', // Status Tanggungan
+            s0: ft[i].__EMPTY_18 || '', // Bank
+            t0: ft[i].__EMPTY_19 || '', // No. Rekening
+            u0: ft[i].__EMPTY_20 || '', // Department
+            v0: ft[i].__EMPTY_21 || '', // Section
+            w0: ft[i].__EMPTY_22 || '', // Section Code
+            x0: ft[i].__EMPTY_23 || '', // Grade
+            y0: ft[i].__EMPTY_24 || '', // Jabatan
+            z0: ft[i].__EMPTY_25 || '', // JPK No. (Kartu Peserta Jamsostek)
+            aa0: ft[i].__EMPTY_26 || '', // No. BPJS Kesehatan
           });
         }
 
