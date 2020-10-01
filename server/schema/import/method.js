@@ -32,11 +32,33 @@ const processImportPayroll = async ({ file, from, to }) => {
         const payroll = new Payroll({
           from,
           to,
+          rate: {
+            b4: ft[2].__EMPTY_1 || 0, // TK/0
+            b5: ft[3].__EMPTY_1 || 0, // TK/1
+            b6: ft[4].__EMPTY_1 || 0, // TK/2
+            b7: ft[5].__EMPTY_1 || 0, // TK/3
+            b8: ft[6].__EMPTY_1 || 0, // K/0
+            b9: ft[7].__EMPTY_1 || 0, // K/1
+            b10: ft[8].__EMPTY_1 || 0, // K/2
+            b11: ft[9].__EMPTY_1 || 0, // K/3
+            b14: ft[12].__EMPTY_1 || 0, // Upah Minimum BPJS Kesehatan
+            b15: ft[13].__EMPTY_1 || 0, // Upah Maximum BPJS Kesehatan
+            b17: ft[15].__EMPTY_1 || 0, // Upah Minimum BPJS Ketenagakerjaan
+            b18: ft[16].__EMPTY_1 || 0, // Upah Maximum BPJS Ketenagakerjaan
+            cb5: ft[3].__EMPTY_79 || 0, // %JKK Perusahaan
+            cc5: ft[3].__EMPTY_80 || 0, // %JK Perusahaan
+            cd5: ft[3].__EMPTY_81 || 0, // %JHT Perusahaan
+            ce5: ft[3].__EMPTY_82 || 0, // %JHT Karyawan
+            ci5: ft[3].__EMPTY_86 || 0, // %Pensiun Perusahaan
+            cj5: ft[3].__EMPTY_87 || 0, // %Pensiun Karyawan
+            cq5: ft[3].__EMPTY_94 || 0, // %BPJS Kesehatan Perusahaan
+            cr5: ft[3].__EMPTY_95 || 0, // %BPJS Kesehatan Karyawan
+          },
         });
 
         for (let i = 4; i < ft.length; i += 1) {
           payroll.employee.push({
-            d0: ft[i].__EMPTY_3, // Nama Karyawan
+            d0: ft[i].__EMPTY_3 || '', // Nama Karyawan
           });
         }
 

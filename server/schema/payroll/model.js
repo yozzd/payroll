@@ -14,6 +14,28 @@ const PayrollSchema = new Schema({
   year: Number,
   month: Number,
   period: String,
+  rate: {
+    b4: Number, // TK/0
+    b5: Number, // TK/1
+    b6: Number, // TK/2
+    b7: Number, // TK/3
+    b8: Number, // K/0
+    b9: Number, // K/1
+    b10: Number, // K/2
+    b11: Number, // K/3
+    b14: Number, // Upah Minimum BPJS Kesehatan
+    b15: Number, // Upah Maximum BPJS Kesehatan
+    b17: Number, // Upah Minimum BPJS Ketenagakerjaan
+    b18: Number, // Upah Maximum BPJS Ketenagakerjaan
+    cb5: Number, // %JKK Perusahaan
+    cc5: Number, // %JK Perusahaan
+    cd5: Number, // %JHT Perusahaan
+    ce5: Number, // %JHT Karyawan
+    ci5: Number, // %Pensiun Perusahaan
+    cj5: Number, // %Pensiun Karyawan
+    cq5: Number, // %BPJS Kesehatan Perusahaan
+    cr5: Number, // %BPJS Kesehatan Karyawan
+  },
   employee: [EmployeeSchema],
 }, { timestamps: true });
 
