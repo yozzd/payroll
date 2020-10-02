@@ -40,40 +40,58 @@
         Send
       </el-button>
     </div>
-    <el-table
-      ref="eslipTable"
-      v-loading="$apollo.loading || loadingSlip || loadingSend"
-      element-loading-text="Loading..."
-      element-loading-spinner="el-icon-loading"
-      :data="tableData"
-      size="small"
-      max-height="500"
-      @selection-change="handleSelectionChange"
-    >
-      <el-table-column
-        type="selection"
-        width="50"
-        align="center"
-        :selectable="selectDisable"
-      ></el-table-column>
-      <el-table-column type="index" width="50" align="center"></el-table-column>
-      <el-table-column prop="b0" label="No. Karyawan"></el-table-column>
-      <el-table-column prop="c0" label="Nama Karyawan"></el-table-column>
-      <el-table-column prop="h0" label="Email"></el-table-column>
-      <el-table-column label="File">
-        <template slot-scope="scope">
-          <el-link
-            v-if="scope.row.slipPath"
-            :href="scope.row.slipPath"
-            target="_blank"
-            type="primary"
-            class="link-sm"
-          >
-            {{ scope.row._id }}.pdf
-          </el-link>
-        </template>
-      </el-table-column>
-    </el-table>
+    <div>
+      <el-table
+        ref="eslipTable"
+        v-loading="$apollo.loading || loadingSlip || loadingSend"
+        element-loading-text="Loading..."
+        element-loading-spinner="el-icon-loading"
+        :data="tableData"
+        size="small"
+        height="500"
+        @selection-change="handleSelectionChange"
+      >
+        <el-table-column
+          type="selection"
+          width="50"
+          align="center"
+          :selectable="selectDisable"
+        ></el-table-column>
+        <el-table-column type="index" width="50" align="center"></el-table-column>
+        <el-table-column prop="b0" label="No. Karyawan" width="100"></el-table-column>
+        <el-table-column label="Nama Karyawan" width="200">
+          <template slot-scope="scope">
+            <client-only>
+              <p v-snip="1" :title="scope.row.c0">
+                {{ scope.row.c0 }}
+              </p>
+            </client-only>
+          </template>
+        </el-table-column>
+        <el-table-column label="Email" width="200">
+          <template slot-scope="scope">
+            <client-only>
+              <p v-snip="1" :title="scope.row.h0">
+                {{ scope.row.h0 }}
+              </p>
+            </client-only>
+          </template>
+        </el-table-column>
+        <el-table-column label="File" min-width="200">
+          <template slot-scope="scope">
+            <el-link
+              v-if="scope.row.slipPath"
+              :href="scope.row.slipPath"
+              target="_blank"
+              type="primary"
+              class="link-sm"
+            >
+              {{ scope.row._id }}.pdf
+            </el-link>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
   </div>
 </template>
 
