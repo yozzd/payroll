@@ -39,3 +39,23 @@ export const PayrollEmployment = gql`
     }
   }
 `;
+
+export const PayrollSocial = gql`
+  query payrollSocial($id: String!) {
+    payrollSocial(id: $id) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        p0
+        q0
+        r0
+        s0
+        t0
+        z0
+        aa0
+      }
+    }
+  }
+`;
