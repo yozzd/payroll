@@ -24,48 +24,51 @@
         </el-select>
       </div>
     </div>
-    <el-table
-      v-loading="$apollo.loading"
-      :data="eslips"
-      element-loading-text="Loading..."
-      element-loading-spinner="el-icon-loading"
-    >
-      <el-table-column
-        prop="period"
-        label="Period"
+    <div>
+      <el-table
+        v-loading="$apollo.loading"
+        :data="eslips"
+        element-loading-text="Loading..."
+        element-loading-spinner="el-icon-loading"
+        height="500"
       >
-        <template slot-scope="scope">
-          <nuxt-link
-            :to="`list/${scope.row._id}`"
-            class="el-link el-link--primary is-underline"
-          >
-            <i class="el-icon-document"></i>
-            <span>
-              {{ scope.row.period }}
-            </span>
-          </nuxt-link>
-        </template>
-      </el-table-column>
-      <el-table-column
-        prop="year"
-        label="Year"
-      >
-      </el-table-column>
-      <el-table-column min-width="10">
-        <template slot-scope="scope">
-          <el-dropdown trigger="click" @command="c => handleCommand(c, scope.row._id)">
-            <span class="el-dropdown-link flex space-x-1 items-center">
-              <i class="el-icon-more"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="delete">
-                Delete
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </template>
-      </el-table-column>
-    </el-table>
+        <el-table-column
+          prop="period"
+          label="Period"
+        >
+          <template slot-scope="scope">
+            <nuxt-link
+              :to="`list/${scope.row._id}`"
+              class="el-link el-link--primary is-underline"
+            >
+              <i class="el-icon-document"></i>
+              <span>
+                {{ scope.row.period }}
+              </span>
+            </nuxt-link>
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="year"
+          label="Year"
+        >
+        </el-table-column>
+        <el-table-column min-width="10">
+          <template slot-scope="scope">
+            <el-dropdown trigger="click" @command="c => handleCommand(c, scope.row._id)">
+              <span class="el-dropdown-link flex space-x-1 items-center">
+                <i class="el-icon-more"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="delete">
+                  Delete
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
 
     <el-dialog
       title="Import"
