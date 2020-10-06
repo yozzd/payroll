@@ -80,6 +80,11 @@ const processImportPayroll = async ({ file, from, to }) => {
             y0: ft[i].__EMPTY_24 || '', // Jabatan
             z0: ft[i].__EMPTY_25 || '', // JPK No. (Kartu Peserta Jamsostek)
             aa0: ft[i].__EMPTY_26 || '', // No. BPJS Kesehatan
+            ab0: ft[i].__EMPTY_27 || 0, // Jam Lembur Normal
+            ad0: ft[i].__EMPTY_29 || 0, // Jam Lembur Dinas
+            af0: ft[i].__EMPTY_31 || 0, // Jam Insentif
+            ag0: ft[i].__EMPTY_32 || 0, // Rate Insentif
+            ay0: ft[i].__EMPTY_50 || 0, // Upah Normal
           });
         }
 

@@ -28,6 +28,15 @@ const EmployeeSchema = new Schema({
   y0: String, // Jabatan
   z0: String, // JPK No. (Kartu Peserta Jamsostek)
   aa0: String, // No. BPJS Kesehatan
+  ab0: Number, // Jam Lembur Normal
+  ac0: Number, // Amount Lembur Normal
+  ad0: Number, // Jam Lembur Dinas
+  ae0: Number, // Amount Lembur Dinas
+  af0: Number, // Jam Insentif
+  ag0: Number, // Rate Insentif
+  ah0: Number, // Amount Insentif
+  ai0: Number, // Total Lembur & Insentif
+  ay0: Number, // Upah Normal
 });
 
 const PayrollSchema = new Schema({
@@ -68,6 +77,11 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.l0 = Math.round((this.g0 / 21) * this.j0, 10);
   this.o0 = this.o0 ? format(new Date(this.o0), 'yyyy-MM-dd') : null;
   this.f0 = this.g0 - this.l0;
+
+  this.ac0 = (this.ay0 / 173) * this.ab0;
+  this.ae0 = (this.ay0 / 173) * this.ad0;
+  this.ah0 = this.af0 * this.ag0;
+  this.ai0 = this.ac0 + this.ae0 + this.ah0;
 
   return next();
 });

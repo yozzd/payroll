@@ -30,6 +30,7 @@
         :data="payrollAll"
         element-loading-text="Loading..."
         element-loading-spinner="el-icon-loading"
+        height="500"
       >
         <el-table-column
           prop="period"

@@ -35,6 +35,14 @@ const EmployeeType = new GraphQLObjectType({
     y0: { type: GraphQLString },
     z0: { type: GraphQLString },
     aa0: { type: GraphQLString },
+    ab0: { type: FloatPre2 },
+    ac0: { type: IntPre0 },
+    ad0: { type: FloatPre2 },
+    ae0: { type: IntPre0 },
+    af0: { type: FloatPre2 },
+    ag0: { type: IntPre0 },
+    ah0: { type: IntPre0 },
+    ai0: { type: IntPre0 },
   }),
 });
 
@@ -47,6 +55,14 @@ const PayrollType = new GraphQLObjectType({
     year: { type: GraphQLInt },
     period: { type: GraphQLString },
     employee: { type: new GraphQLList(EmployeeType) },
+    sab0: { type: IntPre0 },
+    sac0: { type: IntPre0 },
+    sad0: { type: IntPre0 },
+    sae0: { type: IntPre0 },
+    saf0: { type: IntPre0 },
+    sag0: { type: IntPre0 },
+    sah0: { type: IntPre0 },
+    sai0: { type: IntPre0 },
   }),
 });
 

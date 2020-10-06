@@ -59,3 +59,32 @@ export const PayrollSocial = gql`
     }
   }
 `;
+
+export const PayrollOvertime = gql`
+  query payrollOvertime($id: String!) {
+      payrollOvertime(id: $id) {
+      _id
+      sab0
+      sac0
+      sad0
+      sae0
+      saf0
+      sag0
+      sah0
+      sai0
+      employee {
+        _id
+        d0
+        e0
+        ab0
+        ac0
+        ad0
+        ae0
+        af0
+        ag0
+        ah0
+        ai0
+      }
+    }
+  }
+`;
