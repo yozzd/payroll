@@ -36,6 +36,21 @@ const EmployeeSchema = new Schema({
   ag0: Number, // Rate Insentif
   ah0: Number, // Amount Insentif
   ai0: Number, // Total Lembur & Insentif
+  aj0: Number, // Tunjangan Tetap Living
+  ak0: Number, // Tunjangan Tetap Perumahan
+  al0: Number, // Tunjangan Tetap Posisi Fix
+  am0: Number, // Tunjangan Tetap Fungsional Fix
+  an0: Number, // Tunjangan Tetap Koordinator
+  ao0: Number, // Tunjangan Tetap Transport
+  ap0: Number, // Tunjangan Tetap Komunikasi
+  aq0: Number, // Tunjangan Tetap Expertisi
+  ar0: Number, // Tunjangan Tetap Honorarium
+  as0: Number, // Tunjangan Tetap Posisi Variable
+  at0: Number, // Tunjangan Tetap Fungsional Variable
+  au0: Number, // Tunjangan Tetap Acting/PLT
+  av0: Number, // Tunjangan Tetap Others
+  aw0: Number, // Total Tunjangan Tetap
+  ax0: Number, // Upah (Gaji Pokok + Tunjangan Tetap)
   ay0: Number, // Upah Normal
 });
 
@@ -82,6 +97,22 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.ae0 = (this.ay0 / 173) * this.ad0;
   this.ah0 = this.af0 * this.ag0;
   this.ai0 = this.ac0 + this.ae0 + this.ah0;
+
+  this.aw0 = this.aj0
+    + this.ak0
+    + this.al0
+    + this.am0
+    + this.an0
+    + this.ao0
+    + this.ar0
+    + this.ap0
+    + this.aq0
+    + this.ar0
+    + this.as0
+    + this.at0
+    + this.au0
+    + this.av0;
+  this.ax0 = this.g0 + this.aw0;
 
   return next();
 });

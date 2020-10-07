@@ -84,6 +84,19 @@ const processImportPayroll = async ({ file, from, to }) => {
             ad0: ft[i].__EMPTY_29 || 0, // Jam Lembur Dinas
             af0: ft[i].__EMPTY_31 || 0, // Jam Insentif
             ag0: ft[i].__EMPTY_32 || 0, // Rate Insentif
+            aj0: ft[i].__EMPTY_35 || 0, // Tunjangan Tetap Living
+            ak0: ft[i].__EMPTY_36 || 0, // Tunjangan Tetap Perumahan
+            al0: ft[i].__EMPTY_37 || 0, // Tunjangan Tetap Posisi Fix
+            am0: ft[i].__EMPTY_38 || 0, // Tunjangan Tetap Fungsional Fix
+            an0: ft[i].__EMPTY_39 || 0, // Tunjangan Tetap Koordinator
+            ao0: ft[i].__EMPTY_40 || 0, // Tunjangan Tetap Transport
+            ap0: ft[i].__EMPTY_41 || 0, // Tunjangan Tetap Komunikasi
+            aq0: ft[i].__EMPTY_42 || 0, // Tunjangan Tetap Expertisi
+            ar0: ft[i].__EMPTY_43 || 0, // Tunjangan Tetap Honorarium
+            as0: ft[i].__EMPTY_44 || 0, // Tunjangan Tetap Posisi Variable
+            at0: ft[i].__EMPTY_45 || 0, // Tunjangan Tetap Fungsional Variable
+            au0: ft[i].__EMPTY_46 || 0, // Tunjangan Tetap Acting/PLT
+            av0: ft[i].__EMPTY_47 || 0, // Tunjangan Tetap Others
             ay0: ft[i].__EMPTY_50 || 0, // Upah Normal
           });
         }

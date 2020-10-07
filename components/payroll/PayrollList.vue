@@ -12,7 +12,9 @@
       <el-tab-pane label="Overtime">
         <PayrollOvertime />
       </el-tab-pane>
-      <el-tab-pane label="Task">Task</el-tab-pane>
+      <el-tab-pane label="Fixed Allowance">
+        <PayrollFixedAllowance />
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
