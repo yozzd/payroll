@@ -38,8 +38,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="ba0" width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tidak Tetap Fungsional">
               Tj. Tidak Tetap Fungsional
@@ -48,8 +47,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="bb0" width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tidak Tetap Shift">
               Tj. Tidak Tetap Shift
@@ -58,8 +56,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="bc0" width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tidak Tetap Tig Welding">
               Tj. Tidak Tetap Tig Welding
@@ -68,8 +65,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="bd0" width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tidak Tetap Operator Plasma">
               Tj. Tidak Tetap Operator Plasma
@@ -78,8 +74,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="be0" width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tidak Tetap LKS">
               Tj. Tidak Tetap LKS
@@ -88,8 +83,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="bf0" width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tidak Tetap Koperasi">
               Tj. Tidak Tetap Koperasi
@@ -98,8 +92,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="bg0" width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tidak Tetap Quality System">
               Tj. Tidak Tetap Quality System
@@ -108,8 +101,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="bh0" width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tidak Tetap Pengharagaan Masa Kerja">
               Tj. Tidak Tetap Penghargaan Masa Kerja
@@ -118,8 +110,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="bi0" width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tidak Tetap Others">
               Tj. Tidak Tetap Others
@@ -128,8 +119,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="bj0" min-width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <client-only>
             <p v-snip="1" title="Total Tj. Tidak Tetap">
               Total Tj. Tidak Tetap

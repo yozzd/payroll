@@ -38,8 +38,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="ab0" width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <client-only>
             <p v-snip="1" title="Jam Lembur Normal">
               Jam Lembur Normal
@@ -48,8 +47,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="ac0" width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <client-only>
             <p v-snip="1" title="Amount Lembur Normal">
               Amount Lembur Normal
@@ -58,8 +56,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="ad0" width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <client-only>
             <p v-snip="1" title="Jam Lembur Dinas">
               Jam Lembur Dinas
@@ -68,8 +65,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="ae0" width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <client-only>
             <p v-snip="1" title="Amount Lembur Dinas">
               Amount Lembur Dinas
@@ -80,8 +76,7 @@
       <el-table-column prop="af0" label="Jam Insentif" width="100" align="right"></el-table-column>
       <el-table-column prop="ag0" label="Rate Insentif" width="100" align="right"></el-table-column>
       <el-table-column prop="ah0" width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <client-only>
             <p v-snip="1" title="Amount Insentif">
               Amount Insentif
@@ -90,8 +85,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="ai0" min-width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <client-only>
             <p v-snip="1" title="Total Lembur & Insentif">
               Total Lembur & Insentif

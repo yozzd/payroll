@@ -36,8 +36,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="p0" width="100">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <client-only>
             <p v-snip="1" title="(NPWP) Status">
               (NPWP) Status
@@ -47,8 +46,7 @@
       </el-table-column>
       <el-table-column prop="q0" label="(NPWP) No." width="200"></el-table-column>
       <el-table-column prop="r0" width="100">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
+        <template slot="header">
           <client-only>
             <p v-snip="1" title="(NPWP) Status Tanggungan">
               (NPWP) Status Tanggungan
