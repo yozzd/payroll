@@ -42,7 +42,7 @@
     "passport-local": "^1.0.0",
     "pdfmake": "^0.1.68",
     "vue-snip": "^1.1.0",
-    "xlsx": "^0.16.7"
+    "xlsx": "^0.16.8"
   },
   "devDependencies": {
     "@ava/babel": "^1.0.1",
