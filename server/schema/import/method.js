@@ -64,7 +64,7 @@ const processImportPayroll = async ({ file, from, to }) => {
             h0: ft[i].__EMPTY_7 || '', // Status Karyawan
             i0: parseDate(XLSX.SSF.parse_date_code(ft[i].__EMPTY_8)), // Hired date
             j0: ft[i].__EMPTY_9 || 0, // Hari Kerja
-            k0: parseDate(XLSX.SSF.parse_date_code(ft[i].__EMPTY_10)), // Resign/Finish Contract Date
+            k0: parseDate(XLSX.SSF.parse_date_code(ft[i].__EMPTY_10)), // Resign/Finish Contract
             m0: ft[i].__EMPTY_12 || '', // Note
             n0: ft[i].__EMPTY_13 || '', // Jenis Kelamin
             o0: parseDate(XLSX.SSF.parse_date_code(ft[i].__EMPTY_14)), // Birthday

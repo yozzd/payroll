@@ -6,7 +6,7 @@ const {
 } = require('graphql');
 
 const { DateFormat } = require('../scalar/date');
-const { IntPre0, FloatPre2, FloatPre4 } = require('../scalar/number');
+const { IntPre0, FloatPre2 } = require('../scalar/number');
 
 const EmployeeType = new GraphQLObjectType({
   name: 'EmployeeType',

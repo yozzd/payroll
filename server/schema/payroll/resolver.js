@@ -36,7 +36,7 @@ const Query = {
     resolve: auth.hasRole('admin', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id })
         .select({
-          '_id': 1,
+          _id: 1,
           'employee._id': 1,
           'employee.d0': 1,
           'employee.e0': 1,
@@ -47,7 +47,7 @@ const Query = {
           'employee.v0': 1,
           'employee.w0': 1,
           'employee.x0': 1,
-          'employee.y0': 1
+          'employee.y0': 1,
         });
       return p;
     }),
@@ -60,7 +60,7 @@ const Query = {
     resolve: auth.hasRole('admin', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id })
         .select({
-          '_id': 1,
+          _id: 1,
           'employee._id': 1,
           'employee.d0': 1,
           'employee.e0': 1,
@@ -100,25 +100,25 @@ const Query = {
                 ag0: '$employee.ag0',
                 ah0: '$employee.ah0',
                 ai0: '$employee.ai0',
-              }
+              },
             },
-          }
+          },
         },
         {
           $addFields: {
             total: {
-              sab0: { $round: [{ $sum: '$employee.ab0' }, 0]},
-              sac0: { $round: [{ $sum: '$employee.ac0' }, 0]},
-              sad0: { $round: [{ $sum: '$employee.ad0' }, 0]},
-              sae0: { $round: [{ $sum: '$employee.ae0' }, 0]},
-              saf0: { $round: [{ $sum: '$employee.af0' }, 0]},
-              sag0: { $round: [{ $sum: '$employee.ag0' }, 0]},
-              sah0: { $round: [{ $sum: '$employee.ah0' }, 0]},
-              sai0: { $round: [{ $sum: '$employee.ai0' }, 0]},
+              sab0: { $round: [{ $sum: '$employee.ab0' }, 0] },
+              sac0: { $round: [{ $sum: '$employee.ac0' }, 0] },
+              sad0: { $round: [{ $sum: '$employee.ad0' }, 0] },
+              sae0: { $round: [{ $sum: '$employee.ae0' }, 0] },
+              saf0: { $round: [{ $sum: '$employee.af0' }, 0] },
+              sag0: { $round: [{ $sum: '$employee.ag0' }, 0] },
+              sah0: { $round: [{ $sum: '$employee.ah0' }, 0] },
+              sai0: { $round: [{ $sum: '$employee.ai0' }, 0] },
             },
-          }
-        }
-      ])
+          },
+        },
+      ]);
 
       return p[0];
     }),
@@ -155,9 +155,9 @@ const Query = {
                 av0: '$employee.av0',
                 aw0: '$employee.aw0',
                 ax0: '$employee.ax0',
-              }
+              },
             },
-          }
+          },
         },
         {
           $addFields: {
@@ -178,9 +178,9 @@ const Query = {
               saw0: { $sum: '$employee.aw0' },
               sax0: { $sum: '$employee.ax0' },
             },
-          }
-        }
-      ])
+          },
+        },
+      ]);
 
       return p[0];
     }),
