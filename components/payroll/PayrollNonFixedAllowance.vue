@@ -37,142 +37,102 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="aj0" width="100" align="right">
+      <el-table-column prop="ba0" width="100" align="right">
         <!--eslint-disable-next-line vue/no-unused-vars-->
         <template slot="header" slot-scope="scope">
           <client-only>
-            <p v-snip="1" title="Tj. Tetap Living">
-              Tj. Tetap Living
+            <p v-snip="1" title="Tj. Tidak Tetap Fungsional">
+              Tj. Tidak Tetap Fungsional
             </p>
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="ak0" width="100" align="right">
+      <el-table-column prop="bb0" width="100" align="right">
         <!--eslint-disable-next-line vue/no-unused-vars-->
         <template slot="header" slot-scope="scope">
           <client-only>
-            <p v-snip="1" title="Tj. Tetap Perumahan">
-              Tj. Tetap Perumahan
+            <p v-snip="1" title="Tj. Tidak Tetap Shift">
+              Tj. Tidak Tetap Shift
             </p>
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="al0" width="100" align="right">
+      <el-table-column prop="bc0" width="100" align="right">
         <!--eslint-disable-next-line vue/no-unused-vars-->
         <template slot="header" slot-scope="scope">
           <client-only>
-            <p v-snip="1" title="Tj. Tetap Posisi Fix">
-              Tj. Tetap Posisi
+            <p v-snip="1" title="Tj. Tidak Tetap Tig Welding">
+              Tj. Tidak Tetap Tig Welding
             </p>
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="am0" width="100" align="right">
+      <el-table-column prop="bd0" width="100" align="right">
         <!--eslint-disable-next-line vue/no-unused-vars-->
         <template slot="header" slot-scope="scope">
           <client-only>
-            <p v-snip="1" title="Tj. Tetap Fungsional Fix">
-              Tj. Tetap Fungsional
+            <p v-snip="1" title="Tj. Tidak Tetap Operator Plasma">
+              Tj. Tidak Tetap Operator Plasma
             </p>
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="an0" width="100" align="right">
+      <el-table-column prop="be0" width="100" align="right">
         <!--eslint-disable-next-line vue/no-unused-vars-->
         <template slot="header" slot-scope="scope">
           <client-only>
-            <p v-snip="1" title="Tj. Tetap Koordinator">
-              Tj. Tetap Koordinator
+            <p v-snip="1" title="Tj. Tidak Tetap LKS">
+              Tj. Tidak Tetap LKS
             </p>
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="ao0" width="100" align="right">
+      <el-table-column prop="bf0" width="100" align="right">
         <!--eslint-disable-next-line vue/no-unused-vars-->
         <template slot="header" slot-scope="scope">
           <client-only>
-            <p v-snip="1" title="Tj. Tetap Transport">
-              Tj. Tetap Transport
+            <p v-snip="1" title="Tj. Tidak Tetap Koperasi">
+              Tj. Tidak Tetap Koperasi
             </p>
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="ap0" width="100" align="right">
+      <el-table-column prop="bg0" width="100" align="right">
         <!--eslint-disable-next-line vue/no-unused-vars-->
         <template slot="header" slot-scope="scope">
           <client-only>
-            <p v-snip="1" title="Tj. Tetap Komunikasi">
-              Tj. Tetap Komunikasi
+            <p v-snip="1" title="Tj. Tidak Tetap Quality System">
+              Tj. Tidak Tetap Quality System
             </p>
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="aq0" width="100" align="right">
+      <el-table-column prop="bh0" width="100" align="right">
         <!--eslint-disable-next-line vue/no-unused-vars-->
         <template slot="header" slot-scope="scope">
           <client-only>
-            <p v-snip="1" title="Tj. Tetap Expertisi">
-              Tj. Tetap Expertisi
+            <p v-snip="1" title="Tj. Tidak Tetap Pengharagaan Masa Kerja">
+              Tj. Tidak Tetap Penghargaan Masa Kerja
             </p>
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="ar0" width="100" align="right">
+      <el-table-column prop="bi0" width="100" align="right">
         <!--eslint-disable-next-line vue/no-unused-vars-->
         <template slot="header" slot-scope="scope">
           <client-only>
-            <p v-snip="1" title="Tj. Tetap Honorarium">
-              Tj. Tetap Honorarium
+            <p v-snip="1" title="Tj. Tidak Tetap Others">
+              Tj. Tidak Tetap Others
             </p>
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="as0" width="100" align="right">
+      <el-table-column prop="bj0" min-width="100" align="right">
         <!--eslint-disable-next-line vue/no-unused-vars-->
         <template slot="header" slot-scope="scope">
           <client-only>
-            <p v-snip="1" title="Tj. Tetap Posisi Variable">
-              Tj. Tetap Posisi Variable
-            </p>
-          </client-only>
-        </template>
-      </el-table-column>
-      <el-table-column prop="at0" width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
-          <client-only>
-            <p v-snip="1" title="Tj. Tetap Fungsional Variable">
-              Tj. Tetap Fungsional Variable
-            </p>
-          </client-only>
-        </template>
-      </el-table-column>
-      <el-table-column prop="au0" width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
-          <client-only>
-            <p v-snip="1" title="Tj. Tetap Acting / PLT">
-              Tj. Tetap Acting / PLT
-            </p>
-          </client-only>
-        </template>
-      </el-table-column>
-      <el-table-column prop="av0" width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
-          <client-only>
-            <p v-snip="1" title="Tj. Tetap Others">
-              Tj. Tetap Others
-            </p>
-          </client-only>
-        </template>
-      </el-table-column>
-      <el-table-column prop="aw0" width="100" align="right">
-        <!--eslint-disable-next-line vue/no-unused-vars-->
-        <template slot="header" slot-scope="scope">
-          <client-only>
-            <p v-snip="1" title="Total Tj. Tetap">
-              Total Tunjangan Tetap
+            <p v-snip="1" title="Total Tj. Tidak Tetap">
+              Total Tj. Tidak Tetap
             </p>
           </client-only>
         </template>
@@ -183,7 +143,7 @@
 
 <script>
 import MiniSearch from 'minisearch';
-import { PayrollFixedAllowance } from '../../apollo/query/payroll';
+import { PayrollNonFixedAllowance } from '../../apollo/query/payroll';
 
 export default {
   data() {
@@ -196,9 +156,9 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'aj0', 'ak0', 'al0',
-          'am0', 'an0', 'ao0', 'ap0', 'aq0', 'ar0',
-          'as0', 'at0', 'au0', 'av0', 'aw0',
+          '_id', 'd0', 'e0', 'ba0', 'bb0', 'bc0',
+          'bd0', 'be0', 'bf0', 'bg0', 'bh0', 'bi0',
+          'bj0',
         ],
       }),
     };
@@ -217,8 +177,8 @@ export default {
     },
   },
   apollo: {
-    payrollFixedAllowance: {
-      query: PayrollFixedAllowance,
+    payrollNonFixedAllowance: {
+      query: PayrollNonFixedAllowance,
       variables() {
         return {
           id: this.$route.params.id,
@@ -230,23 +190,21 @@ export default {
           const {
             employee,
             total: {
-              saj0, sak0, sal0,
-              sam0, san0, sao0,
-              sap0, saq0, sar0,
-              sas0, sat0, sau0,
-              sav0, saw0,
+              sba0, sbb0, sbc0,
+              sbd0, sbe0, sbf0,
+              sbg0, sbh0, sbi0,
+              sbj0,
             },
-          } = data.payrollFixedAllowance;
+          } = data.payrollNonFixedAllowance;
 
           this.items = employee;
           this.miniSearch.addAll(this.items);
           this.arrSum = [
             'Total', '', '',
-            saj0, sak0, sal0,
-            sam0, san0, sao0,
-            sap0, saq0, sar0,
-            sas0, sat0, sau0,
-            sav0, saw0,
+            sba0, sbb0, sbc0,
+            sbd0, sbe0, sbf0,
+            sbg0, sbh0, sbi0,
+            sbj0,
           ];
         }
       },

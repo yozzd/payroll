@@ -113,7 +113,6 @@ export const PayrollFixedAllowance = gql`
         au0
         av0
         aw0
-        ax0
       }
       total {
         saj0
@@ -130,7 +129,41 @@ export const PayrollFixedAllowance = gql`
         sau0
         sav0
         saw0
-        sax0
+      }
+    }
+  }
+`;
+
+export const PayrollNonFixedAllowance = gql`
+  query payrollNonFixedAllowance($id: String!) {
+    payrollNonFixedAllowance(id: $id) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        ba0
+        bb0
+        bc0
+        bd0
+        be0
+        bf0
+        bg0
+        bh0
+        bi0
+        bj0
+      }
+      total {
+        sba0
+        sbb0
+        sbc0
+        sbd0
+        sbe0
+        sbf0
+        sbg0
+        sbh0
+        sbi0
+        sbj0
       }
     }
   }

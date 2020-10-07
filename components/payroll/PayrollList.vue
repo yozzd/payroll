@@ -15,6 +15,9 @@
       <el-tab-pane label="Fixed Allowance">
         <PayrollFixedAllowance />
       </el-tab-pane>
+      <el-tab-pane label="Non Fixed Allowance">
+        <PayrollNonFixedAllowance />
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>

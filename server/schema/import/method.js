@@ -98,6 +98,15 @@ const processImportPayroll = async ({ file, from, to }) => {
             au0: ft[i].__EMPTY_46 || 0, // Tunjangan Tetap Acting/PLT
             av0: ft[i].__EMPTY_47 || 0, // Tunjangan Tetap Others
             ay0: ft[i].__EMPTY_50 || 0, // Upah Normal
+            ba0: ft[i].__EMPTY_52, // Tunjangan Tidak Tetap Fungsional
+            bb0: ft[i].__EMPTY_53, // Tunjangan Tidak Tetap Shift
+            bc0: ft[i].__EMPTY_54, // Tunjangan Tidak Tetap Tig Welding
+            bd0: ft[i].__EMPTY_55, // Tunjangan Tidak Tetap Operator Plasma
+            be0: ft[i].__EMPTY_56, // Tunjangan Tidak Tetap LKS
+            bf0: ft[i].__EMPTY_57, // Tunjangan Tidak Tetap Koperasi
+            bg0: ft[i].__EMPTY_58, // Tunjangan Tidak Tetap Quality System
+            bh0: ft[i].__EMPTY_59, // Tunjangan Tidak Tetap Penghargaan Masa Kerja
+            bi0: ft[i].__EMPTY_60, // Tunjangan Tidak Tetap Others
           });
         }
 

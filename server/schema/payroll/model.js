@@ -52,6 +52,18 @@ const EmployeeSchema = new Schema({
   aw0: Number, // Total Tunjangan Tetap
   ax0: Number, // Upah (Gaji Pokok + Tunjangan Tetap)
   ay0: Number, // Upah Normal
+  az0: Number, // Selisih Upah
+  ba0: Number, // Tunjangan Tidak Tetap Fungsional
+  bb0: Number, // Tunjangan Tidak Tetap Shift
+  bc0: Number, // Tunjangan Tidak Tetap Tig Welding
+  bd0: Number, // Tunjangan Tidak Tetap Operator Plasma
+  be0: Number, // Tunjangan Tidak Tetap LKS
+  bf0: Number, // Tunjangan Tidak Tetap Koperasi
+  bg0: Number, // Tunjangan Tidak Tetap Quality System
+  bh0: Number, // Tunjangan Tidak Tetap Penghargaan Masa Kerja
+  bi0: Number, // Tunjangan Tidak Tetap Others
+  bj0: Number, // Total Tunjangan Tidak Tetap
+  bk0: Number, // Total Tunjangan Tetap & Tunjangan Tidak Tetap
 });
 
 const PayrollSchema = new Schema({
@@ -113,6 +125,18 @@ EmployeeSchema.pre('save', async function fn(next) {
     + this.au0
     + this.av0;
   this.ax0 = this.g0 + this.aw0;
+  this.az0 = this.ax0 - this.ay0;
+
+  this.bj0 = this.ba0
+    + this.bb0
+    + this.bc0
+    + this.bd0
+    + this.be0
+    + this.bf0
+    + this.bg0
+    + this.bh0
+    + this.bi0;
+  this.bk0 = this.aw0 + this.bj0;
 
   return next();
 });

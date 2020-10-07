@@ -154,7 +154,6 @@ const Query = {
                 au0: '$employee.au0',
                 av0: '$employee.av0',
                 aw0: '$employee.aw0',
-                ax0: '$employee.ax0',
               },
             },
           },
@@ -176,7 +175,58 @@ const Query = {
               sau0: { $sum: '$employee.au0' },
               sav0: { $sum: '$employee.av0' },
               saw0: { $sum: '$employee.aw0' },
-              sax0: { $sum: '$employee.ax0' },
+            },
+          },
+        },
+      ]);
+
+      return p[0];
+    }),
+  },
+  payrollNonFixedAllowance: {
+    type: PayrollType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('admin', async (_, { id }) => {
+      const p = await Payroll.aggregate([
+        { $match: { _id: id } },
+        { $unwind: '$employee' },
+        {
+          $group: {
+            _id: '$_id',
+            employee: {
+              $push: {
+                _id: '$employee._id',
+                d0: '$employee.d0',
+                e0: '$employee.e0',
+                ba0: '$employee.ba0',
+                bb0: '$employee.bb0',
+                bc0: '$employee.bc0',
+                bd0: '$employee.bd0',
+                be0: '$employee.be0',
+                bf0: '$employee.bf0',
+                bg0: '$employee.bg0',
+                bh0: '$employee.bh0',
+                bi0: '$employee.bi0',
+                bj0: '$employee.bj0',
+              },
+            },
+          },
+        },
+        {
+          $addFields: {
+            total: {
+              sba0: { $sum: '$employee.ba0' },
+              sbb0: { $sum: '$employee.bb0' },
+              sbc0: { $sum: '$employee.bc0' },
+              sbd0: { $sum: '$employee.bd0' },
+              sbe0: { $sum: '$employee.be0' },
+              sbf0: { $sum: '$employee.bf0' },
+              sbg0: { $sum: '$employee.bg0' },
+              sbh0: { $sum: '$employee.bh0' },
+              sbi0: { $sum: '$employee.bi0' },
+              sbj0: { $sum: '$employee.bj0' },
             },
           },
         },
