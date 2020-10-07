@@ -64,14 +64,6 @@ export const PayrollOvertime = gql`
   query payrollOvertime($id: String!) {
       payrollOvertime(id: $id) {
       _id
-      sab0
-      sac0
-      sad0
-      sae0
-      saf0
-      sag0
-      sah0
-      sai0
       employee {
         _id
         d0
@@ -84,6 +76,43 @@ export const PayrollOvertime = gql`
         ag0
         ah0
         ai0
+      }
+      total {
+        sab0
+        sac0
+        sad0
+        sae0
+        saf0
+        sag0
+        sah0
+        sai0
+      }
+    }
+  }
+`;
+
+export const PayrollFixedAllowance = gql`
+  query payrollFixedAllowance($id: String!) {
+    payrollFixedAllowance(id: $id) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        aj0
+        ak0
+        al0
+        am0
+        an0
+        ao0
+        ap0
+        aq0
+        ar0
+        as0
+        at0
+        au0
+        av0
+        aw0
       }
     }
   }

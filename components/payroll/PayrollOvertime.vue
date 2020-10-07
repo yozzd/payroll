@@ -150,10 +150,12 @@ export default {
         if (!loading) {
           const {
             employee,
-            sab0, sac0,
-            sad0, sae0,
-            saf0, sag0,
-            sah0, sai0,
+            total: {
+              sab0, sac0,
+              sad0, sae0,
+              saf0, sag0,
+              sah0, sai0,
+            },
           } = data.payrollOvertime;
 
           this.items = employee;

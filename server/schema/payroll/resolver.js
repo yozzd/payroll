@@ -81,22 +81,6 @@ const Query = {
       id: { type: GraphQLString },
     },
     resolve: auth.hasRole('admin', async (_, { id }) => {
-      // const payroll = await Payroll.findOne({ _id: id })
-      //   .select({
-      //     '_id': 1,
-      //     'employee._id': 1,
-      //     'employee.d0': 1,
-      //     'employee.e0': 1,
-      //     'employee.ab0': 1,
-      //     'employee.ac0': 1,
-      //     'employee.ad0': 1,
-      //     'employee.ae0': 1,
-      //     'employee.af0': 1,
-      //     'employee.ag0': 1,
-      //     'employee.ah0': 1,
-      //     'employee.ai0': 1,
-      //   });
-      // return payroll;
       const p = await Payroll.aggregate([
         { $match: { _id: id } },
         { $unwind: '$employee' },
@@ -122,17 +106,20 @@ const Query = {
         },
         {
           $addFields: {
-            sab0: { $round: [{ $sum: '$employee.ab0' }, 0]},
-            sac0: { $round: [{ $sum: '$employee.ac0' }, 0]},
-            sad0: { $round: [{ $sum: '$employee.ad0' }, 0]},
-            sae0: { $round: [{ $sum: '$employee.ae0' }, 0]},
-            saf0: { $round: [{ $sum: '$employee.af0' }, 0]},
-            sag0: { $round: [{ $sum: '$employee.ag0' }, 0]},
-            sah0: { $round: [{ $sum: '$employee.ah0' }, 0]},
-            sai0: { $round: [{ $sum: '$employee.ai0' }, 0]},
+            total: {
+              sab0: { $round: [{ $sum: '$employee.ab0' }, 0]},
+              sac0: { $round: [{ $sum: '$employee.ac0' }, 0]},
+              sad0: { $round: [{ $sum: '$employee.ad0' }, 0]},
+              sae0: { $round: [{ $sum: '$employee.ae0' }, 0]},
+              saf0: { $round: [{ $sum: '$employee.af0' }, 0]},
+              sag0: { $round: [{ $sum: '$employee.ag0' }, 0]},
+              sah0: { $round: [{ $sum: '$employee.ah0' }, 0]},
+              sai0: { $round: [{ $sum: '$employee.ai0' }, 0]},
+            },
           }
         }
       ])
+
       return p[0];
     }),
   },
