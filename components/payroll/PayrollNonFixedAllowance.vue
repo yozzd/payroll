@@ -37,7 +37,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="ba0" width="100" align="right">
+      <el-table-column prop="ba0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tidak Tetap Fungsional">
@@ -46,7 +46,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="bb0" width="100" align="right">
+      <el-table-column prop="bb0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tidak Tetap Shift">
@@ -55,7 +55,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="bc0" width="100" align="right">
+      <el-table-column prop="bc0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tidak Tetap Tig Welding">
@@ -64,7 +64,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="bd0" width="100" align="right">
+      <el-table-column prop="bd0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tidak Tetap Operator Plasma">
@@ -73,7 +73,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="be0" width="100" align="right">
+      <el-table-column prop="be0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tidak Tetap LKS">
@@ -82,7 +82,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="bf0" width="100" align="right">
+      <el-table-column prop="bf0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tidak Tetap Koperasi">
@@ -91,7 +91,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="bg0" width="100" align="right">
+      <el-table-column prop="bg0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tidak Tetap Quality System">
@@ -100,7 +100,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="bh0" width="100" align="right">
+      <el-table-column prop="bh0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tidak Tetap Pengharagaan Masa Kerja">
@@ -109,7 +109,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="bi0" width="100" align="right">
+      <el-table-column prop="bi0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tidak Tetap Others">
@@ -118,7 +118,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="bj0" min-width="100" align="right">
+      <el-table-column prop="bj0" min-width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Total Tj. Tidak Tetap">

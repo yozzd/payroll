@@ -37,7 +37,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="ab0" width="100" align="right">
+      <el-table-column prop="ab0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Jam Lembur Normal">
@@ -46,7 +46,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="ac0" width="100" align="right">
+      <el-table-column prop="ac0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Amount Lembur Normal">
@@ -55,7 +55,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="ad0" width="100" align="right">
+      <el-table-column prop="ad0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Jam Lembur Dinas">
@@ -64,7 +64,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="ae0" width="100" align="right">
+      <el-table-column prop="ae0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Amount Lembur Dinas">
@@ -75,7 +75,7 @@
       </el-table-column>
       <el-table-column prop="af0" label="Jam Insentif" width="100" align="right"></el-table-column>
       <el-table-column prop="ag0" label="Rate Insentif" width="100" align="right"></el-table-column>
-      <el-table-column prop="ah0" width="100" align="right">
+      <el-table-column prop="ah0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Amount Insentif">
@@ -84,7 +84,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="ai0" min-width="100" align="right">
+      <el-table-column prop="ai0" min-width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Total Lembur & Insentif">

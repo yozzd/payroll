@@ -37,7 +37,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="aj0" width="100" align="right">
+      <el-table-column prop="aj0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tetap Living">
@@ -46,7 +46,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="ak0" width="100" align="right">
+      <el-table-column prop="ak0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tetap Perumahan">
@@ -55,7 +55,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="al0" width="100" align="right">
+      <el-table-column prop="al0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tetap Posisi Fix">
@@ -64,7 +64,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="am0" width="100" align="right">
+      <el-table-column prop="am0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tetap Fungsional Fix">
@@ -73,7 +73,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="an0" width="100" align="right">
+      <el-table-column prop="an0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tetap Koordinator">
@@ -82,7 +82,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="ao0" width="100" align="right">
+      <el-table-column prop="ao0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tetap Transport">
@@ -91,7 +91,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="ap0" width="100" align="right">
+      <el-table-column prop="ap0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tetap Komunikasi">
@@ -100,7 +100,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="aq0" width="100" align="right">
+      <el-table-column prop="aq0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tetap Expertisi">
@@ -109,7 +109,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="ar0" width="100" align="right">
+      <el-table-column prop="ar0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tetap Honorarium">
@@ -118,7 +118,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="as0" width="100" align="right">
+      <el-table-column prop="as0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tetap Posisi Variable">
@@ -127,7 +127,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="at0" width="100" align="right">
+      <el-table-column prop="at0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tetap Fungsional Variable">
@@ -136,7 +136,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="au0" width="100" align="right">
+      <el-table-column prop="au0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tetap Acting / PLT">
@@ -145,7 +145,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="av0" width="100" align="right">
+      <el-table-column prop="av0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tj. Tetap Others">
@@ -154,7 +154,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="aw0" min-width="100" align="right">
+      <el-table-column prop="aw0" min-width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Total Tj. Tetap">

@@ -44,7 +44,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="q0" label="(NPWP) No." width="200"></el-table-column>
+      <el-table-column prop="q0" label="(NPWP) No." width="160"></el-table-column>
       <el-table-column prop="r0" width="100">
         <template slot="header">
           <client-only>
@@ -55,9 +55,9 @@
         </template>
       </el-table-column>
       <el-table-column prop="s0" label="(Bank) Name" width="100"></el-table-column>
-      <el-table-column prop="t0" label="(Bank) No." width="200"></el-table-column>
-      <el-table-column prop="z0" label="(BPJS) Ketenagakerjaan" width="200"></el-table-column>
-      <el-table-column prop="aa0" label="(BPJS) Kesehatan" min-width="200"></el-table-column>
+      <el-table-column prop="t0" label="(Bank) No." width="160"></el-table-column>
+      <el-table-column prop="z0" label="(BPJS) Ketenagakerjaan" width="160"></el-table-column>
+      <el-table-column prop="aa0" label="(BPJS) Kesehatan" min-width="160"></el-table-column>
     </el-table>
   </div>
 </template>
