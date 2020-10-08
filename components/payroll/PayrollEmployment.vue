@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="space-y-2">
     <ErrorHandler
       v-if="errors"
       :errors="errors"
