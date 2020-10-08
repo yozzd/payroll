@@ -1,5 +1,14 @@
 html {
   font-family: sans-serif;
+  font-size: 14px;
+}
+
+.el-page-header__content {
+  font-size: 14px;
+}
+
+.link-sm {
+  font-size: 12px;
 }
 
 .el-dropdown-menu.search {
@@ -8,10 +17,6 @@ html {
 
 .el-upload-dragger {
   width: 350px;
-}
-
-.link-sm {
-  font-size: 12px;
 }
 
 button:focus,

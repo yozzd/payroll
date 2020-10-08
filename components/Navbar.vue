@@ -1,9 +1,10 @@
 <template>
   <div class="flex px-12 pt-3 h-16 space-x-8 items-baseline">
     <Brand />
-    <nuxt-link to="/dashboard/" class="flex-1">
+    <nuxt-link to="/dashboard/">
       Dashboard
     </nuxt-link>
+    <div class="flex-1"></div>
     <el-dropdown trigger="click" @command="handleCommand">
       <span class="el-dropdown-link">
         Extras<i class="el-icon-arrow-down el-icon--right"></i>
