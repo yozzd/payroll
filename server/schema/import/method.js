@@ -107,6 +107,16 @@ const processImportPayroll = async ({ file, from, to }) => {
             bg0: ft[i].__EMPTY_58 || 0, // Tunjangan Tidak Tetap Quality System
             bh0: ft[i].__EMPTY_59 || 0, // Tunjangan Tidak Tetap Penghargaan Masa Kerja
             bi0: ft[i].__EMPTY_60 || 0, // Tunjangan Tidak Tetap Others
+            bl0: ft[i].__EMPTY_63 || 0, // Pembetulan Pembayaran Koreksi Absen
+            bm0: ft[i].__EMPTY_64 || 0, // Pembetulan Pembayaran Koreksi Gaji & Hari Kerja
+            bn0: ft[i].__EMPTY_65 || 0, // Pembetulan Pembayaran Koreksi OT
+            bo0: ft[i].__EMPTY_66 || 0, // Pembetulan Pembayaran Tunjangan
+            bp0: ft[i].__EMPTY_67 || 0, // Pembetulan Pembayaran Insentif
+            bq0: ft[i].__EMPTY_68 || 0, // Pembetulan Pembayaran THR
+            br0: ft[i].__EMPTY_69 || 0, // Pembetulan Pembayaran Allowance
+            bs0: ft[i].__EMPTY_70 || 0, // Pembetulan Pembayaran Uang Makan Security
+            bt0: ft[i].__EMPTY_71 || 0, // Pembetulan Pembayaran Others
+            bv0: ft[i].__EMPTY_73 || 0, // Tambahan Lain Tidak Kena Pajak
           });
         }
 

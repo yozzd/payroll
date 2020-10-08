@@ -64,6 +64,17 @@ const EmployeeSchema = new Schema({
   bi0: Number, // Tunjangan Tidak Tetap Others
   bj0: Number, // Total Tunjangan Tidak Tetap
   bk0: Number, // Total Tunjangan Tetap & Tunjangan Tidak Tetap
+  bl0: Number, // Pembetulan Pembayaran Koreksi Absen
+  bm0: Number, // Pembetulan Pembayaran Koreksi Gaji & Hari Kerja
+  bn0: Number, // Pembetulan Pembayaran Koreksi OT
+  bo0: Number, // Pembetulan Pembayaran Tunjangan
+  bp0: Number, // Pembetulan Pembayaran Insentif
+  bq0: Number, // Pembetulan Pembayaran THR
+  br0: Number, // Pembetulan Pembayaran Allowance
+  bs0: Number, // Pembetulan Pembayaran Uang Makan Security
+  bt0: Number, // Pembetulan Pembayaran Others
+  bu0: Number, // Total Pembetulan Pembayaran
+  bv0: Number, // Tambahan Lain Tidak Kena Pajak
 });
 
 const PayrollSchema = new Schema({
@@ -137,6 +148,16 @@ EmployeeSchema.pre('save', async function fn(next) {
     + this.bh0
     + this.bi0;
   this.bk0 = this.aw0 + this.bj0;
+
+  this.bu0 = this.bl0
+    + this.bm0
+    + this.bn0
+    + this.bo0
+    + this.bp0
+    + this.bq0
+    + this.br0
+    + this.bs0
+    + this.bt0;
 
   return next();
 });

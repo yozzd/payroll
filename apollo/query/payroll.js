@@ -168,3 +168,38 @@ export const PayrollNonFixedAllowance = gql`
     }
   }
 `;
+
+export const PayrollRetroFill = gql`
+  query payrollRetroFill($id: String!) {
+    payrollRetroFill(id: $id) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        bl0
+        bm0
+        bn0
+        bo0
+        bp0
+        bq0
+        br0
+        bs0
+        bt0
+        bu0
+      }
+      total {
+        sbl0
+        sbm0
+        sbn0
+        sbo0
+        sbp0
+        sbq0
+        sbr0
+        sbs0
+        sbt0
+        sbu0
+      }
+    }
+  }
+`;
