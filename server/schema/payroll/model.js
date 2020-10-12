@@ -75,6 +75,11 @@ const EmployeeSchema = new Schema({
   bt0: Number, // Pembetulan Pembayaran Others
   bu0: Number, // Total Pembetulan Pembayaran
   bv0: Number, // Tambahan Lain Tidak Kena Pajak
+  bw0: Number, // THR Prorate Months
+  bx0: Number, // THR Prorate Amount
+  by0: Number, // Cuti Days
+  bz0: Number, // Cuti Amount
+  ca0: Number, // Pendapatan Kotor
 });
 
 const PayrollSchema = new Schema({
@@ -158,6 +163,9 @@ EmployeeSchema.pre('save', async function fn(next) {
     + this.br0
     + this.bs0
     + this.bt0;
+
+  this.bx0 = (this.ay0 / 12) * this.bw0;
+  this.bz0 = (this.ay0 / 21) * this.by0;
 
   return next();
 });

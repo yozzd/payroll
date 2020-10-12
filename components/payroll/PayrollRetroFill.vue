@@ -121,8 +121,8 @@
       <el-table-column prop="bu0" min-width="120" align="right">
         <template slot="header">
           <client-only>
-            <p v-snip="1" title="Total Pembetulan Pembayaran">
-              Total Pembetulan Pembayaran
+            <p v-snip="1" title="Total Pembetulan Pembayaran (Retro Fill)">
+              Total Pembetulan Pembayaran (Retro Fill)
             </p>
           </client-only>
         </template>
