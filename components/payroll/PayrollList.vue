@@ -12,6 +12,9 @@
       <el-tab-pane label="Earnings">
         <PayrollEarnings />
       </el-tab-pane>
+      <el-tab-pane label="Deductions">
+        <PayrollDeductions />
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>

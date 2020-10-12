@@ -17,4 +17,3 @@
     </el-tab-pane>
   </el-tabs>
 </template>
-
