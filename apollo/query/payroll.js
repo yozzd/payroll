@@ -203,3 +203,26 @@ export const PayrollRetroFill = gql`
     }
   }
 `;
+
+export const PayrollEarningOthers = gql`
+  query payrollEarningOthers($id: String!) {
+    payrollEarningOthers(id: $id) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        bw0
+        bx0
+        by0
+        bz0
+      }
+      total {
+        sbw0
+        sbx0
+        sby0
+        sbz0
+      }
+    }
+  }
+`;
