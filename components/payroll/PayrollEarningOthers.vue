@@ -37,26 +37,14 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="bw0" width="120" align="right">
-        <template slot="header">
-          <client-only>
-            <p v-snip="1" title="THR Prorate (Months)">
-              THR Prorate (Month)
-            </p>
-          </client-only>
-        </template>
+      <el-table-column label="THR Prorate" align="center">
+        <el-table-column prop="bw0" label="Days" width="120" align="right"></el-table-column>
+        <el-table-column prop="bx0" label="Amount" width="120" align="right"></el-table-column>
       </el-table-column>
-      <el-table-column prop="bx0" width="120" align="right">
-        <template slot="header">
-          <client-only>
-            <p v-snip="1" title="THR Prorate (Amount)">
-              THR Prorate (Amount)
-            </p>
-          </client-only>
-        </template>
+      <el-table-column label="Cuti" align="center">
+        <el-table-column prop="by0" label="Days" width="120" align="right"></el-table-column>
+        <el-table-column prop="bz0" label="Amount" width="120" align="right"></el-table-column>
       </el-table-column>
-      <el-table-column prop="by0" label="Cuti (Days)" width="120" align="right"></el-table-column>
-      <el-table-column prop="bz0" label="Cuti (Amount)" width="120" align="right"></el-table-column>
     </el-table>
   </div>
 </template>
