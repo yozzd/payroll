@@ -37,52 +37,18 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="ab0" width="120" align="right">
-        <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Jam Lembur Normal">
-              Jam Lembur Normal
-            </p>
-          </client-only>
-        </template>
+      <el-table-column label="Lembur Normal" align="center">
+        <el-table-column prop="ab0" label="Hour" width="120" align="right"></el-table-column>
+        <el-table-column prop="ac0" label="Amount" width="120" align="right"></el-table-column>
       </el-table-column>
-      <el-table-column prop="ac0" width="120" align="right">
-        <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Amount Lembur Normal">
-              Amount Lembur Normal
-            </p>
-          </client-only>
-        </template>
+      <el-table-column label="Lembur Dinas" align="center">
+        <el-table-column prop="ad0" label="Hour" width="120" align="right"></el-table-column>
+        <el-table-column prop="ae0" label="Amount" width="120" align="right"></el-table-column>
       </el-table-column>
-      <el-table-column prop="ad0" width="120" align="right">
-        <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Jam Lembur Dinas">
-              Jam Lembur Dinas
-            </p>
-          </client-only>
-        </template>
-      </el-table-column>
-      <el-table-column prop="ae0" width="120" align="right">
-        <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Amount Lembur Dinas">
-              Amount Lembur Dinas
-            </p>
-          </client-only>
-        </template>
-      </el-table-column>
-      <el-table-column prop="af0" label="Jam Insentif" width="100" align="right"></el-table-column>
-      <el-table-column prop="ag0" label="Rate Insentif" width="100" align="right"></el-table-column>
-      <el-table-column prop="ah0" width="120" align="right">
-        <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Amount Insentif">
-              Amount Insentif
-            </p>
-          </client-only>
-        </template>
+      <el-table-column label="Insentif" align="center">
+        <el-table-column prop="af0" label="Hour" width="100" align="right"></el-table-column>
+        <el-table-column prop="ag0" label="Rate" width="100" align="right"></el-table-column>
+        <el-table-column prop="ah0" label="Amount" width="100" align="right"></el-table-column>
       </el-table-column>
       <el-table-column prop="ai0" min-width="120" align="right">
         <template slot="header">

@@ -22,6 +22,7 @@
       element-loading-spinner="el-icon-loading"
       :data="tableData"
       size="small"
+      border
       height="500"
     >
       <el-table-column type="index" width="50" align="center" fixed></el-table-column>
@@ -35,7 +36,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="h0" label="Status Karyawan" width="110"></el-table-column>
+      <el-table-column prop="h0" label="Status Karyawan" width="120"></el-table-column>
       <el-table-column prop="i0" label="Hired Date" width="100"></el-table-column>
       <el-table-column prop="k0" width="100">
         <template slot="header">

@@ -24,6 +24,7 @@
       size="small"
       height="500"
       show-summary
+      border
       :summary-method="summaries"
     >
       <el-table-column type="index" width="50" align="center" fixed></el-table-column>

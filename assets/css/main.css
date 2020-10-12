@@ -32,7 +32,11 @@ button:focus,
 
 .el-form-item.is-error .el-upload-dragger,
 .el-form-item.is-error .el-upload-dragger:focus {
-    border-color: #F56C6C;
+  border-color: #F56C6C;
+}
+
+.el-table thead th {
+  background: #F5F7FA;
 }
 
 .px-80 {

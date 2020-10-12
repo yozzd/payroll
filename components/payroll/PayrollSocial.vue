@@ -35,29 +35,19 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="p0" width="100">
-        <template slot="header">
-          <client-only>
-            <p v-snip="1" title="(NPWP) Status">
-              (NPWP) Status
-            </p>
-          </client-only>
-        </template>
+      <el-table-column label="NPWP" align="center">
+        <el-table-column prop="p0" label="Status" width="80"></el-table-column>
+        <el-table-column prop="q0" label="No." width="160"></el-table-column>
+        <el-table-column prop="r0" label="Status Tanggungan" width="140"></el-table-column>
       </el-table-column>
-      <el-table-column prop="q0" label="(NPWP) No." width="160"></el-table-column>
-      <el-table-column prop="r0" width="100">
-        <template slot="header">
-          <client-only>
-            <p v-snip="1" title="(NPWP) Status Tanggungan">
-              (NPWP) Status Tanggungan
-            </p>
-          </client-only>
-        </template>
+      <el-table-column label="Bank" align="center">
+        <el-table-column prop="s0" label="Name" width="100"></el-table-column>
+        <el-table-column prop="t0" label="No." width="160"></el-table-column>
       </el-table-column>
-      <el-table-column prop="s0" label="(Bank) Name" width="100"></el-table-column>
-      <el-table-column prop="t0" label="(Bank) No." width="160"></el-table-column>
-      <el-table-column prop="z0" label="(BPJS) Ketenagakerjaan" width="160"></el-table-column>
-      <el-table-column prop="aa0" label="(BPJS) Kesehatan" min-width="160"></el-table-column>
+      <el-table-column label="BPJS" align="center">
+        <el-table-column prop="z0" label="Ketenagakerjaan" width="160"></el-table-column>
+        <el-table-column prop="aa0" label="Kesehatan" min-width="160"></el-table-column>
+      </el-table-column>
     </el-table>
   </div>
 </template>
