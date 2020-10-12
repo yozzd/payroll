@@ -37,6 +37,15 @@
           </client-only>
         </template>
       </el-table-column>
+      <el-table-column prop="bv0" width="120" align="right">
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Tambahan Lain Tidak Kena Pajak">
+              Tambahan Lain Tidak Kena Pajak
+            </p>
+          </client-only>
+        </template>
+      </el-table-column>
       <el-table-column label="THR Prorate" align="center">
         <el-table-column prop="bw0" label="Days" width="120" align="right"></el-table-column>
         <el-table-column prop="bx0" label="Amount" width="120" align="right"></el-table-column>
@@ -86,9 +95,9 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'bw0', 'bx0', 'by0',
-          'bz0', 'dr0', 'ds0', 'dt0', 'du0', 'dv0',
-          'dw0', 'dx0', 'dy0',
+          '_id', 'd0', 'e0', 'bv0', 'bw0', 'bx0',
+          'by0', 'bz0', 'dr0', 'ds0', 'dt0', 'du0',
+          'dv0', 'dw0', 'dx0', 'dy0',
         ],
       }),
     };
@@ -120,10 +129,11 @@ export default {
           const {
             employee,
             total: {
-              sbw0, sbx0, sby0,
-              sbz0, sdr0, sds0,
-              sdt0, sdu0, sdv0,
-              sdw0, sdx0, sdy0,
+              sbv0, sbw0, sbx0,
+              sby0, sbz0, sdr0,
+              sds0, sdt0, sdu0,
+              sdv0, sdw0, sdx0,
+              sdy0,
             },
           } = data.payrollEarningOthers;
 
@@ -131,10 +141,11 @@ export default {
           this.miniSearch.addAll(this.items);
           this.arrSum = [
             'Total', '', '',
-            sbw0, sbx0, sby0,
-            sbz0, sdr0, sds0,
-            sdt0, sdu0, sdv0,
-            sdw0, sdx0, sdy0,
+            sbv0, sbw0, sbx0,
+            sby0, sbz0, sdr0,
+            sds0, sdt0, sdu0,
+            sdv0, sdw0, sdx0,
+            sdy0,
           ];
         }
       },

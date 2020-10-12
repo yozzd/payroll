@@ -304,6 +304,7 @@ const Query = {
                 _id: '$employee._id',
                 d0: '$employee.d0',
                 e0: '$employee.e0',
+                bv0: '$employee.bv0',
                 bw0: '$employee.bw0',
                 bx0: '$employee.bx0',
                 by0: '$employee.by0',
@@ -323,6 +324,7 @@ const Query = {
         {
           $addFields: {
             total: {
+              sbv0: { $sum: '$employee.bv0' },
               sbw0: { $sum: '$employee.bw0' },
               sbx0: { $sum: '$employee.bx0' },
               sby0: { $sum: '$employee.by0' },

@@ -212,6 +212,7 @@ export const PayrollEarningOthers = gql`
         _id
         d0
         e0
+        bv0
         bw0
         bx0
         by0
@@ -226,6 +227,7 @@ export const PayrollEarningOthers = gql`
         dy0
       }
       total {
+        sbv0
         sbw0
         sbx0
         sby0
