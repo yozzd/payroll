@@ -216,12 +216,28 @@ export const PayrollEarningOthers = gql`
         bx0
         by0
         bz0
+        dr0
+        ds0
+        dt0
+        du0
+        dv0
+        dw0
+        dx0
+        dy0
       }
       total {
         sbw0
         sbx0
         sby0
         sbz0
+        sdr0
+        sds0
+        sdt0
+        sdu0
+        sdv0
+        sdw0
+        sdx0
+        sdy0
       }
     }
   }

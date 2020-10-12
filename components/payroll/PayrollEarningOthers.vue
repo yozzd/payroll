@@ -45,6 +45,28 @@
         <el-table-column prop="by0" label="Days" width="120" align="right"></el-table-column>
         <el-table-column prop="bz0" label="Amount" width="120" align="right"></el-table-column>
       </el-table-column>
+      <el-table-column prop="dr0" label="Bonus" width="120" align="right"></el-table-column>
+      <el-table-column label="Uang Pisah" align="center">
+        <el-table-column prop="ds0" label="Lama Kerja" width="120" align="right"></el-table-column>
+        <el-table-column prop="dt0" label="Amount" width="120" align="right"></el-table-column>
+      </el-table-column>
+      <el-table-column label="Uang Pesangon" align="center">
+        <el-table-column prop="du0" label="Lama Kerja" width="120" align="right"></el-table-column>
+        <el-table-column prop="dv0" label="Amount" width="120" align="right"></el-table-column>
+      </el-table-column>
+      <el-table-column label="Uang Penghargaan Masa Kerja" align="center">
+        <el-table-column prop="dw0" label="Lama Kerja" width="120" align="right"></el-table-column>
+        <el-table-column prop="dx0" label="Amount" width="120" align="right"></el-table-column>
+      </el-table-column>
+      <el-table-column prop="dy0" width="120" align="right">
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Uang Penggantian Hak">
+              Uang Penggantian Hak
+            </p>
+          </client-only>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -65,7 +87,8 @@ export default {
         fields: ['d0', 'e0'],
         storeFields: [
           '_id', 'd0', 'e0', 'bw0', 'bx0', 'by0',
-          'bz0'
+          'bz0', 'dr0', 'ds0', 'dt0', 'du0', 'dv0',
+          'dw0', 'dx0', 'dy0',
         ],
       }),
     };
@@ -98,7 +121,9 @@ export default {
             employee,
             total: {
               sbw0, sbx0, sby0,
-              sbz0,
+              sbz0, sdr0, sds0,
+              sdt0, sdu0, sdv0,
+              sdw0, sdx0, sdy0,
             },
           } = data.payrollEarningOthers;
 
@@ -107,7 +132,9 @@ export default {
           this.arrSum = [
             'Total', '', '',
             sbw0, sbx0, sby0,
-            sbz0,
+            sbz0, sdr0, sds0,
+            sdt0, sdu0, sdv0,
+            sdw0, sdx0, sdy0,
           ];
         }
       },

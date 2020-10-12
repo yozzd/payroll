@@ -80,6 +80,14 @@ const EmployeeSchema = new Schema({
   by0: Number, // Cuti Days
   bz0: Number, // Cuti Amount
   ca0: Number, // Pendapatan Kotor
+  dr0: Number, // Bonus
+  ds0: Number, // Uang Pisah Prorate
+  dt0: Number, // Uang Pisah Amount
+  du0: Number, // Uang Pesangon Prorate
+  dv0: Number, // Uang Pesangon Amount
+  dw0: Number, // Uang P.Masa Kerja Prorate
+  dx0: Number, // Uang P.Masa Kerja Amount
+  dy0: Number, // Uang Penggantian Hak
 });
 
 const PayrollSchema = new Schema({
@@ -166,6 +174,25 @@ EmployeeSchema.pre('save', async function fn(next) {
 
   this.bx0 = (this.ay0 / 12) * this.bw0;
   this.bz0 = (this.ay0 / 21) * this.by0;
+
+  this.dt0 = this.ay0 * this.ds0;
+  this.dv0 = this.ay0 * this.du0;
+  this.dx0 = this.ay0 * this.dw0;
+  this.dy0 = (this.dv0 + this.dx0) * 0.15;
+
+  this.ca0 = this.g0
+    + this.ai0
+    + this.aw0
+    + this.bj0
+    + this.bu0
+    + this.bx0
+    + this.bz0
+    + this.bv0
+    + this.dt0
+    + this.dv0
+    + this.dx0
+    + this.dy0
+    - this.f0;
 
   return next();
 });

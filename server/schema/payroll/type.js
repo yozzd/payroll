@@ -82,6 +82,14 @@ const EmployeeType = new GraphQLObjectType({
     bx0: { type: IntPre0 },
     by0: { type: FloatPre2 },
     bz0: { type: IntPre0 },
+    dr0: { type: IntPre0 },
+    ds0: { type: IntPre0 },
+    dt0: { type: IntPre0 },
+    du0: { type: IntPre0 },
+    dv0: { type: IntPre0 },
+    dw0: { type: IntPre0 },
+    dx0: { type: IntPre0 },
+    dy0: { type: IntPre0 },
   }),
 });
 
@@ -134,6 +142,14 @@ const TotalType = new GraphQLObjectType({
     sbx0: { type: IntPre0 },
     sby0: { type: FloatPre2 },
     sbz0: { type: IntPre0 },
+    sdr0: { type: IntPre0 },
+    sds0: { type: IntPre0 },
+    sdt0: { type: IntPre0 },
+    sdu0: { type: IntPre0 },
+    sdv0: { type: IntPre0 },
+    sdw0: { type: IntPre0 },
+    sdx0: { type: IntPre0 },
+    sdy0: { type: IntPre0 },
   }),
 });
 
