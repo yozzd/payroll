@@ -35,6 +35,7 @@ export const PayrollEmployment = gql`
         w0
         x0
         y0
+        ex0
       }
     }
   }
@@ -55,6 +56,7 @@ export const PayrollSocial = gql`
         t0
         z0
         aa0
+        ex0
       }
     }
   }
@@ -76,6 +78,7 @@ export const PayrollOvertime = gql`
         ag0
         ah0
         ai0
+        ex0
       }
       total {
         sab0
@@ -113,6 +116,7 @@ export const PayrollFixedAllowance = gql`
         au0
         av0
         aw0
+        ex0
       }
       total {
         saj0
@@ -152,6 +156,7 @@ export const PayrollNonFixedAllowance = gql`
         bh0
         bi0
         bj0
+        ex0
       }
       total {
         sba0
@@ -187,6 +192,7 @@ export const PayrollRetroFill = gql`
         bs0
         bt0
         bu0
+        ex0
       }
       total {
         sbl0
@@ -225,6 +231,7 @@ export const PayrollEarningOthers = gql`
         dw0
         dx0
         dy0
+        ex0
       }
       total {
         sbv0
@@ -255,6 +262,7 @@ export const PayrollAbsent = gql`
         e0
         cw0
         cx0
+        ex0
       }
       total {
         scw0
@@ -274,6 +282,7 @@ export const PayrollFees = gql`
         e0
         cd0
         ce0
+        ex0
       }
       total {
         scd0

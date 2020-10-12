@@ -39,6 +39,10 @@ button:focus,
   background: #F5F7FA;
 }
 
+.el-table .final-row {
+  background: #f0f9eb;
+}
+
 .px-80 {
   padding-left: 20rem;
   padding-right: 20rem;

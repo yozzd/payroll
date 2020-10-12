@@ -95,6 +95,7 @@ const EmployeeType = new GraphQLObjectType({
     dw0: { type: IntPre0 },
     dx0: { type: IntPre0 },
     dy0: { type: IntPre0 },
+    ex0: { type: GraphQLInt },
   }),
 });
 

@@ -24,6 +24,7 @@
       size="small"
       border
       height="500"
+      :row-class-name="finalRow"
     >
       <el-table-column type="index" width="50" align="center" fixed></el-table-column>
       <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
@@ -99,6 +100,14 @@ export default {
       }
       return this.items;
     },
+  },
+  methods: {
+    finalRow({ row }) {
+      if (row.ex0 === 1) {
+        return 'final-row';
+      }
+      return '';
+    }
   },
   apollo: {
     payrollEmployment: {
