@@ -37,18 +37,17 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column label="Absent" align="center">
-        <el-table-column prop="cw0" label="Days" width="120" align="right"></el-table-column>
-        <el-table-column prop="cx0" label="Amount" width="120" align="right"></el-table-column>
+      <el-table-column label="Iuran JHT" align="center">
+        <el-table-column prop="cd0" label="Perusahaan" width="120" align="right"></el-table-column>
+        <el-table-column prop="ce0" label="Karyawan" width="120" align="right"></el-table-column>
       </el-table-column>
-      <el-table-column label="" min-width="120" align="right"></el-table-column>
     </el-table>
   </div>
 </template>
 
 <script>
 import MiniSearch from 'minisearch';
-import { PayrollAbsent } from '../../apollo/query/payroll';
+import { PayrollFees } from '../../apollo/query/payroll';
 
 export default {
   data() {
@@ -61,7 +60,7 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'cw0', 'cx0',
+          '_id', 'd0', 'e0', 'cd0', 'ce0',
         ],
       }),
     };
@@ -80,8 +79,8 @@ export default {
     },
   },
   apollo: {
-    payrollAbsent: {
-      query: PayrollAbsent,
+    payrollFees: {
+      query: PayrollFees,
       variables() {
         return {
           id: this.$route.params.id,
@@ -93,15 +92,15 @@ export default {
           const {
             employee,
             total: {
-              scw0, scx0,
+              scd0, sce0,
             },
-          } = data.payrollAbsent;
+          } = data.payrollFees;
 
           this.items = employee;
           this.miniSearch.addAll(this.items);
           this.arrSum = [
             'Total', '', '',
-            scw0, scx0,
+            scd0, sce0,
           ];
         }
       },

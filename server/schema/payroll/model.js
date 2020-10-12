@@ -80,6 +80,8 @@ const EmployeeSchema = new Schema({
   by0: Number, // Cuti Days
   bz0: Number, // Cuti Amount
   ca0: Number, // Pendapatan Kotor
+  cd0: Number, // JHT Perusahaan
+  ce0: Number, // JHT Karyawan
   cw0: Number, // Absen
   cx0: Number, // Amount Absen
   dr0: Number, // Bonus
@@ -90,6 +92,7 @@ const EmployeeSchema = new Schema({
   dw0: Number, // Uang P.Masa Kerja Prorate
   dx0: Number, // Uang P.Masa Kerja Amount
   dy0: Number, // Uang Penggantian Hak
+  ex0: Number, // Final Payment Flag
 });
 
 const PayrollSchema = new Schema({
@@ -197,6 +200,14 @@ EmployeeSchema.pre('save', async function fn(next) {
     - this.f0;
 
   this.cx0 = (this.g0 / 21) * this.cw0;
+
+   if (this.e0 === 'X.0003' || this.ex0 === 1) {
+    this.cd0 = 0;
+    this.ce0 = 0;
+  } else {
+    this.cd0 = this.ay0 * this.ownerDocument().rate.cd5;
+    this.ce0 = this.ay0 * this.ownerDocument().rate.ce5;
+  }
 
   return next();
 });

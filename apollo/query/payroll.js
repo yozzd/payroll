@@ -263,3 +263,22 @@ export const PayrollAbsent = gql`
     }
   }
 `;
+
+export const PayrollFees = gql`
+  query payrollFees($id: String!) {
+    payrollFees(id: $id) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        cd0
+        ce0
+      }
+      total {
+        scd0
+        sce0
+      }
+    }
+  }
+`;

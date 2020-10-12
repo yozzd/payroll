@@ -124,6 +124,7 @@ const processImportPayroll = async ({ file, from, to }) => {
             ds0: ft[i].__EMPTY_122 || 0, // Uang Pisah Prorate
             du0: ft[i].__EMPTY_124 || 0, // Uang Pesangon Prorate
             dw0: ft[i].__EMPTY_126 || 0, // Uang Penghargaan Masa Kerja Prorate
+            ex0: ft[i].__EMPTY_153 || 0, // Final Payment Flag
           });
         }
 
