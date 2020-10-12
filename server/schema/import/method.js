@@ -119,6 +119,7 @@ const processImportPayroll = async ({ file, from, to }) => {
             bv0: ft[i].__EMPTY_73 || 0, // Tambahan Lain Tidak Kena Pajak
             bw0: ft[i].__EMPTY_74 || 0, // THR Prorate Months
             by0: ft[i].__EMPTY_76 || 0, // Cuti Days
+            cw0: ft[i].__EMPTY_100 || 0, // Absen
             dr0: ft[i].__EMPTY_121 || 0, // Bonus
             ds0: ft[i].__EMPTY_122 || 0, // Uang Pisah Prorate
             du0: ft[i].__EMPTY_124 || 0, // Uang Pesangon Prorate

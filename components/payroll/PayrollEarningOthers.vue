@@ -67,7 +67,7 @@
         <el-table-column prop="dw0" label="Lama Kerja" width="120" align="right"></el-table-column>
         <el-table-column prop="dx0" label="Amount" width="120" align="right"></el-table-column>
       </el-table-column>
-      <el-table-column prop="dy0" width="120" align="right">
+      <el-table-column prop="dy0" min-width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Uang Penggantian Hak">

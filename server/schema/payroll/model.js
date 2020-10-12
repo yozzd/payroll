@@ -80,6 +80,8 @@ const EmployeeSchema = new Schema({
   by0: Number, // Cuti Days
   bz0: Number, // Cuti Amount
   ca0: Number, // Pendapatan Kotor
+  cw0: Number, // Absen
+  cx0: Number, // Amount Absen
   dr0: Number, // Bonus
   ds0: Number, // Uang Pisah Prorate
   dt0: Number, // Uang Pisah Amount
@@ -193,6 +195,8 @@ EmployeeSchema.pre('save', async function fn(next) {
     + this.dx0
     + this.dy0
     - this.f0;
+
+  this.cx0 = (this.g0 / 21) * this.cw0;
 
   return next();
 });

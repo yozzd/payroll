@@ -244,3 +244,22 @@ export const PayrollEarningOthers = gql`
     }
   }
 `;
+
+export const PayrollAbsent = gql`
+  query payrollAbsent($id: String!) {
+    payrollAbsent(id: $id) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        cw0
+        cx0
+      }
+      total {
+        scw0
+        scx0
+      }
+    }
+  }
+`;

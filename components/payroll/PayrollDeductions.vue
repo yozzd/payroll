@@ -1,7 +1,7 @@
 <template>
   <el-tabs>
     <el-tab-pane label="Absent">
-      Absent
+      <PayrollAbsent />
     </el-tab-pane>
   </el-tabs>
 </template>
