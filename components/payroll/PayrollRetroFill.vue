@@ -120,15 +120,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="bu0" min-width="120" align="right">
-        <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Total Pembetulan Pembayaran (Retro Fill)">
-              Total Pembetulan Pembayaran (Retro Fill)
-            </p>
-          </client-only>
-        </template>
-      </el-table-column>
+      <el-table-column prop="bu0" label="Total" min-width="120" align="right"></el-table-column>
     </el-table>
   </div>
 </template>

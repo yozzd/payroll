@@ -103,6 +103,14 @@ const EmployeeSchema = new Schema({
   cv0: Number, // Total JKK, JK, JHT, Pensiun Perusahaan
   cw0: Number, // Absen
   cx0: Number, // Amount Absen
+  cy0: Number, // Total Absen Aktual & Koreksi Absen
+  cz0: Number, // Pajak Penghasilan Ber-NPWP
+  da0: Number, // Pajak Tambahan Non-NPWP
+  db0: Number, // Total Pajak NPWP & Non-NPWP
+  dc0: Number, // Pemotongan Kelebihan Bayar Gaji
+  dd0: Number, // Pemotongan Kelebihan Bayar OT
+  de0: Number, // Pemotongan Prorate Absen
+  df0: Number, // Total Pemotongan Selain Absen
   dr0: Number, // Bonus
   ds0: Number, // Uang Pisah Prorate
   dt0: Number, // Uang Pisah Amount
@@ -111,6 +119,7 @@ const EmployeeSchema = new Schema({
   dw0: Number, // Uang P.Masa Kerja Prorate
   dx0: Number, // Uang P.Masa Kerja Amount
   dy0: Number, // Uang Penggantian Hak
+  ea0: Number, // Total Bulan Periode Pajak
   ex0: Number, // Slot 1 Flag
   ey0: Number, // Slot 2 Flag
   ez0: Number, // Slot 3 Flag
@@ -222,6 +231,7 @@ EmployeeSchema.pre('save', async function fn(next) {
     - this.f0;
 
   this.cx0 = (this.g0 / 21) * this.cw0;
+  this.cy0 = this.cx0;
 
   if (this.e0 === 'X.0003' || this.ex0 === 1) {
     this.cb0 = 0;
@@ -282,6 +292,59 @@ EmployeeSchema.pre('save', async function fn(next) {
   }
   this.cu0 = this.cq0 + this.cr0;
   this.cl0 = this.ci0 + this.cj0 + this.cq0 + this.cr0;
+
+  this.df0 = this.dc0 + this.dd0 + this.de0;
+
+   /** ********Pajak********* */
+  const ptkpObject = {
+    'TK/0': this.ownerDocument().rate.b4,
+    'TK/1': this.ownerDocument().rate.b5,
+    'TK/2': this.ownerDocument().rate.b6,
+    'TK/3': this.ownerDocument().rate.b7,
+    'K/0': this.ownerDocument().rate.b8,
+    'K/1': this.ownerDocument().rate.b9,
+    'K/2': this.ownerDocument().rate.b10,
+    'K/3': this.ownerDocument().rate.b11,
+  };
+  const bruto = this.l0
+    + this.bk0
+    + this.ai0
+    + this.cb0
+    + this.cc0
+    + this.cq0
+    + this.bu0
+    + this.dr0
+    + this.bz0
+    - (this.df0 + this.cy0);
+  let biayaJabatan;
+  if (bruto * 0.05 >= 500000) {
+    biayaJabatan = 500000;
+  } else {
+    biayaJabatan = Math.round(bruto * 0.05);
+  }
+  const pengurang = biayaJabatan + this.ce0 + this.cj0;
+  const netoSebulan = bruto - pengurang;
+  const netoSetahun = Math.floor((netoSebulan * this.ea0) / 1000) * 1000;
+  const ptkp = ptkpObject[this.r0];
+  const pSetahun = netoSetahun - ptkp;
+  const pkpSetahun = pSetahun <= 0 ? 0 : pSetahun;
+  const pph21Tahunan = Math.min(Math.max(0, pkpSetahun), 50000000) * 0.05
+    + Math.min(Math.max(0, pkpSetahun - 50000000), 200000000) * 0.15
+    + Math.min(Math.max(0, pkpSetahun - 250000000), 250000000) * 0.25
+    + Math.max(0, pkpSetahun - 500000000) * 0.3;
+  const pph21Bulanan = Math.round(pph21Tahunan / this.ea0);
+
+  if (this.p0 === 'Yes') {
+    const v = Math.floor(pph21Bulanan / 100) * 100;
+    this.cz0 = v <= 200 ? 0 : v;
+    this.da0 = 0;
+  } else {
+    this.cz0 = 0;
+    this.da0 = Math.floor((pph21Bulanan * 1.2) / 100) * 100;
+  }
+
+  this.db0 = this.cz0 + this.da0;
+  /** ********Pajak********* */
 
   return next();
 });

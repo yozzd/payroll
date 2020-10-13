@@ -38,27 +38,32 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column label="Lembur Normal" align="center">
-        <el-table-column prop="ab0" label="Hour" width="120" align="right"></el-table-column>
-        <el-table-column prop="ac0" label="Amount" width="120" align="right"></el-table-column>
+      <el-table-column prop="cz0" width="120" align="right">
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Pajak Penghasilan Ber-NPWP">
+              Pajak Penghasilan Ber-NPWP
+            </p>
+          </client-only>
+        </template>
       </el-table-column>
-      <el-table-column label="Lembur Dinas" align="center">
-        <el-table-column prop="ad0" label="Hour" width="120" align="right"></el-table-column>
-        <el-table-column prop="ae0" label="Amount" width="120" align="right"></el-table-column>
+      <el-table-column prop="da0" width="120" align="right">
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Pajak Penghasilan Non-NPWP">
+              Pajak Penghasilan Non-NPWP
+            </p>
+          </client-only>
+        </template>
       </el-table-column>
-      <el-table-column label="Insentif" align="center">
-        <el-table-column prop="af0" label="Hour" width="100" align="right"></el-table-column>
-        <el-table-column prop="ag0" label="Rate" width="100" align="right"></el-table-column>
-        <el-table-column prop="ah0" label="Amount" width="100" align="right"></el-table-column>
-      </el-table-column>
-      <el-table-column prop="ai0" label="Total" min-width="120" align="right"></el-table-column>
+      <el-table-column prop="db0" label="Total" min-width="120" align="right"></el-table-column>
     </el-table>
   </div>
 </template>
 
 <script>
 import MiniSearch from 'minisearch';
-import { PayrollOvertime } from '../../apollo/query/payroll';
+import { PayrollTax } from '../../apollo/query/payroll';
 
 export default {
   data() {
@@ -71,8 +76,7 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'ab0', 'ac0', 'ad0',
-          'ae0', 'af0', 'ag0', 'ah0', 'ai0',
+          '_id', 'd0', 'e0', 'cz0', 'da0', 'db0',
         ],
       }),
     };
@@ -97,8 +101,8 @@ export default {
     }
   },
   apollo: {
-    payrollOvertime: {
-      query: PayrollOvertime,
+    payrollTax: {
+      query: PayrollTax,
       variables() {
         return {
           id: this.$route.params.id,
@@ -110,20 +114,15 @@ export default {
           const {
             employee,
             total: {
-              sab0, sac0,
-              sad0, sae0,
-              saf0, sag0,
-              sah0, sai0,
+              scz0, sda0, sdb0,
             },
-          } = data.payrollOvertime;
+          } = data.payrollTax;
 
           this.items = employee;
           this.miniSearch.addAll(this.items);
           this.arrSum = [
             'Total', '', '',
-            sab0, sac0, sad0,
-            sae0, saf0, sag0,
-            sah0, sai0,
+            scz0, sda0, sdb0,
           ];
         }
       },

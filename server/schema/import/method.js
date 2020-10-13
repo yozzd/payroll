@@ -123,10 +123,14 @@ const processImportPayroll = async ({ file, from, to }) => {
             co0: ft[i].__EMPTY_92 || 0, // Upah untuk Pelaporan BPJS Kesehatan
             ct0: ft[i].__EMPTY_97 || '', // Description Medical
             cw0: ft[i].__EMPTY_100 || 0, // Absen
+            dc0: ft[i].__EMPTY_106 || 0, // Pemotongan Kelebihan Bayar Gaji
+            dd0: ft[i].__EMPTY_107 || 0, // Pemotongan Kelebihan Bayar OT
+            de0: ft[i].__EMPTY_108 || 0, // Pemotongan Prorate Absen
             dr0: ft[i].__EMPTY_121 || 0, // Bonus
             ds0: ft[i].__EMPTY_122 || 0, // Uang Pisah Prorate
             du0: ft[i].__EMPTY_124 || 0, // Uang Pesangon Prorate
             dw0: ft[i].__EMPTY_126 || 0, // Uang Penghargaan Masa Kerja Prorate
+            ea0: ft[i].__EMPTY_130 || 0, // Total Bulan Periode Pajak
             ex0: ft[i].__EMPTY_153 || 0, // Slot 1 Flag
             ey0: ft[i].__EMPTY_154 || 0, // Slot 2 Flag
             ez0: ft[i].__EMPTY_155 || 0, // Slot 3 Flag

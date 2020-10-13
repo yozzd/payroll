@@ -156,15 +156,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="aw0" min-width="120" align="right">
-        <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Total Tj. Tetap">
-              Total Tj. Tetap
-            </p>
-          </client-only>
-        </template>
-      </el-table-column>
+      <el-table-column prop="aw0" label="Total" min-width="120" align="right"></el-table-column>
     </el-table>
   </div>
 </template>

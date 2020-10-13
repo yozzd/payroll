@@ -303,3 +303,26 @@ export const PayrollFees = gql`
     }
   }
 `;
+
+export const PayrollTax = gql`
+  query payrollTax($id: String!) {
+    payrollTax(id: $id) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        cz0
+        da0
+        db0
+        ex0
+      }
+      total {
+        scz0
+        sda0
+        sdb0
+      }
+    }
+  }
+`;
+
