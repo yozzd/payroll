@@ -272,9 +272,9 @@ export const PayrollAbsent = gql`
   }
 `;
 
-export const PayrollFees = gql`
-  query payrollFees($id: String!) {
-    payrollFees(id: $id) {
+export const PayrollFee = gql`
+  query payrollFee($id: String!) {
+    payrollFee(id: $id) {
       _id
       employee {
         _id
@@ -326,3 +326,32 @@ export const PayrollTax = gql`
   }
 `;
 
+export const PayrollReduction = gql`
+  query payrollReduction($id: String!) {
+    payrollReduction(id: $id) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        dc0
+        dd0
+        de0
+        dg0
+        dh0
+        di0
+        dj0
+        ex0
+      }
+      total {
+        sdc0
+        sdd0
+        sde0
+        sdg0
+        sdh0
+        sdi0
+        sdj0
+      }
+    }
+  }
+`;

@@ -38,29 +38,60 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column label="Iuran JKK / JK" align="center">
-        <el-table-column prop="cb0" label="JKK" width="120" align="right"></el-table-column>
-        <el-table-column prop="cc0" label="JK" width="120" align="right"></el-table-column>
+      <el-table-column prop="dc0" width="120" align="right">
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Pemotongan Kelebihan Bayar Gaji & Koreksi Absen">
+              Pemotongan Kelebihan Bayar Gaji & Koreksi Absen
+            </p>
+          </client-only>
+        </template>
       </el-table-column>
-      <el-table-column label="Iuran JHT" align="center">
-        <el-table-column prop="cd0" label="Perusahaan" width="120" align="right"></el-table-column>
-        <el-table-column prop="ce0" label="Karyawan" width="120" align="right"></el-table-column>
+      <el-table-column prop="dd0" width="120" align="right">
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Pemotongan Kelebihan Bayar OT">
+              Pemotongan Kelebihan Bayar OT
+            </p>
+          </client-only>
+        </template>
       </el-table-column>
-      <el-table-column label="Iuran Pensiun" align="center">
-        <el-table-column prop="ci0" label="Perusahaan" width="120" align="right"></el-table-column>
-        <el-table-column prop="cj0" label="Karyawan" width="120" align="right"></el-table-column>
+      <el-table-column prop="de0" width="120" align="right">
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Pemotongan Prorate Absen">
+              Pemotongan Prorate Absen
+            </p>
+          </client-only>
+        </template>
       </el-table-column>
-      <el-table-column label="Iuran BPJS Kesehatan" align="center">
-        <el-table-column prop="cq0" label="Perusahaan" width="120" align="right"></el-table-column>
-        <el-table-column prop="cr0" label="Karyawan" min-width="120" align="right"></el-table-column>
+      <el-table-column prop="dg0" label="Pemotongan" width="120" align="right"></el-table-column>
+      <el-table-column prop="dh0" width="120" align="right">
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Pemotongan Toolroom">
+              Pemotongan Toolroom
+            </p>
+          </client-only>
+        </template>
       </el-table-column>
+      <el-table-column prop="di0" width="120" align="right">
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Pemotongan Lain">
+              Pemotongan Lain
+            </p>
+          </client-only>
+        </template>
+      </el-table-column>
+      <el-table-column prop="dj0" label="Total" min-width="120" align="right"></el-table-column>
     </el-table>
   </div>
 </template>
 
 <script>
 import MiniSearch from 'minisearch';
-import { PayrollFees } from '../../apollo/query/payroll';
+import { PayrollReduction } from '../../apollo/query/payroll';
 
 export default {
   data() {
@@ -73,8 +104,8 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'cb0', 'cc0', 'cd0', 'ce0',
-          'ci0', 'cj0', 'cq0', 'cr0',
+          '_id', 'd0', 'e0', 'dc0', 'dd0', 'de0',
+          'dg0', 'dh0', 'di0', 'dj0',
         ],
       }),
     };
@@ -99,8 +130,8 @@ export default {
     }
   },
   apollo: {
-    payrollFees: {
-      query: PayrollFees,
+    payrollReduction: {
+      query: PayrollReduction,
       variables() {
         return {
           id: this.$route.params.id,
@@ -112,17 +143,17 @@ export default {
           const {
             employee,
             total: {
-              scb0, scc0, scd0, sce0,
-              sci0, scj0, scq0, scr0,
+              sdc0, sdd0, sde0, sdg0,
+              sdh0, sdi0, sdj0,
             },
-          } = data.payrollFees;
+          } = data.payrollReduction;
 
           this.items = employee;
           this.miniSearch.addAll(this.items);
           this.arrSum = [
             'Total', '', '',
-            scb0, scc0, scd0, sce0,
-            sci0, scj0, scq0, scr0,
+            sdc0, sdd0, sde0, sdg0,
+            sdh0, sdi0, sdj0,
           ];
         }
       },

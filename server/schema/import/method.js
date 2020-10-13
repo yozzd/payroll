@@ -126,6 +126,9 @@ const processImportPayroll = async ({ file, from, to }) => {
             dc0: ft[i].__EMPTY_106 || 0, // Pemotongan Kelebihan Bayar Gaji
             dd0: ft[i].__EMPTY_107 || 0, // Pemotongan Kelebihan Bayar OT
             de0: ft[i].__EMPTY_108 || 0, // Pemotongan Prorate Absen
+            dg0: ft[i].__EMPTY_110 || 0, // Pemotongan Koreksi Absen
+            dh0: ft[i].__EMPTY_111 || 0, // Pemotongan Toolroom
+            di0: ft[i].__EMPTY_112 || 0, // Pemotongan Others
             dr0: ft[i].__EMPTY_121 || 0, // Bonus
             ds0: ft[i].__EMPTY_122 || 0, // Uang Pisah Prorate
             du0: ft[i].__EMPTY_124 || 0, // Uang Pesangon Prorate
