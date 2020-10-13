@@ -524,6 +524,47 @@ const Query = {
       return p[0];
     }),
   },
+  payrollDeductionOthers: {
+    type: PayrollType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('admin', async (_, { id }) => {
+      const p = await Payroll.aggregate([
+        { $match: { _id: id } },
+        { $unwind: '$employee' },
+        {
+          $group: {
+            _id: '$_id',
+            employee: {
+              $push: {
+                _id: '$employee._id',
+                d0: '$employee.d0',
+                e0: '$employee.e0',
+                dk0: '$employee.dk0',
+                dl0: '$employee.dl0',
+                dm0: '$employee.dm0',
+                dn0: '$employee.dn0',
+                ex0: '$employee.ex0',
+              },
+            },
+          },
+        },
+        {
+          $addFields: {
+            total: {
+              sdk0: { $sum: '$employee.dk0' },
+              sdl0: { $sum: '$employee.dl0' },
+              sdm0: { $sum: '$employee.dm0' },
+              sdn0: { $sum: '$employee.dn0' },
+            },
+          },
+        },
+      ]);
+
+      return p[0];
+    }),
+  },
 };
 
 const Mutation = {

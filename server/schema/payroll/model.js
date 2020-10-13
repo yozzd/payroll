@@ -115,6 +115,13 @@ const EmployeeSchema = new Schema({
   dh0: Number, // Pemotongan Toolroom
   di0: Number, // Pemotongan Others
   dj0: Number, // Total Pemotongan Lain
+  dk0: Number, // Dana Pinjaman
+  dl0: Number, // Kantin
+  dm0: Number, // Kopkar & BMI
+  dn0: Number, // Pph21 Kurang Bayar
+  do0: Number, // Jumlah Pemotongan
+  dp0: Number, // Penghasilan
+  dq0: String, // Periode Potongan Kantin
   dr0: Number, // Bonus
   ds0: Number, // Uang Pisah Prorate
   dt0: Number, // Uang Pisah Amount
@@ -299,6 +306,20 @@ EmployeeSchema.pre('save', async function fn(next) {
 
   this.df0 = this.dc0 + this.dd0 + this.de0;
   this.dj0 = this.dc0 + this.dd0 + this.de0 + this.dg0 + this.dh0 + this.di0;
+
+  this.do0 = this.cx0
+    + this.cz0
+    + this.da0
+    + this.ce0
+    + this.cr0
+    + this.cj0
+    + this.dk0
+    + this.dm0
+    + this.dl0
+    + this.dj0
+    + this.dn0;
+
+  this.dp0 = this.ca0 - this.do0;
 
    /** ********Pajak********* */
   const ptkpObject = {

@@ -355,3 +355,27 @@ export const PayrollReduction = gql`
     }
   }
 `;
+
+export const PayrollDeductionOthers = gql`
+  query payrollDeductionOthers($id: String!) {
+    payrollDeductionOthers(id: $id) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        dk0
+        dl0
+        dm0
+        dn0
+        ex0
+      }
+      total {
+        sdk0
+        sdl0
+        sdm0
+        sdn0
+      }
+    }
+  }
+`;

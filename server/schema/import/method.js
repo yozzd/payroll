@@ -129,6 +129,11 @@ const processImportPayroll = async ({ file, from, to }) => {
             dg0: ft[i].__EMPTY_110 || 0, // Pemotongan Koreksi Absen
             dh0: ft[i].__EMPTY_111 || 0, // Pemotongan Toolroom
             di0: ft[i].__EMPTY_112 || 0, // Pemotongan Others
+            dk0: ft[i].__EMPTY_114 || 0, // Dana Pinjaman
+            dl0: ft[i].__EMPTY_115 || 0, // Kantin
+            dm0: ft[i].__EMPTY_116 || 0, // Kopkar & BMI
+            dn0: ft[i].__EMPTY_117 || 0, // Pph21 Kurang Bayar
+            dq0: ft[i].__EMPTY_120 || '', // Periode Potongan Kantin
             dr0: ft[i].__EMPTY_121 || 0, // Bonus
             ds0: ft[i].__EMPTY_122 || 0, // Uang Pisah Prorate
             du0: ft[i].__EMPTY_124 || 0, // Uang Pesangon Prorate

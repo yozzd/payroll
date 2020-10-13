@@ -12,5 +12,8 @@
     <el-tab-pane label="Reduction">
       <PayrollReduction />
     </el-tab-pane>
+    <el-tab-pane label="Others">
+      <PayrollDeductionOthers />
+    </el-tab-pane>
   </el-tabs>
 </template>
