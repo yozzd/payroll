@@ -38,9 +38,21 @@
           </client-only>
         </template>
       </el-table-column>
+      <el-table-column label="Iuran JKK / JK" align="center">
+        <el-table-column prop="cb0" label="JKK" width="120" align="right"></el-table-column>
+        <el-table-column prop="cc0" label="JK" width="120" align="right"></el-table-column>
+      </el-table-column>
       <el-table-column label="Iuran JHT" align="center">
         <el-table-column prop="cd0" label="Perusahaan" width="120" align="right"></el-table-column>
         <el-table-column prop="ce0" label="Karyawan" width="120" align="right"></el-table-column>
+      </el-table-column>
+      <el-table-column label="Iuran Pensiun" align="center">
+        <el-table-column prop="ci0" label="Perusahaan" width="120" align="right"></el-table-column>
+        <el-table-column prop="cj0" label="Karyawan" width="120" align="right"></el-table-column>
+      </el-table-column>
+      <el-table-column label="Iuran BPJS Kesehatan" align="center">
+        <el-table-column prop="cq0" label="Perusahaan" width="120" align="right"></el-table-column>
+        <el-table-column prop="cr0" label="Karyawan" min-width="120" align="right"></el-table-column>
       </el-table-column>
     </el-table>
   </div>
@@ -61,7 +73,8 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'cd0', 'ce0',
+          '_id', 'd0', 'e0', 'cb0', 'cc0', 'cd0', 'ce0',
+          'ci0', 'cj0', 'cq0', 'cr0',
         ],
       }),
     };
@@ -99,7 +112,8 @@ export default {
           const {
             employee,
             total: {
-              scd0, sce0,
+              scb0, scc0, scd0, sce0,
+              sci0, scj0, scq0, scr0,
             },
           } = data.payrollFees;
 
@@ -107,7 +121,8 @@ export default {
           this.miniSearch.addAll(this.items);
           this.arrSum = [
             'Total', '', '',
-            scd0, sce0,
+            scb0, scc0, scd0, sce0,
+            sci0, scj0, scq0, scr0,
           ];
         }
       },

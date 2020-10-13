@@ -280,13 +280,25 @@ export const PayrollFees = gql`
         _id
         d0
         e0
+        cb0
+        cc0
         cd0
         ce0
+        ci0
+        cj0
+        cq0
+        cr0
         ex0
       }
       total {
+        scb0
+        scc0
         scd0
         sce0
+        sci0
+        scj0
+        scq0
+        scr0
       }
     }
   }

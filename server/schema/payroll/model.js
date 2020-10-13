@@ -80,8 +80,27 @@ const EmployeeSchema = new Schema({
   by0: Number, // Cuti Days
   bz0: Number, // Cuti Amount
   ca0: Number, // Pendapatan Kotor
+  cb0: Number, // JKK Perusahaan
+  cc0: Number, // JK Perusahaan
   cd0: Number, // JHT Perusahaan
   ce0: Number, // JHT Karyawan
+  cf0: Number, // Total BPJS, JKK, JK, JHT Perusahaan & Karyawan
+  cg0: Number, // Total Pensiun Perusahaan & JHT Perusahaan
+  ch0: Number, // Standar Upah Pensiun
+  ci0: Number, // Pensiun Perusahaan
+  cj0: Number, // Pensiun Karyawan
+  ck0: String, // Description (BPJS Ketenagakerjaan)
+  cl0: Number, // Total Iuran Pensiun & Kesehatan Perusahaan & Karyawan
+  cm0: Number, // Total BPJS, JKK, JK, JHT, Pensiun Perusahaan & Karyawan
+  cn0: Number, // Total JKK, JK, Medical Perusahaan
+  co0: Number, // Upah untuk Pelaporan BPJS Kesehatan
+  cp0: Number, // Standar Gaji Iuran BPJS Kesehatan
+  cq0: Number, // BPJS Kesehatan Perusahaan
+  cr0: Number, // BPJS Kesehatan Karyawan
+  cs0: Number, // Kelas Rawat
+  ct0: String, // Description Medical
+  cu0: Number, // Total Medical Perusahaan & Karyawan
+  cv0: Number, // Total JKK, JK, JHT, Pensiun Perusahaan
   cw0: Number, // Absen
   cx0: Number, // Amount Absen
   dr0: Number, // Bonus
@@ -92,7 +111,10 @@ const EmployeeSchema = new Schema({
   dw0: Number, // Uang P.Masa Kerja Prorate
   dx0: Number, // Uang P.Masa Kerja Amount
   dy0: Number, // Uang Penggantian Hak
-  ex0: Number, // Final Payment Flag
+  ex0: Number, // Slot 1 Flag
+  ey0: Number, // Slot 2 Flag
+  ez0: Number, // Slot 3 Flag
+  fa0: Number, // Slot 3 Flag
 });
 
 const PayrollSchema = new Schema({
@@ -201,13 +223,65 @@ EmployeeSchema.pre('save', async function fn(next) {
 
   this.cx0 = (this.g0 / 21) * this.cw0;
 
-   if (this.e0 === 'X.0003' || this.ex0 === 1) {
+  if (this.e0 === 'X.0003' || this.ex0 === 1) {
+    this.cb0 = 0;
+    this.cc0 = 0;
     this.cd0 = 0;
     this.ce0 = 0;
   } else {
+    if (this.fa0 === 1) {
+      this.cb0 = this.ay0 * this.ownerDocument().rate.cb5;
+      this.cc0 = this.ay0 * this.ownerDocument().rate.cc5;
+    } else {
+      this.cb0 = this.ay0 * this.ownerDocument().rate.cb5 * 0.01;
+      this.cc0 = this.ay0 * this.ownerDocument().rate.cc5 * 0.01;
+    }
+
     this.cd0 = this.ay0 * this.ownerDocument().rate.cd5;
     this.ce0 = this.ay0 * this.ownerDocument().rate.ce5;
   }
+
+  this.cf0 = this.cb0 + this.cc0 + this.cd0 + this.ce0;
+
+  if (this.ay0 >= this.ownerDocument().rate.b18) {
+    this.ch0 = this.ey0 === 1 || this.ex0 === 1 ? 0 : this.ownerDocument().rate.b18;
+  } else if (
+    this.ay0 < this.ownerDocument().rate.b18
+    && this.ay0 > this.ownerDocument().rate.b17
+  ) {
+    this.ch0 = this.ey0 === 1 || this.ex0 === 1 ? 0 : this.ay0;
+  } else {
+    this.ch0 = this.ey0 === 1 || this.ex0 === 1 ? 0 : this.ownerDocument().rate.b17;
+  }
+
+  this.ci0 = this.ch0 * this.ownerDocument().rate.ci5;
+  this.cj0 = this.ch0 * this.ownerDocument().rate.cj5;
+  this.cg0 = this.ci0 + this.cd0;
+
+  this.cm0 = this.cb0 + this.cc0 + this.cd0 + this.ce0 + this.ci0 + this.cj0;
+  if (this.co0 >= this.ownerDocument().rate.b15) {
+    this.cp0 = this.ez0 === 1 || this.ex0 === 1 ? 0 : this.ownerDocument().rate.b15;
+  } else if (
+    this.co0 < this.ownerDocument().rate.b15
+    && this.co0 > this.ownerDocument().rate.b14
+  ) {
+    this.cp0 = this.ez0 === 1 || this.ex0 === 1 ? 0 : this.co0;
+  } else if (this.co0 === this.ownerDocument().rate.b14) {
+    this.cp0 = this.ez0 === 1 || this.ex0 === 1 ? 0 : this.ownerDocument().rate.b14;
+  } else {
+    this.cp0 = this.ez0 === 1 || this.ex0 === 1 ? 0 : 0;
+  }
+  this.cq0 = this.cp0 * this.ownerDocument().rate.cq5;
+  this.cr0 = this.cp0 * this.ownerDocument().rate.cr5;
+  if (this.co0 >= 4000000) {
+    this.cs0 = 1;
+  } else if (this.co0 > 0 && this.co0 < 4000000) {
+    this.cs0 = 2;
+  } else {
+    this.cs0 = null;
+  }
+  this.cu0 = this.cq0 + this.cr0;
+  this.cl0 = this.ci0 + this.cj0 + this.cq0 + this.cr0;
 
   return next();
 });

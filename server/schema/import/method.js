@@ -119,12 +119,18 @@ const processImportPayroll = async ({ file, from, to }) => {
             bv0: ft[i].__EMPTY_73 || 0, // Tambahan Lain Tidak Kena Pajak
             bw0: ft[i].__EMPTY_74 || 0, // THR Prorate Months
             by0: ft[i].__EMPTY_76 || 0, // Cuti Days
+            ck0: ft[i].__EMPTY_88 || '', // Description (BPJS Ketenagakerjaan)
+            co0: ft[i].__EMPTY_92 || 0, // Upah untuk Pelaporan BPJS Kesehatan
+            ct0: ft[i].__EMPTY_97 || '', // Description Medical
             cw0: ft[i].__EMPTY_100 || 0, // Absen
             dr0: ft[i].__EMPTY_121 || 0, // Bonus
             ds0: ft[i].__EMPTY_122 || 0, // Uang Pisah Prorate
             du0: ft[i].__EMPTY_124 || 0, // Uang Pesangon Prorate
             dw0: ft[i].__EMPTY_126 || 0, // Uang Penghargaan Masa Kerja Prorate
-            ex0: ft[i].__EMPTY_153 || 0, // Final Payment Flag
+            ex0: ft[i].__EMPTY_153 || 0, // Slot 1 Flag
+            ey0: ft[i].__EMPTY_154 || 0, // Slot 2 Flag
+            ez0: ft[i].__EMPTY_155 || 0, // Slot 3 Flag
+            fa0: ft[i].__EMPTY_156 || 0, // Slot 3 Flag
           });
         }
 
