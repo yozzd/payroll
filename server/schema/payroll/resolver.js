@@ -565,6 +565,51 @@ const Query = {
       return p[0];
     }),
   },
+  payrollPayment: {
+    type: PayrollType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('admin', async (_, { id }) => {
+      const p = await Payroll.aggregate([
+        { $match: { _id: id } },
+        { $unwind: '$employee' },
+        {
+          $group: {
+            _id: '$_id',
+            employee: {
+              $push: {
+                _id: '$employee._id',
+                d0: '$employee.d0',
+                e0: '$employee.e0',
+                ca0: '$employee.ca0',
+                do0: '$employee.do0',
+                dp0: '$employee.dp0',
+                eb0: '$employee.eb0',
+                ec0: '$employee.ec0',
+                ed0: '$employee.ed0',
+                ex0: '$employee.ex0',
+              },
+            },
+          },
+        },
+        {
+          $addFields: {
+            total: {
+              sca0: { $round: [{ $sum: '$employee.ca0' }, 0] },
+              sdo0: { $round: [{ $sum: '$employee.do0' }, 0] },
+              sdp0: { $round: [{ $sum: '$employee.dp0' }, 0] },
+              seb0: { $round: [{ $sum: '$employee.eb0' }, 0] },
+              sec0: { $round: [{ $sum: '$employee.ec0' }, 0] },
+              sed0: { $round: [{ $sum: '$employee.ed0' }, 0] },
+            },
+          },
+        },
+      ]);
+
+      return p[0];
+    }),
+  },
 };
 
 const Mutation = {

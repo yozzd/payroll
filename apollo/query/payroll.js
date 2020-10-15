@@ -379,3 +379,31 @@ export const PayrollDeductionOthers = gql`
     }
   }
 `;
+
+ export const PayrollPayment = gql`
+  query payrollPayment($id: String!) {
+    payrollPayment(id: $id) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        ca0
+        do0
+        dp0
+        eb0
+        ec0
+        ed0
+        ex0
+      }
+      total {
+        sca0
+        sdo0
+        sdp0
+        seb0
+        sec0
+        sed0
+      }
+    }
+  }
+`;

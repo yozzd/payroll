@@ -131,10 +131,15 @@ const EmployeeSchema = new Schema({
   dx0: Number, // Uang P.Masa Kerja Amount
   dy0: Number, // Uang Penggantian Hak
   ea0: Number, // Total Bulan Periode Pajak
+  eb0: Number, // Take Home Pay
+  ec0: Number, // Total Transfer by Mandiri
+  ed0: Number, // Total by Cash
+  es0: Number, // Pengembalian Pajak DTP
   ex0: Number, // Slot 1 Flag
   ey0: Number, // Slot 2 Flag
   ez0: Number, // Slot 3 Flag
   fa0: Number, // Slot 3 Flag
+	fb0: Number, // Slot 4 Flag
 });
 
 const PayrollSchema = new Schema({
@@ -172,7 +177,7 @@ const PayrollSchema = new Schema({
 EmployeeSchema.pre('save', async function fn(next) {
   this.i0 = this.i0 ? format(new Date(this.i0), 'yyyy-MM-dd') : null;
   this.k0 = this.k0 ? format(new Date(this.k0), 'yyyy-MM-dd') : null;
-  this.l0 = Math.round((this.g0 / 21) * this.j0, 10);
+  this.l0 = (this.g0 / 21) * this.j0, 10;
   this.o0 = this.o0 ? format(new Date(this.o0), 'yyyy-MM-dd') : null;
   this.f0 = this.g0 - this.l0;
 
@@ -250,7 +255,7 @@ EmployeeSchema.pre('save', async function fn(next) {
     this.cd0 = 0;
     this.ce0 = 0;
   } else {
-    if (this.fa0 === 1) {
+    if (this.fb0 === 1) {
       this.cb0 = this.ay0 * this.ownerDocument().rate.cb5;
       this.cc0 = this.ay0 * this.ownerDocument().rate.cc5;
     } else {
@@ -307,20 +312,6 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.df0 = this.dc0 + this.dd0 + this.de0;
   this.dj0 = this.dc0 + this.dd0 + this.de0 + this.dg0 + this.dh0 + this.di0;
 
-  this.do0 = this.cx0
-    + this.cz0
-    + this.da0
-    + this.ce0
-    + this.cr0
-    + this.cj0
-    + this.dk0
-    + this.dm0
-    + this.dl0
-    + this.dj0
-    + this.dn0;
-
-  this.dp0 = this.ca0 - this.do0;
-
    /** ********Pajak********* */
   const ptkpObject = {
     'TK/0': this.ownerDocument().rate.b4,
@@ -371,6 +362,36 @@ EmployeeSchema.pre('save', async function fn(next) {
 
   this.db0 = this.cz0 + this.da0;
   /** ********Pajak********* */
+
+  this.do0 = this.cx0
+    + this.cz0
+    + this.da0
+    + this.ce0
+    + this.cr0
+    + this.cj0
+    + this.dk0
+    + this.dm0
+    + this.dl0
+    + this.dj0
+    + this.dn0;
+
+  this.dp0 = this.ca0 - this.do0;
+  this.eb0 = this.dp0 + this.dr0;
+
+  if (this.fa0 === 1) {
+    this.es0 = 0;
+  } else {
+  	this.es0 = this.db0;
+  }
+
+	const byCash = ['X.0008', 'X.0010'];
+  if (byCash.includes(this.e0) || this.ex0 === 1) {
+    this.ec0 = 0;
+    this.ed0 = this.dp0 + this.dr0 + this.dt0 + this.dx0 + this.dy0 + this.es0;
+  } else {
+    this.ec0 = this.dp0 + this.dr0 + this.dt0 + this.dx0 + this.dy0 + this.es0;
+    this.ed0 = 0;
+  }
 
   return next();
 });
