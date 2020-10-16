@@ -30,7 +30,7 @@
     >
       <el-table-column type="index" width="50" align="center" fixed></el-table-column>
       <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
-      <el-table-column label="Nama Karyawan" width="200" fixed>
+      <el-table-column prop="e0" label="Nama Karyawan" width="200" fixed>
         <template slot-scope="scope">
           <client-only>
             <p v-snip="1" :title="scope.row.d0">
@@ -47,6 +47,9 @@
             </p>
           </client-only>
         </template>
+        <template slot-scope="scope">
+          <span>{{ scope.row.ba0 | currency }}</span>
+        </template>
       </el-table-column>
       <el-table-column prop="bb0" width="120" align="right">
         <template slot="header">
@@ -55,6 +58,9 @@
               Tj. Tidak Tetap Shift
             </p>
           </client-only>
+        </template>
+        <template slot-scope="scope">
+          <span>{{ scope.row.bb0 | currency }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="bc0" width="120" align="right">
@@ -65,6 +71,9 @@
             </p>
           </client-only>
         </template>
+        <template slot-scope="scope">
+          <span>{{ scope.row.bc0 | currency }}</span>
+        </template>
       </el-table-column>
       <el-table-column prop="bd0" width="120" align="right">
         <template slot="header">
@@ -73,6 +82,9 @@
               Tj. Tidak Tetap Operator Plasma
             </p>
           </client-only>
+        </template>
+        <template slot-scope="scope">
+          <span>{{ scope.row.bd0 | currency }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="be0" width="120" align="right">
@@ -83,6 +95,9 @@
             </p>
           </client-only>
         </template>
+        <template slot-scope="scope">
+          <span>{{ scope.row.be0 | currency }}</span>
+        </template>
       </el-table-column>
       <el-table-column prop="bf0" width="120" align="right">
         <template slot="header">
@@ -91,6 +106,9 @@
               Tj. Tidak Tetap Koperasi
             </p>
           </client-only>
+        </template>
+        <template slot-scope="scope">
+          <span>{{ scope.row.bf0 | currency }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="bg0" width="120" align="right">
@@ -101,6 +119,9 @@
             </p>
           </client-only>
         </template>
+        <template slot-scope="scope">
+          <span>{{ scope.row.bg0 | currency }}</span>
+        </template>
       </el-table-column>
       <el-table-column prop="bh0" width="120" align="right">
         <template slot="header">
@@ -109,6 +130,9 @@
               Tj. Tidak Tetap Penghargaan Masa Kerja
             </p>
           </client-only>
+        </template>
+        <template slot-scope="scope">
+          <span>{{ scope.row.bh0 | currency }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="bi0" width="120" align="right">
@@ -119,8 +143,15 @@
             </p>
           </client-only>
         </template>
+        <template slot-scope="scope">
+          <span>{{ scope.row.bi0 | currency }}</span>
+        </template>
       </el-table-column>
-      <el-table-column prop="bj0" label="Total" min-width="120" align="right"></el-table-column>
+      <el-table-column prop="bj0" label="Total" min-width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.bj0 | currency }}</span>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -135,7 +166,6 @@ export default {
       items: [],
       search: '',
       errors: [],
-      arrSum: [],
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -156,8 +186,26 @@ export default {
     },
   },
   methods: {
-    summaries() {
-      return this.arrSum;
+    summaries(param) {
+      const { columns, data } = param;
+      const sums = [];
+      columns.forEach((column, index) => {
+        const values = data.map(item => Number(item[column.property]));
+        if (!values.every(value => isNaN(value))) {
+          sums[index] = this.$options.filters.currency(values.reduce((prev, curr) => {
+            const value = Number(curr);
+            if (!isNaN(value)) {
+              return prev + curr;
+            } else {
+              return prev;
+            }
+          }, 0));
+        } else {
+          sums[index] = '';
+        }
+      });
+
+      return sums;
     },
     finalRow({ row }) {
       if (row.ex0 === 1) {
@@ -177,25 +225,9 @@ export default {
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const {
-            employee,
-            total: {
-              sba0, sbb0, sbc0,
-              sbd0, sbe0, sbf0,
-              sbg0, sbh0, sbi0,
-              sbj0,
-            },
-          } = data.payrollNonFixedAllowance;
-
+          const { employee } = data.payrollNonFixedAllowance;
           this.items = employee;
           this.miniSearch.addAll(this.items);
-          this.arrSum = [
-            'Total', '', '',
-            sba0, sbb0, sbc0,
-            sbd0, sbe0, sbf0,
-            sbg0, sbh0, sbi0,
-            sbj0,
-          ];
         }
       },
       error({ graphQLErrors, networkError }) {

@@ -139,51 +139,25 @@ const Query = {
       id: { type: GraphQLString },
     },
     resolve: auth.hasRole('admin', async (_, { id }) => {
-      const p = await Payroll.aggregate([
-        { $match: { _id: id } },
-        { $unwind: '$employee' },
-        {
-          $group: {
-            _id: '$_id',
-            employee: {
-              $push: {
-                _id: '$employee._id',
-                d0: '$employee.d0',
-                e0: '$employee.e0',
-                ba0: '$employee.ba0',
-                bb0: '$employee.bb0',
-                bc0: '$employee.bc0',
-                bd0: '$employee.bd0',
-                be0: '$employee.be0',
-                bf0: '$employee.bf0',
-                bg0: '$employee.bg0',
-                bh0: '$employee.bh0',
-                bi0: '$employee.bi0',
-                bj0: '$employee.bj0',
-                ex0: '$employee.ex0',
-              },
-            },
-          },
-        },
-        {
-          $addFields: {
-            total: {
-              sba0: { $sum: '$employee.ba0' },
-              sbb0: { $sum: '$employee.bb0' },
-              sbc0: { $sum: '$employee.bc0' },
-              sbd0: { $sum: '$employee.bd0' },
-              sbe0: { $sum: '$employee.be0' },
-              sbf0: { $sum: '$employee.bf0' },
-              sbg0: { $sum: '$employee.bg0' },
-              sbh0: { $sum: '$employee.bh0' },
-              sbi0: { $sum: '$employee.bi0' },
-              sbj0: { $sum: '$employee.bj0' },
-            },
-          },
-        },
-      ]);
-
-      return p[0];
+      const p = await Payroll.findOne({ _id: id })
+        .select({
+          _id: 1,
+          'employee._id': 1,
+          'employee.d0': 1,
+          'employee.e0': 1,
+          'employee.ba0': 1,
+          'employee.bb0': 1,
+          'employee.bc0': 1,
+          'employee.bd0': 1,
+          'employee.be0': 1,
+          'employee.bf0': 1,
+          'employee.bg0': 1,
+          'employee.bh0': 1,
+          'employee.bi0': 1,
+          'employee.bj0': 1,
+          'employee.ex0': 1,
+        });
+      return p;
     }),
   },
   payrollRetroFill: {

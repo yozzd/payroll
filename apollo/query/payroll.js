@@ -132,18 +132,6 @@ export const PayrollNonFixedAllowance = gql`
         bj0
         ex0
       }
-      total {
-        sba0
-        sbb0
-        sbc0
-        sbd0
-        sbe0
-        sbf0
-        sbg0
-        sbh0
-        sbi0
-        sbj0
-      }
     }
   }
 `;
