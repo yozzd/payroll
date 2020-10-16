@@ -29,7 +29,7 @@
     >
       <el-table-column type="index" width="50" align="center" fixed></el-table-column>
       <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
-      <el-table-column label="Nama Karyawan" width="200" fixed>
+      <el-table-column prop="d0" label="Nama Karyawan" width="200" fixed>
         <template slot-scope="scope">
           <client-only>
             <p v-snip="1" :title="scope.row.d0">
@@ -38,10 +38,26 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="ca0" label="Earning" width="120" align="right"></el-table-column>
-      <el-table-column prop="do0" label="Deduction" width="120" align="right"></el-table-column>
-      <el-table-column prop="dp0" label="Revenue" width="120" align="right"></el-table-column>
-      <el-table-column prop="eb0" label="Take Home Pay" width="120" align="right"></el-table-column>
+      <el-table-column prop="ca0" label="Earning" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.ca0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="do0" label="Deduction" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.do0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="dp0" label="Revenue" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.dp0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="eb0" label="Take Home Pay" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.eb0 | currency }}</span>
+        </template>
+      </el-table-column>
       <el-table-column prop="ec0" width="120" align="right">
         <template slot="header">
           <client-only>
@@ -50,8 +66,16 @@
             </p>
           </client-only>
         </template>
+        <template slot-scope="scope">
+          <span>{{ scope.row.ec0 | currency }}</span>
+        </template>
       </el-table-column>
-      <el-table-column prop="ed0" label="Total By Cash" min-width="120" align="right"></el-table-column>
+      <el-table-column prop="ed0" label="Total By Cash" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.ed0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="" min-width="120"></el-table-column>
     </el-table>
   </div>
 </template>
@@ -66,7 +90,6 @@ export default {
       items: [],
       search: '',
       errors: [],
-      arrSum: [],
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -87,8 +110,26 @@ export default {
     },
   },
   methods: {
-    summaries() {
-      return this.arrSum;
+    summaries(param) {
+      const { columns, data } = param;
+      const sums = [];
+      columns.forEach((column, index) => {
+        const values = data.map(item => Number(item[column.property]));
+        if (!values.every(value => isNaN(value))) {
+          sums[index] = this.$options.filters.currency(values.reduce((prev, curr) => {
+            const value = Number(curr);
+            if (!isNaN(value)) {
+              return prev + curr;
+            } else {
+              return prev;
+            }
+          }, 0));
+        } else {
+          sums[index] = '';
+        }
+      });
+
+      return sums;
     },
     finalRow({ row }) {
       if (row.ex0 === 1) {
@@ -108,21 +149,9 @@ export default {
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const {
-            employee,
-            total: {
-              sca0, sdo0, sdp0,
-              seb0, sec0, sed0,
-            },
-          } = data.payrollPayment;
-
+          const { employee } = data.payrollPayment;
           this.items = employee;
           this.miniSearch.addAll(this.items);
-          this.arrSum = [
-            'Total', '', '',
-            sca0, sdo0, sdp0,
-            seb0, sec0, sed0,
-          ];
         }
       },
       error({ graphQLErrors, networkError }) {
