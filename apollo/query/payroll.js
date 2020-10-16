@@ -156,18 +156,6 @@ export const PayrollRetroFill = gql`
         bu0
         ex0
       }
-      total {
-        sbl0
-        sbm0
-        sbn0
-        sbo0
-        sbp0
-        sbq0
-        sbr0
-        sbs0
-        sbt0
-        sbu0
-      }
     }
   }
 `;

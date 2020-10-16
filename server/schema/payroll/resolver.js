@@ -166,51 +166,25 @@ const Query = {
       id: { type: GraphQLString },
     },
     resolve: auth.hasRole('admin', async (_, { id }) => {
-      const p = await Payroll.aggregate([
-        { $match: { _id: id } },
-        { $unwind: '$employee' },
-        {
-          $group: {
-            _id: '$_id',
-            employee: {
-              $push: {
-                _id: '$employee._id',
-                d0: '$employee.d0',
-                e0: '$employee.e0',
-                bl0: '$employee.bl0',
-                bm0: '$employee.bm0',
-                bn0: '$employee.bn0',
-                bo0: '$employee.bo0',
-                bp0: '$employee.bp0',
-                bq0: '$employee.bq0',
-                br0: '$employee.br0',
-                bs0: '$employee.bs0',
-                bt0: '$employee.bt0',
-                bu0: '$employee.bu0',
-                ex0: '$employee.ex0',
-              },
-            },
-          },
-        },
-        {
-          $addFields: {
-            total: {
-              sbl0: { $sum: '$employee.bl0' },
-              sbm0: { $sum: '$employee.bm0' },
-              sbn0: { $sum: '$employee.bn0' },
-              sbo0: { $sum: '$employee.bo0' },
-              sbp0: { $sum: '$employee.bp0' },
-              sbq0: { $sum: '$employee.bq0' },
-              sbr0: { $sum: '$employee.br0' },
-              sbs0: { $sum: '$employee.bs0' },
-              sbt0: { $sum: '$employee.bt0' },
-              sbu0: { $sum: '$employee.bu0' },
-            },
-          },
-        },
-      ]);
-
-      return p[0];
+      const p = await Payroll.findOne({ _id: id })
+        .select({
+          _id: 1,
+          'employee._id': 1,
+          'employee.d0': 1,
+          'employee.e0': 1,
+          'employee.bl0': 1,
+          'employee.bm0': 1,
+          'employee.bn0': 1,
+          'employee.bo0': 1,
+          'employee.bp0': 1,
+          'employee.bq0': 1,
+          'employee.br0': 1,
+          'employee.bs0': 1,
+          'employee.bt0': 1,
+          'employee.bu0': 1,
+          'employee.ex0': 1,
+        });
+      return p;
     }),
   },
   payrollEarningOthers: {
