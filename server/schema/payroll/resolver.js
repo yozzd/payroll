@@ -242,47 +242,23 @@ const Query = {
       id: { type: GraphQLString },
     },
     resolve: auth.hasRole('admin', async (_, { id }) => {
-      const p = await Payroll.aggregate([
-        { $match: { _id: id } },
-        { $unwind: '$employee' },
-        {
-          $group: {
-            _id: '$_id',
-            employee: {
-              $push: {
-                _id: '$employee._id',
-                d0: '$employee.d0',
-                e0: '$employee.e0',
-                cb0: '$employee.cb0',
-                cc0: '$employee.cc0',
-                cd0: '$employee.cd0',
-                ce0: '$employee.ce0',
-                ci0: '$employee.ci0',
-                cj0: '$employee.cj0',
-                cq0: '$employee.cq0',
-                cr0: '$employee.cr0',
-                ex0: '$employee.ex0',
-              },
-            },
-          },
-        },
-        {
-          $addFields: {
-            total: {
-              scb0: { $round: [{ $sum: '$employee.cb0' }, 0] },
-              scc0: { $round: [{ $sum: '$employee.cc0' }, 0] },
-              scd0: { $round: [{ $sum: '$employee.cd0' }, 0] },
-              sce0: { $round: [{ $sum: '$employee.ce0' }, 0] },
-              sci0: { $round: [{ $sum: '$employee.ci0' }, 0] },
-              scj0: { $round: [{ $sum: '$employee.cj0' }, 0] },
-              scq0: { $round: [{ $sum: '$employee.cq0' }, 0] },
-              scr0: { $round: [{ $sum: '$employee.cr0' }, 0] },
-            },
-          },
-        },
-      ]);
-
-      return p[0];
+      const p = await Payroll.findOne({ _id: id })
+        .select({
+          _id: 1,
+          'employee._id': 1,
+          'employee.d0': 1,
+          'employee.e0': 1,
+          'employee.cb0': 1,
+          'employee.cc0': 1,
+          'employee.cd0': 1,
+          'employee.ce0': 1,
+          'employee.ci0': 1,
+          'employee.cj0': 1,
+          'employee.cq0': 1,
+          'employee.cr0': 1,
+          'employee.ex0': 1,
+        });
+      return p;
     }),
   },
   payrollTax: {

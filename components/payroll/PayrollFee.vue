@@ -29,7 +29,7 @@
     >
       <el-table-column type="index" width="50" align="center" fixed></el-table-column>
       <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
-      <el-table-column label="Nama Karyawan" width="200" fixed>
+      <el-table-column prop="d0" label="Nama Karyawan" width="200" fixed>
         <template slot-scope="scope">
           <client-only>
             <p v-snip="1" :title="scope.row.d0">
@@ -39,20 +39,52 @@
         </template>
       </el-table-column>
       <el-table-column label="Iuran JKK / JK" align="center">
-        <el-table-column prop="cb0" label="JKK" width="120" align="right"></el-table-column>
-        <el-table-column prop="cc0" label="JK" width="120" align="right"></el-table-column>
+        <el-table-column prop="cb0" label="JKK" width="120" align="right">
+          <template slot-scope="scope">
+            <span>{{ scope.row.cb0 | currency }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="cc0" label="JK" width="120" align="right">
+          <template slot-scope="scope">
+            <span>{{ scope.row.cc0 | currency }}</span>
+          </template>
+        </el-table-column>
       </el-table-column>
       <el-table-column label="Iuran JHT" align="center">
-        <el-table-column prop="cd0" label="Perusahaan" width="120" align="right"></el-table-column>
-        <el-table-column prop="ce0" label="Karyawan" width="120" align="right"></el-table-column>
+        <el-table-column prop="cd0" label="Perusahaan" width="120" align="right">
+          <template slot-scope="scope">
+            <span>{{ scope.row.cd0 | currency }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="ce0" label="Karyawan" width="120" align="right">
+          <template slot-scope="scope">
+            <span>{{ scope.row.ce0 | currency }}</span>
+          </template>
+        </el-table-column>
       </el-table-column>
       <el-table-column label="Iuran Pensiun" align="center">
-        <el-table-column prop="ci0" label="Perusahaan" width="120" align="right"></el-table-column>
-        <el-table-column prop="cj0" label="Karyawan" width="120" align="right"></el-table-column>
+        <el-table-column prop="ci0" label="Perusahaan" width="120" align="right">
+          <template slot-scope="scope">
+            <span>{{ scope.row.ci0 | currency }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="cj0" label="Karyawan" width="120" align="right">
+          <template slot-scope="scope">
+            <span>{{ scope.row.cj0 | currency }}</span>
+          </template>
+        </el-table-column>
       </el-table-column>
       <el-table-column label="Iuran BPJS Kesehatan" align="center">
-        <el-table-column prop="cq0" label="Perusahaan" width="120" align="right"></el-table-column>
-        <el-table-column prop="cr0" label="Karyawan" min-width="120" align="right"></el-table-column>
+        <el-table-column prop="cq0" label="Perusahaan" width="120" align="right">
+          <template slot-scope="scope">
+            <span>{{ scope.row.cq0 | currency }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="cr0" label="Karyawan" min-width="120" align="right">
+          <template slot-scope="scope">
+            <span>{{ scope.row.cr0 | currency }}</span>
+          </template>
+        </el-table-column>
       </el-table-column>
     </el-table>
   </div>
@@ -68,7 +100,6 @@ export default {
       items: [],
       search: '',
       errors: [],
-      arrSum: [],
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -88,8 +119,26 @@ export default {
     },
   },
   methods: {
-    summaries() {
-      return this.arrSum;
+    summaries(param) {
+      const { columns, data } = param;
+      const sums = [];
+      columns.forEach((column, index) => {
+        const values = data.map(item => Number(item[column.property]));
+        if (!values.every(value => isNaN(value))) {
+          sums[index] = this.$options.filters.currency(values.reduce((prev, curr) => {
+            const value = Number(curr);
+            if (!isNaN(value)) {
+              return prev + curr;
+            } else {
+              return prev;
+            }
+          }, 0));
+        } else {
+          sums[index] = '';
+        }
+      });
+
+      return sums;
     },
     finalRow({ row }) {
       if (row.ex0 === 1) {
@@ -109,21 +158,9 @@ export default {
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const {
-            employee,
-            total: {
-              scb0, scc0, scd0, sce0,
-              sci0, scj0, scq0, scr0,
-            },
-          } = data.payrollFee;
-
+          const { employee } = data.payrollFee;
           this.items = employee;
           this.miniSearch.addAll(this.items);
-          this.arrSum = [
-            'Total', '', '',
-            scb0, scc0, scd0, sce0,
-            sci0, scj0, scq0, scr0,
-          ];
         }
       },
       error({ graphQLErrors, networkError }) {

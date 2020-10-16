@@ -221,16 +221,6 @@ export const PayrollFee = gql`
         cr0
         ex0
       }
-      total {
-        scb0
-        scc0
-        scd0
-        sce0
-        sci0
-        scj0
-        scq0
-        scr0
-      }
     }
   }
 `;
