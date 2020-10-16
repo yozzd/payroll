@@ -108,22 +108,6 @@ export const PayrollFixedAllowance = gql`
         aw0
         ex0
       }
-      total {
-        saj0
-        sak0
-        sal0
-        sam0
-        san0
-        sao0
-        sap0
-        saq0
-        sar0
-        sas0
-        sat0
-        sau0
-        sav0
-        saw0
-      }
     }
   }
 `;

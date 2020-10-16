@@ -29,7 +29,7 @@
     >
       <el-table-column type="index" width="50" align="center" fixed></el-table-column>
       <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
-      <el-table-column label="Nama Karyawan" width="200" fixed>
+      <el-table-column prop="d0" label="Nama Karyawan" width="200" fixed>
         <template slot-scope="scope">
           <client-only>
             <p v-snip="1" :title="scope.row.d0">
@@ -98,7 +98,6 @@ export default {
       items: [],
       search: '',
       errors: [],
-      arrSum: [],
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
