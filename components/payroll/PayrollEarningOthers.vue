@@ -62,18 +62,6 @@
           </template>
         </el-table-column>
       </el-table-column>
-      <el-table-column label="Cuti" align="center">
-        <el-table-column prop="by0" label="Days" width="120" align="right">
-          <template slot-scope="scope">
-            <span>{{ scope.row.by0 | frac2 }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="bz0" label="Amount" width="120" align="right">
-          <template slot-scope="scope">
-            <span>{{ scope.row.bz0 | currency }}</span>
-          </template>
-        </el-table-column>
-      </el-table-column>
       <el-table-column prop="dr0" label="Bonus" width="120" align="right">
         <template slot-scope="scope">
           <span>{{ scope.row.dr0 | currency }}</span>
@@ -146,7 +134,7 @@ export default {
         fields: ['d0', 'e0'],
         storeFields: [
           '_id', 'd0', 'e0', 'bv0', 'bw0', 'bx0',
-          'by0', 'bz0', 'dr0', 'ds0', 'dt0', 'du0',
+          'dr0', 'ds0', 'dt0', 'du0',
           'dv0', 'dw0', 'dx0', 'dy0',
         ],
       }),

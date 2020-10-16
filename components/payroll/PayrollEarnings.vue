@@ -12,6 +12,9 @@
     <el-tab-pane label="Retro Fill">
       <PayrollRetroFill />
     </el-tab-pane>
+    <el-tab-pane label="Leave">
+      <PayrollLeave />
+    </el-tab-pane>
     <el-tab-pane label="Others">
       <PayrollEarningOthers />
     </el-tab-pane>

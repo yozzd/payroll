@@ -187,6 +187,25 @@ const Query = {
       return p;
     }),
   },
+  payrollLeave: {
+    type: PayrollType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('admin', async (_, { id }) => {
+      const p = await Payroll.findOne({ _id: id })
+        .select({
+          _id: 1,
+          'employee._id': 1,
+          'employee.d0': 1,
+          'employee.e0': 1,
+          'employee.by0': 1,
+          'employee.bz0': 1,
+          'employee.ex0': 1,
+        });
+      return p;
+    }),
+  },
   payrollEarningOthers: {
     type: PayrollType,
     args: {
@@ -202,8 +221,6 @@ const Query = {
           'employee.bv0': 1,
           'employee.bw0': 1,
           'employee.bx0': 1,
-          'employee.by0': 1,
-          'employee.bz0': 1,
           'employee.dr0': 1,
           'employee.ds0': 1,
           'employee.dt0': 1,

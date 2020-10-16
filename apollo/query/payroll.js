@@ -160,6 +160,22 @@ export const PayrollRetroFill = gql`
   }
 `;
 
+export const PayrollLeave = gql`
+  query payrollLeave($id: String!) {
+    payrollLeave(id: $id) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        by0
+        bz0
+        ex0
+      }
+    }
+  }
+`;
+
 export const PayrollEarningOthers = gql`
   query payrollEarningOthers($id: String!) {
     payrollEarningOthers(id: $id) {
@@ -171,8 +187,6 @@ export const PayrollEarningOthers = gql`
         bv0
         bw0
         bx0
-        by0
-        bz0
         dr0
         ds0
         dt0
