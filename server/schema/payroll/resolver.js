@@ -193,57 +193,28 @@ const Query = {
       id: { type: GraphQLString },
     },
     resolve: auth.hasRole('admin', async (_, { id }) => {
-      const p = await Payroll.aggregate([
-        { $match: { _id: id } },
-        { $unwind: '$employee' },
-        {
-          $group: {
-            _id: '$_id',
-            employee: {
-              $push: {
-                _id: '$employee._id',
-                d0: '$employee.d0',
-                e0: '$employee.e0',
-                bv0: '$employee.bv0',
-                bw0: '$employee.bw0',
-                bx0: '$employee.bx0',
-                by0: '$employee.by0',
-                bz0: '$employee.bz0',
-                dr0: '$employee.dr0',
-                ds0: '$employee.ds0',
-                dt0: '$employee.dt0',
-                du0: '$employee.du0',
-                dv0: '$employee.dv0',
-                dw0: '$employee.dw0',
-                dx0: '$employee.dx0',
-                dy0: '$employee.dy0',
-                ex0: '$employee.ex0',
-              },
-            },
-          },
-        },
-        {
-          $addFields: {
-            total: {
-              sbv0: { $sum: '$employee.bv0' },
-              sbw0: { $sum: '$employee.bw0' },
-              sbx0: { $sum: '$employee.bx0' },
-              sby0: { $sum: '$employee.by0' },
-              sbz0: { $sum: '$employee.bz0' },
-              sdr0: { $sum: '$employee.dr0' },
-              sds0: { $sum: '$employee.ds0' },
-              sdt0: { $sum: '$employee.dt0' },
-              sdu0: { $sum: '$employee.du0' },
-              sdv0: { $sum: '$employee.dv0' },
-              sdw0: { $sum: '$employee.dw0' },
-              sdx0: { $sum: '$employee.dx0' },
-              sdy0: { $round: [{ $sum: '$employee.dy0' }, 0] },
-            },
-          },
-        },
-      ]);
-
-      return p[0];
+      const p = await Payroll.findOne({ _id: id })
+        .select({
+          _id: 1,
+          'employee._id': 1,
+          'employee.d0': 1,
+          'employee.e0': 1,
+          'employee.bv0': 1,
+          'employee.bw0': 1,
+          'employee.bx0': 1,
+          'employee.by0': 1,
+          'employee.bz0': 1,
+          'employee.dr0': 1,
+          'employee.ds0': 1,
+          'employee.dt0': 1,
+          'employee.du0': 1,
+          'employee.dv0': 1,
+          'employee.dw0': 1,
+          'employee.dx0': 1,
+          'employee.dy0': 1,
+          'employee.ex0': 1,
+        });
+      return p;
     }),
   },
   payrollAbsent: {

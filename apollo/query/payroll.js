@@ -183,21 +183,6 @@ export const PayrollEarningOthers = gql`
         dy0
         ex0
       }
-      total {
-        sbv0
-        sbw0
-        sbx0
-        sby0
-        sbz0
-        sdr0
-        sds0
-        sdt0
-        sdu0
-        sdv0
-        sdw0
-        sdx0
-        sdy0
-      }
     }
   }
 `;
