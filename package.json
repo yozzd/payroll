@@ -40,6 +40,7 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "pdfmake": "^0.1.68",
+    "vue-currency-filter": "^5.2.0",
     "vue-snip": "^1.1.0",
     "xlsx": "^0.16.8"
   },

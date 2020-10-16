@@ -37,7 +37,10 @@ export default {
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
-  modules: ['@nuxtjs/apollo'],
+  modules: [
+    '@nuxtjs/apollo',
+    'vue-currency-filter/nuxt',
+  ],
   apollo: {
     defaultOptions: {
       $query: {
@@ -51,6 +54,37 @@ export default {
     },
     errorHandler: '@/apollo/error-handler.js',
   },
+  currencyFilter: [
+    {
+      symbol: '',
+      thousandsSeparator: '.',
+      fractionCount: 0,
+      fractionSeparator: ',',
+      symbolPosition: 'front',
+      symbolSpacing: true,
+      avoidEmptyDecimals: '',
+    },
+    {
+      name: 'frac2',
+      symbol: '',
+      thousandsSeparator: '.',
+      fractionCount: 2,
+      fractionSeparator: ',',
+      symbolPosition: 'front',
+      symbolSpacing: true,
+      avoidEmptyDecimals: '',
+    },
+    {
+      name: 'frac4',
+      symbol: '',
+      thousandsSeparator: '.',
+      fractionCount: 4,
+      fractionSeparator: ',',
+      symbolPosition: 'front',
+      symbolSpacing: true,
+      avoidEmptyDecimals: '',
+    },
+  ],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {

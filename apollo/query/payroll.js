@@ -80,16 +80,6 @@ export const PayrollOvertime = gql`
         ai0
         ex0
       }
-      total {
-        sab0
-        sac0
-        sad0
-        sae0
-        saf0
-        sag0
-        sah0
-        sai0
-      }
     }
   }
 `;
@@ -263,10 +253,6 @@ export const PayrollAbsent = gql`
         cw0
         cx0
         ex0
-      }
-      total {
-        scw0
-        scx0
       }
     }
   }

@@ -29,7 +29,7 @@
     >
       <el-table-column type="index" width="50" align="center" fixed></el-table-column>
       <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
-      <el-table-column label="Nama Karyawan" width="200" fixed>
+      <el-table-column prop="d0" label="Nama Karyawan" width="200" fixed>
         <template slot-scope="scope">
           <client-only>
             <p v-snip="1" :title="scope.row.d0">
@@ -39,8 +39,16 @@
         </template>
       </el-table-column>
       <el-table-column label="Absent" align="center">
-        <el-table-column prop="cw0" label="Days" width="120" align="right"></el-table-column>
-        <el-table-column prop="cx0" label="Amount" width="120" align="right"></el-table-column>
+        <el-table-column prop="cw0" label="Days" width="120" align="right">
+          <template slot-scope="scope">
+            <span>{{ scope.row.cw0 | frac4 }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="cx0" label="Amount" width="120" align="right">
+          <template slot-scope="scope">
+            <span>{{ scope.row.cx0 | currency }}</span>
+          </template>
+        </el-table-column>
       </el-table-column>
       <el-table-column label="" min-width="120" align="right"></el-table-column>
     </el-table>
@@ -57,7 +65,6 @@ export default {
       items: [],
       search: '',
       errors: [],
-      arrSum: [],
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -76,8 +83,26 @@ export default {
     },
   },
   methods: {
-    summaries() {
-      return this.arrSum;
+    summaries(param) {
+      const { columns, data } = param;
+      const sums = [];
+      columns.forEach((column, index) => {
+        const values = data.map(item => Number(item[column.property]));
+        if (!values.every(value => isNaN(value))) {
+          sums[index] = this.$options.filters.currency(values.reduce((prev, curr) => {
+            const value = Number(curr);
+            if (!isNaN(value)) {
+              return prev + curr;
+            } else {
+              return prev;
+            }
+          }, 0));
+        } else {
+          sums[index] = '';
+        }
+      });
+
+      return sums;
     },
     finalRow({ row }) {
       if (row.ex0 === 1) {
@@ -97,19 +122,9 @@ export default {
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const {
-            employee,
-            total: {
-              scw0, scx0,
-            },
-          } = data.payrollAbsent;
-
+          const { employee } = data.payrollAbsent;
           this.items = employee;
           this.miniSearch.addAll(this.items);
-          this.arrSum = [
-            'Total', '', '',
-            scw0, scx0,
-          ];
         }
       },
       error({ graphQLErrors, networkError }) {
