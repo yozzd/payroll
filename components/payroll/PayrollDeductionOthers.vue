@@ -29,7 +29,7 @@
     >
       <el-table-column type="index" width="50" align="center" fixed></el-table-column>
       <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
-      <el-table-column label="Nama Karyawan" width="200" fixed>
+      <el-table-column prop="d0" label="Nama Karyawan" width="200" fixed>
         <template slot-scope="scope">
           <client-only>
             <p v-snip="1" :title="scope.row.d0">
@@ -38,10 +38,22 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="dk0" label="Dana Pinjaman" width="120" align="right"></el-table-column>
-      <el-table-column prop="dl0" label="Canteen" width="120" align="right"></el-table-column>
-      <el-table-column prop="dm0" label="Kopkar dan BMI" width="120" align="right"></el-table-column>
-      <el-table-column prop="dn0" min-width="120" align="right">
+      <el-table-column prop="dk0" label="Dana Pinjaman" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.dk0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="dl0" label="Canteen" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.dl0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="dm0" label="Kopkar dan BMI" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.dm0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="dn0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Pph21 Kurang Bayar">
@@ -49,7 +61,11 @@
             </p>
           </client-only>
         </template>
+        <template slot-scope="scope">
+          <span>{{ scope.row.dn0 | currency }}</span>
+        </template>
       </el-table-column>
+      <el-table-column label="" min-width="120"></el-table-column>
     </el-table>
   </div>
 </template>
@@ -64,7 +80,6 @@ export default {
       items: [],
       search: '',
       errors: [],
-      arrSum: [],
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -84,8 +99,26 @@ export default {
     },
   },
   methods: {
-    summaries() {
-      return this.arrSum;
+    summaries(param) {
+      const { columns, data } = param;
+      const sums = [];
+      columns.forEach((column, index) => {
+        const values = data.map(item => Number(item[column.property]));
+        if (!values.every(value => isNaN(value))) {
+          sums[index] = this.$options.filters.currency(values.reduce((prev, curr) => {
+            const value = Number(curr);
+            if (!isNaN(value)) {
+              return prev + curr;
+            } else {
+              return prev;
+            }
+          }, 0));
+        } else {
+          sums[index] = '';
+        }
+      });
+
+      return sums;
     },
     finalRow({ row }) {
       if (row.ex0 === 1) {
@@ -105,19 +138,9 @@ export default {
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const {
-            employee,
-            total: {
-              sdk0, sdl0, sdm0, sdn0,
-            },
-          } = data.payrollDeductionOthers;
-
+          const { employee } = data.payrollDeductionOthers;
           this.items = employee;
           this.miniSearch.addAll(this.items);
-          this.arrSum = [
-            'Total', '', '',
-            sdk0, sdl0, sdm0, sdn0,
-          ];
         }
       },
       error({ graphQLErrors, networkError }) {

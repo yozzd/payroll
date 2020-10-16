@@ -277,12 +277,6 @@ export const PayrollDeductionOthers = gql`
         dn0
         ex0
       }
-      total {
-        sdk0
-        sdl0
-        sdm0
-        sdn0
-      }
     }
   }
 `;
