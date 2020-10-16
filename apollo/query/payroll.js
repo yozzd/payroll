@@ -238,11 +238,6 @@ export const PayrollTax = gql`
         db0
         ex0
       }
-      total {
-        scz0
-        sda0
-        sdb0
-      }
     }
   }
 `;
@@ -263,15 +258,6 @@ export const PayrollReduction = gql`
         di0
         dj0
         ex0
-      }
-      total {
-        sdc0
-        sdd0
-        sde0
-        sdg0
-        sdh0
-        sdi0
-        sdj0
       }
     }
   }

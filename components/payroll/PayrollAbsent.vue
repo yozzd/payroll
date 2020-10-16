@@ -50,7 +50,7 @@
           </template>
         </el-table-column>
       </el-table-column>
-      <el-table-column label="" min-width="120" align="right"></el-table-column>
+      <el-table-column label="" min-width="120"></el-table-column>
     </el-table>
   </div>
 </template>

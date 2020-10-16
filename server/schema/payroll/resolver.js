@@ -267,37 +267,18 @@ const Query = {
       id: { type: GraphQLString },
     },
     resolve: auth.hasRole('admin', async (_, { id }) => {
-      const p = await Payroll.aggregate([
-        { $match: { _id: id } },
-        { $unwind: '$employee' },
-        {
-          $group: {
-            _id: '$_id',
-            employee: {
-              $push: {
-                _id: '$employee._id',
-                d0: '$employee.d0',
-                e0: '$employee.e0',
-                cz0: '$employee.cz0',
-                da0: '$employee.da0',
-                db0: '$employee.db0',
-                ex0: '$employee.ex0',
-              },
-            },
-          },
-        },
-        {
-          $addFields: {
-            total: {
-              scz0: { $round: [{ $sum: '$employee.cz0' }, 0] },
-              sda0: { $round: [{ $sum: '$employee.da0' }, 0] },
-              sdb0: { $round: [{ $sum: '$employee.db0' }, 0] },
-            },
-          },
-        },
-      ]);
-
-      return p[0];
+      const p = await Payroll.findOne({ _id: id })
+        .select({
+          _id: 1,
+          'employee._id': 1,
+          'employee.d0': 1,
+          'employee.e0': 1,
+          'employee.cz0': 1,
+          'employee.da0': 1,
+          'employee.db0': 1,
+          'employee.ex0': 1,
+        });
+      return p;
     }),
   },
   payrollReduction: {
@@ -306,45 +287,22 @@ const Query = {
       id: { type: GraphQLString },
     },
     resolve: auth.hasRole('admin', async (_, { id }) => {
-      const p = await Payroll.aggregate([
-        { $match: { _id: id } },
-        { $unwind: '$employee' },
-        {
-          $group: {
-            _id: '$_id',
-            employee: {
-              $push: {
-                _id: '$employee._id',
-                d0: '$employee.d0',
-                e0: '$employee.e0',
-                dc0: '$employee.dc0',
-                dd0: '$employee.dd0',
-                de0: '$employee.de0',
-                dg0: '$employee.dg0',
-                dh0: '$employee.dh0',
-                di0: '$employee.di0',
-                dj0: '$employee.dj0',
-                ex0: '$employee.ex0',
-              },
-            },
-          },
-        },
-        {
-          $addFields: {
-            total: {
-              sdc0: { $sum: '$employee.dc0' },
-              sdd0: { $sum: '$employee.dd0' },
-              sde0: { $sum: '$employee.de0' },
-              sdg0: { $sum: '$employee.dg0' },
-              sdh0: { $sum: '$employee.dh0' },
-              sdi0: { $sum: '$employee.di0' },
-              sdj0: { $sum: '$employee.dj0' },
-            },
-          },
-        },
-      ]);
-
-      return p[0];
+      const p = await Payroll.findOne({ _id: id })
+        .select({
+          _id: 1,
+          'employee._id': 1,
+          'employee.d0': 1,
+          'employee.e0': 1,
+          'employee.dc0': 1,
+          'employee.dd0': 1,
+          'employee.de0': 1,
+          'employee.dg0': 1,
+          'employee.dh0': 1,
+          'employee.di0': 1,
+          'employee.dj0': 1,
+          'employee.ex0': 1,
+        });
+      return p;
     }),
   },
   payrollDeductionOthers: {
