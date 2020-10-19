@@ -140,7 +140,11 @@ const EmployeeSchema = new Schema({
   ey0: Number, // Slot 2 Flag
   ez0: Number, // Slot 3 Flag
   fa0: Number, // Slot 3 Flag
-	fb0: Number, // Slot 4 Flag
+  fb0: Number, // Slot 4 Flag
+  slip: {
+    name: { type: String, default: () => nanoid(6) },
+    pw: String,
+  },
 });
 
 const PayrollSchema = new Schema({
@@ -393,6 +397,9 @@ EmployeeSchema.pre('save', async function fn(next) {
     this.ec0 = this.dp0 + this.dr0 + this.dt0 + this.dx0 + this.dy0 + this.es0;
     this.ed0 = 0;
   }
+
+  const dob = format(new Date(this.o0), 'ddMMyy');
+  this.slip.pw = `${this.e0.slice(-3)}${dob}`;
 
   return next();
 });
