@@ -1,5 +1,61 @@
+const { GraphQLError } = require('graphql');
+const PdfPrinter = require('pdfmake');
+const fs = require('fs-extra');
+
+const { idDateFormat } = require('../scalar/date');
+
+const fonts = {
+  Roboto: {
+    normal: 'static/font/Roboto-Regular.ttf',
+    bold: 'static/font/Roboto-Medium.ttf',
+  },
+};
+const printer = new PdfPrinter(fonts);
+
 const generateSlip = async (p) => {
-  console.log(p);
+  try {
+    await fs.ensureDir(`static/slip/${p.dir}`);
+
+    const docDefinition = {
+      // userPassword: p.employee.slip.pw,
+      content: [
+        {
+          style: 'tbl1',
+          table: {
+            widths: [170, 200, 135],
+            body: [
+              [{
+                image: 'static/images/logo.png', width: 60, rowSpan: 2, border: [false, false, false, false],
+              }, {
+                text: 'PT. LABTECH PENTA INTERNATIONAL', bold: true, fontSize: 8, border: [false, false, false, true],
+              }, {
+                text: 'SALARY SLIP', bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, true],
+              }],
+              ['', { text: 'Kawasan Industri Sekupang Kav. 34 Batam - Indonesia', border: [false, false, false, false] }, {
+                text: idDateFormat(p.to, 'MMMM yyyy'), bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, false],
+              }],
+            ],
+          },
+        },
+      ],
+      styles: {
+        tbl1: {
+          fontSize: 8,
+          margin: [-10, -10, -10, 0],
+        },
+      },
+    };
+
+    const pdfDoc = printer.createPdfKitDocument(docDefinition);
+    pdfDoc.pipe(fs.createWriteStream(`static/slip/${p.dir}/${p.employee.slip.name}.pdf`));
+    pdfDoc.end();
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
 };
 
 module.exports = { generateSlip };

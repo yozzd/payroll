@@ -154,6 +154,7 @@ const PayrollSchema = new Schema({
   year: Number,
   month: Number,
   period: String,
+  dir: String,
   rate: {
     b4: Number, // TK/0
     b5: Number, // TK/1
@@ -420,6 +421,7 @@ PayrollSchema.pre('save', async function fn(next) {
   this.year = year;
   this.month = month;
   this.period = `${format(new Date(this.from), 'dd MMM')} - ${format(new Date(this.to), 'dd MMM')}`;
+  this.dir = format(new Date(this.from), 'yyyyMM');
 
   return next();
 });
