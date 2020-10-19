@@ -2,6 +2,11 @@
   <div class="space-y-2">
     <el-page-header :content="content" @back="goBack">
     </el-page-header>
+    <el-progress
+      :text-inside="true"
+      :stroke-width="16"
+      :percentage="percentage"
+    ></el-progress>
     <ErrorHandler
       v-if="errors"
       :errors="errors"
@@ -81,6 +86,7 @@ export default {
       multipleSelection: [],
       loadingGen: false,
       loadingSend: false,
+      percentage: 0,
       errors: [],
       miniSearch: new MiniSearch({
         idField: '_id',
@@ -118,6 +124,8 @@ export default {
     async generate() {
       try {
         this.loadingGen = true;
+        let count = 0;
+        this.percentage = 0;
 
         await Promise.all(
           this.multipleSelection.map(async (v) => {
@@ -128,6 +136,10 @@ export default {
                 eId: v,
               },
             });
+            if (data.generateSlip.sStatus) {
+              count += 1;
+              this.percentage = Math.round((count / this.multipleSelection.length) * 100);
+            }
           }),
         );
 

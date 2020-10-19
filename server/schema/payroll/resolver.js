@@ -426,7 +426,8 @@ const Mutation = {
         { $unwind: '$employee'},
         { $match: { 'employee._id': eId } },
       ]);
-      await generateSlip(p[0]);
+      const s = await generateSlip(p[0]);
+      return s;
     }),
   },
 };

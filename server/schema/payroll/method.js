@@ -219,6 +219,8 @@ const generateSlip = async (p) => {
     const pdfDoc = printer.createPdfKitDocument(docDefinition);
     pdfDoc.pipe(fs.createWriteStream(`static/slip/${p.dir}/${e.slip.name}.pdf`));
     pdfDoc.end();
+
+    return { sStatus: 1 };
   } catch (err) {
     if (typeof err === 'string') {
       throw new GraphQLError(err);
