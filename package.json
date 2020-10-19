@@ -16,7 +16,7 @@
     "server": "cross-env NODE_ENV=development nodemon server/index.js --watch server"
   },
   "dependencies": {
-    "@nuxtjs/apollo": "^4.0.1-rc.3",
+    "@nuxtjs/apollo": "^4.0.1-rc.4",
     "apollo-upload-client": "^14.1.2",
     "bcrypt": "^5.0.0",
     "core-js": "^3.6.5",
