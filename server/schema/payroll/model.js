@@ -4,30 +4,30 @@ const { format, getYear, getMonth } = require('date-fns');
 
 const EmployeeSchema = new Schema({
   _id: { type: String, default: () => nanoid() },
-  d0: String, // Nama Karyawan
-  e0: String, // No. Karyawan
+  d0: { type: String, trim: true }, // Nama Karyawan
+  e0: { type: String, trim: true }, // No. Karyawan
   f0: Number, // Selisih GP dari Hari Kerja Normal
   g0: Number, // Gaji Pokok
-  h0: String, // Status Karyawan
+  h0: { type: String, trim: true }, // Status Karyawan
   i0: Date, // Hired date
   j0: Number, // Hari Kerja
   k0: Date, // Resign / Finish Contract Date
   l0: Number, // Gaji Berdasarkan Hari Kerja Normal
-  m0: String, // Note
-  n0: String, // Jenis Kelamin
+  m0: { type: String, trim: true }, // Note
+  n0: { type: String, trim: true }, // Jenis Kelamin
   o0: Date, // Birthday
-  p0: String, // Status NPWP
-  q0: String, // No. NPWP
-  r0: String, // Status Tanggungan
-  s0: String, // Bank
-  t0: String, // No. Rekening
-  u0: String, // Department
-  v0: String, // Section
-  w0: String, // Section Code
-  x0: String, // Grade
-  y0: String, // Jabatan
-  z0: String, // JPK No. (Kartu Peserta Jamsostek)
-  aa0: String, // No. BPJS Kesehatan
+  p0: { type: String, trim: true }, // Status NPWP
+  q0: { type: String, trim: true }, // No. NPWP
+  r0: { type: String, trim: true }, // Status Tanggungan
+  s0: { type: String, trim: true }, // Bank
+  t0: { type: String, trim: true }, // No. Rekening
+  u0: { type: String, trim: true }, // Department
+  v0: { type: String, trim: true }, // Section
+  w0: { type: String, trim: true }, // Section Code
+  x0: { type: String, trim: true }, // Grade
+  y0: { type: String, trim: true }, // Jabatan
+  z0: { type: String, trim: true }, // JPK No. (Kartu Peserta Jamsostek)
+  aa0: { type: String, trim: true }, // No. BPJS Kesehatan
   ab0: Number, // Jam Lembur Normal
   ac0: Number, // Amount Lembur Normal
   ad0: Number, // Jam Lembur Dinas
@@ -89,7 +89,7 @@ const EmployeeSchema = new Schema({
   ch0: Number, // Standar Upah Pensiun
   ci0: Number, // Pensiun Perusahaan
   cj0: Number, // Pensiun Karyawan
-  ck0: String, // Description (BPJS Ketenagakerjaan)
+  ck0: { type: String, trim: true }, // Description (BPJS Ketenagakerjaan)
   cl0: Number, // Total Iuran Pensiun & Kesehatan Perusahaan & Karyawan
   cm0: Number, // Total BPJS, JKK, JK, JHT, Pensiun Perusahaan & Karyawan
   cn0: Number, // Total JKK, JK, Medical Perusahaan
@@ -98,7 +98,7 @@ const EmployeeSchema = new Schema({
   cq0: Number, // BPJS Kesehatan Perusahaan
   cr0: Number, // BPJS Kesehatan Karyawan
   cs0: Number, // Kelas Rawat
-  ct0: String, // Description Medical
+  ct0: { type: String, trim: true }, // Description Medical
   cu0: Number, // Total Medical Perusahaan & Karyawan
   cv0: Number, // Total JKK, JK, JHT, Pensiun Perusahaan
   cw0: Number, // Absen
@@ -121,7 +121,7 @@ const EmployeeSchema = new Schema({
   dn0: Number, // Pph21 Kurang Bayar
   do0: Number, // Jumlah Pemotongan
   dp0: Number, // Penghasilan
-  dq0: String, // Periode Potongan Kantin
+  dq0: { type: String, trim: true }, // Periode Potongan Kantin
   dr0: Number, // Bonus
   ds0: Number, // Uang Pisah Prorate
   dt0: Number, // Uang Pisah Amount
@@ -135,6 +135,7 @@ const EmployeeSchema = new Schema({
   ec0: Number, // Total Transfer by Mandiri
   ed0: Number, // Total by Cash
   es0: Number, // Pengembalian Pajak DTP
+  ew0: { type: String, trim: true }, // Email
   ex0: Number, // Slot 1 Flag
   ey0: Number, // Slot 2 Flag
   ez0: Number, // Slot 3 Flag
