@@ -317,3 +317,21 @@ export const PayrollDeductionOthers = gql`
     }
   }
 `;
+
+export const PayrollSlip = gql`
+  query payrollSlip($id: String!) {
+    payrollSlip(id: $id) {
+      _id
+      period
+      year
+      employee {
+        _id
+        d0
+        e0
+        ew0
+        ex0
+      }
+    }
+  }
+`;
+
