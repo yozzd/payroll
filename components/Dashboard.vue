@@ -60,6 +60,9 @@
                 <i class="el-icon-more"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="slip">
+                  Slip
+                </el-dropdown-item>
                 <el-dropdown-item command="delete">
                   Delete
                 </el-dropdown-item>
@@ -190,6 +193,7 @@ export default {
     },
     handleCommand(c, id) {
       if (c === 'delete') this.handleConfirm(id);
+      else if (c === 'slip') this.$router.push({ name: 'payroll-slip-id', params: { id } });
     },
     handleConfirm(id) {
       this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
