@@ -4,7 +4,8 @@ const {
   GraphQLString,
 } = require('graphql');
 const Payroll = require('./model.js');
-const { PayrollType } = require('./type');
+const { PayrollType, GenType } = require('./type');
+const { generateSlip } = require('./method');
 const auth = require('../auth/service');
 
 const Query = {
@@ -411,6 +412,21 @@ const Mutation = {
     resolve: auth.hasRole('admin', async (_, { id }) => {
       await Payroll.findOneAndDelete({ _id: id });
       return { _id: id };
+    }),
+  },
+  generateSlip: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLString },
+      eId: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('admin', async (_, { id, eId }) => {
+      const p = await Payroll.aggregate([
+        { $match: { _id: id } },
+        { $unwind: '$employee'},
+        { $match: { 'employee._id': eId } },
+      ]);
+      await generateSlip(p[0]);
     }),
   },
 };

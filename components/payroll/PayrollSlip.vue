@@ -28,13 +28,14 @@
       <el-button
         type="primary"
         :loading="loadingSend"
-        :disabled="!multipleSelection.length || loadingSlip"
+        :disabled="!multipleSelection.length || loadingGen"
         @click="send"
       >
         Send
       </el-button>
     </div>
     <el-table
+      ref="slipTable"
       v-loading="$apollo.loading"
       element-loading-text="Loading..."
       element-loading-spinner="el-icon-loading"
@@ -70,6 +71,7 @@
 <script>
 import MiniSearch from 'minisearch';
 import { PayrollSlip } from '../../apollo/query/payroll';
+import { GenerateSlip } from '../../apollo/mutation/payroll';
 
 export default {
   data() {
@@ -114,7 +116,36 @@ export default {
     handleSelectionChange(a) {
       this.multipleSelection = a.map((v) => v._id);
     },
-    generate() {},
+    async generate() {
+      try {
+        this.loadingGen = true;
+
+        await Promise.all(
+          this.multipleSelection.map(async (v) => {
+            const { data } = await this.$apollo.mutate({
+              mutation: GenerateSlip,
+              variables: {
+                id: this.$route.params.id,
+                eId: v,
+              },
+            });
+          }),
+        );
+
+        this.loadingGen = false;
+        this.multipleSelection = [];
+        this.$refs.slipTable.clearSelection();
+        this.$message({
+          type: 'success',
+          message: 'Completed',
+        });
+
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
+    },
     send() {},
   },
   apollo: {

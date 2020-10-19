@@ -139,4 +139,11 @@ const PayrollType = new GraphQLObjectType({
   }),
 });
 
-module.exports = { PayrollType };
+const GenType = new GraphQLObjectType({
+  name: 'GenType',
+  fields: () => ({
+    sStatus: { type: GraphQLInt },
+  }),
+});
+
+module.exports = { PayrollType, GenType };

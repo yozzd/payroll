@@ -8,11 +8,10 @@ export const PayrollDelete = gql`
   }
 `;
 
-export const GenerateESlip = gql`
-  mutation generateESlip($id: String!, $eId: String!) {
-    generateESlip(id: $id, eId: $eId) {
+export const GenerateSlip = gql`
+  mutation generateSlip($id: String!, $eId: String!) {
+    generateSlip(id: $id, eId: $eId) {
       sStatus
-      slipPath
     }
   }
 `;
