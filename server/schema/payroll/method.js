@@ -72,8 +72,38 @@ const generateSlip = async (p) => {
       text: intpre0(e.ca0).format(), bold: true, alignment: 'right', fillColor: '#EEEEEE',
     }]);
 
+    const ctbl2 = [
+      ['Absent (Days)', floatpre3(e.cw0).format(), { text: intpre0(e.cx0).format(), alignment: 'right' }],
+      ['Income Tax NPWP', '', { text: intpre0(e.cz0).format(), alignment: 'right' }],
+      ['Income Tax Non NPWP', '', { text: intpre0(e.da0).format(), alignment: 'right' }],
+      ['JHT', '2%', { text: intpre0(e.ce0).format(), alignment: 'right' }],
+      ['BPJS Health', '1%', { text: intpre0(e.cr0).format(), alignment: 'right' }],
+      ['Pension', '1%', { text: intpre0(e.cj0).format(), alignment: 'right' }],
+      ['Loan', '', { text: intpre0(e.dk0).format(), alignment: 'right' }],
+      ['Kopkar', '', { text: intpre0(e.dm0).format(), alignment: 'right' }],
+      ['Canteen', '', { text: intpre0(e.dl0).format(), alignment: 'right' }],
+      ['Retro Deductions', '', { text: intpre0(e.dj0).format(), alignment: 'right' }],
+      ['Underpayment of Taxes', '', { text: intpre0(e.dn0).format(), alignment: 'right' }],
+      [{ text: 'TOTAL DEDUCTIONS', bold: true, alignment: 'right' }, '', {
+        text: intpre0(e.do0).format(), bold: true, alignment: 'right', fillColor: '#EEEEEE',
+      }],
+      ['', '', ''],
+      [{ text: 'GROSS', bold: true }, '', { text: intpre0(e.dp0).format(), bold: true, alignment: 'right' }],
+      [{ text: 'Government Borne Tax Returns', colSpan: 2 }, '', { text: intpre0(e.es0).format(), bold: true, alignment: 'right' }],
+    ];
+
+    const notes = [
+      ['', 'Note :', '', ''],
+      ['-', e.dq0, 'Approved by,', 'Received by,'],
+      ['-', { text: 'If there is correction on the limit of complaint on the 15th of each month', rowSpan: 2 }, { text: 'PT. LABTECH PENTA INTERNATIONAL', bold: true }, { text: e.d0, bold: true }],
+      ['', '', e.fc0, ''],
+    ];
+
+    if (e.m0) notes.push(['-', e.m0, '', '']);
+    if (e.fd0) notes.push(['-', e.fd0, '', '']);
+
     const docDefinition = {
-      // userPassword: e.slip.pw,
+      userPassword: e.slip.pw,
       content: [
         {
           style: 'tbl1',
@@ -130,16 +160,34 @@ const generateSlip = async (p) => {
               },
               layout: 'noBorders',
             },
-            // {
-            //   style: 'tbl5',
-            //   table: {
-            //     widths: [110, 75, 50],
-            //     heights: 12,
-            //     body: ctbl2,
-            //   },
-            //   layout: 'noBorders',
-            // },
+            {
+              style: 'tbl5',
+              table: {
+                widths: [110, 75, 50],
+                heights: 12,
+                body: ctbl2,
+              },
+              layout: 'noBorders',
+            },
           ],
+        },
+        {
+          style: 'tbl3',
+          table: {
+            widths: [266, 186, 63],
+            body: [
+              ['', 'NET PAYMENT', { text: intpre0(e.ec0).format(), alignment: 'right', margin: [0, 0, 5, 0] }],
+            ],
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl2',
+          table: {
+            widths: [2, 168, 170, 160],
+            body: notes,
+          },
+          layout: 'noBorders',
         },
       ],
       styles: {

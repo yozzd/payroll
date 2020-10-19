@@ -141,6 +141,9 @@ const EmployeeSchema = new Schema({
   ez0: Number, // Slot 3 Flag
   fa0: Number, // Slot 3 Flag
   fb0: Number, // Slot 4 Flag
+  fc0: { type: String, trim: true }, // Note 1
+  fd0: { type: String, trim: true }, // Note 2
+  ex0: Number, // Slot 1 Flag
   slip: {
     name: { type: String, default: () => nanoid(6) },
     pw: String,
