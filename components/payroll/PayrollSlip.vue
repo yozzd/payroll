@@ -46,7 +46,7 @@
       element-loading-spinner="el-icon-loading"
       :data="tableData"
       size="small"
-      height="600"
+      height="500"
       :row-class-name="finalRow"
       @selection-change="handleSelectionChange"
     >
@@ -67,7 +67,19 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="ew0" label="Email" min-width="300"></el-table-column>
+      <el-table-column prop="ew0" label="Email" width="300"></el-table-column>
+      <el-table-column label="File" min-width="300">
+        <template slot-scope="scope">
+          <el-link
+            v-if="scope.row.slip.check"
+            :href="`/slip/${scope.row.slip.dir}/${scope.row.slip.name}.pdf`"
+            target="_blank"
+            type="primary"
+          >
+            {{ scope.row.slip.name }}.pdf
+          </el-link>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -92,7 +104,7 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'ew0',
+          '_id', 'd0', 'e0', 'ew0', 'slip',
         ],
       }),
     };
@@ -134,6 +146,23 @@ export default {
               variables: {
                 id: this.$route.params.id,
                 eId: v,
+              },
+              update: (store, { data: { generateSlip } }) => {
+                const cdata = store.readQuery({
+                  query: PayrollSlip,
+                  variables: {
+                    id: this.$route.params.id,
+                  },
+                });
+                const index = cdata.payrollSlip.employee.findIndex((e) => e._id === v);
+                cdata.payrollSlip.employee[index].slip.check = true;
+                store.writeQuery({
+                  query: PayrollSlip,
+                  variables: {
+                    id: this.$route.params.id,
+                  },
+                  data: cdata,
+                });
               },
             });
             if (data.generateSlip.sStatus) {

@@ -4,8 +4,10 @@ const {
   GraphQLString,
   GraphQLInt,
   GraphQLFloat,
+  GraphQLBoolean
 } = require('graphql');
 
+const fs = require('fs-extra');
 const { DateFormat } = require('../scalar/date');
 
 const EmployeeType = new GraphQLObjectType({
@@ -123,7 +125,7 @@ const EmployeeType = new GraphQLObjectType({
     ed0: { type: GraphQLFloat },
     ex0: { type: GraphQLFloat },
     ew0: { type: GraphQLString },
-    slip: { type: GraphQLString }
+    slip: { type: SlipCheckType }
   }),
 });
 
@@ -143,6 +145,25 @@ const GenType = new GraphQLObjectType({
   name: 'GenType',
   fields: () => ({
     sStatus: { type: GraphQLInt },
+  }),
+});
+
+const SlipCheckType = new GraphQLObjectType({
+  name: 'SlipCheckType',
+  fields: () => ({
+    name: { type: GraphQLString },
+    dir: { type: GraphQLString },
+    check: {
+      type: GraphQLBoolean,
+      resolve: async (p) => {
+        try {
+          await fs.access(`static/slip/${p.dir}/${p.name}.pdf`);
+          return true;
+        } catch (err) {
+          if (err) return false;
+        }
+      },
+    },
   }),
 });
 
