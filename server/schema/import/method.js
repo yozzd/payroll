@@ -12,6 +12,15 @@ const parseDate = ({
   return null;
 };
 
+const strToDate = (str) => {
+  if (str) {
+    const d = str.split('-');
+    return new Date(`${d[2]}-${d[1]}-${d[0]}`);
+  } else {
+    return null;
+  }
+};
+
 const processImportPayroll = async ({ file, from, to }) => {
   const { filename, createReadStream } = await file;
   const stream = createReadStream();
@@ -67,7 +76,7 @@ const processImportPayroll = async ({ file, from, to }) => {
             k0: parseDate(XLSX.SSF.parse_date_code(ft[i].__EMPTY_10)), // Resign/Finish Contract
             m0: ft[i].__EMPTY_12 || '', // Note
             n0: ft[i].__EMPTY_13 || '', // Jenis Kelamin
-            o0: parseDate(XLSX.SSF.parse_date_code(ft[i].__EMPTY_14)), // Birthday
+            o0: strToDate(ft[i].__EMPTY_14), // Birthday
             p0: ft[i].__EMPTY_15 || '', // Status NPWP
             q0: ft[i].__EMPTY_16 || '', // No. NPWP
             r0: ft[i].__EMPTY_17 || '', // Status Tanggungan
@@ -139,7 +148,7 @@ const processImportPayroll = async ({ file, from, to }) => {
             du0: ft[i].__EMPTY_124 || 0, // Uang Pesangon Prorate
             dw0: ft[i].__EMPTY_126 || 0, // Uang Penghargaan Masa Kerja Prorate
             ea0: ft[i].__EMPTY_130 || 0, // Total Bulan Periode Pajak
-            ew0: ft[i].__EMPTY_152 || 0, // Email
+            ew0: ft[i].__EMPTY_152 || '', // Email
             ex0: ft[i].__EMPTY_153 || 0, // Slot 1 Flag
             ey0: ft[i].__EMPTY_154 || 0, // Slot 2 Flag
             ez0: ft[i].__EMPTY_155 || 0, // Slot 3 Flag

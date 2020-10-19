@@ -36,6 +36,8 @@
           </client-only>
         </template>
       </el-table-column>
+      <el-table-column prop="n0" label="Jenis Kelamin" width="100"></el-table-column>
+      <el-table-column prop="o0" label="Birthday" width="100"></el-table-column>
       <el-table-column label="NPWP" align="center">
         <el-table-column prop="p0" label="Status" width="80"></el-table-column>
         <el-table-column prop="q0" label="No." width="160"></el-table-column>
@@ -47,15 +49,16 @@
       </el-table-column>
       <el-table-column label="BPJS" align="center">
         <el-table-column prop="z0" label="Ketenagakerjaan" width="160"></el-table-column>
-        <el-table-column prop="aa0" label="Kesehatan" min-width="160"></el-table-column>
+        <el-table-column prop="aa0" label="Kesehatan" width="160"></el-table-column>
       </el-table-column>
+      <el-table-column prop="ew0" label="Email" min-width="300"></el-table-column>
     </el-table>
   </div>
 </template>
 
 <script>
 import MiniSearch from 'minisearch';
-import { PayrollSocial } from '../../apollo/query/payroll';
+import { PayrollPrivate } from '../../apollo/query/payroll';
 
 export default {
   data() {
@@ -67,8 +70,9 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'p0', 'q0',
-          'r0', 's0', 't0', 'z0', 'aa0',
+          '_id', 'd0', 'e0', 'n0', 'o0',
+          'p0', 'q0', 'r0', 's0', 't0',
+          'z0', 'aa0', 'ew0',
         ],
       }),
     };
@@ -90,8 +94,8 @@ export default {
     }
   },
   apollo: {
-    payrollSocial: {
-      query: PayrollSocial,
+    payrollPrivate: {
+      query: PayrollPrivate,
       variables() {
         return {
           id: this.$route.params.id,
@@ -100,7 +104,7 @@ export default {
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const { employee } = data.payrollSocial;
+          const { employee } = data.payrollPrivate;
           this.items = employee;
           this.miniSearch.addAll(this.items);
         }

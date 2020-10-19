@@ -53,7 +53,7 @@ const Query = {
       return p;
     }),
   },
-  payrollSocial: {
+  payrollPrivate: {
     type: PayrollType,
     args: {
       id: { type: GraphQLString },
@@ -65,6 +65,8 @@ const Query = {
           'employee._id': 1,
           'employee.d0': 1,
           'employee.e0': 1,
+          'employee.n0': 1,
+          'employee.o0': 1,
           'employee.p0': 1,
           'employee.q0': 1,
           'employee.r0': 1,
@@ -72,6 +74,7 @@ const Query = {
           'employee.t0': 1,
           'employee.z0': 1,
           'employee.aa0': 1,
+          'employee.ew0': 1,
           'employee.ex0': 1,
         });
       return p;

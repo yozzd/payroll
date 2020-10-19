@@ -6,8 +6,8 @@
       <el-tab-pane label="Employment">
         <PayrollEmployment />
       </el-tab-pane>
-      <el-tab-pane label="Social">
-        <PayrollSocial />
+      <el-tab-pane label="Private">
+        <PayrollPrivate />
       </el-tab-pane>
       <el-tab-pane label="Earnings">
         <PayrollEarnings />

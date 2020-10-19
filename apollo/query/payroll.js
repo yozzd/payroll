@@ -41,14 +41,16 @@ export const PayrollEmployment = gql`
   }
 `;
 
-export const PayrollSocial = gql`
-  query payrollSocial($id: String!) {
-    payrollSocial(id: $id) {
+export const PayrollPrivate = gql`
+  query payrollPrivate($id: String!) {
+    payrollPrivate(id: $id) {
       _id
       employee {
         _id
         d0
         e0
+        n0
+        o0
         p0
         q0
         r0
@@ -56,6 +58,7 @@ export const PayrollSocial = gql`
         t0
         z0
         aa0
+        ew0
         ex0
       }
     }
