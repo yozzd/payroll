@@ -86,7 +86,7 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'cw0', 'cx0',
+          '_id', 'd0', 'e0', 'ew0',
         ],
       }),
     };

@@ -14,10 +14,11 @@ const printer = new PdfPrinter(fonts);
 
 const generateSlip = async (p) => {
   try {
+    const { employee: e } = p;
     await fs.ensureDir(`static/slip/${p.dir}`);
 
     const docDefinition = {
-      // userPassword: p.employee.slip.pw,
+      // userPassword: e.slip.pw,
       content: [
         {
           style: 'tbl1',
@@ -37,17 +38,37 @@ const generateSlip = async (p) => {
             ],
           },
         },
+        {
+          style: 'tbl2',
+          table: {
+            widths: [110, 148, 110, 148],
+            body: [
+              ['Employee No.', { text: e.e0, bold: true }, '', ''],
+              ['Employee Name', { text: e.d0, bold: true }, '', ''],
+              ['Bank Account', `MANDIRI / ${e.t0}`, '', ''],
+              ['Department', e.u0, '', ''],
+              ['Section', e.v0, 'Marital Status', e.r0],
+              ['Position', e.y0, 'JPK ID', e.z0],
+              ['Tax ID', e.q0, 'BPJS Health ID', e.aa0],
+            ],
+          },
+          layout: 'noBorders',
+        },
       ],
       styles: {
         tbl1: {
           fontSize: 8,
           margin: [-10, -10, -10, 0],
         },
+        tbl2: {
+          fontSize: 8,
+          margin: [-10, 40, -10, 0],
+        },
       },
     };
 
     const pdfDoc = printer.createPdfKitDocument(docDefinition);
-    pdfDoc.pipe(fs.createWriteStream(`static/slip/${p.dir}/${p.employee.slip.name}.pdf`));
+    pdfDoc.pipe(fs.createWriteStream(`static/slip/${p.dir}/${e.slip.name}.pdf`));
     pdfDoc.end();
   } catch (err) {
     if (typeof err === 'string') {
