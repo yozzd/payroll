@@ -17,6 +17,22 @@
           clearable
         />
       </div>
+      <el-button
+        type="primary"
+        :loading="loadingGen"
+        :disabled="!multipleSelection.length || loadingSend"
+        @click="generate"
+      >
+        Generate
+      </el-button>
+      <el-button
+        type="primary"
+        :loading="loadingSend"
+        :disabled="!multipleSelection.length || loadingSlip"
+        @click="send"
+      >
+        Send
+      </el-button>
     </div>
     <el-table
       v-loading="$apollo.loading"
@@ -26,7 +42,15 @@
       size="small"
       height="600"
       :row-class-name="finalRow"
+      @selection-change="handleSelectionChange"
     >
+      <el-table-column
+        type="selection"
+        width="50"
+        align="center"
+        :selectable="selectDisable"
+        fixed
+      ></el-table-column>
       <el-table-column type="index" width="50" align="center" fixed></el-table-column>
       <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
       <el-table-column prop="d0" label="Nama Karyawan" width="200" fixed>
@@ -53,6 +77,9 @@ export default {
       content: '',
       items: [],
       search: '',
+      multipleSelection: [],
+      loadingGen: false,
+      loadingSend: false,
       errors: [],
       miniSearch: new MiniSearch({
         idField: '_id',
@@ -80,7 +107,15 @@ export default {
         return 'final-row';
       }
       return '';
-    }
+    },
+    selectDisable(r) {
+      return r.ew0 !== '';
+    },
+    handleSelectionChange(a) {
+      this.multipleSelection = a.map((v) => v._id);
+    },
+    generate() {},
+    send() {},
   },
   apollo: {
     payrollSlip: {

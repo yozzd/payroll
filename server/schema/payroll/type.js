@@ -123,6 +123,7 @@ const EmployeeType = new GraphQLObjectType({
     ed0: { type: GraphQLFloat },
     ex0: { type: GraphQLFloat },
     ew0: { type: GraphQLString },
+    slip: { type: GraphQLString }
   }),
 });
 

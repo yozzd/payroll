@@ -375,18 +375,29 @@ const Query = {
       id: { type: GraphQLString },
     },
     resolve: auth.hasRole('admin', async (_, { id }) => {
-      const p = await Payroll.findOne({ _id: id })
-        .select({
-          _id: 1,
-          period: 1,
-          year: 1,
-          'employee._id': 1,
-          'employee.d0': 1,
-          'employee.e0': 1,
-          'employee.ew0': 1,
-          'employee.ex0': 1,
-        });
-      return p;
+      const payroll = await Payroll.aggregate([
+        { $match: { _id: id } },
+        { $unwind: '$employee'},
+        { $match: { 'employee.ex0': { '$ne': 1 } } },
+        {
+          $group: {
+            _id: '$_id',
+            period: { '$first': '$period' },
+            year: { '$first': '$year' },
+            employee: {
+              $push: {
+                _id: '$employee._id',
+                d0: '$employee.d0',
+                e0: '$employee.e0',
+                ew0: '$employee.ew0',
+                ex0: '$employee.ex0',
+                slip: '$employee.slip.name',
+              },
+            },
+          },
+        },
+      ]);
+      return payroll[0];
     }),
   },
 };

@@ -330,6 +330,7 @@ export const PayrollSlip = gql`
         e0
         ew0
         ex0
+        slip
       }
     }
   }
