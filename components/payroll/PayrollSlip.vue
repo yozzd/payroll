@@ -75,6 +75,7 @@
             :href="`/slip/${scope.row.slip.dir}/${scope.row.slip.name}.pdf`"
             target="_blank"
             type="primary"
+            class="font-sm"
           >
             {{ scope.row.slip.name }}.pdf
           </el-link>
@@ -137,6 +138,7 @@ export default {
       try {
         this.loadingGen = true;
         let count = 0;
+        const len = this.multipleSelection.length;
         this.percentage = 0;
 
         await Promise.all(
@@ -168,7 +170,7 @@ export default {
             });
             if (data.generateSlip.sStatus) {
               count += 1;
-              this.percentage = Math.round((count / this.multipleSelection.length) * 100);
+              this.percentage = Math.floor((count / len) * 100);
             }
           }),
         );
