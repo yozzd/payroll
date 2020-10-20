@@ -89,18 +89,17 @@
 import MiniSearch from 'minisearch';
 import { PayrollSlip } from '../../apollo/query/payroll';
 import { GenerateSlip, SendSlip } from '../../apollo/mutation/payroll';
+import mix from '../../mixins/payroll';
 
 export default {
+	mixins: [mix],
   data() {
     return {
       content: '',
-      items: [],
-      search: '',
       multipleSelection: [],
       loadingGen: false,
       loadingSend: false,
       percentage: 0,
-      errors: [],
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -110,23 +109,9 @@ export default {
       }),
     };
   },
-  computed: {
-    tableData() {
-      if (this.search) {
-        return this.miniSearch.search(this.search, { prefix: true });
-      }
-      return this.items;
-    },
-  },
   methods: {
     goBack() {
       this.$router.push({ path: '/dashboard/' });
-    },
-    finalRow({ row }) {
-      if (row.ex0 === 1) {
-        return 'final-row';
-      }
-      return '';
     },
     selectDisable(r) {
       return r.ew0 !== '';

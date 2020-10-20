@@ -76,13 +76,12 @@
 <script>
 import MiniSearch from 'minisearch';
 import { PayrollEmployment } from '../../apollo/query/payroll';
+import mix from '../../mixins/payroll';
 
 export default {
+	mixins: [mix],
   data() {
     return {
-      items: [],
-      search: '',
-      errors: [],
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -92,22 +91,6 @@ export default {
         ],
       }),
     };
-  },
-  computed: {
-    tableData() {
-      if (this.search) {
-        return this.miniSearch.search(this.search, { prefix: true });
-      }
-      return this.items;
-    },
-  },
-  methods: {
-    finalRow({ row }) {
-      if (row.ex0 === 1) {
-        return 'final-row';
-      }
-      return '';
-    }
   },
   apollo: {
     payrollEmployment: {
