@@ -15,3 +15,12 @@ export const GenerateSlip = gql`
     }
   }
 `;
+
+export const SendSlip = gql`
+  mutation sendSlip($id: String!, $eId: String!) {
+    sendSlip(id: $id, eId: $eId) {
+      accepted
+      rejected
+    }
+  }
+`;

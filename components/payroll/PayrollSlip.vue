@@ -2,11 +2,6 @@
   <div class="space-y-2">
     <el-page-header :content="content" @back="goBack">
     </el-page-header>
-    <el-progress
-      :text-inside="true"
-      :stroke-width="16"
-      :percentage="percentage"
-    ></el-progress>
     <ErrorHandler
       v-if="errors"
       :errors="errors"
@@ -39,6 +34,11 @@
         Send
       </el-button>
     </div>
+    <el-progress
+      :text-inside="true"
+      :stroke-width="16"
+      :percentage="percentage"
+    ></el-progress>
     <el-table
       ref="slipTable"
       v-loading="$apollo.loading"
@@ -88,7 +88,7 @@
 <script>
 import MiniSearch from 'minisearch';
 import { PayrollSlip } from '../../apollo/query/payroll';
-import { GenerateSlip } from '../../apollo/mutation/payroll';
+import { GenerateSlip, SendSlip } from '../../apollo/mutation/payroll';
 
 export default {
   data() {
@@ -189,7 +189,43 @@ export default {
         return false;
       }
     },
-    send() {},
+    async send() {
+      try {
+        this.loadingSend = true;
+        let count = 0;
+        const len = this.multipleSelection.length;
+        this.percentage = 0;
+
+        await Promise.all(
+          this.multipleSelection.map(async (v) => {
+            const { data } = await this.$apollo.mutate({
+              mutation: SendSlip,
+              variables: {
+                id: this.$route.params.id,
+                eId: v,
+              },
+            });
+            if (data.sendSlip.accepted.length) {
+              count += 1;
+              this.percentage = Math.floor((count / len) * 100);
+            }
+          }),
+        );
+
+        this.loadingSend = false;
+        this.multipleSelection = [];
+        this.$refs.slipTable.clearSelection();
+        this.$message({
+          type: 'success',
+          message: 'Completed',
+        });
+
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
+    },
   },
   apollo: {
     payrollSlip: {

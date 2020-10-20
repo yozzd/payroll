@@ -1,9 +1,11 @@
 const { GraphQLError } = require('graphql');
 const PdfPrinter = require('pdfmake');
 const fs = require('fs-extra');
+const nodemailer = require('nodemailer');
 
 const { intpre0, floatpre2, floatpre3 } = require('../scalar/number');
 const { idDateFormat } = require('../scalar/date');
+const smtp = require('../../config/smtp');
 
 const fonts = {
   Roboto: {
@@ -230,4 +232,69 @@ const generateSlip = async (p) => {
   }
 };
 
-module.exports = { generateSlip };
+const sendSlip = async (p) => {
+  try {
+    const { employee: e } = p;
+
+    const transporter = nodemailer.createTransport({
+      host: smtp.host,
+      port: smtp.port,
+      secure: true,
+      auth: {
+        user: smtp.user,
+        pass: smtp.pass,
+      },
+      tls: { rejectUnauthorized: false },
+    });
+
+    let html = '';
+    html += `<div>Terlampir slip gaji untuk pembayaran ${idDateFormat(p.to, 'MMMM yyyy')}</div>`;
+    html += '<div>Slip gaji ini dilindungi kata sandi dan kata sandi dalam bentuk (format xxxddmmyy) :</div>';
+    html += '<div>- 3 digit terakhir nomor karyawan</div>';
+    html += '<div>- 2 digit tanggal lahir</div>';
+    html += '<div>- 2 digit bulan lahir</div>';
+    html += '<div>- 2 digit terakhir tahun lahir</div>';
+    html += '<p>Untuk masalah terkait pembayaran, Anda dapat menghubungi Departemen HRD atau Departemen Keuangan untuk bantuan lebih lanjut.</p>';
+    html += '<div>Catatan:</div>';
+    html += '<div>Ini adalah email yang dibuat oleh sistem, mohon jangan dibalas.</div>';
+    html += '<div>Apabila slip gagal dibuka, kemungkinan tanggal lahir yang didaftarkan tidak sesuai dengan sistem. Dan lakukan pengajuan perubahan data.</div>';
+    html += '<div>Untuk membuka file yang dilindungi kata sandi ini, Anda memerlukan Adobe Reader.</div>';
+    html += '<p>-----------------------------------------------------------------------------------</p>';
+    html += `<div>Attached is the payslip for ${idDateFormat(p.to, 'MMMM yyyy')}</div>`;
+    html += '<div>It is password protected and the password is in the form of (format xxxddmmyy) :</div>';
+    html += '<div>- The last 3 digits of the employee number</div>';
+    html += '<div>- 2 digit date of birth</div>';
+    html += '<div>- 2 digit month of birth</div>';
+    html += '<div>- The last 2 digits of the year of birth</div>';
+    html += '<p>For any pay related issue, you may contact your local HRD Department or Finance Department for further assistance.</p>';
+    html += '<div>Note:</div>';
+    html += '<div>This is a system generated mail, please do not reply.</div>';
+    html += '<div>If you fail to open the slip, it is possible that the registered date of birth is not in accordance with the system. And make a data change submission.</div>';
+    html += '<div>To open this password protected file, you need Adobe Reader.</div>';
+
+    const message = {
+      from: `"Labtech Info" <${smtp.sender}>`,
+      to: e.ew0,
+      subject: 'Labtech Info - No Reply',
+      html,
+      attachments: [
+        {
+          filename: `${e.slip.name}.pdf`,
+          path: `static/slip/${p.dir}/${e.slip.name}.pdf`,
+        },
+      ],
+    };
+
+    const info = await transporter.sendMail(message);
+
+    return info;
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
+};
+
+module.exports = { generateSlip, sendSlip };

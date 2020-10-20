@@ -148,6 +148,14 @@ const GenType = new GraphQLObjectType({
   }),
 });
 
+const SendType = new GraphQLObjectType({
+  name: 'SendType',
+  fields: () => ({
+    accepted: { type: GraphQLList(GraphQLString) },
+    rejected: { type: GraphQLList(GraphQLString) },
+  }),
+});
+
 const SlipCheckType = new GraphQLObjectType({
   name: 'SlipCheckType',
   fields: () => ({
@@ -167,4 +175,4 @@ const SlipCheckType = new GraphQLObjectType({
   }),
 });
 
-module.exports = { PayrollType, GenType };
+module.exports = { PayrollType, GenType, SendType };
