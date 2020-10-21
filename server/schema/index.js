@@ -2,6 +2,7 @@ const { GraphQLSchema, GraphQLObjectType } = require('graphql');
 const Auth = require('./auth/resolver');
 const ESlip = require('./eslip/resolver');
 const Import = require('./import/resolver');
+const Journal = require('./journal/resolver');
 const Payroll = require('./payroll/resolver');
 const User = require('./user/resolver');
 
@@ -10,6 +11,7 @@ const query = new GraphQLObjectType({
   fields: {
     ...Auth.Query,
     ...ESlip.Query,
+    ...Journal.Query,
     ...Payroll.Query,
     ...User.Query,
   },
