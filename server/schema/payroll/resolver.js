@@ -1,3 +1,4 @@
+const fs = require('fs-extra');
 const {
   GraphQLList,
   GraphQLInt,
@@ -413,6 +414,8 @@ const Mutation = {
       id: { type: GraphQLString },
     },
     resolve: auth.hasRole('admin', async (_, { id }) => {
+      const p = await Payroll.findOne({ _id: id });
+      await fs.remove(`static/slip/${p.dir}`);
       await Payroll.findOneAndDelete({ _id: id });
       return { _id: id };
     }),
