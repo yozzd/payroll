@@ -2,6 +2,13 @@ const { Schema, model } = require('mongoose');
 const { nanoid } = require('nanoid');
 const { format, getYear, getMonth } = require('date-fns');
 
+const prod = [
+  'Production Division', 'Electronic', 'Mechanical Production', 'Product Development & Control',
+  'R&D DAQ & Control', 'R&D Electronic', 'R&D HVAC/Electrical', 'R&D Mechanical',
+  'R&D Software & Product Development', 'Information Technology', 'HVAC-ELECTRICAL',
+  'Material Requirement Planning', 'QUALITY ASSURANCE', 'Building Infrastructure & Service',
+];
+
 const EmployeeSchema = new Schema({
   _id: { type: String, default: () => nanoid() },
   d0: { type: String, trim: true }, // Nama Karyawan
@@ -143,7 +150,7 @@ const EmployeeSchema = new Schema({
   fb0: Number, // Slot 4 Flag
   fc0: { type: String, trim: true }, // Note 1
   fd0: { type: String, trim: true }, // Note 2
-  ex0: Number, // Slot 1 Flag
+  type: Number,
   slip: {
     name: { type: String, default: () => nanoid(6) },
     pw: String,
@@ -404,6 +411,8 @@ EmployeeSchema.pre('save', async function fn(next) {
 
   const dob = format(new Date(this.o0), 'ddMMyy');
   this.slip.pw = `${this.e0.slice(-3)}${dob}`;
+
+  this.type = prod.includes(this.u0) ? 1 : 2;
 
   return next();
 });
