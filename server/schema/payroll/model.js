@@ -412,7 +412,7 @@ EmployeeSchema.pre('save', async function fn(next) {
   const dob = format(new Date(this.o0), 'ddMMyy');
   this.slip.pw = `${this.e0.slice(-3)}${dob}`;
 
-  this.category= prod.includes(this.u0) ? 1 : 2;
+  this.category = prod.includes(this.u0) ? 1 : 2;
 
   return next();
 });

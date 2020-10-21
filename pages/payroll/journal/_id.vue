@@ -1,0 +1,17 @@
+<template>
+  <div>
+    <Journal />
+  </div>
+</template>
+
+<script>
+export default {
+  layout: 'layout2',
+  head() {
+    return {
+      title: 'Payroll | Journal',
+    };
+  },
+  middleware: ['auth'],
+};
+</script>
