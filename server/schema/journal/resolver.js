@@ -66,8 +66,8 @@ const Query = {
         },
         {
           $project: {
-            employeeA: { $arrayElemAt: [ '$employee', 1 ] },
-            employeeP: { $arrayElemAt: [ '$employee', 0 ] },
+            employeeA: { $arrayElemAt: [ '$employee', 0 ] },
+            employeeP: { $arrayElemAt: [ '$employee', 1 ] },
           },
         },
       ]);
