@@ -6,6 +6,9 @@
       <el-tab-pane label="Production">
         <JournalProduction />
       </el-tab-pane>
+      <el-tab-pane label="Administration">
+        <JournalAdministration/>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>

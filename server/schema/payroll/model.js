@@ -150,7 +150,7 @@ const EmployeeSchema = new Schema({
   fb0: Number, // Slot 4 Flag
   fc0: { type: String, trim: true }, // Note 1
   fd0: { type: String, trim: true }, // Note 2
-  category: Number, // 1 = Production, 2 = Administration
+  category: Number, // 0 = Administration, 1 = Production
   slip: {
     name: { type: String, default: () => nanoid(6) },
     pw: String,
@@ -412,7 +412,7 @@ EmployeeSchema.pre('save', async function fn(next) {
   const dob = format(new Date(this.o0), 'ddMMyy');
   this.slip.pw = `${this.e0.slice(-3)}${dob}`;
 
-  this.category = prod.includes(this.u0) ? 1 : 2;
+  this.category = prod.includes(this.u0) ? 1 : 0;
 
   return next();
 });

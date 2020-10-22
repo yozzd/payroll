@@ -96,6 +96,7 @@ const EmployeeType = new GraphQLObjectType({
     cr0: { type: GraphQLFloat },
     cw0: { type: GraphQLFloat },
     cx0: { type: GraphQLFloat },
+    cy0: { type: GraphQLFloat },
     cz0: { type: GraphQLFloat },
     da0: { type: GraphQLFloat },
     db0: { type: GraphQLFloat },

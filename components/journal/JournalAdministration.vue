@@ -100,15 +100,15 @@ export default {
       variables() {
         return {
           id: this.$route.params.id,
-          cat1: false,
-          cat2: true,
+          cat1: true,
+          cat2: false,
         };
       },
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const { employeeP } = data.journalCategory;
-          this.items = employeeP;
+          const { employeeA } = data.journalCategory;
+          this.items = employeeA;
           this.miniSearch.addAll(this.items);
         }
       },
