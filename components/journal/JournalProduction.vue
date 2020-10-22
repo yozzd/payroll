@@ -81,6 +81,117 @@
           <span>{{ scope.row.ai0 | currency }}</span>
         </template>
       </el-table-column>
+      <el-table-column prop="ef0" label="Position/Functional" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.ef0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="eg0" label="Housing" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.eg0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="eh0" label="Transport" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.eh0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="ei0" label="Incentive" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.ei0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="ej0" label="Meals" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.ej0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="ek0" label="Living" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.ek0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="el0" label="Communication" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.el0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="em0" width="120" align="right">
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Other Allowance Taxable">
+              Other Allowance Taxable
+            </p>
+          </client-only>
+        </template>
+        <template slot-scope="scope">
+          <span>{{ scope.row.em0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="bu0" label="Retro" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.bu0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="cb0" label="Accident" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.cb0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="cc0" label="Death" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.cc0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="Kelas Rawat" width="100">
+        <template slot-scope="scope">
+          <span>{{ scope.row.cs0 }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="cq0" label="Kelas I" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.cq0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="cg0" label="Old Ins" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.cg0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="eo0" label="Serv" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.eo0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="bx0" label="THR" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.bx0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="bv0" width="120" align="right">
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Lebih Bayar Pph21">
+              Lebih Bayar Pph21
+            </p>
+          </client-only>
+        </template>
+        <template slot-scope="scope">
+          <span>{{ scope.row.bv0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="es0" min-width="120" align="right">
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Pengembalian Pajak DTP">
+              Pengembalian Pajak DTP
+            </p>
+          </client-only>
+        </template>
+        <template slot-scope="scope">
+          <span>{{ scope.row.es0 | currency }}</span>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -99,7 +210,9 @@ export default {
         fields: ['d0', 'e0'],
         storeFields: [
           '_id', 'd0', 'e0', 'l0', 'u0', 'v0', 'w0', 'y0',
-          'ai0', 'cy0', 'df0',
+          'ai0', 'bu0', 'bv0', 'bx0', 'cb0', 'cc0', 'cg0',
+        	'cq0', 'cs0', 'cy0', 'df0', 'ef0', 'eg0', 'eh0',
+        	'ei0', 'ej0', 'ek0', 'el0', 'em0', 'eo0', 'es0',
         ],
       }),
     };

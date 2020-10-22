@@ -141,6 +141,14 @@ const EmployeeSchema = new Schema({
   eb0: Number, // Take Home Pay
   ec0: Number, // Total Transfer by Mandiri
   ed0: Number, // Total by Cash
+  ef0: Number, // Positon/Fungsional
+  eg0: Number, // Housing
+  eh0: Number, // Transport
+  ei0: Number, // Incentive
+  ej0: Number, // Meals
+  ek0: Number, // Living
+  el0: Number, // Communication
+  em0: Number, // Other Allowance Taxable
   es0: Number, // Pengembalian Pajak DTP
   ew0: { type: String, trim: true }, // Email
   ex0: Number, // Slot 1 Flag
@@ -408,6 +416,15 @@ EmployeeSchema.pre('save', async function fn(next) {
     this.ec0 = this.dp0 + this.dr0 + this.dt0 + this.dx0 + this.dy0 + this.es0;
     this.ed0 = 0;
   }
+
+  this.ef0 = this.al0 + this.am0 + this.as0 + this.at0 + this.ba0;
+  this.eg0 = this.ak0;
+  this.eh0 = this.an0 + this.ao0;
+  this.ei0 = this.aq0 + this.ar0 + this.be0 + this.bf0;
+  this.ej0 = this.bc0 + this.bd0 + this.bb0;
+  this.ek0 = this.aj0;
+  this.el0 = this.ap0;
+  this.em0 = this.au0 + this.av0 + this.bg0 + this.bh0 + this.bi0;
 
   const dob = format(new Date(this.o0), 'ddMMyy');
   this.slip.pw = `${this.e0.slice(-3)}${dob}`;

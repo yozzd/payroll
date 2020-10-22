@@ -13,21 +13,39 @@ const journalFragment = {
         w0
         y0
         ai0
+        bu0
+        bv0
+        bx0
+        cb0
+        cc0
+        cg0
+        cq0
+        cs0
         cy0
-        df0
+        df0 
+        ef0   
+        eg0
+        eh0
+        ei0
+        ej0
+        ek0
+        el0
+        em0
+        eo0
+        es0
     	}
     `,
   },
 };
 
 export const JournalCategory = gql`
-  query journalCategory($id: String!, $cat1: Boolean!, $cat2: Boolean!) {
+  query journalCategory($id: String!) {
     journalCategory(id: $id) {
       _id
-      employeeA @include(if: $cat1) {
+      employeeA {
         ...journal
       }
-      employeeP @include(if: $cat2) {
+      employeeP {
         ...journal
       }
     }
