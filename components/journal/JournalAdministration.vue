@@ -71,6 +71,16 @@
           <span>{{ scope.row.cy0 | currency }}</span>
         </template>
       </el-table-column>
+      <el-table-column prop="df0" label="Other Deduction" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.df0 | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="ai0" label="OT" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.ai0 | currency }}</span>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -89,7 +99,7 @@ export default {
         fields: ['d0', 'e0'],
         storeFields: [
           '_id', 'd0', 'e0', 'l0', 'u0', 'v0', 'w0', 'y0',
-          'cy0',
+          'ai0', 'cy0', 'df0',
         ],
       }),
     };

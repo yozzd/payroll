@@ -20,7 +20,9 @@ const EmployeeJType = new GraphQLObjectType({
     v0: { type: GraphQLString },
     w0: { type: GraphQLString },
     y0: { type: GraphQLString },
+    ai0: { type: GraphQLFloat },
     cy0: { type: GraphQLFloat },
+    df0: { type: GraphQLFloat },
   }),
 });
 
@@ -28,8 +30,8 @@ const JournalType = new GraphQLObjectType({
   name: 'JournalType',
   fields: () => ({
     _id: { type: GraphQLString },
-    employeeP: { type: new GraphQLList(EmployeeJType) },
     employeeA: { type: new GraphQLList(EmployeeJType) },
+    employeeP: { type: new GraphQLList(EmployeeJType) },
   }),
 });
 

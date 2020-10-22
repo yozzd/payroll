@@ -33,7 +33,9 @@ const Query = {
                 v0: '$employee.v0',
                 w0: '$employee.w0',
                 y0: '$employee.y0',
+                ai0: '$employee.ai0',
                 cy0: '$employee.cy0',
+                df0: '$employee.df0',
               },
             },
           },
@@ -46,8 +48,8 @@ const Query = {
         },
         {
           $project: {
-            employeeA: { $arrayElemAt: [ '$employee', 0 ] },
-            employeeP: { $arrayElemAt: [ '$employee', 1 ] },
+            employeeA: { $arrayElemAt: [ '$employee', 1 ] },
+            employeeP: { $arrayElemAt: [ '$employee', 0 ] },
           },
         },
       ]);
