@@ -2,21 +2,31 @@
   <div class="flex flex-col space-y-4 mt-4 mb-8 px-12">
     <el-page-header :content="content" @back="goBack">
     </el-page-header>
-    <el-tabs>
-      <el-tab-pane label="Employment">
-        <PayrollEmployment />
+    <el-tabs v-model="activeName">
+      <el-tab-pane label="Employment" name="a">
+        <div v-if="activeName==='a'">
+        	<PayrollEmployment />
+        </div>
       </el-tab-pane>
-      <el-tab-pane label="Private">
-        <PayrollPrivate />
+      <el-tab-pane label="Private" name="b">
+        <div v-if="activeName==='b'">
+        	<PayrollPrivate />
+        </div>
       </el-tab-pane>
-      <el-tab-pane label="Earnings">
-        <PayrollEarnings />
+      <el-tab-pane label="Earnings" name="c">
+        <div v-if="activeName==='c'">
+        	<PayrollEarnings />
+        </div>
       </el-tab-pane>
-      <el-tab-pane label="Deductions">
-        <PayrollDeductions />
+      <el-tab-pane label="Deductions" name="d">
+        <div v-if="activeName==='d'">
+        	<PayrollDeductions />
+        </div>
       </el-tab-pane>
-      <el-tab-pane label="Payment">
-        <PayrollPayment />
+      <el-tab-pane label="Payment" name="e">
+        <div v-if="activeName==='e'">
+        	<PayrollPayment />
+        </div>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -29,6 +39,7 @@ export default {
   data() {
     return {
       content: '',
+      activeName: 'a',
     };
   },
   methods: {

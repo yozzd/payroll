@@ -22,7 +22,7 @@
       element-loading-spinner="el-icon-loading"
       :data="tableData"
       size="small"
-      height="500"
+      max-height="500"
       show-summary
       border
       :summary-method="summaries"
