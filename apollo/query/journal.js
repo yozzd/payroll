@@ -38,13 +38,10 @@ const journalFragment = {
   },
 };
 
-export const JournalCategory = gql`
-  query journalCategory($id: String!) {
-    journalCategory(id: $id) {
+export const JournalProduction = gql`
+  query journalProduction($id: String!) {
+    journalProduction(id: $id) {
       _id
-      employeeA {
-        ...journal
-      }
       employeeP {
         ...journal
       }
@@ -53,21 +50,14 @@ export const JournalCategory = gql`
   ${journalFragment.fragments.journal}
 `;
 
-export const JournalProduction = gql`
-  query journalProduction($id: String!) {
-    journalProduction(id: $id) {
+export const JournalAdministration = gql`
+  query journalAdministration($id: String!) {
+    journalAdministration(id: $id) {
       _id
-      employee {
-        _id
-        d0
-        e0
-        l0
-        u0
-        v0
-        w0
-        y0
-        cy0
+      employeeA {
+        ...journal
       }
     }
   }
+  ${journalFragment.fragments.journal}
 `;

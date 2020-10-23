@@ -22,7 +22,7 @@
       element-loading-spinner="el-icon-loading"
       :data="tableData"
       size="small"
-      height="500"
+      max-height="500"
       show-summary
       :summary-method="summaries"
     >
@@ -198,7 +198,7 @@
 
 <script>
 import MiniSearch from 'minisearch';
-import { JournalCategory } from '../../apollo/query/journal';
+import { JournalProduction } from '../../apollo/query/journal';
 import mix from '../../mixins/payroll';
 
 export default {
@@ -218,19 +218,17 @@ export default {
     };
   },
   apollo: {
-    journalCategory: {
-      query: JournalCategory,
+    journalProduction: {
+      query: JournalProduction,
       variables() {
         return {
           id: this.$route.params.id,
-          cat1: false,
-          cat2: true,
         };
       },
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const { employeeP } = data.journalCategory;
+          const { employeeP } = data.journalProduction;
           this.items = employeeP;
           this.miniSearch.addAll(this.items);
         }
