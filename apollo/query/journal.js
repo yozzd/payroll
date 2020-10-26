@@ -38,6 +38,34 @@ const journalFragment = {
   },
 };
 
+const journalBalanceFragment = {
+  fragments: {
+    balance: gql `
+    	fragment balance on JournalEmpType {
+    		category
+    		salary
+    		retro
+    		ot
+    		accident
+    		death
+    		medical
+    		pension
+    		posfunc
+    		housing
+    		transport
+    		incentive
+    		meals
+    		living
+    		communication
+    		other
+    		thr
+    		taxReturn
+    		dtp
+    	}
+    `,
+  },
+};
+
 export const JournalProduction = gql`
   query journalProduction($id: String!) {
     journalProduction(id: $id) {
@@ -60,4 +88,40 @@ export const JournalAdministration = gql`
     }
   }
   ${journalFragment.fragments.journal}
+`;
+
+export const JournalBalance= gql`
+  query journalBalance($id: String!) {
+    journalBalance(id: $id) {
+      _id
+      production {
+        ...balance
+      }
+      administration {
+        ...balance
+      }
+  		totMandiri
+  		totFinalPay
+  		totExpat
+  		totTool
+  		totCanteen
+  		totLoan
+  		totKopkar
+  		totKer
+  		totKes
+  		totTax
+			totProduction
+			totAdministration
+  		tot1
+  		tot2
+  		tot3
+  		pensionProd
+  		pensionAdm
+  		totPension
+  		totGross
+  		totJurnal
+  		totSelisih
+    }
+  }
+  ${journalBalanceFragment.fragments.balance}
 `;

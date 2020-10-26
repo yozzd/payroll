@@ -13,6 +13,11 @@
         	<JournalAdministration />
         </div>
       </el-tab-pane>
+      <el-tab-pane label="Balance" name="bal">
+        <div v-if="activeName==='bal'">
+        	<JournalBalance />
+        </div>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>

@@ -4,7 +4,7 @@ const {
   GraphQLString,
 } = require('graphql');
 const Payroll = require('../payroll/model.js');
-const { JournalType } = require('./type');
+const { JournalType, JournalBalanceType } = require('./type');
 const auth = require('../auth/service');
 
 const Query = {
@@ -107,6 +107,190 @@ const Query = {
                 es0: '$employee.es0',
               },
             },
+          },
+        },
+      ]);
+
+      return p[0];
+    }),
+  },
+  journalBalance: {
+    type: JournalBalanceType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('admin', async (_, { id }) => {
+      const p = await Payroll.aggregate([
+      	{ $match: { _id: id } },
+        { $unwind: '$employee' },
+        { $group: {
+            _id: {
+              id: '$_id',
+              category: '$employee.category',
+            },
+            l0: { $sum: '$employee.l0' },
+            cy0: { $sum: '$employee.cy0' },
+            df0: { $sum: '$employee.df0' },
+            bk0: { $sum: '$employee.bk0' },
+            cn0: { $sum: '$employee.cn0' },
+            en0: { $sum: '$employee.en0' },
+            eq0: { $sum: '$employee.eq0' },
+            retro: { $sum: '$employee.bu0' },
+            ot: { $sum: '$employee.ai0' },
+            accident: { $sum: '$employee.cb0' },
+            death: { $sum: '$employee.cc0' },
+            medical: { $sum: '$employee.cq0' },
+            pension: { $sum: '$employee.cg0' },
+            posfunc: { $sum: '$employee.ef0' },
+            housing: { $sum: '$employee.eg0' },
+            transport: { $sum: '$employee.eh0' },
+            incentive: { $sum: '$employee.ei0' },
+            meals: { $sum: '$employee.ej0' },
+            living: { $sum: '$employee.ek0' },
+            communication: { $sum: '$employee.el0' },
+            other: { $sum: '$employee.em0' },
+            thr: { $sum: '$employee.bx0' },
+            taxReturn: { $sum: '$employee.bv0' },
+            dtp: { $sum: '$employee.es0' },
+            ec0: { $sum: '$employee.ec0' },
+            finalPay: { $sum: { $cond: { if: { $eq: ['$employee.ex0', 1] }, then: '$employee.ed0', else: 0 } } },
+            ed0: { $sum: '$employee.ed0' },
+            toolroom: { $sum: '$employee.dh0' },
+            canteen: { $sum: '$employee.dl0' },
+            loan: { $sum: '$employee.dk0' },
+            kopkar: { $sum: '$employee.dm0' },
+            ker: { $sum: '$employee.cm0' },
+            kes: { $sum: '$employee.cu0' },
+            taxPay: { $sum: '$employee.db0' },
+          }
+        },
+        {
+          $addFields: {
+            salary: { $subtract: ['$l0', { $sum: ['$cy0', '$df'] }] },
+            expat: { $subtract: ['$ed0', '$finalPay'] },
+            gross: {
+              $subtract: [
+                { $sum: ['$l0', '$ot', '$bk0', '$cn0', '$retro', '$en0', '$eq0'] },
+                { $sum: ['$cy0', '$df'] },
+              ],
+            },
+          },
+        },
+        {
+          $group: {
+            _id: '$_id.id',
+            cat: {
+              $push: {
+                category: '$_id.category',
+                salary: '$salary',
+                retro: '$retro',
+                ot: '$ot',
+                accident: '$accident',
+                death: '$death',
+                medical: '$medical',
+                pension: '$pension',
+                posfunc: '$posfunc',
+                housing: '$housing',
+                transport: '$transport',
+                incentive: '$incentive',
+                meals: '$meals',
+                living: '$living',
+                communication: '$communication' ,
+                other: '$other',
+                thr: '$thr',
+                taxReturn: '$taxReturn',
+                dtp: '$dtp',
+              },
+            },
+            totMandiri: { $sum: '$ec0' },
+            totFinalPay: { $sum: '$finalPay' },
+            totExpat: { $sum: '$expat' },
+            totTool: { $sum: '$toolroom' },
+            totCanteen: { $sum: '$canteen' },
+            totLoan: { $sum: '$loan' },
+            totKopkar: { $sum: '$kopkar' },
+            totKer: { $sum: '$ker' },
+            totKes: { $sum: '$kes' },
+            totTax: { $sum: '$taxPay' },
+            totPension: { $sum: '$pension' },
+            totGross: { $sum: '$gross' },
+          },
+        },
+      	{
+          $addFields: {
+            tot2: {
+              $sum: [
+                '$totMandiri', '$totFinalPay', '$totExpat', '$totTool', '$totCanteen',
+                '$totLoan', '$totKopkar', '$totKer', '$totKes', '$totTax',
+              ],
+            },
+            production: {
+              $let: {
+                vars: {
+                  f: { $arrayElemAt: ['$cat', 0] },
+                  l: { $arrayElemAt: ['$cat', 1] },
+                },
+                in: { $cond: { if: { $eq: ['$$f.category', 1] }, then: '$$f', else: '$$l' } },
+              },
+            },
+            administration: {
+              $let: {
+                vars: {
+                  f: { $arrayElemAt: ['$cat', 0] },
+                  l: { $arrayElemAt: ['$cat', 1] },
+                },
+                in: { $cond: { if: { $eq: ['$$f.category', 0] }, then: '$$f', else: '$$l' } },
+              },
+            },
+          },
+        },
+        {
+          $project: {
+            production: '$production',
+            administration: '$administration',
+            totMandiri: '$totMandiri',
+            totFinalPay: '$totFinalPay',
+            totExpat: '$totExpat',
+            totTool: '$totTool',
+            totCanteen: '$totCanteen',
+            totLoan: '$totLoan',
+            totKopkar: '$totKopkar',
+            totKer: '$totKer',
+            totKes: '$totKes',
+            totTax: '$totTax',
+            totProduction: {
+              $sum: [
+                '$production.salary', '$production.retro', '$production.ot', '$production.accident', '$production.death', '$production.medical',
+                '$production.pension', '$production.posfunc', '$production.housing', '$production.transport', '$production.incentive',
+                '$production.meals', '$production.living', '$production.communication', '$production.other', '$production.thr',
+                '$production.taxReturn', '$production.dtp',
+              ],
+            },
+            totAdministration: {
+              $sum: [
+                '$administration.salary', '$administration.retro', '$administration.ot', '$administration.accident', '$administration.death', '$administration.medical',
+                '$administration.pension', '$administration.posfunc', '$administration.housing', '$administration.transport', '$administration.incentive',
+                '$administration.meals', '$administration.living', '$administration.communication', '$administration.other', '$administration.thr',
+                '$administration.taxReturn', '$administration.dtp',
+              ],
+            },
+            tot2: '$tot2',
+            pensionProd: '$production.pension',
+            pensionAdm: '$administration.pension',
+            totPension: '$totPension',
+            totGross: '$totGross',
+          },
+        },
+        {
+          $addFields: {
+            tot1: { $sum: ['$totProduction', '$totAdministration'] },
+          },
+        },
+        {
+          $addFields: {
+            tot3: { $subtract: [{ $round: ['$tot1', 0] }, { $round: ['$tot2', 0] }] },
+            totJurnal: { $subtract: ['$tot1', '$totPension'] },
+            totSelisih: { $abs: { $subtract: ['$totGross', { $subtract: ['$tot1', '$totPension'] }] } },
           },
         },
       ]);
