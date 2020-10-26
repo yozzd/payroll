@@ -47,3 +47,13 @@ button:focus,
   padding-left: 20rem;
   padding-right: 20rem;
 }
+
+.balance-table {
+  @apply w-full font-sm;
+}
+
+.balance-table td,
+.balance-table th {
+  padding: 8px 0;
+  border-bottom: 1px solid #ebeef5;
+}

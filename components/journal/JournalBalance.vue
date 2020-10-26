@@ -4,7 +4,7 @@
       v-if="errors"
       :errors="errors"
     />
-		<table>
+		<table class="balance-table">
   		<thead>
     		<tr>
       		<th>Code</th>
@@ -400,7 +400,7 @@
       		<td class="text-right">{{ journalBalance.totTax | currency }}</td>
       		<td></td>
     		</tr>
-    		<tr>
+    		<tr :class="[{ 'bg-green-100': journalBalance.tot3 === 0 }, 'bg-red-100']">
       		<td></td>
       		<td></td>
       		<td><strong>TOTAL</strong></td>
