@@ -160,7 +160,7 @@
       		<td></td>
       		<td></td>
     		</tr>
-    		<tr>
+    		<tr class="bg-blue-100">
       		<td></td>
       		<td></td>
       		<td></td>
@@ -312,7 +312,7 @@
       		<td></td>
       		<td></td>
     		</tr>
-    		<tr>
+    		<tr class="bg-blue-100">
       		<td></td>
       		<td></td>
       		<td></td>
@@ -424,7 +424,7 @@
       		<td></td>
       		<td></td>
     		</tr>
-    		<tr>
+    		<tr class="bg-blue-100">
       		<td></td>
       		<td></td>
       		<td></td>
@@ -448,7 +448,7 @@
       		<td></td>
       		<td></td>
     		</tr>
-    		<tr>
+    		<tr class="bg-blue-100">
       		<td></td>
       		<td></td>
       		<td>Selisih</td>

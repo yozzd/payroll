@@ -54,6 +54,6 @@ button:focus,
 
 .balance-table td,
 .balance-table th {
-  padding: 8px 0;
+  padding: 4px 8px;
   border-bottom: 1px solid #ebeef5;
 }
