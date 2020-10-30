@@ -346,6 +346,14 @@
     		</tr>
     		<tr>
       		<td>21510</td>
+      		<td>Salaries Payable (Retro Pay)</td>
+      		<td></td>
+      		<td></td>
+      		<td class="text-right">{{ journalBalance.totRetroPay | currency }}</td>
+      		<td></td>
+    		</tr>
+    		<tr>
+      		<td>21510</td>
       		<td>Salaries Payable (Pemotongan Toolroom)</td>
       		<td></td>
       		<td></td>

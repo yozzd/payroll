@@ -43,6 +43,7 @@ const JournalBalanceType = new GraphQLObjectType({
 		totMandiri: { type: GraphQLFloat },
 		totFinalPay: { type: GraphQLFloat },
 		totExpat: { type: GraphQLFloat },
+		totRetroPay: { type: GraphQLFloat },
 		totTool: { type: GraphQLFloat },
 		totCanteen: { type: GraphQLFloat },
 		totLoan: { type: GraphQLFloat },

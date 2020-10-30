@@ -275,7 +275,7 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.cx0 = (this.g0 / 21) * this.cw0;
   this.cy0 = this.cx0;
 
-  if (this.e0 === 'X.0003' || this.ex0 === 1) {
+  if (this.e0 === 'X.0003' || this.ex0 === 1 || this.ey0 === 1 && this.ez0 === 1) {
     this.cb0 = 0;
     this.cc0 = 0;
     this.cd0 = 0;
@@ -367,7 +367,8 @@ EmployeeSchema.pre('save', async function fn(next) {
   }
   const pengurang = biayaJabatan + this.ce0 + this.cj0;
   const netoSebulan = bruto - pengurang;
-  const netoSetahun = Math.floor((netoSebulan * this.ea0) / 1000) * 1000;
+  // const netoSetahun = Math.floor((netoSebulan * this.ea0) / 1000) * 1000;
+  const netoSetahun = netoSebulan * this.ea0;
   const ptkp = ptkpObject[this.r0];
   const pSetahun = netoSetahun - ptkp;
   const pkpSetahun = pSetahun <= 0 ? 0 : pSetahun;
@@ -404,7 +405,7 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.dp0 = this.ca0 - this.do0;
   this.eb0 = this.dp0 + this.dr0;
 
-  if (this.fa0 === 1) {
+  if (this.fa0 === 1 || this.p0 === 'No') {
     this.es0 = 0;
   } else {
   	this.es0 = this.db0;

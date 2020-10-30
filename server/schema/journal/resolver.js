@@ -155,6 +155,7 @@ const Query = {
             ec0: { $sum: '$employee.ec0' },
             finalPay: { $sum: { $cond: { if: { $eq: ['$employee.ex0', 1] }, then: '$employee.ed0', else: 0 } } },
             ed0: { $sum: '$employee.ed0' },
+            retroPay: { $sum: '$employee.di0' },
             toolroom: { $sum: '$employee.dh0' },
             canteen: { $sum: '$employee.dl0' },
             loan: { $sum: '$employee.dk0' },
@@ -205,6 +206,7 @@ const Query = {
             totMandiri: { $sum: '$ec0' },
             totFinalPay: { $sum: '$finalPay' },
             totExpat: { $sum: '$expat' },
+            totRetroPay: { $sum: '$retroPay' },
             totTool: { $sum: '$toolroom' },
             totCanteen: { $sum: '$canteen' },
             totLoan: { $sum: '$loan' },
@@ -220,8 +222,8 @@ const Query = {
           $addFields: {
             tot2: {
               $sum: [
-                '$totMandiri', '$totFinalPay', '$totExpat', '$totTool', '$totCanteen',
-                '$totLoan', '$totKopkar', '$totKer', '$totKes', '$totTax',
+                '$totMandiri', '$totFinalPay', '$totExpat', '$totRetroPay', '$totTool',
+                '$totCanteen', '$totLoan', '$totKopkar', '$totKer', '$totKes', '$totTax',
               ],
             },
             production: {
@@ -251,6 +253,7 @@ const Query = {
             totMandiri: '$totMandiri',
             totFinalPay: '$totFinalPay',
             totExpat: '$totExpat',
+            totRetroPay: '$totRetroPay',
             totTool: '$totTool',
             totCanteen: '$totCanteen',
             totLoan: '$totLoan',

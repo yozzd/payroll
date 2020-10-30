@@ -103,6 +103,7 @@ export const JournalBalance= gql`
   		totMandiri
   		totFinalPay
   		totExpat
+  		totRetroPay
   		totTool
   		totCanteen
   		totLoan
