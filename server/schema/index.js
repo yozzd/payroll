@@ -4,6 +4,7 @@ const ESlip = require('./eslip/resolver');
 const Import = require('./import/resolver');
 const Journal = require('./journal/resolver');
 const Payroll = require('./payroll/resolver');
+const Tax = require('./tax/resolver');
 const User = require('./user/resolver');
 
 const query = new GraphQLObjectType({
@@ -13,6 +14,7 @@ const query = new GraphQLObjectType({
     ...ESlip.Query,
     ...Journal.Query,
     ...Payroll.Query,
+    ...Tax.Query,
     ...User.Query,
   },
 });

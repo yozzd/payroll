@@ -6,9 +6,6 @@ const {
   GraphQLFloat,
 } = require('graphql');
 
-const fs = require('fs-extra');
-const { DateFormat } = require('../scalar/date');
-
 const JournalEmpType = new GraphQLObjectType({
   name: 'JournalEmpType',
   fields: () => ({

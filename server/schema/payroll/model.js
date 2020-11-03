@@ -151,6 +151,7 @@ const EmployeeSchema = new Schema({
   em0: Number, // Other Allowance Taxable
   en0: Number, // Pesangon Serv
   eq0: Number, // Leave / THR
+  er0: Number, // Total JHT dan Pensiun Karyawan
   es0: Number, // Pengembalian Pajak DTP
   ew0: { type: String, trim: true }, // Email
   ex0: Number, // Slot 1 Flag
@@ -431,6 +432,7 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.em0 = this.au0 + this.av0 + this.bg0 + this.bh0 + this.bi0;
   this.en0 = this.dt0 + this.dx0 + this.dy0 + this.dv0;
   this.eq0 = this.bz0 + this.bx0;
+  this.er0 = this.ce0 + this.cj0;
 
   const dob = format(new Date(this.o0), 'ddMMyy');
   this.slip.pw = `${this.e0.slice(-3)}${dob}`;

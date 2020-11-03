@@ -63,6 +63,9 @@
                 <el-dropdown-item command="journal">
                   Journal
                 </el-dropdown-item>
+                <el-dropdown-item command="tax">
+                  Tax
+                </el-dropdown-item>
                 <el-dropdown-item command="slip">
                   Slip
                 </el-dropdown-item>
@@ -197,6 +200,7 @@ export default {
     handleCommand(c, id) {
       if (c === 'delete') this.handleConfirm(id);
       else if (c === 'journal') this.$router.push({ name: 'payroll-journal-id', params: { id } });
+      else if (c === 'tax') this.$router.push({ name: 'payroll-tax-id', params: { id } });
       else if (c === 'slip') this.$router.push({ name: 'payroll-slip-id', params: { id } });
     },
     handleConfirm(id) {
