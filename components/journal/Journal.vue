@@ -3,6 +3,11 @@
     <el-page-header :content="content" @back="goBack">
     </el-page-header>
     <el-tabs v-model="activeName">
+      <el-tab-pane label="Balance" name="bal">
+        <div v-if="activeName==='bal'">
+        	<JournalBalance />
+        </div>
+      </el-tab-pane>
       <el-tab-pane label="Production" name="pro">
         <div v-if="activeName==='pro'">
         	<JournalProduction />
@@ -11,11 +16,6 @@
       <el-tab-pane label="Administration" name="adm">
         <div v-if="activeName==='adm'">
         	<JournalAdministration />
-        </div>
-      </el-tab-pane>
-      <el-tab-pane label="Balance" name="bal">
-        <div v-if="activeName==='bal'">
-        	<JournalBalance />
         </div>
       </el-tab-pane>
     </el-tabs>
@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       content: '',
-      activeName: 'pro',
+      activeName: 'bal',
     };
   },
   methods: {
