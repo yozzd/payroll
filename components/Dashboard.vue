@@ -69,6 +69,9 @@
                 <el-dropdown-item command="ktg">
                   Ketenagakerjaan
                 </el-dropdown-item>
+                <el-dropdown-item command="kes">
+                  Kesehatan
+                </el-dropdown-item>
                 <el-dropdown-item command="slip">
                   Slip
                 </el-dropdown-item>
@@ -205,6 +208,7 @@ export default {
       else if (c === 'journal') this.$router.push({ name: 'payroll-journal-id', params: { id } });
       else if (c === 'tax') this.$router.push({ name: 'payroll-tax-id', params: { id } });
       else if (c === 'ktg') this.$router.push({ name: 'payroll-ketenagakerjaan-id', params: { id } });
+      else if (c === 'kes') this.$router.push({ name: 'payroll-kesehatan-id', params: { id } });
       else if (c === 'slip') this.$router.push({ name: 'payroll-slip-id', params: { id } });
     },
     handleConfirm(id) {
