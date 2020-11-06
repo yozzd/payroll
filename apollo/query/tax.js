@@ -26,7 +26,7 @@ export const TaxReport = gql`
         eq0
         er0
         es0
-				gross
+        gross
         ttax
       }
     }

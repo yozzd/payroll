@@ -80,9 +80,9 @@
         </el-table-column>
       </el-table-column>
       <el-table-column prop="ai0" label="Total" min-width="120" align="right">
-          <template slot-scope="scope">
-            <span>{{ scope.row.ai0 | currency }}</span>
-          </template>
+        <template slot-scope="scope">
+          <span>{{ scope.row.ai0 | currency }}</span>
+        </template>
       </el-table-column>
     </el-table>
   </div>
@@ -94,7 +94,7 @@ import { PayrollOvertime } from '../../apollo/query/payroll';
 import mix from '../../mixins/payroll';
 
 export default {
-	mixins: [mix],
+  mixins: [mix],
   data() {
     return {
       miniSearch: new MiniSearch({

@@ -202,7 +202,7 @@ import { JournalProduction } from '../../apollo/query/journal';
 import mix from '../../mixins/payroll';
 
 export default {
-	mixins: [mix],
+  mixins: [mix],
   data() {
     return {
       miniSearch: new MiniSearch({
@@ -211,8 +211,8 @@ export default {
         storeFields: [
           '_id', 'd0', 'e0', 'l0', 'u0', 'v0', 'w0', 'y0',
           'ai0', 'bu0', 'bv0', 'bx0', 'cb0', 'cc0', 'cg0',
-        	'cq0', 'cs0', 'cy0', 'df0', 'ef0', 'eg0', 'eh0',
-        	'ei0', 'ej0', 'ek0', 'el0', 'em0', 'eo0', 'es0',
+          'cq0', 'cs0', 'cy0', 'df0', 'ef0', 'eg0', 'eh0',
+          'ei0', 'ej0', 'ek0', 'el0', 'em0', 'eo0', 'es0',
         ],
       }),
     };

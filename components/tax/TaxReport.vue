@@ -42,7 +42,7 @@
         <template slot-scope="scope">
           <span>{{ scope.row.i0 }}</span>
         </template>
-			</el-table-column>
+      </el-table-column>
       <el-table-column label="Position" width="200">
         <template slot-scope="scope">
           <client-only>
@@ -65,7 +65,7 @@
         <template slot-scope="scope">
           <span>{{ scope.row.q0 }}</span>
         </template>
-			</el-table-column>
+      </el-table-column>
       <el-table-column prop="l0" label="Basic Salary" width="120" align="right">
         <template slot-scope="scope">
           <span>{{ scope.row.l0 | currency }}</span>
@@ -139,7 +139,7 @@
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Pajak Penghasilan Ber NPWP">
-							Pajak Penghasilan Ber NPWP
+              Pajak Penghasilan Ber NPWP
             </p>
           </client-only>
         </template>
@@ -151,7 +151,7 @@
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Pajak Penghasilan Non NPWP">
-							Pajak Penghasilan Non NPWP
+              Pajak Penghasilan Non NPWP
             </p>
           </client-only>
         </template>
@@ -168,7 +168,7 @@
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Pengembalian Pajak DTP">
-							Pengembalian Pajak DTP
+              Pengembalian Pajak DTP
             </p>
           </client-only>
         </template>
@@ -180,7 +180,7 @@
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Total Tax Diatas 200 Juta">
-							Total Tax Diatas 200 Juta
+              Total Tax Diatas 200 Juta
             </p>
           </client-only>
         </template>
@@ -198,7 +198,7 @@ import { TaxReport } from '../../apollo/query/tax';
 import mix from '../../mixins/payroll';
 
 export default {
-	mixins: [mix],
+  mixins: [mix],
   data() {
     return {
       miniSearch: new MiniSearch({

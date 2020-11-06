@@ -5,27 +5,27 @@
     <el-tabs v-model="activeName">
       <el-tab-pane label="Employment" name="a">
         <div v-if="activeName==='a'">
-        	<PayrollEmployment />
+          <PayrollEmployment />
         </div>
       </el-tab-pane>
       <el-tab-pane label="Private" name="b">
         <div v-if="activeName==='b'">
-        	<PayrollPrivate />
+          <PayrollPrivate />
         </div>
       </el-tab-pane>
       <el-tab-pane label="Earnings" name="c">
         <div v-if="activeName==='c'">
-        	<PayrollEarnings />
+          <PayrollEarnings />
         </div>
       </el-tab-pane>
       <el-tab-pane label="Deductions" name="d">
         <div v-if="activeName==='d'">
-        	<PayrollDeductions />
+          <PayrollDeductions />
         </div>
       </el-tab-pane>
       <el-tab-pane label="Payment" name="e">
         <div v-if="activeName==='e'">
-        	<PayrollPayment />
+          <PayrollPayment />
         </div>
       </el-tab-pane>
     </el-tabs>

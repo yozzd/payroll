@@ -92,7 +92,7 @@ import { GenerateSlip, SendSlip } from '../../apollo/mutation/payroll';
 import mix from '../../mixins/payroll';
 
 export default {
-	mixins: [mix],
+  mixins: [mix],
   data() {
     return {
       content: '',
@@ -134,7 +134,7 @@ export default {
                 id: this.$route.params.id,
                 eId: v,
               },
-              update: (store, { data: { generateSlip } }) => {
+              update: (store) => {
                 const cdata = store.readQuery({
                   query: PayrollSlip,
                   variables: {

@@ -42,17 +42,17 @@
         <template slot-scope="scope">
           <span>{{ scope.row.z0 }}</span>
         </template>
-			</el-table-column>
+      </el-table-column>
       <el-table-column label="No. BPJS Kesehatan" width="140">
         <template slot-scope="scope">
           <span>{{ scope.row.aa0 }}</span>
         </template>
-			</el-table-column>
+      </el-table-column>
       <el-table-column label="Tanggal Lahir" width="100">
         <template slot-scope="scope">
           <span>{{ scope.row.o0 }}</span>
         </template>
-			</el-table-column>
+      </el-table-column>
       <el-table-column prop="co0" label="Upah" width="120" align="right">
         <template slot-scope="scope">
           <span>{{ scope.row.co0 | currency }}</span>
@@ -74,7 +74,7 @@
         <template slot-scope="scope">
           <span>{{ scope.row.cs0 }}</span>
         </template>
-			</el-table-column>
+      </el-table-column>
       <el-table-column prop="cu0" label="Total Iuran" width="120" align="right">
         <template slot-scope="scope">
           <span>{{ scope.row.cu0 | currency }}</span>
@@ -84,7 +84,7 @@
         <template slot-scope="scope">
           <span>{{ scope.row.ct0 }}</span>
         </template>
-			</el-table-column>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -95,7 +95,7 @@ import { KesehatanReport } from '../../apollo/query/kesehatan';
 import mix from '../../mixins/payroll';
 
 export default {
-	mixins: [mix],
+  mixins: [mix],
   data() {
     return {
       miniSearch: new MiniSearch({

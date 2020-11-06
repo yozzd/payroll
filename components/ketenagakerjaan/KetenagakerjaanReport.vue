@@ -42,17 +42,17 @@
         <template slot-scope="scope">
           <span>{{ scope.row.z0 }}</span>
         </template>
-			</el-table-column>
+      </el-table-column>
       <el-table-column label="No. BPJS Kesehatan" width="140">
         <template slot-scope="scope">
           <span>{{ scope.row.aa0 }}</span>
         </template>
-			</el-table-column>
+      </el-table-column>
       <el-table-column label="Tanggal Lahir" width="100">
         <template slot-scope="scope">
           <span>{{ scope.row.o0 }}</span>
         </template>
-			</el-table-column>
+      </el-table-column>
       <el-table-column prop="ay0" label="Upah" width="120" align="right">
         <template slot-scope="scope">
           <span>{{ scope.row.ay0 | currency }}</span>
@@ -101,7 +101,7 @@
         <template slot-scope="scope">
           <span>{{ scope.row.ck0 }}</span>
         </template>
-			</el-table-column>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -112,7 +112,7 @@ import { KetenagakerjaanReport } from '../../apollo/query/ketenagakerjaan';
 import mix from '../../mixins/payroll';
 
 export default {
-	mixins: [mix],
+  mixins: [mix],
   data() {
     return {
       miniSearch: new MiniSearch({

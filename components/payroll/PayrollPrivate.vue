@@ -91,7 +91,7 @@ export default {
         return 'final-row';
       }
       return '';
-    }
+    },
   },
   apollo: {
     payrollPrivate: {

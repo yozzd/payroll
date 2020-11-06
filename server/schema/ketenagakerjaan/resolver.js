@@ -1,8 +1,4 @@
-const {
-  GraphQLList,
-  GraphQLInt,
-  GraphQLString,
-} = require('graphql');
+const { GraphQLString } = require('graphql');
 const Payroll = require('../payroll/model');
 const { PayrollType } = require('../payroll/type');
 const auth = require('../auth/service');
@@ -16,11 +12,11 @@ const Query = {
     resolve: auth.hasRole('admin', async (_, { id }) => {
       const p = await Payroll.aggregate([
         { $match: { _id: id } },
-        { $unwind: '$employee'},
+        { $unwind: '$employee' },
         {
           $group: {
             _id: '$_id',
-            employee : {
+            employee: {
               $push: {
                 _id: '$employee._id',
                 d0: '$employee.d0',

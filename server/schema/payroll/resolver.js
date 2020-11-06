@@ -379,13 +379,13 @@ const Query = {
     resolve: auth.hasRole('admin', async (_, { id }) => {
       const payroll = await Payroll.aggregate([
         { $match: { _id: id } },
-        { $unwind: '$employee'},
-        { $match: { 'employee.ex0': { '$ne': 1 } } },
+        { $unwind: '$employee' },
+        { $match: { 'employee.ex0': { $ne: 1 } } },
         {
           $group: {
             _id: '$_id',
-            period: { '$first': '$period' },
-            year: { '$first': '$year' },
+            period: { $first: '$period' },
+            year: { $first: '$year' },
             employee: {
               $push: {
                 _id: '$employee._id',
@@ -429,7 +429,7 @@ const Mutation = {
     resolve: auth.hasRole('admin', async (_, { id, eId }) => {
       const p = await Payroll.aggregate([
         { $match: { _id: id } },
-        { $unwind: '$employee'},
+        { $unwind: '$employee' },
         { $match: { 'employee._id': eId } },
       ]);
       const s = await generateSlip(p[0]);
@@ -445,7 +445,7 @@ const Mutation = {
     resolve: auth.hasRole('admin', async (_, { id, eId }) => {
       const p = await Payroll.aggregate([
         { $match: { _id: id } },
-        { $unwind: '$employee'},
+        { $unwind: '$employee' },
         { $match: { 'employee._id': eId } },
       ]);
       const s = await sendSlip(p[0]);

@@ -20,15 +20,14 @@ export default {
       const { columns, data } = param;
       const sums = [];
       columns.forEach((column, index) => {
-        const values = data.map(item => Number(item[column.property]));
-        if (!values.every(value => isNaN(value))) {
+        const values = data.map((item) => Number(item[column.property]));
+        if (!values.every((value) => Number.isNaN(Number(value)))) {
           sums[index] = this.$options.filters.currency(values.reduce((prev, curr) => {
             const value = Number(curr);
-            if (!isNaN(value)) {
+            if (!Number.isNaN(Number(value))) {
               return prev + curr;
-            } else {
-              return prev;
             }
+            return prev;
           }, 0));
         } else {
           sums[index] = '';
@@ -42,6 +41,6 @@ export default {
         return 'final-row';
       }
       return '';
-    }
+    },
   },
 };

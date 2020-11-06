@@ -2,8 +2,8 @@ import gql from 'graphql-tag';
 
 const journalFragment = {
   fragments: {
-    journal: gql `
-    	fragment journal on EmployeeJType {
+    journal: gql`
+      fragment journal on EmployeeJType {
         _id
         d0
         e0
@@ -33,35 +33,35 @@ const journalFragment = {
         em0
         eo0
         es0
-    	}
+      }
     `,
   },
 };
 
 const journalBalanceFragment = {
   fragments: {
-    balance: gql `
-    	fragment balance on JournalEmpType {
-    		category
-    		salary
-    		retro
-    		ot
-    		accident
-    		death
-    		medical
-    		pension
-    		posfunc
-    		housing
-    		transport
-    		incentive
-    		meals
-    		living
-    		communication
-    		other
-    		thr
-    		taxReturn
-    		dtp
-    	}
+    balance: gql`
+      fragment balance on JournalEmpType {
+        category
+        salary
+        retro
+        ot
+        accident
+        death
+        medical
+        pension
+        posfunc
+        housing
+        transport
+        incentive
+        meals
+        living
+        communication
+        other
+        thr
+        taxReturn
+        dtp
+      }
     `,
   },
 };
@@ -90,7 +90,7 @@ export const JournalAdministration = gql`
   ${journalFragment.fragments.journal}
 `;
 
-export const JournalBalance= gql`
+export const JournalBalance = gql`
   query journalBalance($id: String!) {
     journalBalance(id: $id) {
       _id
@@ -100,28 +100,28 @@ export const JournalBalance= gql`
       administration {
         ...balance
       }
-  		totMandiri
-  		totFinalPay
-  		totExpat
-  		totRetroPay
-  		totTool
-  		totCanteen
-  		totLoan
-  		totKopkar
-  		totKer
-  		totKes
-  		totTax
-			totProduction
-			totAdministration
-  		tot1
-  		tot2
-  		tot3
-  		pensionProd
-  		pensionAdm
-  		totPension
-  		totGross
-  		totJurnal
-  		totSelisih
+      totMandiri
+      totFinalPay
+      totExpat
+      totRetroPay
+      totTool
+      totCanteen
+      totLoan
+      totKopkar
+      totKer
+      totKes
+      totTax
+      totProduction
+      totAdministration
+      tot1
+      tot2
+      tot3
+      pensionProd
+      pensionAdm
+      totPension
+      totGross
+      totJurnal
+      totSelisih
     }
   }
   ${journalBalanceFragment.fragments.balance}

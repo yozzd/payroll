@@ -204,7 +204,7 @@ const PayrollSchema = new Schema({
 EmployeeSchema.pre('save', async function fn(next) {
   this.i0 = this.i0 ? format(new Date(this.i0), 'yyyy-MM-dd') : null;
   this.k0 = this.k0 ? format(new Date(this.k0), 'yyyy-MM-dd') : null;
-  this.l0 = (this.g0 / 21) * this.j0, 10;
+  this.l0 = (this.g0 / 21) * this.j0;
   this.o0 = this.o0 ? format(new Date(this.o0), 'yyyy-MM-dd') : null;
   this.f0 = this.g0 - this.l0;
 
@@ -276,7 +276,7 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.cx0 = (this.g0 / 21) * this.cw0;
   this.cy0 = this.cx0;
 
-  if (this.e0 === 'X.0003' || this.ex0 === 1 || this.ey0 === 1 && this.ez0 === 1) {
+  if (this.e0 === 'X.0003' || this.ex0 === 1 || (this.ey0 === 1 && this.ez0 === 1)) {
     this.cb0 = 0;
     this.cc0 = 0;
     this.cd0 = 0;
@@ -339,7 +339,7 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.df0 = this.dc0 + this.dd0 + this.de0;
   this.dj0 = this.dc0 + this.dd0 + this.de0 + this.dg0 + this.dh0 + this.di0;
 
-   /** ********Pajak********* */
+  /** ********Pajak********* */
   const ptkpObject = {
     'TK/0': this.ownerDocument().rate.b4,
     'TK/1': this.ownerDocument().rate.b5,
@@ -409,10 +409,10 @@ EmployeeSchema.pre('save', async function fn(next) {
   if (this.fa0 === 1 || this.p0 === 'No') {
     this.es0 = 0;
   } else {
-  	this.es0 = this.db0;
+    this.es0 = this.db0;
   }
 
-	const byCash = ['X.0008', 'X.0010'];
+  const byCash = ['X.0008', 'X.0010'];
   if (byCash.includes(this.e0) || this.ex0 === 1) {
     this.ec0 = 0;
     this.ed0 = this.dp0 + this.dr0 + this.dt0 + this.dx0 + this.dy0 + this.es0;
@@ -421,7 +421,7 @@ EmployeeSchema.pre('save', async function fn(next) {
     this.ed0 = 0;
   }
 
-	this.cn0 = this.cb0 + this.cc0 + this.cq0;
+  this.cn0 = this.cb0 + this.cc0 + this.cq0;
   this.ef0 = this.al0 + this.am0 + this.as0 + this.at0 + this.ba0;
   this.eg0 = this.ak0;
   this.eh0 = this.an0 + this.ao0;

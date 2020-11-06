@@ -16,9 +16,8 @@ const strToDate = (str) => {
   if (str) {
     const d = str.split('-');
     return new Date(`${d[2]}-${d[1]}-${d[0]}`);
-  } else {
-    return null;
   }
+  return null;
 };
 
 const processImportPayroll = async ({ file, from, to }) => {

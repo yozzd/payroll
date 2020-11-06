@@ -4,11 +4,31 @@ const {
   GraphQLString,
   GraphQLInt,
   GraphQLFloat,
-  GraphQLBoolean
+  GraphQLBoolean,
 } = require('graphql');
 
 const fs = require('fs-extra');
 const { DateFormat } = require('../scalar/date');
+
+const SlipCheckType = new GraphQLObjectType({
+  name: 'SlipCheckType',
+  fields: () => ({
+    name: { type: GraphQLString },
+    dir: { type: GraphQLString },
+    check: {
+      type: GraphQLBoolean,
+      resolve: async (p) => {
+        try {
+          await fs.access(`static/slip/${p.dir}/${p.name}.pdf`);
+          return true;
+        } catch (err) {
+          if (err) return false;
+          return false;
+        }
+      },
+    },
+  }),
+});
 
 const EmployeeType = new GraphQLObjectType({
   name: 'EmployeeType',
@@ -170,25 +190,6 @@ const SendType = new GraphQLObjectType({
   fields: () => ({
     accepted: { type: GraphQLList(GraphQLString) },
     rejected: { type: GraphQLList(GraphQLString) },
-  }),
-});
-
-const SlipCheckType = new GraphQLObjectType({
-  name: 'SlipCheckType',
-  fields: () => ({
-    name: { type: GraphQLString },
-    dir: { type: GraphQLString },
-    check: {
-      type: GraphQLBoolean,
-      resolve: async (p) => {
-        try {
-          await fs.access(`static/slip/${p.dir}/${p.name}.pdf`);
-          return true;
-        } catch (err) {
-          if (err) return false;
-        }
-      },
-    },
   }),
 });
 

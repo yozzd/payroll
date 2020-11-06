@@ -86,7 +86,7 @@ import { PayrollPayment } from '../../apollo/query/payroll';
 import mix from '../../mixins/payroll';
 
 export default {
-	mixins: [mix],
+  mixins: [mix],
   data() {
     return {
       miniSearch: new MiniSearch({

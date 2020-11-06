@@ -298,7 +298,7 @@ export const PayrollDeductionOthers = gql`
   }
 `;
 
- export const PayrollPayment = gql`
+export const PayrollPayment = gql`
   query payrollPayment($id: String!) {
     payrollPayment(id: $id) {
       _id
@@ -339,4 +339,3 @@ export const PayrollSlip = gql`
     }
   }
 `;
-

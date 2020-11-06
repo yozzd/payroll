@@ -5,17 +5,17 @@
     <el-tabs v-model="activeName">
       <el-tab-pane label="Balance" name="bal">
         <div v-if="activeName==='bal'">
-        	<JournalBalance />
+          <JournalBalance />
         </div>
       </el-tab-pane>
       <el-tab-pane label="Production" name="pro">
         <div v-if="activeName==='pro'">
-        	<JournalProduction />
+          <JournalProduction />
         </div>
       </el-tab-pane>
       <el-tab-pane label="Administration" name="adm">
         <div v-if="activeName==='adm'">
-        	<JournalAdministration />
+          <JournalAdministration />
         </div>
       </el-tab-pane>
     </el-tabs>

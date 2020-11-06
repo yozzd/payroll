@@ -1,8 +1,4 @@
-const {
-  GraphQLList,
-  GraphQLInt,
-  GraphQLString,
-} = require('graphql');
+const { GraphQLString } = require('graphql');
 const Payroll = require('../payroll/model');
 const { JournalType, JournalBalanceType } = require('./type');
 const auth = require('../auth/service');
@@ -16,12 +12,12 @@ const Query = {
     resolve: auth.hasRole('admin', async (_, { id }) => {
       const p = await Payroll.aggregate([
         { $match: { _id: id } },
-        { $unwind: '$employee'},
+        { $unwind: '$employee' },
         { $match: { 'employee.category': 1 } },
         {
           $group: {
             _id: '$_id',
-            employeeP : {
+            employeeP: {
               $push: {
                 _id: '$employee._id',
                 d0: '$employee.d0',
@@ -69,12 +65,12 @@ const Query = {
     resolve: auth.hasRole('admin', async (_, { id }) => {
       const p = await Payroll.aggregate([
         { $match: { _id: id } },
-        { $unwind: '$employee'},
+        { $unwind: '$employee' },
         { $match: { 'employee.category': 0 } },
         {
           $group: {
             _id: '$_id',
-            employeeA : {
+            employeeA: {
               $push: {
                 _id: '$employee._id',
                 d0: '$employee.d0',
@@ -121,9 +117,10 @@ const Query = {
     },
     resolve: auth.hasRole('admin', async (_, { id }) => {
       const p = await Payroll.aggregate([
-      	{ $match: { _id: id } },
+        { $match: { _id: id } },
         { $unwind: '$employee' },
-        { $group: {
+        {
+          $group: {
             _id: {
               id: '$_id',
               category: '$employee.category',
@@ -163,7 +160,7 @@ const Query = {
             ker: { $sum: '$employee.cm0' },
             kes: { $sum: '$employee.cu0' },
             taxPay: { $sum: '$employee.db0' },
-          }
+          },
         },
         {
           $addFields: {
@@ -196,7 +193,7 @@ const Query = {
                 incentive: '$incentive',
                 meals: '$meals',
                 living: '$living',
-                communication: '$communication' ,
+                communication: '$communication',
                 other: '$other',
                 thr: '$thr',
                 taxReturn: '$taxReturn',
@@ -218,7 +215,7 @@ const Query = {
             totGross: { $sum: '$gross' },
           },
         },
-      	{
+        {
           $addFields: {
             tot2: {
               $sum: [
