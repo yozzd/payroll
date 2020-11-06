@@ -3,7 +3,7 @@ const {
   GraphQLInt,
   GraphQLString,
 } = require('graphql');
-const Payroll = require('../payroll/model.js');
+const Payroll = require('../payroll/model');
 const { JournalType, JournalBalanceType } = require('./type');
 const auth = require('../auth/service');
 

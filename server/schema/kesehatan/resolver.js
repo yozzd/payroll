@@ -3,13 +3,13 @@ const {
   GraphQLInt,
   GraphQLString,
 } = require('graphql');
-const Payroll = require('../payroll/model.js');
-const { KesehatanType } = require('./type');
+const Payroll = require('../payroll/model');
+const { PayrollType } = require('../payroll/type');
 const auth = require('../auth/service');
 
 const Query = {
   kesehatanReport: {
-    type: KesehatanType,
+    type: PayrollType,
     args: {
       id: { type: GraphQLString },
     },
