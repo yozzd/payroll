@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 const journalFragment = {
   fragments: {
     journal: gql`
-      fragment journal on EmployeeJType {
+      fragment journal on EmployeeType {
         _id
         d0
         e0
