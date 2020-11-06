@@ -3,8 +3,6 @@ const {
   GraphQLList,
   GraphQLString,
   GraphQLInt,
-  GraphQLFloat,
-  GraphQLBoolean,
 } = require('graphql');
 
 const { EmployeeType } = require('./employee.type');

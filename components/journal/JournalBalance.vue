@@ -4,7 +4,12 @@
       v-if="errors"
       :errors="errors"
     />
-    <table class="balance-table">
+    <table
+      v-loading="$apollo.loading"
+      class="balance-table"
+      element-loading-text="Loading..."
+      element-loading-spinner="el-icon-loading"
+    >
       <thead>
         <tr>
           <th>Code</th>
