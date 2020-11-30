@@ -282,13 +282,13 @@ EmployeeSchema.pre('save', async function fn(next) {
     this.cd0 = 0;
     this.ce0 = 0;
   } else {
-    if (this.fb0 === 1) {
+    // if (this.fb0 === 1) {
       this.cb0 = this.ay0 * this.ownerDocument().rate.cb5;
       this.cc0 = this.ay0 * this.ownerDocument().rate.cc5;
-    } else {
-      this.cb0 = this.ay0 * this.ownerDocument().rate.cb5 * 0.01;
-      this.cc0 = this.ay0 * this.ownerDocument().rate.cc5 * 0.01;
-    }
+    // } else {
+    //   this.cb0 = this.ay0 * this.ownerDocument().rate.cb5 * 0.01;
+    //   this.cc0 = this.ay0 * this.ownerDocument().rate.cc5 * 0.01;
+    // }
 
     this.cd0 = this.ay0 * this.ownerDocument().rate.cd5;
     this.ce0 = this.ay0 * this.ownerDocument().rate.ce5;
@@ -372,7 +372,7 @@ EmployeeSchema.pre('save', async function fn(next) {
   const netoSetahun = netoSebulan * this.ea0;
   const ptkp = ptkpObject[this.r0];
   const pSetahun = netoSetahun - ptkp;
-  const pkpSetahun = pSetahun <= 0 ? 0 : pSetahun;
+  const pkpSetahun = pSetahun <= 0 ? 0 : Math.floor(pSetahun / 1000) * 1000;
   const pph21Tahunan = Math.min(Math.max(0, pkpSetahun), 50000000) * 0.05
     + Math.min(Math.max(0, pkpSetahun - 50000000), 200000000) * 0.15
     + Math.min(Math.max(0, pkpSetahun - 250000000), 250000000) * 0.25
