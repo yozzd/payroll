@@ -19,3 +19,13 @@ export const ImportESlip = gql`
     }
   }
 `;
+
+export const ImportThr = gql`
+  mutation importThr($input: ImportInputType) {
+    importThr(input: $input) {
+      _id
+      year
+      period
+    }
+  }
+`;

@@ -92,3 +92,5 @@ sw.*
 server/config
 static/eslip
 static/slip
+static/thr
+

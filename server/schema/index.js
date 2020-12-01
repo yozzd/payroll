@@ -7,6 +7,7 @@ const Ketenagakerjaan = require('./ketenagakerjaan/resolver');
 const Kesehatan = require('./kesehatan/resolver');
 const Payroll = require('./payroll/resolver');
 const Tax = require('./tax/resolver');
+const Thr = require('./thr/resolver');
 const User = require('./user/resolver');
 
 const query = new GraphQLObjectType({
@@ -19,6 +20,7 @@ const query = new GraphQLObjectType({
     ...Kesehatan.Query,
     ...Payroll.Query,
     ...Tax.Query,
+    ...Thr.Query,
     ...User.Query,
   },
 });
@@ -29,6 +31,7 @@ const mutation = new GraphQLObjectType({
     ...ESlip.Mutation,
     ...Import.Mutation,
     ...Payroll.Mutation,
+    ...Thr.Mutation,
     ...User.Mutation,
   },
 });

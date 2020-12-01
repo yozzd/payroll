@@ -13,6 +13,9 @@
         <el-dropdown-item command="eslip">
           E-Slip
         </el-dropdown-item>
+        <el-dropdown-item command="thr">
+          THR
+        </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
     <el-dropdown trigger="click" @command="handleCommand">
@@ -37,6 +40,7 @@ export default {
     async handleCommand(c) {
       if (c === 'logout') await this.$auth.logout();
       else if (c === 'eslip') this.$router.push({ path: '/eslip/' });
+      else if (c === 'thr') this.$router.push({ path: '/thr/' });
     },
   },
 };

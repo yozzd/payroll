@@ -4,6 +4,7 @@ const XLSX = require('xlsx');
 
 const Payroll = require('../payroll/model');
 const ESlip = require('../eslip/model');
+const Thr = require('../thr/model');
 
 const parseDate = ({
   D, y, m, d,
@@ -286,4 +287,81 @@ const processImportESlip = async ({ file, from, to }) => {
     }));
 };
 
-module.exports = { processImportPayroll, processImportESlip };
+const processImportThr = async ({ file, from, to }) => {
+  const { filename, createReadStream } = await file;
+  const stream = createReadStream();
+
+  const tmp = `/tmp/${filename}`;
+  return new Promise((resolve, reject) => stream
+    .on('error', async (error) => {
+      if (stream.truncated) await fs.unlinkSync(tmp);
+      reject(error);
+    })
+    .pipe(fs.createWriteStream(tmp))
+    .on('finish', async () => {
+      const wb = XLSX.readFile(tmp);
+      const ws = wb.Sheets[wb.SheetNames];
+      const ft = XLSX.utils.sheet_to_json(ws);
+
+      try {
+        const thr = new Thr({
+          from,
+          to,
+        });
+
+        for (let i = 2; i < ft.length; i += 1) {
+          thr.employee.push({
+            b0: ft[i].__EMPTY_1 || '', // EmpNo
+            c0: ft[i].__EMPTY_2 || '', // EmpName
+            d0: strToDate(ft[i].__EMPTY_3), // Birthday
+            e0: ft[i].__EMPTY_4 || '', // Email
+            f0: ft[i].__EMPTY_5 || '', // BankAccount
+            g0: ft[i].__EMPTY_6 || '', // Department
+            h0: ft[i].__EMPTY_7 || '', // Section
+            i0: ft[i].__EMPTY_8 || '', // Position
+            j0: ft[i].__EMPTY_9 || '', // TaxID
+            k0: ft[i].__EMPTY_10 || 0, // BasicSalary
+            l0: ft[i].__EMPTY_11 || 0, // LivingFix
+            m0: ft[i].__EMPTY_12 || 0, // HousingFix
+            n0: ft[i].__EMPTY_13 || 0, // FunctPosisiFix
+            o0: ft[i].__EMPTY_14 || 0, // Functional
+            p0: ft[i].__EMPTY_15 || 0, // CoordFix
+            q0: ft[i].__EMPTY_16 || 0, // TransportFix
+            r0: ft[i].__EMPTY_17 || 0, // CommuFix
+            s0: ft[i].__EMPTY_18 || 0, // Expertise
+            t0: ft[i].__EMPTY_19 || 0, // HonorariumFix
+            u0: ft[i].__EMPTY_20 || 0, // PositionVariaFix
+            v0: ft[i].__EMPTY_21 || 0, // FuncVariaFix
+            w0: ft[i].__EMPTY_22 || 0, // ActingFix
+            x0: ft[i].__EMPTY_23 || 0, // OtherFix
+            y0: ft[i].__EMPTY_24 || 0, // Total
+            z0: ft[i].__EMPTY_25 || 0, // THRMonth
+            aa0: ft[i].__EMPTY_26 || 0, // THRAmount
+            ab0: ft[i].__EMPTY_27 || 0, // InstallTime
+            ac0: ft[i].__EMPTY_28 || 0, // Install1
+            ad0: ft[i].__EMPTY_29 || 0, // Install2
+            ae0: ft[i].__EMPTY_30 || 0, // Install3
+            af0: ft[i].__EMPTY_31 || 0, // Install4
+            ag0: ft[i].__EMPTY_32 || 0, // Install5
+            ah0: ft[i].__EMPTY_33 || 0, // Install6
+            ai0: ft[i].__EMPTY_34 || '', // DateApprov
+            aj0: ft[2].__EMPTY_35 || '', // Note1
+            ak0: ft[2].__EMPTY_36 || '', // Note2
+          });
+        }
+
+        const saved = await thr.save();
+        return resolve(saved);
+      } catch (err) {
+        if (typeof err === 'string') {
+          reject(new GraphQLError(err));
+        } else {
+          reject(new GraphQLError(err.message));
+        }
+      }
+
+      return true;
+    }));
+};
+
+module.exports = { processImportPayroll, processImportESlip, processImportThr };
