@@ -188,8 +188,10 @@ const generateThr = async (p) => {
   }
 };
 
-const sendThr = async (p, e) => {
+const sendThr = async (p) => {
   try {
+    const { employee: e } = p;
+
     const transporter = nodemailer.createTransport({
       host: smtp.host,
       port: smtp.port,
@@ -202,8 +204,8 @@ const sendThr = async (p, e) => {
     });
 
     let html = '';
-    html += `<div>Terlampir slip gaji untuk pembayaran ${idDateFormat(p.to, 'MMMM yyyy')}</div>`;
-    html += '<div>Slip gaji ini dilindungi kata sandi dan kata sandi dalam bentuk (format xxxddmmyy) :</div>';
+    html += `<div>Terlampir slip THR untuk pembayaran ${idDateFormat(p.to, 'MMMM yyyy')}</div>`;
+    html += '<div>Slip THR ini dilindungi kata sandi dan kata sandi dalam bentuk (format xxxddmmyy) :</div>';
     html += '<div>- 3 digit terakhir nomor karyawan</div>';
     html += '<div>- 2 digit tanggal lahir</div>';
     html += '<div>- 2 digit bulan lahir</div>';
@@ -214,7 +216,7 @@ const sendThr = async (p, e) => {
     html += '<div>Apabila slip gagal dibuka, kemungkinan tanggal lahir yang didaftarkan tidak sesuai dengan sistem. Dan lakukan pengajuan perubahan data.</div>';
     html += '<div>Untuk membuka file yang dilindungi kata sandi ini, Anda memerlukan Adobe Reader.</div>';
     html += '<p>-----------------------------------------------------------------------------------</p>';
-    html += `<div>Attached is the payslip for ${idDateFormat(p.to, 'MMMM yyyy')}</div>`;
+    html += `<div>Attached is the THR slip for ${idDateFormat(p.to, 'MMMM yyyy')}</div>`;
     html += '<div>It is password protected and the password is in the form of (format xxxddmmyy) :</div>';
     html += '<div>- The last 3 digits of the employee number</div>';
     html += '<div>- 2 digit date of birth</div>';
@@ -228,12 +230,12 @@ const sendThr = async (p, e) => {
 
     const message = {
       from: `"Labtech Info" <${smtp.sender}>`,
-      to: e.h0,
+      to: e.e0,
       subject: 'Labtech Info - No Reply',
       html,
       attachments: [
         {
-          filename: `${e._id}.pdf`,
+          filename: `${e.slip.name}.pdf`,
           path: `static/thr/${p.dir}/${e.slip.name}.pdf`,
         },
       ],
