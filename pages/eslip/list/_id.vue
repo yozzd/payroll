@@ -7,11 +7,11 @@
 <script>
 export default {
   layout: 'layout2',
+  middleware: ['auth'],
   head() {
     return {
       title: 'E-Slip | List',
     };
   },
-  middleware: ['auth'],
 };
 </script>

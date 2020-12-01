@@ -283,8 +283,8 @@ EmployeeSchema.pre('save', async function fn(next) {
     this.ce0 = 0;
   } else {
     // if (this.fb0 === 1) {
-      this.cb0 = this.ay0 * this.ownerDocument().rate.cb5;
-      this.cc0 = this.ay0 * this.ownerDocument().rate.cc5;
+    this.cb0 = this.ay0 * this.ownerDocument().rate.cb5;
+    this.cc0 = this.ay0 * this.ownerDocument().rate.cc5;
     // } else {
     //   this.cb0 = this.ay0 * this.ownerDocument().rate.cb5 * 0.01;
     //   this.cc0 = this.ay0 * this.ownerDocument().rate.cc5 * 0.01;
