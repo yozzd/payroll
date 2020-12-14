@@ -145,7 +145,7 @@ export default {
                 id: this.$route.params.id,
                 eId: v,
               },
-              update: (store, { data: { generateThr } }) => {
+              update: (store) => {
                 const cdata = store.readQuery({
                   query: EmployeeThr,
                   variables: {
@@ -153,7 +153,6 @@ export default {
                   },
                 });
                 const index = cdata.employeeThr.employee.findIndex((e) => e._id === v);
-                this.miniSearch.removeAll(this.items);
                 cdata.employeeThr.employee[index].slip.check = true;
                 store.writeQuery({
                   query: EmployeeThr,

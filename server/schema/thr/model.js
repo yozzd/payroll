@@ -60,6 +60,8 @@ const ThrSchema = new Schema({
 EmployeeSchema.pre('save', async function fn(next) {
   const dob = format(new Date(this.d0), 'ddMMyy');
   this.slip.pw = `${this.b0.slice(-3)}${dob}`;
+
+  return next();
 });
 
 ThrSchema.pre('save', async function preSave(next) {

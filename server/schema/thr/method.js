@@ -3,7 +3,7 @@ const PdfPrinter = require('pdfmake');
 const fs = require('fs-extra');
 const nodemailer = require('nodemailer');
 
-const { intpre0, floatpre2, floatpre3 } = require('../scalar/number');
+const { intpre0 } = require('../scalar/number');
 const { idDateFormat } = require('../scalar/date');
 
 const smtp = require('../../config/smtp');
@@ -54,7 +54,9 @@ const generateThr = async (p) => {
     if (e.af0 > 0) ctbl2.push(['March 2021', { text: intpre0(e.af0).format(), alignment: 'right' }, '']);
     if (e.ag0 > 0) ctbl2.push(['April 2021', { text: intpre0(e.ag0).format(), alignment: 'right' }, '']);
     if (e.ah0 > 0) ctbl2.push(['May 2021', { text: intpre0(e.ah0).format(), alignment: 'right' }, '']);
-    ctbl2.push([{ text: 'THR THIS MONTH >>>', colSpan: 2, alignment: 'right', bold: true }, '', { text: intpre0(e.ac0).format(), alignment: 'right', bold: true }]);
+    ctbl2.push([{
+      text: 'THR THIS MONTH >>>', colSpan: 2, alignment: 'right', bold: true,
+    }, '', { text: intpre0(e.ac0).format(), alignment: 'right', bold: true }]);
 
     const notes = [
       ['Note :', 'Approved By', 'Received By'],
@@ -94,7 +96,9 @@ const generateThr = async (p) => {
               ['Employee Name', { text: e.c0, bold: true, colSpan: 3 }, '', ''],
               ['Bank', 'MANDIRI', '/', e.f0],
               ['Position', e.i0, '/', e.g0],
-              [{ text: 'SELAMAT HARI NATAL & TAHUN BARU', colSpan: 4, alignment: 'center', fontSize: 10, bold: true, margin: [0, 15, 0, 10] }, '', '', ''],
+              [{
+                text: 'SELAMAT HARI NATAL & TAHUN BARU', colSpan: 4, alignment: 'center', fontSize: 10, bold: true, margin: [0, 15, 0, 10],
+              }, '', '', ''],
             ],
           },
           layout: 'noBorders',

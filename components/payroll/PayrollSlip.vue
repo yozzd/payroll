@@ -142,7 +142,6 @@ export default {
                   },
                 });
                 const index = cdata.payrollSlip.employee.findIndex((e) => e._id === v);
-                this.miniSearch.removeAll(this.items);
                 cdata.payrollSlip.employee[index].slip.check = true;
                 store.writeQuery({
                   query: PayrollSlip,
