@@ -76,7 +76,7 @@
                   Slip
                 </el-dropdown-item>
                 <el-dropdown-item command="delete">
-                  Delete
+                  <span class="text-red-400">Delete</span>
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
