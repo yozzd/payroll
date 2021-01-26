@@ -59,6 +59,7 @@ const journalBalanceFragment = {
         communication
         other
         thr
+        termination
         taxReturn
         dtp
       }

@@ -416,6 +416,7 @@ const Mutation = {
     resolve: auth.hasRole('admin', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id });
       await fs.remove(`static/slip/${p.dir}`);
+      await fs.remove(`static/report/${p.dir}`);
       await Payroll.findOneAndDelete({ _id: id });
       return { _id: id };
     }),

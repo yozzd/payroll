@@ -14,8 +14,8 @@ const Mutation = {
       input: { type: ImportInputType },
     },
     resolve: auth.hasRole('admin', async (_, { input }) => {
-      const process = await processImportPayroll(input);
-      return process;
+      const p = await processImportPayroll(input);
+      return p;
     }),
   },
   importESlip: {

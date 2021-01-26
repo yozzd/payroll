@@ -5,7 +5,10 @@ export const ImportPayroll = gql`
     importPayroll(input: $input) {
       _id
       year
+      month
       period
+      dir
+      checkPayroll
     }
   }
 `;

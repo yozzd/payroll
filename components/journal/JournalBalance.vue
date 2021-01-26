@@ -162,6 +162,16 @@
           <td></td>
         </tr>
         <tr>
+          <td>51092</td>
+          <td>Production - Labor Cost</td>
+          <td>(Termination)</td>
+          <td class="text-right">
+            {{ production.termination | currency }}
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
           <td>51093</td>
           <td>Production - Labor Cost</td>
           <td>(Communication)</td>
@@ -357,6 +367,16 @@
           <td>(THR)</td>
           <td class="text-right">
             {{ administration.thr | currency }}
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>61080</td>
+          <td>Payroll Exp - Administration</td>
+          <td>(Termination)</td>
+          <td class="text-right">
+            {{ administration.termination | currency }}
           </td>
           <td></td>
           <td></td>

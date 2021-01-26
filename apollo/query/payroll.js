@@ -5,7 +5,10 @@ export const PayrollAll = gql`
     payrollAll(year: $year) {
       _id
       year
+      month
       period
+      dir
+      checkPayroll
     }
   }
 `;

@@ -28,6 +28,7 @@ const JournalEmpType = new GraphQLObjectType({
     communication: { type: GraphQLFloat },
     other: { type: GraphQLFloat },
     thr: { type: GraphQLFloat },
+    termination: { type: GraphQLFloat },
     taxReturn: { type: GraphQLFloat },
     dtp: { type: GraphQLFloat },
   }),

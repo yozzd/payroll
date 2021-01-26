@@ -147,6 +147,7 @@ const Query = {
             communication: { $sum: '$employee.el0' },
             other: { $sum: '$employee.em0' },
             thr: { $sum: '$employee.bx0' },
+            termination: { $sum: '$employee.eo0' },
             taxReturn: { $sum: '$employee.bv0' },
             dtp: { $sum: '$employee.es0' },
             ec0: { $sum: '$employee.ec0' },
@@ -196,6 +197,7 @@ const Query = {
                 communication: '$communication',
                 other: '$other',
                 thr: '$thr',
+                termination: '$termination',
                 taxReturn: '$taxReturn',
                 dtp: '$dtp',
               },
@@ -262,7 +264,7 @@ const Query = {
               $sum: [
                 '$production.salary', '$production.retro', '$production.ot', '$production.accident', '$production.death', '$production.medical',
                 '$production.pension', '$production.posfunc', '$production.housing', '$production.transport', '$production.incentive',
-                '$production.meals', '$production.living', '$production.communication', '$production.other', '$production.thr',
+                '$production.meals', '$production.living', '$production.communication', '$production.other', '$production.thr', '$production.termination',
                 '$production.taxReturn', '$production.dtp',
               ],
             },
@@ -270,7 +272,7 @@ const Query = {
               $sum: [
                 '$administration.salary', '$administration.retro', '$administration.ot', '$administration.accident', '$administration.death', '$administration.medical',
                 '$administration.pension', '$administration.posfunc', '$administration.housing', '$administration.transport', '$administration.incentive',
-                '$administration.meals', '$administration.living', '$administration.communication', '$administration.other', '$administration.thr',
+                '$administration.meals', '$administration.living', '$administration.communication', '$administration.other', '$administration.thr', '$administration.termination',
                 '$administration.taxReturn', '$administration.dtp',
               ],
             },

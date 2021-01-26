@@ -15,6 +15,64 @@ const fonts = {
 };
 const printer = new PdfPrinter(fonts);
 
+const generateReportPayroll = async (p) => {
+  try {
+    const { employee } = p;
+    await fs.ensureDir(`static/report/${p.dir}`);
+
+		const tbl = [
+  		[
+    		{ text: 'No.', bold: true, alignment: 'center' },
+    		{ text: 'Employee No.', bold: true, alignment: 'center' },
+    		{ text: 'Employee Name', bold: true, alignment: 'center' },
+  		],
+		];
+
+		employee.map((e, i) => {
+  		tbl.push([
+    		{ text: (i + 1), alignment: 'center' }, e.e0, e.d0,
+  		]);
+		});
+
+    const docDefinition = {
+    	pageSize: 'A3',
+    	pageOrientation: 'landscape',
+    	pageMargins: [ 40, 40, 40, 40 ],
+    	content: [
+        {
+          style: 'tbl',
+          table: {
+            widths: [20, 30, 100],
+            headerRows: 1,
+            body: tbl,
+          },
+        },
+    	],
+      styles: {
+        tbl: {
+          fontSize: 6,
+        },
+      }
+    };
+
+    return new Promise((resolve) => {
+      const pdfDoc = printer.createPdfKitDocument(docDefinition);
+      pdfDoc.pipe(fs.createWriteStream(`static/report/${p.dir}/${p.dir}_payroll.pdf`));
+      pdfDoc.on('end', () => {
+        resolve();
+      });
+      pdfDoc.end();
+    });
+
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
+}
+
 const generateSlip = async (p) => {
   try {
     const { employee: e } = p;
@@ -297,4 +355,4 @@ const sendSlip = async (p) => {
   }
 };
 
-module.exports = { generateSlip, sendSlip };
+module.exports = { generateReportPayroll ,generateSlip, sendSlip };

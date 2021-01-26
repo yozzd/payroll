@@ -53,7 +53,20 @@
           label="Year"
         >
         </el-table-column>
-        <el-table-column min-width="10">
+        <el-table-column>
+          <template slot-scope="scope">
+          	<el-link
+          		v-if="scope.row.checkPayroll"
+          		:href="`/report/${scope.row.dir}/${scope.row.dir}_payroll.pdf`"
+          		target="_blank"
+          		type="primary"
+          		class="font-sm"
+          	>
+          		Report
+          	</el-link>
+          </template>
+        </el-table-column>
+        <el-table-column min-width="20">
           <template slot-scope="scope">
             <el-dropdown trigger="click" @command="c => handleCommand(c, scope.row._id)">
               <span class="el-dropdown-link flex space-x-1 items-center">
@@ -273,6 +286,7 @@ export default {
                   },
                 });
                 cdata.payrollAll.push(importPayroll);
+                cdata.payrollAll.sort((a, b) => Number(b.month) - Number(a.month));
                 store.writeQuery({
                   query: PayrollAll,
                   variables: {

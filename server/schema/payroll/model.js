@@ -150,6 +150,7 @@ const EmployeeSchema = new Schema({
   el0: Number, // Communication
   em0: Number, // Other Allowance Taxable
   en0: Number, // Pesangon Serv
+  eo0: Number, // Leave, Serv, Transport
   eq0: Number, // Leave / THR
   er0: Number, // Total JHT dan Pensiun Karyawan
   es0: Number, // Pengembalian Pajak DTP
@@ -388,6 +389,14 @@ EmployeeSchema.pre('save', async function fn(next) {
     this.da0 = Math.floor((pph21Bulanan * 1.2) / 100) * 100;
   }
 
+  if (this.e0 === 'B.1524') {
+    this.cz0 = 359700;
+  } else if (this.e0 === 'B.1867') {
+    this.da0 = 231300;
+  } else if (this.e0 === 'B.1839') {
+    this.cz0 = 79600;
+  }
+
   this.db0 = this.cz0 + this.da0;
   /** ********Pajak********* */
 
@@ -415,9 +424,11 @@ EmployeeSchema.pre('save', async function fn(next) {
   const byCash = ['X.0008', 'X.0010'];
   if (byCash.includes(this.e0) || this.ex0 === 1) {
     this.ec0 = 0;
-    this.ed0 = this.dp0 + this.dr0 + this.dt0 + this.dx0 + this.dy0 + this.es0;
+    // this.ed0 = this.dp0 + this.dr0 + this.dt0 + this.dx0 + this.dy0 + this.es0;
+    this.ed0 = this.dp0 + this.dr0 + this.es0;
   } else {
-    this.ec0 = this.dp0 + this.dr0 + this.dt0 + this.dx0 + this.dy0 + this.es0;
+    // this.ec0 = this.dp0 + this.dr0 + this.dt0 + this.dx0 + this.dy0 + this.es0;
+    this.ec0 = this.dp0 + this.dr0 + this.es0;
     this.ed0 = 0;
   }
 
@@ -431,6 +442,7 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.el0 = this.ap0;
   this.em0 = this.au0 + this.av0 + this.bg0 + this.bh0 + this.bi0;
   this.en0 = this.dt0 + this.dx0 + this.dy0 + this.dv0;
+  this.eo0 = this.bz0 + this.dt0 + this.dx0 + this.dy0 + this.dv0;
   this.eq0 = this.bz0 + this.bx0;
   this.er0 = this.ce0 + this.cj0;
 

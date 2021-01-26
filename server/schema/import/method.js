@@ -6,6 +6,8 @@ const Payroll = require('../payroll/model');
 const ESlip = require('../eslip/model');
 const Thr = require('../thr/model');
 
+const { generateReportPayroll } = require('../payroll/method');
+
 const parseDate = ({
   D, y, m, d,
 }) => {
@@ -159,8 +161,10 @@ const processImportPayroll = async ({ file, from, to }) => {
           });
         }
 
-        const saved = await payroll.save();
-        return resolve(saved);
+        const p = await payroll.save();
+        await generateReportPayroll(p);
+      	p.checkPayroll = await fs.access(`static/report/${p.dir}/${p.dir}_payroll.pdf`);
+        return resolve(p);
       } catch (err) {
         if (typeof err === 'string') {
           reject(new GraphQLError(err));
