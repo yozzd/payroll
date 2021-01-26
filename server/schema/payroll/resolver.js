@@ -6,7 +6,7 @@ const {
 } = require('graphql');
 const Payroll = require('./model.js');
 const { PayrollType, GenType, SendType } = require('./type');
-const { generateSlip, sendSlip } = require('./method');
+const { generateSlip, sendSlip, generateReportPayroll } = require('./method');
 const auth = require('../auth/service');
 
 const Query = {
@@ -450,6 +450,19 @@ const Mutation = {
         { $match: { 'employee._id': eId } },
       ]);
       const s = await sendSlip(p[0]);
+      return s;
+    }),
+  },
+  generateReportPayroll: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('admin', async (_, { id }, ctx) => {
+      const p = await Payroll.aggregate([
+        { $match: { _id: id } },
+      ]);
+      const s = await generateReportPayroll(p[0]);
       return s;
     }),
   },

@@ -20,17 +20,28 @@ const generateReportPayroll = async (p) => {
     const { employee } = p;
     await fs.ensureDir(`static/report/${p.dir}`);
 
-		const tbl = [
+		const tbl1 = [
   		[
     		{ text: 'No.', bold: true, alignment: 'center' },
-    		{ text: 'Employee No.', bold: true, alignment: 'center' },
     		{ text: 'Employee Name', bold: true, alignment: 'center' },
+    		{ text: 'Employee No.', bold: true, alignment: 'center' },
+    		{ text: 'Gaji Pokok', bold: true, alignment: 'center' },
+    		{ text: 'Hired Date', bold: true, alignment: 'center' },
+    		{ text: 'Hari Kerja', bold: true, alignment: 'center' },
+    		{ text: 'Department', bold: true, alignment: 'center' },
+    		{ text: 'Lembur Normal', bold: true, alignment: 'center', colSpan: 2 },
+    		{},
+    		{ text: 'Lembur Dinas Luar', bold: true, alignment: 'center', colSpan: 2 },
+    		{},
   		],
 		];
 
 		employee.map((e, i) => {
-  		tbl.push([
-    		{ text: (i + 1), alignment: 'center' }, e.e0, e.d0,
+  		tbl1.push([
+    		{ text: (i + 1), alignment: 'center' }, e.d0, { text: e.e0, alignment: 'center' }, { text: intpre0(e.g0).format(), alignment: 'right' },
+    		{ text: !e.i0 ? null : idDateFormat(e.i0, 'dd-MM-yyyy'), alignment: 'center' }, { text: e.j0, alignment: 'center' }, e.u0,
+    		{ text: floatpre2(e.ab0).format(), alignment: 'right' }, { text: intpre0(e.ac0).format(), alignment: 'right' }, { text: floatpre2(e.ad0).format(), alignment: 'right' },
+    		{ text: intpre0(e.ae0).format(), alignment: 'right' },
   		]);
 		});
 
@@ -42,9 +53,11 @@ const generateReportPayroll = async (p) => {
         {
           style: 'tbl',
           table: {
-            widths: [20, 30, 100],
-            headerRows: 1,
-            body: tbl,
+            widths: [
+              20, 100, 40, 40, 40, 40, 80, 40, 40, 40, 40,
+            ],
+            headerRows: 2,
+            body: tbl1,
           },
         },
     	],
@@ -59,7 +72,7 @@ const generateReportPayroll = async (p) => {
       const pdfDoc = printer.createPdfKitDocument(docDefinition);
       pdfDoc.pipe(fs.createWriteStream(`static/report/${p.dir}/${p.dir}_payroll.pdf`));
       pdfDoc.on('end', () => {
-        resolve();
+        resolve({ sStatus: 1 });
       });
       pdfDoc.end();
     });

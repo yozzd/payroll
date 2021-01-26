@@ -56,13 +56,11 @@
         <el-table-column>
           <template slot-scope="scope">
           	<el-link
-          		v-if="scope.row.checkPayroll"
-          		:href="`/report/${scope.row.dir}/${scope.row.dir}_payroll.pdf`"
-          		target="_blank"
           		type="primary"
           		class="font-sm"
+          		@click="generateReportPayroll(scope.row._id, scope.row.dir)"
           	>
-          		Report
+          		Generate
           	</el-link>
           </template>
         </el-table-column>
@@ -162,7 +160,7 @@
 import { getYear } from 'date-fns';
 import { PayrollAll } from '../apollo/query/payroll';
 import { ImportPayroll } from '../apollo/mutation/import';
-import { PayrollDelete } from '../apollo/mutation/payroll';
+import { PayrollDelete, GenerateReportPayroll } from '../apollo/mutation/payroll';
 
 export default {
   data() {
@@ -308,6 +306,21 @@ export default {
           return false;
         }
       });
+    },
+    async generateReportPayroll(id, dir) {
+      try {
+        await this.$apollo.mutate({
+          mutation: GenerateReportPayroll,
+          variables: {
+            id,
+          },
+        });
+
+        window.open(`/report/${dir}/${dir}_payroll.pdf`);
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
     },
   },
   apollo: {

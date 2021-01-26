@@ -24,3 +24,12 @@ export const SendSlip = gql`
     }
   }
 `;
+
+export const GenerateReportPayroll = gql`
+  mutation generateReportPayroll($id: String!) {
+    generateReportPayroll(id: $id) {
+      sStatus
+    }
+  }
+`;
+
