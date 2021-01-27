@@ -22,53 +22,128 @@ const generateReportPayroll = async (p) => {
 
     const tbl1 = [
       [
-        { text: 'No.', bold: true, alignment: 'center' },
-        { text: 'Employee Name', bold: true, alignment: 'center' },
-        { text: 'Employee No.', bold: true, alignment: 'center' },
-        { text: 'Gaji Pokok', bold: true, alignment: 'center' },
-        { text: 'Hired Date', bold: true, alignment: 'center' },
-        { text: 'Hari Kerja', bold: true, alignment: 'center' },
-        { text: 'Department', bold: true, alignment: 'center' },
-        {
-          text: 'Lembur Normal', bold: true, alignment: 'center', colSpan: 2,
-        },
-        {},
-        {
-          text: 'Lembur Dinas Luar', bold: true, alignment: 'center', colSpan: 2,
-        },
-        {},
+        { text: 'No.', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Nama Karyawan', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'No. Karyawan', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Gaji Pokok', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Hired Date', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Hari Kerja', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Department', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Lembur Upah / 173', bold: true, alignment: 'center', colSpan: 2 }, '',
+        { text: 'Lembur Upah / 173', bold: true, alignment: 'center', colSpan: 2 }, '',
+        { text: 'Insentif Lembur', bold: true, alignment: 'center', colSpan: 3 }, '', '',
+        { text: 'Total Lembur & Insentif', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Tunjagan Tetap', bold: true, alignment: 'center', colSpan: 13 }, '', '', '', '', '', '', '', '', '', '', '', '',
+        { text: 'Total Tunjagan Tetap', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Upah (Gaji Pokok + Tj. Tetap)', bold: true, alignment: 'center', rowSpan: 2 },
+      ],
+      [
+        '', '', '', '', '', '', '',
+        { text: 'Lembur Normal', bold: true, alignment: 'center', colSpan: 2 }, '',
+        { text: 'Lembur Dinas Luar', bold: true, alignment: 'center', colSpan: 2 }, '',
+        { text: 'Jam / Hari', bold: true, alignment: 'center', colSpan: 2 }, '', { text: 'Jam / Hari * Insentif', bold: true, alignment: 'center' }, '',
+        { text: 'Living', bold: true, alignment: 'center' }, { text: 'Perumahan', bold: true, alignment: 'center' },
+        { text: 'Posisi Fix', bold: true, alignment: 'center' }, { text: 'Fungsional Fix', bold: true, alignment: 'center' },
+        { text: 'Koordinator', bold: true, alignment: 'center' }, { text: 'Transport', bold: true, alignment: 'center' },
+        { text: 'Komunikasi', bold: true, alignment: 'center' }, { text: 'Expertisi', bold: true, alignment: 'center' },
+        { text: 'Honorarium', bold: true, alignment: 'center' }, { text: 'Posisi Variable', bold: true, alignment: 'center' },
+        { text: 'Fungsional Variable', bold: true, alignment: 'center' }, { text: 'Acting / PLT', bold: true, alignment: 'center' },
+        { text: 'Others', bold: true, alignment: 'center' }, '', '',
       ],
     ];
 
+		let g0 = 0, ab0 = 0, ac0 = 0, ad0 = 0, ae0 = 0, af0 = 0, ag0 = 0, ah0 = 0;
+		let ai0 = 0, aj0 = 0, ak0 = 0, al0 = 0, am0 = 0, an0 = 0, ao0 = 0, ap0 = 0;
+		let aq0 = 0, ar0 = 0, as0 = 0, at0 = 0, au0 = 0, av0 = 0, aw0 = 0, ax0 = 0;
+		
     employee.map((e, i) => {
       tbl1.push([
         { text: (i + 1), alignment: 'center' }, e.d0, { text: e.e0, alignment: 'center' }, { text: intpre0(e.g0).format(), alignment: 'right' },
-        { text: !e.i0 ? null : idDateFormat(e.i0, 'dd-MM-yyyy'), alignment: 'center' }, { text: e.j0, alignment: 'center' }, e.u0,
-        { text: floatpre2(e.ab0).format(), alignment: 'right' }, { text: intpre0(e.ac0).format(), alignment: 'right' }, { text: floatpre2(e.ad0).format(), alignment: 'right' },
-        { text: intpre0(e.ae0).format(), alignment: 'right' },
+        { text: !e.i0 ? null : idDateFormat(e.i0, 'dd-MM-yyyy'), alignment: 'center' }, { text: e.j0 ,alignment: 'center' }, e.u0,
+        { text: floatpre2(e.ab0).format(), alignment: 'right' }, { text: intpre0(e.ac0).format(), alignment: 'right' },
+        { text: floatpre2(e.ad0).format(), alignment: 'right' }, { text: intpre0(e.ae0).format(), alignment: 'right' },
+        { text: floatpre2(e.af0).format(), alignment: 'right' }, { text: intpre0(e.ag0).format(), alignment: 'right' }, { text: intpre0(e.ah0).format(), alignment: 'right' },
+        { text: intpre0(e.ai0).format(), alignment: 'right' }, { text: intpre0(e.aj0).format(), alignment: 'right' }, { text: intpre0(e.ak0).format(), alignment: 'right' },
+        { text: intpre0(e.al0).format(), alignment: 'right' }, { text: intpre0(e.am0).format(), alignment: 'right' }, { text: intpre0(e.an0).format(), alignment: 'right' },
+        { text: intpre0(e.ao0).format(), alignment: 'right' }, { text: intpre0(e.ap0).format(), alignment: 'right' }, { text: intpre0(e.aq0).format(), alignment: 'right' },
+        { text: intpre0(e.ar0).format(), alignment: 'right' }, { text: intpre0(e.as0).format(), alignment: 'right' }, { text: intpre0(e.at0).format(), alignment: 'right' },
+        { text: intpre0(e.au0).format(), alignment: 'right' }, { text: intpre0(e.av0).format(), alignment: 'right' }, { text: intpre0(e.aw0).format(), alignment: 'right' },
+        { text: intpre0(e.ax0).format(), alignment: 'right' },
       ]);
+
+      g0 += e.g0;
+      ab0 += e.ab0;
+      ac0 += e.ac0;
+      ad0 += e.ad0;
+      ae0 += e.ae0;
+      af0 += e.af0;
+      ag0 += e.ag0;
+      ah0 += e.ah0;
+      ai0 += e.ai0;
+      aj0 += e.aj0;
+      ak0 += e.ak0;
+      al0 += e.al0;
+      am0 += e.am0;
+      an0 += e.an0;
+      ao0 += e.ao0;
+      ap0 += e.ap0;
+      aq0 += e.aq0;
+      ar0 += e.ar0;
+      as0 += e.as0;
+      at0 += e.at0;
+      au0 += e.au0;
+      av0 += e.av0;
+      aw0 += e.aw0;
+      ax0 += e.ax0;
+      
       return true;
     });
 
+    tbl1.push([
+      '', '', '', { text: intpre0(g0).format(), alignment: 'right' }, '', '', '',
+      { text: floatpre2(ab0).format(), alignment: 'right' }, { text: intpre0(ac0).format(), alignment: 'right' }, { text: floatpre2(ad0).format(), alignment: 'right' },
+      { text: intpre0(ae0).format(), alignment: 'right' }, { text: floatpre2(af0).format(), alignment: 'right' }, { text: intpre0(ag0).format(), alignment: 'right' },
+      { text: intpre0(ah0).format(), alignment: 'right' }, { text: intpre0(ai0).format(), alignment: 'right' }, { text: intpre0(aj0).format(), alignment: 'right' },
+      { text: intpre0(ak0).format(), alignment: 'right' }, { text: intpre0(al0).format(), alignment: 'right' }, { text: intpre0(am0).format(), alignment: 'right' },
+      { text: intpre0(an0).format(), alignment: 'right' }, { text: intpre0(ao0).format(), alignment: 'right' }, { text: intpre0(ap0).format(), alignment: 'right' },
+      { text: intpre0(aq0).format(), alignment: 'right' }, { text: intpre0(ar0).format(), alignment: 'right' }, { text: intpre0(as0).format(), alignment: 'right' },
+      { text: intpre0(at0).format(), alignment: 'right' }, { text: intpre0(au0).format(), alignment: 'right' }, { text: intpre0(av0).format(), alignment: 'right' },
+      { text: intpre0(aw0).format(), alignment: 'right' }, { text: intpre0(ax0).format(), alignment: 'right' },
+    ]);
+    
     const docDefinition = {
       pageSize: 'A3',
       pageOrientation: 'landscape',
-      pageMargins: [40, 40, 40, 40],
+      pageMargins: [20, 20, 20, 20],
+      footer: (currentPage, pageCount) => {
+        return {
+          columns: [
+            { text: `${currentPage.toString()} / ${pageCount}`, fontSize: 4, margin: [20, 0] },
+          ],
+        };
+      },
       content: [
         {
           style: 'tbl',
           table: {
             widths: [
-              20, 100, 40, 40, 40, 40, 80, 40, 40, 40, 40,
+              10, 60, 25, 30, 30, 20, 50, 20, 30, 20,
+              30, 20, 30, 30, 30, 30, 30, 30, 30, 30,
+              30, 30, 30, 30, 30, 30, 30, 30, 30, 30,
             ],
             headerRows: 2,
             body: tbl1,
+          },
+          layout: {
+            fillColor: (rowIndex) => {
+              return rowIndex === employee.length + 2 ? '#eeeeee' : null;
+            },
           },
         },
       ],
       styles: {
         tbl: {
-          fontSize: 6,
+          fontSize: 4,
         },
       },
     };

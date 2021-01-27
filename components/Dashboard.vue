@@ -60,7 +60,7 @@
               class="font-sm"
               @click="generateReportPayroll(scope.row._id, scope.row.dir)"
             >
-              Generate
+              Report
             </el-link>
           </template>
         </el-table-column>
