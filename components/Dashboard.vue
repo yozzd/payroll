@@ -55,13 +55,13 @@
         </el-table-column>
         <el-table-column>
           <template slot-scope="scope">
-          	<el-link
-          		type="primary"
-          		class="font-sm"
-          		@click="generateReportPayroll(scope.row._id, scope.row.dir)"
-          	>
-          		Generate
-          	</el-link>
+            <el-link
+              type="primary"
+              class="font-sm"
+              @click="generateReportPayroll(scope.row._id, scope.row.dir)"
+            >
+              Generate
+            </el-link>
           </template>
         </el-table-column>
         <el-table-column min-width="20">
@@ -317,6 +317,7 @@ export default {
         });
 
         window.open(`/report/${dir}/${dir}_payroll.pdf`);
+        return true;
       } catch ({ graphQLErrors, networkError }) {
         this.errors = graphQLErrors || networkError.result.errors;
         return false;

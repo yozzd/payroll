@@ -8,7 +8,6 @@ export const PayrollAll = gql`
       month
       period
       dir
-      checkPayroll
     }
   }
 `;

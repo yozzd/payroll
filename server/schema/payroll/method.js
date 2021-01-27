@@ -20,36 +20,41 @@ const generateReportPayroll = async (p) => {
     const { employee } = p;
     await fs.ensureDir(`static/report/${p.dir}`);
 
-		const tbl1 = [
-  		[
-    		{ text: 'No.', bold: true, alignment: 'center' },
-    		{ text: 'Employee Name', bold: true, alignment: 'center' },
-    		{ text: 'Employee No.', bold: true, alignment: 'center' },
-    		{ text: 'Gaji Pokok', bold: true, alignment: 'center' },
-    		{ text: 'Hired Date', bold: true, alignment: 'center' },
-    		{ text: 'Hari Kerja', bold: true, alignment: 'center' },
-    		{ text: 'Department', bold: true, alignment: 'center' },
-    		{ text: 'Lembur Normal', bold: true, alignment: 'center', colSpan: 2 },
-    		{},
-    		{ text: 'Lembur Dinas Luar', bold: true, alignment: 'center', colSpan: 2 },
-    		{},
-  		],
-		];
+    const tbl1 = [
+      [
+        { text: 'No.', bold: true, alignment: 'center' },
+        { text: 'Employee Name', bold: true, alignment: 'center' },
+        { text: 'Employee No.', bold: true, alignment: 'center' },
+        { text: 'Gaji Pokok', bold: true, alignment: 'center' },
+        { text: 'Hired Date', bold: true, alignment: 'center' },
+        { text: 'Hari Kerja', bold: true, alignment: 'center' },
+        { text: 'Department', bold: true, alignment: 'center' },
+        {
+          text: 'Lembur Normal', bold: true, alignment: 'center', colSpan: 2,
+        },
+        {},
+        {
+          text: 'Lembur Dinas Luar', bold: true, alignment: 'center', colSpan: 2,
+        },
+        {},
+      ],
+    ];
 
-		employee.map((e, i) => {
-  		tbl1.push([
-    		{ text: (i + 1), alignment: 'center' }, e.d0, { text: e.e0, alignment: 'center' }, { text: intpre0(e.g0).format(), alignment: 'right' },
-    		{ text: !e.i0 ? null : idDateFormat(e.i0, 'dd-MM-yyyy'), alignment: 'center' }, { text: e.j0, alignment: 'center' }, e.u0,
-    		{ text: floatpre2(e.ab0).format(), alignment: 'right' }, { text: intpre0(e.ac0).format(), alignment: 'right' }, { text: floatpre2(e.ad0).format(), alignment: 'right' },
-    		{ text: intpre0(e.ae0).format(), alignment: 'right' },
-  		]);
-		});
+    employee.map((e, i) => {
+      tbl1.push([
+        { text: (i + 1), alignment: 'center' }, e.d0, { text: e.e0, alignment: 'center' }, { text: intpre0(e.g0).format(), alignment: 'right' },
+        { text: !e.i0 ? null : idDateFormat(e.i0, 'dd-MM-yyyy'), alignment: 'center' }, { text: e.j0, alignment: 'center' }, e.u0,
+        { text: floatpre2(e.ab0).format(), alignment: 'right' }, { text: intpre0(e.ac0).format(), alignment: 'right' }, { text: floatpre2(e.ad0).format(), alignment: 'right' },
+        { text: intpre0(e.ae0).format(), alignment: 'right' },
+      ]);
+      return true;
+    });
 
     const docDefinition = {
-    	pageSize: 'A3',
-    	pageOrientation: 'landscape',
-    	pageMargins: [ 40, 40, 40, 40 ],
-    	content: [
+      pageSize: 'A3',
+      pageOrientation: 'landscape',
+      pageMargins: [40, 40, 40, 40],
+      content: [
         {
           style: 'tbl',
           table: {
@@ -60,12 +65,12 @@ const generateReportPayroll = async (p) => {
             body: tbl1,
           },
         },
-    	],
+      ],
       styles: {
         tbl: {
           fontSize: 6,
         },
-      }
+      },
     };
 
     return new Promise((resolve) => {
@@ -76,7 +81,6 @@ const generateReportPayroll = async (p) => {
       });
       pdfDoc.end();
     });
-
   } catch (err) {
     if (typeof err === 'string') {
       throw new GraphQLError(err);
@@ -84,7 +88,7 @@ const generateReportPayroll = async (p) => {
       throw new GraphQLError(err.message);
     }
   }
-}
+};
 
 const generateSlip = async (p) => {
   try {
@@ -368,4 +372,4 @@ const sendSlip = async (p) => {
   }
 };
 
-module.exports = { generateReportPayroll ,generateSlip, sendSlip };
+module.exports = { generateReportPayroll, generateSlip, sendSlip };
