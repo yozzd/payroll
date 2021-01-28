@@ -78,6 +78,40 @@ const generateReportPayroll = async (p) => {
         { text: 'Others', bold: true, alignment: 'center' }, '',
       ],
     ];
+    
+    const tbl3 = [
+      [
+        { text: 'No.', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Nama Karyawan', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'No. Karyawan', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Gaji Pokok', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Tambahan Lain Tidak Kena Pajak', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'THR Prorate', bold: true, alignment: 'center', colSpan: 2 }, '',
+        { text: 'Cuti (Leave)', bold: true, alignment: 'center', colSpan: 2 }, '',
+        { text: 'Pendapatan Kotor', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Absent / Day', bold: true, alignment: 'center', colSpan: 2 }, '',
+        { text: 'Pemotongan Kelebihan Bayar Gaji & Koreksi Absen', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Pemotongan Kelebihan Bayar OT', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Pemotongan Prorate Absen', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Total Pemotongan (Gaji, OT, Tunjangan)', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Pemotongan', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Pemotongan Toolroom', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Pemotongan Lain', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Total Pemotongan', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Dana Pinjaman', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Ketring / Canteen', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Kopkar & BMI', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Pph21 Kurang Bayar', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Jumlah Pemotongan', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Penghasilan', bold: true, alignment: 'center', rowSpan: 2 },
+      ],
+      [
+        '', '', '', '', '',
+        { text: 'Months', bold: true, alignment: 'center' }, { text: 'Amount', bold: true, alignment: 'center' },
+        { text: 'Days', bold: true, alignment: 'center' }, { text: 'Amount', bold: true, alignment: 'center' }, '',
+        { text: 'Absent', bold: true, alignment: 'center' }, { text: 'Amount', bold: true, alignment: 'center' },
+      ],
+    ];
 
 
     let g0 = 0, ab0 = 0, ac0 = 0, ad0 = 0, ae0 = 0, af0 = 0, ag0 = 0, ah0 = 0;
@@ -85,7 +119,10 @@ const generateReportPayroll = async (p) => {
     let aq0 = 0, ar0 = 0, as0 = 0, at0 = 0, au0 = 0, av0 = 0, aw0 = 0, ax0 = 0;
     let ba0 = 0, bb0 = 0, bc0 = 0, bd0 = 0, be0 = 0, bf0 = 0, bg0 = 0, bh0 = 0;
     let bi0 = 0, bj0 = 0, bl0 = 0, bm0 = 0, bn0 = 0, bo0 = 0, bp0 = 0, bq0 = 0;
-    let br0 = 0, bs0 = 0, bt0 = 0, bu0 = 0;
+    let br0 = 0, bs0 = 0, bt0 = 0, bu0 = 0, bv0 = 0, bw0 = 0, bx0 = 0, by0 = 0;
+    let bz0 = 0, ca0 = 0, cw0 = 0, cx0 = 0, dc0 = 0, dd0 = 0, de0 = 0, df0 = 0;
+    let dg0 = 0, dh0 = 0, di0 = 0, dj0 = 0, dk0 = 0, dl0 = 0, dm0 = 0, dn0 = 0;
+    let do0 = 0, dp0 = 0;
     
     employee.map((e, i) => {
 
@@ -96,6 +133,10 @@ const generateReportPayroll = async (p) => {
 
       ba0 += e.ba0, bb0 += e.bb0, bc0 += e.bc0, bd0 += e.bd0, be0 += e.be0, bf0 += e.bf0, bg0 += e.bg0, bh0 += e.bh0, bi0 += e.bi0, bj0 += e.bj0;
       bl0 += e.bl0, bm0 += e.bm0, bn0 += e.bn0, bo0 += e.bo0, bp0 += e.bp0, bq0 += e.bq0, br0 += e.br0, bs0 += e.bs0, bt0 += e.bt0, bu0 += e.bu0;
+      
+      bv0 += e.bv0, bw0 += e.bw0, bx0 += e.bx0, by0 += e.by0, bz0 += e.bz0, ca0 += e.ca0, cw0 += e.cw0, cx0 += e.cx0, dc0 += e.dc0, dd0 += e.dd0;
+      de0 += e.de0, df0 += e.df0, dg0 += e.dg0, dh0 += e.dh0, di0 += e.di0, dj0 += e.dj0, dk0 += e.dk0, dl0 += e.dl0, dm0 += e.dm0, dn0 += e.dn0;
+      do0 += e.do0, dp0 += e.dp0;
       
       tbl1.push([
         { text: (i + 1), alignment: 'center' }, e.d0, { text: e.e0, alignment: 'center' }, { text: intpre0(e.g0).format(), alignment: 'right' },
@@ -122,6 +163,18 @@ const generateReportPayroll = async (p) => {
         { text: intpre0(e.bt0).format(), alignment: 'right' }, { text: intpre0(e.bu0).format(), alignment: 'right' },
       ]);
 
+      tbl3.push([
+        { text: (i + 1), alignment: 'center' }, e.d0, { text: e.e0, alignment: 'center' }, { text: intpre0(e.g0).format(), alignment: 'right' },
+        { text: intpre0(e.bv0).format(), alignment: 'right' }, { text: intpre0(e.bw0).format(), alignment: 'right' }, { text: intpre0(e.bx0).format(), alignment: 'right' },
+        { text: intpre0(e.by0).format(), alignment: 'right' }, { text: intpre0(e.bz0).format(), alignment: 'right' }, { text: intpre0(e.ca0).format(), alignment: 'right' },
+        { text: floatpre2(e.cw0).format(), alignment: 'right' }, { text: intpre0(e.cx0).format(), alignment: 'right' }, { text: intpre0(e.dc0).format(), alignment: 'right' },
+        { text: intpre0(e.dd0).format(), alignment: 'right' }, { text: intpre0(e.de0).format(), alignment: 'right' }, { text: intpre0(e.df0).format(), alignment: 'right' },
+        { text: intpre0(e.dg0).format(), alignment: 'right' }, { text: intpre0(e.dh0).format(), alignment: 'right' }, { text: intpre0(e.di0).format(), alignment: 'right' },
+        { text: intpre0(e.dj0).format(), alignment: 'right' }, { text: intpre0(e.dk0).format(), alignment: 'right' }, { text: intpre0(e.dl0).format(), alignment: 'right' },
+        { text: intpre0(e.dm0).format(), alignment: 'right' }, { text: intpre0(e.dn0).format(), alignment: 'right' }, { text: intpre0(e.do0).format(), alignment: 'right' },
+        { text: intpre0(e.dp0).format(), alignment: 'right' },
+      ]);
+
       return true;
     });
 
@@ -146,6 +199,18 @@ const generateReportPayroll = async (p) => {
       { text: intpre0(bn0).format(), alignment: 'right' }, { text: intpre0(bo0).format(), alignment: 'right' }, { text: intpre0(bp0).format(), alignment: 'right' },
       { text: intpre0(bq0).format(), alignment: 'right' }, { text: intpre0(br0).format(), alignment: 'right' }, { text: intpre0(bs0).format(), alignment: 'right' },
       { text: intpre0(bt0).format(), alignment: 'right' }, { text: intpre0(bu0).format(), alignment: 'right' },
+    ]);
+
+    tbl3.push([
+      '', '', '', { text: intpre0(g0).format(), alignment: 'right' },
+      { text: intpre0(bv0).format(), alignment: 'right' }, { text: intpre0(bw0).format(), alignment: 'right' }, { text: intpre0(bx0).format(), alignment: 'right' },
+      { text: intpre0(by0).format(), alignment: 'right' }, { text: intpre0(bz0).format(), alignment: 'right' }, { text: intpre0(ca0).format(), alignment: 'right' },
+      { text: floatpre2(cw0).format(), alignment: 'right' }, { text: intpre0(cx0).format(), alignment: 'right' }, { text: intpre0(dc0).format(), alignment: 'right' },
+      { text: intpre0(dd0).format(), alignment: 'right' }, { text: intpre0(de0).format(), alignment: 'right' }, { text: intpre0(df0).format(), alignment: 'right' },
+      { text: intpre0(dg0).format(), alignment: 'right' }, { text: intpre0(dh0).format(), alignment: 'right' }, { text: intpre0(di0).format(), alignment: 'right' },
+      { text: intpre0(dj0).format(), alignment: 'right' }, { text: intpre0(dk0).format(), alignment: 'right' }, { text: intpre0(dl0).format(), alignment: 'right' },
+      { text: intpre0(dm0).format(), alignment: 'right' }, { text: intpre0(dn0).format(), alignment: 'right' }, { text: intpre0(do0).format(), alignment: 'right' },
+      { text: intpre0(dp0).format(), alignment: 'right' },
     ]);
     
     const docDefinition = {
@@ -179,9 +244,10 @@ const generateReportPayroll = async (p) => {
             },
           },
         },
+        { text: 'PT. Labtech Penta International', bold: true, fontSize: 6, pageBreak: 'before' },
+        { text: `Periode Payroll: ${ p.period }`, bold: true, fontSize: 6, margin: [0, 0, 0, 10] },
         {
           style: 'tbl',
-          pageBreak: 'before',
           table: {
             widths: [
               10, 60, 25, 30, 50, 30, 30, 30, 30, 30,
@@ -190,6 +256,25 @@ const generateReportPayroll = async (p) => {
             ],
             headerRows: 2,
             body: tbl2,
+          },
+          layout: {
+            fillColor: (rowIndex) => {
+              return rowIndex === employee.length + 2 ? '#eeeeee' : null;
+            },
+          },
+        },
+        { text: 'PT. Labtech Penta International', bold: true, fontSize: 6, pageBreak: 'before' },
+        { text: `Periode Payroll: ${ p.period }`, bold: true, fontSize: 6, margin: [0, 0, 0, 10] },
+        {
+          style: 'tbl',
+          table: {
+            widths: [
+              10, 60, 25, 30, 30, 30, 30, 30, 30, 30,
+              30, 30, 30, 30, 30, 30, 30, 30, 30, 30,
+              30, 30, 30, 30, 30, 30,
+            ],
+            headerRows: 2,
+            body: tbl3,
           },
           layout: {
             fillColor: (rowIndex) => {
