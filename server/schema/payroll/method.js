@@ -123,6 +123,8 @@ const generateReportPayroll = async (p) => {
         };
       },
       content: [
+        { text: 'PT. Labtech Penta International', bold: true, fontSize: 6 },
+        { text: `Periode Payroll: ${ p.period }`, bold: true, fontSize: 6, margin: [0, 0, 0, 10] },
         {
           style: 'tbl',
           table: {
