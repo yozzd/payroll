@@ -26,7 +26,7 @@
     </div>
     <div>
       <el-table
-        v-loading="$apollo.loading"
+        v-loading="$apollo.loading || genRpPy"
         :data="payrollAll"
         element-loading-text="Loading..."
         element-loading-spinner="el-icon-loading"
@@ -170,6 +170,7 @@ export default {
     return {
       showDialog: false,
       loading: false,
+      genRpPy: false,
       form: {
         period: [],
         file: null,
@@ -309,6 +310,7 @@ export default {
     },
     async generateReportPayroll(id, dir) {
       try {
+        this.genRpPy = true;
         await this.$apollo.mutate({
           mutation: GenerateReportPayroll,
           variables: {
@@ -316,6 +318,7 @@ export default {
           },
         });
 
+        this.genRpPy = false;
         window.open(`/report/${dir}/${dir}_payroll.pdf`);
         return true;
       } catch ({ graphQLErrors, networkError }) {
