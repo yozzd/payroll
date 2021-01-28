@@ -147,6 +147,7 @@ const processImportPayroll = async ({ file, from, to }) => {
             ds0: ft[i].__EMPTY_122 || 0, // Uang Pisah Prorate
             du0: ft[i].__EMPTY_124 || 0, // Uang Pesangon Prorate
             dw0: ft[i].__EMPTY_126 || 0, // Uang Penghargaan Masa Kerja Prorate
+            dz0: ft[i].__EMPTY_129 || '', // Bulan
             ea0: ft[i].__EMPTY_130 || 0, // Total Bulan Periode Pajak
             ew0: ft[i].__EMPTY_152 || '', // Email
             ex0: ft[i].__EMPTY_153 || 0, // Slot 1 Flag

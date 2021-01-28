@@ -113,6 +113,31 @@ const generateReportPayroll = async (p) => {
       ],
     ];
 
+    const tbl4 = [
+      [
+        { text: 'No.', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Nama Karyawan', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'No. Karyawan', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Gaji Pokok', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Bonus', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Uang Pisah', bold: true, alignment: 'center', colSpan: 2 }, '',
+        { text: 'Uang Pesangon', bold: true, alignment: 'center', colSpan: 2 }, '',
+        { text: 'Uang P. Masa Kerja', bold: true, alignment: 'center', colSpan: 2 }, '',
+        { text: 'Uang Penggantian Hak', bold: true, alignment: 'center' },
+        { text: 'Periode Pajak', bold: true, alignment: 'center', colSpan: 2 }, '',
+        { text: 'Take Home Pay', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Total Transfer By Mandiri', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Total By Cash (For Expat & Final Payment)', bold: true, alignment: 'center', rowSpan: 2 },
+      ],
+      [
+        '', '', '', '', '',
+        { text: 'Lama Kerja Prorate Tahun', bold: true, alignment: 'center' }, { text: 'Amount', bold: true, alignment: 'center' },
+        { text: 'Lama Kerja Prorate Tahun', bold: true, alignment: 'center' }, { text: 'Amount', bold: true, alignment: 'center' },
+        { text: 'Lama Kerja Prorate Tahun', bold: true, alignment: 'center' }, { text: 'Amount', bold: true, alignment: 'center' },
+        { text: 'Pesangon + P. Masa Kerja * 15%', bold: true, alignment: 'center' },
+        { text: 'Bulan', bold: true, alignment: 'center' }, { text: 'Total', bold: true, alignment: 'center' },
+      ],
+    ];
 
     let g0 = 0, ab0 = 0, ac0 = 0, ad0 = 0, ae0 = 0, af0 = 0, ag0 = 0, ah0 = 0;
     let ai0 = 0, aj0 = 0, ak0 = 0, al0 = 0, am0 = 0, an0 = 0, ao0 = 0, ap0 = 0;
@@ -122,7 +147,8 @@ const generateReportPayroll = async (p) => {
     let br0 = 0, bs0 = 0, bt0 = 0, bu0 = 0, bv0 = 0, bw0 = 0, bx0 = 0, by0 = 0;
     let bz0 = 0, ca0 = 0, cw0 = 0, cx0 = 0, dc0 = 0, dd0 = 0, de0 = 0, df0 = 0;
     let dg0 = 0, dh0 = 0, di0 = 0, dj0 = 0, dk0 = 0, dl0 = 0, dm0 = 0, dn0 = 0;
-    let do0 = 0, dp0 = 0;
+    let do0 = 0, dp0 = 0, dr0 = 0, ds0 = 0, dt0 = 0, du0 = 0, dv0 = 0, dw0 = 0;
+    let dx0 = 0, dy0 = 0, eb0 = 0, ec0 = 0, ed0 = 0;
     
     employee.map((e, i) => {
 
@@ -136,7 +162,8 @@ const generateReportPayroll = async (p) => {
       
       bv0 += e.bv0, bw0 += e.bw0, bx0 += e.bx0, by0 += e.by0, bz0 += e.bz0, ca0 += e.ca0, cw0 += e.cw0, cx0 += e.cx0, dc0 += e.dc0, dd0 += e.dd0;
       de0 += e.de0, df0 += e.df0, dg0 += e.dg0, dh0 += e.dh0, di0 += e.di0, dj0 += e.dj0, dk0 += e.dk0, dl0 += e.dl0, dm0 += e.dm0, dn0 += e.dn0;
-      do0 += e.do0, dp0 += e.dp0;
+      do0 += e.do0, dp0 += e.dp0, dr0 += e.dr0, ds0 += e.ds0, dt0 += e.dt0, du0 += e.du0, dv0 += e.dv0, dw0 += e.dw0, dx0 += e.dx0, dy0 += e.dy0;
+      eb0 += e.eb0, ec0 += e.ec0, ed0 += e.ed0;
       
       tbl1.push([
         { text: (i + 1), alignment: 'center' }, e.d0, { text: e.e0, alignment: 'center' }, { text: intpre0(e.g0).format(), alignment: 'right' },
@@ -175,6 +202,14 @@ const generateReportPayroll = async (p) => {
         { text: intpre0(e.dp0).format(), alignment: 'right' },
       ]);
 
+      tbl4.push([
+        { text: (i + 1), alignment: 'center' }, e.d0, { text: e.e0, alignment: 'center' }, { text: intpre0(e.g0).format(), alignment: 'right' },
+        { text: intpre0(e.dr0).format(), alignment: 'right' }, { text: intpre0(e.ds0).format(), alignment: 'right' }, { text: intpre0(e.dt0).format(), alignment: 'right' },
+        { text: intpre0(e.du0).format(), alignment: 'right' }, { text: intpre0(e.dv0).format(), alignment: 'right' }, { text: intpre0(e.dw0).format(), alignment: 'right' },
+        { text: intpre0(e.dx0).format(), alignment: 'right' }, { text: intpre0(e.dy0).format(), alignment: 'right' }, { text: e.dz0, alignment: 'center' }, { text: e.ea0, alignment: 'center' },
+        { text: intpre0(e.eb0).format(), alignment: 'right' }, { text: intpre0(e.ec0).format(), alignment: 'right' }, { text: intpre0(e.ed0).format(), alignment: 'right' },
+      ]);
+
       return true;
     });
 
@@ -211,6 +246,14 @@ const generateReportPayroll = async (p) => {
       { text: intpre0(dj0).format(), alignment: 'right' }, { text: intpre0(dk0).format(), alignment: 'right' }, { text: intpre0(dl0).format(), alignment: 'right' },
       { text: intpre0(dm0).format(), alignment: 'right' }, { text: intpre0(dn0).format(), alignment: 'right' }, { text: intpre0(do0).format(), alignment: 'right' },
       { text: intpre0(dp0).format(), alignment: 'right' },
+    ]);
+    
+    tbl4.push([
+      '', '', '', { text: intpre0(g0).format(), alignment: 'right' },
+      { text: intpre0(dr0).format(), alignment: 'right' }, { text: intpre0(ds0).format(), alignment: 'right' }, { text: intpre0(dt0).format(), alignment: 'right' },
+      { text: intpre0(du0).format(), alignment: 'right' }, { text: intpre0(dv0).format(), alignment: 'right' }, { text: intpre0(dw0).format(), alignment: 'right' },
+      { text: intpre0(dx0).format(), alignment: 'right' }, { text: intpre0(dy0).format(), alignment: 'right' }, '', '', { text: intpre0(eb0).format(), alignment: 'right' },
+      { text: intpre0(ec0).format(), alignment: 'right' }, { text: intpre0(ed0).format(), alignment: 'right' },
     ]);
     
     const docDefinition = {
@@ -275,6 +318,24 @@ const generateReportPayroll = async (p) => {
             ],
             headerRows: 2,
             body: tbl3,
+          },
+          layout: {
+            fillColor: (rowIndex) => {
+              return rowIndex === employee.length + 2 ? '#eeeeee' : null;
+            },
+          },
+        },
+        { text: 'PT. Labtech Penta International', bold: true, fontSize: 6, pageBreak: 'before' },
+        { text: `Periode Payroll: ${ p.period }`, bold: true, fontSize: 6, margin: [0, 0, 0, 10] },
+        {
+          style: 'tbl',
+          table: {
+            widths: [
+              10, 60, 25, 30, 30, 30, 30, 30, 30, 30,
+              30, 30, 30, 30, 30, 30, 30,
+            ],
+            headerRows: 2,
+            body: tbl4,
           },
           layout: {
             fillColor: (rowIndex) => {

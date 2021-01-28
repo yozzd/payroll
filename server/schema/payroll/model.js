@@ -137,6 +137,7 @@ const EmployeeSchema = new Schema({
   dw0: Number, // Uang P.Masa Kerja Prorate
   dx0: Number, // Uang P.Masa Kerja Amount
   dy0: Number, // Uang Penggantian Hak
+  dz0: { type: String, trim: true }, // Bulan
   ea0: Number, // Total Bulan Periode Pajak
   eb0: Number, // Take Home Pay
   ec0: Number, // Total Transfer by Mandiri
