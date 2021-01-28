@@ -51,12 +51,52 @@ const generateReportPayroll = async (p) => {
         { text: 'Others', bold: true, alignment: 'center' }, '', '',
       ],
     ];
+    
+    const tbl2 = [
+      [
+        { text: 'No.', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Nama Karyawan', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'No. Karyawan', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Gaji Pokok', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Department', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Tunjagan Tidak Tetap', bold: true, alignment: 'center', colSpan: 9 }, '', '', '', '', '', '', '', '',
+        { text: 'Total Tunjagan Tidak Tetap', bold: true, alignment: 'center', rowSpan: 2 },
+        { text: 'Pembetulan Pembayaran', bold: true, alignment: 'center', colSpan: 9 }, '', '', '', '', '', '', '', '',
+        { text: 'Total Pembetulan Pembayaran (Retro Fill)', bold: true, alignment: 'center', rowSpan: 2 },
+      ],
+      [
+        '', '', '', '', '',
+        { text: 'Fungsional', bold: true, alignment: 'center' }, { text: 'Shift', bold: true, alignment: 'center' },
+        { text: 'Tig Welding', bold: true, alignment: 'center' }, { text: 'Plasma Cutting', bold: true, alignment: 'center' },
+        { text: 'LKS', bold: true, alignment: 'center' }, { text: 'Koperasi', bold: true, alignment: 'center' },
+        { text: 'Quality System', bold: true, alignment: 'center' }, { text: 'Penghargaan Masa Kerja', bold: true, alignment: 'center' },
+        { text: 'Others', bold: true, alignment: 'center' }, '',
+        { text: 'Koreksi Absen', bold: true, alignment: 'center' }, { text: 'Koreksi Gaji & Hari Kerja', bold: true, alignment: 'center' },
+        { text: 'Koreksi OT', bold: true, alignment: 'center' }, { text: 'Tunjangan', bold: true, alignment: 'center' },
+        { text: 'Insentif', bold: true, alignment: 'center' }, { text: 'THR', bold: true, alignment: 'center' },
+        { text: 'Allowance', bold: true, alignment: 'center' }, { text: 'Uang Makan Security', bold: true, alignment: 'center' },
+        { text: 'Others', bold: true, alignment: 'center' }, '',
+      ],
+    ];
 
-		let g0 = 0, ab0 = 0, ac0 = 0, ad0 = 0, ae0 = 0, af0 = 0, ag0 = 0, ah0 = 0;
-		let ai0 = 0, aj0 = 0, ak0 = 0, al0 = 0, am0 = 0, an0 = 0, ao0 = 0, ap0 = 0;
-		let aq0 = 0, ar0 = 0, as0 = 0, at0 = 0, au0 = 0, av0 = 0, aw0 = 0, ax0 = 0;
-		
+
+    let g0 = 0, ab0 = 0, ac0 = 0, ad0 = 0, ae0 = 0, af0 = 0, ag0 = 0, ah0 = 0;
+    let ai0 = 0, aj0 = 0, ak0 = 0, al0 = 0, am0 = 0, an0 = 0, ao0 = 0, ap0 = 0;
+    let aq0 = 0, ar0 = 0, as0 = 0, at0 = 0, au0 = 0, av0 = 0, aw0 = 0, ax0 = 0;
+    let ba0 = 0, bb0 = 0, bc0 = 0, bd0 = 0, be0 = 0, bf0 = 0, bg0 = 0, bh0 = 0;
+    let bi0 = 0, bj0 = 0, bl0 = 0, bm0 = 0, bn0 = 0, bo0 = 0, bp0 = 0, bq0 = 0;
+    let br0 = 0, bs0 = 0, bt0 = 0, bu0 = 0;
+    
     employee.map((e, i) => {
+
+      g0 += e.g0;
+   		ab0 += e.ab0, ac0 += e.ac0, ad0 += e.ad0, ae0 += e.ae0, af0 += e.af0, ag0 += e.ag0, ah0 += e.ah0, ai0 += e.ai0, aj0 += e.aj0, ak0 += e.ak0;
+      al0 += e.al0, am0 += e.am0, an0 += e.an0, ao0 += e.ao0, ap0 += e.ap0, aq0 += e.aq0, ar0 += e.ar0, as0 += e.as0, at0 += e.at0, au0 += e.au0;
+      av0 += e.av0, aw0 += e.aw0, ax0 += e.ax0;
+
+      ba0 += e.ba0, bb0 += e.bb0, bc0 += e.bc0, bd0 += e.bd0, be0 += e.be0, bf0 += e.bf0, bg0 += e.bg0, bh0 += e.bh0, bi0 += e.bi0, bj0 += e.bj0;
+      bl0 += e.bl0, bm0 += e.bm0, bn0 += e.bn0, bo0 += e.bo0, bp0 += e.bp0, bq0 += e.bq0, br0 += e.br0, bs0 += e.bs0, bt0 += e.bt0, bu0 += e.bu0;
+      
       tbl1.push([
         { text: (i + 1), alignment: 'center' }, e.d0, { text: e.e0, alignment: 'center' }, { text: intpre0(e.g0).format(), alignment: 'right' },
         { text: !e.i0 ? null : idDateFormat(e.i0, 'dd-MM-yyyy'), alignment: 'center' }, { text: e.j0 ,alignment: 'center' }, e.u0,
@@ -71,31 +111,17 @@ const generateReportPayroll = async (p) => {
         { text: intpre0(e.ax0).format(), alignment: 'right' },
       ]);
 
-      g0 += e.g0;
-      ab0 += e.ab0;
-      ac0 += e.ac0;
-      ad0 += e.ad0;
-      ae0 += e.ae0;
-      af0 += e.af0;
-      ag0 += e.ag0;
-      ah0 += e.ah0;
-      ai0 += e.ai0;
-      aj0 += e.aj0;
-      ak0 += e.ak0;
-      al0 += e.al0;
-      am0 += e.am0;
-      an0 += e.an0;
-      ao0 += e.ao0;
-      ap0 += e.ap0;
-      aq0 += e.aq0;
-      ar0 += e.ar0;
-      as0 += e.as0;
-      at0 += e.at0;
-      au0 += e.au0;
-      av0 += e.av0;
-      aw0 += e.aw0;
-      ax0 += e.ax0;
-      
+      tbl2.push([
+        { text: (i + 1), alignment: 'center' }, e.d0, { text: e.e0, alignment: 'center' }, { text: intpre0(e.g0).format(), alignment: 'right' },
+        e.u0, { text: intpre0(e.ba0).format(), alignment: 'right' }, { text: intpre0(e.bb0).format(), alignment: 'right' }, { text: intpre0(e.bc0).format(), alignment: 'right' },
+        { text: intpre0(e.bd0).format(), alignment: 'right' }, { text: intpre0(e.be0).format(), alignment: 'right' }, { text: intpre0(e.bf0).format(), alignment: 'right' },
+        { text: intpre0(e.bg0).format(), alignment: 'right' }, { text: intpre0(e.bh0).format(), alignment: 'right' }, { text: intpre0(e.bi0).format(), alignment: 'right' },
+        { text: intpre0(e.bj0).format(), alignment: 'right' }, { text: intpre0(e.bl0).format(), alignment: 'right' }, { text: intpre0(e.bm0).format(), alignment: 'right' },
+        { text: intpre0(e.bn0).format(), alignment: 'right' }, { text: intpre0(e.bo0).format(), alignment: 'right' }, { text: intpre0(e.bp0).format(), alignment: 'right' },
+        { text: intpre0(e.bq0).format(), alignment: 'right' }, { text: intpre0(e.br0).format(), alignment: 'right' }, { text: intpre0(e.bs0).format(), alignment: 'right' },
+        { text: intpre0(e.bt0).format(), alignment: 'right' }, { text: intpre0(e.bu0).format(), alignment: 'right' },
+      ]);
+
       return true;
     });
 
@@ -109,6 +135,17 @@ const generateReportPayroll = async (p) => {
       { text: intpre0(aq0).format(), alignment: 'right' }, { text: intpre0(ar0).format(), alignment: 'right' }, { text: intpre0(as0).format(), alignment: 'right' },
       { text: intpre0(at0).format(), alignment: 'right' }, { text: intpre0(au0).format(), alignment: 'right' }, { text: intpre0(av0).format(), alignment: 'right' },
       { text: intpre0(aw0).format(), alignment: 'right' }, { text: intpre0(ax0).format(), alignment: 'right' },
+    ]);
+
+    tbl2.push([
+      '', '', '', { text: intpre0(g0).format(), alignment: 'right' }, '',
+      { text: intpre0(ba0).format(), alignment: 'right' }, { text: intpre0(bb0).format(), alignment: 'right' }, { text: intpre0(bc0).format(), alignment: 'right' },
+      { text: intpre0(bd0).format(), alignment: 'right' }, { text: intpre0(be0).format(), alignment: 'right' }, { text: intpre0(bf0).format(), alignment: 'right' },
+      { text: intpre0(bg0).format(), alignment: 'right' }, { text: intpre0(bh0).format(), alignment: 'right' }, { text: intpre0(bi0).format(), alignment: 'right' },
+      { text: intpre0(bj0).format(), alignment: 'right' }, { text: intpre0(bl0).format(), alignment: 'right' }, { text: intpre0(bm0).format(), alignment: 'right' },
+      { text: intpre0(bn0).format(), alignment: 'right' }, { text: intpre0(bo0).format(), alignment: 'right' }, { text: intpre0(bp0).format(), alignment: 'right' },
+      { text: intpre0(bq0).format(), alignment: 'right' }, { text: intpre0(br0).format(), alignment: 'right' }, { text: intpre0(bs0).format(), alignment: 'right' },
+      { text: intpre0(bt0).format(), alignment: 'right' }, { text: intpre0(bu0).format(), alignment: 'right' },
     ]);
     
     const docDefinition = {
@@ -135,6 +172,24 @@ const generateReportPayroll = async (p) => {
             ],
             headerRows: 2,
             body: tbl1,
+          },
+          layout: {
+            fillColor: (rowIndex) => {
+              return rowIndex === employee.length + 2 ? '#eeeeee' : null;
+            },
+          },
+        },
+        {
+          style: 'tbl',
+          pageBreak: 'before',
+          table: {
+            widths: [
+              10, 60, 25, 30, 50, 30, 30, 30, 30, 30,
+              30, 30, 30, 30, 30, 30, 30, 30, 30, 30,
+              30, 30, 30, 30, 30,
+            ],
+            headerRows: 2,
+            body: tbl2,
           },
           layout: {
             fillColor: (rowIndex) => {
