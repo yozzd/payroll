@@ -28,7 +28,7 @@
       <el-table
         v-loading="$apollo.loading || genRpPy"
         :data="payrollAll"
-        element-loading-text="Loading..."
+        :element-loading-text="genRpPy ? 'Processing...' : 'Loading...'"
         element-loading-spinner="el-icon-loading"
         height="500"
       >
