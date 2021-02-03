@@ -161,8 +161,13 @@ const EmployeeSchema = new Schema({
   ez0: Number, // Slot 3 Flag
   fa0: Number, // Slot 3 Flag
   fb0: Number, // Slot 4 Flag
-  fc0: { type: String, trim: true }, // Note 1
-  fd0: { type: String, trim: true }, // Note 2
+  fc0: Number, // Slot 5 Flag
+  fd0: Number, // Slot 6 Flag
+  fe0: Number, // Slot 7 Flag
+  ff0: Number, // Slot 8 Flag
+  fg0: Number, // Slot 9 Flag
+  fh0: { type: String, trim: true }, // Note 1
+  fi0: { type: String, trim: true }, // Note 2
   category: Number, // 0 = Administration, 1 = Production
   slip: {
     name: { type: String, default: () => nanoid(6) },
@@ -253,13 +258,22 @@ EmployeeSchema.pre('save', async function fn(next) {
     + this.bs0
     + this.bt0;
 
-  this.bx0 = (this.ay0 / 12) * this.bw0;
+  if (this.fd0) {
+    this.bx0 = this.fd0;
+  } else {
+    this.bx0 = (this.ay0 / 12) * this.bw0;
+  }
   this.bz0 = (this.ay0 / 21) * this.by0;
 
   this.dt0 = this.ay0 * this.ds0;
-  this.dv0 = this.ay0 * this.du0;
   this.dx0 = this.ay0 * this.dw0;
-  this.dy0 = (this.dv0 + this.dx0) * 0.15;
+  if (this.fe0) {
+    this.dv0 = this.fe0;
+    this.dy0 = 0;
+  } else {
+  	this.dv0 = this.ay0 * this.du0;
+  	this.dy0 = (this.dv0 + this.dx0) * 0.15;
+  }
 
   this.ca0 = this.g0
     + this.ai0
@@ -278,19 +292,19 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.cx0 = (this.g0 / 21) * this.cw0;
   this.cy0 = this.cx0;
 
-  if (this.e0 === 'X.0003' || this.ex0 === 1 || (this.ey0 === 1 && this.ez0 === 1)) {
+  if (this.e0 === 'X.0003' || this.ex0 === 1 || (this.ey0 === 1 && this.ez0 === 1) || this.ff0 === 1 || this.fg0 === 1) {
     this.cb0 = 0;
     this.cc0 = 0;
     this.cd0 = 0;
     this.ce0 = 0;
   } else {
-    // if (this.fb0 === 1) {
-    this.cb0 = this.ay0 * this.ownerDocument().rate.cb5;
-    this.cc0 = this.ay0 * this.ownerDocument().rate.cc5;
-    // } else {
-    //   this.cb0 = this.ay0 * this.ownerDocument().rate.cb5 * 0.01;
-    //   this.cc0 = this.ay0 * this.ownerDocument().rate.cc5 * 0.01;
-    // }
+    if (this.fb0 === 1) {
+      this.cb0 = this.ay0 * this.ownerDocument().rate.cb5;
+      this.cc0 = this.ay0 * this.ownerDocument().rate.cc5;
+    } else {
+      this.cb0 = this.ay0 * this.ownerDocument().rate.cb5 * 0.01;
+      this.cc0 = this.ay0 * this.ownerDocument().rate.cc5 * 0.01;
+    }
 
     this.cd0 = this.ay0 * this.ownerDocument().rate.cd5;
     this.ce0 = this.ay0 * this.ownerDocument().rate.ce5;
@@ -299,14 +313,14 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.cf0 = this.cb0 + this.cc0 + this.cd0 + this.ce0;
 
   if (this.ay0 >= this.ownerDocument().rate.b18) {
-    this.ch0 = this.ey0 === 1 || this.ex0 === 1 ? 0 : this.ownerDocument().rate.b18;
+    this.ch0 = this.ey0 === 1 || this.ex0 === 1 || this.ff0 === 1 || this.fg0 === 1 ? 0 : this.ownerDocument().rate.b18;
   } else if (
     this.ay0 < this.ownerDocument().rate.b18
     && this.ay0 > this.ownerDocument().rate.b17
   ) {
-    this.ch0 = this.ey0 === 1 || this.ex0 === 1 ? 0 : this.ay0;
+    this.ch0 = this.ey0 === 1 || this.ex0 === 1 || this.ff0 === 1 || this.fg0 === 1 ? 0 : this.ay0;
   } else {
-    this.ch0 = this.ey0 === 1 || this.ex0 === 1 ? 0 : this.ownerDocument().rate.b17;
+    this.ch0 = this.ey0 === 1 || this.ex0 === 1 || this.ff0 === 1 || this.fg0 === 1 ? 0 : this.ownerDocument().rate.b17;
   }
 
   this.ci0 = this.ch0 * this.ownerDocument().rate.ci5;
@@ -315,16 +329,16 @@ EmployeeSchema.pre('save', async function fn(next) {
 
   this.cm0 = this.cb0 + this.cc0 + this.cd0 + this.ce0 + this.ci0 + this.cj0;
   if (this.co0 >= this.ownerDocument().rate.b15) {
-    this.cp0 = this.ez0 === 1 || this.ex0 === 1 ? 0 : this.ownerDocument().rate.b15;
+    this.cp0 = this.ez0 === 1 || this.ex0 === 1 || this.ff0 === 1 || this.fg0 === 1 ? 0 : this.ownerDocument().rate.b15;
   } else if (
     this.co0 < this.ownerDocument().rate.b15
     && this.co0 > this.ownerDocument().rate.b14
   ) {
-    this.cp0 = this.ez0 === 1 || this.ex0 === 1 ? 0 : this.co0;
+    this.cp0 = this.ez0 === 1 || this.ex0 === 1 || this.ff0 === 1 || this.fg0 === 1 ? 0 : this.co0;
   } else if (this.co0 === this.ownerDocument().rate.b14) {
-    this.cp0 = this.ez0 === 1 || this.ex0 === 1 ? 0 : this.ownerDocument().rate.b14;
+    this.cp0 = this.ez0 === 1 || this.ex0 === 1 || this.ff0 === 1 || this.fg0 === 1 ? 0 : this.ownerDocument().rate.b14;
   } else {
-    this.cp0 = this.ez0 === 1 || this.ex0 === 1 ? 0 : 0;
+    this.cp0 = this.ez0 === 1 || this.ex0 === 1 || this.ff0 === 1 || this.fg0 === 1 ? 0 : 0;
   }
   this.cq0 = this.cp0 * this.ownerDocument().rate.cq5;
   this.cr0 = this.cp0 * this.ownerDocument().rate.cr5;
@@ -381,7 +395,13 @@ EmployeeSchema.pre('save', async function fn(next) {
     + Math.max(0, pkpSetahun - 500000000) * 0.3;
   const pph21Bulanan = Math.round(pph21Tahunan / this.ea0);
 
-  if (this.p0 === 'Yes') {
+  if (this.fc0 && this.p0 === 'Yes') {
+    this.cz0 = this.fc0;
+    this.da0 = 0;
+  } else if (this.fc0 && this.p0 === 'No') {
+    this.cz0 = 0;
+    this.da0 = this.fc0;
+  } else if (!this.fc0 && this.p0 === 'Yes') {
     const v = Math.floor(pph21Bulanan / 100) * 100;
     this.cz0 = v <= 200 ? 0 : v;
     this.da0 = 0;
@@ -390,14 +410,13 @@ EmployeeSchema.pre('save', async function fn(next) {
     this.da0 = Math.floor((pph21Bulanan * 1.2) / 100) * 100;
   }
 
-  if (this.e0 === 'B.1524') {
-    this.cz0 = 359700;
-  } else if (this.e0 === 'B.1867') {
-    this.da0 = 231300;
-  } else if (this.e0 === 'B.1839') {
-    this.cz0 = 79600;
-  }
-
+	if (this.e0 === 'B.1327') {
+  	this.cz0 = 0;
+	}
+	if (this.e0 === 'B.2057') {
+  	this.da0 = 0;
+	}
+	
   this.db0 = this.cz0 + this.da0;
   /** ********Pajak********* */
 
@@ -416,14 +435,14 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.dp0 = this.ca0 - this.do0;
   this.eb0 = this.dp0 + this.dr0;
 
-  if (this.fa0 === 1 || this.p0 === 'No') {
+  if (!this.fa0 || this.p0 === 'No') {
     this.es0 = 0;
   } else {
     this.es0 = this.db0;
   }
 
   const byCash = ['X.0008', 'X.0010'];
-  if (byCash.includes(this.e0) || this.ex0 === 1) {
+  if (byCash.includes(this.e0) || this.ex0 === 1 || this.ff0 === 1 || this.fg0 === 1) {
     this.ec0 = 0;
     // this.ed0 = this.dp0 + this.dr0 + this.dt0 + this.dx0 + this.dy0 + this.es0;
     this.ed0 = this.dp0 + this.dr0 + this.es0;
@@ -443,7 +462,11 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.el0 = this.ap0;
   this.em0 = this.au0 + this.av0 + this.bg0 + this.bh0 + this.bi0;
   this.en0 = this.dt0 + this.dx0 + this.dy0 + this.dv0;
-  this.eo0 = this.bz0 + this.dt0 + this.dx0 + this.dy0 + this.dv0;
+  if (this.fe0) {
+    this.eo0 = this.fe0;
+  } else {
+  	this.eo0 = this.bz0 + this.dt0 + this.dx0 + this.dy0 + this.dv0;
+  }
   this.eq0 = this.bz0 + this.bx0;
   this.er0 = this.ce0 + this.cj0;
 

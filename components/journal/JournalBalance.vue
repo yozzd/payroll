@@ -443,6 +443,26 @@
         </tr>
         <tr>
           <td>21510</td>
+          <td>Salaries Payable (Total Final Pay Mangkir)</td>
+          <td></td>
+          <td></td>
+          <td class="text-right">
+            {{ journalBalance.totMangkirPay | currency }}
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>21510</td>
+          <td>Salaries Payable (Total Final Pay Pesangon)</td>
+          <td></td>
+          <td></td>
+          <td class="text-right">
+            {{ journalBalance.totPesangonPay | currency }}
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>21510</td>
           <td>Salaries Payable (Total Expatriat Salary)</td>
           <td></td>
           <td></td>
@@ -528,6 +548,16 @@
           <td></td>
           <td class="text-right">
             {{ journalBalance.totTax | currency }}
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>PPH 21 Kurang Bayar</td>
+          <td></td>
+          <td></td>
+          <td class="text-right">
+            {{ journalBalance.totPphKurangBayar | currency }}
           </td>
           <td></td>
         </tr>

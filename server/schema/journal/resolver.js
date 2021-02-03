@@ -132,6 +132,7 @@ const Query = {
             cn0: { $sum: '$employee.cn0' },
             en0: { $sum: '$employee.en0' },
             eq0: { $sum: '$employee.eq0' },
+            dn0: { $sum: '$employee.dn0' },
             retro: { $sum: '$employee.bu0' },
             ot: { $sum: '$employee.ai0' },
             accident: { $sum: '$employee.cb0' },
@@ -161,12 +162,14 @@ const Query = {
             ker: { $sum: '$employee.cm0' },
             kes: { $sum: '$employee.cu0' },
             taxPay: { $sum: '$employee.db0' },
+            pesangonPay: { $sum: { $cond: { if: { $eq: ['$employee.ff0', 1] }, then: '$employee.ed0', else: 0 } } },
+            mangkirPay: { $sum: { $cond: { if: { $eq: ['$employee.fg0', 1] }, then: '$employee.ed0', else: 0 } } },
           },
         },
         {
           $addFields: {
             salary: { $subtract: ['$l0', { $sum: ['$cy0', '$df'] }] },
-            expat: { $subtract: ['$ed0', '$finalPay'] },
+            expat: { $subtract: ['$ed0', { $sum: ['$finalPay', '$pesangonPay', '$mangkirPay'] }] },
             gross: {
               $subtract: [
                 { $sum: ['$l0', '$ot', '$bk0', '$cn0', '$retro', '$en0', '$eq0'] },
@@ -215,6 +218,9 @@ const Query = {
             totTax: { $sum: '$taxPay' },
             totPension: { $sum: '$pension' },
             totGross: { $sum: '$gross' },
+						totPesangonPay: { $sum: '$pesangonPay' },
+						totMangkirPay: { $sum: '$mangkirPay' },
+						totPphKurangBayar: { $sum: '$dn0' },
           },
         },
         {
@@ -223,6 +229,7 @@ const Query = {
               $sum: [
                 '$totMandiri', '$totFinalPay', '$totExpat', '$totRetroPay', '$totTool',
                 '$totCanteen', '$totLoan', '$totKopkar', '$totKer', '$totKes', '$totTax',
+                '$totPesangonPay', '$totMangkirPay', '$totPphKurangBayar',
               ],
             },
             production: {
@@ -281,6 +288,9 @@ const Query = {
             pensionAdm: '$administration.pension',
             totPension: '$totPension',
             totGross: '$totGross',
+						totPesangonPay: '$totPesangonPay',
+						totMangkirPay: '$totMangkirPay',
+						totPphKurangBayar: '$totPphKurangBayar',
           },
         },
         {

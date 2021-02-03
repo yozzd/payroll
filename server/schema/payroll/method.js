@@ -451,7 +451,7 @@ const generateSlip = async (p) => {
       ['', 'Note :', '', ''],
       ['-', e.dq0, 'Approved by,', 'Received by,'],
       ['-', { text: 'If there is correction on the limit of complaint on the 15th of each month', rowSpan: 2 }, { text: 'PT. LABTECH PENTA INTERNATIONAL', bold: true }, { text: e.d0, bold: true }],
-      ['', '', e.fc0, ''],
+      ['', '', e.fh0, ''],
     ];
 
     if (e.m0) notes.push(['-', e.m0, '', '']);

@@ -123,6 +123,9 @@ export const JournalBalance = gql`
       totGross
       totJurnal
       totSelisih
+      totPesangonPay
+      totMangkirPay
+      totPphKurangBayar
     }
   }
   ${journalBalanceFragment.fragments.balance}

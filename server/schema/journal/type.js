@@ -62,6 +62,9 @@ const JournalBalanceType = new GraphQLObjectType({
     totGross: { type: GraphQLFloat },
     totJurnal: { type: GraphQLFloat },
     totSelisih: { type: GraphQLFloat },
+    totPesangonPay: { type: GraphQLFloat },
+    totMangkirPay: { type: GraphQLFloat },
+    totPphKurangBayar: { type: GraphQLFloat },
   }),
 });
 
