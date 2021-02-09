@@ -58,6 +58,17 @@
             <el-link
               type="primary"
               class="font-sm"
+              @click="showAdd(scope.row._id)"
+            >
+              Add Employee
+            </el-link>
+          </template>
+        </el-table-column>
+        <el-table-column>
+          <template slot-scope="scope">
+            <el-link
+              type="primary"
+              class="font-sm"
               @click="generateReportPayroll(scope.row._id, scope.row.dir)"
             >
               Report
@@ -153,6 +164,42 @@
         </el-button>
       </span>
     </el-dialog>
+    
+    <el-dialog
+      title="Add Employee"
+      :visible.sync="showAddDialog"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :before-close="handleAddDialogClose"
+      width="31%"
+    >
+      <ErrorHandler
+        v-if="errors"
+        :errors="errors"
+        class="mb-8"
+      />
+      <el-form
+        ref="formAdd"
+        :model="formAdd"
+        :rules="rulesAdd"
+        :hide-required-asterisk="true"
+        label-position="top"
+      >
+        <el-form-item label="No. Karyawan" prop="e0">
+          <el-input v-model="formAdd.e0"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleAddDialogClose">Cancel</el-button>
+        <el-button
+          type="primary"
+          :loading="loadingAdd"
+          @click="handleAdd('formAdd')"
+        >
+          Save
+        </el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -160,7 +207,7 @@
 import { getYear } from 'date-fns';
 import { PayrollAll } from '../apollo/query/payroll';
 import { ImportPayroll } from '../apollo/mutation/import';
-import { PayrollDelete, GenerateReportPayroll } from '../apollo/mutation/payroll';
+import { PayrollDelete, GenerateReportPayroll, AddEmployee } from '../apollo/mutation/payroll';
 
 export default {
   data() {
@@ -169,12 +216,18 @@ export default {
 
     return {
       showDialog: false,
+      showAddDialog: false,
       loading: false,
+      loadingAdd: false,
       genRpPy: false,
       form: {
         period: [],
         file: null,
         year,
+      },
+      formAdd: {
+        id: '',
+        e0: '',
       },
       fileList: [],
       rules: {
@@ -197,6 +250,9 @@ export default {
             message: 'This field is required',
           },
         ],
+      },
+      rulesAdd: {
+        e0: [{ required: true, message: 'Required' }],
       },
       years: [...Array(year - (initY - 1)).keys()].map((i) => i + initY).sort((a, b) => b - a),
       errors: [],
@@ -298,6 +354,43 @@ export default {
 
             this.handleCancel();
             this.loading = false;
+            return true;
+          } catch ({ graphQLErrors, networkError }) {
+            this.errors = graphQLErrors || networkError.result.errors;
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
+    },
+    showAdd(id) {
+      this.showAddDialog = true;
+      this.formAdd.id = id;
+    },
+    handleAddDialogClose() {
+      this.$refs.formAdd.resetFields();
+      this.$refs.formAdd.clearValidate();
+      this.showAddDialog = false;
+    },
+    handleAdd(form) {
+      this.$refs[form].validate(async (valid) => {
+        if (valid) {
+          try {
+            this.loadingAdd = true;
+
+            await this.$apollo.mutate({
+              mutation: AddEmployee,
+              variables: {
+                input: {
+                  _id: this.formAdd.id,
+                  e0: this.formAdd.e0,
+                },
+              },
+            });
+
+            this.handleAddDialogClose();
+            this.loadingAdd = false;
             return true;
           } catch ({ graphQLErrors, networkError }) {
             this.errors = graphQLErrors || networkError.result.errors;

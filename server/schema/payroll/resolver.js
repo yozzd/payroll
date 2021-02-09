@@ -7,6 +7,7 @@ const {
 const Payroll = require('./model.js');
 const { PayrollType, GenType, SendType } = require('./type');
 const { generateSlip, sendSlip, generateReportPayroll } = require('./method');
+const { AddEmployeeInputType } = require('./employee.input.type.js');
 const auth = require('../auth/service');
 
 const Query = {
@@ -464,6 +465,35 @@ const Mutation = {
       ]);
       const s = await generateReportPayroll(p[0]);
       return s;
+    }),
+  },
+  addEmployee: {
+    type: GenType,
+    args: {
+      input: { type: AddEmployeeInputType },
+    },
+    resolve: auth.hasRole('admin', async (_, { input }) => {
+      const { _id, e0 } = input;
+      const px = await Payroll.findOne({_id});
+
+      let m, y;
+      if (px.month < 1) {
+        m = 11;
+        y = px.year - 1;
+      } else {
+        m = px.month - 1;
+        y = px.year;
+      }
+
+      const py = await Payroll.aggregate([
+        { $match: { $and: [ { month: m }, { year: y }] } },
+        { $unwind: '$employee' },
+        { $match: { 'employee.e0': e0 } },
+      ]);
+
+      px.employee.push(py[0].employee);
+      await px.save();
+      return { sStatus: 1 };
     }),
   },
 };

@@ -32,3 +32,11 @@ export const GenerateReportPayroll = gql`
     }
   }
 `;
+
+export const AddEmployee = gql`
+  mutation addEmployee($input: AddEmployeeInputType) {
+    addEmployee(input: $input) {
+      sStatus
+    }
+  }
+`;
