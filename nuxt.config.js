@@ -23,6 +23,7 @@ export default {
   plugins: [
     '@/plugins/element-ui',
     '@/plugins/auth',
+    '@/plugins/maska',
     { src: '@/plugins/vue-snip', mode: 'client' },
   ],
 

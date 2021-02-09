@@ -186,7 +186,10 @@
         label-position="top"
       >
         <el-form-item label="No. Karyawan" prop="e0">
-          <el-input v-model="formAdd.e0"></el-input>
+          <el-input
+          	v-model="formAdd.e0"
+          	v-maska="'A.####'"
+          ></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
