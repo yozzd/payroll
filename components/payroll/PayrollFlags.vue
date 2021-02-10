@@ -32,13 +32,13 @@
         <template slot-scope="scope">
           <client-only>
             <el-link
-              v-snip="1"
               type="primary"
               class="font-sm"
               @click="showEdit(scope.row)"
-              :title="scope.row.d0"
             >
-              {{ scope.row.d0 }}
+              <p v-snip="1" :title="scope.row.d0">
+                {{ scope.row.d0 }}
+              </p>
             </el-link>
           </client-only>
         </template>
@@ -160,7 +160,6 @@ export default {
       showEditDialog: false,
       form: {},
       loading: false,
-      errors: [],
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],

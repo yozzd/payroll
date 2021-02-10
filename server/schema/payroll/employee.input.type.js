@@ -4,8 +4,8 @@ const {
   GraphQLBoolean,
 } = require('graphql');
 
-const EmployeeInputType = new GraphQLInputObjectType({
-  name: 'EmployeeInputType',
+const FlagsInputType = new GraphQLInputObjectType({
+  name: 'FlagsInputType',
   fields: () => ({
     _id: { type: GraphQLString },
     ex0: { type: GraphQLBoolean },
@@ -27,7 +27,7 @@ const EditFlagsEmployeeInputType = new GraphQLInputObjectType({
   name: 'EditFlagsEmployeeInputType',
   fields: () => ({
     _id: { type: GraphQLString },
-    employee: { type: EmployeeInputType },
+    employee: { type: FlagsInputType },
   }),
 });
 
