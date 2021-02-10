@@ -406,6 +406,26 @@ const Query = {
       return payroll[0];
     }),
   },
+  payrollFlags: {
+    type: PayrollType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('admin', async (_, { id }) => {
+      const p = await Payroll.findOne({ _id: id })
+        .select({
+          _id: 1,
+          'employee._id': 1,
+          'employee.d0': 1,
+          'employee.e0': 1,
+          'employee.ex0': 1,
+          'employee.ey0': 1,
+          'employee.ez0': 1,
+          'employee.fb0': 1,
+        });
+      return p;
+    }),
+  },
 };
 
 const Mutation = {

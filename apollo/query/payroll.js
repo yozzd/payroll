@@ -341,3 +341,20 @@ export const PayrollSlip = gql`
     }
   }
 `;
+export const PayrollFlags = gql`
+  query payrollFlags($id: String!) {
+    payrollFlags(id: $id) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        ex0
+        ey0
+        ez0
+        fb0
+      }
+    }
+  }
+`;
+

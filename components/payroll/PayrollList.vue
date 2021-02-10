@@ -28,6 +28,11 @@
           <PayrollPayment />
         </div>
       </el-tab-pane>
+      <el-tab-pane label="Flags" name="f">
+        <div v-if="activeName==='f'">
+          <PayrollFlags />
+        </div>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
