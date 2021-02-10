@@ -37,7 +37,7 @@ export default {
       return sums;
     },
     finalRow({ row }) {
-      if (row.ex0 === 1) {
+      if (row.ex0) {
         return 'final-row';
       }
       return '';

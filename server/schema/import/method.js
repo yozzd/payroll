@@ -150,16 +150,16 @@ const processImportPayroll = async ({ file, from, to }) => {
             dz0: ft[i].__EMPTY_129 || '', // Bulan
             ea0: ft[i].__EMPTY_130 || 0, // Total Bulan Periode Pajak
             ew0: ft[i].__EMPTY_152 || '', // Email
-            ex0: ft[i].__EMPTY_153 || 0, // Slot 1 Flag
-            ey0: ft[i].__EMPTY_154 || 0, // Slot 2 Flag
-            ez0: ft[i].__EMPTY_155 || 0, // Slot 3 Flag
-            fa0: ft[i].__EMPTY_156 || 0, // Slot 3 Flag
-            fb0: ft[i].__EMPTY_157 || 0, // Slot 4 Flag
+            ex0: ft[i].__EMPTY_153, // Slot 1 Flag
+            ey0: ft[i].__EMPTY_154, // Slot 2 Flag
+            ez0: ft[i].__EMPTY_155, // Slot 3 Flag
+            fa0: ft[i].__EMPTY_156, // Slot 3 Flag
+            fb0: ft[i].__EMPTY_157, // Slot 4 Flag
             fc0: ft[i].__EMPTY_158 || 0, // Slot 5 Flag
             fd0: ft[i].__EMPTY_159 || 0, // Slot 6 Flag
             fe0: ft[i].__EMPTY_160 || 0, // Slot 7 Flag
-            ff0: ft[i].__EMPTY_161 || 0, // Slot 8 Flag
-            fg0: ft[i].__EMPTY_162 || 0, // Slot 9 Flag
+            ff0: ft[i].__EMPTY_161, // Slot 8 Flag
+            fg0: ft[i].__EMPTY_162, // Slot 9 Flag
             fh0: ft[i].__EMPTY_163 || '', // Note 1
             fi0: ft[i].__EMPTY_164 || '', // Note 2
           });

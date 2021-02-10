@@ -40,3 +40,20 @@ export const AddEmployee = gql`
     }
   }
 `;
+
+export const EditFlagsEmployee = gql`
+  mutation editFlagsEmployee($input: EditFlagsEmployeeInputType) {
+    editFlagsEmployee(input: $input) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        ex0
+        ey0
+        ez0
+        fb0
+      }
+    }
+  }
+`;

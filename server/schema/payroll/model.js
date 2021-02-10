@@ -156,11 +156,11 @@ const EmployeeSchema = new Schema({
   er0: Number, // Total JHT dan Pensiun Karyawan
   es0: Number, // Pengembalian Pajak DTP
   ew0: { type: String, trim: true }, // Email
-  ex0: Number, // Slot 1 Flag
-  ey0: Number, // Slot 2 Flag
-  ez0: Number, // Slot 3 Flag
-  fa0: Number, // Slot 3 Flag
-  fb0: Number, // Slot 4 Flag
+  ex0: Boolean, // Slot 1 Flag
+  ey0: Boolean, // Slot 2 Flag
+  ez0: Boolean, // Slot 3 Flag
+  fa0: Boolean, // Slot 3 Flag
+  fb0: Boolean, // Slot 4 Flag
   fc0: Number, // Slot 5 Flag
   fd0: Number, // Slot 6 Flag
   fe0: Number, // Slot 7 Flag
@@ -292,13 +292,13 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.cx0 = (this.g0 / 21) * this.cw0;
   this.cy0 = this.cx0;
 
-  if (this.e0 === 'X.0003' || this.ex0 === 1 || (this.ey0 === 1 && this.ez0 === 1) || this.ff0 === 1 || this.fg0 === 1) {
+  if (this.e0 === 'X.0003' || this.ex0 || (this.ey0 && this.ez0) || this.ff0 || this.fg0) {
     this.cb0 = 0;
     this.cc0 = 0;
     this.cd0 = 0;
     this.ce0 = 0;
   } else {
-    if (this.fb0 === 1) {
+    if (this.fb0) {
       this.cb0 = this.ay0 * this.ownerDocument().rate.cb5;
       this.cc0 = this.ay0 * this.ownerDocument().rate.cc5;
     } else {
@@ -313,14 +313,14 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.cf0 = this.cb0 + this.cc0 + this.cd0 + this.ce0;
 
   if (this.ay0 >= this.ownerDocument().rate.b18) {
-    this.ch0 = this.ey0 === 1 || this.ex0 === 1 || this.ff0 === 1 || this.fg0 === 1 ? 0 : this.ownerDocument().rate.b18;
+    this.ch0 = this.ey0 || this.ex0 || this.ff0 || this.fg0 ? 0 : this.ownerDocument().rate.b18;
   } else if (
     this.ay0 < this.ownerDocument().rate.b18
     && this.ay0 > this.ownerDocument().rate.b17
   ) {
-    this.ch0 = this.ey0 === 1 || this.ex0 === 1 || this.ff0 === 1 || this.fg0 === 1 ? 0 : this.ay0;
+    this.ch0 = this.ey0 || this.ex0 || this.ff0 || this.fg0 ? 0 : this.ay0;
   } else {
-    this.ch0 = this.ey0 === 1 || this.ex0 === 1 || this.ff0 === 1 || this.fg0 === 1 ? 0 : this.ownerDocument().rate.b17;
+    this.ch0 = this.ey0 || this.ex0 || this.ff0 || this.fg0 ? 0 : this.ownerDocument().rate.b17;
   }
 
   this.ci0 = this.ch0 * this.ownerDocument().rate.ci5;
@@ -329,16 +329,16 @@ EmployeeSchema.pre('save', async function fn(next) {
 
   this.cm0 = this.cb0 + this.cc0 + this.cd0 + this.ce0 + this.ci0 + this.cj0;
   if (this.co0 >= this.ownerDocument().rate.b15) {
-    this.cp0 = this.ez0 === 1 || this.ex0 === 1 || this.ff0 === 1 || this.fg0 === 1 ? 0 : this.ownerDocument().rate.b15;
+    this.cp0 = this.ez0 || this.ex0 || this.ff0 || this.fg0 ? 0 : this.ownerDocument().rate.b15;
   } else if (
     this.co0 < this.ownerDocument().rate.b15
     && this.co0 > this.ownerDocument().rate.b14
   ) {
-    this.cp0 = this.ez0 === 1 || this.ex0 === 1 || this.ff0 === 1 || this.fg0 === 1 ? 0 : this.co0;
+    this.cp0 = this.ez0 || this.ex0 || this.ff0 || this.fg0 ? 0 : this.co0;
   } else if (this.co0 === this.ownerDocument().rate.b14) {
-    this.cp0 = this.ez0 === 1 || this.ex0 === 1 || this.ff0 === 1 || this.fg0 === 1 ? 0 : this.ownerDocument().rate.b14;
+    this.cp0 = this.ez0 || this.ex0 || this.ff0 || this.fg0 ? 0 : this.ownerDocument().rate.b14;
   } else {
-    this.cp0 = this.ez0 === 1 || this.ex0 === 1 || this.ff0 === 1 || this.fg0 === 1 ? 0 : 0;
+    this.cp0 = this.ez0 || this.ex0 || this.ff0 || this.fg0 ? 0 : 0;
   }
   this.cq0 = this.cp0 * this.ownerDocument().rate.cq5;
   this.cr0 = this.cp0 * this.ownerDocument().rate.cr5;
@@ -442,7 +442,7 @@ EmployeeSchema.pre('save', async function fn(next) {
   }
 
   const byCash = ['X.0008', 'X.0010'];
-  if (byCash.includes(this.e0) || this.ex0 === 1 || this.ff0 === 1 || this.fg0 === 1) {
+  if (byCash.includes(this.e0) || this.ex0 || this.ff0 || this.fg0) {
     this.ec0 = 0;
     // this.ed0 = this.dp0 + this.dr0 + this.dt0 + this.dx0 + this.dy0 + this.es0;
     this.ed0 = this.dp0 + this.dr0 + this.es0;

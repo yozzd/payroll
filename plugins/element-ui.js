@@ -2,6 +2,7 @@ import Vue from 'vue';
 import {
   Alert,
   Button,
+  Checkbox,
   DatePicker,
   Dialog,
   Dropdown,
@@ -31,6 +32,7 @@ locale.use(lang);
 
 Vue.use(Alert);
 Vue.use(Button);
+Vue.use(Checkbox);
 Vue.use(DatePicker);
 Vue.use(Dialog);
 Vue.use(Dropdown);

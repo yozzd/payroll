@@ -7,7 +7,7 @@ const {
 const Payroll = require('./model.js');
 const { PayrollType, GenType, SendType } = require('./type');
 const { generateSlip, sendSlip, generateReportPayroll } = require('./method');
-const { AddEmployeeInputType } = require('./employee.input.type.js');
+const { AddEmployeeInputType, EditFlagsEmployeeInputType } = require('./employee.input.type.js');
 const auth = require('../auth/service');
 
 const Query = {
@@ -514,6 +514,20 @@ const Mutation = {
       px.employee.push(py[0].employee);
       await px.save();
       return { sStatus: 1 };
+    }),
+  },
+  editFlagsEmployee: {
+    type: PayrollType,
+    args: {
+      input: { type: EditFlagsEmployeeInputType },
+    },
+    resolve: auth.hasRole('admin', async (_, { input }) => {
+      const { _id, employee } = input;
+      const px = await Payroll.findOne({_id});
+      
+      Object.assign(px.employee.id(employee._id), employee);
+      const s = await px.save();
+      return s;
     }),
   },
 };
