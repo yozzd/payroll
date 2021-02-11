@@ -410,13 +410,6 @@ EmployeeSchema.pre('save', async function fn(next) {
     this.da0 = Math.floor((pph21Bulanan * 1.2) / 100) * 100;
   }
 
-  if (this.e0 === 'B.1327') {
-    this.cz0 = 0;
-  }
-  if (this.e0 === 'B.2057') {
-    this.da0 = 0;
-  }
-
   this.db0 = this.cz0 + this.da0;
   /** ********Pajak********* */
 
