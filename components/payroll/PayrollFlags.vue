@@ -45,7 +45,7 @@
       </el-table-column>
       <el-table-column label="Final Payment" width="100" align="center">
         <template slot-scope="scope">
-          <p v-if="scope.row.ex0" >
+          <p v-if="scope.row.ex0">
             X
           </p>
         </template>
@@ -59,7 +59,7 @@
           </client-only>
         </template>
         <template slot-scope="scope">
-          <p v-if="scope.row.ey0" >
+          <p v-if="scope.row.ey0">
             X
           </p>
         </template>
@@ -73,7 +73,7 @@
           </client-only>
         </template>
         <template slot-scope="scope">
-          <p v-if="scope.row.ez0" >
+          <p v-if="scope.row.ez0">
             X
           </p>
         </template>
@@ -87,7 +87,7 @@
           </client-only>
         </template>
         <template slot-scope="scope">
-          <p v-if="scope.row.fb0" >
+          <p v-if="scope.row.fb0">
             X
           </p>
         </template>
@@ -116,21 +116,29 @@
       >
         <el-form-item label="No. Karyawan">
           <el-input
-          	v-model="form.e0"
+            v-model="form.e0"
             :disabled="true"
           ></el-input>
         </el-form-item>
         <el-form-item label="Nama Karyawan">
           <el-input
-          	v-model="form.d0"
+            v-model="form.d0"
             :disabled="true"
           ></el-input>
         </el-form-item>
         <el-form-item label="Flags">
-          <el-checkbox v-model="form.ex0">Final Payment</el-checkbox>
-          <el-checkbox v-model="form.ey0">Tidak Ikut Pensiun</el-checkbox>
-          <el-checkbox v-model="form.ez0">Tidak Ikut BPJS</el-checkbox>
-          <el-checkbox v-model="form.fb0">Tidak Dapat Relaksasi JKK & JK</el-checkbox>
+          <el-checkbox v-model="form.ex0">
+            Final Payment
+          </el-checkbox>
+          <el-checkbox v-model="form.ey0">
+            Tidak Ikut Pensiun
+          </el-checkbox>
+          <el-checkbox v-model="form.ez0">
+            Tidak Ikut BPJS
+          </el-checkbox>
+          <el-checkbox v-model="form.fb0">
+            Tidak Dapat Relaksasi JKK & JK
+          </el-checkbox>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -173,7 +181,7 @@ export default {
   methods: {
     showEdit(row) {
       this.showEditDialog = true;
-      this.form = row;
+      this.form = { ...row };
     },
     handleEditDialogClose() {
       this.$refs.form.resetFields();

@@ -357,4 +357,3 @@ export const PayrollFlags = gql`
     }
   }
 `;
-

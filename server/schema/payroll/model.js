@@ -271,8 +271,8 @@ EmployeeSchema.pre('save', async function fn(next) {
     this.dv0 = this.fe0;
     this.dy0 = 0;
   } else {
-  	this.dv0 = this.ay0 * this.du0;
-  	this.dy0 = (this.dv0 + this.dx0) * 0.15;
+    this.dv0 = this.ay0 * this.du0;
+    this.dy0 = (this.dv0 + this.dx0) * 0.15;
   }
 
   this.ca0 = this.g0
@@ -410,13 +410,13 @@ EmployeeSchema.pre('save', async function fn(next) {
     this.da0 = Math.floor((pph21Bulanan * 1.2) / 100) * 100;
   }
 
-	if (this.e0 === 'B.1327') {
-  	this.cz0 = 0;
-	}
-	if (this.e0 === 'B.2057') {
-  	this.da0 = 0;
-	}
-	
+  if (this.e0 === 'B.1327') {
+    this.cz0 = 0;
+  }
+  if (this.e0 === 'B.2057') {
+    this.da0 = 0;
+  }
+
   this.db0 = this.cz0 + this.da0;
   /** ********Pajak********* */
 
@@ -465,7 +465,7 @@ EmployeeSchema.pre('save', async function fn(next) {
   if (this.fe0) {
     this.eo0 = this.fe0;
   } else {
-  	this.eo0 = this.bz0 + this.dt0 + this.dx0 + this.dy0 + this.dv0;
+    this.eo0 = this.bz0 + this.dt0 + this.dx0 + this.dy0 + this.dv0;
   }
   this.eq0 = this.bz0 + this.bx0;
   this.er0 = this.ce0 + this.cj0;

@@ -164,7 +164,7 @@
         </el-button>
       </span>
     </el-dialog>
-    
+
     <el-dialog
       title="Add Employee"
       :visible.sync="showAddDialog"
@@ -187,8 +187,8 @@
       >
         <el-form-item label="No. Karyawan" prop="e0">
           <el-input
-          	v-model="formAdd.e0"
-          	v-maska="'A.####'"
+            v-model="formAdd.e0"
+            v-maska="'A.####'"
           ></el-input>
         </el-form-item>
       </el-form>

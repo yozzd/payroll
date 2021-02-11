@@ -24,6 +24,7 @@ button:focus,
   @apply outline-none;
 }
 
+.el-select-dropdown__item.selected,
 .el-table th,
 .el-breadcrumb__inner a,
 .el-breadcrumb__inner.is-link {
@@ -41,6 +42,11 @@ button:focus,
 
 .el-table .final-row {
   background: #f0f9eb;
+}
+
+.el-date-editor.el-input,
+.el-select {
+  width: 100%;
 }
 
 .px-80 {

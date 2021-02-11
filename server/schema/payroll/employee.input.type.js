@@ -4,6 +4,21 @@ const {
   GraphQLBoolean,
 } = require('graphql');
 
+const EmploymentInputType = new GraphQLInputObjectType({
+  name: 'EmploymentInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    h0: { type: GraphQLString },
+    i0: { type: GraphQLString },
+    k0: { type: GraphQLString },
+    u0: { type: GraphQLString },
+    v0: { type: GraphQLString },
+    w0: { type: GraphQLString },
+    x0: { type: GraphQLString },
+    y0: { type: GraphQLString },
+  }),
+});
+
 const FlagsInputType = new GraphQLInputObjectType({
   name: 'FlagsInputType',
   fields: () => ({
@@ -23,6 +38,14 @@ const AddEmployeeInputType = new GraphQLInputObjectType({
   }),
 });
 
+const EditEmploymentInputType = new GraphQLInputObjectType({
+  name: 'EditEmploymentInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    employee: { type: EmploymentInputType },
+  }),
+});
+
 const EditFlagsEmployeeInputType = new GraphQLInputObjectType({
   name: 'EditFlagsEmployeeInputType',
   fields: () => ({
@@ -31,4 +54,8 @@ const EditFlagsEmployeeInputType = new GraphQLInputObjectType({
   }),
 });
 
-module.exports = { AddEmployeeInputType, EditFlagsEmployeeInputType };
+module.exports = {
+  AddEmployeeInputType,
+  EditEmploymentInputType,
+  EditFlagsEmployeeInputType,
+};

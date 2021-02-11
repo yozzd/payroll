@@ -22,26 +22,60 @@ const generateReportPayroll = async (p) => {
 
     const tbl1 = [
       [
-        { text: 'No.', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Nama Karyawan', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'No. Karyawan', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Gaji Pokok', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Hired Date', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Hari Kerja', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Department', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Lembur Upah / 173', bold: true, alignment: 'center', colSpan: 2 }, '',
-        { text: 'Lembur Upah / 173', bold: true, alignment: 'center', colSpan: 2 }, '',
-        { text: 'Insentif Lembur', bold: true, alignment: 'center', colSpan: 3 }, '', '',
-        { text: 'Total Lembur & Insentif', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Tunjagan Tetap', bold: true, alignment: 'center', colSpan: 13 }, '', '', '', '', '', '', '', '', '', '', '', '',
-        { text: 'Total Tunjagan Tetap', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Upah (Gaji Pokok + Tj. Tetap)', bold: true, alignment: 'center', rowSpan: 2 },
+        {
+          text: 'No.', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Nama Karyawan', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'No. Karyawan', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Gaji Pokok', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Hired Date', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Hari Kerja', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Department', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Lembur Upah / 173', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'Lembur Upah / 173', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'Insentif Lembur', bold: true, alignment: 'center', colSpan: 3,
+        }, '', '',
+        {
+          text: 'Total Lembur & Insentif', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Tunjagan Tetap', bold: true, alignment: 'center', colSpan: 13,
+        }, '', '', '', '', '', '', '', '', '', '', '', '',
+        {
+          text: 'Total Tunjagan Tetap', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Upah (Gaji Pokok + Tj. Tetap)', bold: true, alignment: 'center', rowSpan: 2,
+        },
       ],
       [
         '', '', '', '', '', '', '',
-        { text: 'Lembur Normal', bold: true, alignment: 'center', colSpan: 2 }, '',
-        { text: 'Lembur Dinas Luar', bold: true, alignment: 'center', colSpan: 2 }, '',
-        { text: 'Jam / Hari', bold: true, alignment: 'center', colSpan: 2 }, '', { text: 'Jam / Hari * Insentif', bold: true, alignment: 'center' }, '',
+        {
+          text: 'Lembur Normal', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'Lembur Dinas Luar', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'Jam / Hari', bold: true, alignment: 'center', colSpan: 2,
+        }, '', { text: 'Jam / Hari * Insentif', bold: true, alignment: 'center' }, '',
         { text: 'Living', bold: true, alignment: 'center' }, { text: 'Perumahan', bold: true, alignment: 'center' },
         { text: 'Posisi Fix', bold: true, alignment: 'center' }, { text: 'Fungsional Fix', bold: true, alignment: 'center' },
         { text: 'Koordinator', bold: true, alignment: 'center' }, { text: 'Transport', bold: true, alignment: 'center' },
@@ -51,18 +85,36 @@ const generateReportPayroll = async (p) => {
         { text: 'Others', bold: true, alignment: 'center' }, '', '',
       ],
     ];
-    
+
     const tbl2 = [
       [
-        { text: 'No.', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Nama Karyawan', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'No. Karyawan', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Gaji Pokok', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Department', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Tunjagan Tidak Tetap', bold: true, alignment: 'center', colSpan: 9 }, '', '', '', '', '', '', '', '',
-        { text: 'Total Tunjagan Tidak Tetap', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Pembetulan Pembayaran', bold: true, alignment: 'center', colSpan: 9 }, '', '', '', '', '', '', '', '',
-        { text: 'Total Pembetulan Pembayaran (Retro Fill)', bold: true, alignment: 'center', rowSpan: 2 },
+        {
+          text: 'No.', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Nama Karyawan', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'No. Karyawan', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Gaji Pokok', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Department', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Tunjagan Tidak Tetap', bold: true, alignment: 'center', colSpan: 9,
+        }, '', '', '', '', '', '', '', '',
+        {
+          text: 'Total Tunjagan Tidak Tetap', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Pembetulan Pembayaran', bold: true, alignment: 'center', colSpan: 9,
+        }, '', '', '', '', '', '', '', '',
+        {
+          text: 'Total Pembetulan Pembayaran (Retro Fill)', bold: true, alignment: 'center', rowSpan: 2,
+        },
       ],
       [
         '', '', '', '', '',
@@ -78,32 +130,78 @@ const generateReportPayroll = async (p) => {
         { text: 'Others', bold: true, alignment: 'center' }, '',
       ],
     ];
-    
+
     const tbl3 = [
       [
-        { text: 'No.', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Nama Karyawan', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'No. Karyawan', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Gaji Pokok', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Tambahan Lain Tidak Kena Pajak', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'THR Prorate', bold: true, alignment: 'center', colSpan: 2 }, '',
-        { text: 'Cuti (Leave)', bold: true, alignment: 'center', colSpan: 2 }, '',
-        { text: 'Pendapatan Kotor', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Absent / Day', bold: true, alignment: 'center', colSpan: 2 }, '',
-        { text: 'Pemotongan Kelebihan Bayar Gaji & Koreksi Absen', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Pemotongan Kelebihan Bayar OT', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Pemotongan Prorate Absen', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Total Pemotongan (Gaji, OT, Tunjangan)', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Pemotongan', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Pemotongan Toolroom', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Pemotongan Lain', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Total Pemotongan', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Dana Pinjaman', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Ketring / Canteen', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Kopkar & BMI', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Pph21 Kurang Bayar', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Jumlah Pemotongan', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Penghasilan', bold: true, alignment: 'center', rowSpan: 2 },
+        {
+          text: 'No.', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Nama Karyawan', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'No. Karyawan', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Gaji Pokok', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Tambahan Lain Tidak Kena Pajak', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'THR Prorate', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'Cuti (Leave)', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'Pendapatan Kotor', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Absent / Day', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'Pemotongan Kelebihan Bayar Gaji & Koreksi Absen', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Pemotongan Kelebihan Bayar OT', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Pemotongan Prorate Absen', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Total Pemotongan (Gaji, OT, Tunjangan)', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Pemotongan', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Pemotongan Toolroom', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Pemotongan Lain', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Total Pemotongan', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Dana Pinjaman', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Ketring / Canteen', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Kopkar & BMI', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Pph21 Kurang Bayar', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Jumlah Pemotongan', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Penghasilan', bold: true, alignment: 'center', rowSpan: 2,
+        },
       ],
       [
         '', '', '', '', '',
@@ -115,19 +213,43 @@ const generateReportPayroll = async (p) => {
 
     const tbl4 = [
       [
-        { text: 'No.', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Nama Karyawan', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'No. Karyawan', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Gaji Pokok', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Bonus', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Uang Pisah', bold: true, alignment: 'center', colSpan: 2 }, '',
-        { text: 'Uang Pesangon', bold: true, alignment: 'center', colSpan: 2 }, '',
-        { text: 'Uang P. Masa Kerja', bold: true, alignment: 'center', colSpan: 2 }, '',
+        {
+          text: 'No.', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Nama Karyawan', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'No. Karyawan', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Gaji Pokok', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Bonus', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Uang Pisah', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'Uang Pesangon', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'Uang P. Masa Kerja', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
         { text: 'Uang Penggantian Hak', bold: true, alignment: 'center' },
-        { text: 'Periode Pajak', bold: true, alignment: 'center', colSpan: 2 }, '',
-        { text: 'Take Home Pay', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Total Transfer By Mandiri', bold: true, alignment: 'center', rowSpan: 2 },
-        { text: 'Total By Cash (For Expat & Final Payment)', bold: true, alignment: 'center', rowSpan: 2 },
+        {
+          text: 'Periode Pajak', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'Take Home Pay', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Total Transfer By Mandiri', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Total By Cash (For Expat & Final Payment)', bold: true, alignment: 'center', rowSpan: 2,
+        },
       ],
       [
         '', '', '', '', '',
@@ -139,35 +261,45 @@ const generateReportPayroll = async (p) => {
       ],
     ];
 
-    let g0 = 0, ab0 = 0, ac0 = 0, ad0 = 0, ae0 = 0, af0 = 0, ag0 = 0, ah0 = 0;
-    let ai0 = 0, aj0 = 0, ak0 = 0, al0 = 0, am0 = 0, an0 = 0, ao0 = 0, ap0 = 0;
-    let aq0 = 0, ar0 = 0, as0 = 0, at0 = 0, au0 = 0, av0 = 0, aw0 = 0, ax0 = 0;
-    let ba0 = 0, bb0 = 0, bc0 = 0, bd0 = 0, be0 = 0, bf0 = 0, bg0 = 0, bh0 = 0;
-    let bi0 = 0, bj0 = 0, bl0 = 0, bm0 = 0, bn0 = 0, bo0 = 0, bp0 = 0, bq0 = 0;
-    let br0 = 0, bs0 = 0, bt0 = 0, bu0 = 0, bv0 = 0, bw0 = 0, bx0 = 0, by0 = 0;
-    let bz0 = 0, ca0 = 0, cw0 = 0, cx0 = 0, dc0 = 0, dd0 = 0, de0 = 0, df0 = 0;
-    let dg0 = 0, dh0 = 0, di0 = 0, dj0 = 0, dk0 = 0, dl0 = 0, dm0 = 0, dn0 = 0;
-    let do0 = 0, dp0 = 0, dr0 = 0, ds0 = 0, dt0 = 0, du0 = 0, dv0 = 0, dw0 = 0;
-    let dx0 = 0, dy0 = 0, eb0 = 0, ec0 = 0, ed0 = 0;
-    
+    let g0 = 0; let ab0 = 0; let ac0 = 0; let ad0 = 0; let ae0 = 0; let af0 = 0; let ag0 = 0; let
+      ah0 = 0;
+    let ai0 = 0; let aj0 = 0; let ak0 = 0; let al0 = 0; let am0 = 0; let an0 = 0; let ao0 = 0; let
+      ap0 = 0;
+    let aq0 = 0; let ar0 = 0; let as0 = 0; let at0 = 0; let au0 = 0; let av0 = 0; let aw0 = 0; let
+      ax0 = 0;
+    let ba0 = 0; let bb0 = 0; let bc0 = 0; let bd0 = 0; let be0 = 0; let bf0 = 0; let bg0 = 0; let
+      bh0 = 0;
+    let bi0 = 0; let bj0 = 0; let bl0 = 0; let bm0 = 0; let bn0 = 0; let bo0 = 0; let bp0 = 0; let
+      bq0 = 0;
+    let br0 = 0; let bs0 = 0; let bt0 = 0; let bu0 = 0; let bv0 = 0; let bw0 = 0; let bx0 = 0; let
+      by0 = 0;
+    let bz0 = 0; let ca0 = 0; let cw0 = 0; let cx0 = 0; let dc0 = 0; let dd0 = 0; let de0 = 0; let
+      df0 = 0;
+    let dg0 = 0; let dh0 = 0; let di0 = 0; let dj0 = 0; let dk0 = 0; let dl0 = 0; let dm0 = 0; let
+      dn0 = 0;
+    let do0 = 0; let dp0 = 0; let dr0 = 0; let ds0 = 0; let dt0 = 0; let du0 = 0; let dv0 = 0; let
+      dw0 = 0;
+    let dx0 = 0; let dy0 = 0; let eb0 = 0; let ec0 = 0; let
+      ed0 = 0;
+
     employee.map((e, i) => {
+      g0 += e.g0; ab0 += e.ab0; ac0 += e.ac0; ad0 += e.ad0; ae0 += e.ae0; af0 += e.af0;
+      ag0 += e.ag0; ah0 += e.ah0; ai0 += e.ai0; aj0 += e.aj0; ak0 += e.ak0; al0 += e.al0;
+      am0 += e.am0; an0 += e.an0; ao0 += e.ao0; ap0 += e.ap0; aq0 += e.aq0; ar0 += e.ar0;
+      as0 += e.as0; at0 += e.at0; au0 += e.au0; av0 += e.av0; aw0 += e.aw0; ax0 += e.ax0;
+      ba0 += e.ba0; bb0 += e.bb0; bc0 += e.bc0; bd0 += e.bd0; be0 += e.be0; bf0 += e.bf0;
+      bg0 += e.bg0; bh0 += e.bh0; bi0 += e.bi0; bj0 += e.bj0; bl0 += e.bl0; bm0 += e.bm0;
+      bn0 += e.bn0; bo0 += e.bo0; bp0 += e.bp0; bq0 += e.bq0; br0 += e.br0; bs0 += e.bs0;
+      bt0 += e.bt0; bu0 += e.bu0; bv0 += e.bv0; bw0 += e.bw0; bx0 += e.bx0; by0 += e.by0;
+      bz0 += e.bz0; ca0 += e.ca0; cw0 += e.cw0; cx0 += e.cx0; dc0 += e.dc0; dd0 += e.dd0;
+      de0 += e.de0; df0 += e.df0; dg0 += e.dg0; dh0 += e.dh0; di0 += e.di0; dj0 += e.dj0;
+      dk0 += e.dk0; dl0 += e.dl0; dm0 += e.dm0; dn0 += e.dn0; do0 += e.do0; dp0 += e.dp0;
+      dr0 += e.dr0; ds0 += e.ds0; dt0 += e.dt0; du0 += e.du0; dv0 += e.dv0; dw0 += e.dw0;
+      dx0 += e.dx0; dy0 += e.dy0; eb0 += e.eb0; ec0 += e.ec0; ed0 += e.ed0;
 
-      g0 += e.g0;
-   		ab0 += e.ab0, ac0 += e.ac0, ad0 += e.ad0, ae0 += e.ae0, af0 += e.af0, ag0 += e.ag0, ah0 += e.ah0, ai0 += e.ai0, aj0 += e.aj0, ak0 += e.ak0;
-      al0 += e.al0, am0 += e.am0, an0 += e.an0, ao0 += e.ao0, ap0 += e.ap0, aq0 += e.aq0, ar0 += e.ar0, as0 += e.as0, at0 += e.at0, au0 += e.au0;
-      av0 += e.av0, aw0 += e.aw0, ax0 += e.ax0;
-
-      ba0 += e.ba0, bb0 += e.bb0, bc0 += e.bc0, bd0 += e.bd0, be0 += e.be0, bf0 += e.bf0, bg0 += e.bg0, bh0 += e.bh0, bi0 += e.bi0, bj0 += e.bj0;
-      bl0 += e.bl0, bm0 += e.bm0, bn0 += e.bn0, bo0 += e.bo0, bp0 += e.bp0, bq0 += e.bq0, br0 += e.br0, bs0 += e.bs0, bt0 += e.bt0, bu0 += e.bu0;
-      
-      bv0 += e.bv0, bw0 += e.bw0, bx0 += e.bx0, by0 += e.by0, bz0 += e.bz0, ca0 += e.ca0, cw0 += e.cw0, cx0 += e.cx0, dc0 += e.dc0, dd0 += e.dd0;
-      de0 += e.de0, df0 += e.df0, dg0 += e.dg0, dh0 += e.dh0, di0 += e.di0, dj0 += e.dj0, dk0 += e.dk0, dl0 += e.dl0, dm0 += e.dm0, dn0 += e.dn0;
-      do0 += e.do0, dp0 += e.dp0, dr0 += e.dr0, ds0 += e.ds0, dt0 += e.dt0, du0 += e.du0, dv0 += e.dv0, dw0 += e.dw0, dx0 += e.dx0, dy0 += e.dy0;
-      eb0 += e.eb0, ec0 += e.ec0, ed0 += e.ed0;
-      
       tbl1.push([
         { text: (i + 1), alignment: 'center' }, e.d0, { text: e.e0, alignment: 'center' }, { text: intpre0(e.g0).format(), alignment: 'right' },
-        { text: !e.i0 ? null : idDateFormat(e.i0, 'dd-MM-yyyy'), alignment: 'center' }, { text: e.j0 ,alignment: 'center' }, e.u0,
+        { text: !e.i0 ? null : idDateFormat(e.i0, 'dd-MM-yyyy'), alignment: 'center' }, { text: e.j0, alignment: 'center' }, e.u0,
         { text: floatpre2(e.ab0).format(), alignment: 'right' }, { text: intpre0(e.ac0).format(), alignment: 'right' },
         { text: floatpre2(e.ad0).format(), alignment: 'right' }, { text: intpre0(e.ae0).format(), alignment: 'right' },
         { text: floatpre2(e.af0).format(), alignment: 'right' }, { text: intpre0(e.ag0).format(), alignment: 'right' }, { text: intpre0(e.ah0).format(), alignment: 'right' },
@@ -247,7 +379,7 @@ const generateReportPayroll = async (p) => {
       { text: intpre0(dm0).format(), alignment: 'right' }, { text: intpre0(dn0).format(), alignment: 'right' }, { text: intpre0(do0).format(), alignment: 'right' },
       { text: intpre0(dp0).format(), alignment: 'right' },
     ]);
-    
+
     tbl4.push([
       '', '', '', { text: intpre0(g0).format(), alignment: 'right' },
       { text: intpre0(dr0).format(), alignment: 'right' }, { text: intpre0(ds0).format(), alignment: 'right' }, { text: intpre0(dt0).format(), alignment: 'right' },
@@ -255,21 +387,21 @@ const generateReportPayroll = async (p) => {
       { text: intpre0(dx0).format(), alignment: 'right' }, { text: intpre0(dy0).format(), alignment: 'right' }, '', '', { text: intpre0(eb0).format(), alignment: 'right' },
       { text: intpre0(ec0).format(), alignment: 'right' }, { text: intpre0(ed0).format(), alignment: 'right' },
     ]);
-    
+
     const docDefinition = {
       pageSize: 'A3',
       pageOrientation: 'landscape',
       pageMargins: [20, 20, 20, 20],
-      footer: (currentPage, pageCount) => {
-        return {
-          columns: [
-            { text: `${currentPage.toString()} / ${pageCount}`, fontSize: 4, margin: [20, 0] },
-          ],
-        };
-      },
+      footer: (currentPage, pageCount) => ({
+        columns: [
+          { text: `${currentPage.toString()} / ${pageCount}`, fontSize: 4, margin: [20, 0] },
+        ],
+      }),
       content: [
         { text: 'PT. Labtech Penta International', bold: true, fontSize: 6 },
-        { text: `Periode Payroll: ${ p.period }`, bold: true, fontSize: 6, margin: [0, 0, 0, 10] },
+        {
+          text: `Periode Payroll: ${p.period}`, bold: true, fontSize: 6, margin: [0, 0, 0, 10],
+        },
         {
           style: 'tbl',
           table: {
@@ -282,13 +414,15 @@ const generateReportPayroll = async (p) => {
             body: tbl1,
           },
           layout: {
-            fillColor: (rowIndex) => {
-              return rowIndex === employee.length + 2 ? '#eeeeee' : null;
-            },
+            fillColor: (rowIndex) => (rowIndex === employee.length + 2 ? '#eeeeee' : null),
           },
         },
-        { text: 'PT. Labtech Penta International', bold: true, fontSize: 6, pageBreak: 'before' },
-        { text: `Periode Payroll: ${ p.period }`, bold: true, fontSize: 6, margin: [0, 0, 0, 10] },
+        {
+          text: 'PT. Labtech Penta International', bold: true, fontSize: 6, pageBreak: 'before',
+        },
+        {
+          text: `Periode Payroll: ${p.period}`, bold: true, fontSize: 6, margin: [0, 0, 0, 10],
+        },
         {
           style: 'tbl',
           table: {
@@ -301,13 +435,15 @@ const generateReportPayroll = async (p) => {
             body: tbl2,
           },
           layout: {
-            fillColor: (rowIndex) => {
-              return rowIndex === employee.length + 2 ? '#eeeeee' : null;
-            },
+            fillColor: (rowIndex) => (rowIndex === employee.length + 2 ? '#eeeeee' : null),
           },
         },
-        { text: 'PT. Labtech Penta International', bold: true, fontSize: 6, pageBreak: 'before' },
-        { text: `Periode Payroll: ${ p.period }`, bold: true, fontSize: 6, margin: [0, 0, 0, 10] },
+        {
+          text: 'PT. Labtech Penta International', bold: true, fontSize: 6, pageBreak: 'before',
+        },
+        {
+          text: `Periode Payroll: ${p.period}`, bold: true, fontSize: 6, margin: [0, 0, 0, 10],
+        },
         {
           style: 'tbl',
           table: {
@@ -320,13 +456,15 @@ const generateReportPayroll = async (p) => {
             body: tbl3,
           },
           layout: {
-            fillColor: (rowIndex) => {
-              return rowIndex === employee.length + 2 ? '#eeeeee' : null;
-            },
+            fillColor: (rowIndex) => (rowIndex === employee.length + 2 ? '#eeeeee' : null),
           },
         },
-        { text: 'PT. Labtech Penta International', bold: true, fontSize: 6, pageBreak: 'before' },
-        { text: `Periode Payroll: ${ p.period }`, bold: true, fontSize: 6, margin: [0, 0, 0, 10] },
+        {
+          text: 'PT. Labtech Penta International', bold: true, fontSize: 6, pageBreak: 'before',
+        },
+        {
+          text: `Periode Payroll: ${p.period}`, bold: true, fontSize: 6, margin: [0, 0, 0, 10],
+        },
         {
           style: 'tbl',
           table: {
@@ -338,9 +476,7 @@ const generateReportPayroll = async (p) => {
             body: tbl4,
           },
           layout: {
-            fillColor: (rowIndex) => {
-              return rowIndex === employee.length + 2 ? '#eeeeee' : null;
-            },
+            fillColor: (rowIndex) => (rowIndex === employee.length + 2 ? '#eeeeee' : null),
           },
         },
       ],

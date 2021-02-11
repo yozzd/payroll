@@ -7,7 +7,11 @@ const {
 const Payroll = require('./model.js');
 const { PayrollType, GenType, SendType } = require('./type');
 const { generateSlip, sendSlip, generateReportPayroll } = require('./method');
-const { AddEmployeeInputType, EditFlagsEmployeeInputType } = require('./employee.input.type.js');
+const {
+  AddEmployeeInputType,
+  EditEmploymentInputType,
+  EditFlagsEmployeeInputType,
+} = require('./employee.input.type.js');
 const auth = require('../auth/service');
 
 const Query = {
@@ -494,9 +498,10 @@ const Mutation = {
     },
     resolve: auth.hasRole('admin', async (_, { input }) => {
       const { _id, e0 } = input;
-      const px = await Payroll.findOne({_id});
+      const px = await Payroll.findOne({ _id });
 
-      let m, y;
+      let m; let
+        y;
       if (px.month < 1) {
         m = 11;
         y = px.year - 1;
@@ -506,7 +511,7 @@ const Mutation = {
       }
 
       const py = await Payroll.aggregate([
-        { $match: { $and: [ { month: m }, { year: y }] } },
+        { $match: { $and: [{ month: m }, { year: y }] } },
         { $unwind: '$employee' },
         { $match: { 'employee.e0': e0 } },
       ]);
@@ -516,6 +521,20 @@ const Mutation = {
       return { sStatus: 1 };
     }),
   },
+  editEmployment: {
+    type: PayrollType,
+    args: {
+      input: { type: EditEmploymentInputType },
+    },
+    resolve: auth.hasRole('admin', async (_, { input }) => {
+      const { _id, employee } = input;
+      const px = await Payroll.findOne({ _id });
+
+      Object.assign(px.employee.id(employee._id), employee);
+      const s = await px.save();
+      return s;
+    }),
+  },
   editFlagsEmployee: {
     type: PayrollType,
     args: {
@@ -523,8 +542,8 @@ const Mutation = {
     },
     resolve: auth.hasRole('admin', async (_, { input }) => {
       const { _id, employee } = input;
-      const px = await Payroll.findOne({_id});
-      
+      const px = await Payroll.findOne({ _id });
+
       Object.assign(px.employee.id(employee._id), employee);
       const s = await px.save();
       return s;
