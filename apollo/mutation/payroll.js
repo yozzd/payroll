@@ -85,6 +85,25 @@ export const EditPrivate = gql`
   }
 `;
 
+export const EditOvertime = gql`
+  mutation editOvertime($input: EditOvertimeInputType) {
+    editOvertime(input: $input) {
+      _id
+      employee {
+        _id
+        ab0
+        ac0
+        ad0
+        ae0
+        af0
+        ag0
+        ah0
+        ai0
+      }
+    }
+  }
+`;
+
 export const EditFlagsEmployee = gql`
   mutation editFlagsEmployee($input: EditFlagsEmployeeInputType) {
     editFlagsEmployee(input: $input) {

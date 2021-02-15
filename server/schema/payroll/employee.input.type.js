@@ -1,7 +1,9 @@
 const {
+  GraphQLBoolean,
+  GraphQLFloat,
+  GraphQLInt,
   GraphQLInputObjectType,
   GraphQLString,
-  GraphQLBoolean,
 } = require('graphql');
 
 const EmploymentInputType = new GraphQLInputObjectType({
@@ -33,6 +35,17 @@ const PrivateInputType = new GraphQLInputObjectType({
     z0: { type: GraphQLString },
     aa0: { type: GraphQLString },
     ew0: { type: GraphQLString },
+  }),
+});
+
+const OvertimeInputType = new GraphQLInputObjectType({
+  name: 'OvertimeInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    ab0: { type: GraphQLFloat },
+    ad0: { type: GraphQLFloat },
+    af0: { type: GraphQLFloat },
+    ag0: { type: GraphQLInt },
   }),
 });
 
@@ -73,6 +86,14 @@ const EditPrivateInputType = new GraphQLInputObjectType({
   }),
 });
 
+const EditOvertimeInputType = new GraphQLInputObjectType({
+  name: 'EditOvertimeInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    employee: { type: OvertimeInputType },
+  }),
+});
+
 const EditFlagsEmployeeInputType = new GraphQLInputObjectType({
   name: 'EditFlagsEmployeeInputType',
   fields: () => ({
@@ -85,5 +106,6 @@ module.exports = {
   AddEmployeeInputType,
   EditEmploymentInputType,
   EditPrivateInputType,
+  EditOvertimeInputType,
   EditFlagsEmployeeInputType,
 };

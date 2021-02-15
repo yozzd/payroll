@@ -32,9 +32,15 @@
       <el-table-column prop="d0" label="Nama Karyawan" width="200" fixed>
         <template slot-scope="scope">
           <client-only>
-            <p v-snip="1" :title="scope.row.d0">
-              {{ scope.row.d0 }}
-            </p>
+            <el-link
+              type="primary"
+              class="font-sm"
+              @click="showEdit(scope.row)"
+            >
+              <p v-snip="1" :title="scope.row.d0">
+                {{ scope.row.d0 }}
+              </p>
+            </el-link>
           </client-only>
         </template>
       </el-table-column>
@@ -85,18 +91,66 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <el-dialog
+      title="Edit Employee"
+      :visible.sync="showEditDialog"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :before-close="handleEditDialogClose"
+      width="20%"
+    >
+      <ErrorHandler
+        v-if="errors"
+        :errors="errors"
+        class="mb-8"
+      />
+      <el-form
+        ref="form"
+        :model="form"
+        :hide-required-asterisk="true"
+        label-position="top"
+      >
+        <el-form-item label="Hour (Lembur Normal)">
+          <el-input v-model="form.ab0"></el-input>
+        </el-form-item>
+        <el-form-item label="Hour (Lembur Dinas)">
+          <el-input v-model="form.ad0"></el-input>
+        </el-form-item>
+        <el-form-item label="Hour (Insentif)">
+          <el-input v-model="form.af0"></el-input>
+        </el-form-item>
+        <el-form-item label="Rate (Insentif)">
+          <el-input v-model="form.ag0"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleEditDialogClose">Cancel</el-button>
+        <el-button
+          type="primary"
+          :loading="loading"
+          @click="handleEdit('form')"
+        >
+          Update
+        </el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import MiniSearch from 'minisearch';
 import { PayrollOvertime } from '../../apollo/query/payroll';
+import { EditOvertime } from '../../apollo/mutation/payroll';
 import mix from '../../mixins/payroll';
 
 export default {
   mixins: [mix],
   data() {
     return {
+      showEditDialog: false,
+      form: {},
+      loading: false,
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -106,6 +160,50 @@ export default {
         ],
       }),
     };
+  },
+  methods: {
+    showEdit(row) {
+      this.showEditDialog = true;
+      this.form = { ...row };
+    },
+    handleEditDialogClose() {
+      this.$refs.form.resetFields();
+      this.showEditDialog = false;
+    },
+    handleEdit(form) {
+      this.$refs[form].validate(async (valid) => {
+        if (valid) {
+          try {
+            this.loading = true;
+
+            await this.$apollo.mutate({
+              mutation: EditOvertime,
+              variables: {
+                input: {
+                  _id: this.$route.params.id,
+                  employee: {
+                    _id: this.form._id,
+                    ab0: parseFloat(this.form.ab0),
+                    ad0: parseFloat(this.form.ad0),
+                    af0: parseFloat(this.form.af0),
+                    ag0: parseInt(this.form.ag0),
+                  },
+                },
+              },
+            });
+
+            this.handleEditDialogClose();
+            this.loading = false;
+            return true;
+          } catch ({ graphQLErrors, networkError }) {
+            this.errors = graphQLErrors || networkError.result.errors;
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
+    },
   },
   apollo: {
     payrollOvertime: {
