@@ -211,6 +211,11 @@ export default {
       showEditDialog: false,
       form: {},
       loading: false,
+      dpt: [],
+      sct: [],
+      scd: [],
+      grd: [],
+      jbt: [],
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
