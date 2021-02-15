@@ -33,9 +33,15 @@
       <el-table-column prop="d0" label="Nama Karyawan" width="200" fixed>
         <template slot-scope="scope">
           <client-only>
-            <p v-snip="1" :title="scope.row.d0">
-              {{ scope.row.d0 }}
-            </p>
+            <el-link
+              type="primary"
+              class="font-sm"
+              @click="showEdit(scope.row)"
+            >
+              <p v-snip="1" :title="scope.row.d0">
+                {{ scope.row.d0 }}
+              </p>
+            </el-link>
           </client-only>
         </template>
       </el-table-column>
@@ -201,18 +207,115 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <el-dialog
+      title="Edit Employee"
+      :visible.sync="showEditDialog"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :before-close="handleEditDialogClose"
+      width="80%"
+    >
+      <ErrorHandler
+        v-if="errors"
+        :errors="errors"
+        class="mb-8"
+      />
+      <el-form
+        ref="form"
+        :model="form"
+        :hide-required-asterisk="true"
+        label-position="top"
+      >
+        <div class="flex space-x-4">
+          <div class="flex-1">
+            <el-form-item label="No. Karyawan">
+              <el-input
+                v-model="form.e0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Nama Karyawan">
+              <el-input
+                v-model="form.d0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Tetap Living">
+              <el-input v-model="form.aj0"></el-input>
+            </el-form-item>
+            <el-form-item label="Tj.Tetap Perumahan">
+              <el-input v-model="form.ak0"></el-input>
+            </el-form-item>
+          </div>
+          <div class="flex-1">
+            <el-form-item label="Tj. Tetap Posisi Fix">
+              <el-input v-model="form.al0"></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Tetap Funsional Fix">
+              <el-input v-model="form.am0"></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Tetap Koordinator">
+              <el-input v-model="form.an0"></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Tetap Transport">
+              <el-input v-model="form.ao0"></el-input>
+            </el-form-item>
+          </div>
+          <div class="flex-1">
+            <el-form-item label="Tj. Tetap Komunikasi">
+              <el-input v-model="form.ap0"></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Tetap Expertisi">
+              <el-input v-model="form.aq0"></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Tetap Honorarium">
+              <el-input v-model="form.ar0"></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Posisi Variable">
+              <el-input v-model="form.as0"></el-input>
+            </el-form-item>
+          </div>
+          <div class="flex-1">
+            <el-form-item label="Tj. Funsional Variable">
+              <el-input v-model="form.at0"></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Tetap Acting / PLT">
+              <el-input v-model="form.au0"></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Others">
+              <el-input v-model="form.av0"></el-input>
+            </el-form-item>
+          </div>
+        </div>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleEditDialogClose">Cancel</el-button>
+        <el-button
+          type="primary"
+          :loading="loading"
+          @click="handleEdit('form')"
+        >
+          Update
+        </el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import MiniSearch from 'minisearch';
 import { PayrollFixedAllowance } from '../../apollo/query/payroll';
+import { EditFixedAllowance } from '../../apollo/mutation/payroll';
 import mix from '../../mixins/payroll';
 
 export default {
   mixins: [mix],
   data() {
     return {
+      showEditDialog: false,
+      form: {},
+      loading: false,
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -223,6 +326,59 @@ export default {
         ],
       }),
     };
+  },
+  methods: {
+    showEdit(row) {
+      this.showEditDialog = true;
+      this.form = { ...row };
+    },
+    handleEditDialogClose() {
+      this.$refs.form.resetFields();
+      this.showEditDialog = false;
+    },
+    handleEdit(form) {
+      this.$refs[form].validate(async (valid) => {
+        if (valid) {
+          try {
+            this.loading = true;
+
+            await this.$apollo.mutate({
+              mutation: EditFixedAllowance,
+              variables: {
+                input: {
+                  _id: this.$route.params.id,
+                  employee: {
+                    _id: this.form._id,
+                    aj0: parseInt(this.form.aj0, 10),
+                    ak0: parseInt(this.form.ak0, 10),
+                    al0: parseInt(this.form.al0, 10),
+                    am0: parseInt(this.form.am0, 10),
+                    an0: parseInt(this.form.an0, 10),
+                    ao0: parseInt(this.form.ao0, 10),
+                    ap0: parseInt(this.form.ap0, 10),
+                    aq0: parseInt(this.form.aq0, 10),
+                    ar0: parseInt(this.form.ar0, 10),
+                    as0: parseInt(this.form.as0, 10),
+                    at0: parseInt(this.form.at0, 10),
+                    au0: parseInt(this.form.au0, 10),
+                    av0: parseInt(this.form.av0, 10),
+                  },
+                },
+              },
+            });
+
+            this.handleEditDialogClose();
+            this.loading = false;
+            return true;
+          } catch ({ graphQLErrors, networkError }) {
+            this.errors = graphQLErrors || networkError.result.errors;
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
+    },
   },
   apollo: {
     payrollFixedAllowance: {

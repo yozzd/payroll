@@ -103,6 +103,30 @@ export const EditOvertime = gql`
     }
   }
 `;
+export const EditFixedAllowance = gql`
+  mutation editFixedAllowance($input: EditFixedAllowanceInputType) {
+    editFixedAllowance(input: $input) {
+      _id
+      employee {
+        _id
+        aj0
+        ak0
+        al0
+        am0
+        an0
+        ao0
+        ap0
+        aq0
+        ar0
+        as0
+        at0
+        au0
+        av0
+        aw0
+      }
+    }
+  }
+`;
 
 export const EditFlagsEmployee = gql`
   mutation editFlagsEmployee($input: EditFlagsEmployeeInputType) {

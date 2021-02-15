@@ -226,7 +226,6 @@ EmployeeSchema.pre('save', async function fn(next) {
     + this.am0
     + this.an0
     + this.ao0
-    + this.ar0
     + this.ap0
     + this.aq0
     + this.ar0

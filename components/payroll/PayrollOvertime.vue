@@ -98,7 +98,7 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :before-close="handleEditDialogClose"
-      width="20%"
+      width="40%"
     >
       <ErrorHandler
         v-if="errors"
@@ -111,18 +111,36 @@
         :hide-required-asterisk="true"
         label-position="top"
       >
-        <el-form-item label="Hour (Lembur Normal)">
-          <el-input v-model="form.ab0"></el-input>
-        </el-form-item>
-        <el-form-item label="Hour (Lembur Dinas)">
-          <el-input v-model="form.ad0"></el-input>
-        </el-form-item>
-        <el-form-item label="Hour (Insentif)">
-          <el-input v-model="form.af0"></el-input>
-        </el-form-item>
-        <el-form-item label="Rate (Insentif)">
-          <el-input v-model="form.ag0"></el-input>
-        </el-form-item>
+        <div class="flex space-x-4">
+          <div class="flex-1">
+            <el-form-item label="No. Karyawan">
+              <el-input
+                v-model="form.e0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Nama Karyawan">
+              <el-input
+                v-model="form.d0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Hour (Lembur Normal)">
+              <el-input v-model="form.ab0"></el-input>
+            </el-form-item>
+            <el-form-item label="Hour (Lembur Dinas)">
+              <el-input v-model="form.ad0"></el-input>
+            </el-form-item>
+          </div>
+          <div class="flex-1">
+            <el-form-item label="Hour (Insentif)">
+              <el-input v-model="form.af0"></el-input>
+            </el-form-item>
+            <el-form-item label="Rate (Insentif)">
+              <el-input v-model="form.ag0"></el-input>
+            </el-form-item>
+          </div>
+        </div>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleEditDialogClose">Cancel</el-button>
