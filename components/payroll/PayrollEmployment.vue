@@ -83,7 +83,7 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :before-close="handleEditDialogClose"
-      width="30%"
+      width="50%"
     >
       <ErrorHandler
         v-if="errors"
@@ -123,14 +123,14 @@
                 type="date"
               ></el-date-picker>
             </el-form-item>
+          </div>
+          <div class="flex-1">
             <el-form-item label="Resign / Finish Date">
               <el-date-picker
                 v-model="form.k0"
                 type="date"
               ></el-date-picker>
             </el-form-item>
-          </div>
-          <div class="flex-1">
             <el-form-item label="Department">
               <el-select v-model="form.u0" filterable>
                 <el-option
@@ -161,6 +161,8 @@
                 ></el-option>
               </el-select>
             </el-form-item>
+          </div>
+          <div class="flex-1">
             <el-form-item label="Grade">
               <el-select v-model="form.x0" filterable>
                 <el-option
