@@ -15,6 +15,14 @@ const fonts = {
 };
 const printer = new PdfPrinter(fonts);
 
+const updateEmployee = async(_id, e, p) => {
+    const px = await p.findOne({ _id });
+
+    Object.assign(px.employee.id(e._id), e);
+    const s = await px.save();
+    return s;
+};
+
 const generateReportPayroll = async (p) => {
   try {
     const { employee } = p;
@@ -786,4 +794,9 @@ const sendSlip = async (p) => {
   }
 };
 
-module.exports = { generateReportPayroll, generateSlip, sendSlip };
+module.exports = {
+  updateEmployee,
+  generateReportPayroll,
+  generateSlip,
+  sendSlip,
+};

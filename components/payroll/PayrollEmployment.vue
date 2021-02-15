@@ -110,8 +110,8 @@
                 :disabled="true"
               ></el-input>
             </el-form-item>
-            <el-form-item label="Status Karyawan" filterable>
-              <el-select v-model="form.h0">
+            <el-form-item label="Status Karyawan">
+              <el-select v-model="form.h0" filterable>
                 <el-option label="Expat" value="Expat"></el-option>
                 <el-option label="Contract" value="Contract"></el-option>
                 <el-option label="Permanent" value="Permanent"></el-option>

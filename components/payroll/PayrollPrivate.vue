@@ -30,9 +30,15 @@
       <el-table-column label="Nama Karyawan" width="200" fixed>
         <template slot-scope="scope">
           <client-only>
-            <p v-snip="1" :title="scope.row.d0">
-              {{ scope.row.d0 }}
-            </p>
+            <el-link
+              type="primary"
+              class="font-sm"
+              @click="showEdit(scope.row)"
+            >
+              <p v-snip="1" :title="scope.row.d0">
+                {{ scope.row.d0 }}
+              </p>
+            </el-link>
           </client-only>
         </template>
       </el-table-column>
@@ -53,19 +59,130 @@
       </el-table-column>
       <el-table-column prop="ew0" label="Email" min-width="300"></el-table-column>
     </el-table>
+
+    <el-dialog
+      title="Edit Employee"
+      :visible.sync="showEditDialog"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :before-close="handleEditDialogClose"
+      width="50%"
+    >
+      <ErrorHandler
+        v-if="errors"
+        :errors="errors"
+        class="mb-8"
+      />
+      <el-form
+        ref="form"
+        :model="form"
+        :hide-required-asterisk="true"
+        label-position="top"
+      >
+        <div class="flex space-x-4">
+          <div class="flex-1">
+            <el-form-item label="No. Karyawan">
+              <el-input
+                v-model="form.e0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Nama Karyawan">
+              <el-input
+                v-model="form.d0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Jenis Kelamin">
+              <el-select v-model="form.n0" filterable>
+                <el-option label="Female" value="Female"></el-option>
+                <el-option label="Male" value="Male"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="Birthday">
+              <el-date-picker
+                v-model="form.o0"
+                type="date"
+              ></el-date-picker>
+            </el-form-item>
+          </div>
+          <div class="flex-1">
+            <el-form-item label="Status (NPWP)">
+              <el-select v-model="form.p0" filterable>
+                <el-option label="No" value="No"></el-option>
+                <el-option label="Yes" value="Yes"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="No. (NPWP)">
+              <el-input v-model="form.q0"></el-input>
+            </el-form-item>
+            <el-form-item label="Status Tanggungan (NPWP)">
+              <el-select v-model="form.r0" filterable>
+                <el-option label="K/0" value="K/0"></el-option>
+                <el-option label="K/1" value="K/1"></el-option>
+                <el-option label="K/2" value="K/2"></el-option>
+                <el-option label="K/3" value="K/3"></el-option>
+                <el-option label="TK/0" value="TK/0"></el-option>
+                <el-option label="TK/1" value="TK/1"></el-option>
+                <el-option label="TK/2" value="TK/2"></el-option>
+                <el-option label="TK/3" value="TK/3"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="Name (Bank)">
+              <el-select v-model="form.s0" filterable>
+                <el-option
+                  v-for="v in banks"
+                  :key="v"
+                  :label="v"
+                  :value="v"
+                ></el-option>
+              </el-select>
+            </el-form-item>
+          </div>
+          <div class="flex-1">
+            <el-form-item label="No. Rekening (Bank)">
+              <el-input v-model="form.t0"></el-input>
+            </el-form-item>
+            <el-form-item label="Ketenagakerjaan (BPJS)">
+              <el-input v-model="form.z0"></el-input>
+            </el-form-item>
+            <el-form-item label="Kesehatan (BPJS)">
+              <el-input v-model="form.aa0"></el-input>
+            </el-form-item>
+            <el-form-item label="Email">
+              <el-input v-model="form.ew0"></el-input>
+            </el-form-item>
+          </div>
+        </div>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleEditDialogClose">Cancel</el-button>
+        <el-button
+          type="primary"
+          :loading="loading"
+          @click="handleEdit('form')"
+        >
+          Update
+        </el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import MiniSearch from 'minisearch';
 import { PayrollPrivate } from '../../apollo/query/payroll';
+import { EditPrivate } from '../../apollo/mutation/payroll';
+import mix from '../../mixins/payroll';
 
 export default {
+  mixins: [mix],
   data() {
     return {
-      items: [],
-      search: '',
-      errors: [],
+      showEditDialog: false,
+      form: {},
+      loading: false,
+      banks: [],
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -77,20 +194,54 @@ export default {
       }),
     };
   },
-  computed: {
-    tableData() {
-      if (this.search) {
-        return this.miniSearch.search(this.search, { prefix: true });
-      }
-      return this.items;
-    },
-  },
   methods: {
-    finalRow({ row }) {
-      if (row.ex0 === 1) {
-        return 'final-row';
-      }
-      return '';
+    showEdit(row) {
+      this.showEditDialog = true;
+      this.form = { ...row };
+    },
+    handleEditDialogClose() {
+      this.$refs.form.resetFields();
+      this.showEditDialog = false;
+    },
+    handleEdit(form) {
+      this.$refs[form].validate(async (valid) => {
+        if (valid) {
+          try {
+            this.loading = true;
+
+            await this.$apollo.mutate({
+              mutation: EditPrivate,
+              variables: {
+                input: {
+                  _id: this.$route.params.id,
+                  employee: {
+                    _id: this.form._id,
+                    n0: this.form.n0,
+                    o0: this.form.o0,
+                    p0: this.form.p0,
+                    q0: this.form.q0,
+                    r0: this.form.r0,
+                    s0: this.form.s0,
+                    t0: this.form.t0,
+                    z0: this.form.z0,
+                    aa0: this.form.aa0,
+                    ew0: this.form.ew0,
+                  },
+                },
+              },
+            });
+
+            this.handleEditDialogClose();
+            this.loading = false;
+            return true;
+          } catch ({ graphQLErrors, networkError }) {
+            this.errors = graphQLErrors || networkError.result.errors;
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
     },
   },
   apollo: {
@@ -107,6 +258,7 @@ export default {
           const { employee } = data.payrollPrivate;
           this.items = employee;
           this.miniSearch.addAll(this.items);
+          this.banks = [...new Set(this.items.map((v) => v.s0))].sort();
         }
       },
       error({ graphQLErrors, networkError }) {

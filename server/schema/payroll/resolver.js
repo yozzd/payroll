@@ -6,10 +6,16 @@ const {
 } = require('graphql');
 const Payroll = require('./model.js');
 const { PayrollType, GenType, SendType } = require('./type');
-const { generateSlip, sendSlip, generateReportPayroll } = require('./method');
+const {
+  updateEmployee,
+  generateSlip,
+  sendSlip,
+  generateReportPayroll,
+} = require('./method');
 const {
   AddEmployeeInputType,
   EditEmploymentInputType,
+  EditPrivateInputType,
   EditFlagsEmployeeInputType,
 } = require('./employee.input.type.js');
 const auth = require('../auth/service');
@@ -528,10 +534,18 @@ const Mutation = {
     },
     resolve: auth.hasRole('admin', async (_, { input }) => {
       const { _id, employee } = input;
-      const px = await Payroll.findOne({ _id });
-
-      Object.assign(px.employee.id(employee._id), employee);
-      const s = await px.save();
+      const s = updateEmployee(_id, employee, Payroll);
+      return s;
+    }),
+  },
+  editPrivate: {
+    type: PayrollType,
+    args: {
+      input: { type: EditPrivateInputType },
+    },
+    resolve: auth.hasRole('admin', async (_, { input }) => {
+      const { _id, employee } = input;
+      const s = updateEmployee(_id, employee, Payroll);
       return s;
     }),
   },
@@ -542,10 +556,7 @@ const Mutation = {
     },
     resolve: auth.hasRole('admin', async (_, { input }) => {
       const { _id, employee } = input;
-      const px = await Payroll.findOne({ _id });
-
-      Object.assign(px.employee.id(employee._id), employee);
-      const s = await px.save();
+      const s = updateEmployee(_id, employee, Payroll);
       return s;
     }),
   },
