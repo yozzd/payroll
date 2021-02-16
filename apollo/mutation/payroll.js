@@ -179,6 +179,21 @@ export const EditRetroFill = gql`
   }
 `;
 
+export const EditLeave = gql`
+  mutation editLeave($input: EditLeaveInputType) {
+    editLeave(input: $input) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        by0
+        bz0
+      }
+    }
+  }
+`;
+
 export const EditFlagsEmployee = gql`
   mutation editFlagsEmployee($input: EditFlagsEmployeeInputType) {
     editFlagsEmployee(input: $input) {
