@@ -194,6 +194,30 @@ export const EditLeave = gql`
   }
 `;
 
+export const EditEarningOthers = gql`
+  mutation editEarningOthers($input: EditEarningOthersInputType) {
+    editEarningOthers(input: $input) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        bv0
+        bw0
+        bx0
+        dr0
+        ds0
+        dt0
+        du0
+        dv0
+        dw0
+        dx0
+        dy0
+      }
+    }
+  }
+`;
+
 export const EditFlagsEmployee = gql`
   mutation editFlagsEmployee($input: EditFlagsEmployeeInputType) {
     editFlagsEmployee(input: $input) {

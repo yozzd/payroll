@@ -109,6 +109,19 @@ const LeaveInputType = new GraphQLInputObjectType({
   }),
 });
 
+const EaringOthersInputType = new GraphQLInputObjectType({
+  name: 'EaringOthersInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    bv0: { type: GraphQLInt },
+    bw0: { type: GraphQLInt },
+    dr0: { type: GraphQLInt },
+    ds0: { type: GraphQLInt },
+    du0: { type: GraphQLInt },
+    dw0: { type: GraphQLInt },
+  }),
+});
+
 const FlagsInputType = new GraphQLInputObjectType({
   name: 'FlagsInputType',
   fields: () => ({
@@ -186,6 +199,14 @@ const EditLeaveInputType = new GraphQLInputObjectType({
   }),
 });
 
+const EditEarningOthersInputType = new GraphQLInputObjectType({
+  name: 'EditEarningOthersInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    employee: { type: EaringOthersInputType },
+  }),
+});
+
 const EditFlagsEmployeeInputType = new GraphQLInputObjectType({
   name: 'EditFlagsEmployeeInputType',
   fields: () => ({
@@ -203,6 +224,6 @@ module.exports = {
   EditNonFixedAllowanceInputType,
   EditRetroFillInputType,
   EditLeaveInputType,
-  EditRetroFillInputType,
+  EditEarningOthersInputType,
   EditFlagsEmployeeInputType,
 };
