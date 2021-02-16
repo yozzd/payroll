@@ -85,6 +85,22 @@ const NonFixedAllowanceInputType = new GraphQLInputObjectType({
   }),
 });
 
+const RetroFillInputType = new GraphQLInputObjectType({
+  name: 'RetroFillInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    bl0: { type: GraphQLInt },
+    bm0: { type: GraphQLInt },
+    bn0: { type: GraphQLInt },
+    bo0: { type: GraphQLInt },
+    bp0: { type: GraphQLInt },
+    bq0: { type: GraphQLInt },
+    br0: { type: GraphQLInt },
+    bs0: { type: GraphQLInt },
+    bt0: { type: GraphQLInt },
+  }),
+});
+
 const FlagsInputType = new GraphQLInputObjectType({
   name: 'FlagsInputType',
   fields: () => ({
@@ -146,6 +162,14 @@ const EditNonFixedAllowanceInputType = new GraphQLInputObjectType({
   }),
 });
 
+const EditRetroFillInputType = new GraphQLInputObjectType({
+  name: 'EditRetroFillInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    employee: { type: RetroFillInputType },
+  }),
+});
+
 const EditFlagsEmployeeInputType = new GraphQLInputObjectType({
   name: 'EditFlagsEmployeeInputType',
   fields: () => ({
@@ -161,5 +185,6 @@ module.exports = {
   EditOvertimeInputType,
   EditFixedAllowanceInputType,
   EditNonFixedAllowanceInputType,
+  EditRetroFillInputType,
   EditFlagsEmployeeInputType,
 };

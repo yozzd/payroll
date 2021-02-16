@@ -156,6 +156,29 @@ export const EditNonFixedAllowance = gql`
   }
 `;
 
+export const EditRetroFill = gql`
+  mutation editRetroFill($input: EditRetroFillInputType) {
+    editRetroFill(input: $input) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        bl0
+        bm0
+        bn0
+        bo0
+        bp0
+        bq0
+        br0
+        bs0
+        bt0
+        bu0
+      }
+    }
+  }
+`;
+
 export const EditFlagsEmployee = gql`
   mutation editFlagsEmployee($input: EditFlagsEmployeeInputType) {
     editFlagsEmployee(input: $input) {
