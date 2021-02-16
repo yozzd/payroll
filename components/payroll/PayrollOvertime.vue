@@ -204,7 +204,7 @@ export default {
                     ab0: parseFloat(this.form.ab0),
                     ad0: parseFloat(this.form.ad0),
                     af0: parseFloat(this.form.af0),
-                    ag0: parseInt(this.form.ag0),
+                    ag0: parseInt(this.form.ag0, 10),
                   },
                 },
               },
