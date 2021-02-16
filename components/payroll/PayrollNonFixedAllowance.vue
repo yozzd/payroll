@@ -30,12 +30,18 @@
     >
       <el-table-column type="index" width="50" align="center" fixed></el-table-column>
       <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
-      <el-table-column prop="e0" label="Nama Karyawan" width="200" fixed>
+      <el-table-column prop="d0" label="Nama Karyawan" width="200" fixed>
         <template slot-scope="scope">
           <client-only>
-            <p v-snip="1" :title="scope.row.d0">
-              {{ scope.row.d0 }}
-            </p>
+            <el-link
+              type="primary"
+              class="font-sm"
+              @click="showEdit(scope.row)"
+            >
+              <p v-snip="1" :title="scope.row.d0">
+                {{ scope.row.d0 }}
+              </p>
+            </el-link>
           </client-only>
         </template>
       </el-table-column>
@@ -126,7 +132,7 @@
       <el-table-column prop="bh0" width="120" align="right">
         <template slot="header">
           <client-only>
-            <p v-snip="1" title="Tj. Tidak Tetap Pengharagaan Masa Kerja">
+            <p v-snip="1" title="Tj. Tidak Tetap Penghargaan Masa Kerja">
               Tj. Tidak Tetap Penghargaan Masa Kerja
             </p>
           </client-only>
@@ -153,18 +159,101 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <el-dialog
+      title="Edit Employee"
+      :visible.sync="showEditDialog"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :before-close="handleEditDialogClose"
+      width="60%"
+    >
+      <ErrorHandler
+        v-if="errors"
+        :errors="errors"
+        class="mb-8"
+      />
+      <el-form
+        ref="form"
+        :model="form"
+        :hide-required-asterisk="true"
+        label-position="top"
+      >
+        <div class="flex space-x-4">
+          <div class="flex-1">
+            <el-form-item label="No. Karyawan">
+              <el-input
+                v-model="form.e0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Nama Karyawan">
+              <el-input
+                v-model="form.d0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Tidak Tetap Fungsional">
+              <el-input v-model="form.ba0"></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Tidak Tetap Shift">
+              <el-input v-model="form.bb0"></el-input>
+            </el-form-item>
+          </div>
+          <div class="flex-1">
+            <el-form-item label="Tj. Tidak Tetap Tig Welding">
+              <el-input v-model="form.bc0"></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Tidak Tetap Operator Plasma">
+              <el-input v-model="form.bd0"></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Tidak Tetap LKS">
+              <el-input v-model="form.be0"></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Tidak Tetap Koperasi">
+              <el-input v-model="form.bf0"></el-input>
+            </el-form-item>
+          </div>
+          <div class="flex-1">
+            <el-form-item label="Tj. Tidak Tetap Quality System">
+              <el-input v-model="form.bg0"></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Tidak Tetap Penghargaan Masa Kerja">
+              <el-input v-model="form.bh0"></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Tidak Tetap Others">
+              <el-input v-model="form.bi0"></el-input>
+            </el-form-item>
+          </div>
+        </div>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleEditDialogClose">Cancel</el-button>
+        <el-button
+          type="primary"
+          :loading="loading"
+          @click="handleEdit('form')"
+        >
+          Update
+        </el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import MiniSearch from 'minisearch';
 import { PayrollNonFixedAllowance } from '../../apollo/query/payroll';
+import { EditNonFixedAllowance } from '../../apollo/mutation/payroll';
 import mix from '../../mixins/payroll';
 
 export default {
   mixins: [mix],
   data() {
     return {
+      showEditDialog: false,
+      form: {},
+      loading: false,
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -175,6 +264,55 @@ export default {
         ],
       }),
     };
+  },
+  methods: {
+    showEdit(row) {
+      this.showEditDialog = true;
+      this.form = { ...row };
+    },
+    handleEditDialogClose() {
+      this.$refs.form.resetFields();
+      this.showEditDialog = false;
+    },
+    handleEdit(form) {
+      this.$refs[form].validate(async (valid) => {
+        if (valid) {
+          try {
+            this.loading = true;
+
+            await this.$apollo.mutate({
+              mutation: EditNonFixedAllowance,
+              variables: {
+                input: {
+                  _id: this.$route.params.id,
+                  employee: {
+                    _id: this.form._id,
+                    ba0: parseInt(this.form.ba0, 10),
+                    bb0: parseInt(this.form.bb0, 10),
+                    bc0: parseInt(this.form.bc0, 10),
+                    bd0: parseInt(this.form.bd0, 10),
+                    be0: parseInt(this.form.be0, 10),
+                    bf0: parseInt(this.form.bf0, 10),
+                    bg0: parseInt(this.form.bg0, 10),
+                    bh0: parseInt(this.form.bh0, 10),
+                    bi0: parseInt(this.form.bi0, 10),
+                  },
+                },
+              },
+            });
+
+            this.handleEditDialogClose();
+            this.loading = false;
+            return true;
+          } catch ({ graphQLErrors, networkError }) {
+            this.errors = graphQLErrors || networkError.result.errors;
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
+    },
   },
   apollo: {
     payrollNonFixedAllowance: {

@@ -91,6 +91,8 @@ export const EditOvertime = gql`
       _id
       employee {
         _id
+        d0
+        e0
         ab0
         ac0
         ad0
@@ -103,12 +105,15 @@ export const EditOvertime = gql`
     }
   }
 `;
+
 export const EditFixedAllowance = gql`
   mutation editFixedAllowance($input: EditFixedAllowanceInputType) {
     editFixedAllowance(input: $input) {
       _id
       employee {
         _id
+        d0
+        e0
         aj0
         ak0
         al0
@@ -123,6 +128,29 @@ export const EditFixedAllowance = gql`
         au0
         av0
         aw0
+      }
+    }
+  }
+`;
+
+export const EditNonFixedAllowance = gql`
+  mutation editNonFixedAllowance($input: EditNonFixedAllowanceInputType) {
+    editNonFixedAllowance(input: $input) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        ba0
+        bb0
+        bc0
+        bd0
+        be0
+        bf0
+        bg0
+        bh0
+        bi0
+        bj0
       }
     }
   }
