@@ -244,7 +244,7 @@
             <el-form-item label="Tj. Tetap Living">
               <el-input v-model="form.aj0"></el-input>
             </el-form-item>
-            <el-form-item label="Tj.Tetap Perumahan">
+            <el-form-item label="Tj. Tetap Perumahan">
               <el-input v-model="form.ak0"></el-input>
             </el-form-item>
           </div>
