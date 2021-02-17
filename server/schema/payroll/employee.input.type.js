@@ -109,8 +109,8 @@ const LeaveInputType = new GraphQLInputObjectType({
   }),
 });
 
-const EaringOthersInputType = new GraphQLInputObjectType({
-  name: 'EaringOthersInputType',
+const EarningOthersInputType = new GraphQLInputObjectType({
+  name: 'EarningOthersInputType',
   fields: () => ({
     _id: { type: GraphQLString },
     bv0: { type: GraphQLInt },
@@ -122,6 +122,27 @@ const EaringOthersInputType = new GraphQLInputObjectType({
   }),
 });
 
+const AbsentInputType = new GraphQLInputObjectType({
+  name: 'AbsentlInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    cw0: { type: GraphQLFloat },
+  }),
+});
+
+const ReductionInputType = new GraphQLInputObjectType({
+  name: 'ReductionInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    dc0: { type: GraphQLInt },
+    dd0: { type: GraphQLInt },
+    de0: { type: GraphQLInt },
+    dg0: { type: GraphQLInt },
+    dh0: { type: GraphQLInt },
+    di0: { type: GraphQLInt },
+  }),
+});
+
 const FlagsInputType = new GraphQLInputObjectType({
   name: 'FlagsInputType',
   fields: () => ({
@@ -130,14 +151,6 @@ const FlagsInputType = new GraphQLInputObjectType({
     ey0: { type: GraphQLBoolean },
     ez0: { type: GraphQLBoolean },
     fb0: { type: GraphQLBoolean },
-  }),
-});
-
-const AbsentInputType = new GraphQLInputObjectType({
-  name: 'AbsentlInputType',
-  fields: () => ({
-    _id: { type: GraphQLString },
-    cw0: { type: GraphQLFloat },
   }),
 });
 
@@ -211,15 +224,7 @@ const EditEarningOthersInputType = new GraphQLInputObjectType({
   name: 'EditEarningOthersInputType',
   fields: () => ({
     _id: { type: GraphQLString },
-    employee: { type: EaringOthersInputType },
-  }),
-});
-
-const EditFlagsEmployeeInputType = new GraphQLInputObjectType({
-  name: 'EditFlagsEmployeeInputType',
-  fields: () => ({
-    _id: { type: GraphQLString },
-    employee: { type: FlagsInputType },
+    employee: { type: EarningOthersInputType },
   }),
 });
 
@@ -228,6 +233,22 @@ const EditAbsentInputType = new GraphQLInputObjectType({
   fields: () => ({
     _id: { type: GraphQLString },
     employee: { type: AbsentInputType },
+  }),
+});
+
+const EditReductionInputType = new GraphQLInputObjectType({
+  name: 'EditReductionInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    employee: { type: ReductionInputType },
+  }),
+});
+
+const EditFlagsEmployeeInputType = new GraphQLInputObjectType({
+  name: 'EditFlagsEmployeeInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    employee: { type: FlagsInputType },
   }),
 });
 
@@ -242,5 +263,6 @@ module.exports = {
   EditLeaveInputType,
   EditEarningOthersInputType,
   EditAbsentInputType,
+  EditReductionInputType,
   EditFlagsEmployeeInputType,
 };

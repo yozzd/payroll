@@ -32,9 +32,15 @@
       <el-table-column prop="d0" label="Nama Karyawan" width="200" fixed>
         <template slot-scope="scope">
           <client-only>
-            <p v-snip="1" :title="scope.row.d0">
-              {{ scope.row.d0 }}
-            </p>
+            <el-link
+              type="primary"
+              class="font-sm"
+              @click="showEdit(scope.row)"
+            >
+              <p v-snip="1" :title="scope.row.d0">
+                {{ scope.row.d0 }}
+              </p>
+            </el-link>
           </client-only>
         </template>
       </el-table-column>
@@ -109,18 +115,90 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <el-dialog
+      title="Edit Employee"
+      :visible.sync="showEditDialog"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :before-close="handleEditDialogClose"
+      width="40%"
+    >
+      <ErrorHandler
+        v-if="errors"
+        :errors="errors"
+        class="mb-8"
+      />
+      <el-form
+        ref="form"
+        :model="form"
+        :hide-required-asterisk="true"
+        label-position="top"
+      >
+        <div class="flex space-x-4">
+          <div class="flex-1">
+            <el-form-item label="No. Karyawan">
+              <el-input
+                v-model="form.e0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Nama Karyawan">
+              <el-input
+                v-model="form.d0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Pemotongan Kelebihan Bayar Gaji & Koreksi Absen">
+              <el-input v-model="form.dc0"></el-input>
+            </el-form-item>
+            <el-form-item label="Pemotongan Kelebihan Bayar OT">
+              <el-input v-model="form.dd0"></el-input>
+            </el-form-item>
+          </div>
+          <div class="flex-1">
+            <el-form-item label="Pemotongan Prorate Absen">
+              <el-input v-model="form.de0"></el-input>
+            </el-form-item>
+            <el-form-item label="Pemotongan">
+              <el-input v-model="form.dg0"></el-input>
+            </el-form-item>
+            <el-form-item label="Pemotongan Toolroom">
+              <el-input v-model="form.dh0"></el-input>
+            </el-form-item>
+            <el-form-item label="Pemotongan Lain">
+              <el-input v-model="form.di0"></el-input>
+            </el-form-item>
+          </div>
+        </div>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleEditDialogClose">Cancel</el-button>
+        <el-button
+          type="primary"
+          :loading="loading"
+          @click="handleEdit('form')"
+        >
+          Update
+        </el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import MiniSearch from 'minisearch';
 import { PayrollReduction } from '../../apollo/query/payroll';
+import { EditReduction } from '../../apollo/mutation/payroll';
 import mix from '../../mixins/payroll';
 
 export default {
   mixins: [mix],
   data() {
     return {
+      showEditDialog: false,
+      form: {},
+      loading: false,
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -130,6 +208,52 @@ export default {
         ],
       }),
     };
+  },
+  methods: {
+    showEdit(row) {
+      this.showEditDialog = true;
+      this.form = { ...row };
+    },
+    handleEditDialogClose() {
+      this.$refs.form.resetFields();
+      this.showEditDialog = false;
+    },
+    handleEdit(form) {
+      this.$refs[form].validate(async (valid) => {
+        if (valid) {
+          try {
+            this.loading = true;
+
+            await this.$apollo.mutate({
+              mutation: EditReduction,
+              variables: {
+                input: {
+                  _id: this.$route.params.id,
+                  employee: {
+                    _id: this.form._id,
+                    dc0: parseInt(this.form.dc0, 10),
+                    dd0: parseInt(this.form.dd0, 10),
+                    de0: parseInt(this.form.de0, 10),
+                    dg0: parseInt(this.form.dg0, 10),
+                    dh0: parseInt(this.form.dh0, 10),
+                    di0: parseInt(this.form.di0, 10),
+                  },
+                },
+              },
+            });
+
+            this.handleEditDialogClose();
+            this.loading = false;
+            return true;
+          } catch ({ graphQLErrors, networkError }) {
+            this.errors = graphQLErrors || networkError.result.errors;
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
+    },
   },
   apollo: {
     payrollReduction: {

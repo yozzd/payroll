@@ -23,6 +23,7 @@ const {
   EditLeaveInputType,
   EditEarningOthersInputType,
   EditAbsentInputType,
+  EditReductionInputType,
   EditFlagsEmployeeInputType,
 } = require('./employee.input.type.js');
 const auth = require('../auth/service');
@@ -626,6 +627,17 @@ const Mutation = {
     type: PayrollType,
     args: {
       input: { type: EditAbsentInputType },
+    },
+    resolve: auth.hasRole('admin', async (_, { input }) => {
+      const { _id, employee } = input;
+      const s = updateEmployee(_id, employee, Payroll);
+      return s;
+    }),
+  },
+  editReduction: {
+    type: PayrollType,
+    args: {
+      input: { type: EditReductionInputType },
     },
     resolve: auth.hasRole('admin', async (_, { input }) => {
       const { _id, employee } = input;

@@ -233,6 +233,26 @@ export const EditAbsent = gql`
   }
 `;
 
+export const EditReduction = gql`
+  mutation editReduction($input: EditReductionInputType) {
+    editReduction(input: $input) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        dc0
+        dd0
+        de0
+        dg0
+        dh0
+        di0
+        dj0
+      }
+    }
+  }
+`;
+
 export const EditFlagsEmployee = gql`
   mutation editFlagsEmployee($input: EditFlagsEmployeeInputType) {
     editFlagsEmployee(input: $input) {
