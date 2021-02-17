@@ -32,9 +32,15 @@
       <el-table-column prop="d0" label="Nama Karyawan" width="200" fixed>
         <template slot-scope="scope">
           <client-only>
-            <p v-snip="1" :title="scope.row.d0">
-              {{ scope.row.d0 }}
-            </p>
+            <el-link
+              type="primary"
+              class="font-sm"
+              @click="showEdit(scope.row)"
+            >
+              <p v-snip="1" :title="scope.row.d0">
+                {{ scope.row.d0 }}
+              </p>
+            </el-link>
           </client-only>
         </template>
       </el-table-column>
@@ -67,18 +73,84 @@
       </el-table-column>
       <el-table-column label="" min-width="120"></el-table-column>
     </el-table>
+
+    <el-dialog
+      title="Edit Employee"
+      :visible.sync="showEditDialog"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :before-close="handleEditDialogClose"
+      width="40%"
+    >
+      <ErrorHandler
+        v-if="errors"
+        :errors="errors"
+        class="mb-8"
+      />
+      <el-form
+        ref="form"
+        :model="form"
+        :hide-required-asterisk="true"
+        label-position="top"
+      >
+        <div class="flex space-x-4">
+          <div class="flex-1">
+            <el-form-item label="No. Karyawan">
+              <el-input
+                v-model="form.e0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Nama Karyawan">
+              <el-input
+                v-model="form.d0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Dana Pinjaman">
+              <el-input v-model="form.dk0"></el-input>
+            </el-form-item>
+            <el-form-item label="Canteen">
+              <el-input v-model="form.dl0"></el-input>
+            </el-form-item>
+          </div>
+          <div class="flex-1">
+            <el-form-item label="Kopkar dan BMI">
+              <el-input v-model="form.dm0"></el-input>
+            </el-form-item>
+            <el-form-item label="Pph21 Kurang Bayar">
+              <el-input v-model="form.dn0"></el-input>
+            </el-form-item>
+          </div>
+        </div>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleEditDialogClose">Cancel</el-button>
+        <el-button
+          type="primary"
+          :loading="loading"
+          @click="handleEdit('form')"
+        >
+          Update
+        </el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import MiniSearch from 'minisearch';
 import { PayrollDeductionOthers } from '../../apollo/query/payroll';
+import { EditDeductionOthers } from '../../apollo/mutation/payroll';
 import mix from '../../mixins/payroll';
 
 export default {
   mixins: [mix],
   data() {
     return {
+      showEditDialog: false,
+      form: {},
+      loading: false,
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -88,6 +160,50 @@ export default {
         ],
       }),
     };
+  },
+  methods: {
+    showEdit(row) {
+      this.showEditDialog = true;
+      this.form = { ...row };
+    },
+    handleEditDialogClose() {
+      this.$refs.form.resetFields();
+      this.showEditDialog = false;
+    },
+    handleEdit(form) {
+      this.$refs[form].validate(async (valid) => {
+        if (valid) {
+          try {
+            this.loading = true;
+
+            await this.$apollo.mutate({
+              mutation: EditDeductionOthers,
+              variables: {
+                input: {
+                  _id: this.$route.params.id,
+                  employee: {
+                    _id: this.form._id,
+                    dk0: parseInt(this.form.dk0, 10),
+                    dl0: parseInt(this.form.dl0, 10),
+                    dm0: parseInt(this.form.dm0, 10),
+                    dn0: parseInt(this.form.dn0, 10),
+                  },
+                },
+              },
+            });
+
+            this.handleEditDialogClose();
+            this.loading = false;
+            return true;
+          } catch ({ graphQLErrors, networkError }) {
+            this.errors = graphQLErrors || networkError.result.errors;
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
+    },
   },
   apollo: {
     payrollDeductionOthers: {

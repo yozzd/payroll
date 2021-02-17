@@ -253,6 +253,23 @@ export const EditReduction = gql`
   }
 `;
 
+export const EditDeductionOthers = gql`
+  mutation editDeductionOthers($input: EditDeductionOthersInputType) {
+    editDeductionOthers(input: $input) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        dk0
+        dl0
+        dm0
+        dn0
+      }
+    }
+  }
+`;
+
 export const EditFlagsEmployee = gql`
   mutation editFlagsEmployee($input: EditFlagsEmployeeInputType) {
     editFlagsEmployee(input: $input) {

@@ -143,6 +143,17 @@ const ReductionInputType = new GraphQLInputObjectType({
   }),
 });
 
+const DeductionOthersInputType = new GraphQLInputObjectType({
+  name: 'DeductionOthersInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    dk0: { type: GraphQLInt },
+    dl0: { type: GraphQLInt },
+    dm0: { type: GraphQLInt },
+    dn0: { type: GraphQLInt },
+  }),
+});
+
 const FlagsInputType = new GraphQLInputObjectType({
   name: 'FlagsInputType',
   fields: () => ({
@@ -244,6 +255,14 @@ const EditReductionInputType = new GraphQLInputObjectType({
   }),
 });
 
+const EditDeductionOthersInputType = new GraphQLInputObjectType({
+  name: 'EditDeductionOthersInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    employee: { type: DeductionOthersInputType },
+  }),
+});
+
 const EditFlagsEmployeeInputType = new GraphQLInputObjectType({
   name: 'EditFlagsEmployeeInputType',
   fields: () => ({
@@ -264,5 +283,6 @@ module.exports = {
   EditEarningOthersInputType,
   EditAbsentInputType,
   EditReductionInputType,
+  EditDeductionOthersInputType,
   EditFlagsEmployeeInputType,
 };
