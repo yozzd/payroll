@@ -218,6 +218,21 @@ export const EditEarningOthers = gql`
   }
 `;
 
+export const EditAbsent = gql`
+  mutation editAbsent($input: EditAbsentInputType) {
+    editAbsent(input: $input) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        cw0
+        cx0
+      }
+    }
+  }
+`;
+
 export const EditFlagsEmployee = gql`
   mutation editFlagsEmployee($input: EditFlagsEmployeeInputType) {
     editFlagsEmployee(input: $input) {

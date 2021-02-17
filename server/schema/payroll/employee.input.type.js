@@ -133,6 +133,14 @@ const FlagsInputType = new GraphQLInputObjectType({
   }),
 });
 
+const AbsentInputType = new GraphQLInputObjectType({
+  name: 'AbsentlInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    cw0: { type: GraphQLFloat },
+  }),
+});
+
 /** *********************************************** */
 
 const AddEmployeeInputType = new GraphQLInputObjectType({
@@ -215,6 +223,14 @@ const EditFlagsEmployeeInputType = new GraphQLInputObjectType({
   }),
 });
 
+const EditAbsentInputType = new GraphQLInputObjectType({
+  name: 'EditAbsentInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    employee: { type: AbsentInputType },
+  }),
+});
+
 module.exports = {
   AddEmployeeInputType,
   EditEmploymentInputType,
@@ -225,5 +241,6 @@ module.exports = {
   EditRetroFillInputType,
   EditLeaveInputType,
   EditEarningOthersInputType,
+  EditAbsentInputType,
   EditFlagsEmployeeInputType,
 };
