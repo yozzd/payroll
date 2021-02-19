@@ -1,4 +1,4 @@
-<template>
+i<template>
   <div class="space-y-2">
     <ErrorHandler
       v-if="errors"
@@ -43,53 +43,9 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column label="Final Payment" width="100" align="center">
+      <el-table-column prop="cx0" label="Pajak Penghasilan" width="120" align="right">
         <template slot-scope="scope">
-          <p v-if="scope.row.ex0">
-            X
-          </p>
-        </template>
-      </el-table-column>
-      <el-table-column width="100" align="center">
-        <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tidak Ikut Pensiun">
-              Tidak Ikut Pensiun
-            </p>
-          </client-only>
-        </template>
-        <template slot-scope="scope">
-          <p v-if="scope.row.ey0">
-            X
-          </p>
-        </template>
-      </el-table-column>
-      <el-table-column width="100" align="center">
-        <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tidak Ikut BPJS">
-              Tidak Ikut BPJS
-            </p>
-          </client-only>
-        </template>
-        <template slot-scope="scope">
-          <p v-if="scope.row.ez0">
-            X
-          </p>
-        </template>
-      </el-table-column>
-      <el-table-column width="100" align="center">
-        <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tidak Dapat Relaksasi JKK & JK">
-              Tidak Dapat Relaksasi JKK & JK
-            </p>
-          </client-only>
-        </template>
-        <template slot-scope="scope">
-          <p v-if="scope.row.fb0">
-            X
-          </p>
+          <span>{{ scope.row.fc0 | currency }}</span>
         </template>
       </el-table-column>
       <el-table-column min-width="200"></el-table-column>
@@ -126,19 +82,8 @@
             :disabled="true"
           ></el-input>
         </el-form-item>
-        <el-form-item label="Flags">
-          <el-checkbox v-model="form.ex0">
-            Final Payment
-          </el-checkbox>
-          <el-checkbox v-model="form.ey0">
-            Tidak Ikut Pensiun
-          </el-checkbox>
-          <el-checkbox v-model="form.ez0">
-            Tidak Ikut BPJS
-          </el-checkbox>
-          <el-checkbox v-model="form.fb0">
-            Tidak Dapat Relaksasi JKK & JK
-          </el-checkbox>
+        <el-form-item label="Pajak Penghasilan">
+          <el-input v-model="form.fc0"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -157,8 +102,8 @@
 
 <script>
 import MiniSearch from 'minisearch';
-import { PayrollFlags } from '../../apollo/query/payroll';
-import { EditFlagsEmployee } from '../../apollo/mutation/payroll';
+import { PayrollManual } from '../../apollo/query/payroll';
+import { EditManualEmployee } from '../../apollo/mutation/payroll';
 import mix from '../../mixins/payroll';
 
 export default {
@@ -172,8 +117,7 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'ex0', 'ey0',
-          'ez0', 'fb0',
+          '_id', 'd0', 'e0', 'fc0',
         ],
       }),
     };
@@ -194,16 +138,13 @@ export default {
             this.loading = true;
 
             await this.$apollo.mutate({
-              mutation: EditFlagsEmployee,
+              mutation: EditManualEmployee,
               variables: {
                 input: {
                   _id: this.$route.params.id,
                   employee: {
                     _id: this.form._id,
-                    ex0: this.form.ex0,
-                    ey0: this.form.ey0,
-                    ez0: this.form.ez0,
-                    fb0: this.form.fb0,
+                    fc0: parseInt(this.form.fc0, 10),
                   },
                 },
               },
@@ -223,8 +164,8 @@ export default {
     },
   },
   apollo: {
-    payrollFlags: {
-      query: PayrollFlags,
+    payrollManual: {
+      query: PayrollManual,
       variables() {
         return {
           id: this.$route.params.id,
@@ -233,7 +174,7 @@ export default {
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const { employee } = data.payrollFlags;
+          const { employee } = data.payrollManual;
           this.items = employee;
           this.miniSearch.addAll(this.items);
         }

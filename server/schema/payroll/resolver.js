@@ -26,6 +26,7 @@ const {
   EditReductionInputType,
   EditDeductionOthersInputType,
   EditFlagsEmployeeInputType,
+  EditManualEmployeeInputType,
 } = require('./employee.input.type.js');
 const auth = require('../auth/service');
 
@@ -445,6 +446,23 @@ const Query = {
       return p;
     }),
   },
+  payrollManual: {
+    type: PayrollType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('admin', async (_, { id }) => {
+      const p = await Payroll.findOne({ _id: id })
+        .select({
+          _id: 1,
+          'employee._id': 1,
+          'employee.d0': 1,
+          'employee.e0': 1,
+          'employee.fc0': 1,
+        });
+      return p;
+    }),
+  },
 };
 
 const Mutation = {
@@ -661,6 +679,17 @@ const Mutation = {
     type: PayrollType,
     args: {
       input: { type: EditFlagsEmployeeInputType },
+    },
+    resolve: auth.hasRole('admin', async (_, { input }) => {
+      const { _id, employee } = input;
+      const s = updateEmployee(_id, employee, Payroll);
+      return s;
+    }),
+  },
+  editManualEmployee: {
+    type: PayrollType,
+    args: {
+      input: { type: EditManualEmployeeInputType },
     },
     resolve: auth.hasRole('admin', async (_, { input }) => {
       const { _id, employee } = input;

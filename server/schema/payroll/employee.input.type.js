@@ -165,6 +165,14 @@ const FlagsInputType = new GraphQLInputObjectType({
   }),
 });
 
+const ManualInputType = new GraphQLInputObjectType({
+  name: 'ManualInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    fc0: { type: GraphQLInt },
+  }),
+});
+
 /** *********************************************** */
 
 const AddEmployeeInputType = new GraphQLInputObjectType({
@@ -271,6 +279,14 @@ const EditFlagsEmployeeInputType = new GraphQLInputObjectType({
   }),
 });
 
+const EditManualEmployeeInputType = new GraphQLInputObjectType({
+  name: 'EditManualEmployeeInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    employee: { type: ManualInputType },
+  }),
+});
+
 module.exports = {
   AddEmployeeInputType,
   EditEmploymentInputType,
@@ -285,4 +301,5 @@ module.exports = {
   EditReductionInputType,
   EditDeductionOthersInputType,
   EditFlagsEmployeeInputType,
+  EditManualEmployeeInputType,
 };

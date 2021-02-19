@@ -286,3 +286,17 @@ export const EditFlagsEmployee = gql`
     }
   }
 `;
+
+export const EditManualEmployee = gql`
+  mutation editManualEmployee($input: EditManualEmployeeInputType) {
+    editManualEmployee(input: $input) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        fc0
+      }
+    }
+  }
+`;
