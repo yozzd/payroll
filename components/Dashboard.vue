@@ -57,7 +57,7 @@
           <template slot-scope="scope">
             <el-dropdown
               trigger="click"
-              @command="c => handleReportCommand(c, scope.row._id, scope.row.dir)">
+              @command="c => handleReportCommand(c, scope.row._id)">
               <span class="el-dropdown-link">
                 Report <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
@@ -77,8 +77,21 @@
                 <el-dropdown-item command="slip">
                   Slip
                 </el-dropdown-item>
-                <el-dropdown-item command="a3">
-                  A3 (PDF)
+              </el-dropdown-menu>
+            </el-dropdown>
+          </template>
+        </el-table-column>
+        <el-table-column>
+          <template slot-scope="scope">
+            <el-dropdown
+              trigger="click"
+              @command="c => handleExportCommand(c, scope.row._id, scope.row.dir)">
+              <span class="el-dropdown-link">
+                Export <i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="pdf">
+                  PDF
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -342,13 +355,15 @@ export default {
       this.$refs.form.clearValidate();
       this.showDialog = false;
     },
-    handleReportCommand(c, id, dir) {
+    handleReportCommand(c, id) {
       if (c === 'journal') this.$router.push({ name: 'payroll-journal-id', params: { id } });
       else if (c === 'tax') this.$router.push({ name: 'payroll-tax-id', params: { id } });
       else if (c === 'ktg') this.$router.push({ name: 'payroll-ketenagakerjaan-id', params: { id } });
       else if (c === 'kes') this.$router.push({ name: 'payroll-kesehatan-id', params: { id } });
       else if (c === 'slip') this.$router.push({ name: 'payroll-slip-id', params: { id } });
-      else if (c === 'a3') this.generateReportPayroll(id, dir);
+    },
+    handleExportCommand(c, id, dir) {
+      if (c === 'pdf') this.generateReportPayroll(id, dir);
     },
     handleActionCommand(c, id) {
       if (c === 'delete') this.handleConfirm(id);
