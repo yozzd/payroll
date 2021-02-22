@@ -47,6 +47,10 @@ button:focus,
   @apply w-full;
 }
 
+.el-dropdown-link {
+  color: #409EFF;
+}
+
 .px-80 {
   padding-left: 20rem;
   padding-right: 20rem;

@@ -55,31 +55,11 @@
         </el-table-column>
         <el-table-column>
           <template slot-scope="scope">
-            <el-link
-              type="primary"
-              class="font-sm"
-              @click="showAdd(scope.row._id)"
-            >
-              Add Employee
-            </el-link>
-          </template>
-        </el-table-column>
-        <el-table-column>
-          <template slot-scope="scope">
-            <el-link
-              type="primary"
-              class="font-sm"
-              @click="generateReportPayroll(scope.row._id, scope.row.dir)"
-            >
-              Report
-            </el-link>
-          </template>
-        </el-table-column>
-        <el-table-column min-width="20">
-          <template slot-scope="scope">
-            <el-dropdown trigger="click" @command="c => handleCommand(c, scope.row._id)">
-              <span class="el-dropdown-link flex space-x-1 items-center">
-                <i class="el-icon-more"></i>
+            <el-dropdown
+              trigger="click"
+              @command="c => handleReportCommand(c, scope.row._id, scope.row.dir)">
+              <span class="el-dropdown-link">
+                Report <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item command="journal">
@@ -97,8 +77,25 @@
                 <el-dropdown-item command="slip">
                   Slip
                 </el-dropdown-item>
-                <el-dropdown-item divided command="clone">
-                  Clone
+                <el-dropdown-item command="a3">
+                  A3 (PDF)
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </template>
+        </el-table-column>
+        <el-table-column min-width="40">
+          <template slot-scope="scope">
+            <el-dropdown trigger="click" @command="c => handleCommand(c, scope.row._id)">
+              <span class="el-dropdown-link">
+                Action <i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="cloneEmployee">
+                  Clone Employee
+                </el-dropdown-item>
+                <el-dropdown-item command="clonePayroll">
+                  Clone Payroll
                 </el-dropdown-item>
                 <el-dropdown-item divided command="delete">
                   <span class="text-red-400">Delete</span>
@@ -169,7 +166,7 @@
     </el-dialog>
 
     <el-dialog
-      title="Add Employee"
+      title="Clone Employee"
       :visible.sync="showAddDialog"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
@@ -208,7 +205,7 @@
     </el-dialog>
 
     <el-dialog
-      title="Clone"
+      title="Clone Payroll"
       :visible.sync="showCloneDialog"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
@@ -345,14 +342,18 @@ export default {
       this.$refs.form.clearValidate();
       this.showDialog = false;
     },
-    handleCommand(c, id) {
-      if (c === 'delete') this.handleConfirm(id);
-      else if (c === 'journal') this.$router.push({ name: 'payroll-journal-id', params: { id } });
+    handleReportCommand(c, id, dir) {
+      if (c === 'journal') this.$router.push({ name: 'payroll-journal-id', params: { id } });
       else if (c === 'tax') this.$router.push({ name: 'payroll-tax-id', params: { id } });
       else if (c === 'ktg') this.$router.push({ name: 'payroll-ketenagakerjaan-id', params: { id } });
       else if (c === 'kes') this.$router.push({ name: 'payroll-kesehatan-id', params: { id } });
       else if (c === 'slip') this.$router.push({ name: 'payroll-slip-id', params: { id } });
-      else if (c === 'clone') this.showClone(id);
+      else if (c === 'a3') this.generateReportPayroll(id, dir);
+    },
+    handleCommand(c, id) {
+      if (c === 'delete') this.handleConfirm(id);
+      else if (c === 'cloneEmployee') this.showAdd(id);
+      else if (c === 'clonePayroll') this.showClone(id);
     },
     handleConfirm(id) {
       this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
