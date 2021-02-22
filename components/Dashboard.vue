@@ -86,7 +86,7 @@
         </el-table-column>
         <el-table-column min-width="40">
           <template slot-scope="scope">
-            <el-dropdown trigger="click" @command="c => handleCommand(c, scope.row._id)">
+            <el-dropdown trigger="click" @command="c => handleActionCommand(c, scope.row._id)">
               <span class="el-dropdown-link">
                 Action <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
@@ -350,7 +350,7 @@ export default {
       else if (c === 'slip') this.$router.push({ name: 'payroll-slip-id', params: { id } });
       else if (c === 'a3') this.generateReportPayroll(id, dir);
     },
-    handleCommand(c, id) {
+    handleActionCommand(c, id) {
       if (c === 'delete') this.handleConfirm(id);
       else if (c === 'cloneEmployee') this.showAdd(id);
       else if (c === 'clonePayroll') this.showClone(id);
