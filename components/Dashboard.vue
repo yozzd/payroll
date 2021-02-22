@@ -113,7 +113,7 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :before-close="handleCancel"
-      width="31%"
+      width="20%"
     >
       <ErrorHandler
         v-if="errors"
