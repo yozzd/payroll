@@ -300,3 +300,15 @@ export const EditManualEmployee = gql`
     }
   }
 `;
+
+export const ClonePayroll = gql`
+  mutation clonePayroll($input: CloneInputType) {
+    clonePayroll(input: $input) {
+      _id
+      year
+      month
+      period
+      dir
+    }
+  }
+`;

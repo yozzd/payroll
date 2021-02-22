@@ -15,10 +15,6 @@ html {
   @apply px-4;
 }
 
-.el-upload-dragger {
-  width: 350px;
-}
-
 button:focus,
 :focus {
   @apply outline-none;
@@ -44,9 +40,11 @@ button:focus,
   background: #f0f9eb;
 }
 
+.el-upload,
 .el-date-editor.el-input,
+.el-range-editor.el-input__inner,
 .el-select {
-  width: 100%;
+  @apply w-full;
 }
 
 .px-80 {

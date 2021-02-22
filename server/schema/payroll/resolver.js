@@ -28,6 +28,7 @@ const {
   EditFlagsEmployeeInputType,
   EditManualEmployeeInputType,
 } = require('./employee.input.type.js');
+const { CloneInputType } = require('./input.type');
 const auth = require('../auth/service');
 
 const Query = {
@@ -694,6 +695,25 @@ const Mutation = {
     resolve: auth.hasRole('admin', async (_, { input }) => {
       const { _id, employee } = input;
       const s = updateEmployee(_id, employee, Payroll);
+      return s;
+    }),
+  },
+  clonePayroll: {
+    type: PayrollType,
+    args: {
+      input: { type: CloneInputType },
+    },
+    resolve: auth.hasRole('admin', async (_, { input }) => {
+      const { _id, from, to } = input;
+      const px = await Payroll.findOne({ _id });
+      const pn = new Payroll({
+        from,
+        to,
+        rate: px.rate,
+      });
+      Object.assign(pn.employee, px.employee);
+
+      const s = await pn.save();
       return s;
     }),
   },

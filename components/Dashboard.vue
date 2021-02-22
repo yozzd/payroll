@@ -97,7 +97,10 @@
                 <el-dropdown-item command="slip">
                   Slip
                 </el-dropdown-item>
-                <el-dropdown-item command="delete">
+                <el-dropdown-item divided command="clone">
+                  Clone
+                </el-dropdown-item>
+                <el-dropdown-item divided command="delete">
                   <span class="text-red-400">Delete</span>
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -203,6 +206,49 @@
         </el-button>
       </span>
     </el-dialog>
+
+    <el-dialog
+      title="Clone"
+      :visible.sync="showCloneDialog"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :before-close="handleCloneDialogClose"
+      width="20%"
+    >
+      <ErrorHandler
+        v-if="errors"
+        :errors="errors"
+        class="mb-8"
+      />
+      <el-form
+        ref="formClone"
+        :model="formClone"
+        :rules="rulesClone"
+        :hide-required-asterisk="true"
+        label-position="top"
+      >
+        <el-form-item label="Period" prop="period">
+          <el-date-picker
+            v-model="formClone.period"
+            type="daterange"
+            start-placeholder="Start date"
+            end-placeholder="End date"
+            format="dd-MM-yyyy"
+          >
+          </el-date-picker>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleCloneDialogClose">Cancel</el-button>
+        <el-button
+          type="primary"
+          :loading="loadingClone"
+          @click="handleClone('formClone')"
+        >
+          Clone
+        </el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -210,7 +256,12 @@
 import { getYear } from 'date-fns';
 import { PayrollAll } from '../apollo/query/payroll';
 import { ImportPayroll } from '../apollo/mutation/import';
-import { PayrollDelete, GenerateReportPayroll, AddEmployee } from '../apollo/mutation/payroll';
+import {
+  PayrollDelete,
+  GenerateReportPayroll,
+  AddEmployee,
+  ClonePayroll,
+} from '../apollo/mutation/payroll';
 
 export default {
   data() {
@@ -220,8 +271,10 @@ export default {
     return {
       showDialog: false,
       showAddDialog: false,
+      showCloneDialog: false,
       loading: false,
       loadingAdd: false,
+      loadingClone: false,
       genRpPy: false,
       form: {
         period: [],
@@ -231,6 +284,10 @@ export default {
       formAdd: {
         id: '',
         e0: '',
+      },
+      formClone: {
+        id: '',
+        period: [],
       },
       fileList: [],
       rules: {
@@ -257,6 +314,20 @@ export default {
       rulesAdd: {
         e0: [{ required: true, message: 'Required' }],
       },
+      rulesClone: {
+        period: [
+          {
+            type: 'array',
+            required: true,
+            message: 'This field is required',
+            len: 2,
+            fields: {
+              0: { type: 'object', required: 'true' },
+              1: { type: 'object', required: 'true' },
+            },
+          },
+        ],
+      },
       years: [...Array(year - (initY - 1)).keys()].map((i) => i + initY).sort((a, b) => b - a),
       errors: [],
     };
@@ -281,6 +352,7 @@ export default {
       else if (c === 'ktg') this.$router.push({ name: 'payroll-ketenagakerjaan-id', params: { id } });
       else if (c === 'kes') this.$router.push({ name: 'payroll-kesehatan-id', params: { id } });
       else if (c === 'slip') this.$router.push({ name: 'payroll-slip-id', params: { id } });
+      else if (c === 'clone') this.showClone(id);
     },
     handleConfirm(id) {
       this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
@@ -421,6 +493,61 @@ export default {
         this.errors = graphQLErrors || networkError.result.errors;
         return false;
       }
+    },
+    showClone(id) {
+      this.showCloneDialog = true;
+      this.formClone.id = id;
+    },
+    handleCloneDialogClose() {
+      this.$refs.formClone.resetFields();
+      this.$refs.formClone.clearValidate();
+      this.showCloneDialog = false;
+    },
+    handleClone(form) {
+      this.$refs[form].validate(async (valid) => {
+        if (valid) {
+          try {
+            this.loadingClone = true;
+
+            await this.$apollo.mutate({
+              mutation: ClonePayroll,
+              variables: {
+                input: {
+                  _id: this.formClone.id,
+                  from: this.formClone.period[0],
+                  to: this.formClone.period[1],
+                },
+              },
+              update: (store, { data: { clonePayroll } }) => {
+                const cdata = store.readQuery({
+                  query: PayrollAll,
+                  variables: {
+                    year: this.form.year,
+                  },
+                });
+                cdata.payrollAll.push(clonePayroll);
+                cdata.payrollAll.sort((a, b) => Number(b.month) - Number(a.month));
+                store.writeQuery({
+                  query: PayrollAll,
+                  variables: {
+                    year: this.form.year,
+                  },
+                  data: cdata,
+                });
+              },
+            });
+
+            this.handleCloneDialogClose();
+            this.loadingClone = false;
+            return true;
+          } catch ({ graphQLErrors, networkError }) {
+            this.errors = graphQLErrors || networkError.result.errors;
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
     },
   },
   apollo: {
