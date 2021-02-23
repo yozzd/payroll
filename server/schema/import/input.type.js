@@ -13,4 +13,12 @@ const ImportInputType = new GraphQLInputObjectType({
   }),
 });
 
-module.exports = { ImportInputType };
+const KantinInputType = new GraphQLInputObjectType({
+  name: 'KantinInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    file: { type: GraphQLUpload },
+  }),
+});
+
+module.exports = { ImportInputType, KantinInputType };

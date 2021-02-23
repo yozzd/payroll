@@ -35,6 +35,7 @@
         <el-table-column
           prop="period"
           label="Period"
+          width="200"
         >
           <template slot-scope="scope">
             <nuxt-link
@@ -57,7 +58,42 @@
           <template slot-scope="scope">
             <el-dropdown
               trigger="click"
-              @command="c => handleReportCommand(c, scope.row._id)">
+              @command="c => handleImportCommand(c, scope.row._id)"
+            >
+              <span class="el-dropdown-link">
+                Import <i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="kantin">
+                  Kantin
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </template>
+        </el-table-column>
+        <el-table-column>
+          <template slot-scope="scope">
+            <el-dropdown
+              trigger="click"
+              @command="c => handleExportCommand(c, scope.row._id, scope.row.dir)"
+            >
+              <span class="el-dropdown-link">
+                Export <i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="pdf">
+                  PDF
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </template>
+        </el-table-column>
+        <el-table-column>
+          <template slot-scope="scope">
+            <el-dropdown
+              trigger="click"
+              @command="c => handleReportCommand(c, scope.row._id)"
+            >
               <span class="el-dropdown-link">
                 Report <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
@@ -81,23 +117,7 @@
             </el-dropdown>
           </template>
         </el-table-column>
-        <el-table-column>
-          <template slot-scope="scope">
-            <el-dropdown
-              trigger="click"
-              @command="c => handleExportCommand(c, scope.row._id, scope.row.dir)">
-              <span class="el-dropdown-link">
-                Export <i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="pdf">
-                  PDF
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </template>
-        </el-table-column>
-        <el-table-column min-width="40">
+        <el-table-column min-width="60">
           <template slot-scope="scope">
             <el-dropdown trigger="click" @command="c => handleActionCommand(c, scope.row._id)">
               <span class="el-dropdown-link">
@@ -172,6 +192,53 @@
           type="primary"
           :loading="loading"
           @click="handleImport('form')"
+        >
+          Import
+        </el-button>
+      </span>
+    </el-dialog>
+
+    <el-dialog
+      title="Import Kantin"
+      :visible.sync="showKantinDialog"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :before-close="handleKantinDialogClose"
+      width="20%"
+    >
+      <ErrorHandler
+        v-if="errors"
+        :errors="errors"
+        class="mb-8"
+      />
+      <el-form
+        ref="formKantin"
+        :model="formKantin"
+        :hide-required-asterisk="true"
+        label-position="top"
+      >
+        <el-form-item label="File" prop="file">
+          <el-upload
+            drag
+            action=""
+            accept=".xls, .xlsx"
+            :file-list="fileList"
+            :on-change="handleKantinUpload"
+            :auto-upload="false"
+          >
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">
+              Drop file here or <em>click to upload</em>
+            </div>
+          </el-upload>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleKantinDialogClose">Cancel</el-button>
+        <el-button
+          type="primary"
+          :loading="loadingKantin"
+          @click="handleKantinImport('formKantin')"
         >
           Import
         </el-button>
@@ -265,7 +332,10 @@
 <script>
 import { getYear } from 'date-fns';
 import { PayrollAll } from '../apollo/query/payroll';
-import { ImportPayroll } from '../apollo/mutation/import';
+import {
+  ImportPayroll,
+  ImportKantin,
+} from '../apollo/mutation/import';
 import {
   PayrollDelete,
   GenerateReportPayroll,
@@ -282,9 +352,11 @@ export default {
       showDialog: false,
       showAddDialog: false,
       showCloneDialog: false,
+      showKantinDialog: false,
       loading: false,
       loadingAdd: false,
       loadingClone: false,
+      loadingKantin: false,
       genRpPy: false,
       form: {
         period: [],
@@ -298,6 +370,10 @@ export default {
       formClone: {
         id: '',
         period: [],
+      },
+      formKantin: {
+        id: '',
+        file: null,
       },
       fileList: [],
       rules: {
@@ -355,15 +431,18 @@ export default {
       this.$refs.form.clearValidate();
       this.showDialog = false;
     },
+    handleImportCommand(c, id) {
+      if (c === 'kantin') this.handleKantinDialog(id);
+    },
+    handleExportCommand(c, id, dir) {
+      if (c === 'pdf') this.generateReportPayroll(id, dir);
+    },
     handleReportCommand(c, id) {
       if (c === 'journal') this.$router.push({ name: 'payroll-journal-id', params: { id } });
       else if (c === 'tax') this.$router.push({ name: 'payroll-tax-id', params: { id } });
       else if (c === 'ktg') this.$router.push({ name: 'payroll-ketenagakerjaan-id', params: { id } });
       else if (c === 'kes') this.$router.push({ name: 'payroll-kesehatan-id', params: { id } });
       else if (c === 'slip') this.$router.push({ name: 'payroll-slip-id', params: { id } });
-    },
-    handleExportCommand(c, id, dir) {
-      if (c === 'pdf') this.generateReportPayroll(id, dir);
     },
     handleActionCommand(c, id) {
       if (c === 'delete') this.handleConfirm(id);
@@ -555,6 +634,47 @@ export default {
 
             this.handleCloneDialogClose();
             this.loadingClone = false;
+            return true;
+          } catch ({ graphQLErrors, networkError }) {
+            this.errors = graphQLErrors || networkError.result.errors;
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
+    },
+    handleKantinDialog(id) {
+      this.showKantinDialog = true;
+      this.formKantin.id = id;
+    },
+    handleKantinDialogClose() {
+      this.$refs.formKantin.resetFields();
+      this.$refs.formKantin.clearValidate();
+      this.showKantinDialog = false;
+    },
+    handleKantinUpload({ raw }) {
+      this.formKantin.file = raw;
+    },
+    handleKantinImport(form) {
+      this.$refs[form].validate(async (valid) => {
+        if (valid) {
+          try {
+            this.loadingKantin = true;
+            const client = this.$apolloProvider.clients.upload;
+
+            await client.mutate({
+              mutation: ImportKantin,
+              variables: {
+                input: {
+                  _id: this.formKantin.id,
+                  file: this.formKantin.file,
+                },
+              },
+            });
+
+            this.handleKantinDialogClose();
+            this.loadingKantin = false;
             return true;
           } catch ({ graphQLErrors, networkError }) {
             this.errors = graphQLErrors || networkError.result.errors;

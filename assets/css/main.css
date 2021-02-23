@@ -41,6 +41,7 @@ button:focus,
 }
 
 .el-upload,
+.el-upload-dragger,
 .el-date-editor.el-input,
 .el-range-editor.el-input__inner,
 .el-select {

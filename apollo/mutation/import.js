@@ -31,3 +31,11 @@ export const ImportThr = gql`
     }
   }
 `;
+
+export const ImportKantin = gql`
+  mutation importKantin($input: KantinInputType) {
+    importKantin(input: $input) {
+      sStatus
+    }
+  }
+`;
