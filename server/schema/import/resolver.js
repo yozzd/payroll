@@ -3,6 +3,7 @@ const {
   processImportESlip,
   processImportThr,
   processImportKantin,
+  processImportKoperasi,
 } = require('./method');
 const { ImportInputType, ExtImportInputType } = require('./input.type');
 const { PayrollType, GenType } = require('../payroll/type');
@@ -50,6 +51,16 @@ const Mutation = {
     },
     resolve: auth.hasRole('admin', async (_, { input }) => {
       const p = await processImportKantin(input);
+      return p;
+    }),
+  },
+  importKoperasi: {
+    type: GenType,
+    args: {
+      input: { type: ExtImportInputType },
+    },
+    resolve: auth.hasRole('admin', async (_, { input }) => {
+      const p = await processImportKoperasi(input);
       return p;
     }),
   },

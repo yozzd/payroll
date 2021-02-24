@@ -67,6 +67,9 @@
                 <el-dropdown-item command="kantin">
                   Kantin
                 </el-dropdown-item>
+                <el-dropdown-item command="koperasi">
+                  Koperasi
+                </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </template>
@@ -212,8 +215,8 @@
         class="mb-8"
       />
       <el-form
-        ref="formKantin"
-        :model="formKantin"
+        ref="formExt"
+        :model="formExt"
         :hide-required-asterisk="true"
         label-position="top"
       >
@@ -238,7 +241,54 @@
         <el-button
           type="primary"
           :loading="loadingKantin"
-          @click="handleKantinImport('formKantin')"
+          @click="handleKantinImport('formExt')"
+        >
+          Import
+        </el-button>
+      </span>
+    </el-dialog>
+
+    <el-dialog
+      title="Import Koperasi"
+      :visible.sync="showKoperasiDialog"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :before-close="handleKoperasiDialogClose"
+      width="20%"
+    >
+      <ErrorHandler
+        v-if="errors"
+        :errors="errors"
+        class="mb-8"
+      />
+      <el-form
+        ref="formExt"
+        :model="formExt"
+        :hide-required-asterisk="true"
+        label-position="top"
+      >
+        <el-form-item label="File" prop="file">
+          <el-upload
+            drag
+            action=""
+            accept=".xls, .xlsx"
+            :file-list="fileList"
+            :on-change="handleKoperasiUpload"
+            :auto-upload="false"
+          >
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">
+              Drop file here or <em>click to upload</em>
+            </div>
+          </el-upload>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleKoperasiDialogClose">Cancel</el-button>
+        <el-button
+          type="primary"
+          :loading="loadingKoperasi"
+          @click="handleKoperasiImport('formExt')"
         >
           Import
         </el-button>
@@ -335,6 +385,7 @@ import { PayrollAll } from '../apollo/query/payroll';
 import {
   ImportPayroll,
   ImportKantin,
+  ImportKoperasi,
 } from '../apollo/mutation/import';
 import {
   PayrollDelete,
@@ -353,10 +404,12 @@ export default {
       showAddDialog: false,
       showCloneDialog: false,
       showKantinDialog: false,
+      showKoperasiDialog: false,
       loading: false,
       loadingAdd: false,
       loadingClone: false,
       loadingKantin: false,
+      loadingKoperasi: false,
       genRpPy: false,
       form: {
         period: [],
@@ -371,7 +424,7 @@ export default {
         id: '',
         period: [],
       },
-      formKantin: {
+      formExt: {
         id: '',
         file: null,
       },
@@ -433,6 +486,7 @@ export default {
     },
     handleImportCommand(c, id) {
       if (c === 'kantin') this.handleKantinDialog(id);
+      else if (c === 'koperasi') this.handleKoperasiDialog(id);
     },
     handleExportCommand(c, id, dir) {
       if (c === 'pdf') this.generateReportPayroll(id, dir);
@@ -646,16 +700,16 @@ export default {
     },
     handleKantinDialog(id) {
       this.showKantinDialog = true;
-      this.formKantin.id = id;
+      this.formExt.id = id;
     },
     handleKantinDialogClose() {
       this.fileList = [];
-      this.$refs.formKantin.resetFields();
-      this.$refs.formKantin.clearValidate();
+      this.$refs.formExt.resetFields();
+      this.$refs.formExt.clearValidate();
       this.showKantinDialog = false;
     },
     handleKantinUpload({ raw }) {
-      this.formKantin.file = raw;
+      this.formExt.file = raw;
     },
     handleKantinImport(form) {
       this.$refs[form].validate(async (valid) => {
@@ -668,14 +722,56 @@ export default {
               mutation: ImportKantin,
               variables: {
                 input: {
-                  _id: this.formKantin.id,
-                  file: this.formKantin.file,
+                  _id: this.formExt.id,
+                  file: this.formExt.file,
                 },
               },
             });
 
             this.handleKantinDialogClose();
             this.loadingKantin = false;
+            return true;
+          } catch ({ graphQLErrors, networkError }) {
+            this.errors = graphQLErrors || networkError.result.errors;
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
+    },
+    handleKoperasiDialog(id) {
+      this.showKoperasiDialog = true;
+      this.formExt.id = id;
+    },
+    handleKoperasiDialogClose() {
+      this.fileList = [];
+      this.$refs.formExt.resetFields();
+      this.$refs.formExt.clearValidate();
+      this.showKoperasiDialog = false;
+    },
+    handleKoperasiUpload({ raw }) {
+      this.formExt.file = raw;
+    },
+    handleKoperasiImport(form) {
+      this.$refs[form].validate(async (valid) => {
+        if (valid) {
+          try {
+            this.loadingKoperasi = true;
+            const client = this.$apolloProvider.clients.upload;
+
+            await client.mutate({
+              mutation: ImportKoperasi,
+              variables: {
+                input: {
+                  _id: this.formExt.id,
+                  file: this.formExt.file,
+                },
+              },
+            });
+
+            this.handleKoperasiDialogClose();
+            this.loadingKoperasi = false;
             return true;
           } catch ({ graphQLErrors, networkError }) {
             this.errors = graphQLErrors || networkError.result.errors;

@@ -39,3 +39,11 @@ export const ImportKantin = gql`
     }
   }
 `;
+
+export const ImportKoperasi = gql`
+  mutation importKoperasi($input: ExtImportInputType) {
+    importKoperasi(input: $input) {
+      sStatus
+    }
+  }
+`;
