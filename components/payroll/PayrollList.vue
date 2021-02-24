@@ -49,7 +49,7 @@ export default {
   data() {
     return {
       content: '',
-      activeName: 'a',
+      activeName: this.$route.query.t1,
     };
   },
   methods: {

@@ -13,12 +13,15 @@ import {
   Input,
   Link,
   Loading,
+  Menu,
+  MenuItem,
   Message,
   MessageBox,
   Option,
   PageHeader,
   Progress,
   Select,
+  Submenu,
   Table,
   TableColumn,
   Tabs,
@@ -42,10 +45,13 @@ Vue.use(Form);
 Vue.use(FormItem);
 Vue.use(Input);
 Vue.use(Link);
+Vue.use(Menu);
+Vue.use(MenuItem);
 Vue.use(Option);
 Vue.use(PageHeader);
 Vue.use(Progress);
 Vue.use(Select);
+Vue.use(Submenu);
 Vue.use(Table);
 Vue.use(TableColumn);
 Vue.use(Tabs);

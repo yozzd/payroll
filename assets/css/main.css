@@ -66,3 +66,34 @@ button:focus,
   padding: 4px 8px;
   border-bottom: 1px solid #ebeef5;
 }
+
+.dropmenu.el-menu.el-menu--horizontal {
+  border-bottom: 0;
+  display: inline-block;
+}
+
+.el-menu--horizontal>.el-submenu .el-submenu__title:hover,
+.el-submenu__title:hover,
+.el-menu {
+  background-color: transparent;
+}
+
+.el-menu--horizontal>.el-submenu.is-active .el-submenu__title,
+.el-submenu.is-active .el-submenu__title {
+  border-bottom: 0;
+}
+
+.dropmenu..el-menu--horizontal > .el-submenu {
+  float: none;
+}
+
+.dropmenu.el-menu--horizontal > .el-submenu .el-submenu__title {
+  height: 8px;
+  line-height: 0;
+  padding: 0 10px;
+}
+
+.dropmenu.el-menu--horizontal > .el-submenu .el-submenu__icon-arrow {
+  margin-left: 0;
+  font-size: 14px;
+}

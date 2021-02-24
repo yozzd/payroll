@@ -39,7 +39,7 @@
         >
           <template slot-scope="scope">
             <nuxt-link
-              :to="`/payroll/list/${scope.row._id}`"
+              :to="`/payroll/list/${scope.row._id}?t1=a`"
               class="el-link el-link--primary is-underline"
             >
               <i class="el-icon-document"></i>
@@ -47,6 +47,72 @@
                 {{ scope.row.period }}
               </span>
             </nuxt-link>
+            <el-menu
+              mode="horizontal"
+              class="dropmenu"
+              @select="(k, p) => handleSelect(k, p, scope.row._id)"
+            >
+              <el-submenu index="1">
+                <el-menu-item index="a">
+                  Employment
+                </el-menu-item>
+                <el-menu-item index="b">
+                  Private
+                </el-menu-item>
+                <el-submenu index="c">
+                  <template slot="title">
+                    Earnings
+                  </template>
+                  <el-menu-item index="ca">
+                    Overtime
+                  </el-menu-item>
+                  <el-menu-item index="cb">
+                    Fixed Allowance
+                  </el-menu-item>
+                  <el-menu-item index="cc">
+                    Non Fixed Allowance
+                  </el-menu-item>
+                  <el-menu-item index="cd">
+                    Retro Fill
+                  </el-menu-item>
+                  <el-menu-item index="ce">
+                    Leave
+                  </el-menu-item>
+                  <el-menu-item index="cf">
+                    Others
+                  </el-menu-item>
+                </el-submenu>
+                <el-submenu index="d">
+                  <template slot="title">
+                    Deductions
+                  </template>
+                  <el-menu-item index="da">
+                    Absent
+                  </el-menu-item>
+                  <el-menu-item index="db">
+                    Fee
+                  </el-menu-item>
+                  <el-menu-item index="dc">
+                    Tax
+                  </el-menu-item>
+                  <el-menu-item index="dd">
+                    Reduction
+                  </el-menu-item>
+                  <el-menu-item index="de">
+                    Others
+                  </el-menu-item>
+                </el-submenu>
+                <el-menu-item index="e">
+                  Payment
+                </el-menu-item>
+                <el-menu-item index="f">
+                  Flags
+                </el-menu-item>
+                <el-menu-item index="g">
+                  Manual
+                </el-menu-item>
+              </el-submenu>
+            </el-menu>
           </template>
         </el-table-column>
         <el-table-column
@@ -472,6 +538,13 @@ export default {
     };
   },
   methods: {
+    handleSelect(key, keyPath, id) {
+      if (keyPath.length > 2) {
+        this.$router.push({ name: 'payroll-list-id', params: { id }, query: { t1: keyPath[1], t2: keyPath[2] } });
+      } else {
+        this.$router.push({ name: 'payroll-list-id', params: { id }, query: { t1: key } });
+      }
+    },
     handleChange(v) {
       this.form.year = v;
     },

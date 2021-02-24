@@ -32,7 +32,7 @@
 export default {
   data() {
     return {
-      activeName: 'da',
+      activeName: this.$route.query.t2,
     };
   },
 };

@@ -390,9 +390,9 @@ const processImportKantin = async ({ _id, file }) => {
       try {
         for (let i = 0; i < ft.length; i += 1) {
           if (ft[i]['Emp No']) {
-            const idx = px.employee.findIndex(v => v.e0 === ft[i]['Emp No']);
+            const idx = px.employee.findIndex((v) => v.e0 === ft[i]['Emp No']);
             if (idx >= 0) {
-              Object.assign(px.employee[idx], { dl0: ft[i]['Amount'] || 0 });
+              Object.assign(px.employee[idx], { dl0: ft[i].Amount || 0 });
               await px.save();
             }
           }
@@ -431,9 +431,9 @@ const processImportKoperasi = async ({ _id, file }) => {
       try {
         for (let i = 0; i < ft.length; i += 1) {
           if (ft[i]['Emp No']) {
-            const idx = px.employee.findIndex(v => v.e0 === ft[i]['Emp No']);
+            const idx = px.employee.findIndex((v) => v.e0 === ft[i]['Emp No']);
             if (idx >= 0) {
-              Object.assign(px.employee[idx], { dm0: ft[i]['Amount'] || 0 });
+              Object.assign(px.employee[idx], { dm0: ft[i].Amount || 0 });
               await px.save();
             }
           }

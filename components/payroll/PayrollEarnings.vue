@@ -37,7 +37,7 @@
 export default {
   data() {
     return {
-      activeName: 'ca',
+      activeName: this.$route.query.t2,
     };
   },
 };
