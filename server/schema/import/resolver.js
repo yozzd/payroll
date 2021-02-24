@@ -4,7 +4,7 @@ const {
   processImportThr,
   processImportKantin,
 } = require('./method');
-const { ImportInputType, KantinInputType } = require('./input.type');
+const { ImportInputType, ExtImportInputType } = require('./input.type');
 const { PayrollType, GenType } = require('../payroll/type');
 const { ESlipType } = require('../eslip/type');
 const { ThrType } = require('../thr/type');
@@ -46,7 +46,7 @@ const Mutation = {
   importKantin: {
     type: GenType,
     args: {
-      input: { type: KantinInputType },
+      input: { type: ExtImportInputType },
     },
     resolve: auth.hasRole('admin', async (_, { input }) => {
       const p = await processImportKantin(input);

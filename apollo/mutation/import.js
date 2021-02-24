@@ -33,7 +33,7 @@ export const ImportThr = gql`
 `;
 
 export const ImportKantin = gql`
-  mutation importKantin($input: KantinInputType) {
+  mutation importKantin($input: ExtImportInputType) {
     importKantin(input: $input) {
       sStatus
     }
