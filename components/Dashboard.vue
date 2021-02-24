@@ -649,6 +649,7 @@ export default {
       this.formKantin.id = id;
     },
     handleKantinDialogClose() {
+      this.fileList = [];
       this.$refs.formKantin.resetFields();
       this.$refs.formKantin.clearValidate();
       this.showKantinDialog = false;
