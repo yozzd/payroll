@@ -393,11 +393,11 @@ const processImportKantin = async ({ _id, file }) => {
             const idx = px.employee.findIndex((v) => v.e0 === ft[i]['Emp No']);
             if (idx >= 0) {
               Object.assign(px.employee[idx], { dl0: ft[i].Amount || 0 });
-              await px.save();
             }
           }
         }
 
+        await px.save();
         return resolve({ sStatus: 1 });
       } catch (err) {
         if (typeof err === 'string') {
@@ -434,11 +434,11 @@ const processImportKoperasi = async ({ _id, file }) => {
             const idx = px.employee.findIndex((v) => v.e0 === ft[i]['Emp No']);
             if (idx >= 0) {
               Object.assign(px.employee[idx], { dm0: ft[i].Amount || 0 });
-              await px.save();
             }
           }
         }
 
+        await px.save();
         return resolve({ sStatus: 1 });
       } catch (err) {
         if (typeof err === 'string') {
