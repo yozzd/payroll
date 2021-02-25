@@ -164,8 +164,8 @@ const EmployeeSchema = new Schema({
   fc0: Number, // Slot 5 Flag
   fd0: Number, // Slot 6 Flag
   fe0: Number, // Slot 7 Flag
-  ff0: Number, // Slot 8 Flag
-  fg0: Number, // Slot 9 Flag
+  ff0: Boolean, // Slot 8 Flag
+  fg0: Boolean, // Slot 9 Flag
   fh0: { type: String, trim: true }, // Note 1
   fi0: { type: String, trim: true }, // Note 2
   category: Number, // 0 = Administration, 1 = Production

@@ -711,7 +711,9 @@ const Mutation = {
         to,
         rate: px.rate,
       });
-      Object.assign(pn.employee, px.employee);
+
+      const arr = px.employee.filter(v => v.fg0 !== true && v.ff0 !== true && v.ex0 !== true);
+      Object.assign(pn.employee, arr);
 
       const s = await pn.save();
       return s;
