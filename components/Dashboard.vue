@@ -136,6 +136,9 @@
                 <el-dropdown-item command="koperasi">
                   Koperasi
                 </el-dropdown-item>
+                <el-dropdown-item command="overtime">
+                  OT / Absent
+                </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </template>
@@ -362,6 +365,53 @@
     </el-dialog>
 
     <el-dialog
+      title="Import OT / Absent"
+      :visible.sync="showOvertimeDialog"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :before-close="handleOvertimeDialogClose"
+      width="20%"
+    >
+      <ErrorHandler
+        v-if="errors"
+        :errors="errors"
+        class="mb-8"
+      />
+      <el-form
+        ref="formExt"
+        :model="formExt"
+        :hide-required-asterisk="true"
+        label-position="top"
+      >
+        <el-form-item label="File" prop="file">
+          <el-upload
+            drag
+            action=""
+            accept=".xls, .xlsx"
+            :file-list="fileList"
+            :on-change="handleOvertimeUpload"
+            :auto-upload="false"
+          >
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">
+              Drop file here or <em>click to upload</em>
+            </div>
+          </el-upload>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleOvertimeDialogClose">Cancel</el-button>
+        <el-button
+          type="primary"
+          :loading="loadingOvertime"
+          @click="handleOvertimeImport('formExt')"
+        >
+          Import
+        </el-button>
+      </span>
+    </el-dialog>
+
+    <el-dialog
       title="Clone Employee"
       :visible.sync="showCloneEmployeeDialog"
       :close-on-click-modal="false"
@@ -452,6 +502,7 @@ import {
   ImportPayroll,
   ImportKantin,
   ImportKoperasi,
+  ImportOvertime,
 } from '../apollo/mutation/import';
 import {
   PayrollDelete,
@@ -471,11 +522,13 @@ export default {
       showClonePayrollDialog: false,
       showKantinDialog: false,
       showKoperasiDialog: false,
+      showOvertimeDialog: false,
       loading: false,
       loadingCloneEmployee: false,
       loadingClonePayroll: false,
       loadingKantin: false,
       loadingKoperasi: false,
+      loadingOvertime: false,
       genRpPy: false,
       form: {
         period: [],
@@ -560,6 +613,7 @@ export default {
     handleImportCommand(c, id) {
       if (c === 'kantin') this.handleKantinDialog(id);
       else if (c === 'koperasi') this.handleKoperasiDialog(id);
+      else if (c === 'overtime') this.handleOvertimeDialog(id);
     },
     handleExportCommand(c, id, dir) {
       if (c === 'pdf') this.generateReportPayroll(id, dir);
@@ -845,6 +899,48 @@ export default {
 
             this.handleKoperasiDialogClose();
             this.loadingKoperasi = false;
+            return true;
+          } catch ({ graphQLErrors, networkError }) {
+            this.errors = graphQLErrors || networkError.result.errors;
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
+    },
+    handleOvertimeDialog(id) {
+      this.showOvertimeDialog = true;
+      this.formExt.id = id;
+    },
+    handleOvertimeDialogClose() {
+      this.fileList = [];
+      this.$refs.formExt.resetFields();
+      this.$refs.formExt.clearValidate();
+      this.showOvertimeDialog = false;
+    },
+    handleOvertimeUpload({ raw }) {
+      this.formExt.file = raw;
+    },
+    handleOvertimeImport(form) {
+      this.$refs[form].validate(async (valid) => {
+        if (valid) {
+          try {
+            this.loadingOvertime = true;
+            const client = this.$apolloProvider.clients.upload;
+
+            await client.mutate({
+              mutation: ImportOvertime,
+              variables: {
+                input: {
+                  _id: this.formExt.id,
+                  file: this.formExt.file,
+                },
+              },
+            });
+
+            this.handleOvertimeDialogClose();
+            this.loadingOvertime = false;
             return true;
           } catch ({ graphQLErrors, networkError }) {
             this.errors = graphQLErrors || networkError.result.errors;

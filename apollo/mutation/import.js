@@ -47,3 +47,11 @@ export const ImportKoperasi = gql`
     }
   }
 `;
+
+export const ImportOvertime = gql`
+  mutation importOvertime($input: ExtImportInputType) {
+    importOvertime(input: $input) {
+      sStatus
+    }
+  }
+`;

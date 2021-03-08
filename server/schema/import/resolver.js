@@ -4,6 +4,7 @@ const {
   processImportThr,
   processImportKantin,
   processImportKoperasi,
+  processImportOvertime,
 } = require('./method');
 const { ImportInputType, ExtImportInputType } = require('./input.type');
 const { PayrollType, GenType } = require('../payroll/type');
@@ -61,6 +62,16 @@ const Mutation = {
     },
     resolve: auth.hasRole('admin', async (_, { input }) => {
       const p = await processImportKoperasi(input);
+      return p;
+    }),
+  },
+  importOvertime: {
+    type: GenType,
+    args: {
+      input: { type: ExtImportInputType },
+    },
+    resolve: auth.hasRole('admin', async (_, { input }) => {
+      const p = await processImportOvertime(input);
       return p;
     }),
   },
