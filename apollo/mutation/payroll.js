@@ -33,14 +33,6 @@ export const GenerateReportPayroll = gql`
   }
 `;
 
-export const AddEmployee = gql`
-  mutation addEmployee($input: AddEmployeeInputType) {
-    addEmployee(input: $input) {
-      sStatus
-    }
-  }
-`;
-
 export const EditEmployment = gql`
   mutation editEmployment($input: EditEmploymentInputType) {
     editEmployment(input: $input) {
@@ -301,8 +293,16 @@ export const EditManualEmployee = gql`
   }
 `;
 
+export const CloneEmployee = gql`
+  mutation cloneEmployee($input: CloneEmployeeInputType) {
+    cloneEmployee(input: $input) {
+      sStatus
+    }
+  }
+`;
+
 export const ClonePayroll = gql`
-  mutation clonePayroll($input: CloneInputType) {
+  mutation clonePayroll($input: ClonePayrollInputType) {
     clonePayroll(input: $input) {
       _id
       year

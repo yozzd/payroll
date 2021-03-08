@@ -13,7 +13,7 @@ const {
   generateReportPayroll,
 } = require('./method');
 const {
-  AddEmployeeInputType,
+  CloneEmployeeInputType,
   EditEmploymentInputType,
   EditPrivateInputType,
   EditOvertimeInputType,
@@ -28,7 +28,7 @@ const {
   EditFlagsEmployeeInputType,
   EditManualEmployeeInputType,
 } = require('./employee.input.type.js');
-const { CloneInputType } = require('./input.type');
+const { ClonePayrollInputType } = require('./input.type');
 const auth = require('../auth/service');
 
 const Query = {
@@ -525,10 +525,10 @@ const Mutation = {
       return s;
     }),
   },
-  addEmployee: {
+  cloneEmployee: {
     type: GenType,
     args: {
-      input: { type: AddEmployeeInputType },
+      input: { type: CloneEmployeeInputType },
     },
     resolve: auth.hasRole('admin', async (_, { input }) => {
       const { _id, e0 } = input;
@@ -701,7 +701,7 @@ const Mutation = {
   clonePayroll: {
     type: PayrollType,
     args: {
-      input: { type: CloneInputType },
+      input: { type: ClonePayrollInputType },
     },
     resolve: auth.hasRole('admin', async (_, { input }) => {
       const { _id, from, to } = input;

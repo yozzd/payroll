@@ -363,10 +363,10 @@
 
     <el-dialog
       title="Clone Employee"
-      :visible.sync="showAddDialog"
+      :visible.sync="showCloneEmployeeDialog"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
-      :before-close="handleAddDialogClose"
+      :before-close="handleCloneEmployeeDialogClose"
       width="20%"
     >
       <ErrorHandler
@@ -375,27 +375,27 @@
         class="mb-8"
       />
       <el-form
-        ref="formAdd"
-        :model="formAdd"
-        :rules="rulesAdd"
+        ref="formCloneEmployee"
+        :model="formCloneEmployee"
+        :rules="rulesCloneEmployee"
         :hide-required-asterisk="true"
         label-position="top"
       >
         <el-form-item label="No. Karyawan" prop="e0">
           <el-input
-            v-model="formAdd.e0"
+            v-model="formCloneEmployee.e0"
             v-maska="'A.####'"
           ></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleAddDialogClose">Cancel</el-button>
+        <el-button @click="handleCloneEmployeeDialogClose">Cancel</el-button>
         <el-button
           type="primary"
-          :loading="loadingAdd"
-          @click="handleAdd('formAdd')"
+          :loading="loadingCloneEmployee"
+          @click="handleCloneEmployee('formCloneEmployee')"
         >
-          Save
+          Clone
         </el-button>
       </span>
     </el-dialog>
@@ -456,7 +456,7 @@ import {
 import {
   PayrollDelete,
   GenerateReportPayroll,
-  AddEmployee,
+  CloneEmployee,
   ClonePayroll,
 } from '../apollo/mutation/payroll';
 
@@ -467,12 +467,12 @@ export default {
 
     return {
       showDialog: false,
-      showAddDialog: false,
+      showCloneEmployeeDialog: false,
       showClonePayrollDialog: false,
       showKantinDialog: false,
       showKoperasiDialog: false,
       loading: false,
-      loadingAdd: false,
+      loadingCloneEmployee: false,
       loadingClonePayroll: false,
       loadingKantin: false,
       loadingKoperasi: false,
@@ -482,7 +482,7 @@ export default {
         file: null,
         year,
       },
-      formAdd: {
+      formCloneEmployee: {
         id: '',
         e0: '',
       },
@@ -516,7 +516,7 @@ export default {
           },
         ],
       },
-      rulesAdd: {
+      rulesCloneEmployee: {
         e0: [{ required: true, message: 'Required' }],
       },
       rulesClonePayroll: {
@@ -573,7 +573,7 @@ export default {
     },
     handleActionCommand(c, id) {
       if (c === 'delete') this.handleConfirm(id);
-      else if (c === 'cloneEmployee') this.showAdd(id);
+      else if (c === 'cloneEmployee') this.showCloneEmployee(id);
       else if (c === 'clonePayroll') this.showClonePayroll(id);
     },
     handleConfirm(id) {
@@ -661,33 +661,33 @@ export default {
         }
       });
     },
-    showAdd(id) {
-      this.showAddDialog = true;
-      this.formAdd.id = id;
+    showCloneEmployee(id) {
+      this.showCloneEmployeeDialog = true;
+      this.formCloneEmployee.id = id;
     },
-    handleAddDialogClose() {
-      this.$refs.formAdd.resetFields();
-      this.$refs.formAdd.clearValidate();
-      this.showAddDialog = false;
+    handleCloneEmployeeDialogClose() {
+      this.$refs.formCloneEmployee.resetFields();
+      this.$refs.formCloneEmployee.clearValidate();
+      this.showCloneEmployeeDialog = false;
     },
-    handleAdd(form) {
+    handleCloneEmployee(form) {
       this.$refs[form].validate(async (valid) => {
         if (valid) {
           try {
-            this.loadingAdd = true;
+            this.loadingCloneEmployee = true;
 
             await this.$apollo.mutate({
-              mutation: AddEmployee,
+              mutation: CloneEmployee,
               variables: {
                 input: {
-                  _id: this.formAdd.id,
-                  e0: this.formAdd.e0,
+                  _id: this.formCloneEmployee.id,
+                  e0: this.formCloneEmployee.e0,
                 },
               },
             });
 
-            this.handleAddDialogClose();
-            this.loadingAdd = false;
+            this.handleCloneEmployeeDialogClose();
+            this.loadingCloneEmployee = false;
             return true;
           } catch ({ graphQLErrors, networkError }) {
             this.errors = graphQLErrors || networkError.result.errors;

@@ -175,8 +175,8 @@ const ManualInputType = new GraphQLInputObjectType({
 
 /** *********************************************** */
 
-const AddEmployeeInputType = new GraphQLInputObjectType({
-  name: 'AddEmployeeInputType',
+const CloneEmployeeInputType = new GraphQLInputObjectType({
+  name: 'CloneEmployeeInputType',
   fields: () => ({
     _id: { type: GraphQLString },
     e0: { type: GraphQLString },
@@ -288,7 +288,7 @@ const EditManualEmployeeInputType = new GraphQLInputObjectType({
 });
 
 module.exports = {
-  AddEmployeeInputType,
+  CloneEmployeeInputType,
   EditEmploymentInputType,
   EditPrivateInputType,
   EditOvertimeInputType,
