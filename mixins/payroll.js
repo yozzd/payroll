@@ -40,6 +40,9 @@ export default {
       if (row.ex0) {
         return 'final-row';
       }
+      if (row.af0 && !row.ag0) {
+        return 'warning-row';
+      }
       return '';
     },
   },
