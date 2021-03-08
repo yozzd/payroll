@@ -402,10 +402,10 @@
 
     <el-dialog
       title="Clone Payroll"
-      :visible.sync="showCloneDialog"
+      :visible.sync="showClonePayrollDialog"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
-      :before-close="handleCloneDialogClose"
+      :before-close="handleClonePayrollDialogClose"
       width="20%"
     >
       <ErrorHandler
@@ -414,15 +414,15 @@
         class="mb-8"
       />
       <el-form
-        ref="formClone"
-        :model="formClone"
-        :rules="rulesClone"
+        ref="formClonePayroll"
+        :model="formClonePayroll"
+        :rules="rulesClonePayroll"
         :hide-required-asterisk="true"
         label-position="top"
       >
         <el-form-item label="Period" prop="period">
           <el-date-picker
-            v-model="formClone.period"
+            v-model="formClonePayroll.period"
             type="daterange"
             start-placeholder="Start date"
             end-placeholder="End date"
@@ -432,11 +432,11 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleCloneDialogClose">Cancel</el-button>
+        <el-button @click="handleClonePayrollDialogClose">Cancel</el-button>
         <el-button
           type="primary"
-          :loading="loadingClone"
-          @click="handleClone('formClone')"
+          :loading="loadingClonePayroll"
+          @click="handleClonePayroll('formClonePayroll')"
         >
           Clone
         </el-button>
@@ -468,12 +468,12 @@ export default {
     return {
       showDialog: false,
       showAddDialog: false,
-      showCloneDialog: false,
+      showClonePayrollDialog: false,
       showKantinDialog: false,
       showKoperasiDialog: false,
       loading: false,
       loadingAdd: false,
-      loadingClone: false,
+      loadingClonePayroll: false,
       loadingKantin: false,
       loadingKoperasi: false,
       genRpPy: false,
@@ -486,7 +486,7 @@ export default {
         id: '',
         e0: '',
       },
-      formClone: {
+      formClonePayroll: {
         id: '',
         period: [],
       },
@@ -519,7 +519,7 @@ export default {
       rulesAdd: {
         e0: [{ required: true, message: 'Required' }],
       },
-      rulesClone: {
+      rulesClonePayroll: {
         period: [
           {
             type: 'array',
@@ -574,7 +574,7 @@ export default {
     handleActionCommand(c, id) {
       if (c === 'delete') this.handleConfirm(id);
       else if (c === 'cloneEmployee') this.showAdd(id);
-      else if (c === 'clonePayroll') this.showClone(id);
+      else if (c === 'clonePayroll') this.showClonePayroll(id);
     },
     handleConfirm(id) {
       this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
@@ -716,28 +716,28 @@ export default {
         return false;
       }
     },
-    showClone(id) {
-      this.showCloneDialog = true;
-      this.formClone.id = id;
+    showClonePayroll(id) {
+      this.showClonePayrollDialog = true;
+      this.formClonePayroll.id = id;
     },
-    handleCloneDialogClose() {
-      this.$refs.formClone.resetFields();
-      this.$refs.formClone.clearValidate();
-      this.showCloneDialog = false;
+    handleClonePayrollDialogClose() {
+      this.$refs.formClonePayroll.resetFields();
+      this.$refs.formClonePayroll.clearValidate();
+      this.showClonePayrollDialog = false;
     },
-    handleClone(form) {
+    handleClonePayroll(form) {
       this.$refs[form].validate(async (valid) => {
         if (valid) {
           try {
-            this.loadingClone = true;
+            this.loadingClonePayroll = true;
 
             await this.$apollo.mutate({
               mutation: ClonePayroll,
               variables: {
                 input: {
-                  _id: this.formClone.id,
-                  from: this.formClone.period[0],
-                  to: this.formClone.period[1],
+                  _id: this.formClonePayroll.id,
+                  from: this.formClonePayroll.period[0],
+                  to: this.formClonePayroll.period[1],
                 },
               },
               update: (store, { data: { clonePayroll } }) => {
@@ -759,8 +759,8 @@ export default {
               },
             });
 
-            this.handleCloneDialogClose();
-            this.loadingClone = false;
+            this.handleClonePayrollDialogClose();
+            this.loadingClonePayroll = false;
             return true;
           } catch ({ graphQLErrors, networkError }) {
             this.errors = graphQLErrors || networkError.result.errors;
