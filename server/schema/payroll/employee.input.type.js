@@ -10,6 +10,8 @@ const EmploymentInputType = new GraphQLInputObjectType({
   name: 'EmploymentInputType',
   fields: () => ({
     _id: { type: GraphQLString },
+    d0: { type: GraphQLString },
+    e0: { type: GraphQLString },
     h0: { type: GraphQLString },
     i0: { type: GraphQLString },
     k0: { type: GraphQLString },

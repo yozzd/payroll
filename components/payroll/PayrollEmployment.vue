@@ -99,16 +99,10 @@
         <div class="flex space-x-4">
           <div class="flex-1">
             <el-form-item label="No. Karyawan">
-              <el-input
-                v-model="form.e0"
-                :disabled="true"
-              ></el-input>
+              <el-input v-model="form.e0"></el-input>
             </el-form-item>
             <el-form-item label="Nama Karyawan">
-              <el-input
-                v-model="form.d0"
-                :disabled="true"
-              ></el-input>
+              <el-input v-model="form.d0"></el-input>
             </el-form-item>
             <el-form-item label="Status Karyawan">
               <el-select v-model="form.h0" filterable>
@@ -250,6 +244,8 @@ export default {
                   _id: this.$route.params.id,
                   employee: {
                     _id: this.form._id,
+                    d0: this.form.d0,
+                    e0: this.form.e0,
                     h0: this.form.h0,
                     i0: this.form.i0,
                     k0: this.form.k0,
