@@ -8,6 +8,16 @@
       <div class="flex-1">
         Total {{ items.length }} items
       </div>
+      <div>
+        <el-link
+          type="primary"
+          class="font-sm"
+          :disabled="!multipleSelection.length"
+          @click="handleDelete"
+        >
+          Delete
+        </el-link>
+      </div>
       <div class="w-64">
         <el-input
           v-model="search"
@@ -25,7 +35,9 @@
       border
       height="500"
       :row-class-name="finalRow"
+      @selection-change="handleSelectionChange"
     >
+      <el-table-column type="selection" width="40" align="center" fixed></el-table-column>
       <el-table-column type="index" width="50" align="center" fixed></el-table-column>
       <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
       <el-table-column label="Nama Karyawan" width="200" fixed>
@@ -195,9 +207,10 @@
 </template>
 
 <script>
+import pullAllBy from 'lodash/pullAllBy';
 import MiniSearch from 'minisearch';
 import { PayrollEmployment } from '../../apollo/query/payroll';
-import { EditEmployment } from '../../apollo/mutation/payroll';
+import { EditEmployment, EmployeeDelete } from '../../apollo/mutation/payroll';
 import mix from '../../mixins/payroll';
 
 export default {
@@ -212,6 +225,8 @@ export default {
       scd: [],
       grd: [],
       jbt: [],
+      multipleSelection: [],
+      cachedMultipleSelection: [],
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -270,6 +285,50 @@ export default {
           return false;
         }
       });
+    },
+    handleSelectionChange(arr) {
+      this.multipleSelection = arr.map((v) => ({ _id: v._id }));
+      this.cachedMultipleSelection = arr;
+    },
+    handleDelete() {
+      this.$confirm('This will permanently delete the data. Continue?', 'Warning', {
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'Cancel',
+        type: 'warning',
+      }).then(async () => {
+        await this.$apollo.mutate({
+          mutation: EmployeeDelete,
+          variables: {
+            id: this.$route.params.id,
+            del: this.multipleSelection,
+          },
+          update: (store, { data: { employeeDelete } }) => {
+            const cdata = store.readQuery({
+              query: PayrollEmployment,
+              variables: {
+                id: this.$route.params.id,
+              },
+            });
+            pullAllBy(cdata.payrollEmployment.employee, employeeDelete, '_id');
+            store.writeQuery({
+              query: PayrollEmployment,
+              variables: {
+                id: this.$route.params.id,
+              },
+              data: cdata,
+            });
+          },
+          optimisticResponse: {
+            __typename: 'Mutation',
+            employeeDelete: this.cachedMultipleSelection,
+          },
+        });
+
+        this.$message({
+          type: 'success',
+          message: 'Delete completed',
+        });
+      }).catch(() => {});
     },
   },
   apollo: {

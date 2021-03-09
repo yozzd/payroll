@@ -312,3 +312,11 @@ export const ClonePayroll = gql`
     }
   }
 `;
+
+export const EmployeeDelete = gql`
+  mutation employeeDelete($id: String!, $del: [DeleteInputType]!) {
+    employeeDelete(id: $id, del: $del) {
+      _id
+    }
+  }
+`;

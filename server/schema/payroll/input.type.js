@@ -12,4 +12,11 @@ const ClonePayrollInputType = new GraphQLInputObjectType({
   }),
 });
 
-module.exports = { ClonePayrollInputType };
+const DeleteInputType = new GraphQLInputObjectType({
+  name: 'DeleteInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+  }),
+});
+
+module.exports = { ClonePayrollInputType, DeleteInputType };

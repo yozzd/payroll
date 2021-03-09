@@ -87,6 +87,10 @@ button:focus,
   border-bottom: 0;
 }
 
+.el-table-column--selection .cell {
+  padding-right: 10px;
+}
+
 .dropmenu..el-menu--horizontal > .el-submenu {
   float: none;
 }

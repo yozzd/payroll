@@ -28,7 +28,7 @@ const {
   EditFlagsEmployeeInputType,
   EditManualEmployeeInputType,
 } = require('./employee.input.type.js');
-const { ClonePayrollInputType } = require('./input.type');
+const { ClonePayrollInputType, DeleteInputType } = require('./input.type');
 const auth = require('../auth/service');
 
 const Query = {
@@ -712,11 +712,28 @@ const Mutation = {
         rate: px.rate,
       });
 
-      const arr = px.employee.filter(v => v.fg0 !== true && v.ff0 !== true && v.ex0 !== true);
+      const arr = px.employee.filter((v) => v.fg0 !== true && v.ff0 !== true && v.ex0 !== true);
       Object.assign(pn.employee, arr);
 
       const s = await pn.save();
       return s;
+    }),
+  },
+  employeeDelete: {
+    type: new GraphQLList(PayrollType),
+    args: {
+      id: { type: GraphQLString },
+      del: { type: new GraphQLList(DeleteInputType) },
+    },
+    resolve: auth.hasRole('admin', async (_, { id, del }) => {
+      const px = await Payroll.findById(id);
+      await Promise.all(
+        del.map(async (v) => {
+          await px.employee.id(v._id).remove();
+        }),
+      );
+      await px.save();
+      return del;
     }),
   },
 };
