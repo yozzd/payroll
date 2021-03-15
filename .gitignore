@@ -89,7 +89,8 @@ sw.*
 # Vim swap files
 *.swp
 
-server/config
+server/config/index.js
+server/config/smtp.js
 static/eslip
 static/report
 static/slip
