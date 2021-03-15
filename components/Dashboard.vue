@@ -38,81 +38,89 @@
           width="200"
         >
           <template slot-scope="scope">
-            <nuxt-link
-              :to="`/payroll/list/${scope.row._id}?t1=a`"
-              class="el-link el-link--primary is-underline"
-            >
+            <div v-if="scope.row.freeze">
               <i class="el-icon-document"></i>
               <span>
                 {{ scope.row.period }}
               </span>
-            </nuxt-link>
-            <el-menu
-              mode="horizontal"
-              class="dropmenu"
-              @select="(k, p) => handleSelect(k, p, scope.row._id)"
-            >
-              <el-submenu index="1">
-                <el-menu-item index="a">
-                  Employment
-                </el-menu-item>
-                <el-menu-item index="b">
-                  Private
-                </el-menu-item>
-                <el-submenu index="c">
-                  <template slot="title">
-                    Earnings
-                  </template>
-                  <el-menu-item index="ca">
-                    Overtime
+            </div>
+            <div v-else>
+              <nuxt-link
+                :to="`/payroll/list/${scope.row._id}?t1=a`"
+                class="el-link el-link--primary is-underline"
+              >
+                <i class="el-icon-document"></i>
+                <span>
+                  {{ scope.row.period }}
+                </span>
+              </nuxt-link>
+              <el-menu
+                mode="horizontal"
+                class="dropmenu"
+                @select="(k, p) => handleSelect(k, p, scope.row._id)"
+              >
+                <el-submenu index="1">
+                  <el-menu-item index="a">
+                    Employment
                   </el-menu-item>
-                  <el-menu-item index="cb">
-                    Fixed Allowance
+                  <el-menu-item index="b">
+                    Private
                   </el-menu-item>
-                  <el-menu-item index="cc">
-                    Non Fixed Allowance
+                  <el-submenu index="c">
+                    <template slot="title">
+                      Earnings
+                    </template>
+                    <el-menu-item index="ca">
+                      Overtime
+                    </el-menu-item>
+                    <el-menu-item index="cb">
+                      Fixed Allowance
+                    </el-menu-item>
+                    <el-menu-item index="cc">
+                      Non Fixed Allowance
+                    </el-menu-item>
+                    <el-menu-item index="cd">
+                      Retro Fill
+                    </el-menu-item>
+                    <el-menu-item index="ce">
+                      Leave
+                    </el-menu-item>
+                    <el-menu-item index="cf">
+                      Others
+                    </el-menu-item>
+                  </el-submenu>
+                  <el-submenu index="d">
+                    <template slot="title">
+                      Deductions
+                    </template>
+                    <el-menu-item index="da">
+                      Absent
+                    </el-menu-item>
+                    <el-menu-item index="db">
+                      Fee
+                    </el-menu-item>
+                    <el-menu-item index="dc">
+                      Tax
+                    </el-menu-item>
+                    <el-menu-item index="dd">
+                      Reduction
+                    </el-menu-item>
+                    <el-menu-item index="de">
+                      Others
+                    </el-menu-item>
+                  </el-submenu>
+                  <el-menu-item index="e">
+                    Payment
                   </el-menu-item>
-                  <el-menu-item index="cd">
-                    Retro Fill
+                  <el-menu-item index="f">
+                    Flags
                   </el-menu-item>
-                  <el-menu-item index="ce">
-                    Leave
-                  </el-menu-item>
-                  <el-menu-item index="cf">
-                    Others
+                  <el-menu-item index="g">
+                    Manual
                   </el-menu-item>
                 </el-submenu>
-                <el-submenu index="d">
-                  <template slot="title">
-                    Deductions
-                  </template>
-                  <el-menu-item index="da">
-                    Absent
-                  </el-menu-item>
-                  <el-menu-item index="db">
-                    Fee
-                  </el-menu-item>
-                  <el-menu-item index="dc">
-                    Tax
-                  </el-menu-item>
-                  <el-menu-item index="dd">
-                    Reduction
-                  </el-menu-item>
-                  <el-menu-item index="de">
-                    Others
-                  </el-menu-item>
-                </el-submenu>
-                <el-menu-item index="e">
-                  Payment
-                </el-menu-item>
-                <el-menu-item index="f">
-                  Flags
-                </el-menu-item>
-                <el-menu-item index="g">
-                  Manual
-                </el-menu-item>
-              </el-submenu>
-            </el-menu>
+              </el-menu>
+            </div>
           </template>
         </el-table-column>
         <el-table-column
@@ -130,13 +138,22 @@
                 Import <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="kantin">
+                <el-dropdown-item
+                  command="kantin"
+                  :disabled="scope.row.freeze"
+                >
                   Kantin
                 </el-dropdown-item>
-                <el-dropdown-item command="koperasi">
+                <el-dropdown-item
+                  command="koperasi"
+                  :disabled="scope.row.freeze"
+                >
                   Koperasi
                 </el-dropdown-item>
-                <el-dropdown-item command="overtime">
+                <el-dropdown-item
+                  command="overtime"
+                  :disabled="scope.row.freeze"
+                >
                   OT / Absent
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -199,10 +216,16 @@
                 Action <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="cloneEmployee">
+                <el-dropdown-item
+                  command="cloneEmployee"
+                  :disabled="scope.row.freeze"
+                >
                   Clone Employee
                 </el-dropdown-item>
-                <el-dropdown-item command="clonePayroll">
+                <el-dropdown-item
+                  command="clonePayroll"
+                  :disabled="scope.row.freeze"
+                >
                   Clone Payroll
                 </el-dropdown-item>
                 <el-dropdown-item
