@@ -9,7 +9,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.aggregate([
         { $match: { _id: id } },
         { $unwind: '$employee' },

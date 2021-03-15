@@ -37,7 +37,7 @@ const Query = {
     args: {
       year: { type: GraphQLInt },
     },
-    resolve: auth.hasRole('admin', async (_, { year }) => {
+    resolve: auth.hasRole('user', async (_, { year }) => {
       const p = await Payroll.find({ year }).sort('-month');
       return p;
     }),
@@ -47,7 +47,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id }).select('period year');
       return p;
     }),
@@ -57,7 +57,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
@@ -82,7 +82,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
@@ -109,7 +109,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
@@ -134,7 +134,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
@@ -165,7 +165,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
@@ -192,7 +192,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
@@ -219,7 +219,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
@@ -238,7 +238,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
@@ -266,7 +266,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
@@ -285,7 +285,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
@@ -310,7 +310,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
@@ -330,7 +330,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
@@ -354,7 +354,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
@@ -375,7 +375,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
@@ -398,7 +398,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const payroll = await Payroll.aggregate([
         { $match: { _id: id } },
         { $unwind: '$employee' },
@@ -432,7 +432,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
@@ -452,7 +452,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
@@ -472,7 +472,7 @@ const Mutation = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id });
       await fs.remove(`static/slip/${p.dir}`);
       await fs.remove(`static/report/${p.dir}`);
@@ -486,7 +486,7 @@ const Mutation = {
       id: { type: GraphQLString },
       eId: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id, eId }) => {
+    resolve: auth.hasRole('user', async (_, { id, eId }) => {
       const p = await Payroll.aggregate([
         { $match: { _id: id } },
         { $unwind: '$employee' },
@@ -502,7 +502,7 @@ const Mutation = {
       id: { type: GraphQLString },
       eId: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id, eId }) => {
+    resolve: auth.hasRole('user', async (_, { id, eId }) => {
       const p = await Payroll.aggregate([
         { $match: { _id: id } },
         { $unwind: '$employee' },
@@ -517,7 +517,7 @@ const Mutation = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.aggregate([
         { $match: { _id: id } },
       ]);
@@ -530,7 +530,7 @@ const Mutation = {
     args: {
       input: { type: CloneEmployeeInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const { _id, e0 } = input;
       const px = await Payroll.findOne({ _id });
 
@@ -560,7 +560,7 @@ const Mutation = {
     args: {
       input: { type: EditEmploymentInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const { _id, employee } = input;
       const s = updateEmployee(_id, employee, Payroll);
       return s;
@@ -571,7 +571,7 @@ const Mutation = {
     args: {
       input: { type: EditPrivateInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const { _id, employee } = input;
       const s = updateEmployee(_id, employee, Payroll);
       return s;
@@ -582,7 +582,7 @@ const Mutation = {
     args: {
       input: { type: EditOvertimeInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const { _id, employee } = input;
       const s = updateEmployee(_id, employee, Payroll);
       return s;
@@ -593,7 +593,7 @@ const Mutation = {
     args: {
       input: { type: EditFixedAllowanceInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const { _id, employee } = input;
       const s = updateEmployee(_id, employee, Payroll);
       return s;
@@ -604,7 +604,7 @@ const Mutation = {
     args: {
       input: { type: EditNonFixedAllowanceInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const { _id, employee } = input;
       const s = updateEmployee(_id, employee, Payroll);
       return s;
@@ -615,7 +615,7 @@ const Mutation = {
     args: {
       input: { type: EditRetroFillInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const { _id, employee } = input;
       const s = updateEmployee(_id, employee, Payroll);
       return s;
@@ -626,7 +626,7 @@ const Mutation = {
     args: {
       input: { type: EditLeaveInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const { _id, employee } = input;
       const s = updateEmployee(_id, employee, Payroll);
       return s;
@@ -637,7 +637,7 @@ const Mutation = {
     args: {
       input: { type: EditEarningOthersInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const { _id, employee } = input;
       const s = updateEmployee(_id, employee, Payroll);
       return s;
@@ -648,7 +648,7 @@ const Mutation = {
     args: {
       input: { type: EditAbsentInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const { _id, employee } = input;
       const s = updateEmployee(_id, employee, Payroll);
       return s;
@@ -659,7 +659,7 @@ const Mutation = {
     args: {
       input: { type: EditReductionInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const { _id, employee } = input;
       const s = updateEmployee(_id, employee, Payroll);
       return s;
@@ -670,7 +670,7 @@ const Mutation = {
     args: {
       input: { type: EditDeductionOthersInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const { _id, employee } = input;
       const s = updateEmployee(_id, employee, Payroll);
       return s;
@@ -681,7 +681,7 @@ const Mutation = {
     args: {
       input: { type: EditFlagsEmployeeInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const { _id, employee } = input;
       const s = updateEmployee(_id, employee, Payroll);
       return s;
@@ -692,7 +692,7 @@ const Mutation = {
     args: {
       input: { type: EditManualEmployeeInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const { _id, employee } = input;
       const s = updateEmployee(_id, employee, Payroll);
       return s;
@@ -703,7 +703,7 @@ const Mutation = {
     args: {
       input: { type: ClonePayrollInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const { _id, from, to } = input;
       const px = await Payroll.findOne({ _id });
       const pn = new Payroll({
@@ -725,7 +725,7 @@ const Mutation = {
       id: { type: GraphQLString },
       del: { type: new GraphQLList(DeleteInputType) },
     },
-    resolve: auth.hasRole('admin', async (_, { id, del }) => {
+    resolve: auth.hasRole('user', async (_, { id, del }) => {
       const px = await Payroll.findById(id);
       await Promise.all(
         del.map(async (v) => {

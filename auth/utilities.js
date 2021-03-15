@@ -1,7 +1,7 @@
 export const userRoles = ['guest', 'user', 'admin', 'root'];
 
 export const isUnset = (o) => typeof o === 'undefined' || o === null;
-[B
+
 export const isSet = (o) => !isUnset(o);
 
 export const isSameURL = (a, b) => a.split('?')[0] === b.split('?')[0];
@@ -36,4 +36,3 @@ export function normalizePath(path = '') {
 
   return result;
 }
-

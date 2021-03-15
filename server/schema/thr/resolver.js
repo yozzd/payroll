@@ -16,7 +16,7 @@ const Query = {
     args: {
       year: { type: GraphQLInt },
     },
-    resolve: auth.hasRole('admin', async (_, { year }) => {
+    resolve: auth.hasRole('user', async (_, { year }) => {
       const thr = await Thr.find({ year }).sort('-month');
       return thr;
     }),
@@ -26,7 +26,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const thr = await Thr.aggregate([
         { $match: { _id: id } },
         { $unwind: '$employee' },
@@ -61,7 +61,7 @@ const Mutation = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const e = await Thr.findOne({ _id: id });
       await fs.remove(`static/thr/${e.dir}`);
       await Thr.findOneAndDelete({ _id: id });
@@ -74,7 +74,7 @@ const Mutation = {
       id: { type: GraphQLString },
       eId: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id, eId }) => {
+    resolve: auth.hasRole('user', async (_, { id, eId }) => {
       const p = await Thr.aggregate([
         { $match: { _id: id } },
         { $unwind: '$employee' },
@@ -90,7 +90,7 @@ const Mutation = {
       id: { type: GraphQLString },
       eId: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id, eId }) => {
+    resolve: auth.hasRole('user', async (_, { id, eId }) => {
       const p = await Thr.aggregate([
         { $match: { _id: id } },
         { $unwind: '$employee' },

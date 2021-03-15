@@ -20,7 +20,7 @@ const Mutation = {
     args: {
       input: { type: ImportInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const p = await processImportPayroll(input);
       return p;
     }),
@@ -30,7 +30,7 @@ const Mutation = {
     args: {
       input: { type: ImportInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const process = await processImportESlip(input);
       return process;
     }),
@@ -40,7 +40,7 @@ const Mutation = {
     args: {
       input: { type: ImportInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const process = await processImportThr(input);
       return process;
     }),
@@ -50,7 +50,7 @@ const Mutation = {
     args: {
       input: { type: ExtImportInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const p = await processImportKantin(input);
       return p;
     }),
@@ -60,7 +60,7 @@ const Mutation = {
     args: {
       input: { type: ExtImportInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const p = await processImportKoperasi(input);
       return p;
     }),
@@ -70,7 +70,7 @@ const Mutation = {
     args: {
       input: { type: ExtImportInputType },
     },
-    resolve: auth.hasRole('admin', async (_, { input }) => {
+    resolve: auth.hasRole('user', async (_, { input }) => {
       const p = await processImportOvertime(input);
       return p;
     }),

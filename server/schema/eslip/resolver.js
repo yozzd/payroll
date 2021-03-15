@@ -15,7 +15,7 @@ const Query = {
     args: {
       year: { type: GraphQLInt },
     },
-    resolve: auth.hasRole('admin', async (_, { year }) => {
+    resolve: auth.hasRole('user', async (_, { year }) => {
       const eslip = await ESlip.find({ year }).sort('-month');
       return eslip;
     }),
@@ -25,7 +25,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const eslip = await ESlip.findOne({ _id: id });
       return eslip;
     }),
@@ -38,7 +38,7 @@ const Mutation = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id }) => {
       const e = await ESlip.findOne({ _id: id });
       await fs.remove(`static/eslip/${e.dir}`);
       await ESlip.findOneAndDelete({ _id: id });
@@ -51,7 +51,7 @@ const Mutation = {
       id: { type: GraphQLString },
       eId: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id, eId }) => {
+    resolve: auth.hasRole('user', async (_, { id, eId }) => {
       const eslip = await ESlip.findOne({ _id: id });
       const e = eslip.employee.id(eId);
       const s = await generateESlip(eslip, e);
@@ -65,7 +65,7 @@ const Mutation = {
       id: { type: GraphQLString },
       eId: { type: GraphQLString },
     },
-    resolve: auth.hasRole('admin', async (_, { id, eId }) => {
+    resolve: auth.hasRole('user', async (_, { id, eId }) => {
       const eslip = await ESlip.findOne({ _id: id });
       const e = eslip.employee.id(eId);
       const s = await sendESlip(eslip, e);
