@@ -743,7 +743,7 @@ const Mutation = {
       id: { type: GraphQLString },
       freeze: { type: GraphQLBoolean },
     },
-    resolve: auth.hasRole('user', async (_, { id, freeze }) => {
+    resolve: auth.hasRole('admin', async (_, { id, freeze }) => {
       const px = await Payroll.findById(id);
       px.freeze = !freeze;
       const s = await px.save();
