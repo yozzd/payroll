@@ -191,7 +191,10 @@
         </el-table-column>
         <el-table-column min-width="60">
           <template slot-scope="scope">
-            <el-dropdown trigger="click" @command="c => handleActionCommand(c, scope.row._id)">
+            <el-dropdown
+              trigger="click"
+              @command="c => handleActionCommand(c, scope.row._id, scope.row.freeze)"
+            >
               <span class="el-dropdown-link">
                 Action <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
@@ -207,7 +210,8 @@
                   divided
                   command="freeze"
                 >
-                  <span>Freeze</span>
+                  <span v-if="scope.row.freeze">Unfreeze</span>
+                  <span v-else>Freeze</span>
                 </el-dropdown-item>
                 <el-dropdown-item divided command="delete">
                   <span class="text-red-400">Delete</span>
@@ -633,11 +637,11 @@ export default {
       else if (c === 'kes') this.$router.push({ name: 'payroll-kesehatan-id', params: { id } });
       else if (c === 'slip') this.$router.push({ name: 'payroll-slip-id', params: { id } });
     },
-    handleActionCommand(c, id) {
+    handleActionCommand(c, id, fr) {
       if (c === 'delete') this.handleConfirm(id);
       else if (c === 'cloneEmployee') this.showCloneEmployee(id);
       else if (c === 'clonePayroll') this.showClonePayroll(id);
-      else if (c === 'freeze') this.handleFreeze(id);
+      else if (c === 'freeze') this.handleFreeze(id, fr);
     },
     handleConfirm(id) {
       this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
@@ -960,8 +964,9 @@ export default {
         }
       });
     },
-    handleFreeze(id) {
-      this.$confirm('Freeze this data?', 'Warning', {
+    handleFreeze(id, freeze) {
+      const f = freeze ? 'Unfreeze' : 'Freeze';
+      this.$confirm(`${f} this data?`, 'Warning', {
         confirmButtonText: 'Yes',
         cancelButtonText: 'Cancel',
         type: 'warning',
@@ -970,12 +975,13 @@ export default {
           mutation: PayrollFreeze,
           variables: {
             id,
+            freeze,
           },
         });
 
         this.$message({
           type: 'success',
-          message: 'Freeze completed',
+          message: `${f} completed`,
         });
       }).catch(() => {});
     },

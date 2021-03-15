@@ -309,6 +309,7 @@ export const ClonePayroll = gql`
       month
       period
       dir
+      freeze
     }
   }
 `;
@@ -322,9 +323,14 @@ export const EmployeeDelete = gql`
 `;
 
 export const PayrollFreeze = gql`
-  mutation payrollFreeze($id: String!) {
-    payrollFreeze(id: $id) {
-      sStatus
+  mutation payrollFreeze($id: String!, $freeze: Boolean!) {
+    payrollFreeze(id: $id, freeze: $freeze) {
+      _id
+      year
+      month
+      period
+      dir
+      freeze
     }
   }
 `;

@@ -3,6 +3,7 @@ const {
   GraphQLList,
   GraphQLInt,
   GraphQLString,
+  GraphQLBoolean,
 } = require('graphql');
 const Payroll = require('./model.js');
 const { PayrollType, GenType, SendType } = require('./type');
@@ -737,15 +738,16 @@ const Mutation = {
     }),
   },
   payrollFreeze: {
-    type: GenType,
+    type: PayrollType,
     args: {
       id: { type: GraphQLString },
+      freeze: { type: GraphQLBoolean },
     },
-    resolve: auth.hasRole('user', async (_, { id }) => {
+    resolve: auth.hasRole('user', async (_, { id, freeze }) => {
       const px = await Payroll.findById(id);
-      px.freeze = true;
-      await px.save();
-      return { sStatus: 1 };
+      px.freeze = !freeze;
+      const s = await px.save();
+      return s;
     }),
   },
 };

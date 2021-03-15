@@ -8,6 +8,7 @@ export const PayrollAll = gql`
       month
       period
       dir
+      freeze
     }
   }
 `;
