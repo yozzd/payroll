@@ -736,6 +736,18 @@ const Mutation = {
       return del;
     }),
   },
+  payrollFreeze: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('user', async (_, { id }) => {
+      const px = await Payroll.findById(id);
+      px.freeze = true;
+      await px.save();
+      return { sStatus: 1 };
+    }),
+  },
 };
 
 module.exports = {

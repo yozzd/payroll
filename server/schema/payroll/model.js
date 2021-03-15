@@ -183,6 +183,7 @@ const PayrollSchema = new Schema({
   month: Number,
   period: String,
   dir: String,
+  freeze: Boolean,
   rate: {
     b4: Number, // TK/0
     b5: Number, // TK/1

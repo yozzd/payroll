@@ -320,3 +320,11 @@ export const EmployeeDelete = gql`
     }
   }
 `;
+
+export const PayrollFreeze = gql`
+  mutation payrollFreeze($id: String!) {
+    payrollFreeze(id: $id) {
+      sStatus
+    }
+  }
+`;

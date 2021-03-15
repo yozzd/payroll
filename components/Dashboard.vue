@@ -202,6 +202,13 @@
                 <el-dropdown-item command="clonePayroll">
                   Clone Payroll
                 </el-dropdown-item>
+                <el-dropdown-item
+                  v-if="$auth.hasRole('admin')"
+                  divided
+                  command="freeze"
+                >
+                  <span>Freeze</span>
+                </el-dropdown-item>
                 <el-dropdown-item divided command="delete">
                   <span class="text-red-400">Delete</span>
                 </el-dropdown-item>
@@ -509,6 +516,7 @@ import {
   GenerateReportPayroll,
   CloneEmployee,
   ClonePayroll,
+  PayrollFreeze,
 } from '../apollo/mutation/payroll';
 
 export default {
@@ -629,6 +637,7 @@ export default {
       if (c === 'delete') this.handleConfirm(id);
       else if (c === 'cloneEmployee') this.showCloneEmployee(id);
       else if (c === 'clonePayroll') this.showClonePayroll(id);
+      else if (c === 'freeze') this.handleFreeze(id);
     },
     handleConfirm(id) {
       this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
@@ -950,6 +959,25 @@ export default {
           return false;
         }
       });
+    },
+    handleFreeze(id) {
+      this.$confirm('Freeze this data?', 'Warning', {
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'Cancel',
+        type: 'warning',
+      }).then(async () => {
+        await this.$apollo.mutate({
+          mutation: PayrollFreeze,
+          variables: {
+            id,
+          },
+        });
+
+        this.$message({
+          type: 'success',
+          message: 'Freeze completed',
+        });
+      }).catch(() => {});
     },
   },
   apollo: {
