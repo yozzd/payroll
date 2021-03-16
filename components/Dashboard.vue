@@ -71,21 +71,24 @@
                       Earnings
                     </template>
                     <el-menu-item index="ca">
-                      Overtime
+                      Basic
                     </el-menu-item>
                     <el-menu-item index="cb">
-                      Fixed Allowance
+                      Overtime
                     </el-menu-item>
                     <el-menu-item index="cc">
-                      Non Fixed Allowance
+                      Fixed Allowance
                     </el-menu-item>
                     <el-menu-item index="cd">
-                      Retro Fill
+                      Non Fixed Allowance
                     </el-menu-item>
                     <el-menu-item index="ce">
-                      Leave
+                      Retro Fill
                     </el-menu-item>
                     <el-menu-item index="cf">
+                      Leave
+                    </el-menu-item>
+                    <el-menu-item index="cg">
                       Others
                     </el-menu-item>
                   </el-submenu>

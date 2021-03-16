@@ -68,6 +68,22 @@ export const PayrollPrivate = gql`
   }
 `;
 
+export const PayrollBasic = gql`
+  query payrollBasic($id: String!) {
+      payrollBasic(id: $id) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        g0
+        ay0
+        ex0
+      }
+    }
+  }
+`;
+
 export const PayrollOvertime = gql`
   query payrollOvertime($id: String!) {
       payrollOvertime(id: $id) {

@@ -17,6 +17,7 @@ const {
   CloneEmployeeInputType,
   EditEmploymentInputType,
   EditPrivateInputType,
+  EditBasicInputType,
   EditOvertimeInputType,
   EditFixedAllowanceInputType,
   EditNonFixedAllowanceInputType,
@@ -104,6 +105,25 @@ const Query = {
           'employee.z0': 1,
           'employee.aa0': 1,
           'employee.ew0': 1,
+          'employee.ex0': 1,
+        });
+      return p;
+    }),
+  },
+  payrollBasic: {
+    type: PayrollType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('user', async (_, { id }) => {
+      const p = await Payroll.findOne({ _id: id })
+        .select({
+          _id: 1,
+          'employee._id': 1,
+          'employee.d0': 1,
+          'employee.e0': 1,
+          'employee.g0': 1,
+          'employee.ay0': 1,
           'employee.ex0': 1,
         });
       return p;
@@ -593,6 +613,17 @@ const Mutation = {
     type: PayrollType,
     args: {
       input: { type: EditPrivateInputType },
+    },
+    resolve: auth.hasRole('user', async (_, { input }) => {
+      const { _id, employee } = input;
+      const s = updateEmployee(_id, employee, Payroll);
+      return s;
+    }),
+  },
+  editBasic: {
+    type: PayrollType,
+    args: {
+      input: { type: EditBasicInputType },
     },
     resolve: auth.hasRole('user', async (_, { input }) => {
       const { _id, employee } = input;

@@ -40,6 +40,15 @@ const PrivateInputType = new GraphQLInputObjectType({
   }),
 });
 
+const BasicInputType = new GraphQLInputObjectType({
+  name: 'BasicInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    g0: { type: GraphQLInt },
+    ay0: { type: GraphQLInt },
+  }),
+});
+
 const OvertimeInputType = new GraphQLInputObjectType({
   name: 'OvertimeInputType',
   fields: () => ({
@@ -201,6 +210,14 @@ const EditPrivateInputType = new GraphQLInputObjectType({
   }),
 });
 
+const EditBasicInputType = new GraphQLInputObjectType({
+  name: 'EditBasicInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    employee: { type: BasicInputType },
+  }),
+});
+
 const EditOvertimeInputType = new GraphQLInputObjectType({
   name: 'EditOvertimeInputType',
   fields: () => ({
@@ -293,6 +310,7 @@ module.exports = {
   CloneEmployeeInputType,
   EditEmploymentInputType,
   EditPrivateInputType,
+  EditBasicInputType,
   EditOvertimeInputType,
   EditFixedAllowanceInputType,
   EditNonFixedAllowanceInputType,

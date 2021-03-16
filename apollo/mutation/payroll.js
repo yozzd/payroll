@@ -77,6 +77,21 @@ export const EditPrivate = gql`
   }
 `;
 
+export const EditBasic = gql`
+  mutation editBasic($input: EditBasicInputType) {
+    editBasic(input: $input) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        g0
+        ay0
+      }
+    }
+  }
+`;
+
 export const EditOvertime = gql`
   mutation editOvertime($input: EditOvertimeInputType) {
     editOvertime(input: $input) {
