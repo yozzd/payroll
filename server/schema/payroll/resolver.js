@@ -549,6 +549,7 @@ const Mutation = {
         { $match: { $and: [{ month: m }, { year: y }] } },
         { $unwind: '$employee' },
         { $match: { 'employee.e0': e0 } },
+        { $project: { 'employee._id': 0 } },
       ]);
 
       px.employee.push(py[0].employee);
