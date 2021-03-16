@@ -293,6 +293,14 @@ export const EditManualEmployee = gql`
   }
 `;
 
+export const AddEmployee = gql`
+  mutation addEmployee($input: AddEmployeeInputType) {
+    addEmployee(input: $input) {
+      sStatus
+    }
+  }
+`;
+
 export const CloneEmployee = gql`
   mutation cloneEmployee($input: CloneEmployeeInputType) {
     cloneEmployee(input: $input) {

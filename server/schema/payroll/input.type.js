@@ -3,6 +3,17 @@ const {
   GraphQLString,
 } = require('graphql');
 
+const AddEmployeeInputType = new GraphQLInputObjectType({
+  name: 'AddEmployeeInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    d0: { type: GraphQLString },
+    e0: { type: GraphQLString },
+    g0: { type: GraphQLString },
+    j0: { type: GraphQLString },
+  }),
+});
+
 const ClonePayrollInputType = new GraphQLInputObjectType({
   name: 'ClonePayrollInputType',
   fields: () => ({
@@ -19,4 +30,8 @@ const DeleteInputType = new GraphQLInputObjectType({
   }),
 });
 
-module.exports = { ClonePayrollInputType, DeleteInputType };
+module.exports = {
+  AddEmployeeInputType,
+  ClonePayrollInputType,
+  DeleteInputType,
+};

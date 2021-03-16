@@ -13,13 +13,13 @@ const EmployeeSchema = new Schema({
   _id: { type: String, default: () => nanoid() },
   d0: { type: String, trim: true }, // Nama Karyawan
   e0: { type: String, trim: true }, // No. Karyawan
-  f0: Number, // Selisih GP dari Hari Kerja Normal
-  g0: Number, // Gaji Pokok
+  f0: { type: Number, default: 0 }, // Selisih GP dari Hari Kerja Normal
+  g0: { type: Number, default: 0 }, // Gaji Pokok
   h0: { type: String, trim: true }, // Status Karyawan
   i0: Date, // Hired date
-  j0: Number, // Hari Kerja
+  j0: { type: Number, default: 0 }, // Hari Kerja
   k0: Date, // Resign / Finish Contract Date
-  l0: Number, // Gaji Berdasarkan Hari Kerja Normal
+  l0: { type: Number, default: 0 }, // Gaji Berdasarkan Hari Kerja Normal
   m0: { type: String, trim: true }, // Note
   n0: { type: String, trim: true }, // Jenis Kelamin
   o0: Date, // Birthday
@@ -35,135 +35,135 @@ const EmployeeSchema = new Schema({
   y0: { type: String, trim: true }, // Jabatan
   z0: { type: String, trim: true }, // JPK No. (Kartu Peserta Jamsostek)
   aa0: { type: String, trim: true }, // No. BPJS Kesehatan
-  ab0: Number, // Jam Lembur Normal
-  ac0: Number, // Amount Lembur Normal
-  ad0: Number, // Jam Lembur Dinas
-  ae0: Number, // Amount Lembur Dinas
-  af0: Number, // Jam Insentif
-  ag0: Number, // Rate Insentif
-  ah0: Number, // Amount Insentif
-  ai0: Number, // Total Lembur & Insentif
-  aj0: Number, // Tunjangan Tetap Living
-  ak0: Number, // Tunjangan Tetap Perumahan
-  al0: Number, // Tunjangan Tetap Posisi Fix
-  am0: Number, // Tunjangan Tetap Fungsional Fix
-  an0: Number, // Tunjangan Tetap Koordinator
-  ao0: Number, // Tunjangan Tetap Transport
-  ap0: Number, // Tunjangan Tetap Komunikasi
-  aq0: Number, // Tunjangan Tetap Expertisi
-  ar0: Number, // Tunjangan Tetap Honorarium
-  as0: Number, // Tunjangan Tetap Posisi Variable
-  at0: Number, // Tunjangan Tetap Fungsional Variable
-  au0: Number, // Tunjangan Tetap Acting/PLT
-  av0: Number, // Tunjangan Tetap Others
-  aw0: Number, // Total Tunjangan Tetap
-  ax0: Number, // Upah (Gaji Pokok + Tunjangan Tetap)
-  ay0: Number, // Upah Normal
-  az0: Number, // Selisih Upah
-  ba0: Number, // Tunjangan Tidak Tetap Fungsional
-  bb0: Number, // Tunjangan Tidak Tetap Shift
-  bc0: Number, // Tunjangan Tidak Tetap Tig Welding
-  bd0: Number, // Tunjangan Tidak Tetap Operator Plasma
-  be0: Number, // Tunjangan Tidak Tetap LKS
-  bf0: Number, // Tunjangan Tidak Tetap Koperasi
-  bg0: Number, // Tunjangan Tidak Tetap Quality System
-  bh0: Number, // Tunjangan Tidak Tetap Penghargaan Masa Kerja
-  bi0: Number, // Tunjangan Tidak Tetap Others
-  bj0: Number, // Total Tunjangan Tidak Tetap
-  bk0: Number, // Total Tunjangan Tetap & Tunjangan Tidak Tetap
-  bl0: Number, // Pembetulan Pembayaran Koreksi Absen
-  bm0: Number, // Pembetulan Pembayaran Koreksi Gaji & Hari Kerja
-  bn0: Number, // Pembetulan Pembayaran Koreksi OT
-  bo0: Number, // Pembetulan Pembayaran Tunjangan
-  bp0: Number, // Pembetulan Pembayaran Insentif
-  bq0: Number, // Pembetulan Pembayaran THR
-  br0: Number, // Pembetulan Pembayaran Allowance
-  bs0: Number, // Pembetulan Pembayaran Uang Makan Security
-  bt0: Number, // Pembetulan Pembayaran Others
-  bu0: Number, // Total Pembetulan Pembayaran
-  bv0: Number, // Tambahan Lain Tidak Kena Pajak
-  bw0: Number, // THR Prorate Months
-  bx0: Number, // THR Prorate Amount
-  by0: Number, // Cuti Days
-  bz0: Number, // Cuti Amount
-  ca0: Number, // Pendapatan Kotor
-  cb0: Number, // JKK Perusahaan
-  cc0: Number, // JK Perusahaan
-  cd0: Number, // JHT Perusahaan
-  ce0: Number, // JHT Karyawan
-  cf0: Number, // Total BPJS, JKK, JK, JHT Perusahaan & Karyawan
-  cg0: Number, // Total Pensiun Perusahaan & JHT Perusahaan
-  ch0: Number, // Standar Upah Pensiun
-  ci0: Number, // Pensiun Perusahaan
-  cj0: Number, // Pensiun Karyawan
+  ab0: { type: Number, default: 0 }, // Jam Lembur Normal
+  ac0: { type: Number, default: 0 }, // Amount Lembur Normal
+  ad0: { type: Number, default: 0 }, // Jam Lembur Dinas
+  ae0: { type: Number, default: 0 }, // Amount Lembur Dinas
+  af0: { type: Number, default: 0 }, // Jam Insentif
+  ag0: { type: Number, default: 0 }, // Rate Insentif
+  ah0: { type: Number, default: 0 }, // Amount Insentif
+  ai0: { type: Number, default: 0 }, // Total Lembur & Insentif
+  aj0: { type: Number, default: 0 }, // Tunjangan Tetap Living
+  ak0: { type: Number, default: 0 }, // Tunjangan Tetap Perumahan
+  al0: { type: Number, default: 0 }, // Tunjangan Tetap Posisi Fix
+  am0: { type: Number, default: 0 }, // Tunjangan Tetap Fungsional Fix
+  an0: { type: Number, default: 0 }, // Tunjangan Tetap Koordinator
+  ao0: { type: Number, default: 0 }, // Tunjangan Tetap Transport
+  ap0: { type: Number, default: 0 }, // Tunjangan Tetap Komunikasi
+  aq0: { type: Number, default: 0 }, // Tunjangan Tetap Expertisi
+  ar0: { type: Number, default: 0 }, // Tunjangan Tetap Honorarium
+  as0: { type: Number, default: 0 }, // Tunjangan Tetap Posisi Variable
+  at0: { type: Number, default: 0 }, // Tunjangan Tetap Fungsional Variable
+  au0: { type: Number, default: 0 }, // Tunjangan Tetap Acting/PLT
+  av0: { type: Number, default: 0 }, // Tunjangan Tetap Others
+  aw0: { type: Number, default: 0 }, // Total Tunjangan Tetap
+  ax0: { type: Number, default: 0 }, // Upah (Gaji Pokok + Tunjangan Tetap)
+  ay0: { type: Number, default: 0 }, // Upah Normal
+  az0: { type: Number, default: 0 }, // Selisih Upah
+  ba0: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Fungsional
+  bb0: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Shift
+  bc0: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Tig Welding
+  bd0: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Operator Plasma
+  be0: { type: Number, default: 0 }, // Tunjangan Tidak Tetap LKS
+  bf0: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Koperasi
+  bg0: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Quality System
+  bh0: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Penghargaan Masa Kerja
+  bi0: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Others
+  bj0: { type: Number, default: 0 }, // Total Tunjangan Tidak Tetap
+  bk0: { type: Number, default: 0 }, // Total Tunjangan Tetap & Tunjangan Tidak Tetap
+  bl0: { type: Number, default: 0 }, // Pembetulan Pembayaran Koreksi Absen
+  bm0: { type: Number, default: 0 }, // Pembetulan Pembayaran Koreksi Gaji & Hari Kerja
+  bn0: { type: Number, default: 0 }, // Pembetulan Pembayaran Koreksi OT
+  bo0: { type: Number, default: 0 }, // Pembetulan Pembayaran Tunjangan
+  bp0: { type: Number, default: 0 }, // Pembetulan Pembayaran Insentif
+  bq0: { type: Number, default: 0 }, // Pembetulan Pembayaran THR
+  br0: { type: Number, default: 0 }, // Pembetulan Pembayaran Allowance
+  bs0: { type: Number, default: 0 }, // Pembetulan Pembayaran Uang Makan Security
+  bt0: { type: Number, default: 0 }, // Pembetulan Pembayaran Others
+  bu0: { type: Number, default: 0 }, // Total Pembetulan Pembayaran
+  bv0: { type: Number, default: 0 }, // Tambahan Lain Tidak Kena Pajak
+  bw0: { type: Number, default: 0 }, // THR Prorate Months
+  bx0: { type: Number, default: 0 }, // THR Prorate Amount
+  by0: { type: Number, default: 0 }, // Cuti Days
+  bz0: { type: Number, default: 0 }, // Cuti Amount
+  ca0: { type: Number, default: 0 }, // Pendapatan Kotor
+  cb0: { type: Number, default: 0 }, // JKK Perusahaan
+  cc0: { type: Number, default: 0 }, // JK Perusahaan
+  cd0: { type: Number, default: 0 }, // JHT Perusahaan
+  ce0: { type: Number, default: 0 }, // JHT Karyawan
+  cf0: { type: Number, default: 0 }, // Total BPJS, JKK, JK, JHT Perusahaan & Karyawan
+  cg0: { type: Number, default: 0 }, // Total Pensiun Perusahaan & JHT Perusahaan
+  ch0: { type: Number, default: 0 }, // Standar Upah Pensiun
+  ci0: { type: Number, default: 0 }, // Pensiun Perusahaan
+  cj0: { type: Number, default: 0 }, // Pensiun Karyawan
   ck0: { type: String, trim: true }, // Description (BPJS Ketenagakerjaan)
-  cl0: Number, // Total Iuran Pensiun & Kesehatan Perusahaan & Karyawan
-  cm0: Number, // Total BPJS, JKK, JK, JHT, Pensiun Perusahaan & Karyawan
-  cn0: Number, // Total JKK, JK, Medical Perusahaan
-  co0: Number, // Upah untuk Pelaporan BPJS Kesehatan
-  cp0: Number, // Standar Gaji Iuran BPJS Kesehatan
-  cq0: Number, // BPJS Kesehatan Perusahaan
-  cr0: Number, // BPJS Kesehatan Karyawan
-  cs0: Number, // Kelas Rawat
+  cl0: { type: Number, default: 0 }, // Total Iuran Pensiun & Kesehatan Perusahaan & Karyawan
+  cm0: { type: Number, default: 0 }, // Total BPJS, JKK, JK, JHT, Pensiun Perusahaan & Karyawan
+  cn0: { type: Number, default: 0 }, // Total JKK, JK, Medical Perusahaan
+  co0: { type: Number, default: 0 }, // Upah untuk Pelaporan BPJS Kesehatan
+  cp0: { type: Number, default: 0 }, // Standar Gaji Iuran BPJS Kesehatan
+  cq0: { type: Number, default: 0 }, // BPJS Kesehatan Perusahaan
+  cr0: { type: Number, default: 0 }, // BPJS Kesehatan Karyawan
+  cs0: { type: Number, default: 0 }, // Kelas Rawat
   ct0: { type: String, trim: true }, // Description Medical
-  cu0: Number, // Total Medical Perusahaan & Karyawan
-  cv0: Number, // Total JKK, JK, JHT, Pensiun Perusahaan
-  cw0: Number, // Absen
-  cx0: Number, // Amount Absen
-  cy0: Number, // Total Absen Aktual & Koreksi Absen
-  cz0: Number, // Pajak Penghasilan Ber-NPWP
-  da0: Number, // Pajak Tambahan Non-NPWP
-  db0: Number, // Total Pajak NPWP & Non-NPWP
-  dc0: Number, // Pemotongan Kelebihan Bayar Gaji
-  dd0: Number, // Pemotongan Kelebihan Bayar OT
-  de0: Number, // Pemotongan Prorate Absen
-  df0: Number, // Total Pemotongan Selain Absen
-  dg0: Number, // Pemotongan Koreksi Absen
-  dh0: Number, // Pemotongan Toolroom
-  di0: Number, // Pemotongan Others
-  dj0: Number, // Total Pemotongan Lain
-  dk0: Number, // Dana Pinjaman
-  dl0: Number, // Kantin
-  dm0: Number, // Kopkar & BMI
-  dn0: Number, // Pph21 Kurang Bayar
-  do0: Number, // Jumlah Pemotongan
-  dp0: Number, // Penghasilan
+  cu0: { type: Number, default: 0 }, // Total Medical Perusahaan & Karyawan
+  cv0: { type: Number, default: 0 }, // Total JKK, JK, JHT, Pensiun Perusahaan
+  cw0: { type: Number, default: 0 }, // Absen
+  cx0: { type: Number, default: 0 }, // Amount Absen
+  cy0: { type: Number, default: 0 }, // Total Absen Aktual & Koreksi Absen
+  cz0: { type: Number, default: 0 }, // Pajak Penghasilan Ber-NPWP
+  da0: { type: Number, default: 0 }, // Pajak Tambahan Non-NPWP
+  db0: { type: Number, default: 0 }, // Total Pajak NPWP & Non-NPWP
+  dc0: { type: Number, default: 0 }, // Pemotongan Kelebihan Bayar Gaji
+  dd0: { type: Number, default: 0 }, // Pemotongan Kelebihan Bayar OT
+  de0: { type: Number, default: 0 }, // Pemotongan Prorate Absen
+  df0: { type: Number, default: 0 }, // Total Pemotongan Selain Absen
+  dg0: { type: Number, default: 0 }, // Pemotongan Koreksi Absen
+  dh0: { type: Number, default: 0 }, // Pemotongan Toolroom
+  di0: { type: Number, default: 0 }, // Pemotongan Others
+  dj0: { type: Number, default: 0 }, // Total Pemotongan Lain
+  dk0: { type: Number, default: 0 }, // Dana Pinjaman
+  dl0: { type: Number, default: 0 }, // Kantin
+  dm0: { type: Number, default: 0 }, // Kopkar & BMI
+  dn0: { type: Number, default: 0 }, // Pph21 Kurang Bayar
+  do0: { type: Number, default: 0 }, // Jumlah Pemotongan
+  dp0: { type: Number, default: 0 }, // Penghasilan
   dq0: { type: String, trim: true }, // Periode Potongan Kantin
-  dr0: Number, // Bonus
-  ds0: Number, // Uang Pisah Prorate
-  dt0: Number, // Uang Pisah Amount
-  du0: Number, // Uang Pesangon Prorate
-  dv0: Number, // Uang Pesangon Amount
-  dw0: Number, // Uang P.Masa Kerja Prorate
-  dx0: Number, // Uang P.Masa Kerja Amount
-  dy0: Number, // Uang Penggantian Hak
+  dr0: { type: Number, default: 0 }, // Bonus
+  ds0: { type: Number, default: 0 }, // Uang Pisah Prorate
+  dt0: { type: Number, default: 0 }, // Uang Pisah Amount
+  du0: { type: Number, default: 0 }, // Uang Pesangon Prorate
+  dv0: { type: Number, default: 0 }, // Uang Pesangon Amount
+  dw0: { type: Number, default: 0 }, // Uang P.Masa Kerja Prorate
+  dx0: { type: Number, default: 0 }, // Uang P.Masa Kerja Amount
+  dy0: { type: Number, default: 0 }, // Uang Penggantian Hak
   dz0: { type: String, trim: true }, // Bulan
-  ea0: Number, // Total Bulan Periode Pajak
-  eb0: Number, // Take Home Pay
-  ec0: Number, // Total Transfer by Mandiri
-  ed0: Number, // Total by Cash
-  ef0: Number, // Positon/Fungsional
-  eg0: Number, // Housing
-  eh0: Number, // Transport
-  ei0: Number, // Incentive
-  ej0: Number, // Meals
-  ek0: Number, // Living
-  el0: Number, // Communication
-  em0: Number, // Other Allowance Taxable
-  en0: Number, // Pesangon Serv
-  eo0: Number, // Leave, Serv, Transport
-  eq0: Number, // Leave / THR
-  er0: Number, // Total JHT dan Pensiun Karyawan
-  es0: Number, // Pengembalian Pajak DTP
+  ea0: { type: Number, default: 0 }, // Total Bulan Periode Pajak
+  eb0: { type: Number, default: 0 }, // Take Home Pay
+  ec0: { type: Number, default: 0 }, // Total Transfer by Mandiri
+  ed0: { type: Number, default: 0 }, // Total by Cash
+  ef0: { type: Number, default: 0 }, // Positon/Fungsional
+  eg0: { type: Number, default: 0 }, // Housing
+  eh0: { type: Number, default: 0 }, // Transport
+  ei0: { type: Number, default: 0 }, // Incentive
+  ej0: { type: Number, default: 0 }, // Meals
+  ek0: { type: Number, default: 0 }, // Living
+  el0: { type: Number, default: 0 }, // Communication
+  em0: { type: Number, default: 0 }, // Other Allowance Taxable
+  en0: { type: Number, default: 0 }, // Pesangon Serv
+  eo0: { type: Number, default: 0 }, // Leave, Serv, Transport
+  eq0: { type: Number, default: 0 }, // Leave / THR
+  er0: { type: Number, default: 0 }, // Total JHT dan Pensiun Karyawan
+  es0: { type: Number, default: 0 }, // Pengembalian Pajak DTP
   ew0: { type: String, trim: true }, // Email
   ex0: Boolean, // Slot 1 Flag
   ey0: Boolean, // Slot 2 Flag
   ez0: Boolean, // Slot 3 Flag
   fa0: Boolean, // Slot 3 Flag
   fb0: Boolean, // Slot 4 Flag
-  fc0: Number, // Slot 5 Flag
-  fd0: Number, // Slot 6 Flag
-  fe0: Number, // Slot 7 Flag
+  fc0: { type: Number, default: 0 }, // Slot 5 Flag
+  fd0: { type: Number, default: 0 }, // Slot 6 Flag
+  fe0: { type: Number, default: 0 }, // Slot 7 Flag
   ff0: Boolean, // Slot 8 Flag
   fg0: Boolean, // Slot 9 Flag
   fh0: { type: String, trim: true }, // Note 1

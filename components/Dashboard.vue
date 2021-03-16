@@ -217,11 +217,17 @@
               </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item
+                  command="addEmployee"
+                  :disabled="scope.row.freeze"
+                >
+                  Add Employee
+                </el-dropdown-item>
+                <!--<el-dropdown-item
                   command="cloneEmployee"
                   :disabled="scope.row.freeze"
                 >
                   Clone Employee
-                </el-dropdown-item>
+                </el-dropdown-item>-->
                 <el-dropdown-item
                   command="clonePayroll"
                   :disabled="scope.row.freeze"
@@ -446,6 +452,60 @@
     </el-dialog>
 
     <el-dialog
+      title="Add Employee"
+      :visible.sync="showAddEmployeeDialog"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :before-close="handleAddEmployeeDialogClose"
+      width="20%"
+    >
+      <ErrorHandler
+        v-if="errors"
+        :errors="errors"
+        class="mb-8"
+      />
+      <el-form
+        ref="formAddEmployee"
+        :model="formAddEmployee"
+        :rules="rulesAddEmployee"
+        :hide-required-asterisk="true"
+        label-position="top"
+      >
+        <el-form-item label="No. Karyawan" prop="e0">
+          <el-input
+            v-model="formAddEmployee.e0"
+            v-maska="'A.####'"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="Nama Karyawan" prop="d0">
+          <el-input
+            v-model="formAddEmployee.d0"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="Gaji Pokok" prop="g0">
+          <el-input
+            v-model="formAddEmployee.g0"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="Hari Kerja" prop="j0">
+          <el-input
+            v-model="formAddEmployee.j0"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleAddEmployeeDialogClose">Cancel</el-button>
+        <el-button
+          type="primary"
+          :loading="loadingAddEmployee"
+          @click="handleAddEmployee('formAddEmployee')"
+        >
+          Save
+        </el-button>
+      </span>
+    </el-dialog>
+
+    <el-dialog
       title="Clone Employee"
       :visible.sync="showCloneEmployeeDialog"
       :close-on-click-modal="false"
@@ -541,6 +601,7 @@ import {
 import {
   PayrollDelete,
   GenerateReportPayroll,
+  AddEmployee,
   CloneEmployee,
   ClonePayroll,
   PayrollFreeze,
@@ -553,12 +614,14 @@ export default {
 
     return {
       showDialog: false,
+      showAddEmployeeDialog: false,
       showCloneEmployeeDialog: false,
       showClonePayrollDialog: false,
       showKantinDialog: false,
       showKoperasiDialog: false,
       showOvertimeDialog: false,
       loading: false,
+      loadingAddEmployee: false,
       loadingCloneEmployee: false,
       loadingClonePayroll: false,
       loadingKantin: false,
@@ -569,6 +632,13 @@ export default {
         period: [],
         file: null,
         year,
+      },
+      formAddEmployee: {
+        id: '',
+        d0: '',
+        e0: '',
+        g0: '',
+        j0: '',
       },
       formCloneEmployee: {
         id: '',
@@ -603,6 +673,11 @@ export default {
             message: 'This field is required',
           },
         ],
+      },
+      rulesAddEmployee: {
+        d0: [{ required: true, message: 'Required' }],
+        e0: [{ required: true, message: 'Required' }],
+        g0: [{ required: true, message: 'Required' }],
       },
       rulesCloneEmployee: {
         e0: [{ required: true, message: 'Required' }],
@@ -662,6 +737,7 @@ export default {
     },
     handleActionCommand(c, id, fr) {
       if (c === 'delete') this.handleConfirm(id);
+      else if (c === 'addEmployee') this.showAddEmployee(id);
       else if (c === 'cloneEmployee') this.showCloneEmployee(id);
       else if (c === 'clonePayroll') this.showClonePayroll(id);
       else if (c === 'freeze') this.handleFreeze(id, fr);
@@ -741,6 +817,46 @@ export default {
 
             this.handleCancel();
             this.loading = false;
+            return true;
+          } catch ({ graphQLErrors, networkError }) {
+            this.errors = graphQLErrors || networkError.result.errors;
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
+    },
+    showAddEmployee(id) {
+      this.showAddEmployeeDialog = true;
+      this.formAddEmployee.id = id;
+    },
+    handleAddEmployeeDialogClose() {
+      this.$refs.formAddEmployee.resetFields();
+      this.$refs.formAddEmployee.clearValidate();
+      this.showAddEmployeeDialog = false;
+    },
+    handleAddEmployee(form) {
+      this.$refs[form].validate(async (valid) => {
+        if (valid) {
+          try {
+            this.loadingAddEmployee = true;
+
+            await this.$apollo.mutate({
+              mutation: AddEmployee,
+              variables: {
+                input: {
+                  _id: this.formAddEmployee.id,
+                  d0: this.formAddEmployee.d0,
+                  e0: this.formAddEmployee.e0,
+                  g0: this.formAddEmployee.g0,
+                  j0: this.formAddEmployee.j0,
+                },
+              },
+            });
+
+            this.handleAddEmployeeDialogClose();
+            this.loadingAddEmployee = false;
             return true;
           } catch ({ graphQLErrors, networkError }) {
             this.errors = graphQLErrors || networkError.result.errors;

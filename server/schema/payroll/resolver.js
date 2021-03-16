@@ -29,7 +29,11 @@ const {
   EditFlagsEmployeeInputType,
   EditManualEmployeeInputType,
 } = require('./employee.input.type.js');
-const { ClonePayrollInputType, DeleteInputType } = require('./input.type');
+const {
+  AddEmployeeInputType,
+  ClonePayrollInputType,
+  DeleteInputType,
+} = require('./input.type');
 const auth = require('../auth/service');
 
 const Query = {
@@ -524,6 +528,23 @@ const Mutation = {
       ]);
       const s = await generateReportPayroll(p[0]);
       return s;
+    }),
+  },
+  addEmployee: {
+    type: GenType,
+    args: {
+      input: { type: AddEmployeeInputType },
+    },
+    resolve: auth.hasRole('user', async (_, { input }) => {
+      const { _id, d0, e0, g0, j0 } = input;
+      const px = await Payroll.findOne({ _id });
+
+      px.employee.push({
+        d0, e0, g0,
+        j0, ay0: g0,
+      });
+      await px.save();
+      return { sStatus: 1 };
     }),
   },
   cloneEmployee: {
