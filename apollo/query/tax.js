@@ -33,6 +33,37 @@ export const TaxReport = gql`
   }
 `;
 
+export const Tax = gql`
+  query tax($year: Int!) {
+    tax(year: $year) {
+      _id
+      year
+      period
+    }
+  }
+`;
+
+export const EmployeeTax = gql`
+  query employeeTax($id: String!) {
+    employeeTax(id: $id) {
+      _id
+      period
+      year
+      employee {
+        _id
+        b0
+        c0
+        e0
+        slip {
+          name
+          dir
+          check
+        }
+      }
+    }
+  }
+`;
+
 export const JournalAdministration = gql`
   query journalAdministration($id: String!) {
     journalAdministration(id: $id) {

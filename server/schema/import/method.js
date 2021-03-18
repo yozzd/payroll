@@ -5,6 +5,7 @@ const XLSX = require('xlsx');
 const Payroll = require('../payroll/model');
 const ESlip = require('../eslip/model');
 const Thr = require('../thr/model');
+const Tax = require('../tax/model');
 
 const parseDate = ({
   D, y, m, d,
@@ -370,6 +371,62 @@ const processImportThr = async ({ file, from, to }) => {
     }));
 };
 
+const processImportTax = async ({ file, from, to }) => {
+  const { filename, createReadStream } = await file;
+  const stream = createReadStream();
+
+  const tmp = `/tmp/${filename}`;
+  return new Promise((resolve, reject) => stream
+    .on('error', async (error) => {
+      if (stream.truncated) await fs.unlinkSync(tmp);
+      reject(error);
+    })
+    .pipe(fs.createWriteStream(tmp))
+    .on('finish', async () => {
+      const wb = XLSX.readFile(tmp);
+      const ws = wb.Sheets[wb.SheetNames];
+      const ft = XLSX.utils.sheet_to_json(ws);
+
+      try {
+        const tax = new Tax({
+          from,
+          to,
+        });
+
+        for (let i = 1; i < ft.length; i += 1) {
+          tax.employee.push({
+            b0: ft[i].__EMPTY_1 || '', // EmpNo
+            c0: ft[i].__EMPTY_2 || '', // EmpName
+            d0: strToDate(ft[i].__EMPTY_3), // Birthday
+            e0: ft[i].__EMPTY_4 || '', // Email
+            f0: ft[i].__EMPTY_5 || '', // Department
+            g0: ft[i].__EMPTY_6 || '', // Section
+            h0: ft[i].__EMPTY_7 || '', // Status
+            i0: ft[i].__EMPTY_8 || 0, // Total
+            j0: ft[i].__EMPTY_9 || 0, // Install1
+            k0: ft[i].__EMPTY_10 || 0, // Install2
+            l0: ft[i].__EMPTY_11 || 0, // Install3
+            m0: ft[i].__EMPTY_12 || 0, // Install4
+            n0: ft[i].__EMPTY_13 || 0, // Install5
+            o0: ft[i].__EMPTY_14 || 0, // Install6
+            p0: ft[i].__EMPTY_15 || '', // Note
+          });
+        }
+
+        const saved = await tax.save();
+        return resolve(saved);
+      } catch (err) {
+        if (typeof err === 'string') {
+          reject(new GraphQLError(err));
+        } else {
+          reject(new GraphQLError(err.message));
+        }
+      }
+
+      return true;
+    }));
+};
+
 const processImportKantin = async ({ _id, file }) => {
   const px = await Payroll.findOne({ _id });
   const { filename, createReadStream } = await file;
@@ -502,6 +559,7 @@ module.exports = {
   processImportPayroll,
   processImportESlip,
   processImportThr,
+  processImportTax,
   processImportKantin,
   processImportKoperasi,
   processImportOvertime,

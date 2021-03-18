@@ -32,6 +32,16 @@ export const ImportThr = gql`
   }
 `;
 
+export const ImportTax = gql`
+  mutation importTax($input: ImportInputType) {
+    importTax(input: $input) {
+      _id
+      year
+      period
+    }
+  }
+`;
+
 export const ImportKantin = gql`
   mutation importKantin($input: ExtImportInputType) {
     importKantin(input: $input) {

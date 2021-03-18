@@ -1,9 +1,59 @@
-const { GraphQLString } = require('graphql');
+const fs = require('fs-extra');
+const {
+  GraphQLList,
+  GraphQLInt,
+  GraphQLString,
+} = require('graphql');
 const Payroll = require('../payroll/model');
-const { PayrollType } = require('../payroll/type');
+const Tax = require('./model.js');
+const { TaxType } = require('./type');
+const { PayrollType, GenType, SendType } = require('../payroll/type');
 const auth = require('../auth/service');
+const { generateTax, sendTax } = require('./method');
 
 const Query = {
+  tax: {
+    type: new GraphQLList(TaxType),
+    args: {
+      year: { type: GraphQLInt },
+    },
+    resolve: auth.hasRole('user', async (_, { year }) => {
+      const tax = await Tax.find({ year }).sort('-month');
+      return tax;
+    }),
+  },
+  employeeTax: {
+    type: TaxType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('user', async (_, { id }) => {
+      const tax = await Tax.aggregate([
+        { $match: { _id: id } },
+        { $unwind: '$employee' },
+        {
+          $group: {
+            _id: '$_id',
+            period: { $first: '$period' },
+            year: { $first: '$year' },
+            employee: {
+              $push: {
+                _id: '$employee._id',
+                b0: '$employee.b0',
+                c0: '$employee.c0',
+                e0: '$employee.e0',
+                slip: {
+                  name: '$employee.slip.name',
+                  dir: '$dir',
+                },
+              },
+            },
+          },
+        },
+      ]);
+      return tax[0];
+    }),
+  },
   taxReport: {
     type: PayrollType,
     args: {
@@ -65,4 +115,54 @@ const Query = {
   },
 };
 
-module.exports = { Query };
+const Mutation = {
+  taxDelete: {
+    type: TaxType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('user', async (_, { id }) => {
+      const e = await Tax.findOne({ _id: id });
+      await fs.remove(`static/tax/${e.dir}`);
+      await Tax.findOneAndDelete({ _id: id });
+      return { _id: id };
+    }),
+  },
+  generateTax: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLString },
+      eId: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('user', async (_, { id, eId }) => {
+      const p = await Tax.aggregate([
+        { $match: { _id: id } },
+        { $unwind: '$employee' },
+        { $match: { 'employee._id': eId } },
+      ]);
+      const s = await generateTax(p[0]);
+      return s;
+    }),
+  },
+  sendTax: {
+    type: SendType,
+    args: {
+      id: { type: GraphQLString },
+      eId: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('user', async (_, { id, eId }) => {
+      const p = await Tax.aggregate([
+        { $match: { _id: id } },
+        { $unwind: '$employee' },
+        { $match: { 'employee._id': eId } },
+      ]);
+      const s = await sendTax(p[0]);
+      return s;
+    }),
+  },
+};
+
+module.exports = {
+  Query,
+  Mutation,
+};

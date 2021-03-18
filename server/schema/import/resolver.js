@@ -2,6 +2,7 @@ const {
   processImportPayroll,
   processImportESlip,
   processImportThr,
+  processImportTax,
   processImportKantin,
   processImportKoperasi,
   processImportOvertime,
@@ -10,6 +11,7 @@ const { ImportInputType, ExtImportInputType } = require('./input.type');
 const { PayrollType, GenType } = require('../payroll/type');
 const { ESlipType } = require('../eslip/type');
 const { ThrType } = require('../thr/type');
+const { TaxType } = require('../tax/type');
 const auth = require('../auth/service');
 
 const Query = {};
@@ -42,6 +44,16 @@ const Mutation = {
     },
     resolve: auth.hasRole('user', async (_, { input }) => {
       const process = await processImportThr(input);
+      return process;
+    }),
+  },
+  importTax: {
+    type: TaxType,
+    args: {
+      input: { type: ImportInputType },
+    },
+    resolve: auth.hasRole('user', async (_, { input }) => {
+      const process = await processImportTax(input);
       return process;
     }),
   },
