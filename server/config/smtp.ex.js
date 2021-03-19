@@ -6,6 +6,6 @@ const smtp = {
   pass: 'password',
   sender: 'user-noreply@xyz.org',
   port: 465,
-}
+};
 
 module.exports = smtp;

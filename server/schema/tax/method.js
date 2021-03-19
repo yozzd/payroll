@@ -2,10 +2,10 @@ const { GraphQLError } = require('graphql');
 const PdfPrinter = require('pdfmake');
 const fs = require('fs-extra');
 const nodemailer = require('nodemailer');
-const { getMonth } = require('date-fns');
+// const { getMonth } = require('date-fns');
 
 const { intpre0 } = require('../scalar/number');
-const { idDateFormat } = require('../scalar/date');
+// const { idDateFormat } = require('../scalar/date');
 
 const smtp = require('../../config/smtp');
 
@@ -22,10 +22,10 @@ const generateTax = async (p) => {
     const { employee: e } = p;
     await fs.ensureDir(`static/tax/${p.dir}`);
 
-    const months = [
-      'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember',
-    ];
+    // const months = [
+    //   'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+    //   'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember',
+    // ];
 
     const ctbl1 = [
       [{ text: e.h0, bold: true }, '', { text: intpre0(Math.abs(e.i0)).format(), alignment: 'right', fontSize: 10 }],
@@ -101,7 +101,7 @@ const generateTax = async (p) => {
           table: {
             widths: [552],
             body: [
-              [ `Note: ${note}` ],
+              [`Note: ${note}`],
             ],
           },
           layout: 'noBorders',

@@ -43,7 +43,7 @@
         width="40"
         align="center"
         fixed
-       ></el-table-column>
+      ></el-table-column>
       <el-table-column type="index" width="50" align="center" fixed></el-table-column>
       <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
       <el-table-column label="Nama Karyawan" width="200" fixed>
