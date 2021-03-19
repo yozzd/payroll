@@ -162,7 +162,10 @@ export default {
                   },
                 });
                 const index = cdata.employeeESlip.employee.findIndex((e) => e._id === v);
-                cdata.employeeESlip.employee[index].slipPath = generateESlip.slipPath;
+                if (cdata.employeeESlip.employee[index].slipPath) {
+                  cdata.employeeESlip.employee[index].slip.check = generateESlip.slipPath;
+                  this.miniSearch.removeAll();
+                }
                 store.writeQuery({
                   query: EmployeeESlip,
                   variables: {

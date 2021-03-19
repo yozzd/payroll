@@ -153,7 +153,10 @@ export default {
                   },
                 });
                 const index = cdata.employeeTax.employee.findIndex((e) => e._id === v);
-                cdata.employeeTax.employee[index].slip.check = true;
+                if (cdata.employeeTax.employee[index].slip.check === false) {
+                  cdata.employeeTax.employee[index].slip.check = true;
+                  this.miniSearch.removeAll();
+                }
                 store.writeQuery({
                   query: EmployeeTax,
                   variables: {

@@ -153,7 +153,10 @@ export default {
                   },
                 });
                 const index = cdata.employeeThr.employee.findIndex((e) => e._id === v);
-                cdata.employeeThr.employee[index].slip.check = true;
+                if (cdata.employeeThr.employee[index].slip.check === false) {
+                  cdata.employeeThr.employee[index].slip.check = true;
+                  this.miniSearch.removeAll();
+                }
                 store.writeQuery({
                   query: EmployeeThr,
                   variables: {
