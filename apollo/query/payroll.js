@@ -143,6 +143,7 @@ export const PayrollNonFixedAllowance = gql`
   query payrollNonFixedAllowance($id: String!) {
     payrollNonFixedAllowance(id: $id) {
       _id
+      freeze
       employee {
         _id
         d0
