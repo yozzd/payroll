@@ -179,32 +179,32 @@ const PayrollSchema = new Schema({
   _id: { type: String, default: () => nanoid() },
   from: Date,
   to: Date,
-  year: Number,
-  month: Number,
+  year: { type: Number, default: 0 },
+  month: { type: Number, default: 0 },
   period: String,
   dir: String,
-  freeze: Boolean,
+  freeze: { type: Boolean, default: false },
   rate: {
-    b4: Number, // TK/0
-    b5: Number, // TK/1
-    b6: Number, // TK/2
-    b7: Number, // TK/3
-    b8: Number, // K/0
-    b9: Number, // K/1
-    b10: Number, // K/2
-    b11: Number, // K/3
-    b14: Number, // Upah Minimum BPJS Kesehatan
-    b15: Number, // Upah Maximum BPJS Kesehatan
-    b17: Number, // Upah Minimum BPJS Ketenagakerjaan
-    b18: Number, // Upah Maximum BPJS Ketenagakerjaan
-    cb5: Number, // %JKK Perusahaan
-    cc5: Number, // %JK Perusahaan
-    cd5: Number, // %JHT Perusahaan
-    ce5: Number, // %JHT Karyawan
-    ci5: Number, // %Pensiun Perusahaan
-    cj5: Number, // %Pensiun Karyawan
-    cq5: Number, // %BPJS Kesehatan Perusahaan
-    cr5: Number, // %BPJS Kesehatan Karyawan
+    b4: { type: Number, default: 0 }, // TK/0
+    b5: { type: Number, default: 0 }, // TK/1
+    b6: { type: Number, default: 0 }, // TK/2
+    b7: { type: Number, default: 0 }, // TK/3
+    b8: { type: Number, default: 0 }, // K/0
+    b9: { type: Number, default: 0 }, // K/1
+    b10: { type: Number, default: 0 }, // K/2
+    b11: { type: Number, default: 0 }, // K/3
+    b14: { type: Number, default: 0 }, // Upah Minimum BPJS Kesehatan
+    b15: { type: Number, default: 0 }, // Upah Maximum BPJS Kesehatan
+    b17: { type: Number, default: 0 }, // Upah Minimum BPJS Ketenagakerjaan
+    b18: { type: Number, default: 0 }, // Upah Maximum BPJS Ketenagakerjaan
+    cb5: { type: Number, default: 0 }, // %JKK Perusahaan
+    cc5: { type: Number, default: 0 }, // %JK Perusahaan
+    cd5: { type: Number, default: 0 }, // %JHT Perusahaan
+    ce5: { type: Number, default: 0 }, // %JHT Karyawan
+    ci5: { type: Number, default: 0 }, // %Pensiun Perusahaan
+    cj5: { type: Number, default: 0 }, // %Pensiun Karyawan
+    cq5: { type: Number, default: 0 }, // %BPJS Kesehatan Perusahaan
+    cr5: { type: Number, default: 0 }, // %BPJS Kesehatan Karyawan
   },
   employee: [EmployeeSchema],
 }, { timestamps: true });

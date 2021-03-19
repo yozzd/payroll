@@ -38,92 +38,84 @@
           width="200"
         >
           <template slot-scope="scope">
-            <div v-if="scope.row.freeze">
+            <nuxt-link
+              :to="`/payroll/list/${scope.row._id}?t1=a`"
+              class="el-link el-link--primary is-underline"
+            >
               <i class="el-icon-document"></i>
               <span>
                 {{ scope.row.period }}
               </span>
-            </div>
-            <div v-else>
-              <nuxt-link
-                :to="`/payroll/list/${scope.row._id}?t1=a`"
-                class="el-link el-link--primary is-underline"
-              >
-                <i class="el-icon-document"></i>
-                <span>
-                  {{ scope.row.period }}
-                </span>
-              </nuxt-link>
-              <el-menu
-                mode="horizontal"
-                class="dropmenu"
-                @select="(k, p) => handleSelect(k, p, scope.row._id)"
-              >
-                <el-submenu index="1">
-                  <el-menu-item index="a">
-                    Employment
+            </nuxt-link>
+            <el-menu
+              mode="horizontal"
+              class="dropmenu"
+              @select="(k, p) => handleSelect(k, p, scope.row._id)"
+            >
+              <el-submenu index="1">
+                <el-menu-item index="a">
+                  Employment
+                </el-menu-item>
+                <el-menu-item index="b">
+                  Private
+                </el-menu-item>
+                <el-submenu index="c">
+                  <template slot="title">
+                    Earnings
+                  </template>
+                  <el-menu-item index="ca">
+                    Basic
                   </el-menu-item>
-                  <el-menu-item index="b">
-                    Private
+                  <el-menu-item index="cb">
+                    Overtime
                   </el-menu-item>
-                  <el-submenu index="c">
-                    <template slot="title">
-                      Earnings
-                    </template>
-                    <el-menu-item index="ca">
-                      Basic
-                    </el-menu-item>
-                    <el-menu-item index="cb">
-                      Overtime
-                    </el-menu-item>
-                    <el-menu-item index="cc">
-                      Fixed Allowance
-                    </el-menu-item>
-                    <el-menu-item index="cd">
-                      Non Fixed Allowance
-                    </el-menu-item>
-                    <el-menu-item index="ce">
-                      Retro Fill
-                    </el-menu-item>
-                    <el-menu-item index="cf">
-                      Leave
-                    </el-menu-item>
-                    <el-menu-item index="cg">
-                      Others
-                    </el-menu-item>
-                  </el-submenu>
-                  <el-submenu index="d">
-                    <template slot="title">
-                      Deductions
-                    </template>
-                    <el-menu-item index="da">
-                      Absent
-                    </el-menu-item>
-                    <el-menu-item index="db">
-                      Fee
-                    </el-menu-item>
-                    <el-menu-item index="dc">
-                      Tax
-                    </el-menu-item>
-                    <el-menu-item index="dd">
-                      Reduction
-                    </el-menu-item>
-                    <el-menu-item index="de">
-                      Others
-                    </el-menu-item>
-                  </el-submenu>
-                  <el-menu-item index="e">
-                    Payment
+                  <el-menu-item index="cc">
+                    Fixed Allowance
                   </el-menu-item>
-                  <el-menu-item index="f">
-                    Flags
+                  <el-menu-item index="cd">
+                    Non Fixed Allowance
                   </el-menu-item>
-                  <el-menu-item index="g">
-                    Manual
+                  <el-menu-item index="ce">
+                    Retro Fill
+                  </el-menu-item>
+                  <el-menu-item index="cf">
+                    Leave
+                  </el-menu-item>
+                  <el-menu-item index="cg">
+                    Others
                   </el-menu-item>
                 </el-submenu>
-              </el-menu>
-            </div>
+                <el-submenu index="d">
+                  <template slot="title">
+                    Deductions
+                  </template>
+                  <el-menu-item index="da">
+                    Absent
+                  </el-menu-item>
+                  <el-menu-item index="db">
+                    Fee
+                  </el-menu-item>
+                  <el-menu-item index="dc">
+                    Tax
+                  </el-menu-item>
+                  <el-menu-item index="dd">
+                    Reduction
+                  </el-menu-item>
+                  <el-menu-item index="de">
+                    Others
+                  </el-menu-item>
+                </el-submenu>
+                <el-menu-item index="e">
+                  Payment
+                </el-menu-item>
+                <el-menu-item index="f">
+                  Flags
+                </el-menu-item>
+                <el-menu-item index="g">
+                  Manual
+                </el-menu-item>
+              </el-submenu>
+            </el-menu>
           </template>
         </el-table-column>
         <el-table-column
