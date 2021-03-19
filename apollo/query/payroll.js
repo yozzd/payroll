@@ -375,6 +375,7 @@ export const PayrollFlags = gql`
   query payrollFlags($id: String!) {
     payrollFlags(id: $id) {
       _id
+      freeze
       employee {
         _id
         d0
