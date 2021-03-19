@@ -91,6 +91,7 @@ export const PayrollOvertime = gql`
   query payrollOvertime($id: String!) {
       payrollOvertime(id: $id) {
       _id
+      freeze
       employee {
         _id
         d0
