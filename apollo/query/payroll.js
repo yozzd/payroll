@@ -210,6 +210,7 @@ export const PayrollEarningOthers = gql`
   query payrollEarningOthers($id: String!) {
     payrollEarningOthers(id: $id) {
       _id
+      freeze
       employee {
         _id
         d0
@@ -235,6 +236,7 @@ export const PayrollAbsent = gql`
   query payrollAbsent($id: String!) {
     payrollAbsent(id: $id) {
       _id
+      freeze
       employee {
         _id
         d0
@@ -290,6 +292,7 @@ export const PayrollReduction = gql`
   query payrollReduction($id: String!) {
     payrollReduction(id: $id) {
       _id
+      freeze
       employee {
         _id
         d0
@@ -311,6 +314,7 @@ export const PayrollDeductionOthers = gql`
   query payrollDeductionOthers($id: String!) {
     payrollDeductionOthers(id: $id) {
       _id
+      freeze
       employee {
         _id
         d0

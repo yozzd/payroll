@@ -275,6 +275,7 @@ const Query = {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
+          freeze: 1,
           'employee._id': 1,
           'employee.d0': 1,
           'employee.e0': 1,
@@ -303,6 +304,7 @@ const Query = {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
+          freeze: 1,
           'employee._id': 1,
           'employee.d0': 1,
           'employee.e0': 1,
@@ -367,6 +369,7 @@ const Query = {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
+          freeze: 1,
           'employee._id': 1,
           'employee.d0': 1,
           'employee.e0': 1,
@@ -391,6 +394,7 @@ const Query = {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
+          freeze: 1,
           'employee._id': 1,
           'employee.d0': 1,
           'employee.e0': 1,
