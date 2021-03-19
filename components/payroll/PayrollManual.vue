@@ -32,6 +32,7 @@ i<template>
         <template slot-scope="scope">
           <client-only>
             <el-link
+              v-if="!freeze"
               type="primary"
               class="font-sm"
               @click="showEdit(scope.row)"
@@ -40,6 +41,9 @@ i<template>
                 {{ scope.row.d0 }}
               </p>
             </el-link>
+            <p v-else v-snip="1" :title="scope.row.d0">
+              {{ scope.row.d0 }}
+            </p>
           </client-only>
         </template>
       </el-table-column>
@@ -174,7 +178,8 @@ export default {
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const { employee } = data.payrollManual;
+          const { freeze, employee } = data.payrollManual;
+          this.freeze = freeze;
           this.items = employee;
           this.miniSearch.addAll(this.items);
         }

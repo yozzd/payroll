@@ -393,6 +393,7 @@ export const PayrollManual = gql`
   query payrollManual($id: String!) {
     payrollManual(id: $id) {
       _id
+      freeze
       employee {
         _id
         d0
