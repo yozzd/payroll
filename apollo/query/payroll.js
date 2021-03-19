@@ -168,6 +168,7 @@ export const PayrollRetroFill = gql`
   query payrollRetroFill($id: String!) {
     payrollRetroFill(id: $id) {
       _id
+      freeze
       employee {
         _id
         d0
@@ -192,6 +193,7 @@ export const PayrollLeave = gql`
   query payrollLeave($id: String!) {
     payrollLeave(id: $id) {
       _id
+      freeze
       employee {
         _id
         d0
