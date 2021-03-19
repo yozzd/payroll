@@ -74,6 +74,7 @@ export const PayrollBasic = gql`
   query payrollBasic($id: String!) {
       payrollBasic(id: $id) {
       _id
+      freeze
       employee {
         _id
         d0
