@@ -26,6 +26,7 @@ export const PayrollEmployment = gql`
   query payrollEmployment($id: String!) {
     payrollEmployment(id: $id) {
       _id
+      freeze
       employee {
         _id
         d0

@@ -37,13 +37,20 @@
       :row-class-name="finalRow"
       @selection-change="handleSelectionChange"
     >
-      <el-table-column type="selection" width="40" align="center" fixed></el-table-column>
+      <el-table-column
+        v-if="!freeze"
+        type="selection"
+        width="40"
+        align="center"
+        fixed
+       ></el-table-column>
       <el-table-column type="index" width="50" align="center" fixed></el-table-column>
       <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
       <el-table-column label="Nama Karyawan" width="200" fixed>
         <template slot-scope="scope">
           <client-only>
             <el-link
+              v-if="!freeze"
               type="primary"
               class="font-sm"
               @click="showEdit(scope.row)"
@@ -52,6 +59,9 @@
                 {{ scope.row.d0 }}
               </p>
             </el-link>
+            <p v-else v-snip="1" :title="scope.row.d0">
+              {{ scope.row.d0 }}
+            </p>
           </client-only>
         </template>
       </el-table-column>
@@ -220,6 +230,7 @@ export default {
       showEditDialog: false,
       form: {},
       loading: false,
+      freeze: false,
       dpt: [],
       sct: [],
       scd: [],
@@ -342,7 +353,8 @@ export default {
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const { employee } = data.payrollEmployment;
+          const { freeze, employee } = data.payrollEmployment;
+          this.freeze = freeze;
           this.items = employee;
           this.miniSearch.addAll(this.items);
           this.dpt = [...new Set(this.items.map((v) => v.u0))].sort();
