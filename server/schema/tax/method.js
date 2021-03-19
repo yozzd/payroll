@@ -28,19 +28,19 @@ const generateTax = async (p) => {
     ];
 
     const ctbl1 = [
-      [{ text: e.h0, bold: true }, '', { text: intpre0(Math.abs(e.i0)).format(), alignment: 'right' }],
-      [`Installment ${p.year} :`, '', ''],
+      [{ text: e.h0, bold: true }, '', { text: intpre0(Math.abs(e.i0)).format(), alignment: 'right', fontSize: 10 }],
+      // [`Installment ${p.year} :`, '', ''],
     ];
 
-    const start = getMonth(p.from);
-    const end = getMonth(p.to);
-    const ds = [e.j0, e.k0, e.l0, e.m0, e.n0, e.o0];
+    // const start = getMonth(p.from);
+    // const end = getMonth(p.to);
+    // const ds = [e.j0, e.k0, e.l0, e.m0, e.n0, e.o0];
 
-    for (let i = start; i <= end; i += 1) {
-      ctbl1.push([
-        '', months[i], { text: intpre0(Math.abs(ds[i - start])).format(), alignment: 'right'},
-      ]);
-    }
+    // for (let i = start; i <= end; i += 1) {
+    //   ctbl1.push([
+    //     '', months[i], { text: intpre0(Math.abs(ds[i - start])).format(), alignment: 'right'},
+    //   ]);
+    // }
 
     const docDefinition = {
       userPassword: e.slip.pw,
@@ -82,21 +82,21 @@ const generateTax = async (p) => {
         {
           style: 'tbl3',
           table: {
-            widths: [100, 60, 60],
+            widths: [100, 10, 60],
             body: ctbl1,
           },
           layout: 'noBorders',
         },
-        {
-          style: 'tbl2',
-          table: {
-            widths: [552],
-            body: [
-              [ `Note: ${e.p0}` ],
-            ],
-          },
-          layout: 'noBorders',
-        },
+        // {
+        //   style: 'tbl2',
+        //   table: {
+        //     widths: [552],
+        //     body: [
+        //       [ `Note: ${e.p0}` ],
+        //     ],
+        //   },
+        //   layout: 'noBorders',
+        // },
       ],
       styles: {
         tbl1: {
@@ -109,7 +109,7 @@ const generateTax = async (p) => {
         },
         tbl3: {
           fontSize: 8,
-          margin: [100, 10, 0, 0],
+          margin: [150, 10, 0, 0],
         },
       },
     };
