@@ -42,6 +42,15 @@ const generateTax = async (p) => {
     //   ]);
     // }
 
+    let note = '';
+    if (e.h0 === 'Kurang Bayar Pajak Pph21') {
+      note = 'Jumlah di atas akan dikurangi pada slip gaji';
+    } else if (e.h0 === 'Lebih Bayar Pajak Pph21') {
+      note = 'Jumlah di atas akan ditambahkan pada slip gaji';
+    } else {
+      note = 'Anda tidak mempunyai kekurangan / kelebihan pajak';
+    }
+
     const docDefinition = {
       userPassword: e.slip.pw,
       content: [
@@ -87,16 +96,16 @@ const generateTax = async (p) => {
           },
           layout: 'noBorders',
         },
-        // {
-        //   style: 'tbl2',
-        //   table: {
-        //     widths: [552],
-        //     body: [
-        //       [ `Note: ${e.p0}` ],
-        //     ],
-        //   },
-        //   layout: 'noBorders',
-        // },
+        {
+          style: 'tbl2',
+          table: {
+            widths: [552],
+            body: [
+              [ `Note: ${note}` ],
+            ],
+          },
+          layout: 'noBorders',
+        },
       ],
       styles: {
         tbl1: {
