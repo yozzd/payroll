@@ -44,31 +44,53 @@ const EmployeeSchema = new Schema({
   ah0: { type: Number, default: 0 }, // Amount Insentif
   ai0: { type: Number, default: 0 }, // Total Lembur & Insentif
   aj0: { type: Number, default: 0 }, // Tunjangan Tetap Living
+  aj0r: { type: Number, default: 0 }, // Tunjangan Tetap Living
   ak0: { type: Number, default: 0 }, // Tunjangan Tetap Perumahan
+  ak0r: { type: Number, default: 0 }, // Tunjangan Tetap Perumahan
   al0: { type: Number, default: 0 }, // Tunjangan Tetap Posisi Fix
+  al0r: { type: Number, default: 0 }, // Tunjangan Tetap Posisi Fix
   am0: { type: Number, default: 0 }, // Tunjangan Tetap Fungsional Fix
+  am0r: { type: Number, default: 0 }, // Tunjangan Tetap Fungsional Fix
   an0: { type: Number, default: 0 }, // Tunjangan Tetap Koordinator
+  an0r: { type: Number, default: 0 }, // Tunjangan Tetap Koordinator
   ao0: { type: Number, default: 0 }, // Tunjangan Tetap Transport
+  ao0r: { type: Number, default: 0 }, // Tunjangan Tetap Transport
   ap0: { type: Number, default: 0 }, // Tunjangan Tetap Komunikasi
+  ap0r: { type: Number, default: 0 }, // Tunjangan Tetap Komunikasi
   aq0: { type: Number, default: 0 }, // Tunjangan Tetap Expertisi
+  aq0r: { type: Number, default: 0 }, // Tunjangan Tetap Expertisi
   ar0: { type: Number, default: 0 }, // Tunjangan Tetap Honorarium
+  ar0r: { type: Number, default: 0 }, // Tunjangan Tetap Honorarium
   as0: { type: Number, default: 0 }, // Tunjangan Tetap Posisi Variable
+  as0r: { type: Number, default: 0 }, // Tunjangan Tetap Posisi Variable
   at0: { type: Number, default: 0 }, // Tunjangan Tetap Fungsional Variable
+  at0r: { type: Number, default: 0 }, // Tunjangan Tetap Fungsional Variable
   au0: { type: Number, default: 0 }, // Tunjangan Tetap Acting/PLT
+  au0r: { type: Number, default: 0 }, // Tunjangan Tetap Acting/PLT
   av0: { type: Number, default: 0 }, // Tunjangan Tetap Others
+  av0r: { type: Number, default: 0 }, // Tunjangan Tetap Others
   aw0: { type: Number, default: 0 }, // Total Tunjangan Tetap
   ax0: { type: Number, default: 0 }, // Upah (Gaji Pokok + Tunjangan Tetap)
   ay0: { type: Number, default: 0 }, // Upah Normal
   az0: { type: Number, default: 0 }, // Selisih Upah
   ba0: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Fungsional
+  ba0r: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Fungsional
   bb0: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Shift
+  bb0r: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Shift
   bc0: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Tig Welding
+  bc0r: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Tig Welding
   bd0: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Operator Plasma
+  bd0r: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Operator Plasma
   be0: { type: Number, default: 0 }, // Tunjangan Tidak Tetap LKS
+  be0r: { type: Number, default: 0 }, // Tunjangan Tidak Tetap LKS
   bf0: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Koperasi
+  bf0r: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Koperasi
   bg0: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Quality System
+  bg0r: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Quality System
   bh0: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Penghargaan Masa Kerja
+  bh0r: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Penghargaan Masa Kerja
   bi0: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Others
+  bi0r: { type: Number, default: 0 }, // Tunjangan Tidak Tetap Others
   bj0: { type: Number, default: 0 }, // Total Tunjangan Tidak Tetap
   bk0: { type: Number, default: 0 }, // Total Tunjangan Tetap & Tunjangan Tidak Tetap
   bl0: { type: Number, default: 0 }, // Pembetulan Pembayaran Koreksi Absen
@@ -220,6 +242,30 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.ae0 = (this.ay0 / 173) * this.ad0;
   this.ah0 = this.af0 * this.ag0;
   this.ai0 = this.ac0 + this.ae0 + this.ah0;
+
+  this.aj0 = (this.aj0r / 21) * this.j0;
+  this.ak0 = (this.ak0r / 21) * this.j0;
+  this.al0 = (this.al0r / 21) * this.j0;
+  this.am0 = (this.am0r / 21) * this.j0;
+  this.an0 = (this.an0r / 21) * this.j0;
+  this.ao0 = (this.ao0r / 21) * this.j0;
+  this.ap0 = (this.ap0r / 21) * this.j0;
+  this.aq0 = (this.aq0r / 21) * this.j0;
+  this.ar0 = (this.ar0r / 21) * this.j0;
+  this.as0 = (this.as0r / 21) * this.j0;
+  this.at0 = (this.at0r / 21) * this.j0;
+  this.au0 = (this.au0r / 21) * this.j0;
+  this.av0 = (this.av0r / 21) * this.j0;
+
+  this.ba0 = (this.ba0r / 21) * this.j0;
+  this.bb0 = (this.bb0r / 21) * this.j0;
+  this.bc0 = (this.bc0r / 21) * this.j0;
+  this.bd0 = (this.bd0r / 21) * this.j0;
+  this.be0 = (this.be0r / 21) * this.j0;
+  this.bf0 = (this.bf0r / 21) * this.j0;
+  this.bg0 = (this.bg0r / 21) * this.j0;
+  this.bh0 = (this.bh0r / 21) * this.j0;
+  this.bi0 = (this.bi0r / 21) * this.j0;
 
   this.aw0 = this.aj0
     + this.ak0
