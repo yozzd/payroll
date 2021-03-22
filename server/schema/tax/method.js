@@ -41,15 +41,12 @@ const generateTax = async (p) => {
     //     '', months[i], { text: intpre0(Math.abs(ds[i - start])).format(), alignment: 'right'},
     //   ]);
     // }
-
-    let note = '';
-    if (e.h0 === 'Kurang Bayar Pajak Pph21') {
-      note = 'Jumlah di atas akan dikurangi pada slip gaji';
-    } else if (e.h0 === 'Lebih Bayar Pajak Pph21') {
-      note = 'Jumlah di atas akan ditambahkan pada slip gaji';
-    } else {
-      note = 'Anda tidak mempunyai kekurangan / kelebihan pajak';
-    }
+    
+    const notes = [
+      ['', 'Note :', ''],
+      ['-', 'Jika nominal di atas "Kurang Bayar" maka nominal tersebut akan dicicil 6 kali tiap bulan', ''],
+      ['-', 'Jika nominal di atas "Lebih Bayar" maka akan diberikan sekaligus', ''],
+    ];
 
     const docDefinition = {
       userPassword: e.slip.pw,
@@ -99,10 +96,8 @@ const generateTax = async (p) => {
         {
           style: 'tbl2',
           table: {
-            widths: [552],
-            body: [
-              [`Note: ${note}`],
-            ],
+            widths: [2, 178, 332],
+            body: notes,
           },
           layout: 'noBorders',
         },
