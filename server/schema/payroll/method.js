@@ -4,7 +4,7 @@ const fs = require('fs-extra');
 const nodemailer = require('nodemailer');
 const XLSX = require('xlsx');
 
-const { intpre0, floatpre2, floatpre3 } = require('../scalar/number');
+const { intpre0, intpre0v2, floatpre2, floatpre2v2, floatpre3, floatpre4v2 } = require('../scalar/number');
 const { idDateFormat } = require('../scalar/date');
 const smtp = require('../../config/smtp');
 
@@ -520,7 +520,7 @@ const genPayrollXLS = async (p) => {
 
     const len = e.length + 4;
     const wb = {
-      SheetNames: ['Sheet1'],
+      SheetNames: ['Sheet1', 'Sheet2', 'Sheet3'],
       Sheets: {
         Sheet1: {
           '!ref': `A1:AD${len}`,
@@ -573,6 +573,106 @@ const genPayrollXLS = async (p) => {
             { s: { r: 2, c: 29 }, e: { r: 3, c: 29 } },
           ],
         },
+        Sheet2: {
+          '!ref': `A1:V${len}`,
+          A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
+          A2: { t: 's', v: `PERIODE PAYROLL: ${p.period}` },
+          A3: { t: 's', v: 'No' },
+          B3: { t: 's', v: 'Nama Karyawan' },
+          C3: { t: 's', v: 'No Karyawan' },
+          D3: { t: 's', v: 'Gaji Pokok' },
+          E3: { t: 's', v: 'Lembur Upah / 173' },
+          E4: { t: 's', v: 'Lembur Normal' },
+          G3: { t: 's', v: 'Lembur Upah / 173' },
+          G4: { t: 's', v: 'Lembur Normal' },
+          I3: { t: 's', v: 'Insentif Lembur' },
+          I4: { t: 's', v: 'Jam / Hari' },
+          K4: { t: 's', v: 'Jam / Hari * Insentif' },
+          L3: { t: 's', v: 'Total Lembur & Insentif' },
+          M3: { t: 's', v: 'Pembetulan Pembayaran' },
+          M4: { t: 's', v: 'Koreksi Absen' },
+          N4: { t: 's', v: 'Koreksi Gaji & Hari Kerja' },
+          O4: { t: 's', v: 'Koreksi OT' },
+          P4: { t: 's', v: 'Tunjangan' },
+          Q4: { t: 's', v: 'Insentif' },
+          R4: { t: 's', v: 'THR' },
+          S4: { t: 's', v: 'Allowance' },
+          T4: { t: 's', v: 'Uang Makan Security' },
+          U4: { t: 's', v: 'Others' },
+          V3: { t: 's', v: 'Total Pembetulan Pembayaran (Retro Fill)' },
+          '!merges': [
+            { s: { r: 0, c: 0 }, e: { r: 0, c: 21 } },
+            { s: { r: 1, c: 0 }, e: { r: 1, c: 21 } },
+            { s: { r: 2, c: 0 }, e: { r: 3, c: 0 } },
+            { s: { r: 2, c: 1 }, e: { r: 3, c: 1 } },
+            { s: { r: 2, c: 2 }, e: { r: 3, c: 2 } },
+            { s: { r: 2, c: 3 }, e: { r: 3, c: 3 } },
+            { s: { r: 2, c: 4 }, e: { r: 2, c: 5 } },
+            { s: { r: 3, c: 4 }, e: { r: 3, c: 5 } },
+            { s: { r: 2, c: 6 }, e: { r: 2, c: 7 } },
+            { s: { r: 3, c: 6 }, e: { r: 3, c: 7 } },
+            { s: { r: 2, c: 8 }, e: { r: 2, c: 10 } },
+            { s: { r: 3, c: 8 }, e: { r: 3, c: 9 } },
+            { s: { r: 2, c: 11 }, e: { r: 3, c: 11 } },
+            { s: { r: 2, c: 12 }, e: { r: 2, c: 20 } },
+            { s: { r: 2, c: 21 }, e: { r: 3, c: 21 } },
+          ],
+        },
+        Sheet3: {
+          '!ref': `A1:W${len}`,
+          A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
+          A2: { t: 's', v: `PERIODE PAYROLL: ${p.period}` },
+          A3: { t: 's', v: 'No' },
+          B3: { t: 's', v: 'Nama Karyawan' },
+          C3: { t: 's', v: 'No Karyawan' },
+          D3: { t: 's', v: 'Gaji Pokok' },
+          E3: { t: 's', v: 'Tambahan Lain Tidak Kena Pajak' },
+          F3: { t: 's', v: 'THR Prorate' },
+          F4: { t: 's', v: 'Months' },
+          G4: { t: 's', v: 'Amount' },
+          H3: { t: 's', v: 'Cuti (Leave Right)' },
+          H4: { t: 's', v: 'Days' },
+          I4: { t: 's', v: 'Amount' },
+          J3: { t: 's', v: 'Absen / Day Basic' },
+          J4: { t: 's', v: 'Absen' },
+          K4: { t: 's', v: 'Amount' },
+          L3: { t: 's', v: 'Pemotongan Kelebihan Bayar Gaji & Koreksi Absen' },
+          M3: { t: 's', v: 'Pemotongan Kelebihan Bayar OT' },
+          N3: { t: 's', v: 'Pemotongan Prorate Absen' },
+          O3: { t: 's', v: 'Total Pemotongan (Gaji, OT, Tunjangan)' },
+          P3: { t: 's', v: 'Pemotongan' },
+          Q3: { t: 's', v: 'Pemotongan Toolroom' },
+          R3: { t: 's', v: 'Pemotongan Lain' },
+          S3: { t: 's', v: 'Total Semua Pemotongan' },
+          T3: { t: 's', v: 'Dana Pinjaman' },
+          U3: { t: 's', v: 'Kantin' },
+          V3: { t: 's', v: 'Kopkar dan BMI' },
+          W3: { t: 's', v: 'Pph21 Kurang Bayar' },
+          '!merges': [
+            { s: { r: 0, c: 0 }, e: { r: 0, c: 22 } },
+            { s: { r: 1, c: 0 }, e: { r: 1, c: 22 } },
+            { s: { r: 2, c: 0 }, e: { r: 3, c: 0 } },
+            { s: { r: 2, c: 1 }, e: { r: 3, c: 1 } },
+            { s: { r: 2, c: 2 }, e: { r: 3, c: 2 } },
+            { s: { r: 2, c: 3 }, e: { r: 3, c: 3 } },
+            { s: { r: 2, c: 4 }, e: { r: 3, c: 4 } },
+            { s: { r: 2, c: 5 }, e: { r: 2, c: 6 } },
+            { s: { r: 2, c: 7 }, e: { r: 2, c: 8 } },
+            { s: { r: 2, c: 9 }, e: { r: 2, c: 10 } },
+            { s: { r: 2, c: 11 }, e: { r: 3, c: 11 } },
+            { s: { r: 2, c: 12 }, e: { r: 3, c: 12 } },
+            { s: { r: 2, c: 13 }, e: { r: 3, c: 13 } },
+            { s: { r: 2, c: 14 }, e: { r: 3, c: 14 } },
+            { s: { r: 2, c: 15 }, e: { r: 3, c: 15 } },
+            { s: { r: 2, c: 16 }, e: { r: 3, c: 16 } },
+            { s: { r: 2, c: 17 }, e: { r: 3, c: 17 } },
+            { s: { r: 2, c: 18 }, e: { r: 3, c: 18 } },
+            { s: { r: 2, c: 19 }, e: { r: 3, c: 19 } },
+            { s: { r: 2, c: 20 }, e: { r: 3, c: 20 } },
+            { s: { r: 2, c: 21 }, e: { r: 3, c: 21 } },
+            { s: { r: 2, c: 22 }, e: { r: 3, c: 22 } },
+          ],
+        },
       },
     };
 
@@ -609,6 +709,53 @@ const genPayrollXLS = async (p) => {
       wb.Sheets.Sheet1[`AB${row}`] = { t: 'n', v: e[i].bi0 };
       wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: e[i].bj0 };
       wb.Sheets.Sheet1[`AD${row}`] = { t: 'n', v: e[i].ax0 + e[i].bj0 };
+      
+      wb.Sheets.Sheet2[`A${row}`] = { t: 'n', v: i + 1 };
+      wb.Sheets.Sheet2[`B${row}`] = { t: 's', v: e[i].d0 };
+      wb.Sheets.Sheet2[`C${row}`] = { t: 's', v: e[i].e0 };
+      wb.Sheets.Sheet2[`D${row}`] = { t: 'n', v: e[i].g0 };
+      wb.Sheets.Sheet2[`E${row}`] = { t: 'n', v: floatpre2v2(e[i].ab0).format() };
+      wb.Sheets.Sheet2[`F${row}`] = { t: 'n', v: intpre0v2(e[i].ac0).format() };
+      wb.Sheets.Sheet2[`G${row}`] = { t: 'n', v: floatpre2v2(e[i].ad0).format() };
+      wb.Sheets.Sheet2[`H${row}`] = { t: 'n', v: intpre0v2(e[i].ae0).format() };
+      wb.Sheets.Sheet2[`I${row}`] = { t: 'n', v: floatpre2v2(e[i].af0).format() };
+      wb.Sheets.Sheet2[`J${row}`] = { t: 'n', v: intpre0v2(e[i].ag0).format() };
+      wb.Sheets.Sheet2[`K${row}`] = { t: 'n', v: intpre0v2(e[i].ah0).format() };
+      wb.Sheets.Sheet2[`L${row}`] = { t: 'n', v: intpre0v2(e[i].ai0).format() };
+      wb.Sheets.Sheet2[`M${row}`] = { t: 'n', v: intpre0v2(e[i].bl0).format() };
+      wb.Sheets.Sheet2[`N${row}`] = { t: 'n', v: intpre0v2(e[i].bm0).format() };
+      wb.Sheets.Sheet2[`O${row}`] = { t: 'n', v: intpre0v2(e[i].bn0).format() };
+      wb.Sheets.Sheet2[`P${row}`] = { t: 'n', v: intpre0v2(e[i].bo0).format() };
+      wb.Sheets.Sheet2[`Q${row}`] = { t: 'n', v: intpre0v2(e[i].bp0).format() };
+      wb.Sheets.Sheet2[`R${row}`] = { t: 'n', v: intpre0v2(e[i].bq0).format() };
+      wb.Sheets.Sheet2[`S${row}`] = { t: 'n', v: intpre0v2(e[i].br0).format() };
+      wb.Sheets.Sheet2[`T${row}`] = { t: 'n', v: intpre0v2(e[i].bs0).format() };
+      wb.Sheets.Sheet2[`U${row}`] = { t: 'n', v: intpre0v2(e[i].bt0).format() };
+      wb.Sheets.Sheet2[`V${row}`] = { t: 'n', v: intpre0v2(e[i].bu0).format() };
+      
+      wb.Sheets.Sheet3[`A${row}`] = { t: 'n', v: i + 1 };
+      wb.Sheets.Sheet3[`B${row}`] = { t: 's', v: e[i].d0 };
+      wb.Sheets.Sheet3[`C${row}`] = { t: 's', v: e[i].e0 };
+      wb.Sheets.Sheet3[`D${row}`] = { t: 'n', v: e[i].g0 };
+      wb.Sheets.Sheet3[`E${row}`] = { t: 'n', v: intpre0v2(e[i].bv0).format() };
+      wb.Sheets.Sheet3[`F${row}`] = { t: 'n', v: intpre0v2(e[i].bw0).format() };
+      wb.Sheets.Sheet3[`G${row}`] = { t: 'n', v: intpre0v2(e[i].bx0).format() };
+      wb.Sheets.Sheet3[`H${row}`] = { t: 'n', v: intpre0v2(e[i].by0).format() };
+      wb.Sheets.Sheet3[`I${row}`] = { t: 'n', v: intpre0v2(e[i].bz0).format() };
+      wb.Sheets.Sheet3[`J${row}`] = { t: 'n', v: floatpre4v2(e[i].cw0).format() };
+      wb.Sheets.Sheet3[`K${row}`] = { t: 'n', v: intpre0v2(e[i].cx0).format() };
+      wb.Sheets.Sheet3[`L${row}`] = { t: 'n', v: intpre0v2(e[i].dc0).format() };
+      wb.Sheets.Sheet3[`M${row}`] = { t: 'n', v: intpre0v2(e[i].dd0).format() };
+      wb.Sheets.Sheet3[`N${row}`] = { t: 'n', v: intpre0v2(e[i].de0).format() };
+      wb.Sheets.Sheet3[`O${row}`] = { t: 'n', v: intpre0v2(e[i].df0).format() };
+      wb.Sheets.Sheet3[`P${row}`] = { t: 'n', v: intpre0v2(e[i].de0).format() };
+      wb.Sheets.Sheet3[`Q${row}`] = { t: 'n', v: intpre0v2(e[i].dh0).format() };
+      wb.Sheets.Sheet3[`R${row}`] = { t: 'n', v: intpre0v2(e[i].di0).format() };
+      wb.Sheets.Sheet3[`S${row}`] = { t: 'n', v: intpre0v2(e[i].dj0).format() };
+      wb.Sheets.Sheet3[`T${row}`] = { t: 'n', v: intpre0v2(e[i].dk0).format() };
+      wb.Sheets.Sheet3[`U${row}`] = { t: 'n', v: intpre0v2(e[i].dl0).format() };
+      wb.Sheets.Sheet3[`V${row}`] = { t: 'n', v: intpre0v2(e[i].dm0).format() };
+      wb.Sheets.Sheet3[`W${row}`] = { t: 'n', v: intpre0v2(e[i].dn0).format() };
     }
 
     XLSX.writeFile(wb, `static/report/${p.dir}/${p.dir}_payroll.xls`);
