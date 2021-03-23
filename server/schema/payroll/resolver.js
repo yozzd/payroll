@@ -12,6 +12,7 @@ const {
   generateSlip,
   sendSlip,
   generateReportPayroll,
+  genPayrollXLS,
 } = require('./method');
 const {
   CloneEmployeeInputType,
@@ -561,6 +562,19 @@ const Mutation = {
         { $match: { _id: id } },
       ]);
       const s = await generateReportPayroll(p[0]);
+      return s;
+    }),
+  },
+  generatePayrollXLS: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('user', async (_, { id }) => {
+      const p = await Payroll.aggregate([
+        { $match: { _id: id } },
+      ]);
+      const s = await genPayrollXLS(p[0]);
       return s;
     }),
   },

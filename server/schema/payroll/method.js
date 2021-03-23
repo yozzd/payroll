@@ -2,6 +2,7 @@ const { GraphQLError } = require('graphql');
 const PdfPrinter = require('pdfmake');
 const fs = require('fs-extra');
 const nodemailer = require('nodemailer');
+const XLSX = require('xlsx');
 
 const { intpre0, floatpre2, floatpre3 } = require('../scalar/number');
 const { idDateFormat } = require('../scalar/date');
@@ -512,6 +513,114 @@ const generateReportPayroll = async (p) => {
   }
 };
 
+const genPayrollXLS = async (p) => {
+  try {
+    const { employee: e } = p;
+    await fs.ensureDir(`static/report/${p.dir}`);
+
+    const len = e.length + 4;
+    const wb = {
+      SheetNames: ['Sheet1'],
+      Sheets: {
+        Sheet1: {
+          '!ref': `A1:AD${len}`,
+          A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
+          A2: { t: 's', v: `PERIODE PAYROLL: ${p.period}` },
+          A3: { t: 's', v: 'No' },
+          B3: { t: 's', v: 'Nama Karyawan' },
+          C3: { t: 's', v: 'No Karyawan' },
+          D3: { t: 's', v: 'Gaji Pokok' },
+          E3: { t: 's', v: 'Tunjangan Tetap' },
+          E4: { t: 's', v: 'Tj. Tetap Living' },
+          F4: { t: 's', v: 'Tj. Tetap Perumahan' },
+          G4: { t: 's', v: 'Tj. Tetap Posisi Fix' },
+          H4: { t: 's', v: 'Tj. Tetap Fungsional Fix' },
+          I4: { t: 's', v: 'Tj. Tetap Koordinator' },
+          J4: { t: 's', v: 'Tj. Tetap Transport' },
+          K4: { t: 's', v: 'Tj. Tetap Komunikasi' },
+          L4: { t: 's', v: 'Tj. Tetap Expertisi' },
+          M4: { t: 's', v: 'Tj. Tetap Honorarium' },
+          N4: { t: 's', v: 'Tj. Tetap Posisi Variable' },
+          O4: { t: 's', v: 'Tj. Tetap Fungsional Variable' },
+          P4: { t: 's', v: 'Tj. Tetap Acting / PLT' },
+          Q4: { t: 's', v: 'Tj. Tetap Others' },
+          R3: { t: 's', v: 'Total Tunjangan Tetap' },
+          S3: { t: 's', v: 'Upah (Gaji Pokok + Tj. Tetap)' },
+          T3: { t: 's', v: 'Tunjangan Tidak Tetap' },
+          T4: { t: 's', v: 'Tj. Tidak Tetap Fungsional' },
+          U4: { t: 's', v: 'Tj. Tidak Tetap Shift' },
+          V4: { t: 's', v: 'Tj. Tidak Tetap Tig Welding' },
+          W4: { t: 's', v: 'Tj. Tidak Tetap Operator Plasma' },
+          X4: { t: 's', v: 'Tj. Tidak Tetap LKS' },
+          Y4: { t: 's', v: 'Tj. Tidak Tetap Koperasi' },
+          Z4: { t: 's', v: 'Tj. Tidak Tetap Quality System' },
+          AA4: { t: 's', v: 'Tj. Tidak Tetap Penghargaan Masa Kerja' },
+          AB4: { t: 's', v: 'Tj. Tidak Tetap Others' },
+          AC3: { t: 's', v: 'Total Tunjangan Tidak Tetap' },
+          AD3: { t: 's', v: 'Total Salary' },
+          '!merges': [
+            { s: { r: 0, c: 0 }, e: { r: 0, c: 27 } },
+            { s: { r: 1, c: 0 }, e: { r: 1, c: 27 } },
+            { s: { r: 2, c: 0 }, e: { r: 3, c: 0 } },
+            { s: { r: 2, c: 1 }, e: { r: 3, c: 1 } },
+            { s: { r: 2, c: 2 }, e: { r: 3, c: 2 } },
+            { s: { r: 2, c: 3 }, e: { r: 3, c: 3 } },
+            { s: { r: 2, c: 4 }, e: { r: 2, c: 16 } },
+            { s: { r: 2, c: 17 }, e: { r: 3, c: 17 } },
+            { s: { r: 2, c: 18 }, e: { r: 3, c: 18 } },
+            { s: { r: 2, c: 19 }, e: { r: 2, c: 27 } },
+            { s: { r: 2, c: 28 }, e: { r: 3, c: 28 } },
+            { s: { r: 2, c: 29 }, e: { r: 3, c: 29 } },
+          ],
+        },
+      },
+    };
+
+    let row = 4;
+    for (let i = 0; i < e.length; i += 1) {
+      row++;
+      wb.Sheets.Sheet1[`A${row}`] = { t: 'n', v: i + 1 };
+      wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: e[i].d0 };
+      wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: e[i].e0 };
+      wb.Sheets.Sheet1[`D${row}`] = { t: 'n', v: e[i].g0 };
+      wb.Sheets.Sheet1[`E${row}`] = { t: 'n', v: e[i].aj0 };
+      wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: e[i].ak0 };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: e[i].al0 };
+      wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: e[i].am0 };
+      wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: e[i].an0 };
+      wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: e[i].ao0 };
+      wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: e[i].ap0 };
+      wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: e[i].aq0 };
+      wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: e[i].ar0 };
+      wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: e[i].as0 };
+      wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: e[i].at0 };
+      wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: e[i].au0 };
+      wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: e[i].av0 };
+      wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: e[i].aw0 };
+      wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: e[i].ax0 };
+      wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: e[i].ba0 };
+      wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: e[i].bb0 };
+      wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: e[i].bc0 };
+      wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: e[i].bd0 };
+      wb.Sheets.Sheet1[`X${row}`] = { t: 'n', v: e[i].be0 };
+      wb.Sheets.Sheet1[`Y${row}`] = { t: 'n', v: e[i].bf0 };
+      wb.Sheets.Sheet1[`Z${row}`] = { t: 'n', v: e[i].bg0 };
+      wb.Sheets.Sheet1[`AA${row}`] = { t: 'n', v: e[i].bh0 };
+      wb.Sheets.Sheet1[`AB${row}`] = { t: 'n', v: e[i].bi0 };
+      wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: e[i].bj0 };
+      wb.Sheets.Sheet1[`AD${row}`] = { t: 'n', v: e[i].ax0 + e[i].bj0 };
+    }
+
+    XLSX.writeFile(wb, `static/report/${p.dir}/${p.dir}_payroll.xls`);
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
+};
+
 const generateSlip = async (p) => {
   try {
     const { employee: e } = p;
@@ -797,6 +906,7 @@ const sendSlip = async (p) => {
 module.exports = {
   updateEmployee,
   generateReportPayroll,
+  genPayrollXLS,
   generateSlip,
   sendSlip,
 };

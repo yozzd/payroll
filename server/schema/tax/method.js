@@ -41,7 +41,7 @@ const generateTax = async (p) => {
     //     '', months[i], { text: intpre0(Math.abs(ds[i - start])).format(), alignment: 'right'},
     //   ]);
     // }
-    
+
     const notes = [
       ['', 'Note :', ''],
       ['-', 'Jika nominal di atas "Kurang Bayar" maka nominal tersebut akan dicicil 6 kali tiap bulan', ''],

@@ -165,8 +165,11 @@
                 Export <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="pdf">
+                <el-dropdown-item command="a3_pdf">
                   PDF
+                </el-dropdown-item>
+                <el-dropdown-item command="a3_xls">
+                  XLS
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -596,6 +599,7 @@ import {
 import {
   PayrollDelete,
   GenerateReportPayroll,
+  GeneratePayrollXLS,
   AddEmployee,
   CloneEmployee,
   ClonePayroll,
@@ -721,7 +725,8 @@ export default {
       else if (c === 'overtime') this.handleOvertimeDialog(id);
     },
     handleExportCommand(c, id, dir) {
-      if (c === 'pdf') this.generateReportPayroll(id, dir);
+      if (c === 'a3_pdf') this.generateReportPayroll(id, dir);
+      else if (c === 'a3_xls') this.generatePayrollXLS(id, dir);
     },
     handleReportCommand(c, id) {
       if (c === 'journal') this.$router.push({ name: 'payroll-journal-id', params: { id } });
@@ -911,6 +916,22 @@ export default {
 
         this.genRpPy = false;
         window.open(`/report/${dir}/${dir}_payroll.pdf`);
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
+    },
+    async generatePayrollXLS(id, dir) {
+      try {
+        await this.$apollo.mutate({
+          mutation: GeneratePayrollXLS,
+          variables: {
+            id,
+          },
+        });
+
+        window.open(`/report/${dir}/${dir}_payroll.xls`);
         return true;
       } catch ({ graphQLErrors, networkError }) {
         this.errors = graphQLErrors || networkError.result.errors;
