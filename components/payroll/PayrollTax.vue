@@ -24,6 +24,7 @@
       size="small"
       max-height="500"
       show-summary
+      border
       :summary-method="summaries"
       :row-class-name="finalRow"
     >
