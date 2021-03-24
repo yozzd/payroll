@@ -146,8 +146,11 @@ const processImportPayroll = async ({ file, from, to }) => {
             dq0: ft[i].__EMPTY_120 || '', // Periode Potongan Kantin
             dr0: ft[i].__EMPTY_121 || 0, // Bonus
             ds0: ft[i].__EMPTY_122 || 0, // Uang Pisah Prorate
-            du0: ft[i].__EMPTY_124 || 0, // Uang Pesangon Prorate
-            dw0: ft[i].__EMPTY_126 || 0, // Uang Penghargaan Masa Kerja Prorate
+            // du0: ft[i].__EMPTY_124 || 0, // Uang Pesangon Prorate
+            dv0: ft[i].__EMPTY_125 || 0, // Uang Pesangon Amount
+            // dw0: ft[i].__EMPTY_126 || 0, // Uang Penghargaan Masa Kerja Prorate
+            dx0: ft[i].__EMPTY_127 || 0, // Uang Penghargaan Masa Kerja Amount
+            dy0: ft[i].__EMPTY_128 || 0, // Uang Penggantian Hak
             dz0: ft[i].__EMPTY_129 || '', // Bulan
             ea0: ft[i].__EMPTY_130 || 0, // Total Bulan Periode Pajak
             ew0: ft[i].__EMPTY_152 || '', // Email

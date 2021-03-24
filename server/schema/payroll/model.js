@@ -312,14 +312,14 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.bz0 = (this.ay0 / 21) * this.by0;
 
   this.dt0 = this.ay0 * this.ds0;
-  this.dx0 = this.ay0 * this.dw0;
-  if (this.fe0) {
-    this.dv0 = this.fe0;
-    this.dy0 = 0;
-  } else {
-    this.dv0 = this.ay0 * this.du0;
-    this.dy0 = (this.dv0 + this.dx0) * 0.15;
-  }
+  // this.dx0 = this.ay0 * this.dw0;
+  // if (this.fe0) {
+  //   this.dv0 = this.fe0;
+  //   this.dy0 = 0;
+  // } else {
+  //   this.dv0 = this.ay0 * this.du0;
+  //   this.dy0 = (this.dv0 + this.dx0) * 0.15;
+  // }
 
   this.ca0 = this.g0
     + this.ai0

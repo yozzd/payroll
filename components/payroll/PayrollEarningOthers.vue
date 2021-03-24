@@ -113,7 +113,7 @@
           </template>
         </el-table-column>
       </el-table-column>
-      <el-table-column prop="dy0" min-width="120" align="right">
+      <el-table-column prop="dy0" width="120" align="right">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Uang Penggantian Hak">
@@ -125,6 +125,7 @@
           <span>{{ scope.row.dy0 | currency }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="" min-width="120"></el-table-column>
     </el-table>
 
     <el-dialog
