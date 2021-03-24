@@ -527,7 +527,7 @@ const genPayrollXLS = async (p) => {
         Sheet1: {
           '!ref': `A1:AD${len}`,
           A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
-          A2: { t: 's', v: `PERIODE PAYROLL: ${p.period}` },
+          A2: { t: 's', v: `PERIODE PAYROLL: ${p.period} ${p.year}` },
           A3: { t: 's', v: 'No' },
           B3: { t: 's', v: 'Nama Karyawan' },
           C3: { t: 's', v: 'No Karyawan' },
@@ -578,7 +578,7 @@ const genPayrollXLS = async (p) => {
         Sheet2: {
           '!ref': `A1:V${len}`,
           A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
-          A2: { t: 's', v: `PERIODE PAYROLL: ${p.period}` },
+          A2: { t: 's', v: `PERIODE PAYROLL: ${p.period} ${p.year}` },
           A3: { t: 's', v: 'No' },
           B3: { t: 's', v: 'Nama Karyawan' },
           C3: { t: 's', v: 'No Karyawan' },
@@ -623,7 +623,7 @@ const genPayrollXLS = async (p) => {
         Sheet3: {
           '!ref': `A1:W${len}`,
           A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
-          A2: { t: 's', v: `PERIODE PAYROLL: ${p.period}` },
+          A2: { t: 's', v: `PERIODE PAYROLL: ${p.period} ${p.year}` },
           A3: { t: 's', v: 'No' },
           B3: { t: 's', v: 'Nama Karyawan' },
           C3: { t: 's', v: 'No Karyawan' },
