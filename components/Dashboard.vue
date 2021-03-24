@@ -40,7 +40,7 @@
           <template slot-scope="scope">
             <nuxt-link
               :to="`/payroll/list/${scope.row._id}?t1=a`"
-              class="el-link el-link--primary is-underline"
+              class="el-link el-link--primary is-underline -mr-4"
             >
               <i class="el-icon-document"></i>
               <span>
@@ -157,7 +157,27 @@
         </el-table-column>
         <el-table-column>
           <template slot-scope="scope">
-            <el-dropdown
+            <el-menu
+              mode="horizontal"
+              class="dropmenu"
+              @select="c => handleExportCommand(c, scope.row._id, scope.row.dir)"
+            >
+              <el-submenu index="1">
+                <template slot="title">Export</template>
+                <el-submenu index="a">
+                  <template slot="title">
+                    Payroll
+                  </template>
+                  <el-menu-item index="aa">
+                    PDF
+                  </el-menu-item>
+                  <el-menu-item index="ab">
+                    XLS
+                  </el-menu-item>
+                </el-submenu>
+              </el-submenu>
+            </el-menu>
+            <!--<el-dropdown
               trigger="click"
               @command="c => handleExportCommand(c, scope.row._id, scope.row.dir)"
             >
@@ -172,7 +192,7 @@
                   XLS
                 </el-dropdown-item>
               </el-dropdown-menu>
-            </el-dropdown>
+            </el-dropdown>-->
           </template>
         </el-table-column>
         <el-table-column>
@@ -725,8 +745,8 @@ export default {
       else if (c === 'overtime') this.handleOvertimeDialog(id);
     },
     handleExportCommand(c, id, dir) {
-      if (c === 'a3_pdf') this.generateReportPayroll(id, dir);
-      else if (c === 'a3_xls') this.generatePayrollXLS(id, dir);
+      if (c === 'aa') this.generateReportPayroll(id, dir);
+      else if (c === 'ab') this.generatePayrollXLS(id, dir);
     },
     handleReportCommand(c, id) {
       if (c === 'journal') this.$router.push({ name: 'payroll-journal-id', params: { id } });

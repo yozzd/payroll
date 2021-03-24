@@ -102,6 +102,5 @@ button:focus,
 }
 
 .dropmenu.el-menu--horizontal > .el-submenu .el-submenu__icon-arrow {
-  margin-left: 0;
   font-size: 14px;
 }
