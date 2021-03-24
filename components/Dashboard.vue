@@ -26,9 +26,9 @@
     </div>
     <div>
       <el-table
-        v-loading="$apollo.loading || genRpPy"
+        v-loading="$apollo.loading || genRpPy || genAcc"
         :data="payrollAll"
-        :element-loading-text="genRpPy ? 'Processing...' : 'Loading...'"
+        :element-loading-text="genRpPy || genAcc ? 'Processing...' : 'Loading...'"
         element-loading-spinner="el-icon-loading"
         height="500"
       >
@@ -175,24 +175,11 @@
                     XLS
                   </el-menu-item>
                 </el-submenu>
+                <el-menu-item index="b">
+                  Accounting Check
+                </el-menu-item>
               </el-submenu>
             </el-menu>
-            <!--<el-dropdown
-              trigger="click"
-              @command="c => handleExportCommand(c, scope.row._id, scope.row.dir)"
-            >
-              <span class="el-dropdown-link">
-                Export <i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="a3_pdf">
-                  PDF
-                </el-dropdown-item>
-                <el-dropdown-item command="a3_xls">
-                  XLS
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>-->
           </template>
         </el-table-column>
         <el-table-column>
@@ -620,6 +607,7 @@ import {
   PayrollDelete,
   GenerateReportPayroll,
   GeneratePayrollXLS,
+  GenerateAccCheck,
   AddEmployee,
   CloneEmployee,
   ClonePayroll,
@@ -647,6 +635,7 @@ export default {
       loadingKoperasi: false,
       loadingOvertime: false,
       genRpPy: false,
+      genAcc: false,
       form: {
         period: [],
         file: null,
@@ -747,6 +736,7 @@ export default {
     handleExportCommand(c, id, dir) {
       if (c === 'aa') this.generateReportPayroll(id, dir);
       else if (c === 'ab') this.generatePayrollXLS(id, dir);
+      else if (c === 'b') this.generateAccCheck(id, dir);
     },
     handleReportCommand(c, id) {
       if (c === 'journal') this.$router.push({ name: 'payroll-journal-id', params: { id } });
@@ -952,6 +942,24 @@ export default {
         });
 
         window.open(`/report/${dir}/${dir}_payroll.xls`);
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
+    },
+    async generateAccCheck(id, dir) {
+      try {
+        this.genAcc = true;
+        await this.$apollo.mutate({
+          mutation: GenerateAccCheck,
+          variables: {
+            id,
+          },
+        });
+
+        this.genAcc = false;
+        window.open(`/report/${dir}/${dir}_acc.pdf`);
         return true;
       } catch ({ graphQLErrors, networkError }) {
         this.errors = graphQLErrors || networkError.result.errors;

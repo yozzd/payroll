@@ -41,6 +41,14 @@ export const GeneratePayrollXLS = gql`
   }
 `;
 
+export const GenerateAccCheck = gql`
+  mutation generateAccCheck($id: String!) {
+    generateAccCheck(id: $id) {
+      sStatus
+    }
+  }
+`;
+
 export const EditEmployment = gql`
   mutation editEmployment($input: EditEmploymentInputType) {
     editEmployment(input: $input) {

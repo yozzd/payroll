@@ -770,6 +770,85 @@ const genPayrollXLS = async (p) => {
   }
 };
 
+const genAccCheck = async (p) => {
+  try {
+    const { employee } = p;
+    await fs.ensureDir(`static/report/${p.dir}`);
+
+    const tbl1 = [
+      [
+        {
+          text: 'No', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Nama Karyawan', bold: true, alignment: 'center',
+        },
+        {
+          text: 'No. Karyawan', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Dana Pinjaman', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Kantin', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Kopkar & BMI', bold: true, alignment: 'center',
+        },
+      ],
+    ];
+
+    employee.map((e, i) => {
+      tbl1.push([
+        { text: (i + 1), alignment: 'center' }, e.d0, { text: e.e0, alignment: 'center' },
+        { text: intpre0(e.dk0).format(), alignment: 'right' },
+        { text: intpre0(e.dl0).format(), alignment: 'right' },
+        { text: intpre0(e.dm0).format(), alignment: 'right' },
+      ]);
+
+    });
+
+    const docDefinition = {
+      content: [
+        { text: 'PT. Labtech Penta International', bold: true, fontSize: 8 },
+        {
+          text: `Periode Payroll: ${p.period}`, bold: true, fontSize: 8, margin: [0, 0, 0, 20],
+        },
+        {
+          style: 'tbl1',
+          table: {
+            widths: [
+              15, 180, 60, 60, 60, 60,
+            ],
+            body: tbl1,
+          },
+        },
+      ],
+      styles: {
+        tbl1: {
+          fontSize: 8,
+          margin: [-10, -10, -10, 0],
+        },
+      },
+    };
+
+    return new Promise((resolve) => {
+      const pdfDoc = printer.createPdfKitDocument(docDefinition);
+      pdfDoc.pipe(fs.createWriteStream(`static/report/${p.dir}/${p.dir}_acc.pdf`));
+      pdfDoc.on('end', () => {
+        resolve({ sStatus: 1 });
+      });
+      pdfDoc.end();
+    });
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
+};
+
 const generateSlip = async (p) => {
   try {
     const { employee: e } = p;
@@ -1056,6 +1135,7 @@ module.exports = {
   updateEmployee,
   generateReportPayroll,
   genPayrollXLS,
+  genAccCheck,
   generateSlip,
   sendSlip,
 };
