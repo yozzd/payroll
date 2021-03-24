@@ -80,12 +80,13 @@
             <span>{{ scope.row.cq0 | currency }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="cr0" label="Karyawan" min-width="120" align="right">
+        <el-table-column prop="cr0" label="Karyawan" width="120" align="right">
           <template slot-scope="scope">
             <span>{{ scope.row.cr0 | currency }}</span>
           </template>
         </el-table-column>
       </el-table-column>
+      <el-table-column label="" min-width="120"></el-table-column>
     </el-table>
   </div>
 </template>

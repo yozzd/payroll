@@ -96,7 +96,8 @@
       </el-table-column>
       <el-table-column prop="w0" label="Section Code" width="100"></el-table-column>
       <el-table-column prop="x0" label="Grade" width="100"></el-table-column>
-      <el-table-column prop="y0" label="Jabatan" min-width="200"></el-table-column>
+      <el-table-column prop="y0" label="Jabatan" width="200"></el-table-column>
+      <el-table-column label="" min-width="120"></el-table-column>
     </el-table>
 
     <el-dialog

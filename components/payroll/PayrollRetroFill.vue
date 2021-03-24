@@ -157,11 +157,12 @@
           <span>{{ scope.row.bt0 | currency }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="bu0" label="Total" min-width="120" align="right">
+      <el-table-column prop="bu0" label="Total" width="120" align="right">
         <template slot-scope="scope">
           <span>{{ scope.row.bu0 | currency }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="" min-width="120"></el-table-column>
     </el-table>
 
     <el-dialog
