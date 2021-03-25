@@ -26,7 +26,13 @@
         border
         height="500"
         :row-class-name="finalRow"
+        @selection-change="handleSelectionChange"
       >
+        <el-table-column
+          type="selection"
+          width="50"
+          align="center"
+        ></el-table-column>
         <el-table-column type="index" width="50" align="center" fixed></el-table-column>
         <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
         <el-table-column label="Nama Karyawan" width="200" fixed>
@@ -108,6 +114,7 @@ export default {
   mixins: [mix],
   data() {
     return {
+      multipleSelection: [],
       showEditDialog: false,
       form: {},
       loading: false,
@@ -122,6 +129,9 @@ export default {
     };
   },
   methods: {
+    handleSelectionChange(a) {
+      this.multipleSelection = a.map((v) => v._id);
+    },
     showEdit(row) {
       this.showEditDialog = true;
       this.form = { ...row };
