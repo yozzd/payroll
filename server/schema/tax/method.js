@@ -44,8 +44,8 @@ const generateTax = async (p) => {
 
     const notes = [
       ['', 'Note :', ''],
-      ['-', 'Jika nominal di atas "Kurang Bayar" maka nominal tersebut akan dicicil 6 kali tiap bulan', ''],
-      ['-', 'Jika nominal di atas "Lebih Bayar" maka akan diberikan sekaligus', ''],
+      ['-', 'Jika nominal "Kurang Bayar" maka akan dicicil 6 kali tiap bulan', ''],
+      ['-', 'Jika nominal "Lebih Bayar" maka akan diberikan sekaligus', ''],
     ];
 
     const docDefinition = {

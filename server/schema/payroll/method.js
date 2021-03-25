@@ -3,11 +3,12 @@ const PdfPrinter = require('pdfmake');
 const fs = require('fs-extra');
 const nodemailer = require('nodemailer');
 const XLSX = require('xlsx');
+const { getMonth } = require('date-fns');
 
 const {
   intpre0, intpre0v2, floatpre2, floatpre2v2, floatpre3, floatpre4v2,
 } = require('../scalar/number');
-const { gDateFormat, idDateFormat } = require('../scalar/date');
+const { gDateFormat, idDateFormat, dateDiff } = require('../scalar/date');
 const smtp = require('../../config/smtp');
 
 const fonts = {
@@ -1137,9 +1138,46 @@ const genFinal = async (p) => {
     await fs.ensureDir(`static/final/${p.dir}`);
 
     const vw1 = [
-      [{ text: 'NAME', colSpan: 5 }, '', '', '', '', ':', e.d0],
-      [{ text: 'EMP NO', colSpan: 5 }, '', '', '', '', ':', e.e0],
-      [{ text: 'DATE OF HIRE', colSpan: 5 }, '', '', '', '', ':', { text: gDateFormat(e.i0, 'dd MMMM yyyy') }],
+      [{ text: 'Name', colSpan: 5 }, '', '', '', '', ':', e.d0],
+      [{ text: 'Emp No', colSpan: 5 }, '', '', '', '', ':', e.e0],
+      [{ text: 'Date of Hire', colSpan: 5 }, '', '', '', '', ':', { text: gDateFormat(e.i0, 'dd MMMM yyyy') }],
+      [{ text: 'Status', colSpan: 5 }, '', '', '', '', ':', e.h0],
+      [{ text: 'Position', colSpan: 5 }, '', '', '', '', ':', e.y0],
+      [{ text: 'Resign / Termination Date', colSpan: 5 }, '', '', '', '', ':', { text: gDateFormat(e.k0, 'dd MMMM yyyy') }],
+      [{ text: 'Long Services', colSpan: 5 }, '', '', '', '', ':', dateDiff(e.i0, e.k0)],
+      [{ text: 'Basic Salary Per Month', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.g0).format(), alignment: 'right' }],
+      [{ text: 'Basic Salary Per Day', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.g0 / 21).format(), alignment: 'right' }],
+      [{ text: 'Overtime' }, { text: '(Variable)', colSpan: 4}, '', '', '', ':', { text: intpre0(e.g0 / 173).format(), alignment: 'right' }],
+    ];
+    
+    if (e.aj0) vw1.push([{ text: 'Living Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.aj0).format(), alignment: 'right' }]);
+    if (e.ak0) vw1.push([{ text: 'Housing Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.ak0).format(), alignment: 'right' }]);
+    if (e.al0) vw1.push([{ text: 'Functional Position Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.al0).format(), alignment: 'right' }]);
+    if (e.am0) vw1.push([{ text: 'Functional Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.am0).format(), alignment: 'right' }]);
+    if (e.an0) vw1.push([{ text: 'Coordinator Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.an0).format(), alignment: 'right' }]);
+    if (e.ao0) vw1.push([{ text: 'Transport Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.ao0).format(), alignment: 'right' }]);
+    if (e.ap0) vw1.push([{ text: 'Communication Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.ap0).format(), alignment: 'right' }]);
+    if (e.aq0) vw1.push([{ text: 'Expertise Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.aq0).format(), alignment: 'right' }]);
+    if (e.ar0) vw1.push([{ text: 'Honorarium Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.ar0).format(), alignment: 'right' }]);
+    if (e.as0) vw1.push([{ text: 'Position Variable Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.as0).format(), alignment: 'right' }]);
+    if (e.at0) vw1.push([{ text: 'Functional Variable Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.at0).format(), alignment: 'right' }]);
+    if (e.au0) vw1.push([{ text: 'Acting/PLT Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.au0).format(), alignment: 'right' }]);
+    if (e.av0) vw1.push([{ text: 'Others Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.av0).format(), alignment: 'right' }]);
+    
+    if (e.ba0) vw1.push([{ text: 'Functional Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.ba0).format(), alignment: 'right' }]);
+    if (e.bb0) vw1.push([{ text: 'Shift Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bb0).format(), alignment: 'right' }]);
+    if (e.bc0) vw1.push([{ text: 'Tig Welding Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bc0).format(), alignment: 'right' }]);
+    if (e.bd0) vw1.push([{ text: 'Plasma Cutting Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bd0).format(), alignment: 'right' }]);
+    if (e.be0) vw1.push([{ text: 'LKS Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.be0).format(), alignment: 'right' }]);
+    if (e.bf0) vw1.push([{ text: 'Koperasi Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bf0).format(), alignment: 'right' }]);
+    if (e.bg0) vw1.push([{ text: 'Quality System Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bg0).format(), alignment: 'right' }]);
+    if (e.bh0) vw1.push([{ text: 'Penghargaan Masa Kerja Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bh0).format(), alignment: 'right' }]);
+    if (e.bi0) vw1.push([{ text: 'Others Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bi0).format(), alignment: 'right' }]);
+    
+    vw1.push([{ text: 'Salary All In', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.g0 + e.bk0).format(), alignment: 'right' }]);
+    
+    const vw2 = [
+      [{ text: 'Basic of', colSpan: 2 }, '', getMonth(e.k0), { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.l0).format(), alignment: 'right' }],
     ];
     
     const docDefinition = {
@@ -1148,7 +1186,7 @@ const genFinal = async (p) => {
         {
           style: 'tbl1',
           table: {
-            widths: [170, 200, 135],
+            widths: [177, 200, 135],
             body: [
               [{
                 image: 'static/images/logo.png', width: 60, rowSpan: 2, border: [false, false, false, false],
@@ -1166,8 +1204,23 @@ const genFinal = async (p) => {
         {
           style: 'tbl2',
           table: {
-            widths: [40, 40, 40, 40, 40, 10, 180],
+            widths: [40, 40, 40, 40, 40, 10, 190],
             body: vw1,
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl1',
+          table: {
+            widths: [512],
+            body: [[{ text: '', border: [false , false, false, true] }]],
+          },
+        },
+        {
+          style: 'tbl2',
+          table: {
+            widths: [40, 40, 40, 40, 40, 10, 190],
+            body: vw2,
           },
           layout: 'noBorders',
         },
@@ -1179,7 +1232,7 @@ const genFinal = async (p) => {
         },
         tbl2: {
           fontSize: 8,
-          margin: [-10, 40, -10, 0],
+          margin: [30, 40, 0, 20],
         },
       },
     };
