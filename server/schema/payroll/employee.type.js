@@ -29,6 +29,26 @@ const SlipCheckType = new GraphQLObjectType({
   }),
 });
 
+const FinalCheckType = new GraphQLObjectType({
+  name: 'FinalCheckType',
+  fields: () => ({
+    name: { type: GraphQLString },
+    dir: { type: GraphQLString },
+    check: {
+      type: GraphQLBoolean,
+      resolve: async (p) => {
+        try {
+          await fs.access(`static/final/${p.dir}/${p.name}.pdf`);
+          return true;
+        } catch (err) {
+          if (err) return false;
+          return false;
+        }
+      },
+    },
+  }),
+});
+
 const EmployeeType = new GraphQLObjectType({
   name: 'EmployeeType',
   fields: () => ({
@@ -174,6 +194,7 @@ const EmployeeType = new GraphQLObjectType({
     fb0: { type: GraphQLBoolean },
     fc0: { type: GraphQLFloat },
     slip: { type: SlipCheckType },
+    final: { type: FinalCheckType },
     gross: { type: GraphQLFloat },
     ttax: { type: GraphQLFloat },
   }),

@@ -14,6 +14,7 @@ const {
   generateReportPayroll,
   genPayrollXLS,
   genAccCheck,
+  genFinal,
 } = require('./method');
 const {
   CloneEmployeeInputType,
@@ -518,23 +519,19 @@ const Query = {
         { $match: { 'employee.ex0': true } },
         { $sort : { 'employee.e0' : 1 } },
         { $group: {
-            _id: {
-              id: '$_id',
-              freeze: '$freeze',
-            },
+            _id: '$_id',
+            freeze: { $first: '$freeze' },
             employee: {
               $push: {
                 _id: '$employee._id',
                 d0: '$employee.d0',
                 e0: '$employee.e0',
+                final: {
+                  name: '$employee.final.name',
+                  dir: '$dir',
+                },
               },
             },
-          }
-        },
-        { $project: {
-            _id: '$_id.id',
-            freeze: '$_id.freeze',
-            employee: '$employee',
           }
         },
       ]);
@@ -883,6 +880,22 @@ const Mutation = {
       const px = await Payroll.findById(id);
       px.freeze = !freeze;
       const s = await px.save();
+      return s;
+    }),
+  },
+  generateFinal: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLString },
+      eId: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('user', async (_, { id, eId }) => {
+      const p = await Payroll.aggregate([
+        { $match: { _id: id } },
+        { $unwind: '$employee' },
+        { $match: { 'employee._id': eId } },
+      ]);
+      const s = await genFinal(p[0]);
       return s;
     }),
   },

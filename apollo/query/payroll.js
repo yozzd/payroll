@@ -413,6 +413,11 @@ export const PayrollFinal = gql`
         _id
         d0
         e0
+        final {
+          name
+          dir
+          check
+        }
       }
     }
   }

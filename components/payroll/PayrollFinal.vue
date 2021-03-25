@@ -16,8 +16,22 @@
             clearable
           />
         </div>
+        <el-button
+          type="primary"
+          :loading="loadingGen"
+          :disabled="!multipleSelection.length"
+          @click="generate"
+        >
+          Generate
+        </el-button>
       </div>
+      <el-progress
+        :text-inside="true"
+        :stroke-width="16"
+        :percentage="percentage"
+      ></el-progress>
       <el-table
+        ref="finalTable"
         v-loading="$apollo.loading"
         element-loading-text="Loading..."
         element-loading-spinner="el-icon-loading"
@@ -52,6 +66,19 @@
                 {{ scope.row.d0 }}
               </p>
             </client-only>
+          </template>
+        </el-table-column>
+        <el-table-column label="File" width="200">
+          <template slot-scope="scope">
+            <el-link
+              v-if="scope.row.final.check"
+              :href="`/final/${scope.row.final.dir}/${scope.row.final.name}.pdf`"
+              target="_blank"
+              type="primary"
+              class="font-sm"
+            >
+              {{ scope.row.final.name }}.pdf
+            </el-link>
           </template>
         </el-table-column>
         <el-table-column min-width="200"></el-table-column>
@@ -107,7 +134,7 @@
 <script>
 import MiniSearch from 'minisearch';
 import { PayrollFinal } from '../../apollo/query/payroll';
-// import { EditFinalEmployee } from '../../apollo/mutation/payroll';
+import { GenerateFinal } from '../../apollo/mutation/payroll';
 import mix from '../../mixins/payroll';
 
 export default {
@@ -115,10 +142,12 @@ export default {
   data() {
     return {
       multipleSelection: [],
+      loadingGen: false,
       showEditDialog: false,
       form: {},
       loading: false,
       freeze: false,
+      percentage: 0,
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -131,6 +160,63 @@ export default {
   methods: {
     handleSelectionChange(a) {
       this.multipleSelection = a.map((v) => v._id);
+    },
+    async generate() {
+      try {
+        this.loadingGen = true;
+        let count = 0;
+        const len = this.multipleSelection.length;
+        this.percentage = 0;
+
+        await Promise.all(
+          this.multipleSelection.map(async (v) => {
+            const { data } = await this.$apollo.mutate({
+              mutation: GenerateFinal,
+              variables: {
+                id: this.$route.params.id,
+                eId: v,
+              },
+              update: (store) => {
+                const cdata = store.readQuery({
+                  query: PayrollFinal,
+                  variables: {
+                    id: this.$route.params.id,
+                  },
+                });
+                const index = cdata.payrollFinal.employee.findIndex((e) => e._id === v);
+                if (cdata.payrollFinal.employee[index].final.check === false) {
+                  cdata.payrollFinal.employee[index].final.check = true;
+                  this.miniSearch.removeAll();
+                }
+                store.writeQuery({
+                  query: PayrollFinal,
+                  variables: {
+                    id: this.$route.params.id,
+                  },
+                  data: cdata,
+                });
+              },
+            });
+            if (data.generateFinal.sStatus) {
+              count += 1;
+              this.percentage = Math.floor((count / len) * 100);
+            }
+          }),
+        );
+
+        this.loadingGen = false;
+        this.multipleSelection = [];
+        this.$refs.finalTable.clearSelection();
+        this.$message({
+          type: 'success',
+          message: 'Completed',
+        });
+
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
     },
     showEdit(row) {
       this.showEditDialog = true;

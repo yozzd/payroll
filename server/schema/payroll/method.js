@@ -1131,6 +1131,58 @@ const sendSlip = async (p) => {
   }
 };
 
+const genFinal = async (p) => {
+  try {
+    const { employee: e } = p;
+    await fs.ensureDir(`static/final/${p.dir}`);
+
+    const docDefinition = {
+      // userPassword: e.final.pw,
+      content: [
+        {
+          style: 'tbl1',
+          table: {
+            widths: [170, 200, 135],
+            body: [
+              [{
+                image: 'static/images/logo.png', width: 60, rowSpan: 2, border: [false, false, false, false],
+              }, {
+                text: 'PT. LABTECH PENTA INTERNATIONAL', bold: true, fontSize: 8, border: [false, false, false, true],
+              }, {
+                text: 'SALARY SLIP', bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, true],
+              }],
+              ['', { text: 'Kawasan Industri Sekupang Kav. 34 Batam - Indonesia', border: [false, false, false, false] }, {
+                text: idDateFormat(p.to, 'MMMM yyyy'), bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, false],
+              }],
+            ],
+          },
+        },
+      ],
+      styles: {
+        tbl1: {
+          fontSize: 8,
+          margin: [-10, -10, -10, 0],
+        },
+      },
+    };
+    
+    return new Promise((resolve) => {
+      const pdfDoc = printer.createPdfKitDocument(docDefinition);
+    	pdfDoc.pipe(fs.createWriteStream(`static/final/${p.dir}/${e.final.name}.pdf`));
+      pdfDoc.on('end', () => {
+        resolve({ sStatus: 1 });
+      });
+      pdfDoc.end();
+    });
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
+};
+
 module.exports = {
   updateEmployee,
   generateReportPayroll,
@@ -1138,4 +1190,5 @@ module.exports = {
   genAccCheck,
   generateSlip,
   sendSlip,
+  genFinal,
 };

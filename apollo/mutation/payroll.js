@@ -373,3 +373,11 @@ export const PayrollFreeze = gql`
     }
   }
 `;
+
+export const GenerateFinal = gql`
+  mutation generateFinal($id: String!, $eId: String!) {
+    generateFinal(id: $id, eId: $eId) {
+      sStatus
+    }
+  }
+`;
