@@ -403,3 +403,17 @@ export const PayrollManual = gql`
     }
   }
 `;
+
+export const PayrollFinal = gql`
+  query payrollFinal($id: String!) {
+    payrollFinal(id: $id) {
+      _id
+      freeze
+      employee {
+        _id
+        d0
+        e0
+      }
+    }
+  }
+`;

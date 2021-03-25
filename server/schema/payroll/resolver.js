@@ -505,6 +505,42 @@ const Query = {
       return p;
     }),
   },
+  
+  payrollFinal: {
+    type: PayrollType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('user', async (_, { id }) => {
+      const p = await Payroll.aggregate([
+        { $match: { _id: id } },
+        { $unwind: '$employee' },
+        { $match: { 'employee.ex0': true } },
+        { $sort : { 'employee.e0' : 1 } },
+        { $group: {
+            _id: {
+              id: '$_id',
+              freeze: '$freeze',
+            },
+            employee: {
+              $push: {
+                _id: '$employee._id',
+                d0: '$employee.d0',
+                e0: '$employee.e0',
+              },
+            },
+          }
+        },
+        { $project: {
+            _id: '$_id.id',
+            freeze: '$_id.freeze',
+            employee: '$employee',
+          }
+        },
+      ]);
+      return p[0];
+    }),
+  },
 };
 
 const Mutation = {

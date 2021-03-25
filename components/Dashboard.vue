@@ -114,6 +114,9 @@
                 <el-menu-item index="g">
                   Manual
                 </el-menu-item>
+                <el-menu-item index="h">
+                  Final Payment
+                </el-menu-item>
               </el-submenu>
             </el-menu>
           </template>
@@ -712,6 +715,8 @@ export default {
     handleSelect(key, keyPath, id) {
       if (keyPath.length > 2) {
         this.$router.push({ name: 'payroll-list-id', params: { id }, query: { t1: keyPath[1], t2: keyPath[2] } });
+      } else if (key === 'h') {
+        this.$router.push({ name: 'payroll-final-id', params: { id } });
       } else {
         this.$router.push({ name: 'payroll-list-id', params: { id }, query: { t1: key } });
       }
