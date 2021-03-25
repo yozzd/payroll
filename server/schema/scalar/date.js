@@ -2,6 +2,7 @@ const { GraphQLScalarType } = require('graphql');
 const { format } = require('date-fns');
 const { id } = require('date-fns/locale');
 
+const gDateFormat = (d, f) => format(new Date(d), f);
 const idDateFormat = (d, f) => format(new Date(d), f, { locale: id });
 
 const DateFormat = new GraphQLScalarType({
@@ -14,4 +15,4 @@ const DateFormat = new GraphQLScalarType({
   },
 });
 
-module.exports = { DateFormat, idDateFormat };
+module.exports = { DateFormat, gDateFormat, idDateFormat };

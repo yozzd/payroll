@@ -7,7 +7,7 @@ const XLSX = require('xlsx');
 const {
   intpre0, intpre0v2, floatpre2, floatpre2v2, floatpre3, floatpre4v2,
 } = require('../scalar/number');
-const { idDateFormat } = require('../scalar/date');
+const { gDateFormat, idDateFormat } = require('../scalar/date');
 const smtp = require('../../config/smtp');
 
 const fonts = {
@@ -1136,6 +1136,12 @@ const genFinal = async (p) => {
     const { employee: e } = p;
     await fs.ensureDir(`static/final/${p.dir}`);
 
+    const vw1 = [
+      [{ text: 'NAME', colSpan: 5 }, '', '', '', '', ':', e.d0],
+      [{ text: 'EMP NO', colSpan: 5 }, '', '', '', '', ':', e.e0],
+      [{ text: 'DATE OF HIRE', colSpan: 5 }, '', '', '', '', ':', { text: gDateFormat(e.i0, 'dd MMMM yyyy') }],
+    ];
+    
     const docDefinition = {
       // userPassword: e.final.pw,
       content: [
@@ -1149,19 +1155,31 @@ const genFinal = async (p) => {
               }, {
                 text: 'PT. LABTECH PENTA INTERNATIONAL', bold: true, fontSize: 8, border: [false, false, false, true],
               }, {
-                text: 'SALARY SLIP', bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, true],
+                text: 'FINAL PAYMENT', bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, true],
               }],
               ['', { text: 'Kawasan Industri Sekupang Kav. 34 Batam - Indonesia', border: [false, false, false, false] }, {
-                text: idDateFormat(p.to, 'MMMM yyyy'), bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, false],
+                text: e.m0, bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, false],
               }],
             ],
           },
+        },
+        {
+          style: 'tbl2',
+          table: {
+            widths: [40, 40, 40, 40, 40, 10, 180],
+            body: vw1,
+          },
+          layout: 'noBorders',
         },
       ],
       styles: {
         tbl1: {
           fontSize: 8,
           margin: [-10, -10, -10, 0],
+        },
+        tbl2: {
+          fontSize: 8,
+          margin: [-10, 40, -10, 0],
         },
       },
     };
