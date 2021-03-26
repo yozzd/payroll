@@ -166,7 +166,9 @@
               @select="c => handleExportCommand(c, scope.row._id, scope.row.dir)"
             >
               <el-submenu index="1">
-                <template slot="title">Export</template>
+                <template slot="title">
+                  Export
+                </template>
                 <el-submenu index="a">
                   <template slot="title">
                     Payroll

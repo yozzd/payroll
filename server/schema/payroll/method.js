@@ -3,10 +3,10 @@ const PdfPrinter = require('pdfmake');
 const fs = require('fs-extra');
 const nodemailer = require('nodemailer');
 const XLSX = require('xlsx');
-const { getMonth } = require('date-fns');
+const { getDate, getMonth } = require('date-fns');
 
 const {
-  intpre0, intpre0v2, floatpre2, floatpre2v2, floatpre3, floatpre4v2,
+  intpre0, intpre0v2, floatpre2, floatpre2v2, floatpre3, floatpre4, floatpre4v2,
 } = require('../scalar/number');
 const { gDateFormat, idDateFormat, dateDiff } = require('../scalar/date');
 const smtp = require('../../config/smtp');
@@ -807,6 +807,7 @@ const genAccCheck = async (p) => {
         { text: intpre0(e.dm0).format(), alignment: 'right' },
       ]);
 
+      return true;
     });
 
     const docDefinition = {
@@ -1147,9 +1148,9 @@ const genFinal = async (p) => {
       [{ text: 'Long Services', colSpan: 5 }, '', '', '', '', ':', dateDiff(e.i0, e.k0)],
       [{ text: 'Basic Salary Per Month', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.g0).format(), alignment: 'right' }],
       [{ text: 'Basic Salary Per Day', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.g0 / 21).format(), alignment: 'right' }],
-      [{ text: 'Overtime' }, { text: '(Variable)', colSpan: 4}, '', '', '', ':', { text: intpre0(e.g0 / 173).format(), alignment: 'right' }],
+      [{ text: 'Overtime' }, { text: '(Variable)', colSpan: 4 }, '', '', '', ':', { text: intpre0(e.g0 / 173).format(), alignment: 'right' }],
     ];
-    
+
     if (e.aj0) vw1.push([{ text: 'Living Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.aj0).format(), alignment: 'right' }]);
     if (e.ak0) vw1.push([{ text: 'Housing Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.ak0).format(), alignment: 'right' }]);
     if (e.al0) vw1.push([{ text: 'Functional Position Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.al0).format(), alignment: 'right' }]);
@@ -1163,7 +1164,7 @@ const genFinal = async (p) => {
     if (e.at0) vw1.push([{ text: 'Functional Variable Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.at0).format(), alignment: 'right' }]);
     if (e.au0) vw1.push([{ text: 'Acting/PLT Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.au0).format(), alignment: 'right' }]);
     if (e.av0) vw1.push([{ text: 'Others Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.av0).format(), alignment: 'right' }]);
-    
+
     if (e.ba0) vw1.push([{ text: 'Functional Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.ba0).format(), alignment: 'right' }]);
     if (e.bb0) vw1.push([{ text: 'Shift Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bb0).format(), alignment: 'right' }]);
     if (e.bc0) vw1.push([{ text: 'Tig Welding Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bc0).format(), alignment: 'right' }]);
@@ -1173,13 +1174,91 @@ const genFinal = async (p) => {
     if (e.bg0) vw1.push([{ text: 'Quality System Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bg0).format(), alignment: 'right' }]);
     if (e.bh0) vw1.push([{ text: 'Penghargaan Masa Kerja Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bh0).format(), alignment: 'right' }]);
     if (e.bi0) vw1.push([{ text: 'Others Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bi0).format(), alignment: 'right' }]);
-    
+
     vw1.push([{ text: 'Salary All In', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.g0 + e.bk0).format(), alignment: 'right' }]);
-    
+
+    const mt = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const d = getDate(e.k0);
+    const m = getMonth(e.k0);
+    let mm;
+    if (d < 22) {
+      mm = m === 0 ? 11 : m - 1;
+    } else {
+      mm = m;
+    }
+    const ms = `22 ${mt[mm]} s/d ${gDateFormat(e.k0, 'dd MMM yyyy')}`;
+
+    let income = e.l0 + e.ac0 + e.bz0 + e.bx0 + e.bv0;
     const vw2 = [
-      [{ text: 'Basic of', colSpan: 2 }, '', getMonth(e.k0), { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.l0).format(), alignment: 'right' }],
+      ['Basic of', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.l0).format(), alignment: 'right' }],
+      ['Overtime', { text: ms, colSpan: 2 }, '', { text: e.ab0, alignment: 'right' }, 'Hours', ':', { text: intpre0(e.ac0).format(), alignment: 'right' }],
     ];
-    
+
+    if (e.ad0) vw2.push(['Dinas Luar', { text: ms, colSpan: 2 }, '', { text: e.ad0, alignment: 'right' }, 'Hours', ':', { text: intpre0(e.ae0).format(), alignment: 'right' }]); income += e.ae0;
+    if (e.af0) vw2.push(['Insentif', { text: ms, colSpan: 2 }, '', { text: e.ad0, alignment: 'right' }, 'Hours', ':', { text: intpre0(e.ah0).format(), alignment: 'right' }]); income += e.ah0;
+
+    vw2.push([{ text: 'Leave Right', colSpan: 3 }, '', '', { text: e.by0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.bz0).format(), alignment: 'right' }]);
+
+    let bw;
+    if (e.bw0) {
+      bw = e.bw0 === 12 ? '1 years 0 months' : `0 years ${e.bw0} months`;
+    } else {
+      bw = '';
+    }
+    vw2.push(['THR Prorate', { text: bw, colSpan: 2 }, '', `${e.bw0}/12`, '', ':', { text: intpre0(e.bx0).format(), alignment: 'right' }]);
+
+    if (e.aj0) vw2.push(['Living Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.aj0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.aj0 / 21) * e.j0;
+    if (e.ak0) vw2.push(['Housing Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.ak0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.ak0 / 21) * e.j0;
+    if (e.al0) vw2.push(['Functional Position Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.al0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.al0 / 21) * e.j0;
+    if (e.am0) vw2.push(['Functional Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.am0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.am0 / 21) * e.j0;
+    if (e.an0) vw2.push(['Coordinator Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.an0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.an0 / 21) * e.j0;
+    if (e.ao0) vw2.push(['Transport Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.ao0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.ao0 / 21) * e.j0;
+    if (e.ap0) vw2.push(['Communication Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.ap0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.ap0 / 21) * e.j0;
+    if (e.aq0) vw2.push(['Expertise Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.aq0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.aq0 / 21) * e.j0;
+    if (e.ar0) vw2.push(['Honorarium Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.ar0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.ar0 / 21) * e.j0;
+    if (e.as0) vw2.push(['Position Variable Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.as0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.as0 / 21) * e.j0;
+    if (e.at0) vw2.push(['Functional Variable Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.at0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.at0 / 21) * e.j0;
+    if (e.au0) vw2.push(['Acting/PLT Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.au0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.au0 / 21) * e.j0;
+    if (e.av0) vw2.push(['Others Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.av0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.av0 / 21) * e.j0;
+
+    if (e.ba0) vw2.push(['Functional Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.ba0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.ba0 / 21) * e.j0;
+    if (e.bb0) vw2.push(['Shift Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.bb0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.bb0 / 21) * e.j0;
+    if (e.bc0) vw2.push(['Tig Welding Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.bc0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.bc0 / 21) * e.j0;
+    if (e.bd0) vw2.push(['Plasma Cutting Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.bd0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.bd0 / 21) * e.j0;
+    if (e.be0) vw2.push(['LKS Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.be0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.be0 / 21) * e.j0;
+    if (e.bf0) vw2.push(['Koperasi Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.bf0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.bf0 / 21) * e.j0;
+    if (e.bg0) vw2.push(['Quality System Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.bg0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.bg0 / 21) * e.j0;
+    if (e.bh0) vw2.push(['Penghargaan Masa Kerja Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.bh0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.bh0 / 21) * e.j0;
+    if (e.bi0) vw2.push(['Others Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.bi0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.bi0 / 21) * e.j0;
+
+    if (e.dt0) vw2.push([{ text: 'Uang Pisah', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.dt0).format(), alignment: 'right' }]); income += (e.dt0 / 21) * e.j0;
+    vw2.push([{ text: 'Tambahan Lain Tidak Kena Pajak', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bv0).format(), alignment: 'right' }]);
+    vw2.push(['', '', '', {
+      text: 'Total Income', colSpan: 2, alignment: 'right', bold: true,
+    }, '', ':', { text: intpre0(income).format(), alignment: 'right', bold: true }]);
+
+    const tax = e.cz0 ? e.cz0 : e.da0;
+    const deduction = e.cx0 + e.dl0 + e.dm0 + e.dk0 + tax + e.ce0 + e.cj0 + e.cr0 + e.dh0 + e.dn0;
+    const vw3 = [
+      [{ text: 'Absensi', colSpan: 3 }, '', '', { text: floatpre4(e.cw0).format(), alignment: 'right' }, 'Days', ':', { text: intpre0(e.cx0).format(), alignment: 'right' }],
+      ['Potongan Kupon', { text: e.dq0, colSpan: 2 }, '', { text: `${e.dl0 / 7000} Kupon`, alignment: 'right' }, '7000', ':', { text: intpre0(e.dl0).format(), alignment: 'right' }],
+      [{ text: 'Koperasi Karyawan / Bank Muamalat Indonesia (BMI)', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.dm0).format(), alignment: 'right' }],
+      [{ text: 'Dana Pinjaman', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.dk0).format(), alignment: 'right' }],
+      [{ text: 'Pajak Pph21', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(tax).format(), alignment: 'right' }],
+      [{ text: 'Iuran JHT Karyawan', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.ce0).format(), alignment: 'right' }],
+      [{ text: 'Iuran Pensiun Karyawan', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.cj0).format(), alignment: 'right' }],
+      [{ text: 'Iuran Kesehatan Karyawan', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.cr0).format(), alignment: 'right' }],
+      [{ text: 'Pemotongan Toolroom', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.dh0).format(), alignment: 'right' }],
+      [{ text: 'Pemotongan Kurang Bayar Pph21', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.dn0).format(), alignment: 'right' }],
+      ['', '', '', {
+        text: 'Total Deductions', colSpan: 2, alignment: 'right', bold: true,
+      }, '', ':', { text: intpre0(deduction).format(), alignment: 'right', bold: true }],
+      ['', '', '', {
+        text: 'Grand Total', colSpan: 2, alignment: 'right', bold: true,
+      }, '', ':', { text: intpre0(income - deduction).format(), alignment: 'right', bold: true }],
+    ];
+
+    const wd = [80, 40, 40, 40, 40, 10, 150];
     const docDefinition = {
       // userPassword: e.final.pw,
       content: [
@@ -1204,7 +1283,7 @@ const genFinal = async (p) => {
         {
           style: 'tbl2',
           table: {
-            widths: [40, 40, 40, 40, 40, 10, 190],
+            widths: wd,
             body: vw1,
           },
           layout: 'noBorders',
@@ -1213,14 +1292,22 @@ const genFinal = async (p) => {
           style: 'tbl1',
           table: {
             widths: [512],
-            body: [[{ text: '', border: [false , false, false, true] }]],
+            body: [[{ text: '', border: [false, false, false, true] }]],
           },
         },
         {
           style: 'tbl2',
           table: {
-            widths: [40, 40, 40, 40, 40, 10, 190],
+            widths: wd,
             body: vw2,
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl2',
+          table: {
+            widths: wd,
+            body: vw3,
           },
           layout: 'noBorders',
         },
@@ -1232,14 +1319,14 @@ const genFinal = async (p) => {
         },
         tbl2: {
           fontSize: 8,
-          margin: [30, 40, 0, 20],
+          margin: [10, 20, 0, 20],
         },
       },
     };
-    
+
     return new Promise((resolve) => {
       const pdfDoc = printer.createPdfKitDocument(docDefinition);
-    	pdfDoc.pipe(fs.createWriteStream(`static/final/${p.dir}/${e.final.name}.pdf`));
+      pdfDoc.pipe(fs.createWriteStream(`static/final/${p.dir}/${e.final.name}.pdf`));
       pdfDoc.on('end', () => {
         resolve({ sStatus: 1 });
       });

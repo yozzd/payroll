@@ -506,7 +506,7 @@ const Query = {
       return p;
     }),
   },
-  
+
   payrollFinal: {
     type: PayrollType,
     args: {
@@ -517,8 +517,9 @@ const Query = {
         { $match: { _id: id } },
         { $unwind: '$employee' },
         { $match: { 'employee.ex0': true } },
-        { $sort : { 'employee.e0' : 1 } },
-        { $group: {
+        { $sort: { 'employee.e0': 1 } },
+        {
+          $group: {
             _id: '$_id',
             freeze: { $first: '$freeze' },
             employee: {
@@ -532,7 +533,7 @@ const Query = {
                 },
               },
             },
-          }
+          },
         },
       ]);
       return p[0];

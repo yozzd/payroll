@@ -68,5 +68,6 @@ module.exports = {
   floatpre2,
   floatpre2v2,
   floatpre3,
+  floatpre4,
   floatpre4v2,
 };
