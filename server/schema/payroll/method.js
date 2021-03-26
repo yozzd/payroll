@@ -1274,6 +1274,14 @@ const genFinal = async (p) => {
       [{ text: `${terbilang(intpre0v2(income - deduction).format())} Rupiah`, colSpan: 7, bold: true, italics: true }, '', '', '', '', '', ''],
     ];
 
+    const vw4 = [
+      [{ text: 'Batam', colSpan: 5 }, '', '', '', ''],
+      ['Prepared By,', 'Checked By,', 'Reviewed By,', 'Knowledge By,', 'Approved By,'],
+      ['', '', '', '', ''],
+      ['Ayu Fatimah / Ratnawati', 'Ronal P. Siahaan', 'Yutin Sudarni', 'Hendra Syahputra', 'Eko Hernanto'],
+      ['Personel / IT DB', 'Compensation, Benefit & Company Licences', 'Finance Manager', 'HR & GA Dept Head', 'Management PT. Labtech Penta International'],
+    ];
+    
     const wd = [80, 40, 40, 40, 40, 10, 150];
     const docDefinition = {
       // userPassword: e.final.pw,
@@ -1324,6 +1332,15 @@ const genFinal = async (p) => {
           table: {
             widths: wd,
             body: vw3,
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl2',
+          table: {
+            widths: [95, 95, 95, 95, 95],
+            heights: [10, 10, 40, 10, 10],
+            body: vw4,
           },
           layout: 'noBorders',
         },
