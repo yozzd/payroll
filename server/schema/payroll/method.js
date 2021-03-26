@@ -15,9 +15,23 @@ const fonts = {
   Roboto: {
     normal: 'static/font/Roboto-Regular.ttf',
     bold: 'static/font/Roboto-Medium.ttf',
+    bolditalics: 'static/font/Roboto-MediumItalic.ttf',
   },
 };
 const printer = new PdfPrinter(fonts);
+
+const terbilang = (x) => {
+  const str = ['', 'Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan', 'Sembilan', 'Sepuluh', 'Sebelas'];
+  
+  if (x < 12) return str[parseInt(x, 10)];
+  else if (x < 20) return `${terbilang(x - 10)} Belas`;
+  else if (x < 100) return `${terbilang(x / 10)} Puluh ${terbilang(x % 10)}`;
+  else if (x < 200) return ` Seratus ${terbilang(x - 100)}`;
+  else if (x < 1000) return `${terbilang(x / 100)} Ratus ${terbilang(x % 100)}`;
+  else if (x < 2000) return ` Seribu ${terbilang(x - 1000)}`;
+  else if (x < 1000000) return `${terbilang(x / 1000)} Ribu ${terbilang(x % 1000)}`;
+  else if (x < 1000000000) return `${terbilang(x / 1000000)} Juta ${terbilang(x % 1000000)}`;
+};
 
 const updateEmployee = async (_id, e, p) => {
   const px = await p.findOne({ _id });
@@ -1256,6 +1270,8 @@ const genFinal = async (p) => {
       ['', '', '', {
         text: 'Grand Total', colSpan: 2, alignment: 'right', bold: true,
       }, '', ':', { text: intpre0(income - deduction).format(), alignment: 'right', bold: true }],
+      [{ text: 'Be spelled out / Terbilang', colSpan: 7 }, '', '', '', '', '', ''],
+      [{ text: `${terbilang(intpre0v2(income - deduction).format())} Rupiah`, colSpan: 7, bold: true, italics: true }, '', '', '', '', '', ''],
     ];
 
     const wd = [80, 40, 40, 40, 40, 10, 150];
