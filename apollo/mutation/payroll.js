@@ -381,3 +381,22 @@ export const GenerateFinal = gql`
     }
   }
 `;
+
+export const EditFinalEmployee = gql`
+  mutation editFinalEmployee($input: EditFinalEmployeeInputType) {
+    editFinalEmployee(input: $input) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        fDate
+        final {
+          name
+          dir
+          check
+        }
+      }
+    }
+  }
+`;

@@ -191,6 +191,7 @@ const EmployeeSchema = new Schema({
   fh0: { type: String, trim: true }, // Note 1
   fi0: { type: String, trim: true }, // Note 2
   category: Number, // 0 = Administration, 1 = Production
+  fDate: Date,
   slip: {
     name: { type: String, default: () => nanoid(6) },
     pw: String,

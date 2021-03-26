@@ -197,6 +197,7 @@ const EmployeeType = new GraphQLObjectType({
     final: { type: FinalCheckType },
     gross: { type: GraphQLFloat },
     ttax: { type: GraphQLFloat },
+    fDate: { type: DateFormat },
   }),
 });
 

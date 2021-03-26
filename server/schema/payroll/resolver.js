@@ -32,6 +32,7 @@ const {
   EditDeductionOthersInputType,
   EditFlagsEmployeeInputType,
   EditManualEmployeeInputType,
+  EditFinalEmployeeInputType,
 } = require('./employee.input.type.js');
 const {
   AddEmployeeInputType,
@@ -506,7 +507,6 @@ const Query = {
       return p;
     }),
   },
-
   payrollFinal: {
     type: PayrollType,
     args: {
@@ -527,6 +527,7 @@ const Query = {
                 _id: '$employee._id',
                 d0: '$employee.d0',
                 e0: '$employee.e0',
+                fDate: '$employee.fDate',
                 final: {
                   name: '$employee.final.name',
                   dir: '$dir',
@@ -898,6 +899,41 @@ const Mutation = {
       ]);
       const s = await genFinal(p[0]);
       return s;
+    }),
+  },
+  editFinalEmployee: {
+    type: PayrollType,
+    args: {
+      input: { type: EditFinalEmployeeInputType },
+    },
+    resolve: auth.hasRole('user', async (_, { input }) => {
+      const { _id, employee } = input;
+      await updateEmployee(_id, employee, Payroll);
+      const p = await Payroll.aggregate([
+        { $match: { _id } },
+        { $unwind: '$employee' },
+        { $match: { 'employee.ex0': true } },
+        { $sort: { 'employee.e0': 1 } },
+        {
+          $group: {
+            _id: '$_id',
+            freeze: { $first: '$freeze' },
+            employee: {
+              $push: {
+                _id: '$employee._id',
+                d0: '$employee.d0',
+                e0: '$employee.e0',
+                fDate: '$employee.fDate',
+                final: {
+                  name: '$employee.final.name',
+                  dir: '$dir',
+                },
+              },
+            },
+          },
+        },
+      ]);
+      return p[0];
     }),
   },
 };

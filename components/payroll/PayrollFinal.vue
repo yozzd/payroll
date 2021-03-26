@@ -115,6 +115,12 @@
               :disabled="true"
             ></el-input>
           </el-form-item>
+          <el-form-item label="Date">
+            <el-date-picker
+              v-model="form.fDate"
+              type="date"
+            ></el-date-picker>
+          </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="handleEditDialogClose">Cancel</el-button>
@@ -134,7 +140,7 @@
 <script>
 import MiniSearch from 'minisearch';
 import { PayrollFinal } from '../../apollo/query/payroll';
-import { GenerateFinal } from '../../apollo/mutation/payroll';
+import { GenerateFinal, EditFinalEmployee } from '../../apollo/mutation/payroll';
 import mix from '../../mixins/payroll';
 
 export default {
@@ -232,21 +238,18 @@ export default {
           try {
             this.loading = true;
 
-            // await this.$apollo.mutate({
-            //   mutation: EditFinalEmployee,
-            //   variables: {
-            //     input: {
-            //       _id: this.$route.params.id,
-            //       employee: {
-            //         _id: this.form._id,
-            //         ex0: this.form.ex0,
-            //         ey0: this.form.ey0,
-            //         ez0: this.form.ez0,
-            //         fb0: this.form.fb0,
-            //       },
-            //     },
-            //   },
-            // });
+            await this.$apollo.mutate({
+              mutation: EditFinalEmployee,
+              variables: {
+                input: {
+                  _id: this.$route.params.id,
+                  employee: {
+                    _id: this.form._id,
+                    fDate: this.form.fDate,
+                  },
+                },
+              },
+            });
 
             this.handleEditDialogClose();
             this.loading = false;

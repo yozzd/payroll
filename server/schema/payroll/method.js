@@ -1275,7 +1275,7 @@ const genFinal = async (p) => {
     ];
 
     const vw4 = [
-      [{ text: 'Batam', colSpan: 5 }, '', '', '', ''],
+      [{ text: `Batam, ${idDateFormat(e.fDate, 'dd MMMM yyyy')}`, colSpan: 5 }, '', '', '', ''],
       ['Prepared By,', 'Checked By,', 'Reviewed By,', 'Knowledge By,', 'Approved By,'],
       ['', '', '', '', ''],
       ['Ayu Fatimah / Ratnawati', 'Ronal P. Siahaan', 'Yutin Sudarni', 'Hendra Syahputra', 'Eko Hernanto'],

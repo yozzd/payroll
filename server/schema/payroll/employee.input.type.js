@@ -184,6 +184,14 @@ const ManualInputType = new GraphQLInputObjectType({
   }),
 });
 
+const FinalInputType = new GraphQLInputObjectType({
+  name: 'FinalInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    fDate: { type: GraphQLString },
+  }),
+});
+
 /** *********************************************** */
 
 const CloneEmployeeInputType = new GraphQLInputObjectType({
@@ -306,6 +314,14 @@ const EditManualEmployeeInputType = new GraphQLInputObjectType({
   }),
 });
 
+const EditFinalEmployeeInputType = new GraphQLInputObjectType({
+  name: 'EditFinalEmployeeInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    employee: { type: FinalInputType },
+  }),
+});
+
 module.exports = {
   CloneEmployeeInputType,
   EditEmploymentInputType,
@@ -322,4 +338,5 @@ module.exports = {
   EditDeductionOthersInputType,
   EditFlagsEmployeeInputType,
   EditManualEmployeeInputType,
+  EditFinalEmployeeInputType,
 };
