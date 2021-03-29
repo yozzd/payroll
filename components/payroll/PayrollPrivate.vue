@@ -27,23 +27,21 @@
     >
       <el-table-column type="index" width="50" align="center" fixed></el-table-column>
       <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
-      <el-table-column label="Nama Karyawan" width="200" fixed>
+      <el-table-column label="Nama Karyawan" width="300" fixed>
         <template slot-scope="scope">
-          <client-only>
-            <el-link
-              v-if="!freeze"
-              type="primary"
-              class="font-sm"
-              @click="showEdit(scope.row)"
-            >
-              <p v-snip="1" :title="scope.row.d0">
-                {{ scope.row.d0 }}
-              </p>
-            </el-link>
-            <p v-else v-snip="1" :title="scope.row.d0">
+          <el-link
+            v-if="!freeze"
+            type="primary"
+            class="font-sm"
+            @click="showEdit(scope.row)"
+          >
+            <p>
               {{ scope.row.d0 }}
             </p>
-          </client-only>
+          </el-link>
+          <p v-else>
+            {{ scope.row.d0 }}
+          </p>
         </template>
       </el-table-column>
       <el-table-column prop="n0" label="Jenis Kelamin" width="100"></el-table-column>

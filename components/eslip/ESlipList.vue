@@ -49,6 +49,7 @@
         :data="tableData"
         size="small"
         height="500"
+        border
         @selection-change="handleSelectionChange"
       >
         <el-table-column
@@ -59,13 +60,11 @@
         ></el-table-column>
         <el-table-column type="index" width="50" align="center"></el-table-column>
         <el-table-column prop="b0" label="No. Karyawan" width="100"></el-table-column>
-        <el-table-column label="Nama Karyawan" width="200">
+        <el-table-column label="Nama Karyawan" width="300">
           <template slot-scope="scope">
-            <client-only>
-              <p v-snip="1" :title="scope.row.c0">
-                {{ scope.row.c0 }}
-              </p>
-            </client-only>
+            <p>
+              {{ scope.row.c0 }}
+            </p>
           </template>
         </el-table-column>
         <el-table-column label="Email" width="200">
