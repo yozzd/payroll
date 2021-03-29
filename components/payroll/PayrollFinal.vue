@@ -1,5 +1,7 @@
 <template>
   <div class="flex flex-col space-y-4 mt-4 mb-8 px-12">
+    <el-page-header :content="content" @back="goBack">
+    </el-page-header>
     <div class="space-y-2">
       <ErrorHandler
         v-if="errors"
@@ -145,6 +147,7 @@ export default {
   mixins: [mix],
   data() {
     return {
+      content: '',
       multipleSelection: [],
       loadingGen: false,
       showEditDialog: false,
@@ -156,12 +159,15 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0',
+          '_id', 'd0', 'e0', 'final',
         ],
       }),
     };
   },
   methods: {
+    goBack() {
+      this.$router.push({ path: '/dashboard/' });
+    },
     handleSelectionChange(a) {
       this.multipleSelection = a.map((v) => v._id);
     },
@@ -273,10 +279,13 @@ export default {
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const { freeze, employee } = data.payrollFinal;
+          const {
+            freeze, employee, period, year,
+          } = data.payrollFinal;
           this.freeze = freeze;
           this.items = employee;
           this.miniSearch.addAll(this.items);
+          this.content = `${period} ${year}`;
         }
       },
       error({ graphQLErrors, networkError }) {

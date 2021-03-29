@@ -409,6 +409,8 @@ export const PayrollFinal = gql`
     payrollFinal(id: $id) {
       _id
       freeze
+      period
+      year
       employee {
         _id
         d0
