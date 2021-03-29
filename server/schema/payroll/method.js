@@ -22,15 +22,16 @@ const printer = new PdfPrinter(fonts);
 
 const terbilang = (x) => {
   const str = ['', 'Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan', 'Sembilan', 'Sepuluh', 'Sebelas'];
-  
+
   if (x < 12) return str[parseInt(x, 10)];
-  else if (x < 20) return `${terbilang(x - 10)} Belas`;
-  else if (x < 100) return `${terbilang(x / 10)} Puluh ${terbilang(x % 10)}`;
-  else if (x < 200) return ` Seratus ${terbilang(x - 100)}`;
-  else if (x < 1000) return `${terbilang(x / 100)} Ratus ${terbilang(x % 100)}`;
-  else if (x < 2000) return ` Seribu ${terbilang(x - 1000)}`;
-  else if (x < 1000000) return `${terbilang(x / 1000)} Ribu ${terbilang(x % 1000)}`;
-  else if (x < 1000000000) return `${terbilang(x / 1000000)} Juta ${terbilang(x % 1000000)}`;
+  if (x < 20) return `${terbilang(x - 10)} Belas`;
+  if (x < 100) return `${terbilang(x / 10)} Puluh ${terbilang(x % 10)}`;
+  if (x < 200) return ` Seratus ${terbilang(x - 100)}`;
+  if (x < 1000) return `${terbilang(x / 100)} Ratus ${terbilang(x % 100)}`;
+  if (x < 2000) return ` Seribu ${terbilang(x - 1000)}`;
+  if (x < 1000000) return `${terbilang(x / 1000)} Ribu ${terbilang(x % 1000)}`;
+  if (x < 1000000000) return `${terbilang(x / 1000000)} Juta ${terbilang(x % 1000000)}`;
+  return true;
 };
 
 const updateEmployee = async (_id, e, p) => {
@@ -1271,7 +1272,9 @@ const genFinal = async (p) => {
         text: 'Grand Total', colSpan: 2, alignment: 'right', bold: true,
       }, '', ':', { text: intpre0(income - deduction).format(), alignment: 'right', bold: true }],
       [{ text: 'Be spelled out / Terbilang', colSpan: 7 }, '', '', '', '', '', ''],
-      [{ text: `${terbilang(intpre0v2(income - deduction).format())} Rupiah`, colSpan: 7, bold: true, italics: true }, '', '', '', '', '', ''],
+      [{
+        text: `${terbilang(intpre0v2(income - deduction).format())} Rupiah`, colSpan: 7, bold: true, italics: true,
+      }, '', '', '', '', '', ''],
     ];
 
     const vw4 = [
@@ -1281,7 +1284,7 @@ const genFinal = async (p) => {
       ['Ayu Fatimah / Ratnawati', 'Ronal P. Siahaan', 'Yutin Sudarni', 'Hendra Syahputra', 'Eko Hernanto'],
       ['Personel / IT DB', 'Compensation, Benefit & Company Licences', 'Finance Manager', 'HR & GA Dept Head', 'Management PT. Labtech Penta International'],
     ];
-    
+
     const wd = [80, 40, 40, 40, 40, 10, 150];
     const docDefinition = {
       // userPassword: e.final.pw,
