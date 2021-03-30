@@ -8,6 +8,7 @@ const Kesehatan = require('./kesehatan/resolver');
 const Payroll = require('./payroll/resolver');
 const Tax = require('./tax/resolver');
 const Thr = require('./thr/resolver');
+const Trf = require('./trf/resolver');
 const User = require('./user/resolver');
 
 const query = new GraphQLObjectType({
@@ -21,6 +22,7 @@ const query = new GraphQLObjectType({
     ...Payroll.Query,
     ...Tax.Query,
     ...Thr.Query,
+    ...Trf.Query,
     ...User.Query,
   },
 });

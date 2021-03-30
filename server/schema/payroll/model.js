@@ -178,20 +178,20 @@ const EmployeeSchema = new Schema({
   er0: { type: Number, default: 0 }, // Total JHT dan Pensiun Karyawan
   es0: { type: Number, default: 0 }, // Pengembalian Pajak DTP
   ew0: { type: String, trim: true }, // Email
-  ex0: Boolean, // Slot 1 Flag
-  ey0: Boolean, // Slot 2 Flag
-  ez0: Boolean, // Slot 3 Flag
-  fa0: Boolean, // Slot 3 Flag
-  fb0: Boolean, // Slot 4 Flag
+  ex0: { type: Boolean, default: false }, // Slot 1 Flag
+  ey0: { type: Boolean, default: false }, // Slot 2 Flag
+  ez0: { type: Boolean, default: false }, // Slot 3 Flag
+  fa0: { type: Boolean, default: false }, // Slot 3 Flag
+  fb0: { type: Boolean, default: false }, // Slot 4 Flag
   fc0: { type: Number, default: 0 }, // Slot 5 Flag
   fd0: { type: Number, default: 0 }, // Slot 6 Flag
   fe0: { type: Number, default: 0 }, // Slot 7 Flag
-  ff0: Boolean, // Slot 8 Flag
-  fg0: Boolean, // Slot 9 Flag
+  ff0: { type: Boolean, default: false }, // Slot 8 Flag
+  fg0: { type: Boolean, default: false }, // Slot 9 Flag
   fh0: { type: String, trim: true }, // Note 1
   fi0: { type: String, trim: true }, // Note 2
-  fj0: Boolean, // Slot 10 Flag
-  fk0: Boolean, // Slot 11 Flag
+  fj0: { type: Boolean, default: false }, // Slot 10 Flag
+  fk0: { type: Boolean, default: false }, // Slot 11 Flag
   category: Number, // 0 = Administration, 1 = Production
   fDate: Date,
   slip: {
@@ -358,7 +358,7 @@ EmployeeSchema.pre('save', async function fn(next) {
     //   this.cb0 = this.ay0 * this.ownerDocument().rate.cb5 * 0.01;
     //   this.cc0 = this.ay0 * this.ownerDocument().rate.cc5 * 0.01;
     // }
-    
+
     this.cb0 = this.ay0 * this.ownerDocument().rate.cb5;
     this.cc0 = this.ay0 * this.ownerDocument().rate.cc5;
     this.cd0 = this.ay0 * this.ownerDocument().rate.cd5;

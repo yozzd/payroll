@@ -956,7 +956,7 @@ const generateSlip = async (p) => {
     if (e.fd0) notes.push(['-', e.fd0, '', '']);
 
     const docDefinition = {
-      userPassword: e.slip.pw,
+      // userPassword: e.slip.pw,
       content: [
         {
           style: 'tbl1',
@@ -1029,7 +1029,7 @@ const generateSlip = async (p) => {
           table: {
             widths: [266, 186, 63],
             body: [
-              ['', 'NET PAYMENT', { text: intpre0(e.ec0).format(), alignment: 'right', margin: [0, 0, 5, 0] }],
+              ['', 'NET PAYMENT', { text: e.e0 === 'X.0010' ? intpre0(e.ed0).format() : intpre0(e.ec0).format(), alignment: 'right', margin: [0, 0, 5, 0] }],
             ],
           },
           layout: 'noBorders',
