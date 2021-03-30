@@ -4,6 +4,8 @@ export const KetenagakerjaanReport = gql`
   query ketenagakerjaanReport($id: String!) {
     ketenagakerjaanReport(id: $id) {
       _id
+      period
+      year
       employee {
         _id
         d0

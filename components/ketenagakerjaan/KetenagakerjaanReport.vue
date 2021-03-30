@@ -1,5 +1,7 @@
 <template>
-  <div class="space-y-2">
+  <div class="space-y-4">
+    <el-page-header :content="content" @back="goBack">
+    </el-page-header>
     <ErrorHandler
       v-if="errors"
       :errors="errors"
@@ -114,6 +116,7 @@ export default {
   mixins: [mix],
   data() {
     return {
+      content: '',
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -124,6 +127,11 @@ export default {
         ],
       }),
     };
+  },
+  methods: {
+    goBack() {
+      this.$router.push({ path: '/dashboard/' });
+    },
   },
   apollo: {
     ketenagakerjaanReport: {
@@ -136,9 +144,10 @@ export default {
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const { employee } = data.ketenagakerjaanReport;
+          const { period, year, employee } = data.ketenagakerjaanReport;
           this.items = employee;
           this.miniSearch.addAll(this.items);
+          this.content = `${period} ${year}`;
         }
       },
       error({ graphQLErrors, networkError }) {
