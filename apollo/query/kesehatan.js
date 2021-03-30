@@ -4,6 +4,8 @@ export const KesehatanReport = gql`
   query kesehatanReport($id: String!) {
     kesehatanReport(id: $id) {
       _id
+      period
+      year
       employee {
         _id
         d0

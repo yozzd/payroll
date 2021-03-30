@@ -16,6 +16,8 @@ const Query = {
         {
           $group: {
             _id: '$_id',
+            period: { $first: '$period' },
+            year: { $first: '$year' },
             employee: {
               $push: {
                 _id: '$employee._id',
