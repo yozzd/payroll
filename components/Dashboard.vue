@@ -209,6 +209,9 @@
                 <el-dropdown-item command="kes">
                   Kesehatan
                 </el-dropdown-item>
+                <el-dropdown-item command="trf">
+                  By Transfer
+                </el-dropdown-item>
                 <el-dropdown-item command="slip">
                   Slip
                 </el-dropdown-item>
@@ -750,6 +753,7 @@ export default {
       else if (c === 'tax') this.$router.push({ name: 'payroll-tax-id', params: { id } });
       else if (c === 'ktg') this.$router.push({ name: 'payroll-ketenagakerjaan-id', params: { id } });
       else if (c === 'kes') this.$router.push({ name: 'payroll-kesehatan-id', params: { id } });
+      else if (c === 'trf') this.$router.push({ name: 'payroll-trf-id', params: { id } });
       else if (c === 'slip') this.$router.push({ name: 'payroll-slip-id', params: { id } });
     },
     handleActionCommand(c, id, fr) {

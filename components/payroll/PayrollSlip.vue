@@ -58,7 +58,7 @@
       ></el-table-column>
       <el-table-column type="index" width="50" align="center"></el-table-column>
       <el-table-column prop="e0" label="No. Karyawan" width="100"></el-table-column>
-      <el-table-column prop="d0" label="Nama Karyawan" width="200">
+      <el-table-column prop="d0" label="Nama Karyawan" width="300">
         <template slot-scope="scope">
           <p>
             {{ scope.row.d0 }}
