@@ -29,13 +29,11 @@
     >
       <el-table-column type="index" width="50" align="center" fixed></el-table-column>
       <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
-      <el-table-column prop="d0" label="Nama Karyawan" width="200" fixed>
+      <el-table-column prop="d0" label="Nama Karyawan" width="300" fixed>
         <template slot-scope="scope">
-          <client-only>
-            <p v-snip="1" :title="scope.row.d0">
-              {{ scope.row.d0 }}
-            </p>
-          </client-only>
+          <p>
+            {{ scope.row.d0 }}
+          </p>
         </template>
       </el-table-column>
       <el-table-column label="No. KPJ" width="140">
@@ -97,11 +95,12 @@
           <span>{{ scope.row.cm0 | currency }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Catatan" min-width="140">
+      <el-table-column label="Catatan" width="140">
         <template slot-scope="scope">
           <span>{{ scope.row.ck0 }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="" min-width="120"></el-table-column>
     </el-table>
   </div>
 </template>
