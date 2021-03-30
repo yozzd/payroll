@@ -4,6 +4,8 @@ export const TrfReport = gql`
   query trfReport($id: String!) {
     trfReport(id: $id) {
       _id
+      period
+      year
       employee {
         _id
         d0
