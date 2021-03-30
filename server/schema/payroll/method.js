@@ -956,7 +956,7 @@ const generateSlip = async (p) => {
     if (e.fd0) notes.push(['-', e.fd0, '', '']);
 
     const docDefinition = {
-      // userPassword: e.slip.pw,
+      userPassword: e.slip.pw,
       content: [
         {
           style: 'tbl1',
@@ -1069,11 +1069,14 @@ const generateSlip = async (p) => {
       },
     };
 
-    const pdfDoc = printer.createPdfKitDocument(docDefinition);
-    pdfDoc.pipe(fs.createWriteStream(`static/slip/${p.dir}/${e.slip.name}.pdf`));
-    pdfDoc.end();
-
-    return { sStatus: 1 };
+    return new Promise((resolve) => {
+      const pdfDoc = printer.createPdfKitDocument(docDefinition);
+      pdfDoc.pipe(fs.createWriteStream(`static/slip/${p.dir}/${e.slip.name}.pdf`));
+      pdfDoc.on('end', () => {
+        resolve({ sStatus: 1 });
+      });
+      pdfDoc.end();
+    });
   } catch (err) {
     if (typeof err === 'string') {
       throw new GraphQLError(err);
