@@ -80,6 +80,7 @@ export const PayrollBasic = gql`
         d0
         e0
         g0
+        l0
         ay0
         ex0
       }
@@ -282,6 +283,7 @@ export const PayrollTax = gql`
         cz0
         da0
         db0
+        es0
         ex0
       }
     }

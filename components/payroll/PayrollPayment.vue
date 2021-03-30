@@ -66,7 +66,7 @@
           </client-only>
         </template>
         <template slot-scope="scope">
-          <span>{{ scope.row.ec0 | currency }}</span>
+          <span>{{ scope.row.ec0 }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="ed0" label="Total By Cash" width="120" align="right">

@@ -130,6 +130,7 @@ const Query = {
           'employee.d0': 1,
           'employee.e0': 1,
           'employee.g0': 1,
+          'employee.l0': 1,
           'employee.ay0': 1,
           'employee.ex0': 1,
         });
@@ -359,6 +360,7 @@ const Query = {
           'employee.cz0': 1,
           'employee.da0': 1,
           'employee.db0': 1,
+          'employee.es0': 1,
           'employee.ex0': 1,
         });
       return p;

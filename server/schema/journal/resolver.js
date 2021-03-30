@@ -152,7 +152,7 @@ const Query = {
             taxReturn: { $sum: '$employee.bv0' },
             dtp: { $sum: '$employee.es0' },
             ec0: { $sum: '$employee.ec0' },
-            finalPay: { $sum: { $cond: { if: { $eq: ['$employee.ex0', 1] }, then: '$employee.ed0', else: 0 } } },
+            finalPay: { $sum: { $cond: { if: { $and: [{ $eq: ['$employee.ex0', true] }, { $ne: ['$employee.ff0', true] }] }, then: '$employee.ed0', else: 0 } } },
             ed0: { $sum: '$employee.ed0' },
             retroPay: { $sum: '$employee.di0' },
             toolroom: { $sum: '$employee.dh0' },
@@ -162,13 +162,13 @@ const Query = {
             ker: { $sum: '$employee.cm0' },
             kes: { $sum: '$employee.cu0' },
             taxPay: { $sum: '$employee.db0' },
-            pesangonPay: { $sum: { $cond: { if: { $eq: ['$employee.ff0', 1] }, then: '$employee.ed0', else: 0 } } },
-            mangkirPay: { $sum: { $cond: { if: { $eq: ['$employee.fg0', 1] }, then: '$employee.ed0', else: 0 } } },
+            pesangonPay: { $sum: { $cond: { if: { $eq: ['$employee.ff0', true] }, then: '$employee.ed0', else: 0 } } },
+            mangkirPay: { $sum: { $cond: { if: { $eq: ['$employee.fg0', true] }, then: '$employee.ed0', else: 0 } } },
           },
         },
         {
           $addFields: {
-            salary: { $subtract: ['$l0', { $sum: ['$cy0', '$df'] }] },
+            salary: { $subtract: ['$l0', { $sum: ['$cy0', '$df0'] }] },
             expat: { $subtract: ['$ed0', { $sum: ['$finalPay', '$pesangonPay', '$mangkirPay'] }] },
             gross: {
               $subtract: [

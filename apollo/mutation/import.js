@@ -42,6 +42,16 @@ export const ImportTax = gql`
   }
 `;
 
+export const ImportProrate = gql`
+  mutation importProrate($input: ImportInputType) {
+    importProrate(input: $input) {
+      _id
+      year
+      period
+    }
+  }
+`;
+
 export const ImportKantin = gql`
   mutation importKantin($input: ExtImportInputType) {
     importKantin(input: $input) {

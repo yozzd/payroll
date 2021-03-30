@@ -66,6 +66,18 @@
           <span>{{ scope.row.db0 | currency }}</span>
         </template>
       </el-table-column>
+      <el-table-column prop="es0" width="120" align="right">
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Pengembalian Pajak DTP">
+              Pengembalian Pajak DTP
+            </p>
+          </client-only>
+        </template>
+        <template slot-scope="scope">
+          <span>{{ scope.row.es0 | currency }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="" min-width="120"></el-table-column>
     </el-table>
   </div>
@@ -84,7 +96,7 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'cz0', 'da0', 'db0',
+          '_id', 'd0', 'e0', 'cz0', 'da0', 'db0', 'es0',
         ],
       }),
     };

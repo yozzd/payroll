@@ -52,6 +52,16 @@
           <span>{{ scope.row.g0 | currency }}</span>
         </template>
       </el-table-column>
+      <el-table-column
+        prop="l0"
+        label="Gaji Berdasrkan Hari Kerja Normal"
+        width="120"
+        align="right"
+      >
+        <template slot-scope="scope">
+          <span>{{ scope.row.l0 | currency }}</span>
+        </template>
+      </el-table-column>
       <el-table-column prop="ay0" label="Upah Normal" width="120" align="right">
         <template slot-scope="scope">
           <span>{{ scope.row.ay0 | currency }}</span>
@@ -130,7 +140,7 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'g0', 'ay0',
+          '_id', 'd0', 'e0', 'g0', 'l0', 'ay0',
         ],
       }),
     };

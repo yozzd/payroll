@@ -166,6 +166,8 @@ const processImportPayroll = async ({ file, from, to }) => {
             fg0: ft[i].__EMPTY_162, // Slot 9 Flag
             fh0: ft[i].__EMPTY_163 || '', // Note 1
             fi0: ft[i].__EMPTY_164 || '', // Note 2
+            fj0: ft[i].__EMPTY_165, // Slot 10 Flag
+            fk0: ft[i].__EMPTY_166, // Slot 11 Flag
           });
         }
 
