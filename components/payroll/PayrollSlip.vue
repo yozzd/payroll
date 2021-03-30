@@ -60,11 +60,9 @@
       <el-table-column prop="e0" label="No. Karyawan" width="100"></el-table-column>
       <el-table-column prop="d0" label="Nama Karyawan" width="200">
         <template slot-scope="scope">
-          <client-only>
-            <p v-snip="1" :title="scope.row.d0">
-              {{ scope.row.d0 }}
-            </p>
-          </client-only>
+          <p>
+            {{ scope.row.d0 }}
+          </p>
         </template>
       </el-table-column>
       <el-table-column prop="ew0" label="Email" width="300"></el-table-column>
