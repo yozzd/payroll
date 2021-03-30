@@ -4,6 +4,8 @@ export const TaxReport = gql`
   query taxReport($id: String!) {
     taxReport(id: $id) {
       _id
+      year
+      period
       employee {
         _id
         d0
