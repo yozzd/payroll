@@ -445,7 +445,7 @@ const Query = {
       const payroll = await Payroll.aggregate([
         { $match: { _id: id } },
         { $unwind: '$employee' },
-        { $match: { 'employee.ex0': { $ne: true } } },
+        { $match: { 'employee.ex0': false } },
         {
           $group: {
             _id: '$_id',
