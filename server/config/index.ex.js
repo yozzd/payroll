@@ -13,6 +13,7 @@ const config = {
           useCreateIndex: true,
           useNewUrlParser: true,
           useUnifiedTopology: true,
+          serializeFunctions: true,
         });
       } catch (err) {
         consola.error(`MongoDB connection error: ${err}`);
