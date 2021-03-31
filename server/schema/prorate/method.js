@@ -4,7 +4,6 @@ const fs = require('fs-extra');
 const nodemailer = require('nodemailer');
 
 const { intpre0 } = require('../scalar/number');
-const { gDateFormat } = require('../scalar/date');
 
 const smtp = require('../../config/smtp');
 
@@ -23,7 +22,7 @@ const generateProrate = async (p) => {
 
     const m1 = ['22 Des – 31 Des 2020', '01 Jan – 21 Jan 2021', '22 Jan – 21 Feb 2021'];
     const m2 = ['Januari', 'Februari'];
-    
+
     const ctbl1 = [
       [{
         text: `Hari Kerja & UMK Kenaikan Rp. ${intpre0(e.m0).format()}`, colSpan: 8, bold: true, border: [false, false, false, false],
