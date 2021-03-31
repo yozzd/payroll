@@ -173,7 +173,7 @@ const Query = {
             gross: {
               $subtract: [
                 { $sum: ['$l0', '$ot', '$bk0', '$cn0', '$retro', '$en0', '$eq0'] },
-                { $sum: ['$cy0', '$df'] },
+                { $sum: ['$cy0', '$df0'] },
               ],
             },
           },

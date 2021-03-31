@@ -576,7 +576,7 @@ const processImportProrate = async ({ file, from, to }) => {
       const wb = XLSX.readFile(tmp);
       const ws = wb.Sheets[wb.SheetNames];
       const ft = XLSX.utils.sheet_to_json(ws);
-      
+
       try {
         const prorate = new Prorate({
           from,

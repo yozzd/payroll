@@ -4,10 +4,9 @@ const {
   GraphQLInt,
   GraphQLString,
 } = require('graphql');
-const Payroll = require('../payroll/model');
 const Prorate = require('./model.js');
 const { ProrateType } = require('./type');
-const { PayrollType, GenType, SendType } = require('../payroll/type');
+const { GenType, SendType } = require('../payroll/type');
 const auth = require('../auth/service');
 const { generateProrate, sendProrate } = require('./method');
 
