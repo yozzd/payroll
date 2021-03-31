@@ -42,7 +42,7 @@
     </div>
     <div>
       <el-table
-        ref="taxTable"
+        ref="prorateTable"
         v-loading="$apollo.loading || loadingGen || loadingSend"
         element-loading-text="Loading..."
         element-loading-spinner="el-icon-loading"
@@ -80,7 +80,7 @@
           <template slot-scope="scope">
             <el-link
               v-if="scope.row.slip.check"
-              :href="`/tax/${scope.row.slip.dir}/${scope.row.slip.name}.pdf`"
+              :href="`/prorate/${scope.row.slip.dir}/${scope.row.slip.name}.pdf`"
               target="_blank"
               type="primary"
               class="font-sm"
@@ -96,8 +96,8 @@
 
 <script>
 import MiniSearch from 'minisearch';
-import { EmployeeTax } from '../../apollo/query/tax';
-import { GenerateTax, SendTax } from '../../apollo/mutation/tax';
+import { EmployeeProrate } from '../../apollo/query/prorate';
+import { GenerateProrate, SendProrate } from '../../apollo/mutation/prorate';
 import mix from '../../mixins/payroll';
 
 export default {
@@ -118,7 +118,7 @@ export default {
   },
   methods: {
     goBack() {
-      this.$router.push({ path: '/tax/' });
+      this.$router.push({ path: '/prorate/' });
     },
     selectDisable(r) {
       return r.e0 !== '';
@@ -139,25 +139,25 @@ export default {
         await Promise.all(
           this.multipleSelection.map(async (v) => {
             const { data } = await this.$apollo.mutate({
-              mutation: GenerateTax,
+              mutation: GenerateProrate,
               variables: {
                 id: this.$route.params.id,
                 eId: v,
               },
               update: (store) => {
                 const cdata = store.readQuery({
-                  query: EmployeeTax,
+                  query: EmployeeProrate,
                   variables: {
                     id: this.$route.params.id,
                   },
                 });
-                const index = cdata.employeeTax.employee.findIndex((e) => e._id === v);
-                if (cdata.employeeTax.employee[index].slip.check === false) {
-                  cdata.employeeTax.employee[index].slip.check = true;
+                const index = cdata.employeeProrate.employee.findIndex((e) => e._id === v);
+                if (cdata.employeeProrate.employee[index].slip.check === false) {
+                  cdata.employeeProrate.employee[index].slip.check = true;
                   this.miniSearch.removeAll();
                 }
                 store.writeQuery({
-                  query: EmployeeTax,
+                  query: EmployeeProrate,
                   variables: {
                     id: this.$route.params.id,
                   },
@@ -165,7 +165,7 @@ export default {
                 });
               },
             });
-            if (data.generateTax.sStatus) {
+            if (data.generateProrate.sStatus) {
               count += 1;
               this.percentage = Math.floor((count / len) * 100);
             }
@@ -174,7 +174,7 @@ export default {
 
         this.loadingGen = false;
         this.multipleSelection = [];
-        this.$refs.taxTable.clearSelection();
+        this.$refs.prorateTable.clearSelection();
         this.$message({
           type: 'success',
           message: 'Completed',
@@ -196,13 +196,13 @@ export default {
         await Promise.all(
           this.multipleSelection.map(async (v) => {
             const { data } = await this.$apollo.mutate({
-              mutation: SendTax,
+              mutation: SendProrate,
               variables: {
                 id: this.$route.params.id,
                 eId: v,
               },
             });
-            if (data.sendTax.accepted.length) {
+            if (data.sendProrate.accepted.length) {
               count += 1;
               this.percentage = Math.floor((count / len) * 100);
             }
@@ -211,7 +211,7 @@ export default {
 
         this.loadingSend = false;
         this.multipleSelection = [];
-        this.$refs.taxTable.clearSelection();
+        this.$refs.prorateTable.clearSelection();
         this.$message({
           type: 'success',
           message: 'Completed',
@@ -225,8 +225,8 @@ export default {
     },
   },
   apollo: {
-    employeeTax: {
-      query: EmployeeTax,
+    employeeProrate: {
+      query: EmployeeProrate,
       prefetch: false,
       variables() {
         return {
@@ -235,7 +235,7 @@ export default {
       },
       result({ data, loading }) {
         if (!loading) {
-          const { employee, period, year } = data.employeeTax;
+          const { employee, period, year } = data.employeeProrate;
           this.items = employee;
           this.content = `${period} ${year}`;
           this.miniSearch.addAll(this.items);
