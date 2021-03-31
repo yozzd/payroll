@@ -212,8 +212,8 @@ const sendProrate = async (p) => {
     });
 
     let html = '';
-    html += `<div>Terlampir slip Pajak untuk tahun ${p.year - 1}</div>`;
-    html += '<div>Slip THR ini dilindungi kata sandi dan kata sandi dalam bentuk (format xxxddmmyy) :</div>';
+    html += `<div>Terlampir slip Prorate Penyesuaian UMK untuk tahun ${p.year} - ${p.year - 1}</div>`;
+    html += '<div>Slip ini dilindungi kata sandi dan kata sandi dalam bentuk (format xxxddmmyy) :</div>';
     html += '<div>- 3 digit terakhir nomor karyawan</div>';
     html += '<div>- 2 digit tanggal lahir</div>';
     html += '<div>- 2 digit bulan lahir</div>';
@@ -224,7 +224,7 @@ const sendProrate = async (p) => {
     html += '<div>Apabila slip gagal dibuka, kemungkinan tanggal lahir yang didaftarkan tidak sesuai dengan sistem. Dan lakukan pengajuan perubahan data.</div>';
     html += '<div>Untuk membuka file yang dilindungi kata sandi ini, Anda memerlukan Adobe Reader.</div>';
     html += '<p>-----------------------------------------------------------------------------------</p>';
-    html += `<div>Attached is the Prorate slip for year ${p.year - 1}</div>`;
+    html += `<div>Attached is the Prorate slip for year ${p.year} - ${p.year - 1}</div>`;
     html += '<div>It is password protected and the password is in the form of (format xxxddmmyy) :</div>';
     html += '<div>- The last 3 digits of the employee number</div>';
     html += '<div>- 2 digit date of birth</div>';
