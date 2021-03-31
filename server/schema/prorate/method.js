@@ -3,7 +3,7 @@ const PdfPrinter = require('pdfmake');
 const fs = require('fs-extra');
 const nodemailer = require('nodemailer');
 
-const { intpre0 } = require('../scalar/number');
+const { intpre0, floatpre2, floatpre3 } = require('../scalar/number');
 
 const smtp = require('../../config/smtp');
 
@@ -77,38 +77,39 @@ const generateProrate = async (p) => {
       }, '', '', '', '', '', '', ''],
       [{ text: 'Overtime Lama', colSpan: 2 }, '', { text: 'Overtime Baru', colSpan: 2 }, '', { text: `Prorate Overtime ${m2[0]}`, colSpan: 2, rowSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
       [{ text: m1[1], colSpan: 2 }, '', { text: m1[1], colSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
-      [{ text: intpre0(e.an0).format(), alignment: 'right' }, { text: intpre0(e.ao0).format(), alignment: 'right' }, { text: intpre0(e.ap0).format(), alignment: 'right' }, { text: intpre0(e.aq0).format(), alignment: 'right' }, { text: intpre0(e.ar0).format(), alignment: 'right', colSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
+      [{ text: floatpre2(e.an0).format(), alignment: 'right' }, { text: intpre0(e.ao0).format(), alignment: 'right' }, { text: floatpre2(e.ap0).format(), alignment: 'right' }, { text: intpre0(e.aq0).format(), alignment: 'right' }, { text: intpre0(e.ar0).format(), alignment: 'right', colSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
       [{
         text: `Overtime ${m2[1]}`, colSpan: 8, bold: true, border: [false, false, false, false], margin: [0, 10, 0, 0],
       }, '', '', '', '', '', '', ''],
       [{ text: 'Overtime Lama', colSpan: 2 }, '', { text: 'Overtime Baru', colSpan: 2 }, '', { text: `Prorate Overtime ${m2[1]}`, colSpan: 2, rowSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
       [{ text: m1[2], colSpan: 2 }, '', { text: m1[2], colSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
-      [{ text: intpre0(e.as0).format(), alignment: 'right' }, { text: intpre0(e.at0).format(), alignment: 'right' }, { text: intpre0(e.au0).format(), alignment: 'right' }, { text: intpre0(e.av0).format(), alignment: 'right' }, { text: intpre0(e.aw0).format(), alignment: 'right', colSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
+      [{ text: floatpre2(e.as0).format(), alignment: 'right' }, { text: intpre0(e.at0).format(), alignment: 'right' }, { text: floatpre2(e.au0).format(), alignment: 'right' }, { text: intpre0(e.av0).format(), alignment: 'right' }, { text: intpre0(e.aw0).format(), alignment: 'right', colSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
       [{
         text: `Overtime Dinas Luar ${m2[0]}`, colSpan: 8, bold: true, border: [false, false, false, false], margin: [0, 10, 0, 0],
       }, '', '', '', '', '', '', ''],
       [{ text: 'Overtime Lama', colSpan: 2 }, '', { text: 'Overtime Baru', colSpan: 2 }, '', { text: `Prorate Overtime Dinas Luar ${m2[0]}`, colSpan: 2, rowSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
       [{ text: m1[1], colSpan: 2 }, '', { text: m1[1], colSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
+      [{ text: floatpre2(e.ax0).format(), alignment: 'right' }, { text: intpre0(e.ay0).format(), alignment: 'right' }, { text: floatpre2(e.az0).format(), alignment: 'right' }, { text: intpre0(e.ba0).format(), alignment: 'right' }, { text: intpre0(e.bb0).format(), alignment: 'right', colSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
       [{
         text: `Overtime Dinas Luar ${m2[1]}`, colSpan: 8, bold: true, border: [false, false, false, false], margin: [0, 10, 0, 0],
       }, '', '', '', '', '', '', ''],
       [{ text: 'Overtime Lama', colSpan: 2 }, '', { text: 'Overtime Baru', colSpan: 2 }, '', { text: `Prorate Overtime Dinas Luar ${m2[1]}`, colSpan: 2, rowSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
       [{ text: m1[2], colSpan: 2 }, '', { text: m1[2], colSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
-      [{ text: intpre0(e.bc0).format(), alignment: 'right' }, { text: intpre0(e.bd0).format(), alignment: 'right' }, { text: intpre0(e.be0).format(), alignment: 'right' }, { text: intpre0(e.bf0).format(), alignment: 'right' }, { text: intpre0(e.bg0).format(), alignment: 'right', colSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
+      [{ text: floatpre2(e.bc0).format(), alignment: 'right' }, { text: intpre0(e.bd0).format(), alignment: 'right' }, { text: floatpre2(e.be0).format(), alignment: 'right' }, { text: intpre0(e.bf0).format(), alignment: 'right' }, { text: intpre0(e.bg0).format(), alignment: 'right', colSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
       [{
         text: `Absensi ${m2[0]}`, colSpan: 8, bold: true, border: [false, false, false, false], margin: [0, 10, 0, 0],
       }, '', '', '', '', '', '', ''],
       [{ text: 'Absensi / Day Basic  Lama', colSpan: 2 }, '', { text: 'Absensi / Day Basic Baru', colSpan: 2 }, '', { text: `Prorate Absensi ${m2[0]}`, colSpan: 2, rowSpan: 3 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
       [{ text: m1[1], colSpan: 2 }, '', { text: m1[1], colSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
       ['Absen', 'Absen / Day', 'Absen', 'Absen / Day', { text: '', colSpan: 2, border: [false, false, false, false] }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
-      [{ text: intpre0(e.bh0).format(), alignment: 'right' }, { text: intpre0(e.bi0).format(), alignment: 'right' }, { text: intpre0(e.bj0).format(), alignment: 'right' }, { text: intpre0(e.bk0).format(), alignment: 'right' }, { text: intpre0(e.bl0).format(), alignment: 'right', colSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
+      [{ text: floatpre3(e.bh0).format(), alignment: 'right' }, { text: intpre0(e.bi0).format(), alignment: 'right' }, { text: floatpre3(e.bj0).format(), alignment: 'right' }, { text: intpre0(e.bk0).format(), alignment: 'right' }, { text: intpre0(e.bl0).format(), alignment: 'right', colSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
       [{
         text: `Absensi ${m2[1]}`, colSpan: 8, bold: true, border: [false, false, false, false], margin: [0, 10, 0, 0],
       }, '', '', '', '', '', '', ''],
       [{ text: 'Absensi / Day Basic  Lama', colSpan: 2 }, '', { text: 'Absensi / Day Basic Baru', colSpan: 2 }, '', { text: `Prorate Absensi ${m2[1]}`, colSpan: 2, rowSpan: 3 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
       [{ text: m1[2], colSpan: 2 }, '', { text: m1[2], colSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
       ['Absen', 'Absen / Day', 'Absen', 'Absen / Day', { text: '', colSpan: 2, border: [false, false, false, false] }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
-      [{ text: intpre0(e.bm0).format(), alignment: 'right' }, { text: intpre0(e.bn0).format(), alignment: 'right' }, { text: intpre0(e.bo0).format(), alignment: 'right' }, { text: intpre0(e.bp0).format(), alignment: 'right' }, { text: intpre0(e.bq0).format(), alignment: 'right', colSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
+      [{ text: floatpre3(e.bm0).format(), alignment: 'right' }, { text: intpre0(e.bn0).format(), alignment: 'right' }, { text: floatpre3(e.bo0).format(), alignment: 'right' }, { text: intpre0(e.bp0).format(), alignment: 'right' }, { text: intpre0(e.bq0).format(), alignment: 'right', colSpan: 2 }, '', { text: '', colSpan: 2, border: [false, false, false, false] }, ''],
       [{
         text: 'Total Koreksi', colSpan: 8, bold: true, border: [false, false, false, false], margin: [0, 10, 0, 0],
       }, '', '', '', '', '', '', ''],
@@ -117,7 +118,7 @@ const generateProrate = async (p) => {
     ];
 
     const docDefinition = {
-      userPassword: e.slip.pw,
+      // userPassword: e.slip.pw,
       footer: (currentPage, pageCount) => ({
         columns: [
           { text: `${currentPage.toString()} / ${pageCount}`, fontSize: 8, margin: [20, 0] },
