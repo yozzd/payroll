@@ -67,13 +67,11 @@
             </p>
           </template>
         </el-table-column>
-        <el-table-column label="Email" width="200">
+        <el-table-column label="Email" width="300">
           <template slot-scope="scope">
-            <client-only>
-              <p v-snip="1" :title="scope.row.h0">
-                {{ scope.row.h0 }}
-              </p>
-            </client-only>
+            <p>
+              {{ scope.row.h0 }}
+            </p>
           </template>
         </el-table-column>
         <el-table-column label="File" min-width="200">
