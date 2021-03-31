@@ -5,30 +5,30 @@ const {
   GraphQLString,
 } = require('graphql');
 const Payroll = require('../payroll/model');
-const Tax = require('./model.js');
-const { TaxType } = require('./type');
+const Prorate = require('./model.js');
+const { ProrateType } = require('./type');
 const { PayrollType, GenType, SendType } = require('../payroll/type');
 const auth = require('../auth/service');
-const { generateTax, sendTax } = require('./method');
+const { generateProrate, sendProrate } = require('./method');
 
 const Query = {
-  tax: {
-    type: new GraphQLList(TaxType),
+  prorate: {
+    type: new GraphQLList(ProrateType),
     args: {
       year: { type: GraphQLInt },
     },
     resolve: auth.hasRole('user', async (_, { year }) => {
-      const tax = await Tax.find({ year }).sort('-month');
-      return tax;
+      const prorate = await Prorate.find({ year }).sort('-month');
+      return prorate;
     }),
   },
-  employeeTax: {
-    type: TaxType,
+  employeeProrate: {
+    type: ProrateType,
     args: {
       id: { type: GraphQLString },
     },
     resolve: auth.hasRole('user', async (_, { id }) => {
-      const tax = await Tax.aggregate([
+      const prorate = await Prorate.aggregate([
         { $match: { _id: id } },
         { $unwind: '$employee' },
         {
@@ -51,10 +51,10 @@ const Query = {
           },
         },
       ]);
-      return tax[0];
+      return prorate[0];
     }),
   },
-  taxReport: {
+  prorateReport: {
     type: PayrollType,
     args: {
       id: { type: GraphQLString },
@@ -101,7 +101,7 @@ const Query = {
                     { $sum: ['$employee.cy0', '$employee.df0'] },
                   ],
                 },
-                ttax: {
+                tprorate: {
                   $subtract: ['$employee.db0', '$employee.es0'],
                 },
               },
@@ -116,47 +116,47 @@ const Query = {
 };
 
 const Mutation = {
-  taxDelete: {
-    type: TaxType,
+  prorateDelete: {
+    type: ProrateType,
     args: {
       id: { type: GraphQLString },
     },
     resolve: auth.hasRole('user', async (_, { id }) => {
-      const e = await Tax.findOne({ _id: id });
-      await fs.remove(`static/tax/${e.dir}`);
-      await Tax.findOneAndDelete({ _id: id });
+      const e = await Prorate.findOne({ _id: id });
+      await fs.remove(`static/prorate/${e.dir}`);
+      await Prorate.findOneAndDelete({ _id: id });
       return { _id: id };
     }),
   },
-  generateTax: {
+  generateProrate: {
     type: GenType,
     args: {
       id: { type: GraphQLString },
       eId: { type: GraphQLString },
     },
     resolve: auth.hasRole('user', async (_, { id, eId }) => {
-      const p = await Tax.aggregate([
+      const p = await Prorate.aggregate([
         { $match: { _id: id } },
         { $unwind: '$employee' },
         { $match: { 'employee._id': eId } },
       ]);
-      const s = await generateTax(p[0]);
+      const s = await generateProrate(p[0]);
       return s;
     }),
   },
-  sendTax: {
+  sendProrate: {
     type: SendType,
     args: {
       id: { type: GraphQLString },
       eId: { type: GraphQLString },
     },
     resolve: auth.hasRole('user', async (_, { id, eId }) => {
-      const p = await Tax.aggregate([
+      const p = await Prorate.aggregate([
         { $match: { _id: id } },
         { $unwind: '$employee' },
         { $match: { 'employee._id': eId } },
       ]);
-      const s = await sendTax(p[0]);
+      const s = await sendProrate(p[0]);
       return s;
     }),
   },

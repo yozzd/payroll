@@ -6,6 +6,7 @@ const Journal = require('./journal/resolver');
 const Ketenagakerjaan = require('./ketenagakerjaan/resolver');
 const Kesehatan = require('./kesehatan/resolver');
 const Payroll = require('./payroll/resolver');
+const Prorate = require('./prorate/resolver');
 const Tax = require('./tax/resolver');
 const Thr = require('./thr/resolver');
 const Trf = require('./trf/resolver');
@@ -20,6 +21,7 @@ const query = new GraphQLObjectType({
     ...Ketenagakerjaan.Query,
     ...Kesehatan.Query,
     ...Payroll.Query,
+    ...Prorate.Query,
     ...Tax.Query,
     ...Thr.Query,
     ...Trf.Query,
@@ -33,6 +35,7 @@ const mutation = new GraphQLObjectType({
     ...ESlip.Mutation,
     ...Import.Mutation,
     ...Payroll.Mutation,
+    ...Prorate.Mutation,
     ...Tax.Mutation,
     ...Thr.Mutation,
     ...User.Mutation,

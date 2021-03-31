@@ -6,6 +6,7 @@ const Payroll = require('../payroll/model');
 const ESlip = require('../eslip/model');
 const Thr = require('../thr/model');
 const Tax = require('../tax/model');
+const Prorate = require('../prorate/model');
 
 const parseDate = ({
   D, y, m, d,
@@ -560,6 +561,117 @@ const processImportOvertime = async ({ _id, file }) => {
     }));
 };
 
+const processImportProrate = async ({ file, from, to }) => {
+  const { filename, createReadStream } = await file;
+  const stream = createReadStream();
+
+  const tmp = `/tmp/${filename}`;
+  return new Promise((resolve, reject) => stream
+    .on('error', async (error) => {
+      if (stream.truncated) await fs.unlinkSync(tmp);
+      reject(error);
+    })
+    .pipe(fs.createWriteStream(tmp))
+    .on('finish', async () => {
+      const wb = XLSX.readFile(tmp);
+      const ws = wb.Sheets[wb.SheetNames];
+      const ft = XLSX.utils.sheet_to_json(ws);
+      
+      try {
+        const prorate = new Prorate({
+          from,
+          to,
+        });
+
+        for (let i = 1; i < ft.length; i += 1) {
+          prorate.employee.push({
+            b0: ft[i].__EMPTY_1 || '', // EmpNo
+            c0: ft[i].__EMPTY_2 || '', // EmpName
+            d0: strToDate(ft[i].__EMPTY_3), // Birthday
+            e0: ft[i].__EMPTY_4 || '', // Email
+            f0: ft[i].__EMPTY_5 || '', // Department
+            g0: ft[i].__EMPTY_6 || 0, // Workday 1
+            h0: ft[i].__EMPTY_7 || 0, // Workday 2
+            i0: ft[i].__EMPTY_8 || 0, // Workday 3
+            j0: ft[i].__EMPTY_9 || 0, // Basic 1
+            k0: ft[i].__EMPTY_10 || 0, // Basic 2
+            l0: ft[i].__EMPTY_11 || 0, // Prorate Basic 1
+            m0: ft[i].__EMPTY_12 || 0, // Prorate Basic 2
+            n0: ft[i].__EMPTY_13 || 0, // Upah 1
+            o0: ft[i].__EMPTY_14 || 0, // Upah 2
+            p0: ft[i].__EMPTY_15 || 0, // Tj. Posisi Fix Lama
+            q0: ft[i].__EMPTY_16 || 0, // Tj. Posisi Fix Baru
+            r0: ft[i].__EMPTY_17 || 0, // Prorate Tj. Posisi Fix 1
+            s0: ft[i].__EMPTY_18 || 0, // Prorate Tj. Posisi Fix 2
+            t0: ft[i].__EMPTY_19 || 0, // Tj. Tetap Fungsi Fix Lama
+            u0: ft[i].__EMPTY_20 || 0, // Tj. Tetap Fungsi Fix Baru
+            v0: ft[i].__EMPTY_21 || 0, // Prorate Tj. Tetap Fungsi Fix 1
+            w0: ft[i].__EMPTY_22 || 0, // Prorate Tj. Tetap Fungsi Fix 2
+            x0: ft[i].__EMPTY_23 || 0, // Tj. Tetap Expertise Lama
+            y0: ft[i].__EMPTY_24 || 0, // Tj. Tetap Expertise Baru
+            z0: ft[i].__EMPTY_25 || 0, // Prorate Tj. Tetap Expertise 1
+            aa0: ft[i].__EMPTY_26 || 0, // Prorate Tj. Tetap Expertise 2
+            ab0: ft[i].__EMPTY_27 || 0, // Tj. Posisi Variable Lama
+            ac0: ft[i].__EMPTY_28 || 0, // Tj. Posisi Variable Baru
+            ad0: ft[i].__EMPTY_29 || 0, // Prorate Tj. Posisi Variable 1
+            ae0: ft[i].__EMPTY_30 || 0, // Prorate Tj. Posisi Variable 2
+            af0: ft[i].__EMPTY_31 || 0, // Tj. Fungsional Variable Lama
+            ag0: ft[i].__EMPTY_32 || 0, // Tj. Fungsional Variable Baru
+            ah0: ft[i].__EMPTY_33 || 0, // Prorate Tj. Fungsional Variable 1
+            ai0: ft[i].__EMPTY_34 || 0, // Prorate Tj. Fungsional Variable 2
+            aj0: ft[i].__EMPTY_35 || 0, // Tj. Acting / PLT Lama
+            ak0: ft[i].__EMPTY_36 || 0, // Tj. Acting / PLT Baru
+            al0: ft[i].__EMPTY_37 || 0, // Prorate Tj. Acting / PLT Lama
+            am0: ft[i].__EMPTY_38 || 0, // Prorate [DTj. Acting / PLT Baru
+            an0: ft[i].__EMPTY_39 || 0, // Jam OT Lama 1
+            ao0: ft[i].__EMPTY_40 || 0, // OT Lama 1
+            ap0: ft[i].__EMPTY_41 || 0, // Jam OT Baru 1
+            aq0: ft[i].__EMPTY_42 || 0, // OT Baru 1
+            ar0: ft[i].__EMPTY_43 || 0, // Prorate OT 1
+            as0: ft[i].__EMPTY_44 || 0, // Jam OT Lama 2
+            at0: ft[i].__EMPTY_45 || 0, // OT Lama 2
+            au0: ft[i].__EMPTY_46 || 0, // Jam OT Baru 2
+            av0: ft[i].__EMPTY_47 || 0, // OT Baru 2
+            aw0: ft[i].__EMPTY_48 || 0, // Prorate OT 2
+            ax0: ft[i].__EMPTY_49 || 0, // Jam OT Dinas Lama 1
+            ay0: ft[i].__EMPTY_50 || 0, // OT Dinas Lama 1
+            az0: ft[i].__EMPTY_51 || 0, // Jam OT Dinas Baru 1
+            ba0: ft[i].__EMPTY_52 || 0, // OT Dinas Baru 1
+            bb0: ft[i].__EMPTY_53 || 0, // Prorate Dinas 1
+            bc0: ft[i].__EMPTY_54 || 0, // Jam OT Dinas Lama 2
+            bd0: ft[i].__EMPTY_55 || 0, // OT Dinas Lama 2
+            be0: ft[i].__EMPTY_56 || 0, // Jam OT Dinas Baru 2
+            bf0: ft[i].__EMPTY_57 || 0, // OT Dinas Baru 2
+            bg0: ft[i].__EMPTY_58 || 0, // Prorate Dinas 2
+            bh0: ft[i].__EMPTY_59 || 0, // Absen Basic Lama 1
+            bi0: ft[i].__EMPTY_60 || 0, // Total Absen Basic Lama 1
+            bj0: ft[i].__EMPTY_61 || 0, // Absen Basic Baru 1
+            bk0: ft[i].__EMPTY_62 || 0, // Total Absen Basic Baru 1
+            bl0: ft[i].__EMPTY_63 || 0, // Prorate Absen 1
+            bm0: ft[i].__EMPTY_64 || 0, // Absen Basic Lama 2
+            bn0: ft[i].__EMPTY_65 || 0, // Total Absen Basic Lama 2
+            bo0: ft[i].__EMPTY_66 || 0, // Absen Basic Baru 2
+            bp0: ft[i].__EMPTY_67 || 0, // Total Absen Basic Baru 2
+            bq0: ft[i].__EMPTY_68 || 0, // Prorate Absen 2
+            br0: ft[i].__EMPTY_69 || 0, // Pembetulan Pembayaran
+            bs0: ft[i].__EMPTY_70 || 0, // Pemotongan Absensi
+          });
+        }
+
+        const saved = await prorate.save();
+        return resolve(saved);
+      } catch (err) {
+        if (typeof err === 'string') {
+          reject(new GraphQLError(err));
+        } else {
+          reject(new GraphQLError(err.message));
+        }
+      }
+
+      return true;
+    }));
+};
+
 module.exports = {
   processImportPayroll,
   processImportESlip,
@@ -568,4 +680,5 @@ module.exports = {
   processImportKantin,
   processImportKoperasi,
   processImportOvertime,
+  processImportProrate,
 };

@@ -6,6 +6,7 @@ const {
   processImportKantin,
   processImportKoperasi,
   processImportOvertime,
+  processImportProrate,
 } = require('./method');
 const { ImportInputType, ExtImportInputType } = require('./input.type');
 const { PayrollType, GenType } = require('../payroll/type');
