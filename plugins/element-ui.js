@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import {
   Alert,
+  Badge,
+  Breadcrumb,
+  BreadcrumbItem,
   Button,
   Checkbox,
   DatePicker,
@@ -34,6 +37,9 @@ import locale from 'element-ui/lib/locale';
 locale.use(lang);
 
 Vue.use(Alert);
+Vue.use(Badge);
+Vue.use(Breadcrumb);
+Vue.use(BreadcrumbItem);
 Vue.use(Button);
 Vue.use(Checkbox);
 Vue.use(DatePicker);
