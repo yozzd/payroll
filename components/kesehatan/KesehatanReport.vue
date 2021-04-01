@@ -1,15 +1,30 @@
 <template>
   <div class="space-y-4">
-    <el-page-header :content="content" @back="goBack">
-    </el-page-header>
-    <ErrorHandler
-      v-if="errors"
-      :errors="errors"
-    />
+    <el-breadcrumb separator="/">
+      <el-breadcrumb-item :to="{ path: '/dashboard' }">
+        Home
+      </el-breadcrumb-item>
+      <el-breadcrumb-item>Kesehatan</el-breadcrumb-item>
+    </el-breadcrumb>
     <div class="flex space-x-4 items-center">
       <div class="flex-1">
-        Total {{ items.length }} items
+        <el-badge :value="items.length" type="success">
+          {{ content }}
+        </el-badge>
       </div>
+      <el-dropdown
+        trigger="click"
+        @command="c => handleExport(c, dir)"
+      >
+        <span class="el-dropdown-link">
+          Export<i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="pdf">
+            PDF
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
       <div class="w-64">
         <el-input
           v-model="search"
@@ -18,8 +33,12 @@
         />
       </div>
     </div>
+    <ErrorHandler
+      v-if="errors"
+      :errors="errors"
+    />
     <el-table
-      v-loading="$apollo.loading"
+      v-loading="$apollo.loading || loadKes"
       element-loading-text="Loading..."
       element-loading-spinner="el-icon-loading"
       :data="tableData"
@@ -93,6 +112,7 @@
 <script>
 import MiniSearch from 'minisearch';
 import { KesehatanReport } from '../../apollo/query/kesehatan';
+import { GenPDFKes } from '../../apollo/mutation/kesehatan';
 import mix from '../../mixins/payroll';
 
 export default {
@@ -100,6 +120,8 @@ export default {
   data() {
     return {
       content: '',
+      dir: '',
+      loadKes: false,
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -111,8 +133,26 @@ export default {
     };
   },
   methods: {
-    goBack() {
-      this.$router.push({ path: '/dashboard/' });
+    handleExport(c, dir) {
+      if (c === 'pdf') this.genPDFKes(dir);
+    },
+    async genPDFKes(dir) {
+      try {
+        this.loadKes = true;
+        await this.$apollo.mutate({
+          mutation: GenPDFKes,
+          variables: {
+            id: this.$route.params.id,
+          },
+        });
+
+        this.loadKes = false;
+        window.open(`/report/${dir}/${dir}_kes.pdf`);
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
     },
   },
   apollo: {
@@ -126,10 +166,13 @@ export default {
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const { period, year, employee } = data.kesehatanReport;
+          const {
+            period, year, dir, employee,
+          } = data.kesehatanReport;
           this.items = employee;
           this.miniSearch.addAll(this.items);
           this.content = `${period} ${year}`;
+          this.dir = dir;
         }
       },
       error({ graphQLErrors, networkError }) {
