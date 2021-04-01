@@ -1,9 +1,5 @@
 <template>
   <div class="space-y-2">
-    <ErrorHandler
-      v-if="errors"
-      :errors="errors"
-    />
     <div class="flex space-x-4 items-center">
       <div class="flex-1">
         Total {{ items.length }} items
@@ -26,6 +22,10 @@
         />
       </div>
     </div>
+    <ErrorHandler
+      v-if="errors"
+      :errors="errors"
+    />
     <el-table
       v-loading="$apollo.loading"
       element-loading-text="Loading..."

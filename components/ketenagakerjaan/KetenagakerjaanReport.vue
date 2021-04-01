@@ -4,7 +4,7 @@
       <el-breadcrumb-item :to="{ path: '/dashboard' }">
         Home
       </el-breadcrumb-item>
-      <el-breadcrumb-item>Ketenagakerjaan</el-breadcrumb-item>
+      <el-breadcrumb-item class="text-xl">Ketenagakerjaan</el-breadcrumb-item>
     </el-breadcrumb>
     <div class="flex space-x-4 items-center">
       <div class="flex-1">

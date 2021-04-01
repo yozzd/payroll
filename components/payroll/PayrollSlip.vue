@@ -1,14 +1,16 @@
 <template>
   <div class="space-y-2">
-    <el-page-header :content="content" @back="goBack">
-    </el-page-header>
-    <ErrorHandler
-      v-if="errors"
-      :errors="errors"
-    />
+    <el-breadcrumb separator="/">
+      <el-breadcrumb-item :to="{ path: '/dashboard' }">
+        Home
+      </el-breadcrumb-item>
+      <el-breadcrumb-item class="text-xl">Slip</el-breadcrumb-item>
+    </el-breadcrumb>
     <div class="flex space-x-4 items-center">
       <div class="flex-1">
-        Total {{ items.length }} items
+        <el-badge :value="items.length" type="success">
+          {{ content }}
+        </el-badge>
       </div>
       <div class="w-64">
         <el-input
@@ -39,6 +41,10 @@
       :stroke-width="16"
       :percentage="percentage"
     ></el-progress>
+    <ErrorHandler
+      v-if="errors"
+      :errors="errors"
+    />
     <el-table
       ref="slipTable"
       v-loading="$apollo.loading"

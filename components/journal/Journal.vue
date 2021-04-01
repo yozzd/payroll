@@ -1,7 +1,14 @@
 <template>
   <div class="flex flex-col space-y-4 mt-4 mb-8 px-12">
-    <el-page-header :content="content" @back="goBack">
-    </el-page-header>
+    <el-breadcrumb separator="/">
+      <el-breadcrumb-item :to="{ path: '/dashboard' }">
+        Home
+      </el-breadcrumb-item>
+      <el-breadcrumb-item class="text-xl">Journal</el-breadcrumb-item>
+    </el-breadcrumb>
+    <div>
+      {{ content }}
+    </div>
     <el-tabs v-model="activeName">
       <el-tab-pane label="Balance" name="bal">
         <div v-if="activeName==='bal'">
@@ -31,11 +38,6 @@ export default {
       content: '',
       activeName: 'bal',
     };
-  },
-  methods: {
-    goBack() {
-      this.$router.push({ path: '/dashboard/' });
-    },
   },
   apollo: {
     payrollPeriod: {

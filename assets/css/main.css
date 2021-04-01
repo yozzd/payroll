@@ -104,3 +104,7 @@ button:focus,
 .dropmenu.el-menu--horizontal > .el-submenu .el-submenu__icon-arrow {
   font-size: 14px;
 }
+
+.el-breadcrumb__item {
+  float: none;
+}
