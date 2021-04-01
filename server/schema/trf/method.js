@@ -1,8 +1,9 @@
 const { GraphQLError } = require('graphql');
 const PdfPrinter = require('pdfmake');
 const fs = require('fs-extra');
+const XLSX = require('xlsx');
 
-const { intpre0 } = require('../scalar/number');
+const { intpre0, intpre0v2 } = require('../scalar/number');
 
 const fonts = {
   Roboto: {
@@ -24,10 +25,10 @@ const genPDF = async (p) => {
           text: 'No', bold: true, alignment: 'center',
         },
         {
-          text: 'Nama Karyawan', bold: true, alignment: 'center',
+          text: 'No Karyawan', bold: true, alignment: 'center',
         },
         {
-          text: 'No. Karyawan', bold: true, alignment: 'center',
+          text: 'Nama Karyawan', bold: true, alignment: 'center',
         },
         {
           text: 'Bank No.', bold: true, alignment: 'center',
@@ -46,8 +47,8 @@ const genPDF = async (p) => {
 
     employee.map((e, i) => {
       vw1.push([
-        { text: (i + 1), alignment: 'center' }, e.d0, { text: e.e0, alignment: 'center' },
-        e.t0, e.s0,
+        { text: (i + 1), alignment: 'center' }, { text: e.e0, alignment: 'center' },
+        e.d0, e.t0, e.s0,
         { text: intpre0(e.ec0).format(), alignment: 'right' },
         { text: intpre0(e.ec0F).format(), alignment: 'right' },
       ]);
@@ -88,7 +89,7 @@ const genPDF = async (p) => {
             widths: [110, 412],
             body: [
               [{
-                text: `By Transfer Periode ${p.period} ${p.year}`, colSpan: 2, fontSize: 10, bold: true, margin: [0, 15, 0, 10],
+                text: `By Transfer - Periode Payroll ${p.period} ${p.year}`, colSpan: 2, fontSize: 10, bold: true, margin: [0, 15, 0, 10],
               }, ''],
             ],
           },
@@ -97,7 +98,7 @@ const genPDF = async (p) => {
         {
           style: 'tbl1',
           table: {
-            widths: [15, 160, 40, 70, 40, 60, 60],
+            widths: [15, 40, 160, 70, 40, 60, 60],
             body: vw1,
           },
         },
@@ -131,6 +132,60 @@ const genPDF = async (p) => {
   }
 };
 
+const genXLS = async (p) => {
+  try {
+    const { employee: e } = p;
+    await fs.ensureDir(`static/report/${p.dir}`);
+
+    const len = e.length + 4;
+    const wb = {
+      SheetNames: ['Sheet1'],
+      Sheets: {
+        Sheet1: {
+          '!ref': `A1:G${len}`,
+          A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
+          A2: { t: 's', v: `BY TRANSFER - PERIODE PAYROLL: ${p.period} ${p.year}` },
+          A3: { t: 's', v: 'No' },
+          B3: { t: 's', v: 'No Karyawan' },
+          C3: { t: 's', v: 'Nama Karyawan' },
+          D3: { t: 's', v: 'Bank No.' },
+          E3: { t: 's', v: 'Bank Name' },
+          F3: { t: 's', v: 'Take Home Pay' },
+          G3: { t: 's', v: 'THP for Bank' },
+        },
+      },
+    };
+    
+    let row = 3;
+    for (let i = 0; i < e.length; i += 1) {
+      row += 1;
+      wb.Sheets.Sheet1[`A${row}`] = { t: 'n', v: i + 1 };
+      wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: e[i].e0 };
+      wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: e[i].d0 };
+      wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: e[i].t0 };
+      wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: e[i].s0 };
+      wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: intpre0v2(e[i].ec0).format() };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: intpre0v2(e[i].ec0F).format() };
+    }
+
+    wb.Sheets.Sheet1[`A${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: intpre0v2(p.sum1).format() };
+    wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: intpre0v2(p.sum2).format() };
+
+    XLSX.writeFile(wb, `static/report/${p.dir}/${p.dir}_trf.xls`);
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
+};
 module.exports = {
   genPDF,
+  genXLS,
 };

@@ -89,7 +89,7 @@
 <script>
 import MiniSearch from 'minisearch';
 import { TrfReport } from '../../apollo/query/trf';
-import { GenPDFTrf } from '../../apollo/mutation/trf';
+import { GenPDFTrf, GenXLSTrf } from '../../apollo/mutation/trf';
 import mix from '../../mixins/payroll';
 
 export default {
@@ -111,6 +111,7 @@ export default {
   methods: {
     handleExport(c, dir) {
       if (c === 'pdf') this.genPDFTrf(dir);
+      else if (c === 'xls') this.genXLSTrf(dir);
     },
     async genPDFTrf(dir) {
       try {
@@ -124,6 +125,22 @@ export default {
 
         this.loadTrf = false;
         window.open(`/report/${dir}/${dir}_trf.pdf`);
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
+    },
+    async genXLSTrf(dir) {
+      try {
+        await this.$apollo.mutate({
+          mutation: GenXLSTrf,
+          variables: {
+            id: this.$route.params.id,
+          },
+        });
+
+        window.open(`/report/${dir}/${dir}_trf.xls`);
         return true;
       } catch ({ graphQLErrors, networkError }) {
         this.errors = graphQLErrors || networkError.result.errors;
