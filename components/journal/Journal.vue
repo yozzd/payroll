@@ -4,7 +4,9 @@
       <el-breadcrumb-item :to="{ path: '/dashboard' }">
         Home
       </el-breadcrumb-item>
-      <el-breadcrumb-item class="text-xl">Journal</el-breadcrumb-item>
+      <el-breadcrumb-item class="text-xl">
+        Journal
+      </el-breadcrumb-item>
     </el-breadcrumb>
     <div>
       {{ content }}

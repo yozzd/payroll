@@ -401,6 +401,7 @@ export const PayrollManual = gql`
         d0
         e0
         fc0
+        fe0
       }
     }
   }

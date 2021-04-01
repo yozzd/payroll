@@ -194,6 +194,7 @@ const EmployeeType = new GraphQLObjectType({
     ez0: { type: GraphQLBoolean },
     fb0: { type: GraphQLBoolean },
     fc0: { type: GraphQLFloat },
+    fe0: { type: GraphQLFloat },
     slip: { type: SlipCheckType },
     final: { type: FinalCheckType },
     gross: { type: GraphQLFloat },
