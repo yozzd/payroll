@@ -1,7 +1,9 @@
 <template>
   <div class="space-y-4">
     <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ path: '/dashboard' }">Home</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/dashboard' }">
+        Home
+      </el-breadcrumb-item>
       <el-breadcrumb-item>By Transfer</el-breadcrumb-item>
     </el-breadcrumb>
     <div class="flex space-x-4 items-center">
@@ -10,6 +12,22 @@
           {{ content }}
         </el-badge>
       </div>
+      <el-dropdown
+        trigger="click"
+        @command="c => handleExport(c, dir)"
+      >
+        <span class="el-dropdown-link">
+          Export<i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="pdf">
+            PDF
+          </el-dropdown-item>
+          <el-dropdown-item command="xls">
+            XLS
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
       <div class="w-64">
         <el-input
           v-model="search"
@@ -23,7 +41,7 @@
       :errors="errors"
     />
     <el-table
-      v-loading="$apollo.loading"
+      v-loading="$apollo.loading || loadTrf"
       element-loading-text="Loading..."
       element-loading-spinner="el-icon-loading"
       :data="tableData"
@@ -71,6 +89,7 @@
 <script>
 import MiniSearch from 'minisearch';
 import { TrfReport } from '../../apollo/query/trf';
+import { GenPDFTrf } from '../../apollo/mutation/trf';
 import mix from '../../mixins/payroll';
 
 export default {
@@ -78,6 +97,8 @@ export default {
   data() {
     return {
       content: '',
+      dir: '',
+      loadTrf: false,
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -88,8 +109,26 @@ export default {
     };
   },
   methods: {
-    goBack() {
-      this.$router.push({ path: '/dashboard/' });
+    handleExport(c, dir) {
+      if (c === 'pdf') this.genPDFTrf(dir);
+    },
+    async genPDFTrf(dir) {
+      try {
+        this.loadTrf = true;
+        await this.$apollo.mutate({
+          mutation: GenPDFTrf,
+          variables: {
+            id: this.$route.params.id,
+          },
+        });
+
+        this.loadTrf = false;
+        window.open(`/report/${dir}/${dir}_trf.pdf`);
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
     },
   },
   apollo: {
@@ -103,10 +142,13 @@ export default {
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const { period, year, employee } = data.trfReport;
+          const {
+            period, year, dir, employee,
+          } = data.trfReport;
           this.items = employee;
           this.miniSearch.addAll(this.items);
           this.content = `${period} ${year}`;
+          this.dir = dir;
         }
       },
       error({ graphQLErrors, networkError }) {

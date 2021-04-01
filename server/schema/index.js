@@ -38,6 +38,7 @@ const mutation = new GraphQLObjectType({
     ...Prorate.Mutation,
     ...Tax.Mutation,
     ...Thr.Mutation,
+    ...Trf.Mutation,
     ...User.Mutation,
   },
 });

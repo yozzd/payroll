@@ -6,6 +6,7 @@ export const TrfReport = gql`
       _id
       period
       year
+      dir
       employee {
         _id
         d0
