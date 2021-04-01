@@ -6,6 +6,7 @@ export const KetenagakerjaanReport = gql`
       _id
       period
       year
+      dir
       employee {
         _id
         d0
@@ -27,10 +28,4 @@ export const KetenagakerjaanReport = gql`
   }
 `;
 
-export const Faker = gql`
-  query faker ($id: String!) {
-    faker(id: $id) {
-      _id
-    }
-  }
-`;
+export const faker = '';

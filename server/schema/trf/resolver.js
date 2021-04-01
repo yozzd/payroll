@@ -4,7 +4,7 @@ const { PayrollType, GenType } = require('../payroll/type');
 const auth = require('../auth/service');
 const { genPDF, genXLS } = require('./method');
 
-const byTansfer = async(id) => {
+const byTansfer = async (id) => {
   const p = await Payroll.aggregate([
     { $match: { _id: id } },
     { $unwind: '$employee' },

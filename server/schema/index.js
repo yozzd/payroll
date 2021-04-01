@@ -34,6 +34,7 @@ const mutation = new GraphQLObjectType({
   fields: {
     ...ESlip.Mutation,
     ...Import.Mutation,
+    ...Ketenagakerjaan.Mutation,
     ...Payroll.Mutation,
     ...Prorate.Mutation,
     ...Tax.Mutation,

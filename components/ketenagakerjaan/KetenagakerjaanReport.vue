@@ -1,15 +1,30 @@
 <template>
   <div class="space-y-4">
-    <el-page-header :content="content" @back="goBack">
-    </el-page-header>
-    <ErrorHandler
-      v-if="errors"
-      :errors="errors"
-    />
+    <el-breadcrumb separator="/">
+      <el-breadcrumb-item :to="{ path: '/dashboard' }">
+        Home
+      </el-breadcrumb-item>
+      <el-breadcrumb-item>Ketenagakerjaan</el-breadcrumb-item>
+    </el-breadcrumb>
     <div class="flex space-x-4 items-center">
       <div class="flex-1">
-        Total {{ items.length }} items
+        <el-badge :value="items.length" type="success">
+          {{ content }}
+        </el-badge>
       </div>
+      <el-dropdown
+        trigger="click"
+        @command="c => handleExport(c, dir)"
+      >
+        <span class="el-dropdown-link">
+          Export<i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="pdf">
+            PDF
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
       <div class="w-64">
         <el-input
           v-model="search"
@@ -18,8 +33,12 @@
         />
       </div>
     </div>
+    <ErrorHandler
+      v-if="errors"
+      :errors="errors"
+    />
     <el-table
-      v-loading="$apollo.loading"
+      v-loading="$apollo.loading || loadKtg"
       element-loading-text="Loading..."
       element-loading-spinner="el-icon-loading"
       :data="tableData"
@@ -83,12 +102,12 @@
       <el-table-column label="Iuran Jaminan Pensiun" align="center">
         <el-table-column prop="ci0" label="Pemberi Kerja" width="120" align="right">
           <template slot-scope="scope">
-            <span>{{ scope.row.cd0 | currency }}</span>
+            <span>{{ scope.row.ci0 | currency }}</span>
           </template>
         </el-table-column>
         <el-table-column prop="cj0" label="Tenaga Kerja" width="120" align="right">
           <template slot-scope="scope">
-            <span>{{ scope.row.ce0 | currency }}</span>
+            <span>{{ scope.row.cj0 | currency }}</span>
           </template>
         </el-table-column>
       </el-table-column>
@@ -110,6 +129,7 @@
 <script>
 import MiniSearch from 'minisearch';
 import { KetenagakerjaanReport } from '../../apollo/query/ketenagakerjaan';
+import { GenPDFKtg } from '../../apollo/mutation/ketenagakerjaan';
 import mix from '../../mixins/payroll';
 
 export default {
@@ -117,6 +137,8 @@ export default {
   data() {
     return {
       content: '',
+      dir: '',
+      loadKtg: false,
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -129,8 +151,26 @@ export default {
     };
   },
   methods: {
-    goBack() {
-      this.$router.push({ path: '/dashboard/' });
+    handleExport(c, dir) {
+      if (c === 'pdf') this.genPDFKtg(dir);
+    },
+    async genPDFKtg(dir) {
+      try {
+        this.loadKtg = true;
+        await this.$apollo.mutate({
+          mutation: GenPDFKtg,
+          variables: {
+            id: this.$route.params.id,
+          },
+        });
+
+        this.loadKtg = false;
+        window.open(`/report/${dir}/${dir}_ktg.pdf`);
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
     },
   },
   apollo: {
@@ -144,10 +184,13 @@ export default {
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const { period, year, employee } = data.ketenagakerjaanReport;
+          const {
+            period, year, dir, employee,
+          } = data.ketenagakerjaanReport;
           this.items = employee;
           this.miniSearch.addAll(this.items);
           this.content = `${period} ${year}`;
+          this.dir = dir;
         }
       },
       error({ graphQLErrors, networkError }) {

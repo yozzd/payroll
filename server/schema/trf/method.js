@@ -18,7 +18,7 @@ const genPDF = async (p) => {
   try {
     const { employee } = p;
     await fs.ensureDir(`static/report/${p.dir}`);
-    
+
     const vw1 = [
       [
         {
@@ -155,7 +155,7 @@ const genXLS = async (p) => {
         },
       },
     };
-    
+
     let row = 3;
     for (let i = 0; i < e.length; i += 1) {
       row += 1;
