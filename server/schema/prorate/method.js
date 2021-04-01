@@ -118,7 +118,7 @@ const generateProrate = async (p) => {
     ];
 
     const docDefinition = {
-      // userPassword: e.slip.pw,
+      userPassword: e.slip.pw,
       footer: (currentPage, pageCount) => ({
         columns: [
           { text: `${currentPage.toString()} / ${pageCount}`, fontSize: 8, margin: [20, 0] },
