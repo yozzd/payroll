@@ -645,14 +645,19 @@ const Mutation = {
     resolve: auth.hasRole('user', async (_, { input }) => {
       const {
         _id, d0, e0, g0, j0,
+        n0, o0, p0, r0,
       } = input;
       const px = await Payroll.findOne({ _id });
 
       px.employee.push({
-        d0,
+        d0: d0.toUpperCase(),
         e0,
         g0,
         j0,
+        n0,
+        o0,
+        p0,
+        r0,
         ay0: g0,
       });
       await px.save();

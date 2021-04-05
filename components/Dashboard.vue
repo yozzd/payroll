@@ -470,7 +470,7 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :before-close="handleAddEmployeeDialogClose"
-      width="20%"
+      width="40%"
     >
       <ErrorHandler
         v-if="errors"
@@ -484,27 +484,63 @@
         :hide-required-asterisk="true"
         label-position="top"
       >
-        <el-form-item label="No. Karyawan" prop="e0">
-          <el-input
-            v-model="formAddEmployee.e0"
-            v-maska="'A.####'"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="Nama Karyawan" prop="d0">
-          <el-input
-            v-model="formAddEmployee.d0"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="Gaji Pokok" prop="g0">
-          <el-input
-            v-model="formAddEmployee.g0"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="Hari Kerja" prop="j0">
-          <el-input
-            v-model="formAddEmployee.j0"
-          ></el-input>
-        </el-form-item>
+        <div class="flex space-x-4">
+          <div class="flex-1">
+            <el-form-item label="No. Karyawan" prop="e0">
+              <el-input
+                v-model="formAddEmployee.e0"
+                v-maska="'A.####'"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Nama Karyawan" prop="d0">
+              <el-input
+                v-model="formAddEmployee.d0"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Gaji Pokok" prop="g0">
+              <el-input
+                v-model="formAddEmployee.g0"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Hari Kerja" prop="j0">
+              <el-input
+                v-model="formAddEmployee.j0"
+              ></el-input>
+            </el-form-item>
+          </div>
+          <div class="flex-1">
+            <el-form-item label="Jenis Kelamin" prop="n0">
+              <el-select v-model="formAddEmployee.n0" filterable>
+                <el-option label="Female" value="Female"></el-option>
+                <el-option label="Male" value="Male"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="Birthday" prop="o0">
+              <el-date-picker
+                v-model="formAddEmployee.o0"
+                type="date"
+              ></el-date-picker>
+            </el-form-item>
+            <el-form-item label="Status (NPWP)" prop="p0">
+              <el-select v-model="formAddEmployee.p0" filterable>
+                <el-option label="No" value="No"></el-option>
+                <el-option label="Yes" value="Yes"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="Status Tanggungan (NPWP)" prop="r0">
+              <el-select v-model="formAddEmployee.r0" filterable>
+                <el-option label="K/0" value="K/0"></el-option>
+                <el-option label="K/1" value="K/1"></el-option>
+                <el-option label="K/2" value="K/2"></el-option>
+                <el-option label="K/3" value="K/3"></el-option>
+                <el-option label="TK/0" value="TK/0"></el-option>
+                <el-option label="TK/1" value="TK/1"></el-option>
+                <el-option label="TK/2" value="TK/2"></el-option>
+                <el-option label="TK/3" value="TK/3"></el-option>
+              </el-select>
+            </el-form-item>
+          </div>
+        </div>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleAddEmployeeDialogClose">Cancel</el-button>
@@ -655,6 +691,10 @@ export default {
         e0: '',
         g0: '',
         j0: '',
+        n0: '',
+        o0: '',
+        p0: '',
+        r0: '',
       },
       formCloneEmployee: {
         id: '',
@@ -694,6 +734,11 @@ export default {
         d0: [{ required: true, message: 'Required' }],
         e0: [{ required: true, message: 'Required' }],
         g0: [{ required: true, message: 'Required' }],
+        j0: [{ required: true, message: 'Required' }],
+        n0: [{ required: true, message: 'Required', trigger: 'change' }],
+        o0: [{ required: true, message: 'Required' }],
+        p0: [{ required: true, message: 'Required', trigger: 'change' }],
+        r0: [{ required: true, message: 'Required', trigger: 'change' }],
       },
       rulesCloneEmployee: {
         e0: [{ required: true, message: 'Required' }],
@@ -872,6 +917,10 @@ export default {
                   e0: this.formAddEmployee.e0,
                   g0: this.formAddEmployee.g0,
                   j0: this.formAddEmployee.j0,
+                  n0: this.formAddEmployee.n0,
+                  o0: this.formAddEmployee.o0,
+                  p0: this.formAddEmployee.p0,
+                  r0: this.formAddEmployee.r0,
                 },
               },
             });
