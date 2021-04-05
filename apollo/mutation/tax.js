@@ -24,3 +24,19 @@ export const SendTax = gql`
     }
   }
 `;
+
+export const GenPDFTax = gql`
+  mutation genPDFTax($id: String!) {
+    genPDFTax(id: $id) {
+      sStatus
+    }
+  }
+`;
+
+export const GenXLSTax = gql`
+  mutation genXLSTax($id: String!) {
+    genXLSTax(id: $id) {
+      sStatus
+    }
+  }
+`;

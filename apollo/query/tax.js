@@ -6,6 +6,7 @@ export const TaxReport = gql`
       _id
       year
       period
+      dir
       employee {
         _id
         d0

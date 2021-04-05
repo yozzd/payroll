@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 // const { getMonth } = require('date-fns');
 
 const { intpre0 } = require('../scalar/number');
-// const { idDateFormat } = require('../scalar/date');
+const { gDateFormat } = require('../scalar/date');
 
 const smtp = require('../../config/smtp');
 
@@ -197,4 +197,217 @@ const sendTax = async (p) => {
   }
 };
 
-module.exports = { generateTax, sendTax };
+const genPDF = async (p) => {
+  try {
+    const { employee } = p;
+    await fs.ensureDir(`static/report/${p.dir}`);
+
+    const vw1 = [
+      [
+        {
+          text: 'No', bold: true, alignment: 'center',
+        },
+        {
+          text: 'No Karyawan', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Nama Karyawan', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Hired Date', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Position', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Department', bold: true, alignment: 'center',
+        },
+        {
+          text: 'NPWP', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Basic Salary', bold: true, alignment: 'center',
+        },
+        {
+          text: 'OT Amount', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Allowance', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Ins. Paid By Company', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Retro Fill', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Pesangon, Serv.', bold: true, alignment: 'center',
+        },
+        {
+          text: 'THR, Leave', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Deduction', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Absent', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Gross', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Ins. Paid By Employee', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Pajak Penghasilan Ber NPWP', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Pajak Penghasilan Non NPWP', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Total Tax', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Pengembalian Pajak DTP', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Total All', bold: true, alignment: 'center',
+        },
+      ],
+    ];
+
+    employee.map((e, i) => {
+      vw1.push([
+        { text: (i + 1), alignment: 'center' }, { text: e.e0, alignment: 'center' }, e.d0,
+        { text: gDateFormat(e.i0, 'yyyy-MM-dd'), alignment: 'right' },
+        e.y0, e.u0, e.q0,
+        { text: intpre0(e.l0).format(), alignment: 'right' },
+        { text: intpre0(e.ai0).format(), alignment: 'right' },
+        { text: intpre0(e.bk0).format(), alignment: 'right' },
+        { text: intpre0(e.cn0).format(), alignment: 'right' },
+        { text: intpre0(e.bu0).format(), alignment: 'right' },
+        { text: intpre0(e.en0).format(), alignment: 'right' },
+        { text: intpre0(e.eq0).format(), alignment: 'right' },
+        { text: intpre0(e.df0).format(), alignment: 'right' },
+        { text: intpre0(e.cy0).format(), alignment: 'right' },
+        { text: intpre0(e.gross).format(), alignment: 'right' },
+        { text: intpre0(e.er0).format(), alignment: 'right' },
+        { text: intpre0(e.cz0).format(), alignment: 'right' },
+        { text: intpre0(e.da0).format(), alignment: 'right' },
+        { text: intpre0(e.db0).format(), alignment: 'right' },
+        { text: intpre0(e.es0).format(), alignment: 'right' },
+        { text: intpre0(e.ttax).format(), alignment: 'right' },
+      ]);
+
+      return true;
+    });
+
+    vw1.push([
+      '', '', '', '', '', '', '',
+      { text: intpre0(p.sum1).format(), alignment: 'right' },
+      { text: intpre0(p.sum2).format(), alignment: 'right' },
+      { text: intpre0(p.sum3).format(), alignment: 'right' },
+      { text: intpre0(p.sum4).format(), alignment: 'right' },
+      { text: intpre0(p.sum5).format(), alignment: 'right' },
+      { text: intpre0(p.sum6).format(), alignment: 'right' },
+      { text: intpre0(p.sum7).format(), alignment: 'right' },
+      { text: intpre0(p.sum8).format(), alignment: 'right' },
+      { text: intpre0(p.sum9).format(), alignment: 'right' },
+      { text: intpre0(p.sum10).format(), alignment: 'right' },
+      { text: intpre0(p.sum11).format(), alignment: 'right' },
+      { text: intpre0(p.sum12).format(), alignment: 'right' },
+      { text: intpre0(p.sum13).format(), alignment: 'right' },
+      { text: intpre0(p.sum14).format(), alignment: 'right' },
+      { text: intpre0(p.sum15).format(), alignment: 'right' },
+      { text: intpre0(p.sum16).format(), alignment: 'right' },
+    ]);
+    
+    const docDefinition = {
+      pageOrientation: 'landscape',
+      footer: (currentPage, pageCount) => ({
+        columns: [
+          { text: `${currentPage.toString()} / ${pageCount}`, fontSize: 8, margin: [20, 0] },
+        ],
+      }),
+      content: [
+        {
+          style: 'tbl1',
+          table: {
+            widths: [170, 240, 200, 135],
+            body: [
+              [{
+                image: 'static/images/logo.png', width: 60, rowSpan: 2, border: [false, false, false, false],
+              }, { text: '', border: [false, false, false, false] }, {
+                text: 'PT. LABTECH PENTA INTERNATIONAL', bold: true, fontSize: 8, border: [false, false, false, true],
+              }, {
+                text: 'TAX', bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, true],
+              }],
+              ['', { text: '', border: [false, false, false, false] }, { text: 'Kawasan Industri Sekupang Kav. 34 Batam - Indonesia', border: [false, false, false, false] }, {
+                text: '', border: [false, false, false, false],
+              }],
+            ],
+          },
+        },
+        {
+          style: 'tbl2',
+          table: {
+            widths: [110, 412],
+            body: [
+              [{
+                text: `Tax - Periode Payroll ${p.period} ${p.year}`, colSpan: 2, fontSize: 10, bold: true, margin: [0, 15, 0, 10],
+              }, ''],
+            ],
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl3',
+          table: {
+            widths: [
+              10, 20, 50, 25, 25, 25, 25,
+              25, 25, 25, 25, 25, 25, 25,
+              25, 25, 25, 25, 25, 25, 25,
+              25, 25,
+            ],
+            body: vw1,
+          },
+        },
+      ],
+      styles: {
+        tbl1: {
+          fontSize: 8,
+          margin: [-10, -10, -10, 0],
+        },
+        tbl2: {
+          fontSize: 8,
+          margin: [-10, 20, -10, 10],
+        },
+        tbl3: {
+          fontSize: 4,
+          margin: [-10, -10, -10, 0],
+        },
+      },
+    };
+
+    return new Promise((resolve) => {
+      const pdfDoc = printer.createPdfKitDocument(docDefinition);
+      pdfDoc.pipe(fs.createWriteStream(`static/report/${p.dir}/${p.dir}_tax.pdf`));
+      pdfDoc.on('end', () => {
+        resolve({ sStatus: 1 });
+      });
+      pdfDoc.end();
+    });
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
+};
+
+module.exports = {
+  generateTax,
+  sendTax,
+  genPDF
+};

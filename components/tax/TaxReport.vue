@@ -1,15 +1,35 @@
 <template>
   <div class="space-y-4">
-    <el-page-header :content="content" @back="goBack">
-    </el-page-header>
-    <ErrorHandler
-      v-if="errors"
-      :errors="errors"
-    />
+    <el-breadcrumb separator="/">
+      <el-breadcrumb-item :to="{ path: '/dashboard' }">
+        Home
+      </el-breadcrumb-item>
+      <el-breadcrumb-item class="text-xl">
+        Tax
+      </el-breadcrumb-item>
+    </el-breadcrumb>
     <div class="flex space-x-4 items-center">
       <div class="flex-1">
-        Total {{ items.length }} items
+        <el-badge :value="items.length" type="success">
+          {{ content }}
+        </el-badge>
       </div>
+      <el-dropdown
+        trigger="click"
+        @command="c => handleExport(c, dir)"
+      >
+        <span class="el-dropdown-link">
+          Export<i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="pdf">
+            PDF
+          </el-dropdown-item>
+          <el-dropdown-item command="xls">
+            XLS
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
       <div class="w-64">
         <el-input
           v-model="search"
@@ -18,8 +38,12 @@
         />
       </div>
     </div>
+    <ErrorHandler
+      v-if="errors"
+      :errors="errors"
+    />
     <el-table
-      v-loading="$apollo.loading"
+      v-loading="$apollo.loading || loadTax"
       element-loading-text="Loading..."
       element-loading-spinner="el-icon-loading"
       :data="tableData"
@@ -177,14 +201,7 @@
           <span>{{ scope.row.es0 | currency }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="ttax" width="120" align="right">
-        <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Total Tax Diatas 200 Juta">
-              Total Tax Diatas 200 Juta
-            </p>
-          </client-only>
-        </template>
+      <el-table-column prop="ttax" label="Total All" width="120" align="right">
         <template slot-scope="scope">
           <span>{{ scope.row.ttax | currency }}</span>
         </template>
@@ -197,6 +214,7 @@
 <script>
 import MiniSearch from 'minisearch';
 import { TaxReport } from '../../apollo/query/tax';
+import { GenPDFTax, GenXLSTax } from '../../apollo/mutation/tax';
 import mix from '../../mixins/payroll';
 
 export default {
@@ -204,6 +222,8 @@ export default {
   data() {
     return {
       content: '',
+      dir: '',
+      loadTax: false,
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -217,8 +237,43 @@ export default {
     };
   },
   methods: {
-    goBack() {
-      this.$router.push({ path: '/dashboard/' });
+    handleExport(c, dir) {
+      if (c === 'pdf') this.genPDFTax(dir);
+      else if (c === 'xls') this.genXLSTax(dir);
+    },
+    async genPDFTax(dir) {
+      try {
+        this.loadTax = true;
+        await this.$apollo.mutate({
+          mutation: GenPDFTax,
+          variables: {
+            id: this.$route.params.id,
+          },
+        });
+
+        this.loadTax = false;
+        window.open(`/report/${dir}/${dir}_tax.pdf`);
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
+    },
+    async genXLSTax(dir) {
+      try {
+        await this.$apollo.mutate({
+          mutation: GenXLSTax,
+          variables: {
+            id: this.$route.params.id,
+          },
+        });
+
+        window.open(`/report/${dir}/${dir}_tax.xls`);
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
     },
   },
   apollo: {
@@ -232,10 +287,13 @@ export default {
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const { period, year, employee } = data.taxReport;
+          const {
+            period, year, dir, employee,
+          } = data.taxReport;
           this.items = employee;
           this.miniSearch.addAll(this.items);
           this.content = `${period} ${year}`;
+          this.dir = dir;
         }
       },
       error({ graphQLErrors, networkError }) {
