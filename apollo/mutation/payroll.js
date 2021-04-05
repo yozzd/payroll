@@ -271,6 +271,20 @@ export const EditTax = gql`
   }
 `;
 
+export const EditFee = gql`
+  mutation editFee($input: EditFeeInputType) {
+    editFee(input: $input) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        co0
+      }
+    }
+  }
+`;
+
 export const EditReduction = gql`
   mutation editReduction($input: EditReductionInputType) {
     editReduction(input: $input) {

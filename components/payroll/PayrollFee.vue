@@ -31,7 +31,17 @@
       <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
       <el-table-column prop="d0" label="Nama Karyawan" width="300" fixed>
         <template slot-scope="scope">
-          <p>
+          <el-link
+            v-if="!freeze"
+            type="primary"
+            class="font-sm"
+            @click="showEdit(scope.row)"
+          >
+            <p>
+              {{ scope.row.d0 }}
+            </p>
+          </el-link>
+          <p v-else>
             {{ scope.row.d0 }}
           </p>
         </template>
@@ -84,29 +94,132 @@
           </template>
         </el-table-column>
       </el-table-column>
+      <el-table-column
+        prop="co0"
+        label="Upah Untuk Pelaporan BPJS Kesehatan"
+        width="120"
+        align="right"
+      >
+        <template slot-scope="scope">
+          <span>{{ scope.row.co0 | currency }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="" min-width="120"></el-table-column>
     </el-table>
+
+    <el-dialog
+      title="Edit Employee"
+      :visible.sync="showEditDialog"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :before-close="handleEditDialogClose"
+      width="20%"
+    >
+      <ErrorHandler
+        v-if="errors"
+        :errors="errors"
+        class="mb-8"
+      />
+      <el-form
+        ref="form"
+        :model="form"
+        :hide-required-asterisk="true"
+        label-position="top"
+      >
+        <el-form-item label="No. Karyawan">
+          <el-input
+            v-model="form.e0"
+            :disabled="true"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="Nama Karyawan">
+          <el-input
+            v-model="form.d0"
+            :disabled="true"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="Upah untuk Pelaporan BPJS Kesehatan">
+          <el-input v-model="form.co0"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleEditDialogClose">Cancel</el-button>
+        <el-button
+          type="primary"
+          :loading="loading"
+          @click="handleEdit('form')"
+        >
+          Update
+        </el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import MiniSearch from 'minisearch';
 import { PayrollFee } from '../../apollo/query/payroll';
+import { EditFee } from '../../apollo/mutation/payroll';
 import mix from '../../mixins/payroll';
 
 export default {
   mixins: [mix],
   data() {
     return {
+      showEditDialog: false,
+      form: {},
+      loading: false,
+      freeze: false,
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
           '_id', 'd0', 'e0', 'cb0', 'cc0', 'cd0', 'ce0',
-          'ci0', 'cj0', 'cq0', 'cr0',
+          'ci0', 'cj0', 'cq0', 'cr0', 'co0',
         ],
       }),
     };
+  },
+  methods: {
+    showEdit(row) {
+      this.showEditDialog = true;
+      this.form = { ...row };
+    },
+    handleEditDialogClose() {
+      this.$refs.form.resetFields();
+      this.showEditDialog = false;
+    },
+    handleEdit(form) {
+      this.$refs[form].validate(async (valid) => {
+        if (valid) {
+          try {
+            this.loading = true;
+
+            await this.$apollo.mutate({
+              mutation: EditFee,
+              variables: {
+                input: {
+                  _id: this.$route.params.id,
+                  employee: {
+                    _id: this.form._id,
+                    co0: parseInt(this.form.co0, 10),
+                  },
+                },
+              },
+            });
+
+            this.handleEditDialogClose();
+            this.loading = false;
+            return true;
+          } catch ({ graphQLErrors, networkError }) {
+            this.errors = graphQLErrors || networkError.result.errors;
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
+    },
   },
   apollo: {
     payrollFee: {
@@ -119,7 +232,8 @@ export default {
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const { employee } = data.payrollFee;
+          const { employee, freeze } = data.payrollFee;
+          this.freeze = freeze;
           this.items = employee;
           this.miniSearch.addAll(this.items);
         }

@@ -150,6 +150,14 @@ const TaxInputType = new GraphQLInputObjectType({
   }),
 });
 
+const FeeInputType = new GraphQLInputObjectType({
+  name: 'FeeInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    co0: { type: GraphQLInt },
+  }),
+});
+
 const ReductionInputType = new GraphQLInputObjectType({
   name: 'ReductionInputType',
   fields: () => ({
@@ -302,6 +310,14 @@ const EditTaxInputType = new GraphQLInputObjectType({
   }),
 });
 
+const EditFeeInputType = new GraphQLInputObjectType({
+  name: 'EditFeeInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    employee: { type: FeeInputType },
+  }),
+});
+
 const EditReductionInputType = new GraphQLInputObjectType({
   name: 'EditReductionInputType',
   fields: () => ({
@@ -355,6 +371,7 @@ module.exports = {
   EditEarningOthersInputType,
   EditAbsentInputType,
   EditTaxInputType,
+  EditFeeInputType,
   EditReductionInputType,
   EditDeductionOthersInputType,
   EditFlagsEmployeeInputType,

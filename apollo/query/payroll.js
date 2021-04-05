@@ -254,6 +254,7 @@ export const PayrollFee = gql`
   query payrollFee($id: String!) {
     payrollFee(id: $id) {
       _id
+      freeze
       employee {
         _id
         d0
@@ -266,6 +267,7 @@ export const PayrollFee = gql`
         cj0
         cq0
         cr0
+        co0
         ex0
       }
     }
