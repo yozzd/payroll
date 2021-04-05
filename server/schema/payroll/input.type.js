@@ -1,6 +1,7 @@
 const {
   GraphQLInputObjectType,
   GraphQLString,
+  GraphQLInt,
 } = require('graphql');
 
 const AddEmployeeInputType = new GraphQLInputObjectType({
@@ -10,11 +11,14 @@ const AddEmployeeInputType = new GraphQLInputObjectType({
     d0: { type: GraphQLString },
     e0: { type: GraphQLString },
     g0: { type: GraphQLString },
+    i0: { type: GraphQLString },
     j0: { type: GraphQLString },
+    k0: { type: GraphQLString },
     n0: { type: GraphQLString },
     o0: { type: GraphQLString },
     p0: { type: GraphQLString },
     r0: { type: GraphQLString },
+    co0: { type: GraphQLInt },
   }),
 });
 

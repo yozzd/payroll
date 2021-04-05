@@ -470,7 +470,7 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :before-close="handleAddEmployeeDialogClose"
-      width="40%"
+      width="60%"
     >
       <ErrorHandler
         v-if="errors"
@@ -538,6 +538,23 @@
                 <el-option label="TK/2" value="TK/2"></el-option>
                 <el-option label="TK/3" value="TK/3"></el-option>
               </el-select>
+            </el-form-item>
+          </div>
+          <div class="flex-1">
+            <el-form-item label="Hired Date">
+              <el-date-picker
+                v-model="formAddEmployee.i0"
+                type="date"
+              ></el-date-picker>
+            </el-form-item>
+            <el-form-item label="Resign / Finish Date">
+              <el-date-picker
+                v-model="formAddEmployee.k0"
+                type="date"
+              ></el-date-picker>
+            </el-form-item>
+            <el-form-item label="Upah untuk Pelaporan BPJS Kesehatan" prop="co0">
+              <el-input v-model="formAddEmployee.co0"></el-input>
             </el-form-item>
           </div>
         </div>
@@ -690,11 +707,14 @@ export default {
         d0: '',
         e0: '',
         g0: '',
+        i0: '',
         j0: '',
+        k0: '',
         n0: '',
         o0: '',
         p0: '',
         r0: '',
+        co0: '',
       },
       formCloneEmployee: {
         id: '',
@@ -739,6 +759,7 @@ export default {
         o0: [{ required: true, message: 'Required' }],
         p0: [{ required: true, message: 'Required', trigger: 'change' }],
         r0: [{ required: true, message: 'Required', trigger: 'change' }],
+        co0: [{ required: true, message: 'Required' }],
       },
       rulesCloneEmployee: {
         e0: [{ required: true, message: 'Required' }],
@@ -916,11 +937,14 @@ export default {
                   d0: this.formAddEmployee.d0,
                   e0: this.formAddEmployee.e0,
                   g0: this.formAddEmployee.g0,
+                  i0: this.formAddEmployee.i0,
                   j0: this.formAddEmployee.j0,
+                  k0: this.formAddEmployee.k0,
                   n0: this.formAddEmployee.n0,
                   o0: this.formAddEmployee.o0,
                   p0: this.formAddEmployee.p0,
                   r0: this.formAddEmployee.r0,
+                  co0: parseInt(this.formAddEmployee.co0, 10),
                 },
               },
             });
