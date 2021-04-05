@@ -52,44 +52,30 @@
           </p>
         </template>
       </el-table-column>
-      <el-table-column width="100" align="center">
-        <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tidak Ikut Pensiun">
-              Tidak Ikut Pensiun
-            </p>
-          </client-only>
-        </template>
+      <el-table-column label="Tidak Ikut Pensiun" width="100" align="center">
         <template slot-scope="scope">
           <p v-if="scope.row.ey0">
             X
           </p>
         </template>
       </el-table-column>
-      <el-table-column width="100" align="center">
-        <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tidak Ikut BPJS">
-              Tidak Ikut BPJS
-            </p>
-          </client-only>
-        </template>
+      <el-table-column label="Tidak Ikut BPJS" width="100" align="center">
         <template slot-scope="scope">
           <p v-if="scope.row.ez0">
             X
           </p>
         </template>
       </el-table-column>
-      <el-table-column width="100" align="center">
-        <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tidak Dapat Relaksasi JKK & JK">
-              Tidak Dapat Relaksasi JKK & JK
-            </p>
-          </client-only>
-        </template>
+      <el-table-column label="Tidak Dapat Relaksasi JKK & JK" width="100" align="center">
         <template slot-scope="scope">
           <p v-if="scope.row.fb0">
+            X
+          </p>
+        </template>
+      </el-table-column>
+      <el-table-column label="Final Payment Dibayarkan" width="100" align="center">
+        <template slot-scope="scope">
+          <p v-if="scope.row.fj0">
             X
           </p>
         </template>
@@ -141,6 +127,9 @@
           <el-checkbox v-model="form.fb0">
             Tidak Dapat Relaksasi JKK & JK
           </el-checkbox>
+          <el-checkbox v-model="form.fj0">
+            Final Payment BPJS Dibayarkan
+          </el-checkbox>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -176,7 +165,7 @@ export default {
         fields: ['d0', 'e0'],
         storeFields: [
           '_id', 'd0', 'e0', 'ex0', 'ey0',
-          'ez0', 'fb0',
+          'ez0', 'fb0', 'fj0',
         ],
       }),
     };
@@ -207,6 +196,7 @@ export default {
                     ey0: this.form.ey0,
                     ez0: this.form.ez0,
                     fb0: this.form.fb0,
+                    fj0: this.form.fj0,
                   },
                 },
               },

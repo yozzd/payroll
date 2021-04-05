@@ -256,6 +256,21 @@ export const EditAbsent = gql`
   }
 `;
 
+export const EditTax = gql`
+  mutation editTax($input: EditTaxInputType) {
+    editTax(input: $input) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        dz0
+        ea0
+      }
+    }
+  }
+`;
+
 export const EditReduction = gql`
   mutation editReduction($input: EditReductionInputType) {
     editReduction(input: $input) {

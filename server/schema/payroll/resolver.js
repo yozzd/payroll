@@ -28,6 +28,7 @@ const {
   EditLeaveInputType,
   EditEarningOthersInputType,
   EditAbsentInputType,
+  EditTaxInputType,
   EditReductionInputType,
   EditDeductionOthersInputType,
   EditFlagsEmployeeInputType,
@@ -354,12 +355,15 @@ const Query = {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
+          freeze: 1,
           'employee._id': 1,
           'employee.d0': 1,
           'employee.e0': 1,
           'employee.cz0': 1,
           'employee.da0': 1,
           'employee.db0': 1,
+          'employee.dz0': 1,
+          'employee.ea0': 1,
           'employee.es0': 1,
           'employee.ex0': 1,
         });
@@ -487,6 +491,7 @@ const Query = {
           'employee.ey0': 1,
           'employee.ez0': 1,
           'employee.fb0': 1,
+          'employee.fj0': 1,
         });
       return p;
     }),
@@ -788,6 +793,17 @@ const Mutation = {
     type: PayrollType,
     args: {
       input: { type: EditAbsentInputType },
+    },
+    resolve: auth.hasRole('user', async (_, { input }) => {
+      const { _id, employee } = input;
+      const s = updateEmployee(_id, employee, Payroll);
+      return s;
+    }),
+  },
+  editTax: {
+    type: PayrollType,
+    args: {
+      input: { type: EditTaxInputType },
     },
     resolve: auth.hasRole('user', async (_, { input }) => {
       const { _id, employee } = input;

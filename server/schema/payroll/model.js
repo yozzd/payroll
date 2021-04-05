@@ -448,7 +448,7 @@ EmployeeSchema.pre('save', async function fn(next) {
     + Math.min(Math.max(0, pkpSetahun - 50000000), 200000000) * 0.15
     + Math.min(Math.max(0, pkpSetahun - 250000000), 250000000) * 0.25
     + Math.max(0, pkpSetahun - 500000000) * 0.3;
-  const pph21Bulanan = Math.round(pph21Tahunan / this.ea0);
+  const pph21Bulanan = pph21Tahunan === 0 ? 0 : Math.round(pph21Tahunan / this.ea0);
 
   if (this.fc0 && this.p0 === 'Yes') {
     this.cz0 = this.fc0;

@@ -276,6 +276,7 @@ export const PayrollTax = gql`
   query payrollTax($id: String!) {
     payrollTax(id: $id) {
       _id
+      freeze
       employee {
         _id
         d0
@@ -283,6 +284,8 @@ export const PayrollTax = gql`
         cz0
         da0
         db0
+        dz0
+        ea0
         es0
         ex0
       }
@@ -386,6 +389,7 @@ export const PayrollFlags = gql`
         ey0
         ez0
         fb0
+        fj0
       }
     }
   }

@@ -134,10 +134,19 @@ const EarningOthersInputType = new GraphQLInputObjectType({
 });
 
 const AbsentInputType = new GraphQLInputObjectType({
-  name: 'AbsentlInputType',
+  name: 'AbsentInputType',
   fields: () => ({
     _id: { type: GraphQLString },
     cw0: { type: GraphQLFloat },
+  }),
+});
+
+const TaxInputType = new GraphQLInputObjectType({
+  name: 'TaxInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    dz0: { type: GraphQLString },
+    ea0: { type: GraphQLInt },
   }),
 });
 
@@ -173,6 +182,7 @@ const FlagsInputType = new GraphQLInputObjectType({
     ey0: { type: GraphQLBoolean },
     ez0: { type: GraphQLBoolean },
     fb0: { type: GraphQLBoolean },
+    fj0: { type: GraphQLBoolean },
   }),
 });
 
@@ -284,6 +294,14 @@ const EditAbsentInputType = new GraphQLInputObjectType({
   }),
 });
 
+const EditTaxInputType = new GraphQLInputObjectType({
+  name: 'EditTaxInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    employee: { type: TaxInputType },
+  }),
+});
+
 const EditReductionInputType = new GraphQLInputObjectType({
   name: 'EditReductionInputType',
   fields: () => ({
@@ -336,6 +354,7 @@ module.exports = {
   EditLeaveInputType,
   EditEarningOthersInputType,
   EditAbsentInputType,
+  EditTaxInputType,
   EditReductionInputType,
   EditDeductionOthersInputType,
   EditFlagsEmployeeInputType,
