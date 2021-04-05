@@ -200,6 +200,17 @@ const Mutation = {
       return s;
     }),
   },
+  genXLSTax: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('user', async (_, { id }) => {
+      const p = await taxR(id);
+      const s = await genXLS(p);
+      return s;
+    }),
+  },
 };
 
 module.exports = {

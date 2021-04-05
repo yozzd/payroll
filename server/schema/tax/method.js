@@ -2,9 +2,9 @@ const { GraphQLError } = require('graphql');
 const PdfPrinter = require('pdfmake');
 const fs = require('fs-extra');
 const nodemailer = require('nodemailer');
-// const { getMonth } = require('date-fns');
+const XLSX = require('xlsx');
 
-const { intpre0 } = require('../scalar/number');
+const { intpre0, intpre0v2 } = require('../scalar/number');
 const { gDateFormat } = require('../scalar/date');
 
 const smtp = require('../../config/smtp');
@@ -22,25 +22,9 @@ const generateTax = async (p) => {
     const { employee: e } = p;
     await fs.ensureDir(`static/tax/${p.dir}`);
 
-    // const months = [
-    //   'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-    //   'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember',
-    // ];
-
     const ctbl1 = [
       [{ text: e.h0, bold: true }, '', { text: intpre0(Math.abs(e.i0)).format(), alignment: 'right', fontSize: 10 }],
-      // [`Installment ${p.year} :`, '', ''],
     ];
-
-    // const start = getMonth(p.from);
-    // const end = getMonth(p.to);
-    // const ds = [e.j0, e.k0, e.l0, e.m0, e.n0, e.o0];
-
-    // for (let i = start; i <= end; i += 1) {
-    //   ctbl1.push([
-    //     '', months[i], { text: intpre0(Math.abs(ds[i - start])).format(), alignment: 'right'},
-    //   ]);
-    // }
 
     const notes = [
       ['', 'Note :', ''],
@@ -406,8 +390,111 @@ const genPDF = async (p) => {
   }
 };
 
+const genXLS = async (p) => {
+  try {
+    const { employee: e } = p;
+    await fs.ensureDir(`static/report/${p.dir}`);
+
+    const len = e.length + 4;
+    const wb = {
+      SheetNames: ['Sheet1'],
+      Sheets: {
+        Sheet1: {
+          '!ref': `A1:W${len}`,
+          A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
+          A2: { t: 's', v: `TAX - PERIODE PAYROLL: ${p.period} ${p.year}` },
+          A3: { t: 's', v: 'No' },
+          B3: { t: 's', v: 'No Karyawan' },
+          C3: { t: 's', v: 'Nama Karyawan' },
+          D3: { t: 's', v: 'Hired Date' },
+          E3: { t: 's', v: 'Position' },
+          F3: { t: 's', v: 'Department' },
+          G3: { t: 's', v: 'NPWP' },
+          H3: { t: 's', v: 'Basic Salary' },
+          I3: { t: 's', v: 'OT Amount' },
+          J3: { t: 's', v: 'Allowance' },
+          K3: { t: 's', v: 'Ins. Paid By Company' },
+          L3: { t: 's', v: 'Retro Fill' },
+          M3: { t: 's', v: 'Pesangon, Serv.' },
+          N3: { t: 's', v: 'THR, Leave' },
+          O3: { t: 's', v: 'Deduction' },
+          P3: { t: 's', v: 'Absent' },
+          Q3: { t: 's', v: 'Gross' },
+          R3: { t: 's', v: 'Ins. Paid By Employee' },
+          S3: { t: 's', v: 'Pajak Penghasilan Ber NPWP' },
+          T3: { t: 's', v: 'Pajak Penghasilan Non NPWP' },
+          U3: { t: 's', v: 'Total Tax' },
+          V3: { t: 's', v: 'Pengembalian Pajak DTP' },
+          W3: { t: 's', v: 'Total All' },
+        },
+      },
+    };
+
+    let row = 3;
+    for (let i = 0; i < e.length; i += 1) {
+      row += 1;
+      wb.Sheets.Sheet1[`A${row}`] = { t: 'n', v: i + 1 };
+      wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: e[i].e0 };
+      wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: e[i].d0 };
+      wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: gDateFormat(e[i].i0, 'yyyy-MM-dd') };
+      wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: e[i].y0 };
+      wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: e[i].u0 };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 's', v: e[i].q0 };
+      wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: intpre0v2(e[i].l0).format() };
+      wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: intpre0v2(e[i].ai0).format() };
+      wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: intpre0v2(e[i].bk0).format() };
+      wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: intpre0v2(e[i].cn0).format() };
+      wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: intpre0v2(e[i].bu0).format() };
+      wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: intpre0v2(e[i].en0).format() };
+      wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: intpre0v2(e[i].eq0).format() };
+      wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: intpre0v2(e[i].df0).format() };
+      wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: intpre0v2(e[i].cy0).format() };
+      wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: intpre0v2(e[i].gross).format() };
+      wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: intpre0v2(e[i].er0).format() };
+      wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: intpre0v2(e[i].cz0).format() };
+      wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: intpre0v2(e[i].da0).format() };
+      wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: intpre0v2(e[i].db0).format() };
+      wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: intpre0v2(e[i].es0).format() };
+      wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: intpre0v2(e[i].ttax).format() };
+    }
+
+    wb.Sheets.Sheet1[`A${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`G${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: intpre0v2(p.sum1).format() };
+    wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: intpre0v2(p.sum2).format() };
+    wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: intpre0v2(p.sum3).format() };
+    wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: intpre0v2(p.sum4).format() };
+    wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: intpre0v2(p.sum5).format() };
+    wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: intpre0v2(p.sum6).format() };
+    wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: intpre0v2(p.sum7).format() };
+    wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: intpre0v2(p.sum8).format() };
+    wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: intpre0v2(p.sum9).format() };
+    wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: intpre0v2(p.sum10).format() };
+    wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: intpre0v2(p.sum11).format() };
+    wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: intpre0v2(p.sum12).format() };
+    wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: intpre0v2(p.sum13).format() };
+    wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: intpre0v2(p.sum14).format() };
+    wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: intpre0v2(p.sum15).format() };
+    wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: intpre0v2(p.sum16).format() };
+
+    XLSX.writeFile(wb, `static/report/${p.dir}/${p.dir}_tax.xls`);
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
+};
+
 module.exports = {
   generateTax,
   sendTax,
-  genPDF
+  genPDF,
+  genXLS,
 };

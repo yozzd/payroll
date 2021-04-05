@@ -185,6 +185,7 @@ const genXLS = async (p) => {
     }
   }
 };
+
 module.exports = {
   genPDF,
   genXLS,
