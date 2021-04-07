@@ -50,6 +50,9 @@ const a3Report = async (id) => {
     {
       $group: {
         _id: '$_id',
+        period: { $first: '$period' },
+        year: { $first: '$year' },
+        dir: { $first: '$dir' },
         employee: { $push: '$employee' },
         g0Sum: { $sum: '$employee.g0' },
         ab0Sum: { $sum: '$employee.ab0' },
@@ -711,10 +714,8 @@ const Mutation = {
       id: { type: GraphQLString },
     },
     resolve: auth.hasRole('user', async (_, { id }) => {
-      const p = await Payroll.aggregate([
-        { $match: { _id: id } },
-      ]);
-      const s = await genPayrollXLS(p[0]);
+      const p = await a3Report(id);
+      const s = await genPayrollXLS(p);
       return s;
     }),
   },

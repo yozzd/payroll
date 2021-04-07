@@ -502,7 +502,7 @@ const genPayrollXLS = async (p) => {
     const { employee: e } = p;
     await fs.ensureDir(`static/report/${p.dir}`);
 
-    const len = e.length + 4;
+    const len = e.length + 5;
     const wb = {
       SheetNames: ['Sheet1', 'Sheet2', 'Sheet3'],
       Sheets: {
@@ -741,6 +741,84 @@ const genPayrollXLS = async (p) => {
       wb.Sheets.Sheet3[`V${row}`] = { t: 'n', v: intpre0v2(e[i].dm0).format() };
       wb.Sheets.Sheet3[`W${row}`] = { t: 'n', v: intpre0v2(e[i].dn0).format() };
     }
+
+    wb.Sheets.Sheet1[`A${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`D${row}`] = { t: 'n', v: intpre0v2(p.g0Sum).format() };
+    wb.Sheets.Sheet1[`E${row}`] = { t: 'n', v: intpre0v2(p.aj0Sum).format() };
+    wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: intpre0v2(p.ak0Sum).format() };
+    wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: intpre0v2(p.al0Sum).format() };
+    wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: intpre0v2(p.am0Sum).format() };
+    wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: intpre0v2(p.an0Sum).format() };
+    wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: intpre0v2(p.ao0Sum).format() };
+    wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: intpre0v2(p.ap0Sum).format() };
+    wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: intpre0v2(p.aq0Sum).format() };
+    wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: intpre0v2(p.ar0Sum).format() };
+    wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: intpre0v2(p.as0Sum).format() };
+    wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: intpre0v2(p.at0Sum).format() };
+    wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: intpre0v2(p.au0Sum).format() };
+    wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: intpre0v2(p.av0Sum).format() };
+    wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: intpre0v2(p.aw0Sum).format() };
+    wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: intpre0v2(p.ax0Sum).format() };
+    wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: intpre0v2(p.ba0Sum).format() };
+    wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: intpre0v2(p.bb0Sum).format() };
+    wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: intpre0v2(p.bc0Sum).format() };
+    wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: intpre0v2(p.bd0Sum).format() };
+    wb.Sheets.Sheet1[`X${row}`] = { t: 'n', v: intpre0v2(p.be0Sum).format() };
+    wb.Sheets.Sheet1[`Y${row}`] = { t: 'n', v: intpre0v2(p.bf0Sum).format() };
+    wb.Sheets.Sheet1[`Z${row}`] = { t: 'n', v: intpre0v2(p.bg0Sum).format() };
+    wb.Sheets.Sheet1[`AA${row}`] = { t: 'n', v: intpre0v2(p.bh0Sum).format() };
+    wb.Sheets.Sheet1[`AB${row}`] = { t: 'n', v: intpre0v2(p.bi0Sum).format() };
+    wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: intpre0v2(p.bj0Sum).format() };
+    wb.Sheets.Sheet1[`AD${row}`] = { t: 'n', v: intpre0v2(p.ax0Sum + p.bj0Sum).format() };
+
+    wb.Sheets.Sheet2[`A${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet2[`B${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet2[`C${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet2[`D${row}`] = { t: 'n', v: intpre0v2(p.g0Sum).format() };
+    wb.Sheets.Sheet2[`E${row}`] = { t: 'n', v: p.ab0Sum };
+    wb.Sheets.Sheet2[`F${row}`] = { t: 'n', v: intpre0v2(p.ac0Sum).format() };
+    wb.Sheets.Sheet2[`G${row}`] = { t: 'n', v: p.ad0Sum };
+    wb.Sheets.Sheet2[`H${row}`] = { t: 'n', v: intpre0v2(p.ae0Sum).format() };
+    wb.Sheets.Sheet2[`I${row}`] = { t: 'n', v: p.af0Sum };
+    wb.Sheets.Sheet2[`J${row}`] = { t: 'n', v: intpre0v2(p.ag0Sum).format() };
+    wb.Sheets.Sheet2[`K${row}`] = { t: 'n', v: intpre0v2(p.ah0Sum).format() };
+    wb.Sheets.Sheet2[`L${row}`] = { t: 'n', v: intpre0v2(p.ai0Sum).format() };
+    wb.Sheets.Sheet2[`M${row}`] = { t: 'n', v: intpre0v2(p.bl0Sum).format() };
+    wb.Sheets.Sheet2[`N${row}`] = { t: 'n', v: intpre0v2(p.bm0Sum).format() };
+    wb.Sheets.Sheet2[`O${row}`] = { t: 'n', v: intpre0v2(p.bn0Sum).format() };
+    wb.Sheets.Sheet2[`P${row}`] = { t: 'n', v: intpre0v2(p.bo0Sum).format() };
+    wb.Sheets.Sheet2[`Q${row}`] = { t: 'n', v: intpre0v2(p.bp0Sum).format() };
+    wb.Sheets.Sheet2[`R${row}`] = { t: 'n', v: intpre0v2(p.bq0Sum).format() };
+    wb.Sheets.Sheet2[`S${row}`] = { t: 'n', v: intpre0v2(p.br0Sum).format() };
+    wb.Sheets.Sheet2[`T${row}`] = { t: 'n', v: intpre0v2(p.bs0Sum).format() };
+    wb.Sheets.Sheet2[`U${row}`] = { t: 'n', v: intpre0v2(p.bt0Sum).format() };
+    wb.Sheets.Sheet2[`V${row}`] = { t: 'n', v: intpre0v2(p.bu0Sum).format() };
+
+    wb.Sheets.Sheet3[`A${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet3[`B${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet3[`C${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet3[`D${row}`] = { t: 'n', v: intpre0v2(p.g0Sum).format() };
+    wb.Sheets.Sheet3[`E${row}`] = { t: 'n', v: intpre0v2(p.bv0Sum).format() };
+    wb.Sheets.Sheet3[`F${row}`] = { t: 'n', v: intpre0v2(p.bw0Sum).format() };
+    wb.Sheets.Sheet3[`G${row}`] = { t: 'n', v: intpre0v2(p.bx0Sum).format() };
+    wb.Sheets.Sheet3[`H${row}`] = { t: 'n', v: intpre0v2(p.by0Sum).format() };
+    wb.Sheets.Sheet3[`I${row}`] = { t: 'n', v: intpre0v2(p.bz0Sum).format() };
+    wb.Sheets.Sheet3[`J${row}`] = { t: 'n', v: p.cw0Sum };
+    wb.Sheets.Sheet3[`K${row}`] = { t: 'n', v: intpre0v2(p.cx0Sum).format() };
+    wb.Sheets.Sheet3[`L${row}`] = { t: 'n', v: intpre0v2(p.dc0Sum).format() };
+    wb.Sheets.Sheet3[`M${row}`] = { t: 'n', v: intpre0v2(p.dd0Sum).format() };
+    wb.Sheets.Sheet3[`N${row}`] = { t: 'n', v: intpre0v2(p.de0Sum).format() };
+    wb.Sheets.Sheet3[`O${row}`] = { t: 'n', v: intpre0v2(p.df0Sum).format() };
+    wb.Sheets.Sheet3[`P${row}`] = { t: 'n', v: intpre0v2(p.de0Sum).format() };
+    wb.Sheets.Sheet3[`Q${row}`] = { t: 'n', v: intpre0v2(p.dh0Sum).format() };
+    wb.Sheets.Sheet3[`R${row}`] = { t: 'n', v: intpre0v2(p.di0Sum).format() };
+    wb.Sheets.Sheet3[`S${row}`] = { t: 'n', v: intpre0v2(p.dj0Sum).format() };
+    wb.Sheets.Sheet3[`T${row}`] = { t: 'n', v: intpre0v2(p.dk0Sum).format() };
+    wb.Sheets.Sheet3[`U${row}`] = { t: 'n', v: intpre0v2(p.dl0Sum).format() };
+    wb.Sheets.Sheet3[`V${row}`] = { t: 'n', v: intpre0v2(p.dm0Sum).format() };
+    wb.Sheets.Sheet3[`W${row}`] = { t: 'n', v: intpre0v2(p.dn0Sum).format() };
 
     XLSX.writeFile(wb, `static/report/${p.dir}/${p.dir}_payroll.xls`);
   } catch (err) {
