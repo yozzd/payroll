@@ -155,6 +155,8 @@ const FeeInputType = new GraphQLInputObjectType({
   name: 'FeeInputType',
   fields: () => ({
     _id: { type: GraphQLString },
+    ck0: { type: GraphQLString },
+    ct0: { type: GraphQLString },
     co0: { type: GraphQLInt },
   }),
 });

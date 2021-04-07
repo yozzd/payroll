@@ -437,8 +437,10 @@ const Query = {
           'employee.ce0': 1,
           'employee.ci0': 1,
           'employee.cj0': 1,
+          'employee.ck0': 1,
           'employee.cq0': 1,
           'employee.cr0': 1,
+          'employee.ct0': 1,
           'employee.co0': 1,
           'employee.ex0': 1,
         });

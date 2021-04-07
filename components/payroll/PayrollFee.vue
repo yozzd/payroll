@@ -82,6 +82,11 @@
           </template>
         </el-table-column>
       </el-table-column>
+      <el-table-column prop="ck0" label="Desc. (BPJS Ketenagakerjaan)" width="160">
+        <template slot-scope="scope">
+          <span>{{ scope.row.ck0 }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="Iuran BPJS Kesehatan" align="center">
         <el-table-column prop="cq0" label="Perusahaan" width="120" align="right">
           <template slot-scope="scope">
@@ -93,6 +98,11 @@
             <span>{{ scope.row.cr0 | currency }}</span>
           </template>
         </el-table-column>
+      </el-table-column>
+      <el-table-column prop="ct0" label="Desc. (BPJS Kesehatan)" width="160">
+        <template slot-scope="scope">
+          <span>{{ scope.row.ct0 }}</span>
+        </template>
       </el-table-column>
       <el-table-column
         prop="co0"
@@ -113,7 +123,7 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :before-close="handleEditDialogClose"
-      width="20%"
+      width="40%"
     >
       <ErrorHandler
         v-if="errors"
@@ -126,21 +136,33 @@
         :hide-required-asterisk="true"
         label-position="top"
       >
-        <el-form-item label="No. Karyawan">
-          <el-input
-            v-model="form.e0"
-            :disabled="true"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="Nama Karyawan">
-          <el-input
-            v-model="form.d0"
-            :disabled="true"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="Upah untuk Pelaporan BPJS Kesehatan">
-          <el-input v-model="form.co0"></el-input>
-        </el-form-item>
+        <div class="flex space-x-4">
+          <div class="flex-1">
+            <el-form-item label="No. Karyawan">
+              <el-input
+                v-model="form.e0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Nama Karyawan">
+              <el-input
+                v-model="form.d0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Desc. (BPJS Ketenagakerjaan)">
+              <el-input type="textarea" v-model="form.ck0"></el-input>
+            </el-form-item>
+            <el-form-item label="Desc. (BPJS Kesehatan)">
+              <el-input type="textarea" v-model="form.ct0"></el-input>
+            </el-form-item>
+          </div>
+          <div class="flex-1">
+            <el-form-item label="Upah untuk Pelaporan BPJS Kesehatan">
+              <el-input v-model="form.co0"></el-input>
+            </el-form-item>
+          </div>
+        </div>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleEditDialogClose">Cancel</el-button>
@@ -175,7 +197,7 @@ export default {
         fields: ['d0', 'e0'],
         storeFields: [
           '_id', 'd0', 'e0', 'cb0', 'cc0', 'cd0', 'ce0',
-          'ci0', 'cj0', 'cq0', 'cr0', 'co0',
+          'ci0', 'cj0', 'ck0', 'cq0', 'cr0', 'ct0', 'co0',
         ],
       }),
     };
@@ -202,6 +224,8 @@ export default {
                   _id: this.$route.params.id,
                   employee: {
                     _id: this.form._id,
+                    ck0: this.form.ck0,
+                    ct0: this.form.ct0,
                     co0: parseInt(this.form.co0, 10),
                   },
                 },

@@ -282,6 +282,8 @@ export const EditFee = gql`
         _id
         d0
         e0
+        ck0
+        ct0
         co0
       }
     }

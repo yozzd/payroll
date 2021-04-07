@@ -270,8 +270,10 @@ export const PayrollFee = gql`
         ce0
         ci0
         cj0
+        ck0
         cq0
         cr0
+        ct0
         co0
         ex0
       }
