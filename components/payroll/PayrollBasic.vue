@@ -67,6 +67,11 @@
           <span>{{ scope.row.ay0 | currency }}</span>
         </template>
       </el-table-column>
+      <el-table-column prop="j0" label="Hari Kerja" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.j0 }}</span>
+        </template>
+      </el-table-column>
       <el-table-column min-width="200"></el-table-column>
     </el-table>
 
@@ -107,6 +112,9 @@
         <el-form-item label="Upah Normal">
           <el-input v-model="form.ay0"></el-input>
         </el-form-item>
+        <el-form-item label="Hari Kerja">
+          <el-input v-model="form.j0"></el-input>
+        </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleEditDialogClose">Cancel</el-button>
@@ -140,7 +148,7 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'g0', 'l0', 'ay0',
+          '_id', 'd0', 'e0', 'g0', 'j0', 'l0', 'ay0',
         ],
       }),
     };
@@ -168,6 +176,7 @@ export default {
                   employee: {
                     _id: this.form._id,
                     g0: parseInt(this.form.g0, 10),
+                    j0: parseInt(this.form.j0, 10),
                     ay0: parseInt(this.form.ay0, 10),
                   },
                 },

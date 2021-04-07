@@ -45,6 +45,7 @@ const BasicInputType = new GraphQLInputObjectType({
   fields: () => ({
     _id: { type: GraphQLString },
     g0: { type: GraphQLInt },
+    j0: { type: GraphQLInt },
     ay0: { type: GraphQLInt },
   }),
 });
