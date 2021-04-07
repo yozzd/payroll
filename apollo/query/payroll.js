@@ -9,6 +9,10 @@ export const PayrollAll = gql`
       period
       dir
       freeze
+      employee {
+        u0
+        v0
+      }
     }
   }
 `;

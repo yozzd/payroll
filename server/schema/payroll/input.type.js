@@ -19,6 +19,8 @@ const AddEmployeeInputType = new GraphQLInputObjectType({
     o0: { type: GraphQLString },
     p0: { type: GraphQLString },
     r0: { type: GraphQLString },
+    u0: { type: GraphQLString },
+    v0: { type: GraphQLString },
     co0: { type: GraphQLInt },
     ew0: { type: GraphQLString },
   }),

@@ -470,7 +470,7 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :before-close="handleAddEmployeeDialogClose"
-      width="60%"
+      width="80%"
     >
       <ErrorHandler
         v-if="errors"
@@ -506,9 +506,6 @@
               <el-input
                 v-model="formAddEmployee.j0"
               ></el-input>
-            </el-form-item>
-            <el-form-item label="Email" prop="ew0">
-              <el-input v-model="formAddEmployee.ew0"></el-input>
             </el-form-item>
           </div>
           <div class="flex-1">
@@ -565,6 +562,31 @@
             </el-form-item>
             <el-form-item label="Upah untuk Pelaporan BPJS Kesehatan" prop="co0">
               <el-input v-model="formAddEmployee.co0"></el-input>
+            </el-form-item>
+          </div>
+          <div class="flex-1">
+            <el-form-item label="Department" prop="u0">
+              <el-select v-model="formAddEmployee.u0" filterable>
+                <el-option
+                  v-for="d in dpt"
+                  :key="d"
+                  :label="d"
+                  :value="d"
+                ></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="Section" prop="v0">
+              <el-select v-model="formAddEmployee.v0" filterable>
+                <el-option
+                  v-for="s in sct"
+                  :key="s"
+                  :label="s"
+                  :value="s"
+                ></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="Email" prop="ew0">
+              <el-input v-model="formAddEmployee.ew0"></el-input>
             </el-form-item>
           </div>
         </div>
@@ -707,6 +729,8 @@ export default {
       loadingOvertime: false,
       genRpPy: false,
       genAcc: false,
+      dpt: [],
+      sct: [],
       form: {
         period: [],
         file: null,
@@ -725,6 +749,8 @@ export default {
         o0: '',
         p0: '',
         r0: '',
+        u0: '',
+        v0: '',
         co0: '',
         ew0: '',
       },
@@ -773,6 +799,8 @@ export default {
         o0: [{ required: true, message: 'Required' }],
         p0: [{ required: true, message: 'Required', trigger: 'change' }],
         r0: [{ required: true, message: 'Required', trigger: 'change' }],
+        u0: [{ required: true, message: 'Required', trigger: 'change' }],
+        v0: [{ required: true, message: 'Required', trigger: 'change' }],
         co0: [{ required: true, message: 'Required' }],
         ew0: [{ required: true, message: 'Required' }],
       },
@@ -960,6 +988,8 @@ export default {
                   o0: this.formAddEmployee.o0,
                   p0: this.formAddEmployee.p0,
                   r0: this.formAddEmployee.r0,
+                  u0: this.formAddEmployee.u0,
+                  v0: this.formAddEmployee.v0,
                   co0: parseInt(this.formAddEmployee.co0, 10),
                   ew0: this.formAddEmployee.ew0,
                 },
@@ -1280,6 +1310,14 @@ export default {
         };
       },
       prefetch: false,
+      result({ data, loading }) {
+        if (!loading) {
+          const len = data.payrollAll.length;
+          const { employee } = data.payrollAll[len - 1];
+          this.dpt = [...new Set(employee.map((v) => v.u0))].sort();
+          this.sct = [...new Set(employee.map((v) => v.v0))].sort();
+        }
+      },
       error({ graphQLErrors, networkError }) {
         this.errors = graphQLErrors || networkError.result.errors;
       },

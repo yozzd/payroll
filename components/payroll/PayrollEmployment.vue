@@ -74,24 +74,8 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column label="Department" width="200">
-        <template slot-scope="scope">
-          <client-only>
-            <p v-snip="1" :title="scope.row.u0">
-              {{ scope.row.u0 }}
-            </p>
-          </client-only>
-        </template>
-      </el-table-column>
-      <el-table-column label="Section" width="200">
-        <template slot-scope="scope">
-          <client-only>
-            <p v-snip="1" :title="scope.row.v0">
-              {{ scope.row.v0 }}
-            </p>
-          </client-only>
-        </template>
-      </el-table-column>
+      <el-table-column prop="u0" label="Department" width="200"></el-table-column>
+      <el-table-column prop="v0" label="Section" width="200"></el-table-column>
       <el-table-column prop="w0" label="Section Code" width="100"></el-table-column>
       <el-table-column prop="x0" label="Grade" width="100"></el-table-column>
       <el-table-column prop="y0" label="Jabatan" width="200"></el-table-column>
