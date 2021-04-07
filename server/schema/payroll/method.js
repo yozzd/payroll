@@ -288,42 +288,8 @@ const generateReportPayroll = async (p) => {
       ],
     ];
 
-    let g0 = 0; let ab0 = 0; let ac0 = 0; let ad0 = 0; let ae0 = 0; let af0 = 0; let ag0 = 0; let
-      ah0 = 0;
-    let ai0 = 0; let aj0 = 0; let ak0 = 0; let al0 = 0; let am0 = 0; let an0 = 0; let ao0 = 0; let
-      ap0 = 0;
-    let aq0 = 0; let ar0 = 0; let as0 = 0; let at0 = 0; let au0 = 0; let av0 = 0; let aw0 = 0; let
-      ax0 = 0;
-    let ba0 = 0; let bb0 = 0; let bc0 = 0; let bd0 = 0; let be0 = 0; let bf0 = 0; let bg0 = 0; let
-      bh0 = 0;
-    let bi0 = 0; let bj0 = 0; let bl0 = 0; let bm0 = 0; let bn0 = 0; let bo0 = 0; let bp0 = 0; let
-      bq0 = 0;
-    let br0 = 0; let bs0 = 0; let bt0 = 0; let bu0 = 0; let bv0 = 0; let bw0 = 0; let bx0 = 0; let
-      by0 = 0;
-    let bz0 = 0; let ca0 = 0; let cw0 = 0; let cx0 = 0; let dc0 = 0; let dd0 = 0; let de0 = 0; let
-      df0 = 0;
-    let dg0 = 0; let dh0 = 0; let di0 = 0; let dj0 = 0; let dk0 = 0; let dl0 = 0; let dm0 = 0; let
-      dn0 = 0;
-    let do0 = 0; let dp0 = 0; let dr0 = 0; let ds0 = 0; let dt0 = 0; let du0 = 0; let dv0 = 0; let
-      dw0 = 0;
-    let dx0 = 0; let dy0 = 0; let eb0 = 0; let ec0 = 0; let
-      ed0 = 0;
-
     employee.map((e, i) => {
-      g0 += e.g0; ab0 += e.ab0; ac0 += e.ac0; ad0 += e.ad0; ae0 += e.ae0; af0 += e.af0;
-      ag0 += e.ag0; ah0 += e.ah0; ai0 += e.ai0; aj0 += e.aj0; ak0 += e.ak0; al0 += e.al0;
-      am0 += e.am0; an0 += e.an0; ao0 += e.ao0; ap0 += e.ap0; aq0 += e.aq0; ar0 += e.ar0;
-      as0 += e.as0; at0 += e.at0; au0 += e.au0; av0 += e.av0; aw0 += e.aw0; ax0 += e.ax0;
-      ba0 += e.ba0; bb0 += e.bb0; bc0 += e.bc0; bd0 += e.bd0; be0 += e.be0; bf0 += e.bf0;
-      bg0 += e.bg0; bh0 += e.bh0; bi0 += e.bi0; bj0 += e.bj0; bl0 += e.bl0; bm0 += e.bm0;
-      bn0 += e.bn0; bo0 += e.bo0; bp0 += e.bp0; bq0 += e.bq0; br0 += e.br0; bs0 += e.bs0;
-      bt0 += e.bt0; bu0 += e.bu0; bv0 += e.bv0; bw0 += e.bw0; bx0 += e.bx0; by0 += e.by0;
-      bz0 += e.bz0; ca0 += e.ca0; cw0 += e.cw0; cx0 += e.cx0; dc0 += e.dc0; dd0 += e.dd0;
-      de0 += e.de0; df0 += e.df0; dg0 += e.dg0; dh0 += e.dh0; di0 += e.di0; dj0 += e.dj0;
-      dk0 += e.dk0; dl0 += e.dl0; dm0 += e.dm0; dn0 += e.dn0; do0 += e.do0; dp0 += e.dp0;
-      dr0 += e.dr0; ds0 += e.ds0; dt0 += e.dt0; du0 += e.du0; dv0 += e.dv0; dw0 += e.dw0;
-      dx0 += e.dx0; dy0 += e.dy0; eb0 += e.eb0; ec0 += e.ec0; ed0 += e.ed0;
-
+      
       tbl1.push([
         { text: (i + 1), alignment: 'center' }, e.d0, { text: e.e0, alignment: 'center' }, { text: intpre0(e.g0).format(), alignment: 'right' },
         { text: !e.i0 ? null : idDateFormat(e.i0, 'dd-MM-yyyy'), alignment: 'center' }, { text: e.j0, alignment: 'center' }, e.u0,
@@ -373,46 +339,46 @@ const generateReportPayroll = async (p) => {
     });
 
     tbl1.push([
-      '', '', '', { text: intpre0(g0).format(), alignment: 'right' }, '', '', '',
-      { text: floatpre2(ab0).format(), alignment: 'right' }, { text: intpre0(ac0).format(), alignment: 'right' }, { text: floatpre2(ad0).format(), alignment: 'right' },
-      { text: intpre0(ae0).format(), alignment: 'right' }, { text: floatpre2(af0).format(), alignment: 'right' }, { text: intpre0(ag0).format(), alignment: 'right' },
-      { text: intpre0(ah0).format(), alignment: 'right' }, { text: intpre0(ai0).format(), alignment: 'right' }, { text: intpre0(aj0).format(), alignment: 'right' },
-      { text: intpre0(ak0).format(), alignment: 'right' }, { text: intpre0(al0).format(), alignment: 'right' }, { text: intpre0(am0).format(), alignment: 'right' },
-      { text: intpre0(an0).format(), alignment: 'right' }, { text: intpre0(ao0).format(), alignment: 'right' }, { text: intpre0(ap0).format(), alignment: 'right' },
-      { text: intpre0(aq0).format(), alignment: 'right' }, { text: intpre0(ar0).format(), alignment: 'right' }, { text: intpre0(as0).format(), alignment: 'right' },
-      { text: intpre0(at0).format(), alignment: 'right' }, { text: intpre0(au0).format(), alignment: 'right' }, { text: intpre0(av0).format(), alignment: 'right' },
-      { text: intpre0(aw0).format(), alignment: 'right' }, { text: intpre0(ax0).format(), alignment: 'right' },
+      '', '', '', { text: intpre0(p.g0Sum).format(), alignment: 'right' }, '', '', '',
+      { text: floatpre2(p.ab0Sum).format(), alignment: 'right' }, { text: intpre0(p.ac0Sum).format(), alignment: 'right' }, { text: floatpre2(p.ad0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.ae0Sum).format(), alignment: 'right' }, { text: floatpre2(p.af0Sum).format(), alignment: 'right' }, { text: intpre0(p.ag0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.ah0Sum).format(), alignment: 'right' }, { text: intpre0(p.ai0Sum).format(), alignment: 'right' }, { text: intpre0(p.aj0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.ak0Sum).format(), alignment: 'right' }, { text: intpre0(p.al0Sum).format(), alignment: 'right' }, { text: intpre0(p.am0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.an0Sum).format(), alignment: 'right' }, { text: intpre0(p.ao0Sum).format(), alignment: 'right' }, { text: intpre0(p.ap0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.aq0Sum).format(), alignment: 'right' }, { text: intpre0(p.ar0Sum).format(), alignment: 'right' }, { text: intpre0(p.as0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.at0Sum).format(), alignment: 'right' }, { text: intpre0(p.au0Sum).format(), alignment: 'right' }, { text: intpre0(p.av0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.aw0Sum).format(), alignment: 'right' }, { text: intpre0(p.ax0Sum).format(), alignment: 'right' },
     ]);
 
     tbl2.push([
-      '', '', '', { text: intpre0(g0).format(), alignment: 'right' }, '',
-      { text: intpre0(ba0).format(), alignment: 'right' }, { text: intpre0(bb0).format(), alignment: 'right' }, { text: intpre0(bc0).format(), alignment: 'right' },
-      { text: intpre0(bd0).format(), alignment: 'right' }, { text: intpre0(be0).format(), alignment: 'right' }, { text: intpre0(bf0).format(), alignment: 'right' },
-      { text: intpre0(bg0).format(), alignment: 'right' }, { text: intpre0(bh0).format(), alignment: 'right' }, { text: intpre0(bi0).format(), alignment: 'right' },
-      { text: intpre0(bj0).format(), alignment: 'right' }, { text: intpre0(bl0).format(), alignment: 'right' }, { text: intpre0(bm0).format(), alignment: 'right' },
-      { text: intpre0(bn0).format(), alignment: 'right' }, { text: intpre0(bo0).format(), alignment: 'right' }, { text: intpre0(bp0).format(), alignment: 'right' },
-      { text: intpre0(bq0).format(), alignment: 'right' }, { text: intpre0(br0).format(), alignment: 'right' }, { text: intpre0(bs0).format(), alignment: 'right' },
-      { text: intpre0(bt0).format(), alignment: 'right' }, { text: intpre0(bu0).format(), alignment: 'right' },
+      '', '', '', { text: intpre0(p.g0Sum).format(), alignment: 'right' }, '',
+      { text: intpre0(p.ba0Sum).format(), alignment: 'right' }, { text: intpre0(p.bb0Sum).format(), alignment: 'right' }, { text: intpre0(p.bc0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.bd0Sum).format(), alignment: 'right' }, { text: intpre0(p.be0Sum).format(), alignment: 'right' }, { text: intpre0(p.bf0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.bg0Sum).format(), alignment: 'right' }, { text: intpre0(p.bh0Sum).format(), alignment: 'right' }, { text: intpre0(p.bi0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.bj0Sum).format(), alignment: 'right' }, { text: intpre0(p.bl0Sum).format(), alignment: 'right' }, { text: intpre0(p.bm0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.bn0Sum).format(), alignment: 'right' }, { text: intpre0(p.bo0Sum).format(), alignment: 'right' }, { text: intpre0(p.bp0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.bq0Sum).format(), alignment: 'right' }, { text: intpre0(p.br0Sum).format(), alignment: 'right' }, { text: intpre0(p.bs0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.bt0Sum).format(), alignment: 'right' }, { text: intpre0(p.bu0Sum).format(), alignment: 'right' },
     ]);
 
     tbl3.push([
-      '', '', '', { text: intpre0(g0).format(), alignment: 'right' },
-      { text: intpre0(bv0).format(), alignment: 'right' }, { text: intpre0(bw0).format(), alignment: 'right' }, { text: intpre0(bx0).format(), alignment: 'right' },
-      { text: intpre0(by0).format(), alignment: 'right' }, { text: intpre0(bz0).format(), alignment: 'right' }, { text: intpre0(ca0).format(), alignment: 'right' },
-      { text: floatpre2(cw0).format(), alignment: 'right' }, { text: intpre0(cx0).format(), alignment: 'right' }, { text: intpre0(dc0).format(), alignment: 'right' },
-      { text: intpre0(dd0).format(), alignment: 'right' }, { text: intpre0(de0).format(), alignment: 'right' }, { text: intpre0(df0).format(), alignment: 'right' },
-      { text: intpre0(dg0).format(), alignment: 'right' }, { text: intpre0(dh0).format(), alignment: 'right' }, { text: intpre0(di0).format(), alignment: 'right' },
-      { text: intpre0(dj0).format(), alignment: 'right' }, { text: intpre0(dk0).format(), alignment: 'right' }, { text: intpre0(dl0).format(), alignment: 'right' },
-      { text: intpre0(dm0).format(), alignment: 'right' }, { text: intpre0(dn0).format(), alignment: 'right' }, { text: intpre0(do0).format(), alignment: 'right' },
-      { text: intpre0(dp0).format(), alignment: 'right' },
+      '', '', '', { text: intpre0(p.g0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.bv0Sum).format(), alignment: 'right' }, { text: intpre0(p.bw0Sum).format(), alignment: 'right' }, { text: intpre0(p.bx0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.by0Sum).format(), alignment: 'right' }, { text: intpre0(p.bz0Sum).format(), alignment: 'right' }, { text: intpre0(p.ca0Sum).format(), alignment: 'right' },
+      { text: floatpre2(p.cw0Sum).format(), alignment: 'right' }, { text: intpre0(p.cx0Sum).format(), alignment: 'right' }, { text: intpre0(p.dc0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.dd0Sum).format(), alignment: 'right' }, { text: intpre0(p.de0Sum).format(), alignment: 'right' }, { text: intpre0(p.df0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.dg0Sum).format(), alignment: 'right' }, { text: intpre0(p.dh0Sum).format(), alignment: 'right' }, { text: intpre0(p.di0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.dj0Sum).format(), alignment: 'right' }, { text: intpre0(p.dk0Sum).format(), alignment: 'right' }, { text: intpre0(p.dl0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.dm0Sum).format(), alignment: 'right' }, { text: intpre0(p.dn0Sum).format(), alignment: 'right' }, { text: intpre0(p.do0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.dp0Sum).format(), alignment: 'right' },
     ]);
 
     tbl4.push([
-      '', '', '', { text: intpre0(g0).format(), alignment: 'right' },
-      { text: intpre0(dr0).format(), alignment: 'right' }, { text: intpre0(ds0).format(), alignment: 'right' }, { text: intpre0(dt0).format(), alignment: 'right' },
-      { text: intpre0(du0).format(), alignment: 'right' }, { text: intpre0(dv0).format(), alignment: 'right' }, { text: intpre0(dw0).format(), alignment: 'right' },
-      { text: intpre0(dx0).format(), alignment: 'right' }, { text: intpre0(dy0).format(), alignment: 'right' }, '', '', { text: intpre0(eb0).format(), alignment: 'right' },
-      { text: intpre0(ec0).format(), alignment: 'right' }, { text: intpre0(ed0).format(), alignment: 'right' },
+      '', '', '', { text: intpre0(p.g0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.dr0Sum).format(), alignment: 'right' }, { text: intpre0(p.ds0Sum).format(), alignment: 'right' }, { text: intpre0(p.dt0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.du0Sum).format(), alignment: 'right' }, { text: intpre0(p.dv0Sum).format(), alignment: 'right' }, { text: intpre0(p.dw0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.dx0Sum).format(), alignment: 'right' }, { text: intpre0(p.dy0Sum).format(), alignment: 'right' }, '', '', { text: intpre0(p.eb0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.ec0Sum).format(), alignment: 'right' }, { text: intpre0(p.ed0Sum).format(), alignment: 'right' },
     ]);
 
     const docDefinition = {

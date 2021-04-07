@@ -43,6 +43,98 @@ const {
 } = require('./input.type');
 const auth = require('../auth/service');
 
+const a3Report = async (id) => {
+  const p = await Payroll.aggregate([
+    { $match: { _id: id } },
+    { $unwind: '$employee' },
+    {
+      $group: {
+        _id: '$_id',
+        employee: { $push: '$employee' },
+        g0Sum: { $sum: '$employee.g0' },
+        ab0Sum: { $sum: '$employee.ab0' },
+        ac0Sum: { $sum: '$employee.ac0' },
+        ad0Sum: { $sum: '$employee.ad0' },
+        ae0Sum: { $sum: '$employee.ae0' },
+        af0Sum: { $sum: '$employee.af0' },
+        ag0Sum: { $sum: '$employee.ag0' },
+        ah0Sum: { $sum: '$employee.ah0' },
+        ai0Sum: { $sum: '$employee.ai0' },
+        aj0Sum: { $sum: '$employee.aj0' },
+        ak0Sum: { $sum: '$employee.ak0' },
+        al0Sum: { $sum: '$employee.al0' },
+        am0Sum: { $sum: '$employee.am0' },
+        an0Sum: { $sum: '$employee.an0' },
+        ao0Sum: { $sum: '$employee.ao0' },
+        ap0Sum: { $sum: '$employee.ap0' },
+        aq0Sum: { $sum: '$employee.aq0' },
+        ar0Sum: { $sum: '$employee.ar0' },
+        as0Sum: { $sum: '$employee.as0' },
+        at0Sum: { $sum: '$employee.at0' },
+        au0Sum: { $sum: '$employee.au0' },
+        av0Sum: { $sum: '$employee.av0' },
+        aw0Sum: { $sum: '$employee.aw0' },
+        ax0Sum: { $sum: '$employee.ax0' },
+        ba0Sum: { $sum: '$employee.ba0' },
+        bb0Sum: { $sum: '$employee.bb0' },
+        bc0Sum: { $sum: '$employee.bc0' },
+        bd0Sum: { $sum: '$employee.bd0' },
+        be0Sum: { $sum: '$employee.be0' },
+        bf0Sum: { $sum: '$employee.bf0' },
+        bg0Sum: { $sum: '$employee.bg0' },
+        bh0Sum: { $sum: '$employee.bh0' },
+        bi0Sum: { $sum: '$employee.bi0' },
+        bj0Sum: { $sum: '$employee.bj0' },
+        bl0Sum: { $sum: '$employee.bl0' },
+        bm0Sum: { $sum: '$employee.bm0' },
+        bn0Sum: { $sum: '$employee.bn0' },
+        bo0Sum: { $sum: '$employee.bo0' },
+        bp0Sum: { $sum: '$employee.bp0' },
+        bq0Sum: { $sum: '$employee.bq0' },
+        br0Sum: { $sum: '$employee.br0' },
+        bs0Sum: { $sum: '$employee.bs0' },
+        bt0Sum: { $sum: '$employee.bt0' },
+        bu0Sum: { $sum: '$employee.bu0' },
+        bv0Sum: { $sum: '$employee.bv0' },
+        bw0Sum: { $sum: '$employee.bw0' },
+        bx0Sum: { $sum: '$employee.bx0' },
+        by0Sum: { $sum: '$employee.by0' },
+        bz0Sum: { $sum: '$employee.bz0' },
+        ca0Sum: { $sum: '$employee.ca0' },
+        cw0Sum: { $sum: '$employee.cw0' },
+        cx0Sum: { $sum: '$employee.cx0' },
+        dc0Sum: { $sum: '$employee.dc0' },
+        dd0Sum: { $sum: '$employee.dd0' },
+        de0Sum: { $sum: '$employee.de0' },
+        df0Sum: { $sum: '$employee.df0' },
+        dg0Sum: { $sum: '$employee.dg0' },
+        dh0Sum: { $sum: '$employee.dh0' },
+        di0Sum: { $sum: '$employee.di0' },
+        dj0Sum: { $sum: '$employee.dj0' },
+        dk0Sum: { $sum: '$employee.dk0' },
+        dl0Sum: { $sum: '$employee.dl0' },
+        dm0Sum: { $sum: '$employee.dm0' },
+        dn0Sum: { $sum: '$employee.dn0' },
+        do0Sum: { $sum: '$employee.do0' },
+        dp0Sum: { $sum: '$employee.dp0' },
+        dr0Sum: { $sum: '$employee.dr0' },
+        ds0Sum: { $sum: '$employee.ds0' },
+        dt0Sum: { $sum: '$employee.dt0' },
+        du0Sum: { $sum: '$employee.du0' },
+        dv0Sum: { $sum: '$employee.dv0' },
+        dw0Sum: { $sum: '$employee.dw0' },
+        dx0Sum: { $sum: '$employee.dx0' },
+        dy0Sum: { $sum: '$employee.dy0' },
+        eb0Sum: { $sum: '$employee.eb0' },
+        ec0Sum: { $sum: '$employee.ec0' },
+        ed0Sum: { $sum: '$employee.ed0' },
+      },
+    },
+  ]);
+
+  return p[0];
+};
+
 const Query = {
   payrollAll: {
     type: new GraphQLList(PayrollType),
@@ -608,10 +700,8 @@ const Mutation = {
       id: { type: GraphQLString },
     },
     resolve: auth.hasRole('user', async (_, { id }) => {
-      const p = await Payroll.aggregate([
-        { $match: { _id: id } },
-      ]);
-      const s = await generateReportPayroll(p[0]);
+      const p = await a3Report(id);
+      const s = await generateReportPayroll(p);
       return s;
     }),
   },
