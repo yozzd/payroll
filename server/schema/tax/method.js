@@ -305,7 +305,7 @@ const genPDF = async (p) => {
       { text: intpre0(p.sum15).format(), alignment: 'right' },
       { text: intpre0(p.sum16).format(), alignment: 'right' },
     ]);
-    
+
     const docDefinition = {
       pageOrientation: 'landscape',
       footer: (currentPage, pageCount) => ({

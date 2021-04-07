@@ -12,7 +12,7 @@ const auth = require('../auth/service');
 const { generateTax, sendTax } = require('./method');
 const { genPDF, genXLS } = require('./method');
 
-const taxR = async(id) => {
+const taxR = async (id) => {
   const p = await Payroll.aggregate([
     { $match: { _id: id } },
     { $unwind: '$employee' },

@@ -151,10 +151,10 @@
               ></el-input>
             </el-form-item>
             <el-form-item label="Desc. (BPJS Ketenagakerjaan)">
-              <el-input type="textarea" v-model="form.ck0"></el-input>
+              <el-input v-model="form.ck0" type="textarea"></el-input>
             </el-form-item>
             <el-form-item label="Desc. (BPJS Kesehatan)">
-              <el-input type="textarea" v-model="form.ct0"></el-input>
+              <el-input v-model="form.ct0" type="textarea"></el-input>
             </el-form-item>
           </div>
           <div class="flex-1">

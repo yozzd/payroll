@@ -289,7 +289,6 @@ const generateReportPayroll = async (p) => {
     ];
 
     employee.map((e, i) => {
-      
       tbl1.push([
         { text: (i + 1), alignment: 'center' }, e.d0, { text: e.e0, alignment: 'center' }, { text: intpre0(e.g0).format(), alignment: 'right' },
         { text: !e.i0 ? null : idDateFormat(e.i0, 'dd-MM-yyyy'), alignment: 'center' }, { text: e.j0, alignment: 'center' }, e.u0,
@@ -1329,8 +1328,8 @@ const genFinal = async (p) => {
       [{ text: `Batam, ${idDateFormat(e.fDate, 'dd MMMM yyyy')}`, colSpan: 5 }, '', '', '', ''],
       ['Prepared By,', 'Checked By,', 'Reviewed By,', 'Knowledge By,', 'Approved By,'],
       ['', '', '', '', ''],
-      ['Ayu Fatimah / Ratnawati', 'Ronal P. Siahaan', 'Yutin Sudarni', 'Hendra Syahputra', 'Eko Hernanto'],
-      ['Personel / IT DB', 'Compensation, Benefit & Company Licences', 'Finance Manager', 'HR & GA Dept Head', 'Management PT. Labtech Penta International'],
+      ['Ayu Fatimah', 'Ronal P. Siahaan', 'Hendra SP / Yutin Sudarni', 'Gusti Very Wealthy', 'Eko Hernanto'],
+      [{ text: 'Personel', bold: true }, { text: 'Payroll Controller', bold: true }, { text: 'HR & GA Dept. / Finance Dept.', bold: true }, { text: 'Finance & HRGA Division', bold: true }, { text: 'Management PT. Labtech Penta International', bold: true }],
     ];
 
     const wd = [80, 40, 40, 40, 40, 10, 150];
