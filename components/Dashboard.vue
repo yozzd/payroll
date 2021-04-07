@@ -242,6 +242,7 @@
                   Clone Employee
                 </el-dropdown-item>-->
                 <el-dropdown-item
+                  v-if="$auth.hasRole('admin')"
                   command="clonePayroll"
                   :disabled="scope.row.freeze"
                 >
