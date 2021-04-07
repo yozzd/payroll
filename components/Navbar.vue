@@ -10,9 +10,9 @@
         Extras<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item command="eslip">
+        <!--<el-dropdown-item command="eslip">
           E-Slip
-        </el-dropdown-item>
+        </el-dropdown-item>-->
         <el-dropdown-item command="prorate">
           Prorate
         </el-dropdown-item>
