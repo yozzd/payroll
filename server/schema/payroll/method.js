@@ -1205,6 +1205,7 @@ const genFinal = async (p) => {
       mm = m;
     }
     const ms = `22 ${mt[mm]} s/d ${gDateFormat(e.k0, 'dd MMM yyyy')}`;
+    console.log(ms);
 
     let income = e.l0 + e.ac0 + e.bz0 + e.bx0 + e.bv0;
     const vw2 = [

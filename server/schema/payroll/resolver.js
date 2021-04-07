@@ -648,8 +648,8 @@ const Mutation = {
     },
     resolve: auth.hasRole('user', async (_, { input }) => {
       const {
-        _id, d0, e0, g0, i0, j0,
-        k0, n0, o0, p0, r0, co0,
+        _id, d0, e0, g0, h0, i0, j0,
+        k0, n0, o0, p0, r0, co0, ew0,
       } = input;
       const px = await Payroll.findOne({ _id });
 
@@ -657,6 +657,7 @@ const Mutation = {
         d0: d0.toUpperCase(),
         e0,
         g0,
+        h0,
         i0,
         j0,
         k0,
@@ -666,6 +667,7 @@ const Mutation = {
         r0,
         ay0: g0,
         co0,
+        ew0,
       });
       await px.save();
       return { sStatus: 1 };

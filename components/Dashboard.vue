@@ -507,6 +507,9 @@
                 v-model="formAddEmployee.j0"
               ></el-input>
             </el-form-item>
+            <el-form-item label="Email" prop="ew0">
+              <el-input v-model="formAddEmployee.ew0"></el-input>
+            </el-form-item>
           </div>
           <div class="flex-1">
             <el-form-item label="Jenis Kelamin" prop="n0">
@@ -541,7 +544,14 @@
             </el-form-item>
           </div>
           <div class="flex-1">
-            <el-form-item label="Hired Date">
+            <el-form-item label="Status Karyawan" prop="h0">
+              <el-select v-model="formAddEmployee.h0" filterable>
+                <el-option label="Expat" value="Expat"></el-option>
+                <el-option label="Contract" value="Contract"></el-option>
+                <el-option label="Permanent" value="Permanent"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="Hired Date" prop="i0">
               <el-date-picker
                 v-model="formAddEmployee.i0"
                 type="date"
@@ -707,6 +717,7 @@ export default {
         d0: '',
         e0: '',
         g0: '',
+        h0: '',
         i0: '',
         j0: '',
         k0: '',
@@ -715,6 +726,7 @@ export default {
         p0: '',
         r0: '',
         co0: '',
+        ew0: '',
       },
       formCloneEmployee: {
         id: '',
@@ -753,6 +765,8 @@ export default {
       rulesAddEmployee: {
         d0: [{ required: true, message: 'Required' }],
         e0: [{ required: true, message: 'Required' }],
+        h0: [{ required: true, message: 'Required', trigger: 'change' }],
+        i0: [{ required: true, message: 'Required' }],
         g0: [{ required: true, message: 'Required' }],
         j0: [{ required: true, message: 'Required' }],
         n0: [{ required: true, message: 'Required', trigger: 'change' }],
@@ -760,6 +774,7 @@ export default {
         p0: [{ required: true, message: 'Required', trigger: 'change' }],
         r0: [{ required: true, message: 'Required', trigger: 'change' }],
         co0: [{ required: true, message: 'Required' }],
+        ew0: [{ required: true, message: 'Required' }],
       },
       rulesCloneEmployee: {
         e0: [{ required: true, message: 'Required' }],
@@ -937,14 +952,16 @@ export default {
                   d0: this.formAddEmployee.d0,
                   e0: this.formAddEmployee.e0,
                   g0: this.formAddEmployee.g0,
+                  h0: this.formAddEmployee.h0,
                   i0: this.formAddEmployee.i0,
-                  j0: this.formAddEmployee.j0,
+                  j0: parseInt(this.formAddEmployee.j0, 10),
                   k0: this.formAddEmployee.k0,
                   n0: this.formAddEmployee.n0,
                   o0: this.formAddEmployee.o0,
                   p0: this.formAddEmployee.p0,
                   r0: this.formAddEmployee.r0,
                   co0: parseInt(this.formAddEmployee.co0, 10),
+                  ew0: this.formAddEmployee.ew0,
                 },
               },
             });
