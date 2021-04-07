@@ -1205,7 +1205,6 @@ const genFinal = async (p) => {
       mm = m;
     }
     const ms = `22 ${mt[mm]} s/d ${gDateFormat(e.k0, 'dd MMM yyyy')}`;
-    console.log(ms);
 
     let income = e.l0 + e.ac0 + e.bz0 + e.bx0 + e.bv0;
     const vw2 = [
@@ -1252,6 +1251,7 @@ const genFinal = async (p) => {
 
     if (e.dt0) vw2.push([{ text: 'Uang Pisah', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.dt0).format(), alignment: 'right' }]); income += (e.dt0 / 21) * e.j0;
     vw2.push([{ text: 'Tambahan Lain Tidak Kena Pajak', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bv0).format(), alignment: 'right' }]);
+    if (e.fe0) vw2.push(['Uang Pesangon', '', '', '', '', ':', { text: intpre0(e.fe0).format(), alignment: 'right' }]); income += e.fe0;
     vw2.push(['', '', '', {
       text: 'Total Income', colSpan: 2, alignment: 'right', bold: true,
     }, '', ':', { text: intpre0(income).format(), alignment: 'right', bold: true }]);
