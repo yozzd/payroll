@@ -115,7 +115,7 @@
               :disabled="true"
             ></el-input>
           </el-form-item>
-          <el-form-item label="Date">
+          <el-form-item label="Tanggal Pembuatan Berkas">
             <el-date-picker
               v-model="form.fDate"
               type="date"
@@ -284,6 +284,7 @@ export default {
           } = data.payrollFinal;
           this.freeze = freeze;
           this.items = employee;
+          this.miniSearch.removeAll();
           this.miniSearch.addAll(this.items);
           this.content = `${period} ${year}`;
         }

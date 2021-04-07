@@ -339,6 +339,7 @@ export default {
           const { freeze, employee } = data.payrollEmployment;
           this.freeze = freeze;
           this.items = employee;
+          this.miniSearch.removeAll();
           this.miniSearch.addAll(this.items);
           this.dpt = [...new Set(this.items.map((v) => v.u0))].sort();
           this.sct = [...new Set(this.items.map((v) => v.v0))].sort();

@@ -112,6 +112,7 @@ export default {
         if (!loading) {
           const { employee } = data.payrollPayment;
           this.items = employee;
+          this.miniSearch.removeAll();
           this.miniSearch.addAll(this.items);
         }
       },

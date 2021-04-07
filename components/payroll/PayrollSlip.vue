@@ -234,6 +234,7 @@ export default {
           const { period, year, employee } = data.payrollSlip;
           this.content = `${period} ${year}`;
           this.items = employee;
+          this.miniSearch.removeAll();
           this.miniSearch.addAll(this.items);
         }
       },

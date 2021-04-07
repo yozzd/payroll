@@ -281,6 +281,7 @@ export default {
           const { freeze, employee } = data.payrollEarningOthers;
           this.freeze = freeze;
           this.items = employee;
+          this.miniSearch.removeAll();
           this.miniSearch.addAll(this.items);
         }
       },
