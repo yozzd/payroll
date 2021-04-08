@@ -9,6 +9,17 @@ export const UserCreate = gql`
     }
   }
 `;
+
+export const UserEdit = gql`
+  mutation userEdit($id: String, $username: String!, $role: String!) {
+    userEdit(id: $id, username: $username, role: $role) {
+      _id
+      username
+      role
+    }
+  }
+`;
+
 export const UserChangePassword = gql`
   mutation userChangePassword($id: String!, $oldPassword: String!, $newPassword: String!) {
     userChangePassword(id: $id, oldPassword: $oldPassword, newPassword: $newPassword) {

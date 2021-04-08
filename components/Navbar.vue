@@ -36,8 +36,8 @@
           Change Password
         </el-dropdown-item>
         <el-dropdown-item
-          command="users"
           v-if="$auth.hasRole('root')"
+          command="users"
         >
           User Management
         </el-dropdown-item>

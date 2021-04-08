@@ -4,7 +4,7 @@
       Change Password
     </div>
     <div class="text-red-500">
-      You'll be forced to logout after change,<br/>
+      You'll be forced to logout after change,<br />
       Please login with your new password
     </div>
     <ErrorHandler

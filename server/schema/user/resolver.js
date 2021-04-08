@@ -47,6 +47,21 @@ const Mutation = {
       }
     }),
   },
+  userEdit: {
+    type: UserType,
+    args: {
+      id: { type: GraphQLString },
+      username: { type: GraphQLString },
+      role: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('root', async (_, { id, username, role }) => {
+      const u = await User.findById(id);
+      u.username = username;
+      u.role = role;
+      const s = await u.save();
+      return s;
+    }),
+  },
   userChangePassword: {
     type: UserType,
     args: {
@@ -54,12 +69,13 @@ const Mutation = {
       oldPassword: { type: GraphQLString },
       newPassword: { type: GraphQLString },
     },
-    resolve: auth.isAuthenticated(async (_, { id, oldPassword, newPassword}) => {
+    resolve: auth.isAuthenticated(async (_, { id, oldPassword, newPassword }) => {
       const user = await User.findById(id);
       const c = await user.authenticate(oldPassword);
       if (c) {
         user.password = newPassword;
-        return await user.save();
+        const s = await user.save();
+        return s;
       }
       throw new GraphQLError('Your password in invalid, please try again');
     }),

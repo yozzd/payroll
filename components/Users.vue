@@ -33,7 +33,6 @@
       element-loading-text="Loading..."
       element-loading-spinner="el-icon-loading"
       :data="users"
-      size="small"
       max-height="500"
       @selection-change="handleSelectionChange"
     >
@@ -43,8 +42,21 @@
         align="center"
       ></el-table-column>
       <el-table-column type="index" width="50" align="center"></el-table-column>
-      <el-table-column prop="username" label="Username" width="200"></el-table-column>
-      <el-table-column prop="role" label="Role" width="100"></el-table-column>
+      <el-table-column label="Username" width="200">
+        <template slot-scope="scope">
+          <el-link
+            type="primary"
+            @click="showEditDialog(scope.row)"
+          >
+            {{ scope.row.username }}
+          </el-link>
+        </template>
+      </el-table-column>
+      <el-table-column label="Role" width="100">
+        <template slot-scope="scope">
+          {{ roles[scope.row.role] }}
+        </template>
+      </el-table-column>
       <el-table-column label="" min-width="120"></el-table-column>
     </el-table>
 
@@ -78,9 +90,44 @@
         <el-form-item>
           <el-button
             type="primary"
-            @click="submitAdd('formAdd')"
+            @click="handleAdd('formAdd')"
           >
             Save
+          </el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
+
+    <el-dialog
+      title="Edit User"
+      :visible.sync="showEdit"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :before-close="handleEditClose"
+      width="20%"
+    >
+      <el-form
+        ref="formEdit"
+        :model="formEdit"
+        :rules="rules"
+        :hide-required-asterisk="true"
+        label-position="top"
+      >
+        <el-form-item label="Username" prop="username">
+          <el-input v-model="formEdit.username"></el-input>
+        </el-form-item>
+        <el-form-item label="Role" prop="role">
+          <el-select v-model="formEdit.role" filterable>
+            <el-option label="Admin" value="admin"></el-option>
+            <el-option label="User" value="user"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button
+            type="primary"
+            @click="handleEdit('formEdit')"
+          >
+            Update
           </el-button>
         </el-form-item>
       </el-form>
@@ -91,12 +138,17 @@
 <script>
 import pullAllBy from 'lodash/pullAllBy';
 import { Users } from '../apollo/query/user';
-import { UserCreate, UserDelete } from '../apollo/mutation/user';
+import { UserCreate, UserEdit, UserDelete } from '../apollo/mutation/user';
 
 export default {
   data() {
     return {
+      roles: {
+        admin: 'Admin',
+        user: 'User',
+      },
       showAdd: false,
+      showEdit: false,
       multipleSelection: [],
       cachedMultipleSelection: [],
       formAdd: {
@@ -104,11 +156,12 @@ export default {
         password: '',
         role: '',
       },
-      rulesAdd: {
+      rules: {
         username: [{ required: true, message: 'Required' }],
         password: [{ required: true, message: 'Required' }],
         role: [{ required: true, message: 'Required', trigger: 'change' }],
       },
+      formEdit: {},
       errors: [],
     };
   },
@@ -117,7 +170,7 @@ export default {
       this.$refs.formAdd.resetFields();
       this.showAdd = false;
     },
-    submitAdd(form) {
+    handleAdd(form) {
       this.$refs[form].validate(async (valid) => {
         if (valid) {
           try {
@@ -182,6 +235,38 @@ export default {
           },
         });
       }).catch(() => {});
+    },
+    showEditDialog(row) {
+      this.showEdit = true;
+      this.formEdit = { ...row };
+    },
+    handleEditClose() {
+      this.$refs.formEdit.resetFields();
+      this.showEdit = false;
+    },
+    handleEdit(form) {
+      this.$refs[form].validate(async (valid) => {
+        if (valid) {
+          try {
+            await this.$apollo.mutate({
+              mutation: UserEdit,
+              variables: {
+                id: this.formEdit._id,
+                username: this.formEdit.username,
+                role: this.formEdit.role,
+              },
+            });
+
+            this.handleEditClose();
+            return true;
+          } catch ({ graphQLErrors, networkError }) {
+            this.errors = graphQLErrors || networkError.result.errors;
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
     },
   },
   apollo: {
