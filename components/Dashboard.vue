@@ -177,7 +177,10 @@
                   <el-menu-item index="aa">
                     PDF
                   </el-menu-item>
-                  <el-menu-item index="ab">
+                  <el-menu-item
+                    v-if="$auth.hasRole('admin')"
+                    index="ab"
+                  >
                     XLS
                   </el-menu-item>
                 </el-submenu>
