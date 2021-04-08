@@ -128,34 +128,35 @@
         </el-table-column>
         <el-table-column>
           <template slot-scope="scope">
-            <el-dropdown
-              trigger="click"
-              @command="c => handleImportCommand(c, scope.row._id)"
+            <el-menu
+              mode="horizontal"
+              class="dropmenu"
+              @select="c => handleImportCommand(c, scope.row._id)"
             >
-              <span class="el-dropdown-link">
-                Import <i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item
-                  command="kantin"
+              <el-submenu index="1">
+                <template slot="title">
+                  Import
+                </template>
+                <el-menu-item
+                  index="a"
                   :disabled="scope.row.freeze"
                 >
                   Kantin
-                </el-dropdown-item>
-                <el-dropdown-item
-                  command="koperasi"
+                </el-menu-item>
+                <el-menu-item
+                  index="b"
                   :disabled="scope.row.freeze"
                 >
                   Koperasi
-                </el-dropdown-item>
-                <el-dropdown-item
-                  command="overtime"
+                </el-menu-item>
+                <el-menu-item
+                  index="c"
                   :disabled="scope.row.freeze"
                 >
                   OT / Absent
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
+                </el-menu-item>
+              </el-submenu>
+            </el-menu>
           </template>
         </el-table-column>
         <el-table-column>
@@ -189,38 +190,39 @@
         </el-table-column>
         <el-table-column>
           <template slot-scope="scope">
-            <el-dropdown
-              trigger="click"
-              @command="c => handleReportCommand(c, scope.row._id)"
+            <el-menu
+              mode="horizontal"
+              class="dropmenu"
+              @select="c => handleReportCommand(c, scope.row._id)"
             >
-              <span class="el-dropdown-link">
-                Report <i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="journal">
+              <el-submenu index="1">
+                <template slot="title">
+                  Report
+                </template>
+                <el-menu-item index="a">
                   Journal
-                </el-dropdown-item>
-                <el-dropdown-item command="tax">
+                </el-menu-item>
+                <el-menu-item index="b">
                   Tax
-                </el-dropdown-item>
-                <el-dropdown-item command="ktg">
+                </el-menu-item>
+                <el-menu-item index="c">
                   Ketenagakerjaan
-                </el-dropdown-item>
-                <el-dropdown-item command="kes">
+                </el-menu-item>
+                <el-menu-item index="d">
                   Kesehatan
-                </el-dropdown-item>
-                <el-dropdown-item command="trf">
+                </el-menu-item>
+                <el-menu-item index="e">
                   By Transfer
-                </el-dropdown-item>
-                <el-dropdown-item command="slip">
+                </el-menu-item>
+                <el-menu-item index="f">
                   Slip
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
+                </el-menu-item>
+              </el-submenu>
+            </el-menu>
           </template>
         </el-table-column>
         <el-table-column min-width="60">
-          <template slot-scope="scope">
+          <!--<template slot-scope="scope">
             <el-dropdown
               trigger="click"
               @command="c => handleActionCommand(c, scope.row._id, scope.row.freeze)"
@@ -235,12 +237,12 @@
                 >
                   Add Employee
                 </el-dropdown-item>
-                <!--<el-dropdown-item
+                <el-dropdown-item
                   command="cloneEmployee"
                   :disabled="scope.row.freeze"
                 >
                   Clone Employee
-                </el-dropdown-item>-->
+                </el-dropdown-item>
                 <el-dropdown-item
                   v-if="$auth.hasRole('admin')"
                   command="clonePayroll"
@@ -261,6 +263,42 @@
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
+          </template>-->
+          <template slot-scope="scope">
+            <el-menu
+              mode="horizontal"
+              class="dropmenu"
+              @select="c => handleActionCommand(c, scope.row._id, scope.row.freeze)"
+            >
+              <el-submenu index="1">
+                <template slot="title">
+                  Action
+                </template>
+                <el-menu-item
+                  index="a"
+                  :disabled="scope.row.freeze"
+                >
+                  Add Employee
+                </el-menu-item>
+                <el-menu-item
+                  v-if="$auth.hasRole('admin')"
+                  index="b"
+                  :disabled="scope.row.freeze"
+                >
+                  Clone Payroll
+                </el-menu-item>
+                <el-menu-item
+                  v-if="$auth.hasRole('admin')"
+                  index="c"
+                >
+                  <span v-if="scope.row.freeze">Unfreeze</span>
+                  <span v-else>Freeze</span>
+                </el-menu-item>
+                <el-menu-item index="d">
+                  <span class="text-red-400">Delete</span>
+                </el-menu-item>
+              </el-submenu>
+            </el-menu>
           </template>
         </el-table-column>
       </el-table>
@@ -849,9 +887,9 @@ export default {
       this.showDialog = false;
     },
     handleImportCommand(c, id) {
-      if (c === 'kantin') this.handleKantinDialog(id);
-      else if (c === 'koperasi') this.handleKoperasiDialog(id);
-      else if (c === 'overtime') this.handleOvertimeDialog(id);
+      if (c === 'a') this.handleKantinDialog(id);
+      else if (c === 'b') this.handleKoperasiDialog(id);
+      else if (c === 'c') this.handleOvertimeDialog(id);
     },
     handleExportCommand(c, id, dir) {
       if (c === 'aa') this.generateReportPayroll(id, dir);
@@ -859,19 +897,18 @@ export default {
       else if (c === 'b') this.generateAccCheck(id, dir);
     },
     handleReportCommand(c, id) {
-      if (c === 'journal') this.$router.push({ name: 'payroll-journal-id', params: { id } });
-      else if (c === 'tax') this.$router.push({ name: 'payroll-tax-id', params: { id } });
-      else if (c === 'ktg') this.$router.push({ name: 'payroll-ketenagakerjaan-id', params: { id } });
-      else if (c === 'kes') this.$router.push({ name: 'payroll-kesehatan-id', params: { id } });
-      else if (c === 'trf') this.$router.push({ name: 'payroll-trf-id', params: { id } });
-      else if (c === 'slip') this.$router.push({ name: 'payroll-slip-id', params: { id } });
+      if (c === 'a') this.$router.push({ name: 'payroll-journal-id', params: { id } });
+      else if (c === 'b') this.$router.push({ name: 'payroll-tax-id', params: { id } });
+      else if (c === 'c') this.$router.push({ name: 'payroll-ketenagakerjaan-id', params: { id } });
+      else if (c === 'd') this.$router.push({ name: 'payroll-kesehatan-id', params: { id } });
+      else if (c === 'e') this.$router.push({ name: 'payroll-trf-id', params: { id } });
+      else if (c === 'f') this.$router.push({ name: 'payroll-slip-id', params: { id } });
     },
     handleActionCommand(c, id, fr) {
-      if (c === 'delete') this.handleConfirm(id);
-      else if (c === 'addEmployee') this.showAddEmployee(id);
-      else if (c === 'cloneEmployee') this.showCloneEmployee(id);
-      else if (c === 'clonePayroll') this.showClonePayroll(id);
-      else if (c === 'freeze') this.handleFreeze(id, fr);
+      if (c === 'a') this.showAddEmployee(id);
+      else if (c === 'b') this.showClonePayroll(id);
+      else if (c === 'c') this.handleFreeze(id, fr);
+      else if (c === 'd') this.handleConfirm(id);
     },
     handleConfirm(id) {
       this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
