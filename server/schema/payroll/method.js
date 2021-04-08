@@ -288,6 +288,13 @@ const generateReportPayroll = async (p) => {
       ],
     ];
 
+    const tbl5 = [
+      ['Prepared By,', 'Checked By,', 'Reviewed By,', 'Knowledge By,', 'Approved By,'],
+      ['', '', '', '', ''],
+      ['Ayu Fatimah', 'Ronal P. Siahaan', 'Hendra SP / Yutin Sudarni', 'Gusti Very Wealthy', 'Eko Hernanto'],
+      [{ text: 'Personel', bold: true }, { text: 'Payroll Controller', bold: true }, { text: 'HR & GA Dept. / Finance Dept.', bold: true }, { text: 'Finance & HRGA Division', bold: true }, { text: 'Management PT. Labtech Penta International', bold: true }],
+    ];
+
     employee.map((e, i) => {
       tbl1.push([
         { text: (i + 1), alignment: 'center' }, e.d0, { text: e.e0, alignment: 'center' }, { text: intpre0(e.g0).format(), alignment: 'right' },
@@ -470,6 +477,16 @@ const generateReportPayroll = async (p) => {
           layout: {
             fillColor: (rowIndex) => (rowIndex === employee.length + 2 ? '#eeeeee' : null),
           },
+        },
+        {
+          style: 'tbl',
+          margin: [10, 40, 0, 0],
+          table: {
+            widths: [95, 95, 95, 95, 95],
+            heights: [5, 20, 5, 5],
+            body: tbl5,
+          },
+          layout: 'noBorders',
         },
       ],
       styles: {
