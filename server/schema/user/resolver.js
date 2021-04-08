@@ -36,7 +36,7 @@ const Mutation = {
       password: { type: GraphQLString },
       role: { type: GraphQLString },
     },
-    resolve: async (_, args) => {
+    resolve: auth.hasRole('root', async (_, args) => {
       try {
         const newUser = new User(args);
         const s = await newUser.save();
@@ -44,7 +44,7 @@ const Mutation = {
       } catch (err) {
         throw new GraphQLError(err);
       }
-    },
+    }),
   },
   userChangePassword: {
     type: UserType,

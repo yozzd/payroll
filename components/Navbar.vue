@@ -35,6 +35,12 @@
         <el-dropdown-item command="cpass">
           Change Password
         </el-dropdown-item>
+        <el-dropdown-item
+          command="users"
+          v-if="$auth.hasRole('root')"
+        >
+          User Management
+        </el-dropdown-item>
         <el-dropdown-item command="logout">
           Logout
         </el-dropdown-item>
@@ -53,6 +59,7 @@ export default {
       else if (c === 'tax') this.$router.push({ path: '/tax/' });
       else if (c === 'thr') this.$router.push({ path: '/thr/' });
       else if (c === 'cpass') this.$router.push({ path: '/cpass/' });
+      else if (c === 'users') this.$router.push({ path: '/users/' });
     },
   },
 };
