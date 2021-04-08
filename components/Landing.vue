@@ -1,11 +1,11 @@
 <template>
   <div class="flex min-h-full">
     <div class="w-2/5 flex flex-col p-12">
-      <div class="flex">
-        <Brand />
-      </div>
       <div class="flex items-center h-full">
         <div class="flex-1 flex-col space-y-8 px-12">
+          <div class="flex justify-center">
+            <Brand />
+          </div>
           <ErrorHandler
             v-if="errors"
             :errors="errors"
