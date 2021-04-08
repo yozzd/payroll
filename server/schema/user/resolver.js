@@ -2,6 +2,7 @@ const { GraphQLList, GraphQLString, GraphQLError } = require('graphql');
 const auth = require('../auth/service');
 const User = require('./model');
 const { UserType } = require('./type');
+const { DeleteInputType } = require('../payroll/input.type');
 
 const Query = {
   users: {
@@ -61,6 +62,20 @@ const Mutation = {
         return await user.save();
       }
       throw new GraphQLError('Your password in invalid, please try again');
+    }),
+  },
+  userDelete: {
+    type: new GraphQLList(UserType),
+    args: {
+      del: { type: new GraphQLList(DeleteInputType) },
+    },
+    resolve: auth.hasRole('user', async (_, { del }) => {
+      await Promise.all(
+        del.map(async (v) => {
+          await User.findOneAndDelete({ _id: v._id });
+        }),
+      );
+      return del;
     }),
   },
 };

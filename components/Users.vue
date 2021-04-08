@@ -7,7 +7,7 @@
       v-if="errors"
       :errors="errors"
     />
-    <div class="flex flex-row-reverse space-x-4 items-center">
+    <div class="flex flex-row-reverse space-x-4 space-x-reverse">
       <div>
         <el-link
           :underline="false"
@@ -15,6 +15,16 @@
           @click="showAdd = true"
         >
           Add User
+        </el-link>
+      </div>
+      <div>
+        <el-link
+          :underline="false"
+          type="primary"
+          :disabled="!multipleSelection.length"
+          @click="handleDelete"
+        >
+          Delete
         </el-link>
       </div>
     </div>
@@ -25,7 +35,13 @@
       :data="users"
       size="small"
       max-height="500"
+      @selection-change="handleSelectionChange"
     >
+      <el-table-column
+        type="selection"
+        width="40"
+        align="center"
+      ></el-table-column>
       <el-table-column type="index" width="50" align="center"></el-table-column>
       <el-table-column prop="username" label="Username" width="200"></el-table-column>
       <el-table-column prop="role" label="Role" width="100"></el-table-column>
@@ -73,13 +89,16 @@
 </template>
 
 <script>
+import pullAllBy from 'lodash/pullAllBy';
 import { Users } from '../apollo/query/user';
-import { UserCreate } from '../apollo/mutation/user';
+import { UserCreate, UserDelete } from '../apollo/mutation/user';
 
 export default {
   data() {
     return {
       showAdd: false,
+      multipleSelection: [],
+      cachedMultipleSelection: [],
       formAdd: {
         username: '',
         password: '',
@@ -131,6 +150,38 @@ export default {
           return false;
         }
       });
+    },
+    handleSelectionChange(arr) {
+      this.multipleSelection = arr.map((v) => ({ _id: v._id }));
+      this.cachedMultipleSelection = arr;
+    },
+    handleDelete() {
+      this.$confirm('This will permanently delete the data. Continue?', 'Warning', {
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'Cancel',
+        type: 'warning',
+      }).then(async () => {
+        await this.$apollo.mutate({
+          mutation: UserDelete,
+          variables: {
+            del: this.multipleSelection,
+          },
+          update: (store, { data: { userDelete } }) => {
+            const cdata = store.readQuery({
+              query: Users,
+            });
+            pullAllBy(cdata.users, userDelete, '_id');
+            store.writeQuery({
+              query: Users,
+              data: cdata,
+            });
+          },
+          optimisticResponse: {
+            __typename: 'Mutation',
+            userDelete: this.cachedMultipleSelection,
+          },
+        });
+      }).catch(() => {});
     },
   },
   apollo: {
