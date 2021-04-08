@@ -32,6 +32,9 @@
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item command="cpass">
+          Change Password
+        </el-dropdown-item>
         <el-dropdown-item command="logout">
           Logout
         </el-dropdown-item>
@@ -49,6 +52,7 @@ export default {
       else if (c === 'prorate') this.$router.push({ path: '/prorate/' });
       else if (c === 'tax') this.$router.push({ path: '/tax/' });
       else if (c === 'thr') this.$router.push({ path: '/thr/' });
+      else if (c === 'cpass') this.$router.push({ path: '/cpass/' });
     },
   },
 };
