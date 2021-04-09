@@ -20,10 +20,4 @@ export const TrfReport = gql`
   }
 `;
 
-export const Faker = gql`
-  query faker ($id: String!) {
-    faker(id: $id) {
-      _id
-    }
-  }
-`;
+export const faker = '';

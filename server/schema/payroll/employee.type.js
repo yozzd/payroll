@@ -49,6 +49,26 @@ const FinalCheckType = new GraphQLObjectType({
   }),
 });
 
+const PphCheckType = new GraphQLObjectType({
+  name: 'PphCheckType',
+  fields: () => ({
+    name: { type: GraphQLString },
+    dir: { type: GraphQLString },
+    check: {
+      type: GraphQLBoolean,
+      resolve: async (p) => {
+        try {
+          await fs.access(`static/pph/${p.dir}/${p.name}.pdf`);
+          return true;
+        } catch (err) {
+          if (err) return false;
+          return false;
+        }
+      },
+    },
+  }),
+});
+
 const EmployeeType = new GraphQLObjectType({
   name: 'EmployeeType',
   fields: () => ({
@@ -203,6 +223,7 @@ const EmployeeType = new GraphQLObjectType({
     gross: { type: GraphQLFloat },
     ttax: { type: GraphQLFloat },
     fDate: { type: DateFormat },
+    pph: { type: PphCheckType },
   }),
 });
 
