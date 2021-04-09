@@ -124,7 +124,107 @@ const genPDF = async (p) => {
     ];
 
     const col2 = [
-      ['', 'Nama Karyawan', p.d0],
+      [{
+        text: '', border: [true, true, true, false], colSpan: 3,
+      }, '', ''],
+      [{ text: '', border: [true, false, false, false] }, { text: 'Nama Karyawan', border: [false, false, false, false] }, { text: p.d0, border: [false, false, true, false] }],
+      [{ text: '', border: [true, false, false, false] }, { text: 'Status Tanggungan', border: [false, false, false, false] }, { text: p.r0, border: [false, false, true, false] }],
+      [{ text: '', border: [true, false, false, false] }, { text: p.ea0, border: [false, false, false, false], alignment: 'right' }, { text: 'Bulanan', border: [false, false, true, false] }],
+      [{ text: '', border: [true, false, false, false] }, { text: 'Gaji Pokok', border: [false, false, false, false], bold: true }, {
+        text: intpre0(p.t0b).format(), border: [false, false, true, false], alignment: 'right', bold: true,
+      }],
+      [{
+        text: '', border: [true, false, true, false], colSpan: 3,
+      }, '', ''],
+      [{ text: '1', border: [true, false, false, false], alignment: 'center' }, { text: 'Tunjangan Tetap & Tidak Tetap', border: [false, false, false, false] }, { text: intpre0(p.bk0b).format(), border: [false, false, true, false], alignment: 'right' }],
+      [{ text: '2', border: [true, false, false, false], alignment: 'center' }, { text: 'Lembur & Insentif', border: [false, false, false, false] }, { text: intpre0(p.ai0b).format(), border: [false, false, true, false], alignment: 'right' }],
+      [{ text: '3', border: [true, false, false, false], alignment: 'center' }, { text: 'Jaminan Kecelakaan Kerja, 0.54%', border: [false, false, false, false] }, { text: intpre0(p.cb0b).format(), border: [false, false, true, false], alignment: 'right' }],
+      [{ text: '4', border: [true, false, false, false], alignment: 'center' }, { text: 'Jaminan Kematian, 0.30%', border: [false, false, false, false] }, { text: intpre0(p.cc0b).format(), border: [false, false, true, false], alignment: 'right' }],
+      [{ text: '5', border: [true, false, false, false], alignment: 'center' }, { text: 'Iuran BPJS Kesehatan, 4% dibayar perusahaan', border: [false, false, false, false] }, { text: intpre0(p.cq0b).format(), border: [false, false, true, false], alignment: 'right' }],
+      [{ text: '6', border: [true, false, false, false], alignment: 'center' }, { text: 'Retro Fill', border: [false, false, false, false] }, { text: intpre0(p.bu0b).format(), border: [false, false, true, false], alignment: 'right' }],
+      [{ text: '7', border: [true, false, false, false], alignment: 'center' }, { text: 'Bonus & THR', border: [false, false, false, false] }, { text: intpre0(p.dr0b).format(), border: [false, false, true, false], alignment: 'right' }],
+      [{ text: '8', border: [true, false, false, false], alignment: 'center' }, { text: 'Cuti yang diuangkan', border: [false, false, false, false] }, { text: intpre0(p.bz0b).format(), border: [false, false, true, false], alignment: 'right' }],
+      [{ text: '9', border: [true, false, false, false], alignment: 'center' }, { text: '(Other Deduction)', border: [false, false, false, false] }, { text: intpre0(p.df0b).format(), border: [false, false, true, false], alignment: 'right' }],
+      [{ text: '10', border: [true, false, false, false], alignment: 'center' }, { text: '(Absent Deduction)', border: [false, false, false, false] }, { text: intpre0(p.cy0b).format(), border: [false, false, true, false], alignment: 'right' }],
+      [{ text: '', border: [true, false, false, false] }, { text: 'Total Penghasilan Bruto', border: [false, false, false, false], bold: true }, {
+        text: intpre0(p.t1b).format(), border: [false, true, true, false], alignment: 'right', bold: true,
+      }],
+      [{
+        text: '', border: [true, false, true, false], colSpan: 3,
+      }, '', ''],
+      [{ text: '1', border: [true, false, false, false], alignment: 'center' }, { text: 'Biaya Jabatan', border: [false, false, false, false] }, { text: intpre0(p.t2b).format(), border: [false, false, true, false], alignment: 'right' }],
+      [{ text: '2', border: [true, false, false, false], alignment: 'center' }, { text: 'Iuran JHT, 2% dari upah dibayar karyawan', border: [false, false, false, false] }, { text: intpre0(p.ce0b).format(), border: [false, false, true, false], alignment: 'right' }],
+      [{ text: '3', border: [true, false, false, false], alignment: 'center' }, { text: 'Iuran Pensiun, 1% dari upah dibayar karyawan', border: [false, false, false, false] }, { text: intpre0(p.cj0b).format(), border: [false, false, true, false], alignment: 'right' }],
+      [{ text: '', border: [true, false, false, false] }, { text: 'Total Pengurang', border: [false, false, false, false], bold: true }, {
+        text: intpre0(p.t3b).format(), border: [false, true, true, false], alignment: 'right', bold: true,
+      }],
+      [{
+        text: '', border: [true, false, true, false], colSpan: 3,
+      }, '', ''],
+      [{ text: '', border: [true, false, false, false] }, { text: 'Total Neto Setahun', border: [false, false, false, false], bold: true }, {
+        text: intpre0(p.t4b).format(), border: [false, false, true, false], alignment: 'right', bold: true,
+      }],
+      [{
+        text: '', border: [true, false, true, false], colSpan: 3,
+      }, '', ''],
+      [{ text: '', border: [true, false, false, false] }, { text: 'Penghasilan Neto Setahun', border: [false, false, false, false], bold: true }, {
+        text: intpre0(p.t4b).format(), border: [false, false, true, false], alignment: 'right', bold: true,
+      }],
+      [{
+        text: '', border: [true, false, true, false], colSpan: 3,
+      }, '', ''],
+      [{ text: '', border: [true, false, false, false] }, { text: 'PTKP', border: [false, false, false, false] }, {
+        text: intpre0(p.t6a).format(), border: [false, false, true, false], alignment: 'right',
+      }],
+      [{
+        text: '', border: [true, false, true, false], colSpan: 3,
+      }, '', ''],
+      [{ text: '', border: [true, false, false, false] }, { text: 'Penghasilan Kena Pajak Setahun', border: [false, false, false, false], bold: true }, {
+        text: intpre0(p.t7a).format(), border: [false, false, true, false], alignment: 'right', bold: true,
+      }],
+      [{
+        text: '', border: [true, false, true, false], colSpan: 3,
+      }, '', ''],
+      [{ text: '', border: [true, false, false, false] }, { text: 'PKP Setahun', border: [false, false, false, false], bold: true }, {
+        text: intpre0(p.t8a).format(), border: [false, false, true, false], alignment: 'right', bold: true,
+      }],
+      [{
+        text: '', border: [true, false, true, false], colSpan: 3,
+      }, '', ''],
+      [{ text: '', border: [true, false, false, false] }, { text: 'Tarif Pph21', border: [false, false, false, false], bold: true }, {
+        text: 'Tarif', border: [false, false, true, false], bold: true,
+      }],
+      [{ text: '', border: [true, false, false, false] }, { text: 'Level 1 : 0 - 50 Juta', border: [false, false, false, false] }, { text: '5%', border: [false, false, true, false], alignment: 'right' }],
+      [{ text: '', border: [true, false, false, false] }, { text: 'Level 2 : 50 - 250 Juta', border: [false, false, false, false] }, { text: '15%', border: [false, false, true, false], alignment: 'right' }],
+      [{ text: '', border: [true, false, false, false] }, { text: 'Level 3 : 250 - 500 Juta', border: [false, false, false, false] }, { text: '25%', border: [false, false, true, false], alignment: 'right' }],
+      [{ text: '', border: [true, false, false, false] }, { text: 'Level 4 : lebih dari 500 Juta', border: [false, false, false, false] }, { text: '30%', border: [false, false, true, false], alignment: 'right' }],
+      [{
+        text: '', border: [true, false, true, false], colSpan: 3,
+      }, '', ''],
+      [{ text: '', border: [true, false, false, false] }, { text: 'Pph21 Tahunan', border: [false, false, false, false] }, {
+        text: intpre0(p.t9a).format(), border: [false, false, true, false], alignment: 'right',
+      }],
+      [{
+        text: '', border: [true, false, true, false], colSpan: 3,
+      }, '', ''],
+      [{ text: '', border: [true, false, false, false] }, { text: 'Pph21 Bulanan', border: [false, false, false, false] }, {
+        text: intpre0(p.t10b).format(), border: [false, false, true, false], alignment: 'right',
+      }],
+      [{
+        text: '', border: [true, false, true, false], colSpan: 3,
+      }, '', ''],
+      [{ text: '', border: [true, false, false, false] }, { text: 'Memiliki NPWP', border: [false, false, false, false] }, {
+        text: p.p0, border: [false, false, true, false], alignment: 'right',
+      }],
+      [{
+        text: '', border: [true, false, true, false], colSpan: 3,
+      }, '', ''],
+      [{ text: '', border: [true, false, false, false] }, { text: 'Pph21 Bulanan', border: [false, false, false, false] }, {
+        text: intpre0(p.t11b).format(), border: [false, false, true, false], alignment: 'right',
+      }],
+      [{
+        text: '', border: [true, false, true, true], colSpan: 3,
+      }, '', ''],
     ];
 
     const col3 = [

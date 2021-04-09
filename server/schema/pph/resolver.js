@@ -84,11 +84,25 @@ const Mutation = {
         },
         {
           $addFields: {
+            ai0b: { $multiply: ['$ai0', '$ea0'] },
+            bk0b: { $multiply: ['$bk0', '$ea0'] },
+            bz0b: { $multiply: ['$bz0', '$ea0'] },
+            bu0b: { $multiply: ['$bu0', '$ea0'] },
+            cb0b: { $multiply: ['$cb0', '$ea0'] },
+            cc0b: { $multiply: ['$cc0', '$ea0'] },
+            ce0b: { $multiply: ['$ce0', '$ea0'] },
+            cj0b: { $multiply: ['$cj0', '$ea0'] },
+            cq0b: { $multiply: ['$cq0', '$ea0'] },
+            cy0b: { $multiply: ['$cy0', '$ea0'] },
+            df0b: { $multiply: ['$df0', '$ea0'] },
+            dr0b: { $multiply: ['$dr0', '$ea0'] },
+            t0b: { $multiply: ['$l0', '$ea0'] },
             t1a: { $subtract: [{ $sum: ['$l0', '$bk0', '$ai0', '$cb0', '$cc0', '$cq0', '$bu0', '$dr0', '$bz0'] }, { $sum: ['$df0', '$cy0'] }] },
           },
         },
         {
           $addFields: {
+            t1b: { $subtract: [{ $sum: ['$t0b', '$bk0b', '$ai0b', '$cb0b', '$cc0b', '$cq0b', '$bu0b', '$dr0b', '$bz0b'] }, { $sum: ['$df0b', '$cy0b'] }] },
             t2a: {
               $function: {
                 body: `function(v) {
@@ -102,16 +116,27 @@ const Mutation = {
         },
         {
           $addFields: {
+            t2b: {
+              $function: {
+                body: `function(v) {
+                  return (v * 0.05 >= 6000000) ? 6000000 : Math.round(v * 0.05);
+                }`,
+                args: ['$t1b'],
+                lang: 'js',
+              },
+            },
             t3a: { $sum: ['$t2a', '$ce0', '$cj0'] },
           },
         },
         {
           $addFields: {
+            t3b: { $sum: ['$t2b', '$ce0b', '$cj0b'] },
             t4a: { $subtract: ['$t1a', '$t3a'] },
           },
         },
         {
           $addFields: {
+            t4b: { $subtract: ['$t1b', '$t3b'] },
             t5a: { $multiply: ['$t4a', '$ea0'] },
           },
         },
@@ -185,6 +210,15 @@ const Mutation = {
                 lang: 'js',
               },
             },
+            t10b: {
+              $function: {
+                body: `function(v) {
+                  return (v === 0 ? 0 : Math.round(v));
+                }`,
+                args: ['$t9a'],
+                lang: 'js',
+              },
+            },
           },
         },
 
@@ -199,9 +233,24 @@ const Mutation = {
                     const v = Math.floor(c / 100) * 100;
                     return (v <= 200 ? 0 : v);
                   }
-                  return (Math.floor((pph21Bulanan * 1.2) / 100) * 100);
+                  return (Math.floor((c * 1.2) / 100) * 100);
                 }`,
                 args: ['$fc0', '$p0', '$t10a'],
+                lang: 'js',
+              },
+            },
+            t11b: {
+              $function: {
+                body: `function(a, b, c) {
+                  if (a) {
+                    return a;
+                  } if (!a && b === 'Yes') {
+                    const v = Math.floor(c / 100) * 100;
+                    return (v <= 200 ? 0 : v);
+                  }
+                  return (Math.floor((c * 1.2) / 100) * 100);
+                }`,
+                args: ['$fc0', '$p0', '$t10b'],
                 lang: 'js',
               },
             },
