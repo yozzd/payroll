@@ -103,6 +103,7 @@ const Mutation = {
         {
           $addFields: {
             t1b: { $subtract: [{ $sum: ['$t0b', '$bk0b', '$ai0b', '$cb0b', '$cc0b', '$cq0b', '$bu0b', '$dr0b', '$bz0', '$bx0'] }, { $sum: ['$df0b', '$cy0b'] }] },
+            t1c: { $subtract: [{ $sum: ['$t0b', '$bk0b', '$ai0b', '$cb0b', '$cc0b', '$cq0b', '$bu0b', '$dr0b'] }, { $sum: ['$df0b', '$cy0b'] }] },
             t2a: {
               $function: {
                 body: `function(v) {
@@ -125,18 +126,29 @@ const Mutation = {
                 lang: 'js',
               },
             },
+            t2c: {
+              $function: {
+                body: `function(v) {
+                  return (v * 0.05 >= 6000000) ? 6000000 : Math.round(v * 0.05);
+                }`,
+                args: ['$t1c'],
+                lang: 'js',
+              },
+            },
             t3a: { $sum: ['$t2a', '$ce0', '$cj0'] },
           },
         },
         {
           $addFields: {
             t3b: { $sum: ['$t2b', '$ce0b', '$cj0b'] },
+            t3c: { $sum: ['$t2c', '$ce0b', '$cj0b'] },
             t4a: { $subtract: ['$t1a', '$t3a'] },
           },
         },
         {
           $addFields: {
             t4b: { $subtract: ['$t1b', '$t3b'] },
+            t4c: { $subtract: ['$t1c', '$t3c'] },
             t5a: { $multiply: ['$t4a', '$ea0'] },
           },
         },
@@ -163,13 +175,13 @@ const Mutation = {
             },
           },
         },
-
         {
           $addFields: {
             t7a: { $subtract: ['$t5a', '$t6a'] },
+            t7b: { $subtract: ['$t4b', '$t6a'] },
+            t7c: { $subtract: ['$t4c', '$t6a'] },
           },
         },
-
         {
           $addFields: {
             t8a: {
@@ -183,9 +195,26 @@ const Mutation = {
             },
           },
         },
-
         {
           $addFields: {
+            t8b: {
+              $function: {
+                body: `function(v) {
+                  return (v <= 0 ? 0 : Math.floor(v / 1000) * 1000);
+                }`,
+                args: ['$t7b'],
+                lang: 'js',
+              },
+            },
+            t8c: {
+              $function: {
+                body: `function(v) {
+                  return (v <= 0 ? 0 : Math.floor(v / 1000) * 1000);
+                }`,
+                args: ['$t7c'],
+                lang: 'js',
+              },
+            },
             t9a: {
               $function: {
                 body: `function(v) {
@@ -198,9 +227,28 @@ const Mutation = {
             },
           },
         },
-
         {
           $addFields: {
+            t9b: {
+              $function: {
+                body: `function(v) {
+                  const pph = Math.min(Math.max(0, v), 50000000) * 0.05 + Math.min(Math.max(0, v - 50000000), 200000000) * 0.15 + Math.min(Math.max(0, v - 250000000), 250000000) * 0.25 + Math.max(0, v - 500000000) * 0.3;
+                  return pph;
+                }`,
+                args: ['$t8b'],
+                lang: 'js',
+              },
+            },
+            t9c: {
+              $function: {
+                body: `function(v) {
+                  const pph = Math.min(Math.max(0, v), 50000000) * 0.05 + Math.min(Math.max(0, v - 50000000), 200000000) * 0.15 + Math.min(Math.max(0, v - 250000000), 250000000) * 0.25 + Math.max(0, v - 500000000) * 0.3;
+                  return pph;
+                }`,
+                args: ['$t8c'],
+                lang: 'js',
+              },
+            },
             t10a: {
               $function: {
                 body: `function(v, e) {
@@ -210,20 +258,28 @@ const Mutation = {
                 lang: 'js',
               },
             },
+          },
+        },
+        {
+          $addFields: {
             t10b: {
               $function: {
                 body: `function(v) {
                   return (v === 0 ? 0 : Math.round(v));
                 }`,
-                args: ['$t9a'],
+                args: ['$t9b'],
                 lang: 'js',
               },
             },
-          },
-        },
-
-        {
-          $addFields: {
+            t10c: {
+              $function: {
+                body: `function(v) {
+                  return (v === 0 ? 0 : Math.round(v));
+                }`,
+                args: ['$t9c'],
+                lang: 'js',
+              },
+            },
             t11a: {
               $function: {
                 body: `function(a, b, c) {
@@ -239,6 +295,11 @@ const Mutation = {
                 lang: 'js',
               },
             },
+            t12b: { $subtract: ['$t9b', '$t9a'] },
+          },
+        },
+        {
+          $addFields: {
             t11b: {
               $function: {
                 body: `function(a, b, c) {
@@ -251,6 +312,21 @@ const Mutation = {
                   return (Math.floor((c * 1.2) / 100) * 100);
                 }`,
                 args: ['$fc0', '$p0', '$t10b'],
+                lang: 'js',
+              },
+            },
+            t11c: {
+              $function: {
+                body: `function(a, b, c) {
+                  if (a) {
+                    return a;
+                  } if (!a && b === 'Yes') {
+                    const v = Math.floor(c / 100) * 100;
+                    return (v <= 200 ? 0 : v);
+                  }
+                  return (Math.floor((c * 1.2) / 100) * 100);
+                }`,
+                args: ['$fc0', '$p0', '$t10c'],
                 lang: 'js',
               },
             },
