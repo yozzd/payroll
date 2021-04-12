@@ -561,6 +561,50 @@ const processImportOvertime = async ({ _id, file }) => {
     }));
 };
 
+const processImportTax21 = async ({ _id, file }) => {
+  const px = await Payroll.findOne({ _id });
+  const { filename, createReadStream } = await file;
+  const stream = createReadStream();
+
+  const tmp = `/tmp/${filename}`;
+  return new Promise((resolve, reject) => stream
+    .on('error', async (error) => {
+      if (stream.truncated) await fs.unlinkSync(tmp);
+      reject(error);
+    })
+    .pipe(fs.createWriteStream(tmp))
+    .on('finish', async () => {
+      const wb = XLSX.readFile(tmp);
+      const ws = wb.Sheets[wb.SheetNames];
+      const ft = XLSX.utils.sheet_to_json(ws);
+
+      try {
+        for (let i = 0; i < ft.length; i += 1) {
+          if (ft[i]['Emp No']) {
+            const idx = px.employee.findIndex((v) => v.e0 === ft[i]['Emp No']);
+            if (idx >= 0) {
+              Object.assign(px.employee[idx], {
+                dg0: ft[i].Pemotongan || 0,
+                bv0: ft[i].Pembetulan || 0,
+              });
+            }
+          }
+        }
+
+        await px.save();
+        return resolve({ sStatus: 1 });
+      } catch (err) {
+        if (typeof err === 'string') {
+          reject(new GraphQLError(err));
+        } else {
+          reject(new GraphQLError(err.message));
+        }
+      }
+
+      return true;
+    }));
+};
+
 const processImportProrate = async ({ file, from, to }) => {
   const { filename, createReadStream } = await file;
   const stream = createReadStream();
@@ -681,4 +725,5 @@ module.exports = {
   processImportKoperasi,
   processImportOvertime,
   processImportProrate,
+  processImportTax21,
 };

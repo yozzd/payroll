@@ -128,7 +128,6 @@ const group = {
   ed0Sum: { $sum: '$employee.ed0' },
 };
 const a3Report = async (id) => {
-
   const p = await Payroll.aggregate([
     { $match: { _id: id } },
     { $unwind: '$employee' },
@@ -141,11 +140,10 @@ const a3Report = async (id) => {
 };
 
 const a3ReportNoFin = async (id) => {
-
   const p = await Payroll.aggregate([
     { $match: { _id: id } },
     { $unwind: '$employee' },
-    { $match: { 'employee.ex0': false} },
+    { $match: { 'employee.ex0': false } },
     {
       $group: group,
     },

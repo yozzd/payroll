@@ -75,3 +75,11 @@ export const ImportOvertime = gql`
     }
   }
 `;
+
+export const ImportTax21 = gql`
+  mutation importTax21($input: ExtImportInputType) {
+    importTax21(input: $input) {
+      sStatus
+    }
+  }
+`;

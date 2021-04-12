@@ -7,6 +7,7 @@ const {
   processImportKoperasi,
   processImportOvertime,
   processImportProrate,
+  processImportTax21,
 } = require('./method');
 const { ImportInputType, ExtImportInputType } = require('./input.type');
 const { PayrollType, GenType } = require('../payroll/type');
@@ -96,6 +97,16 @@ const Mutation = {
     },
     resolve: auth.hasRole('user', async (_, { input }) => {
       const p = await processImportOvertime(input);
+      return p;
+    }),
+  },
+  importTax21: {
+    type: GenType,
+    args: {
+      input: { type: ExtImportInputType },
+    },
+    resolve: auth.hasRole('user', async (_, { input }) => {
+      const p = await processImportTax21(input);
       return p;
     }),
   },

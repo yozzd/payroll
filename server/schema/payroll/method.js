@@ -1230,31 +1230,34 @@ const genFinal = async (p) => {
       [{ text: 'Overtime' }, { text: '(Variable)', colSpan: 4 }, '', '', '', ':', { text: intpre0(e.g0 / 173).format(), alignment: 'right' }],
     ];
 
-    if (e.aj0) vw1.push([{ text: 'Living Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.aj0).format(), alignment: 'right' }]);
-    if (e.ak0) vw1.push([{ text: 'Housing Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.ak0).format(), alignment: 'right' }]);
-    if (e.al0) vw1.push([{ text: 'Functional Position Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.al0).format(), alignment: 'right' }]);
-    if (e.am0) vw1.push([{ text: 'Functional Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.am0).format(), alignment: 'right' }]);
-    if (e.an0) vw1.push([{ text: 'Coordinator Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.an0).format(), alignment: 'right' }]);
-    if (e.ao0) vw1.push([{ text: 'Transport Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.ao0).format(), alignment: 'right' }]);
-    if (e.ap0) vw1.push([{ text: 'Communication Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.ap0).format(), alignment: 'right' }]);
-    if (e.aq0) vw1.push([{ text: 'Expertise Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.aq0).format(), alignment: 'right' }]);
-    if (e.ar0) vw1.push([{ text: 'Honorarium Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.ar0).format(), alignment: 'right' }]);
-    if (e.as0) vw1.push([{ text: 'Position Variable Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.as0).format(), alignment: 'right' }]);
-    if (e.at0) vw1.push([{ text: 'Functional Variable Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.at0).format(), alignment: 'right' }]);
-    if (e.au0) vw1.push([{ text: 'Acting/PLT Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.au0).format(), alignment: 'right' }]);
-    if (e.av0) vw1.push([{ text: 'Others Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.av0).format(), alignment: 'right' }]);
+    if (e.aj0) vw1.push([{ text: 'Living Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.aj0r).format(), alignment: 'right' }]);
+    if (e.ak0) vw1.push([{ text: 'Housing Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.ak0r).format(), alignment: 'right' }]);
+    if (e.al0) vw1.push([{ text: 'Functional Position Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.al0r).format(), alignment: 'right' }]);
+    if (e.am0) vw1.push([{ text: 'Functional Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.am0r).format(), alignment: 'right' }]);
+    if (e.an0) vw1.push([{ text: 'Coordinator Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.an0r).format(), alignment: 'right' }]);
+    if (e.ao0) vw1.push([{ text: 'Transport Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.ao0r).format(), alignment: 'right' }]);
+    if (e.ap0) vw1.push([{ text: 'Communication Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.ap0r).format(), alignment: 'right' }]);
+    if (e.aq0) vw1.push([{ text: 'Expertise Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.aq0r).format(), alignment: 'right' }]);
+    if (e.ar0) vw1.push([{ text: 'Honorarium Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.ar0r).format(), alignment: 'right' }]);
+    if (e.as0) vw1.push([{ text: 'Position Variable Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.as0r).format(), alignment: 'right' }]);
+    if (e.at0) vw1.push([{ text: 'Functional Variable Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.at0r).format(), alignment: 'right' }]);
+    if (e.au0) vw1.push([{ text: 'Acting/PLT Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.au0r).format(), alignment: 'right' }]);
+    if (e.av0) vw1.push([{ text: 'Others Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.av0r).format(), alignment: 'right' }]);
 
-    if (e.ba0) vw1.push([{ text: 'Functional Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.ba0).format(), alignment: 'right' }]);
-    if (e.bb0) vw1.push([{ text: 'Shift Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bb0).format(), alignment: 'right' }]);
-    if (e.bc0) vw1.push([{ text: 'Tig Welding Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bc0).format(), alignment: 'right' }]);
-    if (e.bd0) vw1.push([{ text: 'Plasma Cutting Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bd0).format(), alignment: 'right' }]);
-    if (e.be0) vw1.push([{ text: 'LKS Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.be0).format(), alignment: 'right' }]);
-    if (e.bf0) vw1.push([{ text: 'Koperasi Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bf0).format(), alignment: 'right' }]);
-    if (e.bg0) vw1.push([{ text: 'Quality System Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bg0).format(), alignment: 'right' }]);
-    if (e.bh0) vw1.push([{ text: 'Penghargaan Masa Kerja Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bh0).format(), alignment: 'right' }]);
-    if (e.bi0) vw1.push([{ text: 'Others Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bi0).format(), alignment: 'right' }]);
+    if (e.ba0) vw1.push([{ text: 'Functional Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.ba0r).format(), alignment: 'right' }]);
+    if (e.bb0) vw1.push([{ text: 'Shift Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bb0r).format(), alignment: 'right' }]);
+    if (e.bc0) vw1.push([{ text: 'Tig Welding Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bc0r).format(), alignment: 'right' }]);
+    if (e.bd0) vw1.push([{ text: 'Plasma Cutting Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bd0r).format(), alignment: 'right' }]);
+    if (e.be0) vw1.push([{ text: 'LKS Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.be0r).format(), alignment: 'right' }]);
+    if (e.bf0) vw1.push([{ text: 'Koperasi Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bf0r).format(), alignment: 'right' }]);
+    if (e.bg0) vw1.push([{ text: 'Quality System Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bg0r).format(), alignment: 'right' }]);
+    if (e.bh0) vw1.push([{ text: 'Penghargaan Masa Kerja Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bh0r).format(), alignment: 'right' }]);
+    if (e.bi0) vw1.push([{ text: 'Others Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bi0r).format(), alignment: 'right' }]);
 
-    vw1.push([{ text: 'Salary All In', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.g0 + e.bk0).format(), alignment: 'right' }]);
+    const all1 = e.g0 + e.aj0r + e.ak0r + e.al0r + e.am0r + e.an0r + e.ao0r + e.ap0r + e.aq0r + e.ar0r + e.as0r
+    + e.at0r + e.au0r + e.av0r + e.ba0r + e.bb0r + e.bc0r + e.bd0r + e.be0r + e.bf0r + e.bg0r + e.bh0r + e.bi0r;
+
+    vw1.push([{ text: 'Salary All In', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(all1).format(), alignment: 'right' }]);
 
     const mt = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const d = getDate(e.k0);
@@ -1286,29 +1289,29 @@ const genFinal = async (p) => {
     }
     vw2.push(['THR Prorate', { text: bw, colSpan: 2 }, '', `${e.bw0}/12`, '', ':', { text: intpre0(e.bx0).format(), alignment: 'right' }]);
 
-    if (e.aj0) vw2.push(['Living Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.aj0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.aj0 / 21) * e.j0;
-    if (e.ak0) vw2.push(['Housing Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.ak0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.ak0 / 21) * e.j0;
-    if (e.al0) vw2.push(['Functional Position Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.al0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.al0 / 21) * e.j0;
-    if (e.am0) vw2.push(['Functional Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.am0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.am0 / 21) * e.j0;
-    if (e.an0) vw2.push(['Coordinator Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.an0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.an0 / 21) * e.j0;
-    if (e.ao0) vw2.push(['Transport Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.ao0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.ao0 / 21) * e.j0;
-    if (e.ap0) vw2.push(['Communication Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.ap0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.ap0 / 21) * e.j0;
-    if (e.aq0) vw2.push(['Expertise Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.aq0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.aq0 / 21) * e.j0;
-    if (e.ar0) vw2.push(['Honorarium Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.ar0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.ar0 / 21) * e.j0;
-    if (e.as0) vw2.push(['Position Variable Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.as0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.as0 / 21) * e.j0;
-    if (e.at0) vw2.push(['Functional Variable Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.at0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.at0 / 21) * e.j0;
-    if (e.au0) vw2.push(['Acting/PLT Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.au0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.au0 / 21) * e.j0;
-    if (e.av0) vw2.push(['Others Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.av0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.av0 / 21) * e.j0;
+    if (e.aj0) vw2.push(['Living Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.aj0).format(), alignment: 'right' }]); income += e.aj0;
+    if (e.ak0) vw2.push(['Housing Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.ak0).format(), alignment: 'right' }]); income += e.ak0;
+    if (e.al0) vw2.push(['Functional Position Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.al0).format(), alignment: 'right' }]); income += e.al0;
+    if (e.am0) vw2.push(['Functional Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.am0).format(), alignment: 'right' }]); income += e.am0;
+    if (e.an0) vw2.push(['Coordinator Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.an0).format(), alignment: 'right' }]); income += e.an0;
+    if (e.ao0) vw2.push(['Transport Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.ao0).format(), alignment: 'right' }]); income += e.ao0;
+    if (e.ap0) vw2.push(['Communication Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.ap0).format(), alignment: 'right' }]); income += e.ap0;
+    if (e.aq0) vw2.push(['Expertise Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.aq0).format(), alignment: 'right' }]); income += e.aq0;
+    if (e.ar0) vw2.push(['Honorarium Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.ar0).format(), alignment: 'right' }]); income += e.ar0;
+    if (e.as0) vw2.push(['Position Variable Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.as0).format(), alignment: 'right' }]); income += e.as0;
+    if (e.at0) vw2.push(['Functional Variable Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.at0).format(), alignment: 'right' }]); income += e.at0;
+    if (e.au0) vw2.push(['Acting/PLT Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.au0).format(), alignment: 'right' }]); income += e.au0;
+    if (e.av0) vw2.push(['Others Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.av0).format(), alignment: 'right' }]); income += e.av0;
 
-    if (e.ba0) vw2.push(['Functional Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.ba0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.ba0 / 21) * e.j0;
-    if (e.bb0) vw2.push(['Shift Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.bb0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.bb0 / 21) * e.j0;
-    if (e.bc0) vw2.push(['Tig Welding Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.bc0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.bc0 / 21) * e.j0;
-    if (e.bd0) vw2.push(['Plasma Cutting Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.bd0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.bd0 / 21) * e.j0;
-    if (e.be0) vw2.push(['LKS Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.be0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.be0 / 21) * e.j0;
-    if (e.bf0) vw2.push(['Koperasi Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.bf0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.bf0 / 21) * e.j0;
-    if (e.bg0) vw2.push(['Quality System Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.bg0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.bg0 / 21) * e.j0;
-    if (e.bh0) vw2.push(['Penghargaan Masa Kerja Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.bh0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.bh0 / 21) * e.j0;
-    if (e.bi0) vw2.push(['Others Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0((e.bi0 / 21) * e.j0).format(), alignment: 'right' }]); income += (e.bi0 / 21) * e.j0;
+    if (e.ba0) vw2.push(['Functional Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.ba0).format(), alignment: 'right' }]); income += e.ba0;
+    if (e.bb0) vw2.push(['Shift Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.bb0).format(), alignment: 'right' }]); income += e.bb0;
+    if (e.bc0) vw2.push(['Tig Welding Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.bc0).format(), alignment: 'right' }]); income += e.bc0;
+    if (e.bd0) vw2.push(['Plasma Cutting Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.bd0).format(), alignment: 'right' }]); income += e.bd0;
+    if (e.be0) vw2.push(['LKS Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.be0).format(), alignment: 'right' }]); income += e.be0;
+    if (e.bf0) vw2.push(['Koperasi Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.bf0).format(), alignment: 'right' }]); income += e.bf0;
+    if (e.bg0) vw2.push(['Quality System Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.bg0).format(), alignment: 'right' }]); income += e.bg0;
+    if (e.bh0) vw2.push(['Penghargaan Masa Kerja Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.bh0).format(), alignment: 'right' }]); income += e.bh0;
+    if (e.bi0) vw2.push(['Others Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.bi0).format(), alignment: 'right' }]); income += e.bi0;
 
     if (e.dt0) vw2.push([{ text: 'Uang Pisah', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.dt0).format(), alignment: 'right' }]); income += (e.dt0 / 21) * e.j0;
     vw2.push([{ text: 'Tambahan Lain Tidak Kena Pajak', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bv0).format(), alignment: 'right' }]);

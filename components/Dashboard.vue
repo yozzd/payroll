@@ -155,6 +155,12 @@
                 >
                   OT / Absent
                 </el-menu-item>
+                <el-menu-item
+                  index="d"
+                  :disabled="scope.row.freeze"
+                >
+                  Tax 21 Kurang / Lebih Bayar
+                </el-menu-item>
               </el-submenu>
             </el-menu>
           </template>
@@ -516,6 +522,53 @@
     </el-dialog>
 
     <el-dialog
+      title="Import Tax 21 Kurang / Lebih Bayar"
+      :visible.sync="showTax21Dialog"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :before-close="handleTax21DialogClose"
+      width="20%"
+    >
+      <ErrorHandler
+        v-if="errors"
+        :errors="errors"
+        class="mb-8"
+      />
+      <el-form
+        ref="formExt"
+        :model="formExt"
+        :hide-required-asterisk="true"
+        label-position="top"
+      >
+        <el-form-item label="File" prop="file">
+          <el-upload
+            drag
+            action=""
+            accept=".xls, .xlsx"
+            :file-list="fileList"
+            :on-change="handleTax21Upload"
+            :auto-upload="false"
+          >
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">
+              Drop file here or <em>click to upload</em>
+            </div>
+          </el-upload>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleTax21DialogClose">Cancel</el-button>
+        <el-button
+          type="primary"
+          :loading="loadingTax21"
+          @click="handleTax21Import('formExt')"
+        >
+          Import
+        </el-button>
+      </span>
+    </el-dialog>
+
+    <el-dialog
       title="Add Employee"
       :visible.sync="showAddEmployeeDialog"
       :close-on-click-modal="false"
@@ -746,6 +799,7 @@ import {
   ImportKantin,
   ImportKoperasi,
   ImportOvertime,
+  ImportTax21,
 } from '../apollo/mutation/import';
 import {
   PayrollDelete,
@@ -772,6 +826,7 @@ export default {
       showKantinDialog: false,
       showKoperasiDialog: false,
       showOvertimeDialog: false,
+      showTax21Dialog: false,
       loading: false,
       loadingAddEmployee: false,
       loadingCloneEmployee: false,
@@ -779,6 +834,7 @@ export default {
       loadingKantin: false,
       loadingKoperasi: false,
       loadingOvertime: false,
+      loadingTax21: false,
       genRpPy: false,
       genAcc: false,
       dpt: [],
@@ -903,6 +959,7 @@ export default {
       if (c === 'a') this.handleKantinDialog(id);
       else if (c === 'b') this.handleKoperasiDialog(id);
       else if (c === 'c') this.handleOvertimeDialog(id);
+      else if (c === 'd') this.handleTax21Dialog(id);
     },
     handleExportCommand(c, id, dir) {
       if (c === 'aa') this.generateReportPayroll(id, dir);
@@ -1337,6 +1394,48 @@ export default {
 
             this.handleOvertimeDialogClose();
             this.loadingOvertime = false;
+            return true;
+          } catch ({ graphQLErrors, networkError }) {
+            this.errors = graphQLErrors || networkError.result.errors;
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
+    },
+    handleTax21Dialog(id) {
+      this.showTax21Dialog = true;
+      this.formExt.id = id;
+    },
+    handleTax21DialogClose() {
+      this.fileList = [];
+      this.$refs.formExt.resetFields();
+      this.$refs.formExt.clearValidate();
+      this.showTax21Dialog = false;
+    },
+    handleTax21Upload({ raw }) {
+      this.formExt.file = raw;
+    },
+    handleTax21Import(form) {
+      this.$refs[form].validate(async (valid) => {
+        if (valid) {
+          try {
+            this.loadingTax21 = true;
+            const client = this.$apolloProvider.clients.upload;
+
+            await client.mutate({
+              mutation: ImportTax21,
+              variables: {
+                input: {
+                  _id: this.formExt.id,
+                  file: this.formExt.file,
+                },
+              },
+            });
+
+            this.handleTax21DialogClose();
+            this.loadingTax21 = false;
             return true;
           } catch ({ graphQLErrors, networkError }) {
             this.errors = graphQLErrors || networkError.result.errors;
