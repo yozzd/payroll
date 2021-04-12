@@ -183,6 +183,12 @@
                   >
                     XLS
                   </el-menu-item>
+                  <el-menu-item
+                    v-if="$auth.hasRole('admin')"
+                    index="ac"
+                  >
+                    XLS (No Final Payment)
+                  </el-menu-item>
                 </el-submenu>
                 <el-menu-item index="b">
                   Accounting Check
@@ -745,6 +751,7 @@ import {
   PayrollDelete,
   GenerateReportPayroll,
   GeneratePayrollXLS,
+  GenPayrollXLSNoFin,
   GenerateAccCheck,
   AddEmployee,
   CloneEmployee,
@@ -900,6 +907,7 @@ export default {
     handleExportCommand(c, id, dir) {
       if (c === 'aa') this.generateReportPayroll(id, dir);
       else if (c === 'ab') this.generatePayrollXLS(id, dir);
+      else if (c === 'ac') this.genPayrollXLSNoFin(id, dir);
       else if (c === 'b') this.generateAccCheck(id, dir);
     },
     handleReportCommand(c, id) {
@@ -1112,6 +1120,22 @@ export default {
       try {
         await this.$apollo.mutate({
           mutation: GeneratePayrollXLS,
+          variables: {
+            id,
+          },
+        });
+
+        window.open(`/report/${dir}/${dir}_payroll.xls`);
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
+    },
+    async genPayrollXLSNoFin(id, dir) {
+      try {
+        await this.$apollo.mutate({
+          mutation: GenPayrollXLSNoFin,
           variables: {
             id,
           },

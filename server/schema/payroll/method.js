@@ -758,6 +758,7 @@ const genPayrollXLS = async (p) => {
       wb.Sheets.Sheet3[`W${row}`] = { t: 'n', v: intpre0v2(e[i].dn0).format() };
     }
 
+    row += 1;
     wb.Sheets.Sheet1[`A${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: '' };
@@ -1419,7 +1420,7 @@ const genFinal = async (p) => {
         },
         tbl2: {
           fontSize: 8,
-          margin: [10, 20, 0, 20],
+          margin: [10, 10, 0, 10],
         },
       },
     };
