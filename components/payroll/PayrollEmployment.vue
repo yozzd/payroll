@@ -46,7 +46,7 @@
       ></el-table-column>
       <el-table-column type="index" width="50" align="center" fixed></el-table-column>
       <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
-      <el-table-column label="Nama Karyawan" width="300" fixed>
+      <el-table-column label="Nama Karyawan" min-width="200" fixed>
         <template slot-scope="scope">
           <el-link
             v-if="!freeze"
@@ -74,8 +74,8 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column prop="u0" label="Department" width="200"></el-table-column>
-      <el-table-column prop="v0" label="Section" width="200"></el-table-column>
+      <el-table-column prop="u0" label="Department" min-width="200"></el-table-column>
+      <el-table-column prop="v0" label="Section" min-width="200"></el-table-column>
       <el-table-column prop="w0" label="Section Code" width="100"></el-table-column>
       <el-table-column prop="x0" label="Grade" width="100"></el-table-column>
       <el-table-column prop="y0" label="Jabatan" width="200"></el-table-column>
