@@ -4,7 +4,9 @@
       <div class="flex items-center h-full">
         <div class="flex-1 flex-col space-y-8 px-12">
           <div class="flex justify-center">
-            <Brand />
+            <div class="text-4xl font-inter-bold tracking-tighter">
+              Payroll
+            </div>
           </div>
           <ErrorHandler
             v-if="errors"
