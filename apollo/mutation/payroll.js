@@ -95,6 +95,7 @@ export const EditPrivate = gql`
         t0
         z0
         aa0
+        et0
         ew0
       }
     }

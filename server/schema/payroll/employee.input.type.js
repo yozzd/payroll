@@ -36,6 +36,7 @@ const PrivateInputType = new GraphQLInputObjectType({
     t0: { type: GraphQLString },
     z0: { type: GraphQLString },
     aa0: { type: GraphQLString },
+    et0: { type: GraphQLString },
     ew0: { type: GraphQLString },
   }),
 });

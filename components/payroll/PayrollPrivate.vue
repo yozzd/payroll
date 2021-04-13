@@ -70,7 +70,7 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :before-close="handleEditDialogClose"
-      width="60%"
+      width="80%"
     >
       <ErrorHandler
         v-if="errors"
@@ -157,6 +157,18 @@
               <el-input v-model="form.ew0"></el-input>
             </el-form-item>
           </div>
+          <div class="flex-1">
+            <el-form-item label="Agama">
+              <el-select v-model="form.et0" filterable>
+                <el-option
+                  v-for="v in rlg"
+                  :key="v"
+                  :label="v"
+                  :value="v"
+                ></el-option>
+              </el-select>
+            </el-form-item>
+          </div>
         </div>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -188,13 +200,14 @@ export default {
       loading: false,
       freeze: false,
       banks: [],
+      rlg: [],
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
           '_id', 'd0', 'e0', 'n0', 'o0',
           'p0', 'q0', 'r0', 's0', 't0',
-          'z0', 'aa0', 'ew0',
+          'z0', 'aa0', 'et0', 'ew0',
         ],
       }),
     };
@@ -230,6 +243,7 @@ export default {
                     t0: this.form.t0,
                     z0: this.form.z0,
                     aa0: this.form.aa0,
+                    et0: this.form.et0,
                     ew0: this.form.ew0,
                   },
                 },
@@ -266,6 +280,7 @@ export default {
           this.miniSearch.removeAll();
           this.miniSearch.addAll(this.items);
           this.banks = [...new Set(this.items.map((v) => v.s0))].sort();
+          this.rlg = [...new Set(this.items.map((v) => v.et0))].sort();
         }
       },
       error({ graphQLErrors, networkError }) {
