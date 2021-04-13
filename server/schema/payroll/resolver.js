@@ -1017,7 +1017,8 @@ const Mutation = {
       });
 
       const arr1 = px.employee.filter((v) => v.fg0 !== true && v.ff0 !== true && v.ex0 !== true);
-      const arr2 = arr1.map((v) => {
+      const arr2 = arr1.map((o) => {
+        const v = o;
         v.j0 = 21;
         v.ab0 = 0;
         v.ad0 = 0;

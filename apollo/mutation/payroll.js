@@ -393,6 +393,10 @@ export const ClonePayroll = gql`
       period
       dir
       freeze
+      employee {
+        u0
+        v0
+      }
     }
   }
 `;
