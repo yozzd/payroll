@@ -1015,8 +1015,43 @@ const Mutation = {
         rate: px.rate,
       });
 
-      const arr = px.employee.filter((v) => v.fg0 !== true && v.ff0 !== true && v.ex0 !== true);
-      Object.assign(pn.employee, arr);
+      const arr1 = px.employee.filter((v) => v.fg0 !== true && v.ff0 !== true && v.ex0 !== true);
+      const arr2 = arr1.map(v => {
+        v.j0 = 21;
+        v.ab0 = 0;
+        v.ac0 = 0;
+        v.af0 = 0;
+        v.bl0 = 0;
+        v.bm0 = 0;
+        v.bn0 = 0;
+        v.bo0 = 0;
+        v.bp0 = 0;
+        v.bq0 = 0;
+        v.br0 = 0;
+        v.bs0 = 0;
+        v.bt0 = 0;
+        v.bv0 = 0;
+        v.bw0 = 0;
+        v.by0 = 0;
+        v.ck0 = '';
+        v.ct0 = '';
+        v.cw0 = 0;
+        v.dc0 = 0;
+        v.dd0 = 0;
+        v.de0 = 0;
+        v.dg0 = 0;
+        v.dh0 = 0;
+        v.di0 = 0;
+        v.dk0 = 0;
+        v.dl0 = 0;
+        v.dm0 = 0;
+        v.dn0 = 0;
+        v.dq0 = 0;
+        v.dr0 = 0;
+
+        return v;
+      });
+      Object.assign(pn.employee, arr2);
 
       const s = await pn.save();
       return s;
