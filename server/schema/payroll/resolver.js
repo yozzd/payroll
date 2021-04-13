@@ -221,6 +221,7 @@ const Query = {
           'employee.t0': 1,
           'employee.z0': 1,
           'employee.aa0': 1,
+          'employee.et0': 1,
           'employee.ew0': 1,
           'employee.ex0': 1,
         });
@@ -1016,10 +1017,10 @@ const Mutation = {
       });
 
       const arr1 = px.employee.filter((v) => v.fg0 !== true && v.ff0 !== true && v.ex0 !== true);
-      const arr2 = arr1.map(v => {
+      const arr2 = arr1.map((v) => {
         v.j0 = 21;
         v.ab0 = 0;
-        v.ac0 = 0;
+        v.ad0 = 0;
         v.af0 = 0;
         v.bl0 = 0;
         v.bm0 = 0;

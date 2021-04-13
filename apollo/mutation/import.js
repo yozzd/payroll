@@ -83,3 +83,11 @@ export const ImportTax21 = gql`
     }
   }
 `;
+
+export const ImportAgama = gql`
+  mutation importAgama($input: ExtImportInputType) {
+    importAgama(input: $input) {
+      sStatus
+    }
+  }
+`;

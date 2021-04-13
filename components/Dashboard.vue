@@ -161,6 +161,12 @@
                 >
                   Tax 21 Kurang / Lebih Bayar
                 </el-menu-item>
+                <el-menu-item
+                  index="e"
+                  :disabled="scope.row.freeze"
+                >
+                  Agama
+                </el-menu-item>
               </el-submenu>
             </el-menu>
           </template>
@@ -569,6 +575,53 @@
     </el-dialog>
 
     <el-dialog
+      title="Import Agama"
+      :visible.sync="showAgamaDialog"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :before-close="handleAgamaDialogClose"
+      width="20%"
+    >
+      <ErrorHandler
+        v-if="errors"
+        :errors="errors"
+        class="mb-8"
+      />
+      <el-form
+        ref="formExt"
+        :model="formExt"
+        :hide-required-asterisk="true"
+        label-position="top"
+      >
+        <el-form-item label="File" prop="file">
+          <el-upload
+            drag
+            action=""
+            accept=".xls, .xlsx"
+            :file-list="fileList"
+            :on-change="handleAgamaUpload"
+            :auto-upload="false"
+          >
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">
+              Drop file here or <em>click to upload</em>
+            </div>
+          </el-upload>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleAgamaDialogClose">Cancel</el-button>
+        <el-button
+          type="primary"
+          :loading="loadingAgama"
+          @click="handleAgamaImport('formExt')"
+        >
+          Import
+        </el-button>
+      </span>
+    </el-dialog>
+
+    <el-dialog
       title="Add Employee"
       :visible.sync="showAddEmployeeDialog"
       :close-on-click-modal="false"
@@ -800,6 +853,7 @@ import {
   ImportKoperasi,
   ImportOvertime,
   ImportTax21,
+  ImportAgama,
 } from '../apollo/mutation/import';
 import {
   PayrollDelete,
@@ -827,6 +881,7 @@ export default {
       showKoperasiDialog: false,
       showOvertimeDialog: false,
       showTax21Dialog: false,
+      showAgamaDialog: false,
       loading: false,
       loadingAddEmployee: false,
       loadingCloneEmployee: false,
@@ -835,6 +890,7 @@ export default {
       loadingKoperasi: false,
       loadingOvertime: false,
       loadingTax21: false,
+      loadingAgama: false,
       genRpPy: false,
       genAcc: false,
       dpt: [],
@@ -960,6 +1016,7 @@ export default {
       else if (c === 'b') this.handleKoperasiDialog(id);
       else if (c === 'c') this.handleOvertimeDialog(id);
       else if (c === 'd') this.handleTax21Dialog(id);
+      else if (c === 'e') this.handleAgamaDialog(id);
     },
     handleExportCommand(c, id, dir) {
       if (c === 'aa') this.generateReportPayroll(id, dir);
@@ -1436,6 +1493,48 @@ export default {
 
             this.handleTax21DialogClose();
             this.loadingTax21 = false;
+            return true;
+          } catch ({ graphQLErrors, networkError }) {
+            this.errors = graphQLErrors || networkError.result.errors;
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
+    },
+    handleAgamaDialog(id) {
+      this.showAgamaDialog = true;
+      this.formExt.id = id;
+    },
+    handleAgamaDialogClose() {
+      this.fileList = [];
+      this.$refs.formExt.resetFields();
+      this.$refs.formExt.clearValidate();
+      this.showAgamaDialog = false;
+    },
+    handleAgamaUpload({ raw }) {
+      this.formExt.file = raw;
+    },
+    handleAgamaImport(form) {
+      this.$refs[form].validate(async (valid) => {
+        if (valid) {
+          try {
+            this.loadingAgama = true;
+            const client = this.$apolloProvider.clients.upload;
+
+            await client.mutate({
+              mutation: ImportAgama,
+              variables: {
+                input: {
+                  _id: this.formExt.id,
+                  file: this.formExt.file,
+                },
+              },
+            });
+
+            this.handleAgamaDialogClose();
+            this.loadingAgama = false;
             return true;
           } catch ({ graphQLErrors, networkError }) {
             this.errors = graphQLErrors || networkError.result.errors;

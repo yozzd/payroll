@@ -59,6 +59,7 @@
         <el-table-column prop="z0" label="Ketenagakerjaan" width="160"></el-table-column>
         <el-table-column prop="aa0" label="Kesehatan" width="160"></el-table-column>
       </el-table-column>
+      <el-table-column prop="et0" label="Agama" width="160"></el-table-column>
       <el-table-column prop="ew0" label="Email" width="300"></el-table-column>
       <el-table-column label="" min-width="120"></el-table-column>
     </el-table>

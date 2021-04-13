@@ -177,6 +177,7 @@ const EmployeeSchema = new Schema({
   eq0: { type: Number, default: 0 }, // Leave / THR
   er0: { type: Number, default: 0 }, // Total JHT dan Pensiun Karyawan
   es0: { type: Number, default: 0 }, // Pengembalian Pajak DTP
+  et0: { type: String, trim: true }, // Religion
   ew0: { type: String, trim: true }, // Email
   ex0: { type: Boolean, default: false }, // Slot 1 Flag
   ey0: { type: Boolean, default: false }, // Slot 2 Flag
