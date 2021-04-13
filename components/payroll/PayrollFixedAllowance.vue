@@ -244,49 +244,49 @@
               ></el-input>
             </el-form-item>
             <el-form-item label="Tj. Tetap Living">
-              <el-input v-model="form.aj0"></el-input>
+              <el-input v-model="form.aj0r"></el-input>
             </el-form-item>
             <el-form-item label="Tj. Tetap Perumahan">
-              <el-input v-model="form.ak0"></el-input>
+              <el-input v-model="form.ak0r"></el-input>
             </el-form-item>
           </div>
           <div class="flex-1">
             <el-form-item label="Tj. Tetap Posisi Fix">
-              <el-input v-model="form.al0"></el-input>
+              <el-input v-model="form.al0r"></el-input>
             </el-form-item>
             <el-form-item label="Tj. Tetap Funsional Fix">
-              <el-input v-model="form.am0"></el-input>
+              <el-input v-model="form.am0r"></el-input>
             </el-form-item>
             <el-form-item label="Tj. Tetap Koordinator">
-              <el-input v-model="form.an0"></el-input>
+              <el-input v-model="form.an0r"></el-input>
             </el-form-item>
             <el-form-item label="Tj. Tetap Transport">
-              <el-input v-model="form.ao0"></el-input>
+              <el-input v-model="form.ao0r"></el-input>
             </el-form-item>
           </div>
           <div class="flex-1">
             <el-form-item label="Tj. Tetap Komunikasi">
-              <el-input v-model="form.ap0"></el-input>
+              <el-input v-model="form.ap0r"></el-input>
             </el-form-item>
             <el-form-item label="Tj. Tetap Expertisi">
-              <el-input v-model="form.aq0"></el-input>
+              <el-input v-model="form.aq0r"></el-input>
             </el-form-item>
             <el-form-item label="Tj. Tetap Honorarium">
-              <el-input v-model="form.ar0"></el-input>
+              <el-input v-model="form.ar0r"></el-input>
             </el-form-item>
             <el-form-item label="Tj. Posisi Variable">
-              <el-input v-model="form.as0"></el-input>
+              <el-input v-model="form.as0r"></el-input>
             </el-form-item>
           </div>
           <div class="flex-1">
             <el-form-item label="Tj. Funsional Variable">
-              <el-input v-model="form.at0"></el-input>
+              <el-input v-model="form.at0r"></el-input>
             </el-form-item>
             <el-form-item label="Tj. Tetap Acting / PLT">
-              <el-input v-model="form.au0"></el-input>
+              <el-input v-model="form.au0r"></el-input>
             </el-form-item>
             <el-form-item label="Tj. Others">
-              <el-input v-model="form.av0"></el-input>
+              <el-input v-model="form.av0r"></el-input>
             </el-form-item>
           </div>
         </div>
@@ -326,6 +326,9 @@ export default {
           '_id', 'd0', 'e0', 'aj0', 'ak0', 'al0',
           'am0', 'an0', 'ao0', 'ap0', 'aq0', 'ar0',
           'as0', 'at0', 'au0', 'av0', 'aw0',
+          'aj0r', 'ak0r', 'al0r', 'am0r', 'an0r',
+          'ao0r', 'ap0r', 'aq0r', 'ar0r',
+          'as0r', 'at0r', 'au0r', 'av0r',
         ],
       }),
     };
@@ -352,19 +355,19 @@ export default {
                   _id: this.$route.params.id,
                   employee: {
                     _id: this.form._id,
-                    aj0: parseInt(this.form.aj0, 10),
-                    ak0: parseInt(this.form.ak0, 10),
-                    al0: parseInt(this.form.al0, 10),
-                    am0: parseInt(this.form.am0, 10),
-                    an0: parseInt(this.form.an0, 10),
-                    ao0: parseInt(this.form.ao0, 10),
-                    ap0: parseInt(this.form.ap0, 10),
-                    aq0: parseInt(this.form.aq0, 10),
-                    ar0: parseInt(this.form.ar0, 10),
-                    as0: parseInt(this.form.as0, 10),
-                    at0: parseInt(this.form.at0, 10),
-                    au0: parseInt(this.form.au0, 10),
-                    av0: parseInt(this.form.av0, 10),
+                    aj0r: parseInt(this.form.aj0r, 10),
+                    ak0r: parseInt(this.form.ak0r, 10),
+                    al0r: parseInt(this.form.al0r, 10),
+                    am0r: parseInt(this.form.am0r, 10),
+                    an0r: parseInt(this.form.an0r, 10),
+                    ao0r: parseInt(this.form.ao0r, 10),
+                    ap0r: parseInt(this.form.ap0r, 10),
+                    aq0r: parseInt(this.form.aq0r, 10),
+                    ar0r: parseInt(this.form.ar0r, 10),
+                    as0r: parseInt(this.form.as0r, 10),
+                    at0r: parseInt(this.form.at0r, 10),
+                    au0r: parseInt(this.form.au0r, 10),
+                    av0r: parseInt(this.form.av0r, 10),
                   },
                 },
               },

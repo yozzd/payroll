@@ -150,18 +150,31 @@ export const EditFixedAllowance = gql`
         d0
         e0
         aj0
+        aj0r
         ak0
+        ak0r
         al0
+        al0r
         am0
+        am0r
         an0
+        an0r
         ao0
+        ao0r
         ap0
+        ap0r
         aq0
+        aq0r
         ar0
+        ar0r
         as0
+        as0r
         at0
+        at0r
         au0
+        au0r
         av0
+        av0r
         aw0
       }
     }
@@ -177,14 +190,23 @@ export const EditNonFixedAllowance = gql`
         d0
         e0
         ba0
+        ba0r
         bb0
+        bb0r
         bc0
+        bc0r
         bd0
+        bd0r
         be0
+        be0r
         bf0
+        bf0r
         bg0
+        bg0r
         bh0
+        bh0r
         bi0
+        bi0r
         bj0
       }
     }

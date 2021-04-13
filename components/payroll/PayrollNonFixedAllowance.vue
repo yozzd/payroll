@@ -197,35 +197,35 @@
               ></el-input>
             </el-form-item>
             <el-form-item label="Tj. Tidak Tetap Fungsional">
-              <el-input v-model="form.ba0"></el-input>
+              <el-input v-model="form.ba0r"></el-input>
             </el-form-item>
             <el-form-item label="Tj. Tidak Tetap Shift">
-              <el-input v-model="form.bb0"></el-input>
+              <el-input v-model="form.bb0r"></el-input>
             </el-form-item>
           </div>
           <div class="flex-1">
             <el-form-item label="Tj. Tidak Tetap Tig Welding">
-              <el-input v-model="form.bc0"></el-input>
+              <el-input v-model="form.bc0r"></el-input>
             </el-form-item>
             <el-form-item label="Tj. Tidak Tetap Operator Plasma">
-              <el-input v-model="form.bd0"></el-input>
+              <el-input v-model="form.bd0r"></el-input>
             </el-form-item>
             <el-form-item label="Tj. Tidak Tetap LKS">
-              <el-input v-model="form.be0"></el-input>
+              <el-input v-model="form.be0r"></el-input>
             </el-form-item>
             <el-form-item label="Tj. Tidak Tetap Koperasi">
-              <el-input v-model="form.bf0"></el-input>
+              <el-input v-model="form.bf0r"></el-input>
             </el-form-item>
           </div>
           <div class="flex-1">
             <el-form-item label="Tj. Tidak Tetap Quality System">
-              <el-input v-model="form.bg0"></el-input>
+              <el-input v-model="form.bg0r"></el-input>
             </el-form-item>
             <el-form-item label="Tj. Tidak Tetap Penghargaan Masa Kerja">
-              <el-input v-model="form.bh0"></el-input>
+              <el-input v-model="form.bh0r"></el-input>
             </el-form-item>
             <el-form-item label="Tj. Tidak Tetap Others">
-              <el-input v-model="form.bi0"></el-input>
+              <el-input v-model="form.bi0r"></el-input>
             </el-form-item>
           </div>
         </div>
@@ -262,9 +262,10 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'ba0', 'bb0', 'bc0',
-          'bd0', 'be0', 'bf0', 'bg0', 'bh0', 'bi0',
-          'bj0',
+          '_id', 'd0', 'e0', 'ba0', 'bb0', 'bc0', 'bd0',
+          'be0', 'bf0', 'bg0', 'bh0', 'bi0', 'bj0',
+          'ba0r', 'bb0r', 'bc0r', 'bd0r',
+          'be0r', 'bf0r', 'bg0r', 'bh0r', 'bi0r',
         ],
       }),
     };
@@ -291,15 +292,15 @@ export default {
                   _id: this.$route.params.id,
                   employee: {
                     _id: this.form._id,
-                    ba0: parseInt(this.form.ba0, 10),
-                    bb0: parseInt(this.form.bb0, 10),
-                    bc0: parseInt(this.form.bc0, 10),
-                    bd0: parseInt(this.form.bd0, 10),
-                    be0: parseInt(this.form.be0, 10),
-                    bf0: parseInt(this.form.bf0, 10),
-                    bg0: parseInt(this.form.bg0, 10),
-                    bh0: parseInt(this.form.bh0, 10),
-                    bi0: parseInt(this.form.bi0, 10),
+                    ba0r: parseInt(this.form.ba0r, 10),
+                    bb0r: parseInt(this.form.bb0r, 10),
+                    bc0r: parseInt(this.form.bc0r, 10),
+                    bd0r: parseInt(this.form.bd0r, 10),
+                    be0r: parseInt(this.form.be0r, 10),
+                    bf0r: parseInt(this.form.bf0r, 10),
+                    bg0r: parseInt(this.form.bg0r, 10),
+                    bh0r: parseInt(this.form.bh0r, 10),
+                    bi0r: parseInt(this.form.bi0r, 10),
                   },
                 },
               },
