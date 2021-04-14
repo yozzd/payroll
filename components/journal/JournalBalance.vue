@@ -12,11 +12,21 @@
     >
       <thead>
         <tr>
-          <th>Code</th>
-          <th></th>
-          <th>Description</th>
-          <th>DR</th>
-          <th>CR</th>
+          <th class="text-left">
+            Code
+          </th>
+          <th class="text-left">
+            Category
+          </th>
+          <th class="text-left">
+            Description
+          </th>
+          <th class="text-left">
+            DR
+          </th>
+          <th class="text-left">
+            CR
+          </th>
           <th></th>
         </tr>
       </thead>
@@ -393,7 +403,7 @@
         </tr>
         <tr>
           <td></td>
-          <td>Production - Labor Cost</td>
+          <td>Payroll Exp - Administration</td>
           <td>(Tax 21 Returned)</td>
           <td class="text-right">
             {{ administration.taxReturn | currency }}
@@ -403,7 +413,7 @@
         </tr>
         <tr>
           <td></td>
-          <td>Production - Labor Cost</td>
+          <td>Payroll Exp - Administration</td>
           <td>(Pengembalian Pajak DTP)</td>
           <td class="text-right">
             {{ administration.dtp | currency }}

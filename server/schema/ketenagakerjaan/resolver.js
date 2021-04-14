@@ -31,6 +31,7 @@ const ktg = async (id) => {
             cj0: '$employee.cj0',
             cm0: '$employee.cm0',
             ck0: '$employee.ck0',
+            ex0: '$employee.ex0',
           },
         },
         sum1: { $sum: '$employee.ay0' },

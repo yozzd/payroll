@@ -385,6 +385,7 @@ export const EditManualEmployee = gql`
         e0
         fc0
         fe0
+        ex0
       }
     }
   }

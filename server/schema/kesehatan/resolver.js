@@ -28,6 +28,7 @@ const kes = async (id) => {
             cs0: '$employee.cs0',
             ct0: '$employee.ct0',
             cu0: '$employee.cu0',
+            ex0: '$employee.ex0',
           },
         },
         sum1: { $sum: '$employee.co0' },

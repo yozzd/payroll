@@ -46,14 +46,14 @@
           </p>
         </template>
       </el-table-column>
-      <el-table-column label="Final Payment" width="100" align="center">
+      <el-table-column label="Final Payment" width="120" align="center">
         <template slot-scope="scope">
           <p v-if="scope.row.ex0">
             X
           </p>
         </template>
       </el-table-column>
-      <el-table-column width="100" align="center">
+      <el-table-column width="120" align="center">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tidak Ikut Pensiun">
@@ -67,7 +67,7 @@
           </p>
         </template>
       </el-table-column>
-      <el-table-column width="100" align="center">
+      <el-table-column width="120" align="center">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tidak Ikut BPJS">
@@ -81,7 +81,7 @@
           </p>
         </template>
       </el-table-column>
-      <el-table-column width="100" align="center">
+      <el-table-column width="120" align="center">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Tidak Dapat Relaksasi JKK & JK">
@@ -95,7 +95,7 @@
           </p>
         </template>
       </el-table-column>
-      <el-table-column width="100" align="center">
+      <el-table-column width="120" align="center">
         <template slot="header">
           <client-only>
             <p v-snip="1" title="Final Payment BPJS Dibayarkan">

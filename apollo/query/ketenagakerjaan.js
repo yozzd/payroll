@@ -23,6 +23,7 @@ export const KetenagakerjaanReport = gql`
         cj0
         cm0
         ck0
+        ex0
       }
     }
   }

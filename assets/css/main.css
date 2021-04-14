@@ -34,6 +34,25 @@ html {
   font-size: 12px;
 }
 
+.el-input__inner,
+.el-button,
+.el-form-item__label,
+.el-dropdown-menu__item,
+.el-select-dropdown__item,
+.el-date-picker__header-label,
+.el-date-table th,
+.el-table th > .cell,
+.el-picker-panel,
+.el-year-table td .cell,
+.el-month-table td .cell,
+.el-table .cell {
+  @apply text-black;
+}
+
+.el-button--primary {
+  @apply text-white;
+}
+
 .el-dropdown-menu.search {
   @apply px-4;
 }
@@ -59,12 +78,20 @@ button:focus,
   background: #F5F7FA;
 }
 
+.el-table th > .cell {
+  @apply font-inter-bold;
+}
+
 .el-table .final-row {
   background: #f0f9eb;
 }
 
 .el-table .warning-row {
   background: #fdf5e6;
+}
+
+.el-table--small td {
+  padding: 4px 0;
 }
 
 .el-upload,

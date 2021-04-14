@@ -7,7 +7,6 @@
       <div>
         <el-link
           type="primary"
-          class="font-sm"
           :underline="false"
           :disabled="!multipleSelection.length"
           @click="handleDelete"

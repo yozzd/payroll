@@ -20,6 +20,7 @@ export const KesehatanReport = gql`
         cs0
         ct0
         cu0
+        ex0
       }
     }
   }

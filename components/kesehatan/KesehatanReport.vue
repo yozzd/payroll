@@ -101,7 +101,7 @@
           <span>{{ scope.row.cu0 | currency }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Catatan" width="140">
+      <el-table-column label="Catatan" width="200">
         <template slot-scope="scope">
           <span>{{ scope.row.ct0 }}</span>
         </template>

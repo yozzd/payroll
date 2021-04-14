@@ -650,6 +650,7 @@ const Query = {
           'employee.e0': 1,
           'employee.fc0': 1,
           'employee.fe0': 1,
+          'employee.ex0': 1,
         });
       return p;
     }),

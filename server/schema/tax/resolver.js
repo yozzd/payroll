@@ -45,6 +45,7 @@ const taxR = async (id) => {
             eq0: '$employee.eq0',
             er0: '$employee.er0',
             es0: '$employee.es0',
+            ex0: '$employee.ex0',
             gross: {
               $subtract: [
                 {
