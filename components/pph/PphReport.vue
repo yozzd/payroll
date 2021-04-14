@@ -10,9 +10,7 @@
     </el-breadcrumb>
     <div class="flex space-x-4 items-center">
       <div class="flex-1">
-        <el-badge :value="items.length" type="success">
-          {{ content }}
-        </el-badge>
+        {{ content }} &bull; Total {{ items.length }} items
       </div>
       <div class="w-64">
         <el-input
