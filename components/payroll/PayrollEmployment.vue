@@ -2,7 +2,8 @@
   <div class="space-y-2">
     <div class="flex space-x-4 items-center">
       <div class="flex-1">
-        Total {{ items.length }} items
+        <span class="text-green-500">Total {{ items.length }} items</span>
+        &bull; <span class="text-pink-500">{{ multipleSelection.length }} item(s) selected</span>
       </div>
       <div>
         <el-link

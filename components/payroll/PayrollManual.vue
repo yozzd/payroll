@@ -6,7 +6,7 @@ i<template>
     />
     <div class="flex space-x-4 items-center">
       <div class="flex-1">
-        Total {{ items.length }} items
+        <span class="text-green-500">Total {{ items.length }} items</span>
       </div>
       <div class="w-64">
         <el-input
