@@ -1,5 +1,5 @@
 <template>
-  <div class="flex px-12 pt-3 h-16 space-x-8 items-baseline">
+  <div class="flex px-12 pt-5 h-20 space-x-8 items-baseline">
     <Brand />
     <nuxt-link to="/dashboard/">
       Dashboard
