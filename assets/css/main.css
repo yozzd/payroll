@@ -45,6 +45,8 @@ html {
 .el-picker-panel,
 .el-year-table td .cell,
 .el-month-table td .cell,
+.el-loading-spinner .el-loading-text,
+.el-loading-spinner i,
 .el-table .cell {
   @apply text-black;
 }

@@ -30,7 +30,7 @@
         :data="payrollAll"
         :element-loading-text="genRpPy || genAcc ? 'Processing...' : 'Loading...'"
         element-loading-spinner="el-icon-loading"
-        height="500"
+        height="600"
       >
         <el-table-column
           prop="period"
