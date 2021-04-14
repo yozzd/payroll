@@ -57,6 +57,7 @@
               v-if="!freeze"
               type="primary"
               class="font-sm"
+              :underline="false"
               @click="showEdit(scope.row)"
             >
               <p>
@@ -76,6 +77,7 @@
               target="_blank"
               type="primary"
               class="font-sm"
+              :underline="false"
             >
               {{ scope.row.final.name }}.pdf
             </el-link>
