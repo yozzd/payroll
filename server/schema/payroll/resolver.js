@@ -1,4 +1,5 @@
 const fs = require('fs-extra');
+const { intervalToDuration } = require('date-fns');
 const {
   GraphQLList,
   GraphQLInt,
@@ -1078,6 +1079,50 @@ const Mutation = {
       Object.assign(pn.employee, arr2);
 
       const s = await pn.save();
+      return s;
+    }),
+  },
+  hariRaya: {
+    type: PayrollType,
+    args: {
+      id: { type: GraphQLString },
+      typeHR: { type: GraphQLInt },
+      tglHR: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('user', async (_, { id, typeHR, tglHR }) => {
+      const px = await Payroll.findById(id);
+      if (!typeHR) {
+        px.typeHR = 0;
+        px.tglHR = '';
+
+        // const arr = px.employee.map((o) => {
+        //   const v = o;
+        //   return v
+        // });
+
+        // Object.assign(px.employee, arr);
+      } else {
+        px.typeHR = typeHR;
+        px.tglHR = tglHR;
+
+        // const arr = px.employee.map((o) => {
+        //   const v = o;
+
+        //   let c = 0;
+        //   const { years, months, days } = intervalToDuration({ start: new Date(v.i0), end: new Date(tglHR) });
+        //   if (years > 0) c = 12;
+        //   else if (years === 0 && days >= 15) c = months + 1;
+        //   else c = months;
+
+        //   v.bw0 = c;
+
+        //   return v
+        // });
+
+        // Object.assign(px.employee, arr);
+      }
+
+      const s = await px.save();
       return s;
     }),
   },

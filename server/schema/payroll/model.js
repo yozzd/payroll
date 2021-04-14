@@ -214,6 +214,8 @@ const PayrollSchema = new Schema({
   period: String,
   dir: String,
   freeze: { type: Boolean, default: false },
+  typeHR: { type: Number, default: 0 },
+  tglHR: Date,
   rate: {
     b4: { type: Number, default: 0 }, // TK/0
     b5: { type: Number, default: 0 }, // TK/1

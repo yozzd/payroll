@@ -246,53 +246,11 @@
           </template>
         </el-table-column>
         <el-table-column min-width="60">
-          <!--<template slot-scope="scope">
-            <el-dropdown
-              trigger="click"
-              @command="c => handleActionCommand(c, scope.row._id, scope.row.freeze)"
-            >
-              <span class="el-dropdown-link">
-                Action <i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item
-                  command="addEmployee"
-                  :disabled="scope.row.freeze"
-                >
-                  Add Employee
-                </el-dropdown-item>
-                <el-dropdown-item
-                  command="cloneEmployee"
-                  :disabled="scope.row.freeze"
-                >
-                  Clone Employee
-                </el-dropdown-item>
-                <el-dropdown-item
-                  v-if="$auth.hasRole('admin')"
-                  command="clonePayroll"
-                  :disabled="scope.row.freeze"
-                >
-                  Clone Payroll
-                </el-dropdown-item>
-                <el-dropdown-item
-                  v-if="$auth.hasRole('admin')"
-                  divided
-                  command="freeze"
-                >
-                  <span v-if="scope.row.freeze">Unfreeze</span>
-                  <span v-else>Freeze</span>
-                </el-dropdown-item>
-                <el-dropdown-item divided command="delete">
-                  <span class="text-red-400">Delete</span>
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </template>-->
           <template slot-scope="scope">
             <el-menu
               mode="horizontal"
               class="dropmenu"
-              @select="c => handleActionCommand(c, scope.row._id, scope.row.freeze)"
+              @select="c => handleActionCommand(c, scope.row)"
             >
               <el-submenu index="1">
                 <template slot="title">
@@ -312,13 +270,19 @@
                   Clone Payroll
                 </el-menu-item>
                 <el-menu-item
-                  v-if="$auth.hasRole('admin')"
                   index="c"
+                  :disabled="scope.row.freeze"
+                >
+                  Hari Raya
+                </el-menu-item>
+                <el-menu-item
+                  v-if="$auth.hasRole('admin')"
+                  index="d"
                 >
                   <span v-if="scope.row.freeze">Unfreeze</span>
                   <span v-else>Freeze</span>
                 </el-menu-item>
-                <el-menu-item index="d">
+                <el-menu-item index="e">
                   <span class="text-red-400">Delete</span>
                 </el-menu-item>
               </el-submenu>
@@ -841,6 +805,51 @@
         </el-button>
       </span>
     </el-dialog>
+
+    <el-dialog
+      title="Hari Raya"
+      :visible.sync="showHariRayaDialog"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :before-close="handleHariRayaDialogClose"
+      width="20%"
+    >
+      <ErrorHandler
+        v-if="errors"
+        :errors="errors"
+        class="mb-8"
+      />
+      <el-form
+        ref="formHariRaya"
+        :model="formHariRaya"
+        :hide-required-asterisk="true"
+        label-position="top"
+      >
+        <el-form-item label="Type">
+          <el-select v-model="formHariRaya.typeHR" filterable>
+            <el-option label="None" value="0"></el-option>
+            <el-option label="Muslim" value="1"></el-option>
+            <el-option label="Non Muslim" value="2"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="Tanggal">
+          <el-date-picker
+            v-model="formHariRaya.tglHR"
+            type="date"
+          ></el-date-picker>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleHariRayaDialogClose">Cancel</el-button>
+        <el-button
+          type="primary"
+          :loading="loading"
+          @click="handleHariRaya('formHariRaya')"
+        >
+          Update
+        </el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -864,6 +873,7 @@ import {
   AddEmployee,
   CloneEmployee,
   ClonePayroll,
+  HariRaya,
   PayrollFreeze,
 } from '../apollo/mutation/payroll';
 
@@ -877,6 +887,7 @@ export default {
       showAddEmployeeDialog: false,
       showCloneEmployeeDialog: false,
       showClonePayrollDialog: false,
+      showHariRayaDialog: false,
       showKantinDialog: false,
       showKoperasiDialog: false,
       showOvertimeDialog: false,
@@ -886,6 +897,7 @@ export default {
       loadingAddEmployee: false,
       loadingCloneEmployee: false,
       loadingClonePayroll: false,
+      loadingHariRaya: false,
       loadingKantin: false,
       loadingKoperasi: false,
       loadingOvertime: false,
@@ -925,6 +937,11 @@ export default {
       formClonePayroll: {
         id: '',
         period: [],
+      },
+      formHariRaya: {
+        id: '',
+        typeHR: '',
+        tglHR: '',
       },
       formExt: {
         id: '',
@@ -1033,11 +1050,15 @@ export default {
       else if (c === 'f') this.$router.push({ name: 'payroll-pph-id', params: { id } });
       else if (c === 'g') this.$router.push({ name: 'payroll-slip-id', params: { id } });
     },
-    handleActionCommand(c, id, fr) {
-      if (c === 'a') this.showAddEmployee(id);
-      else if (c === 'b') this.showClonePayroll(id);
-      else if (c === 'c') this.handleFreeze(id, fr);
-      else if (c === 'd') this.handleConfirm(id);
+    handleActionCommand(c, r) {
+      const {
+        _id, freeze, typeHR, tglHR,
+      } = r;
+      if (c === 'a') this.showAddEmployee(_id);
+      else if (c === 'b') this.showClonePayroll(_id);
+      else if (c === 'c') this.showHariRaya(_id, typeHR, tglHR);
+      else if (c === 'd') this.handleFreeze(_id, freeze);
+      else if (c === 'e') this.handleConfirm(_id);
     },
     handleConfirm(id) {
       this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
@@ -1325,6 +1346,44 @@ export default {
 
             this.handleClonePayrollDialogClose();
             this.loadingClonePayroll = false;
+            return true;
+          } catch ({ graphQLErrors, networkError }) {
+            this.errors = graphQLErrors || networkError.result.errors;
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
+    },
+    showHariRaya(id, typeHR, tglHR) {
+      this.showHariRayaDialog = true;
+      this.formHariRaya.id = id;
+      this.formHariRaya.typeHR = typeHR.toString();
+      this.formHariRaya.tglHR = tglHR;
+    },
+    handleHariRayaDialogClose() {
+      this.$refs.formHariRaya.resetFields();
+      this.$refs.formHariRaya.clearValidate();
+      this.showHariRayaDialog = false;
+    },
+    handleHariRaya(form) {
+      this.$refs[form].validate(async (valid) => {
+        if (valid) {
+          try {
+            this.loadingHariRaya = true;
+
+            await this.$apollo.mutate({
+              mutation: HariRaya,
+              variables: {
+                id: this.formHariRaya.id,
+                typeHR: parseInt(this.formHariRaya.typeHR, 10),
+                tglHR: this.formHariRaya.tglHR,
+              },
+            });
+
+            this.handleHariRayaDialogClose();
+            this.loadingHariRaya = false;
             return true;
           } catch ({ graphQLErrors, networkError }) {
             this.errors = graphQLErrors || networkError.result.errors;

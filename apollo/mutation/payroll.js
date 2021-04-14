@@ -470,3 +470,22 @@ export const EditFinalEmployee = gql`
     }
   }
 `;
+
+export const HariRaya = gql`
+  mutation hariRaya($id: String, $typeHR: Int, $tglHR: String) {
+    hariRaya(id: $id, typeHR: $typeHR, tglHR: $tglHR) {
+      _id
+      year
+      month
+      period
+      dir
+      freeze
+      typeHR
+      tglHR
+      employee {
+        u0
+        v0
+      }
+    }
+  }
+`;

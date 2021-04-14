@@ -6,6 +6,7 @@ const {
   GraphQLBoolean,
 } = require('graphql');
 
+const { DateFormat } = require('../scalar/date');
 const { EmployeeType } = require('./employee.type');
 
 const PayrollType = new GraphQLObjectType({
@@ -19,6 +20,8 @@ const PayrollType = new GraphQLObjectType({
     period: { type: GraphQLString },
     dir: { type: GraphQLString },
     freeze: { type: GraphQLBoolean },
+    typeHR: { type: GraphQLInt },
+    tglHR: { type: DateFormat },
     employee: { type: new GraphQLList(EmployeeType) },
   }),
 });
