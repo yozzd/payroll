@@ -89,7 +89,7 @@
           </client-only>
         </template>
       </el-table-column>
-      <el-table-column label="NPWP" width="140">
+      <el-table-column label="NPWP" width="160">
         <template slot-scope="scope">
           <span>{{ scope.row.q0 }}</span>
         </template>

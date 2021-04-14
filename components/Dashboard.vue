@@ -40,7 +40,7 @@
           <template slot-scope="scope">
             <nuxt-link
               :to="`/payroll/list/${scope.row._id}?t1=a`"
-              class="el-link el-link--primary is-underline -mr-4"
+              class="el-link el-link--primary -mr-4"
             >
               <i class="el-icon-document"></i>
               <span>

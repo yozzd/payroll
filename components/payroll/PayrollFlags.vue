@@ -34,6 +34,7 @@
             v-if="!freeze"
             type="primary"
             class="font-sm"
+            :underline="false"
             @click="showEdit(scope.row)"
           >
             <p>
@@ -52,28 +53,56 @@
           </p>
         </template>
       </el-table-column>
-      <el-table-column label="Tidak Ikut Pensiun" width="100" align="center">
+      <el-table-column width="100" align="center">
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Tidak Ikut Pensiun">
+              Tidak Ikut Pensiun
+            </p>
+          </client-only>
+        </template>
         <template slot-scope="scope">
           <p v-if="scope.row.ey0">
             X
           </p>
         </template>
       </el-table-column>
-      <el-table-column label="Tidak Ikut BPJS" width="100" align="center">
+      <el-table-column width="100" align="center">
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Tidak Ikut BPJS">
+              Tidak Ikut BPJS
+            </p>
+          </client-only>
+        </template>
         <template slot-scope="scope">
           <p v-if="scope.row.ez0">
             X
           </p>
         </template>
       </el-table-column>
-      <el-table-column label="Tidak Dapat Relaksasi JKK & JK" width="100" align="center">
+      <el-table-column width="100" align="center">
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Tidak Dapat Relaksasi JKK & JK">
+              Tidak Dapat Relaksasi JKK & JK
+            </p>
+          </client-only>
+        </template>
         <template slot-scope="scope">
           <p v-if="scope.row.fb0">
             X
           </p>
         </template>
       </el-table-column>
-      <el-table-column label="Final Payment Dibayarkan" width="100" align="center">
+      <el-table-column width="100" align="center">
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Final Payment BPJS Dibayarkan">
+              Final Payment BPJS Dibayarkan
+            </p>
+          </client-only>
+        </template>
         <template slot-scope="scope">
           <p v-if="scope.row.fj0">
             X

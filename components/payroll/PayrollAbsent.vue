@@ -35,6 +35,7 @@
             v-if="!freeze"
             type="primary"
             class="font-sm"
+            :underline="false"
             @click="showEdit(scope.row)"
           >
             <p>

@@ -36,6 +36,7 @@
             v-if="!freeze"
             type="primary"
             class="font-sm"
+            :underline="false"
             @click="showEdit(scope.row)"
           >
             <p>
@@ -54,7 +55,7 @@
       </el-table-column>
       <el-table-column
         prop="l0"
-        label="Gaji Berdasrkan Hari Kerja Normal"
+        label="Gaji Normal"
         width="120"
         align="right"
       >
@@ -67,7 +68,7 @@
           <span>{{ scope.row.ay0 | currency }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="j0" label="Hari Kerja" width="120" align="right">
+      <el-table-column prop="j0" label="Hari Kerja" width="80" align="right">
         <template slot-scope="scope">
           <span>{{ scope.row.j0 }}</span>
         </template>
@@ -81,7 +82,7 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :before-close="handleEditDialogClose"
-      width="40%"
+      width="20%"
     >
       <ErrorHandler
         v-if="errors"

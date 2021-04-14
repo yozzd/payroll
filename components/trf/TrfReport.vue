@@ -63,7 +63,7 @@
           </p>
         </template>
       </el-table-column>
-      <el-table-column label="Bank No." width="120">
+      <el-table-column label="Bank No." width="140">
         <template slot-scope="scope">
           <span>{{ scope.row.t0 }}</span>
         </template>

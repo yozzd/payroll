@@ -34,6 +34,7 @@ i<template>
             v-if="!freeze"
             type="primary"
             class="font-sm"
+            :underline="false"
             @click="showEdit(scope.row)"
           >
             <p>
@@ -45,7 +46,14 @@ i<template>
           </p>
         </template>
       </el-table-column>
-      <el-table-column prop="fc0" label="Pajak Penghasilan" width="120" align="right">
+      <el-table-column prop="fc0" width="120" align="right">
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Pajak Penghasilan">
+              Pajak Penghasilan
+            </p>
+          </client-only>
+        </template>
         <template slot-scope="scope">
           <span>{{ scope.row.fc0 | currency }}</span>
         </template>

@@ -35,6 +35,7 @@
             v-if="!freeze"
             type="primary"
             class="font-sm"
+            :underline="false"
             @click="showEdit(scope.row)"
           >
             <p>
@@ -82,7 +83,7 @@
           </template>
         </el-table-column>
       </el-table-column>
-      <el-table-column prop="ck0" label="Desc. (BPJS Ketenagakerjaan)" width="160">
+      <el-table-column prop="ck0" label="Desc. (BPJS Ketenagakerjaan)" width="200">
         <template slot-scope="scope">
           <span>{{ scope.row.ck0 }}</span>
         </template>
@@ -99,17 +100,23 @@
           </template>
         </el-table-column>
       </el-table-column>
-      <el-table-column prop="ct0" label="Desc. (BPJS Kesehatan)" width="160">
+      <el-table-column prop="ct0" label="Desc. (BPJS Kesehatan)" width="200">
         <template slot-scope="scope">
           <span>{{ scope.row.ct0 }}</span>
         </template>
       </el-table-column>
       <el-table-column
         prop="co0"
-        label="Upah Untuk Pelaporan BPJS Kesehatan"
         width="120"
         align="right"
       >
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Upah Pelaporan Untuk BPJS Kesehatan">
+              Upah Pelaporan Untuk BPJS Kesehatan
+            </p>
+          </client-only>
+        </template>
         <template slot-scope="scope">
           <span>{{ scope.row.co0 | currency }}</span>
         </template>

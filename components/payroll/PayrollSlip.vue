@@ -55,6 +55,7 @@
       :data="tableData"
       size="small"
       height="500"
+      border
       :row-class-name="finalRow"
       @selection-change="handleSelectionChange"
     >
@@ -74,7 +75,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="ew0" label="Email" width="300"></el-table-column>
-      <el-table-column label="File" min-width="300">
+      <el-table-column label="File" width="100">
         <template slot-scope="scope">
           <el-link
             v-if="scope.row.slip.check"
@@ -82,11 +83,13 @@
             target="_blank"
             type="primary"
             class="font-sm"
+            :underline="false"
           >
             {{ scope.row.slip.name }}.pdf
           </el-link>
         </template>
       </el-table-column>
+      <el-table-column label="" min-width="120"></el-table-column>
     </el-table>
   </div>
 </template>

@@ -1105,7 +1105,14 @@ const Mutation = {
         px.typeHR = typeHR;
         px.tglHR = tglHR;
 
-        // const arr = px.employee.map((o) => {
+        // let arr1 = [];
+        // if (typeHR === 1) {
+        //   arr1 = px.employee.filter((v) => v.et0 === 'Islam');
+        // } else {
+        //   arr1 = px.employee.filter((v) => v.et0 !== 'Islam');
+        // }
+
+        // const arr2 = arr1.map((o) => {
         //   const v = o;
 
         //   let c = 0;
@@ -1115,11 +1122,10 @@ const Mutation = {
         //   else c = months;
 
         //   v.bw0 = c;
-
         //   return v
         // });
 
-        // Object.assign(px.employee, arr);
+        // Object.assign(px.employee, arr2);
       }
 
       const s = await px.save();

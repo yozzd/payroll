@@ -47,6 +47,7 @@
       :data="tableData"
       size="small"
       height="500"
+      border
       :row-class-name="finalRow"
       @selection-change="handleSelectionChange"
     >
@@ -64,7 +65,7 @@
           </p>
         </template>
       </el-table-column>
-      <el-table-column label="File" min-width="300">
+      <el-table-column label="File" width="100">
         <template slot-scope="scope">
           <el-link
             v-if="scope.row.pph.check"
@@ -72,11 +73,13 @@
             target="_blank"
             type="primary"
             class="font-sm"
+            :underline="false"
           >
             {{ scope.row.pph.name }}.pdf
           </el-link>
         </template>
       </el-table-column>
+      <el-table-column label="" min-width="120"></el-table-column>
     </el-table>
   </div>
 </template>
