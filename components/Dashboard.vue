@@ -35,7 +35,7 @@
         <el-table-column
           prop="period"
           label="Period"
-          width="200"
+          width="180"
         >
           <template slot-scope="scope">
             <nuxt-link
@@ -124,6 +124,7 @@
         <el-table-column
           prop="year"
           label="Year"
+          width="60"
         >
         </el-table-column>
         <el-table-column>
