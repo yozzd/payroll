@@ -20,7 +20,7 @@
     "core-js": "^3.10.1",
     "cors": "^2.8.5",
     "currency.js": "^2.0.3",
-    "date-fns": "^2.20.2",
+    "date-fns": "^2.20.3",
     "dotprop": "^1.2.1",
     "element-ui": "^2.15.1",
     "express": "^4.17.1",
