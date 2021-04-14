@@ -10,7 +10,9 @@
     </el-breadcrumb>
     <div class="flex space-x-4 items-center">
       <div class="flex-1">
-        {{ content }} &bull; Total {{ items.length }} items
+        {{ content }}
+        &bull; <span class="text-green-500">Total {{ items.length }} items</span>
+        &bull; <span class="text-pink-500">{{ multipleSelection.length }} item(s) selected</span>
       </div>
       <div class="w-64">
         <el-input

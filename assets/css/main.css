@@ -47,6 +47,7 @@ html {
 .el-month-table td .cell,
 .el-loading-spinner .el-loading-text,
 .el-loading-spinner i,
+.el-breadcrumb__item:last-child .el-breadcrumb__inner,
 .el-table .cell {
   @apply text-black;
 }
