@@ -45,11 +45,14 @@ html {
 .el-picker-panel,
 .el-year-table td .cell,
 .el-month-table td .cell,
-.el-loading-spinner .el-loading-text,
-.el-loading-spinner i,
 .el-breadcrumb__item:last-child .el-breadcrumb__inner,
 .el-table .cell {
   @apply text-black;
+}
+
+.el-loading-spinner .el-loading-text,
+.el-loading-spinner i {
+  @apply text-pink-500;
 }
 
 .el-button--primary {
