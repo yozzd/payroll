@@ -46,6 +46,7 @@ html {
 .el-year-table td .cell,
 .el-month-table td .cell,
 .el-breadcrumb__item:last-child .el-breadcrumb__inner,
+.el-checkbox__label,
 .el-table .cell {
   @apply text-black;
 }

@@ -63,10 +63,16 @@ const EmployeeSchema = new Schema({
   ar0r: { type: Number, default: 0 }, // Tunjangan Tetap Honorarium
   as0: { type: Number, default: 0 }, // Tunjangan Tetap Posisi Variable
   as0r: { type: Number, default: 0 }, // Tunjangan Tetap Posisi Variable
+  as0f: { type: Boolean, default: false }, // Tunjangan Tetap Posisi Variable Flag
+  as0p: { type: Number, default: 0 }, // Tunjangan Tetap Posisi Variable Percentage
   at0: { type: Number, default: 0 }, // Tunjangan Tetap Fungsional Variable
   at0r: { type: Number, default: 0 }, // Tunjangan Tetap Fungsional Variable
+  at0f: { type: Boolean, default: false }, // Tunjangan Tetap Fungsional Variable Flag
+  at0p: { type: Number, default: 0 }, // Tunjangan Tetap Fungsional Variable Percentage
   au0: { type: Number, default: 0 }, // Tunjangan Tetap Acting/PLT
   au0r: { type: Number, default: 0 }, // Tunjangan Tetap Acting/PLT
+  au0f: { type: Boolean, default: false }, // Tunjangan Tetap Acting/PLT Flag
+  au0p: { type: Number, default: 0 }, // Tunjangan Tetap Acting/PLT Percentage
   av0: { type: Number, default: 0 }, // Tunjangan Tetap Others
   av0r: { type: Number, default: 0 }, // Tunjangan Tetap Others
   aw0: { type: Number, default: 0 }, // Total Tunjangan Tetap
@@ -179,20 +185,21 @@ const EmployeeSchema = new Schema({
   es0: { type: Number, default: 0 }, // Pengembalian Pajak DTP
   et0: { type: String, trim: true }, // Religion
   ew0: { type: String, trim: true }, // Email
-  ex0: { type: Boolean, default: false }, // Slot 1 Flag
-  ey0: { type: Boolean, default: false }, // Slot 2 Flag
-  ez0: { type: Boolean, default: false }, // Slot 3 Flag
-  fa0: { type: Boolean, default: false }, // Slot 3 Flag
-  fb0: { type: Boolean, default: false }, // Slot 4 Flag
-  fc0: { type: Number, default: 0 }, // Slot 5 Flag
-  fd0: { type: Number, default: 0 }, // Slot 6 Flag
-  fe0: { type: Number, default: 0 }, // Slot 7 Flag
-  ff0: { type: Boolean, default: false }, // Slot 8 Flag
-  fg0: { type: Boolean, default: false }, // Slot 9 Flag
+  ex0: { type: Boolean, default: false }, // Final Payment Flag
+  ey0: { type: Boolean, default: false }, // Tidak Ikut Pensiun Flag
+  ez0: { type: Boolean, default: false }, // Tidak Ikut BPJS Flag
+  fa0: { type: Boolean, default: false }, // Pengembalian Pajak Flag
+  fb0: { type: Boolean, default: false }, // JKK & JK Flag
+  fc0: { type: Number, default: 0 }, // Manual Pajak Final Payment
+  fd0: { type: Number, default: 0 }, // Manual THR
+  fe0: { type: Number, default: 0 }, // Manual Termination
+  ff0: { type: Boolean, default: false }, // Pesangon Flag
+  fg0: { type: Boolean, default: false }, // Mangkir Flag
   fh0: { type: String, trim: true }, // Note 1
   fi0: { type: String, trim: true }, // Note 2
-  fj0: { type: Boolean, default: false }, // Slot 10 Flag
-  fk0: { type: Boolean, default: false }, // Slot 11 Flag
+  fj0: { type: Boolean, default: false }, // BPJS Final Payment Dibayarkan Flag
+  fk0: { type: Boolean, default: false }, // BPJS Kesehatan Dibayarkan Flag
+  fl0: { type: Boolean, default: false }, // Special Allowance Flag
   category: Number, // 0 = Administration, 1 = Production
   fDate: Date,
   slip: {
@@ -277,6 +284,32 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.bh0 = (this.bh0r / 21) * this.j0;
   this.bi0 = (this.bi0r / 21) * this.j0;
 
+  if (this.e0 === 'B.0840') {
+    if (!this.fl0) {
+      this.ast0f = false;
+      this.as0p = null;
+      this.as0 = (this.as0r / 21) * this.j0;
+      
+      this.at0f = false;
+      this.at0p = null;
+      this.at0 = (this.at0r / 21) * this.j0;
+
+      this.au0f = false;
+      this.au0p = null;
+      this.au0 = (this.au0r / 21) * this.j0;
+    }
+
+    if (this.fl0 && this.as0f && this.as0p > 0) {
+      this.as0 = (100 / this.as0p) * this.as0;
+    }
+    if (this.fl0 && this.at0f && this.at0p > 0) {
+      this.at0 = (100 / this.at0p) * this.at0;
+    }
+    if (this.fl0 && this.au0f && this.au0p > 0) {
+      this.au0 = (100 / this.au0p) * this.au0;
+    }
+  }
+  
   this.aw0 = this.aj0
     + this.ak0
     + this.al0

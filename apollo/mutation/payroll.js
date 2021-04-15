@@ -370,6 +370,14 @@ export const EditFlagsEmployee = gql`
         ey0
         ez0
         fb0
+        fj0
+        fl0
+        as0f
+        as0p
+        at0f
+        at0p
+        au0f
+        au0p
       }
     }
   }

@@ -109,16 +109,30 @@
           </p>
         </template>
       </el-table-column>
+      <el-table-column width="120" align="center">
+        <template slot="header">
+          <client-only>
+            <p v-snip="1" title="Special Allowance">
+              Special Allowance
+            </p>
+          </client-only>
+        </template>
+        <template slot-scope="scope">
+          <p v-if="scope.row.fl0">
+            X
+          </p>
+        </template>
+      </el-table-column>
       <el-table-column min-width="200"></el-table-column>
     </el-table>
 
     <el-dialog
-      title="Edit Employee"
+      title="Flags Employee"
       :visible.sync="showEditDialog"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :before-close="handleEditDialogClose"
-      width="20%"
+      width="40%"
     >
       <ErrorHandler
         v-if="errors"
@@ -131,35 +145,95 @@
         :hide-required-asterisk="true"
         label-position="top"
       >
-        <el-form-item label="No. Karyawan">
-          <el-input
-            v-model="form.e0"
-            :disabled="true"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="Nama Karyawan">
-          <el-input
-            v-model="form.d0"
-            :disabled="true"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="Flags">
-          <el-checkbox v-model="form.ex0">
-            Final Payment
-          </el-checkbox>
-          <el-checkbox v-model="form.ey0">
-            Tidak Ikut Pensiun
-          </el-checkbox>
-          <el-checkbox v-model="form.ez0">
-            Tidak Ikut BPJS
-          </el-checkbox>
-          <el-checkbox v-model="form.fb0">
-            Tidak Dapat Relaksasi JKK & JK
-          </el-checkbox>
-          <el-checkbox v-model="form.fj0">
-            Final Payment BPJS Dibayarkan
-          </el-checkbox>
-        </el-form-item>
+        <div class="flex space-x-4">
+          <div class="flex-1">
+            <el-form-item label="No. Karyawan">
+              <el-input
+                v-model="form.e0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Nama Karyawan">
+              <el-input
+                v-model="form.d0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Flags">
+              <el-checkbox v-model="form.ex0">
+                Final Payment
+              </el-checkbox>
+              <el-checkbox v-model="form.ey0">
+                Tidak Ikut Pensiun
+              </el-checkbox>
+              <el-checkbox v-model="form.ez0">
+                Tidak Ikut BPJS
+              </el-checkbox>
+              <el-checkbox v-model="form.fb0">
+                Tidak Dapat Relaksasi JKK & JK
+              </el-checkbox>
+              <el-checkbox v-model="form.fj0">
+                Final Payment BPJS Dibayarkan
+              </el-checkbox>
+            </el-form-item>
+          </div>
+          <div class="flex-1 space-y-2">
+            <el-checkbox v-model="form.fl0">
+              Special Allowance
+            </el-checkbox>
+            <div class="flex pl-6 items-baseline">
+              <div class="w-3/4">
+                <el-checkbox
+                  v-model="form.at0f"
+                  :disabled="!form.fl0"
+                >
+                  Tj. Tetap Fungsional Variable
+                </el-checkbox>
+              </div>
+              <div class="w-1/4">
+                <el-input
+                  v-model="form.at0p"
+                  size="medium"
+                  :disabled="!form.fl0 || !form.at0f"
+                ></el-input>
+              </div>
+            </div>
+            <div class="flex pl-6 items-baseline">
+              <div class="w-3/4">
+                <el-checkbox
+                  v-model="form.as0f"
+                  :disabled="!form.fl0"
+                >
+                  Tj. Tetap Posisi Variable
+                </el-checkbox>
+              </div>
+              <div class="w-1/4">
+                <el-input
+                  v-model="form.as0p"
+                  size="medium"
+                  :disabled="!form.fl0 || !form.as0f"
+                ></el-input>
+              </div>
+            </div>
+            <div class="flex pl-6 items-baseline">
+              <div class="w-3/4">
+                <el-checkbox
+                  v-model="form.au0f"
+                  :disabled="!form.fl0"
+                >
+                  Tj. Tetap Acting / PLT
+                </el-checkbox>
+              </div>
+              <div class="w-1/4">
+                <el-input
+                  v-model="form.au0p"
+                  size="medium"
+                  :disabled="!form.fl0 || !form.au0f"
+                ></el-input>
+              </div>
+            </div>
+          </div>
+        </div>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleEditDialogClose">Cancel</el-button>
@@ -194,7 +268,9 @@ export default {
         fields: ['d0', 'e0'],
         storeFields: [
           '_id', 'd0', 'e0', 'ex0', 'ey0',
-          'ez0', 'fb0', 'fj0',
+          'ez0', 'fb0', 'fj0', 'fl0',
+          'as0f', 'as0p', 'at0f', 'at0p',
+          'au0f', 'au0p',
         ],
       }),
     };
@@ -226,6 +302,13 @@ export default {
                     ez0: this.form.ez0,
                     fb0: this.form.fb0,
                     fj0: this.form.fj0,
+                    fl0: this.form.fl0,
+                    as0f: this.form.as0f,
+                    as0p: this.form.as0f ? parseFloat(this.form.as0p) : null,
+                    at0f: this.form.at0f,
+                    at0p: this.form.at0f ? parseFloat(this.form.at0p) : null,
+                    au0f: this.form.au0f,
+                    au0p: this.form.au0f ? parseFloat(this.form.au0p) : null,
                   },
                 },
               },

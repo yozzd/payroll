@@ -30,6 +30,8 @@ const generateTax = async (p) => {
       ['', 'Note :', ''],
       ['-', 'Jika nominal "Kurang Bayar" maka akan dicicil 6 kali tiap bulan', ''],
       ['-', 'Jika nominal "Lebih Bayar" maka akan diberikan sekaligus', ''],
+      ['-', 'Karyawan akan menandatangani surat pernyataan yang diberikan secara hardcopy dan dikembalikan ke HRD', ''],
+      ['-', 'Pengembalian form surat pernyataan paling lambat hari Senin tanggal 19 April jam 12.00', ''],
     ];
 
     const docDefinition = {

@@ -631,6 +631,13 @@ const Query = {
           'employee.ez0': 1,
           'employee.fb0': 1,
           'employee.fj0': 1,
+          'employee.fl0': 1,
+          'employee.as0f': 1,
+          'employee.as0p': 1,
+          'employee.at0f': 1,
+          'employee.at0p': 1,
+          'employee.au0f': 1,
+          'employee.au0p': 1,
         });
       return p;
     }),
@@ -1074,6 +1081,7 @@ const Mutation = {
         v.dn0 = 0;
         v.dq0 = 0;
         v.dr0 = 0;
+        v.fl0 = false;
 
         return v;
       });

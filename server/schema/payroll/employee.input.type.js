@@ -195,6 +195,13 @@ const FlagsInputType = new GraphQLInputObjectType({
     ez0: { type: GraphQLBoolean },
     fb0: { type: GraphQLBoolean },
     fj0: { type: GraphQLBoolean },
+    fl0: { type: GraphQLBoolean },
+    as0f: { type: GraphQLBoolean },
+    as0p: { type: GraphQLFloat },
+    at0f: { type: GraphQLBoolean },
+    at0p: { type: GraphQLFloat },
+    au0f: { type: GraphQLBoolean },
+    au0p: { type: GraphQLFloat },
   }),
 });
 
