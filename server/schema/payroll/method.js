@@ -933,7 +933,7 @@ const generateSlip = async (p) => {
     await fs.ensureDir(`static/slip/${p.dir}`);
 
     const ctbl1 = [
-      ['Basic Salary', '', '', { text: intpre0(e.g0).format(), alignment: 'right' }],
+      ['Basic Salary', '', '', { text: intpre0(e.l0).format(), alignment: 'right' }],
       ['Overtime', { text: floatpre2(e.ab0).format(), alignment: 'right' }, 'Wage/173', { text: intpre0(e.ac0).format(), alignment: 'right' }],
       ['Insentif', { text: floatpre2(e.af0).format(), alignment: 'right' }, intpre0(e.ag0).format(), { text: intpre0(e.ah0).format(), alignment: 'right' }],
       ['Official Overtime', { text: floatpre2(e.ad0).format(), alignment: 'right' }, 'Wage/173', { text: intpre0(e.ae0).format(), alignment: 'right' }],
@@ -1016,6 +1016,15 @@ const generateSlip = async (p) => {
     if (e.m0) notes.push(['-', e.m0, '', '']);
     if (e.fd0) notes.push(['-', e.fd0, '', '']);
 
+    let net = 0;
+    if (e.e0 === 'X.0010') {
+      net = intpre0(e.ed0).format()
+    } else if (e.ex0) {
+      net = intpre0(e.eb0).format()
+    } else {
+      net = intpre0(e.ec0).format()
+    };
+    
     const docDefinition = {
       userPassword: e.slip.pw,
       content: [
@@ -1090,7 +1099,7 @@ const generateSlip = async (p) => {
           table: {
             widths: [266, 186, 63],
             body: [
-              ['', 'NET PAYMENT', { text: e.e0 === 'X.0010' ? intpre0(e.ed0).format() : intpre0(e.ec0).format(), alignment: 'right', margin: [0, 0, 5, 0] }],
+              ['', 'NET PAYMENT', { text: net, alignment: 'right', margin: [0, 0, 5, 0] }],
             ],
           },
           layout: 'noBorders',
