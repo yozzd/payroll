@@ -35,6 +35,11 @@
         <PayrollEarningOthers />
       </div>
     </el-tab-pane>
+    <el-tab-pane label="Special Allowance" name="ch">
+      <div v-if="activeName==='ch'">
+        <PayrollSpAllow />
+      </div>
+    </el-tab-pane>
   </el-tabs>
 </template>
 

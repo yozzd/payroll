@@ -498,3 +498,26 @@ export const HariRaya = gql`
     }
   }
 `;
+
+export const EditSpAllow = gql`
+  mutation editSpAllow($input: EditSpAllowInputType) {
+    editSpAllow(input: $input) {
+      _id
+      employee {
+        _id
+        d0
+        e0
+        fl0
+        as0
+        as0r
+        as0p
+        at0
+        at0r
+        at0p
+        au0
+        au0r
+        au0p
+      }
+    }
+  }
+`;

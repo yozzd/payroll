@@ -284,32 +284,33 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.bh0 = (this.bh0r / 21) * this.j0;
   this.bi0 = (this.bi0r / 21) * this.j0;
 
-  if (this.e0 === 'B.0840') {
-    if (!this.fl0) {
-      this.ast0f = false;
-      this.as0p = null;
-      this.as0 = (this.as0r / 21) * this.j0;
-      
-      this.at0f = false;
-      this.at0p = null;
-      this.at0 = (this.at0r / 21) * this.j0;
+  if (!this.fl0) {
+    this.ast0f = false;
+    this.as0p = null;
+    this.as0 = (this.as0r / 21) * this.j0;
 
-      this.au0f = false;
-      this.au0p = null;
-      this.au0 = (this.au0r / 21) * this.j0;
-    }
+    this.at0f = false;
+    this.at0p = null;
+    this.at0 = (this.at0r / 21) * this.j0;
 
-    if (this.fl0 && this.as0f && this.as0p > 0) {
-      this.as0 = (100 / this.as0p) * this.as0;
-    }
-    if (this.fl0 && this.at0f && this.at0p > 0) {
-      this.at0 = (100 / this.at0p) * this.at0;
-    }
-    if (this.fl0 && this.au0f && this.au0p > 0) {
-      this.au0 = (100 / this.au0p) * this.au0;
-    }
+    this.au0f = false;
+    this.au0p = null;
+    this.au0 = (this.au0r / 21) * this.j0;
   }
-  
+
+  if (this.fl0 && this.as0f && this.as0p > 0) {
+    const v = this.as0;
+    this.as0 = (100 / this.as0p) * v;
+  }
+  if (this.fl0 && this.at0f && this.at0p > 0) {
+    const v = this.at0;
+    this.at0 = (100 / this.at0p) * v;
+  }
+  if (this.fl0 && this.au0f && this.au0p > 0) {
+    const v = this.au0;
+    this.au0 = (100 / this.au0p) * v;
+  }
+
   this.aw0 = this.aj0
     + this.ak0
     + this.al0

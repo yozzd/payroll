@@ -36,6 +36,7 @@ const {
   EditFlagsEmployeeInputType,
   EditManualEmployeeInputType,
   EditFinalEmployeeInputType,
+  EditSpAllowInputType,
 } = require('./employee.input.type.js');
 const {
   AddEmployeeInputType,
@@ -694,6 +695,46 @@ const Query = {
           },
         },
       ]);
+
+      return p[0];
+    }),
+  },
+  payrollSpAllow: {
+    type: PayrollType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('user', async (_, { id }) => {
+      const p = await Payroll.aggregate([
+        { $match: { _id: id } },
+        { $unwind: '$employee' },
+        { $match: { 'employee.fl0': true } },
+        { $sort: { 'employee.e0': 1 } },
+        {
+          $group: {
+            _id: '$_id',
+            freeze: { $first: '$freeze' },
+            employee: {
+              $push: {
+                _id: '$employee._id',
+                d0: '$employee.d0',
+                e0: '$employee.e0',
+                fl0: '$employee.fl0',
+                as0: '$employee.as0',
+                as0r: '$employee.as0r',
+                as0p: '$employee.as0p',
+                at0: '$employee.at0',
+                at0r: '$employee.at0r',
+                at0p: '$employee.at0p',
+                au0: '$employee.au0',
+                au0r: '$employee.au0r',
+                au0p: '$employee.au0p',
+              },
+            },
+          },
+        },
+      ]);
+
       return p[0];
     }),
   },
@@ -1219,6 +1260,48 @@ const Mutation = {
           },
         },
       ]);
+      return p[0];
+    }),
+  },
+  editSpAllow: {
+    type: PayrollType,
+    args: {
+      input: { type: EditSpAllowInputType },
+    },
+    resolve: auth.hasRole('user', async (_, { input }) => {
+      const { _id, employee } = input;
+      await updateEmployee(_id, employee, Payroll);
+
+      const p = await Payroll.aggregate([
+        { $match: { _id } },
+        { $unwind: '$employee' },
+        { $match: { 'employee.fl0': true } },
+        { $sort: { 'employee.e0': 1 } },
+        {
+          $group: {
+            _id: '$_id',
+            freeze: { $first: '$freeze' },
+            employee: {
+              $push: {
+                _id: '$employee._id',
+                d0: '$employee.d0',
+                e0: '$employee.e0',
+                fl0: '$employee.fl0',
+                as0: '$employee.as0',
+                as0r: '$employee.as0r',
+                as0p: '$employee.as0p',
+                at0: '$employee.at0',
+                at0r: '$employee.at0r',
+                at0p: '$employee.at0p',
+                au0: '$employee.au0',
+                au0r: '$employee.au0r',
+                au0p: '$employee.au0p',
+              },
+            },
+          },
+        },
+      ]);
+
       return p[0];
     }),
   },

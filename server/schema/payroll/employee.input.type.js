@@ -223,6 +223,20 @@ const FinalInputType = new GraphQLInputObjectType({
   }),
 });
 
+const SpAllowInputType = new GraphQLInputObjectType({
+  name: 'FlagsInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    fl0: { type: GraphQLBoolean },
+    as0f: { type: GraphQLBoolean },
+    as0p: { type: GraphQLFloat },
+    at0f: { type: GraphQLBoolean },
+    at0p: { type: GraphQLFloat },
+    au0f: { type: GraphQLBoolean },
+    au0p: { type: GraphQLFloat },
+  }),
+});
+
 /** *********************************************** */
 
 const CloneEmployeeInputType = new GraphQLInputObjectType({
@@ -369,6 +383,14 @@ const EditFinalEmployeeInputType = new GraphQLInputObjectType({
   }),
 });
 
+const EditSpAllowInputType = new GraphQLInputObjectType({
+  name: 'EditSpAllowInputType',
+  fields: () => ({
+    _id: { type: GraphQLString },
+    employee: { type: FlagsInputType },
+  }),
+});
+
 module.exports = {
   CloneEmployeeInputType,
   EditEmploymentInputType,
@@ -388,4 +410,5 @@ module.exports = {
   EditFlagsEmployeeInputType,
   EditManualEmployeeInputType,
   EditFinalEmployeeInputType,
+  EditSpAllowInputType,
 };

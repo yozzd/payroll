@@ -474,3 +474,27 @@ export const PayrollFinal = gql`
     }
   }
 `;
+
+export const PayrollSpAllow = gql`
+  query payrollSpAllow($id: String!) {
+    payrollSpAllow(id: $id) {
+      _id
+      freeze
+      employee {
+        _id
+        d0
+        e0
+        fl0
+        as0
+        as0r
+        as0p
+        at0
+        at0r
+        at0p
+        au0
+        au0r
+        au0p
+      }
+    }
+  }
+`;

@@ -84,6 +84,9 @@
                   <el-menu-item index="cg">
                     Others
                   </el-menu-item>
+                  <el-menu-item index="ch">
+                    Special Allowance
+                  </el-menu-item>
                 </el-submenu>
                 <el-submenu index="d">
                   <template slot="title">
