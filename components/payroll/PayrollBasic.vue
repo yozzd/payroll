@@ -82,7 +82,7 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :before-close="handleEditDialogClose"
-      width="20%"
+      width="30%"
     >
       <ErrorHandler
         v-if="errors"
