@@ -1,6 +1,6 @@
 <template>
   <div class="flex min-h-full">
-    <div class="w-2/5 flex flex-col p-12">
+    <div class="xl:w-2/5 2xl:w-2/6 flex flex-col p-12">
       <div class="flex items-center h-full">
         <div class="flex-1 flex-col space-y-8 px-12">
           <div class="flex justify-center">
@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-    <div class="w-3/5 bg-gray-100">
+    <div class="xl:w-3/5 2xl:w-4/6 bg-gray-100">
       <div class="flex justify-center items-center h-full">
         Placeholder
       </div>
