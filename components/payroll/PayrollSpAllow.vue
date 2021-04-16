@@ -48,6 +48,13 @@
           </p>
         </template>
       </el-table-column>
+      <el-table-column label="Department" width="200">
+        <template slot-scope="scope">
+          <p :title="scope.row.u0" class="truncate">
+            {{ scope.row.u0 }}
+          </p>
+        </template>
+      </el-table-column>
       <el-table-column label="Tj. Tetap Fungsional Fix" align="center">
         <el-table-column prop="am0" label="Full" width="120" align="right">
           <template slot-scope="scope">
@@ -116,6 +123,7 @@
           </template>
         </el-table-column>
       </el-table-column>
+      <el-table-column prop="spAllowRem" label="Keterangan" width="260"></el-table-column>
       <el-table-column min-width="200"></el-table-column>
     </el-table>
 
@@ -125,7 +133,7 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :before-close="handleEditDialogClose"
-      width="30%"
+      width="40%"
     >
       <ErrorHandler
         v-if="errors"
@@ -138,30 +146,39 @@
         :hide-required-asterisk="true"
         label-position="top"
       >
-        <el-form-item label="No. Karyawan">
-          <el-input
-            v-model="form.e0"
-            :disabled="true"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="Nama Karyawan">
-          <el-input
-            v-model="form.d0"
-            :disabled="true"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="Tj. Tetap Fungsional Fix">
-          <el-input v-model="form.am0p"></el-input>
-        </el-form-item>
-        <el-form-item label="Tj. Tetap Fungsional Variable">
-          <el-input v-model="form.at0p"></el-input>
-        </el-form-item>
-        <el-form-item label="Tj. Tetap Posisi Variable">
-          <el-input v-model="form.as0p"></el-input>
-        </el-form-item>
-        <el-form-item label="Tj. Tetap Acting / PLT">
-          <el-input v-model="form.au0p"></el-input>
-        </el-form-item>
+        <div class="flex space-x-4">
+          <div class="flex-1">
+            <el-form-item label="No. Karyawan">
+              <el-input
+                v-model="form.e0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Nama Karyawan">
+              <el-input
+                v-model="form.d0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Tetap Fungsional Fix">
+              <el-input v-model="form.am0p"></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Tetap Fungsional Variable">
+              <el-input v-model="form.at0p"></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Tetap Posisi Variable">
+              <el-input v-model="form.as0p"></el-input>
+            </el-form-item>
+            <el-form-item label="Tj. Tetap Acting / PLT">
+              <el-input v-model="form.au0p"></el-input>
+            </el-form-item>
+          </div>
+          <div class="flex-1">
+            <el-form-item label="Keterangan">
+              <el-input v-model="form.spAllowRem" type="textarea"></el-input>
+            </el-form-item>
+          </div>
+        </div>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleEditDialogClose">Cancel</el-button>
@@ -195,11 +212,12 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'fl0',
+          '_id', 'd0', 'e0', 'u0', 'fl0',
           'am0', 'am0r', 'am0p',
           'as0', 'as0r', 'as0p',
           'at0', 'at0r', 'at0p',
           'au0', 'au0r', 'au0p',
+          'spAllowRem',
         ],
       }),
     };
@@ -231,6 +249,7 @@ export default {
                     as0p: parseFloat(this.form.as0p),
                     at0p: parseFloat(this.form.at0p),
                     au0p: parseFloat(this.form.au0p),
+                    spAllowRem: this.form.spAllowRem,
                   },
                 },
               },

@@ -509,6 +509,7 @@ export const EditSpAllow = gql`
         _id
         d0
         e0
+        u0
         fl0
         am0
         am0r
@@ -522,6 +523,7 @@ export const EditSpAllow = gql`
         au0
         au0r
         au0p
+        spAllowRem
       }
     }
   }

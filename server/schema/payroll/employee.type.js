@@ -256,6 +256,7 @@ const EmployeeType = new GraphQLObjectType({
     ttax: { type: GraphQLFloat },
     fDate: { type: DateFormat },
     pph: { type: PphCheckType },
+    spAllowRem: { type: GraphQLString },
   }),
 });
 

@@ -204,6 +204,7 @@ const EmployeeSchema = new Schema({
   fl0: { type: Boolean, default: false }, // Special Allowance Flag
   category: Number, // 0 = Administration, 1 = Production
   fDate: Date,
+  spAllowRem: { type: String, trim: true }, // Special Allowance Remark
   slip: {
     name: { type: String, default: () => nanoid(6) },
     pw: String,

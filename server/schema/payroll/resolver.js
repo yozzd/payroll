@@ -154,6 +154,45 @@ const a3ReportNoFin = async (id) => {
   return p[0];
 };
 
+const spAllowQ = async (id) => {
+  const p = await Payroll.aggregate([
+    { $match: { _id: id } },
+    { $unwind: '$employee' },
+    { $match: { 'employee.fl0': true } },
+    { $sort: { 'employee.e0': 1 } },
+    {
+      $group: {
+        _id: '$_id',
+        freeze: { $first: '$freeze' },
+        employee: {
+          $push: {
+            _id: '$employee._id',
+            d0: '$employee.d0',
+            u0: '$employee.u0',
+            e0: '$employee.e0',
+            fl0: '$employee.fl0',
+            am0: '$employee.am0',
+            am0r: '$employee.am0r',
+            am0p: '$employee.am0p',
+            as0: '$employee.as0',
+            as0r: '$employee.as0r',
+            as0p: '$employee.as0p',
+            at0: '$employee.at0',
+            at0r: '$employee.at0r',
+            at0p: '$employee.at0p',
+            au0: '$employee.au0',
+            au0r: '$employee.au0r',
+            au0p: '$employee.au0p',
+            spAllowRem: '$employee.spAllowRem',
+          },
+        },
+      },
+    },
+  ]);
+
+  return p[0];
+};
+      
 const Query = {
   payrollAll: {
     type: new GraphQLList(PayrollType),
@@ -707,40 +746,8 @@ const Query = {
       id: { type: GraphQLString },
     },
     resolve: auth.hasRole('user', async (_, { id }) => {
-      const p = await Payroll.aggregate([
-        { $match: { _id: id } },
-        { $unwind: '$employee' },
-        { $match: { 'employee.fl0': true } },
-        { $sort: { 'employee.e0': 1 } },
-        {
-          $group: {
-            _id: '$_id',
-            freeze: { $first: '$freeze' },
-            employee: {
-              $push: {
-                _id: '$employee._id',
-                d0: '$employee.d0',
-                e0: '$employee.e0',
-                fl0: '$employee.fl0',
-                am0: '$employee.am0',
-                am0r: '$employee.am0r',
-                am0p: '$employee.am0p',
-                as0: '$employee.as0',
-                as0r: '$employee.as0r',
-                as0p: '$employee.as0p',
-                at0: '$employee.at0',
-                at0r: '$employee.at0r',
-                at0p: '$employee.at0p',
-                au0: '$employee.au0',
-                au0r: '$employee.au0r',
-                au0p: '$employee.au0p',
-              },
-            },
-          },
-        },
-      ]);
-
-      return p[0];
+      const s = await spAllowQ(id);
+      return s;
     }),
   },
 };
@@ -1304,40 +1311,8 @@ const Mutation = {
       const { _id, employee } = input;
       await updateEmployee(_id, employee, Payroll);
 
-      const p = await Payroll.aggregate([
-        { $match: { _id } },
-        { $unwind: '$employee' },
-        { $match: { 'employee.fl0': true } },
-        { $sort: { 'employee.e0': 1 } },
-        {
-          $group: {
-            _id: '$_id',
-            freeze: { $first: '$freeze' },
-            employee: {
-              $push: {
-                _id: '$employee._id',
-                d0: '$employee.d0',
-                e0: '$employee.e0',
-                fl0: '$employee.fl0',
-                am0: '$employee.am0',
-                am0r: '$employee.am0r',
-                am0p: '$employee.am0p',
-                as0: '$employee.as0',
-                as0r: '$employee.as0r',
-                as0p: '$employee.as0p',
-                at0: '$employee.at0',
-                at0r: '$employee.at0r',
-                at0p: '$employee.at0p',
-                au0: '$employee.au0',
-                au0r: '$employee.au0r',
-                au0p: '$employee.au0p',
-              },
-            },
-          },
-        },
-      ]);
-
-      return p[0];
+      const s = await spAllowQ(_id);
+      return s;
     }),
   },
 };
