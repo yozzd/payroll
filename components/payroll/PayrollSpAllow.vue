@@ -48,6 +48,23 @@
           </p>
         </template>
       </el-table-column>
+      <el-table-column label="Tj. Tetap Fungsional Fix" align="center">
+        <el-table-column prop="am0" label="Full" width="120" align="right">
+          <template slot-scope="scope">
+            <span>{{ scope.row.am0 | currency }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="%" width="60" align="center">
+          <template slot-scope="scope">
+            <span>{{ scope.row.am0p }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="am0r" label="Actual" width="120" align="right">
+          <template slot-scope="scope">
+            <span>{{ scope.row.am0r | currency }}</span>
+          </template>
+        </el-table-column>
+      </el-table-column>
       <el-table-column label="Tj. Tetap Fungsional Variable" align="center">
         <el-table-column prop="at0" label="Full" width="120" align="right">
           <template slot-scope="scope">
@@ -133,6 +150,9 @@
             :disabled="true"
           ></el-input>
         </el-form-item>
+        <el-form-item label="Tj. Tetap Fungsional Fix">
+          <el-input v-model="form.am0p"></el-input>
+        </el-form-item>
         <el-form-item label="Tj. Tetap Fungsional Variable">
           <el-input v-model="form.at0p"></el-input>
         </el-form-item>
@@ -175,8 +195,11 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'fl0', 'as0', 'as0r', 'as0p',
-          'at0', 'at0r', 'at0p', 'au0', 'au0r', 'au0p',
+          '_id', 'd0', 'e0', 'fl0',
+          'am0', 'am0r', 'am0p',
+          'as0', 'as0r', 'as0p',
+          'at0', 'at0r', 'at0p',
+          'au0', 'au0r', 'au0p',
         ],
       }),
     };
@@ -204,6 +227,7 @@ export default {
                   employee: {
                     _id: this.form._id,
                     fl0: this.form.fl0,
+                    am0p: parseFloat(this.form.am0p),
                     as0p: parseFloat(this.form.as0p),
                     at0p: parseFloat(this.form.at0p),
                     au0p: parseFloat(this.form.au0p),

@@ -196,6 +196,8 @@ const FlagsInputType = new GraphQLInputObjectType({
     fb0: { type: GraphQLBoolean },
     fj0: { type: GraphQLBoolean },
     fl0: { type: GraphQLBoolean },
+    am0f: { type: GraphQLBoolean },
+    am0p: { type: GraphQLFloat },
     as0f: { type: GraphQLBoolean },
     as0p: { type: GraphQLFloat },
     at0f: { type: GraphQLBoolean },
@@ -228,6 +230,8 @@ const SpAllowInputType = new GraphQLInputObjectType({
   fields: () => ({
     _id: { type: GraphQLString },
     fl0: { type: GraphQLBoolean },
+    am0f: { type: GraphQLBoolean },
+    am0p: { type: GraphQLFloat },
     as0f: { type: GraphQLBoolean },
     as0p: { type: GraphQLFloat },
     at0f: { type: GraphQLBoolean },

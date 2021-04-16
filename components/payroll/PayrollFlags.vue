@@ -174,6 +174,23 @@
             <div class="flex pl-6 items-baseline">
               <div class="w-3/4">
                 <el-checkbox
+                  v-model="form.am0f"
+                  :disabled="!form.fl0"
+                >
+                  Tj. Tetap Fungsional Fix
+                </el-checkbox>
+              </div>
+              <div class="w-1/4">
+                <el-input
+                  v-model="form.am0p"
+                  size="medium"
+                  :disabled="!form.fl0 || !form.am0f"
+                ></el-input>
+              </div>
+            </div>
+            <div class="flex pl-6 items-baseline">
+              <div class="w-3/4">
+                <el-checkbox
                   v-model="form.at0f"
                   :disabled="!form.fl0"
                 >
@@ -259,8 +276,8 @@ export default {
         storeFields: [
           '_id', 'd0', 'e0', 'ex0', 'ey0',
           'ez0', 'fb0', 'fj0', 'fl0',
-          'as0f', 'as0p', 'at0f', 'at0p',
-          'au0f', 'au0p',
+          'am0f', 'am0p', 'as0f', 'as0p',
+          'at0f', 'at0p', 'au0f', 'au0p',
         ],
       }),
     };
@@ -293,6 +310,8 @@ export default {
                     fb0: this.form.fb0,
                     fj0: this.form.fj0,
                     fl0: this.form.fl0,
+                    am0f: this.form.am0f,
+                    am0p: this.form.am0f ? parseFloat(this.form.am0p) : null,
                     as0f: this.form.as0f,
                     as0p: this.form.as0f ? parseFloat(this.form.as0p) : null,
                     at0f: this.form.at0f,

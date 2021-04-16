@@ -302,7 +302,7 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :before-close="handleCancel"
-      width="20%"
+      width="30%"
     >
       <ErrorHandler
         v-if="errors"
@@ -360,7 +360,7 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :before-close="handleKantinDialogClose"
-      width="20%"
+      width="30%"
     >
       <ErrorHandler
         v-if="errors"
@@ -407,7 +407,7 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :before-close="handleKoperasiDialogClose"
-      width="20%"
+      width="30%"
     >
       <ErrorHandler
         v-if="errors"
@@ -454,7 +454,7 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :before-close="handleOvertimeDialogClose"
-      width="20%"
+      width="30%"
     >
       <ErrorHandler
         v-if="errors"
@@ -501,7 +501,7 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :before-close="handleTax21DialogClose"
-      width="20%"
+      width="30%"
     >
       <ErrorHandler
         v-if="errors"
@@ -548,7 +548,7 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :before-close="handleAgamaDialogClose"
-      width="20%"
+      width="30%"
     >
       <ErrorHandler
         v-if="errors"
@@ -884,7 +884,7 @@ import {
 export default {
   data() {
     const year = getYear(new Date());
-    const initY = 2019;
+    const initY = 2020;
 
     return {
       showDialog: false,

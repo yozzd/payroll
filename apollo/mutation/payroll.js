@@ -372,6 +372,8 @@ export const EditFlagsEmployee = gql`
         fb0
         fj0
         fl0
+        am0f
+        am0p
         as0f
         as0p
         at0f
@@ -508,6 +510,9 @@ export const EditSpAllow = gql`
         d0
         e0
         fl0
+        am0
+        am0r
+        am0p
         as0
         as0r
         as0p
