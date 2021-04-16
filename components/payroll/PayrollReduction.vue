@@ -50,11 +50,9 @@
       </el-table-column>
       <el-table-column prop="dc0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pemotongan Kelebihan Bayar Gaji & Koreksi Absen">
-              Pemotongan Kelebihan Bayar Gaji & Koreksi Absen
-            </p>
-          </client-only>
+          <p title="Pemotongan Kelebihan Bayar Gaji & Koreksi Absen" class="truncate">
+            Pemotongan Kelebihan Bayar Gaji & Koreksi Absen
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.dc0 | currency }}</span>
@@ -62,11 +60,9 @@
       </el-table-column>
       <el-table-column prop="dd0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pemotongan Kelebihan Bayar OT">
-              Pemotongan Kelebihan Bayar OT
-            </p>
-          </client-only>
+          <p title="Pemotongan Kelebihan Bayar OT" class="truncate">
+            Pemotongan Kelebihan Bayar OT
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.dd0 | currency }}</span>
@@ -74,11 +70,9 @@
       </el-table-column>
       <el-table-column prop="de0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pemotongan Prorate Absen">
-              Pemotongan Prorate Absen
-            </p>
-          </client-only>
+          <p title="Pemotongan Prorate Absen" class="truncate">
+            Pemotongan Prorate Absen
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.de0 | currency }}</span>
@@ -91,11 +85,9 @@
       </el-table-column>
       <el-table-column prop="dh0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pemotongan Toolroom">
-              Pemotongan Toolroom
-            </p>
-          </client-only>
+          <p title="Pemotongan Toolroom" class="truncate">
+            Pemotongan Toolroom
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.dh0 | currency }}</span>
@@ -103,11 +95,9 @@
       </el-table-column>
       <el-table-column prop="di0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pemotongan Lain">
-              Pemotongan Lain
-            </p>
-          </client-only>
+          <p title="Pemotongan Lain" class="truncate">
+            Pemotongan Lain
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.di0 | currency }}</span>

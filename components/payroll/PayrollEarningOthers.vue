@@ -49,18 +49,16 @@
       </el-table-column>
       <el-table-column prop="bv0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tambahan Lain Tidak Kena Pajak">
-              Tambahan Lain Tidak Kena Pajak
-            </p>
-          </client-only>
+          <p title="Tambahan Lain Tidak Kena Pajak" class="truncate">
+            Tambahan Lain Tidak Kena Pajak
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.bv0 | currency }}</span>
         </template>
       </el-table-column>
       <el-table-column label="THR Prorate" align="center">
-        <el-table-column prop="bw0" label="Months" width="120" align="right">
+        <el-table-column prop="bw0" label="Months" width="80" align="center">
           <template slot-scope="scope">
             <span>{{ scope.row.bw0 | currency }}</span>
           </template>
@@ -77,7 +75,12 @@
         </template>
       </el-table-column>
       <el-table-column label="Uang Pisah" align="center">
-        <el-table-column prop="ds0" label="Lama Kerja" width="120" align="right">
+        <el-table-column prop="ds0" width="80" align="center">
+          <template slot="header">
+            <p title="Lama Kerja" class="truncate">
+              Lama Kerja
+            </p>
+          </template>
           <template slot-scope="scope">
             <span>{{ scope.row.ds0 | currency }}</span>
           </template>
@@ -89,7 +92,12 @@
         </el-table-column>
       </el-table-column>
       <el-table-column label="Uang Pesangon" align="center">
-        <el-table-column prop="du0" label="Lama Kerja" width="120" align="right">
+        <el-table-column prop="du0" width="80" align="right">
+          <template slot="header">
+            <p title="Lama Kerja" class="truncate">
+              Lama Kerja
+            </p>
+          </template>
           <template slot-scope="scope">
             <span>{{ scope.row.du0 | currency }}</span>
           </template>
@@ -101,7 +109,12 @@
         </el-table-column>
       </el-table-column>
       <el-table-column label="Uang Penghargaan Masa Kerja" align="center">
-        <el-table-column prop="dw0" label="Lama Kerja" width="120" align="right">
+        <el-table-column prop="dw0" width="80" align="right">
+          <template slot="header">
+            <p title="Lama Kerja" class="truncate">
+              Lama Kerja
+            </p>
+          </template>
           <template slot-scope="scope">
             <span>{{ scope.row.dw0 | currency }}</span>
           </template>
@@ -114,11 +127,9 @@
       </el-table-column>
       <el-table-column prop="dy0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Uang Penggantian Hak">
-              Uang Penggantian Hak
-            </p>
-          </client-only>
+          <p title="Uang Penggantian Hak" class="truncate">
+            Uang Penggantian Hak
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.dy0 | currency }}</span>

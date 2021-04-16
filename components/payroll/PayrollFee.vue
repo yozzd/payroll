@@ -111,11 +111,9 @@
         align="right"
       >
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Upah Pelaporan Untuk BPJS Kesehatan">
-              Upah Pelaporan Untuk BPJS Kesehatan
-            </p>
-          </client-only>
+          <p title="Upah Pelaporan Untuk BPJS Kesehatan" class="truncate">
+            Upah Pelaporan Untuk BPJS Kesehatan
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.co0 | currency }}</span>

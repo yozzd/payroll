@@ -50,11 +50,9 @@
       </el-table-column>
       <el-table-column prop="cz0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pajak Penghasilan Ber-NPWP">
-              Pajak Penghasilan Ber-NPWP
-            </p>
-          </client-only>
+          <p title="Pajak Penghasilan Ber-NPWP" class="truncate">
+            Pajak Penghasilan Ber-NPWP
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.cz0 | currency }}</span>
@@ -62,11 +60,9 @@
       </el-table-column>
       <el-table-column prop="da0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pajak Penghasilan Non-NPWP">
-              Pajak Penghasilan Non-NPWP
-            </p>
-          </client-only>
+          <p title="Pajak Penghasilan Non-NPWP" class="truncate">
+            Pajak Penghasilan Non-NPWP
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.da0 | currency }}</span>
@@ -79,11 +75,9 @@
       </el-table-column>
       <el-table-column prop="es0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pengembalian Pajak DTP">
-              Pengembalian Pajak DTP
-            </p>
-          </client-only>
+          <p title="Pengembalian Pajak DTP" class="truncate">
+            Pengembalian Pajak DTP
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.es0 | currency }}</span>

@@ -23,44 +23,23 @@
       :data="tableData"
       size="small"
       max-height="500"
+      border
       show-summary
       :summary-method="summaries"
     >
       <el-table-column type="index" width="50" align="center" fixed></el-table-column>
       <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
-      <el-table-column prop="d0" label="Nama Karyawan" width="200" fixed>
-        <template slot-scope="scope">
-          <client-only>
-            <p v-snip="1" :title="scope.row.d0">
-              {{ scope.row.d0 }}
-            </p>
-          </client-only>
-        </template>
-      </el-table-column>
+      <el-table-column prop="d0" label="Nama Karyawan" width="300" fixed></el-table-column>
       <el-table-column prop="y0" label="Position" width="200"></el-table-column>
-      <el-table-column label="Department" width="200">
+      <el-table-column prop="u0" label="Department" width="280"></el-table-column>
+      <el-table-column label="Section" width="280">
         <template slot-scope="scope">
-          <client-only>
-            <p v-snip="1" :title="scope.row.u0">
-              {{ scope.row.u0 }}
-            </p>
-          </client-only>
+          <p :title="scope.row.v0" class="truncate">
+            {{ scope.row.v0 }}
+          </p>
         </template>
       </el-table-column>
-      <el-table-column label="Section" width="200">
-        <template slot-scope="scope">
-          <client-only>
-            <p v-snip="1" :title="scope.row.v0">
-              {{ scope.row.v0 }}
-            </p>
-          </client-only>
-        </template>
-      </el-table-column>
-      <el-table-column label="Code" width="100">
-        <template slot-scope="scope">
-          <span>{{ scope.row.w0 }}</span>
-        </template>
-      </el-table-column>
+      <el-table-column prop="w0" label="Code" width="80" align="center"></el-table-column>
       <el-table-column prop="l0" label="Basic" width="120" align="right">
         <template slot-scope="scope">
           <span>{{ scope.row.l0 | currency }}</span>
@@ -81,7 +60,12 @@
           <span>{{ scope.row.ai0 | currency }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="ef0" label="Position/Functional" width="120" align="right">
+      <el-table-column prop="ef0" width="120" align="right">
+        <template slot="header">
+          <p title="Position / Functional" class="truncate">
+            Position / Functional
+          </p>
+        </template>
         <template slot-scope="scope">
           <span>{{ scope.row.ef0 | currency }}</span>
         </template>
@@ -118,11 +102,9 @@
       </el-table-column>
       <el-table-column prop="em0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Other Allowance Taxable">
-              Other Allowance Taxable
-            </p>
-          </client-only>
+          <p title="Other Allowance Taxable" class="truncate">
+            Other Allowance Taxable
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.em0 | currency }}</span>
@@ -143,7 +125,12 @@
           <span>{{ scope.row.cc0 | currency }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Kelas Rawat" width="100">
+      <el-table-column width="80" align="center">
+        <template slot="header">
+          <p title="Kelas Rawat" class="truncate">
+            Kelas Rawat
+          </p>
+        </template>
         <template slot-scope="scope">
           <span>{{ scope.row.cs0 }}</span>
         </template>
@@ -170,11 +157,9 @@
       </el-table-column>
       <el-table-column prop="bv0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Lebih Bayar Pph21">
-              Lebih Bayar Pph21
-            </p>
-          </client-only>
+          <p title="Lebih Bayar Pph21" class="truncate">
+            Lebih Bayar Pph21
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.bv0 | currency }}</span>
@@ -182,16 +167,15 @@
       </el-table-column>
       <el-table-column prop="es0" min-width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pengembalian Pajak DTP">
-              Pengembalian Pajak DTP
-            </p>
-          </client-only>
+          <p title="Pengembalian Pajak DTP" class="truncate">
+            Pengembalian Pajak DTP
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.es0 | currency }}</span>
         </template>
       </el-table-column>
+      <el-table-column min-width="120"></el-table-column>
     </el-table>
   </div>
 </template>

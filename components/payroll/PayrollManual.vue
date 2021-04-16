@@ -48,11 +48,9 @@ i<template>
       </el-table-column>
       <el-table-column prop="fc0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pajak Penghasilan">
-              Pajak Penghasilan
-            </p>
-          </client-only>
+          <p title="Pajak Penghasilan" class="truncate">
+            Pajak Penghasilan
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.fc0 | currency }}</span>

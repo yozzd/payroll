@@ -55,11 +55,9 @@
       </el-table-column>
       <el-table-column width="120" align="center">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tidak Ikut Pensiun">
-              Tidak Ikut Pensiun
-            </p>
-          </client-only>
+          <p title="Tidak Ikut Pensiun" class="truncate">
+            Tidak Ikut Pensiun
+          </p>
         </template>
         <template slot-scope="scope">
           <p v-if="scope.row.ey0">
@@ -69,11 +67,9 @@
       </el-table-column>
       <el-table-column width="120" align="center">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tidak Ikut BPJS">
-              Tidak Ikut BPJS
-            </p>
-          </client-only>
+          <p title="Tidak Ikut BPJS" class="truncate">
+            Tidak Ikut BPJS
+          </p>
         </template>
         <template slot-scope="scope">
           <p v-if="scope.row.ez0">
@@ -83,11 +79,9 @@
       </el-table-column>
       <el-table-column width="120" align="center">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tidak Dapat Relaksasi JKK & JK">
-              Tidak Dapat Relaksasi JKK & JK
-            </p>
-          </client-only>
+          <p title="Tidak Dapat Relaksasi JKK & JK" class="truncate">
+            Tidak Dapat Relaksasi JKK & JK
+          </p>
         </template>
         <template slot-scope="scope">
           <p v-if="scope.row.fb0">
@@ -97,11 +91,9 @@
       </el-table-column>
       <el-table-column width="120" align="center">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Final Payment BPJS Dibayarkan">
-              Final Payment BPJS Dibayarkan
-            </p>
-          </client-only>
+          <p title="Final Payment BPJS Dibayarkan" class="truncate">
+            Final Payment BPJS Dibayarkan
+          </p>
         </template>
         <template slot-scope="scope">
           <p v-if="scope.row.fj0">
@@ -111,11 +103,9 @@
       </el-table-column>
       <el-table-column width="120" align="center">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Special Allowance">
-              Special Allowance
-            </p>
-          </client-only>
+          <p title="Special Allowance" class="truncate">
+            Special Allowance
+          </p>
         </template>
         <template slot-scope="scope">
           <p v-if="scope.row.fl0">

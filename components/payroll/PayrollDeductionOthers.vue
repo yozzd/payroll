@@ -65,11 +65,9 @@
       </el-table-column>
       <el-table-column prop="dn0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pph21 Kurang Bayar">
-              Pph21 Kurang Bayar
-            </p>
-          </client-only>
+          <p title="Pph21 Kurang Bayar" class="truncate">
+            Pph21 Kurang Bayar
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.dn0 | currency }}</span>

@@ -72,20 +72,16 @@
       </el-table-column>
       <el-table-column label="Position" width="200">
         <template slot-scope="scope">
-          <client-only>
-            <p v-snip="1" :title="scope.row.y0">
-              {{ scope.row.u0 }}
-            </p>
-          </client-only>
+          <p :title="scope.row.y0" class="truncate">
+            {{ scope.row.u0 }}
+          </p>
         </template>
       </el-table-column>
       <el-table-column label="Department" width="200">
         <template slot-scope="scope">
-          <client-only>
-            <p v-snip="1" :title="scope.row.u0">
-              {{ scope.row.u0 }}
-            </p>
-          </client-only>
+          <p :title="scope.row.u0" class="truncate">
+            {{ scope.row.u0 }}
+          </p>
         </template>
       </el-table-column>
       <el-table-column label="NPWP" width="160">
@@ -110,11 +106,9 @@
       </el-table-column>
       <el-table-column prop="cn0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Ins. Paid By Company">
-              Ins. Paid By Company
-            </p>
-          </client-only>
+          <p title="Ins. Paid By Company" class="truncate">
+            Ins. Paid By Company
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.cn0 | currency }}</span>
@@ -152,11 +146,9 @@
       </el-table-column>
       <el-table-column prop="er0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Ins. Paid By Employee">
-              Ins. Paid By Employee
-            </p>
-          </client-only>
+          <p title="Ins. Paid By Employee" class="truncate">
+            Ins. Paid By Employee
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.er0 | currency }}</span>
@@ -164,11 +156,9 @@
       </el-table-column>
       <el-table-column prop="cz0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pajak Penghasilan Ber NPWP">
-              Pajak Penghasilan Ber NPWP
-            </p>
-          </client-only>
+          <p title="Pajak Penghasilan Ber NPWP" class="truncate">
+            Pajak Penghasilan Ber NPWP
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.cz0 | currency }}</span>
@@ -176,11 +166,9 @@
       </el-table-column>
       <el-table-column prop="da0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pajak Penghasilan Non NPWP">
-              Pajak Penghasilan Non NPWP
-            </p>
-          </client-only>
+          <p title="Pajak Penghasilan Non NPWP" class="truncate">
+            Pajak Penghasilan Non NPWP
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.da0 | currency }}</span>
@@ -193,11 +181,9 @@
       </el-table-column>
       <el-table-column prop="es0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pengembalian Pajak DTP">
-              Pengembalian Pajak DTP
-            </p>
-          </client-only>
+          <p title="Pengembalian Pajak DTP" class="truncate">
+            Pengembalian Pajak DTP
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.es0 | currency }}</span>
@@ -208,7 +194,7 @@
           <span>{{ scope.row.ttax | currency }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="" min-width="120"></el-table-column>
+      <el-table-column min-width="120"></el-table-column>
     </el-table>
   </div>
 </template>

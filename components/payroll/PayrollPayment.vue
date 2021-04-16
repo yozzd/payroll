@@ -59,11 +59,9 @@
       </el-table-column>
       <el-table-column prop="ec0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Total Transfer by Mandiri">
-              Total Transfer by Mandiri
-            </p>
-          </client-only>
+          <p title="Total Transfer by Mandiri" class="truncate">
+            Total Transfer by Mandiri
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.ec0 | currency }}</span>
