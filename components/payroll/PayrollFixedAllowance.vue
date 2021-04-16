@@ -50,11 +50,9 @@
       </el-table-column>
       <el-table-column prop="aj0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tetap Living">
-              Tj. Tetap Living
-            </p>
-          </client-only>
+          <p title="Tj. Tetap Living" class="truncate">
+            Tj. Tetap Living
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.aj0 | currency }}</span>
@@ -62,11 +60,9 @@
       </el-table-column>
       <el-table-column prop="ak0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tetap Perumahan">
-              Tj. Tetap Perumahan
-            </p>
-          </client-only>
+          <p title="Tj. Tetap Perumahan" class="truncate">
+            Tj. Tetap Perumahan
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.ak0 | currency }}</span>
@@ -74,11 +70,9 @@
       </el-table-column>
       <el-table-column prop="al0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tetap Posisi Fix">
-              Tj. Tetap Posisi
-            </p>
-          </client-only>
+          <p title="Tj. Tetap Posisi Fix" class="truncate">
+            Tj. Tetap Posisi
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.al0 | currency }}</span>
@@ -86,11 +80,9 @@
       </el-table-column>
       <el-table-column prop="am0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tetap Fungsional Fix">
-              Tj. Tetap Fungsional
-            </p>
-          </client-only>
+          <p title="Tj. Tetap Fungsional Fix" class="truncate">
+            Tj. Tetap Fungsional
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.am0 | currency }}</span>
@@ -98,11 +90,9 @@
       </el-table-column>
       <el-table-column prop="an0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tetap Koordinator">
-              Tj. Tetap Koordinator
-            </p>
-          </client-only>
+          <p title="Tj. Tetap Koordinator" class="truncate">
+            Tj. Tetap Koordinator
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.an0 | currency }}</span>
@@ -110,11 +100,9 @@
       </el-table-column>
       <el-table-column prop="ao0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tetap Transport">
-              Tj. Tetap Transport
-            </p>
-          </client-only>
+          <p title="Tj. Tetap Transport" class="truncate">
+            Tj. Tetap Transport
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.ao0 | currency }}</span>
@@ -122,11 +110,9 @@
       </el-table-column>
       <el-table-column prop="ap0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tetap Komunikasi">
-              Tj. Tetap Komunikasi
-            </p>
-          </client-only>
+          <p title="Tj. Tetap Komunikasi" class="truncate">
+            Tj. Tetap Komunikasi
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.ap0 | currency }}</span>
@@ -134,11 +120,9 @@
       </el-table-column>
       <el-table-column prop="aq0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tetap Expertisi">
-              Tj. Tetap Expertisi
-            </p>
-          </client-only>
+          <p title="Tj. Tetap Expertisi" class="truncate">
+            Tj. Tetap Expertisi
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.aq0 | currency }}</span>
@@ -146,11 +130,9 @@
       </el-table-column>
       <el-table-column prop="ar0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tetap Honorarium">
-              Tj. Tetap Honorarium
-            </p>
-          </client-only>
+          <p title="Tj. Tetap Honorarium" class="truncate">
+            Tj. Tetap Honorarium
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.ar0 | currency }}</span>
@@ -158,11 +140,9 @@
       </el-table-column>
       <el-table-column prop="as0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tetap Posisi Variable">
-              Tj. Tetap Posisi Variable
-            </p>
-          </client-only>
+          <p title="Tj. Tetap Posisi Variable" class="truncate">
+            Tj. Tetap Posisi Variable
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.as0 | currency }}</span>
@@ -170,11 +150,9 @@
       </el-table-column>
       <el-table-column prop="at0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tetap Fungsional Variable">
-              Tj. Tetap Fungsional Variable
-            </p>
-          </client-only>
+          <p title="Tj. Tetap Fungsional Variable" class="truncate">
+            Tj. Tetap Fungsional Variable
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.at0 | currency }}</span>
@@ -182,11 +160,9 @@
       </el-table-column>
       <el-table-column prop="au0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tetap Acting / PLT">
-              Tj. Tetap Acting / PLT
-            </p>
-          </client-only>
+          <p title="Tj. Tetap Acting / PLT" class="truncate">
+            Tj. Tetap Acting / PLT
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.au0 | currency }}</span>
@@ -194,11 +170,9 @@
       </el-table-column>
       <el-table-column prop="av0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tetap Others">
-              Tj. Tetap Others
-            </p>
-          </client-only>
+          <p title="Tj. Tetap Others" class="truncate">
+            Tj. Tetap Others
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.av0 | currency }}</span>

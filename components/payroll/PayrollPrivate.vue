@@ -48,21 +48,33 @@
       <el-table-column prop="n0" label="Jenis Kelamin" width="100"></el-table-column>
       <el-table-column prop="o0" label="Birthday" width="100"></el-table-column>
       <el-table-column label="NPWP" align="center">
-        <el-table-column prop="p0" label="Status" width="80"></el-table-column>
+        <el-table-column prop="p0" width="60" align="center">
+          <template slot="header">
+            <p title="Status" class="truncate">
+              Status
+            </p>
+          </template>
+        </el-table-column>
         <el-table-column prop="q0" label="No." width="160"></el-table-column>
-        <el-table-column prop="r0" label="Status Tanggungan" width="140"></el-table-column>
+        <el-table-column prop="r0" width="60" align="center">
+          <template slot="header">
+            <p title="Status Tanggungan" class="truncate">
+              Status Tanggungan
+            </p>
+          </template>
+        </el-table-column>
       </el-table-column>
       <el-table-column label="Bank" align="center">
-        <el-table-column prop="s0" label="Name" width="100"></el-table-column>
-        <el-table-column prop="t0" label="No." width="160"></el-table-column>
+        <el-table-column prop="s0" label="Name" width="80"></el-table-column>
+        <el-table-column prop="t0" label="No." width="140"></el-table-column>
       </el-table-column>
       <el-table-column label="BPJS" align="center">
-        <el-table-column prop="z0" label="Ketenagakerjaan" width="160"></el-table-column>
-        <el-table-column prop="aa0" label="Kesehatan" width="160"></el-table-column>
+        <el-table-column prop="z0" label="Ketenagakerjaan" width="120"></el-table-column>
+        <el-table-column prop="aa0" label="Kesehatan" width="120"></el-table-column>
       </el-table-column>
-      <el-table-column prop="et0" label="Agama" width="160"></el-table-column>
+      <el-table-column prop="et0" label="Agama" width="100"></el-table-column>
       <el-table-column prop="ew0" label="Email" min-width="240"></el-table-column>
-      <el-table-column label="" min-width="120"></el-table-column>
+      <el-table-column min-width="120"></el-table-column>
     </el-table>
 
     <el-dialog

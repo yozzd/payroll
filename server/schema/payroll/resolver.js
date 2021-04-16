@@ -827,7 +827,34 @@ const Mutation = {
     resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await Payroll.aggregate([
         { $match: { _id: id } },
+        { $unwind: '$employee' },
+        {
+          $group: {
+            _id: '$_id',
+            period: { $first: '$period' },
+            year: { $first: '$year' },
+            dir: { $first: '$dir' },
+            employee: {
+              $push: {
+                _id: '$employee._id',
+                d0: '$employee.d0',
+                e0: '$employee.e0',
+                dk0: '$employee.dk0',
+                dl0: '$employee.dl0',
+                dm0: '$employee.dm0',
+                dg0: '$employee.dg0',
+                bv0: '$employee.bv0',
+              },
+            },
+            dk0sum: { $sum: '$employee.dk0' },
+            dl0sum: { $sum: '$employee.dl0' },
+            dm0sum: { $sum: '$employee.dm0' },
+            dg0sum: { $sum: '$employee.dg0' },
+            bv0sum: { $sum: '$employee.bv0' },
+          },
+        },
       ]);
+      
       const s = await genAccCheck(p[0]);
       return s;
     }),

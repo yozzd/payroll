@@ -68,7 +68,7 @@
           <span>{{ scope.row.ay0 | currency }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="j0" label="Hari Kerja" width="80" align="right">
+      <el-table-column label="Hari Kerja" width="80" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.j0 }}</span>
         </template>

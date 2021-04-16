@@ -872,6 +872,12 @@ const genAccCheck = async (p) => {
         {
           text: 'Kopkar & BMI', bold: true, alignment: 'center',
         },
+        {
+          text: 'Pemotongan', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Tambahan Lain Tidak Kena Pajak', bold: true, alignment: 'center',
+        },
       ],
     ];
 
@@ -881,11 +887,22 @@ const genAccCheck = async (p) => {
         { text: intpre0(e.dk0).format(), alignment: 'right' },
         { text: intpre0(e.dl0).format(), alignment: 'right' },
         { text: intpre0(e.dm0).format(), alignment: 'right' },
+        { text: intpre0(e.dg0).format(), alignment: 'right' },
+        { text: intpre0(e.bv0).format(), alignment: 'right' },
       ]);
 
       return true;
     });
 
+    tbl1.push([
+      '', '', '',
+      { text: intpre0(p.dk0sum).format(), alignment: 'right' },
+      { text: intpre0(p.dl0sum).format(), alignment: 'right' },
+      { text: intpre0(p.dm0sum).format(), alignment: 'right' },
+      { text: intpre0(p.dg0sum).format(), alignment: 'right' },
+      { text: intpre0(p.bv0sum).format(), alignment: 'right' },
+    ]);
+    
     const docDefinition = {
       content: [
         { text: 'PT. Labtech Penta International', bold: true, fontSize: 8 },
@@ -896,7 +913,8 @@ const genAccCheck = async (p) => {
           style: 'tbl1',
           table: {
             widths: [
-              15, 180, 60, 60, 60, 60,
+              15, 140, 40, 40, 40, 40,
+              40, 40,
             ],
             body: tbl1,
           },
@@ -904,7 +922,7 @@ const genAccCheck = async (p) => {
       ],
       styles: {
         tbl1: {
-          fontSize: 8,
+          fontSize: 6,
           margin: [-10, -10, -10, 0],
         },
       },

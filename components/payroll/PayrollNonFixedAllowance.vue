@@ -50,11 +50,9 @@
       </el-table-column>
       <el-table-column prop="ba0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tidak Tetap Fungsional">
-              Tj. Tidak Tetap Fungsional
-            </p>
-          </client-only>
+          <p title="Tj. Tidak Tetap Fungsional" class="truncate">
+            Tj. Tidak Tetap Fungsional
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.ba0 | currency }}</span>
@@ -62,11 +60,9 @@
       </el-table-column>
       <el-table-column prop="bb0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tidak Tetap Shift">
-              Tj. Tidak Tetap Shift
-            </p>
-          </client-only>
+          <p title="Tj. Tidak Tetap Shift" class="truncate">
+            Tj. Tidak Tetap Shift
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.bb0 | currency }}</span>
@@ -74,11 +70,9 @@
       </el-table-column>
       <el-table-column prop="bc0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tidak Tetap Tig Welding">
-              Tj. Tidak Tetap Tig Welding
-            </p>
-          </client-only>
+          <p title="Tj. Tidak Tetap Tig Welding" class="truncate">
+            Tj. Tidak Tetap Tig Welding
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.bc0 | currency }}</span>
@@ -86,11 +80,9 @@
       </el-table-column>
       <el-table-column prop="bd0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tidak Tetap Operator Plasma">
-              Tj. Tidak Tetap Operator Plasma
-            </p>
-          </client-only>
+          <p title="Tj. Tidak Tetap Operator Plasma" class="truncate">
+            Tj. Tidak Tetap Operator Plasma
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.bd0 | currency }}</span>
@@ -98,11 +90,9 @@
       </el-table-column>
       <el-table-column prop="be0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tidak Tetap LKS">
-              Tj. Tidak Tetap LKS
-            </p>
-          </client-only>
+          <p title="Tj. Tidak Tetap LKS" class="truncate">
+            Tj. Tidak Tetap LKS
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.be0 | currency }}</span>
@@ -110,11 +100,9 @@
       </el-table-column>
       <el-table-column prop="bf0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tidak Tetap Koperasi">
-              Tj. Tidak Tetap Koperasi
-            </p>
-          </client-only>
+          <p title="Tj. Tidak Tetap Koperasi" class="truncate">
+            Tj. Tidak Tetap Koperasi
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.bf0 | currency }}</span>
@@ -122,11 +110,9 @@
       </el-table-column>
       <el-table-column prop="bg0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tidak Tetap Quality System">
-              Tj. Tidak Tetap Quality System
-            </p>
-          </client-only>
+          <p title="Tj. Tidak Tetap Quality System" class="truncate">
+            Tj. Tidak Tetap Quality System
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.bg0 | currency }}</span>
@@ -134,11 +120,9 @@
       </el-table-column>
       <el-table-column prop="bh0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tidak Tetap Penghargaan Masa Kerja">
-              Tj. Tidak Tetap Penghargaan Masa Kerja
-            </p>
-          </client-only>
+          <p title="Tj. Tidak Tetap Penghargaan Masa Kerja" class="truncate">
+            Tj. Tidak Tetap Penghargaan Masa Kerja
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.bh0 | currency }}</span>
@@ -146,11 +130,9 @@
       </el-table-column>
       <el-table-column prop="bi0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Tj. Tidak Tetap Others">
-              Tj. Tidak Tetap Others
-            </p>
-          </client-only>
+          <p title="Tj. Tidak Tetap Others" class="truncate">
+            Tj. Tidak Tetap Others
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.bi0 | currency }}</span>
@@ -161,7 +143,7 @@
           <span>{{ scope.row.bj0 | currency }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="" min-width="120"></el-table-column>
+      <el-table-column min-width="120"></el-table-column>
     </el-table>
 
     <el-dialog

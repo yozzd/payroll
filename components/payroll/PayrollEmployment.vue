@@ -67,13 +67,19 @@
       </el-table-column>
       <el-table-column prop="h0" label="Status Karyawan" width="120"></el-table-column>
       <el-table-column prop="i0" label="Hired Date" width="100"></el-table-column>
-      <el-table-column prop="k0" label="Resign / Finish Date" width="140"></el-table-column>
+      <el-table-column prop="k0" width="100">
+        <template slot="header">
+          <p title="Resign / Finish Date" class="truncate">
+            Resign / Finish Date
+          </p>
+        </template>
+      </el-table-column>
       <el-table-column prop="u0" label="Department" width="280"></el-table-column>
       <el-table-column prop="v0" label="Section" width="280"></el-table-column>
       <el-table-column prop="w0" label="Section Code" width="100"></el-table-column>
       <el-table-column prop="x0" label="Grade" width="100"></el-table-column>
       <el-table-column prop="y0" label="Jabatan" width="200"></el-table-column>
-      <el-table-column label="" min-width="120"></el-table-column>
+      <el-table-column min-width="120"></el-table-column>
     </el-table>
 
     <el-dialog

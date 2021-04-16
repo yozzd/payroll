@@ -50,11 +50,9 @@
       </el-table-column>
       <el-table-column prop="bl0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pembetulan Pembayaran Koreksi Absen">
-              Pembetulan Pembayaran Koreksi Absen
-            </p>
-          </client-only>
+          <p title="Pembetulan Pembayaran Koreksi Absen" class="truncate">
+            Pembetulan Pembayaran Koreksi Absen
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.bl0 | currency }}</span>
@@ -62,11 +60,9 @@
       </el-table-column>
       <el-table-column prop="bm0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pembetulan Pembayaran Koreksi Gaji & Hari Kerja">
-              Pembetulan Pembayaran Koreksi Gaji & Hari Kerja
-            </p>
-          </client-only>
+          <p title="Pembetulan Pembayaran Koreksi Gaji & Hari Kerja" class="truncate">
+            Pembetulan Pembayaran Koreksi Gaji & Hari Kerja
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.bm0 | currency }}</span>
@@ -74,11 +70,9 @@
       </el-table-column>
       <el-table-column prop="bn0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pembetulan Pembayaran OT">
-              Pembetulan Pembayaran OT
-            </p>
-          </client-only>
+          <p title="Pembetulan Pembayaran OT" class="truncate">
+            Pembetulan Pembayaran OT
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.bn0 | currency }}</span>
@@ -86,11 +80,9 @@
       </el-table-column>
       <el-table-column prop="bo0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pembetulan Pembayaran Tunjangan">
-              Pembetulan Pembayaran Tunjangan
-            </p>
-          </client-only>
+          <p title="Pembetulan Pembayaran Tunjangan" class="truncate">
+            Pembetulan Pembayaran Tunjangan
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.bo0 | currency }}</span>
@@ -98,11 +90,9 @@
       </el-table-column>
       <el-table-column prop="bp0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pembetulan Pembayaran Insentif">
-              Pembetulan Pembayaran Insentif
-            </p>
-          </client-only>
+          <p title="Pembetulan Pembayaran Insentif" class="truncate">
+            Pembetulan Pembayaran Insentif
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.bp0 | currency }}</span>
@@ -110,11 +100,9 @@
       </el-table-column>
       <el-table-column prop="bq0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pembetulan Pembayaran THR">
-              Pembetulan Pembayaran THR
-            </p>
-          </client-only>
+          <p title="Pembetulan Pembayaran THR" class="truncate">
+            Pembetulan Pembayaran THR
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.bq0 | currency }}</span>
@@ -122,11 +110,9 @@
       </el-table-column>
       <el-table-column prop="br0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pembetulan Pembayaran Allowance">
-              Pembetulan Pembayaran Allowance
-            </p>
-          </client-only>
+          <p title="Pembetulan Pembayaran Allowance" class="truncate">
+            Pembetulan Pembayaran Allowance
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.br0 | currency }}</span>
@@ -134,11 +120,9 @@
       </el-table-column>
       <el-table-column prop="bs0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pembetulan Pembayaran Uang Makan Security">
-              Pembetulan Pembayaran Uang Makan Security
-            </p>
-          </client-only>
+          <p title="Pembetulan Pembayaran Uang Makan Security" class="truncate">
+            Pembetulan Pembayaran Uang Makan Security
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.bs0 | currency }}</span>
@@ -146,11 +130,9 @@
       </el-table-column>
       <el-table-column prop="bt0" width="120" align="right">
         <template slot="header">
-          <client-only>
-            <p v-snip="1" title="Pembetulan Pembayaran Others">
-              Pembetulan Pembayaran Others
-            </p>
-          </client-only>
+          <p title="Pembetulan Pembayaran Others" class="truncate">
+            Pembetulan Pembayaran Others
+          </p>
         </template>
         <template slot-scope="scope">
           <span>{{ scope.row.bt0 | currency }}</span>
@@ -161,7 +143,7 @@
           <span>{{ scope.row.bu0 | currency }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="" min-width="120"></el-table-column>
+      <el-table-column min-width="120"></el-table-column>
     </el-table>
 
     <el-dialog
