@@ -908,7 +908,7 @@ const genAccCheck = async (p) => {
       { text: intpre0(p.dg0sum).format(), alignment: 'right' },
       { text: intpre0(p.bv0sum).format(), alignment: 'right' },
     ]);
-    
+
     const docDefinition = {
       content: [
         { text: 'PT. Labtech Penta International', bold: true, fontSize: 8 },
@@ -1042,13 +1042,13 @@ const generateSlip = async (p) => {
 
     let net = 0;
     if (e.e0 === 'X.0010') {
-      net = intpre0(e.ed0).format()
+      net = intpre0(e.ed0).format();
     } else if (e.ex0) {
-      net = intpre0(e.eb0).format()
+      net = intpre0(e.eb0).format();
     } else {
-      net = intpre0(e.ec0).format()
-    };
-    
+      net = intpre0(e.ec0).format();
+    }
+
     const docDefinition = {
       userPassword: e.slip.pw,
       content: [
@@ -1554,7 +1554,7 @@ const genPDFSpAllowQ = async (p) => {
         '',
       ],
     ];
-    
+
     employee.map((e, i) => {
       vw1.push([
         { text: (i + 1), alignment: 'center' }, { text: e.e0, alignment: 'center' },

@@ -204,7 +204,6 @@ const FlagsInputType = new GraphQLInputObjectType({
     at0p: { type: GraphQLFloat },
     au0f: { type: GraphQLBoolean },
     au0p: { type: GraphQLFloat },
-    spAllowRem: { type: GraphQLString },
   }),
 });
 
@@ -227,7 +226,7 @@ const FinalInputType = new GraphQLInputObjectType({
 });
 
 const SpAllowInputType = new GraphQLInputObjectType({
-  name: 'FlagsInputType',
+  name: 'SpAllowInputType',
   fields: () => ({
     _id: { type: GraphQLString },
     fl0: { type: GraphQLBoolean },
@@ -393,7 +392,7 @@ const EditSpAllowInputType = new GraphQLInputObjectType({
   name: 'EditSpAllowInputType',
   fields: () => ({
     _id: { type: GraphQLString },
-    employee: { type: FlagsInputType },
+    employee: { type: SpAllowInputType },
   }),
 });
 

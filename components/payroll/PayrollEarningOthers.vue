@@ -58,9 +58,9 @@
         </template>
       </el-table-column>
       <el-table-column label="THR Prorate" align="center">
-        <el-table-column prop="bw0" label="Months" width="80" align="center">
+        <el-table-column label="Months" width="80" align="center">
           <template slot-scope="scope">
-            <span>{{ scope.row.bw0 | currency }}</span>
+            <span>{{ scope.row.bw0 }}</span>
           </template>
         </el-table-column>
         <el-table-column prop="bx0" label="Amount" width="120" align="right">
@@ -75,7 +75,7 @@
         </template>
       </el-table-column>
       <el-table-column label="Uang Pisah" align="center">
-        <el-table-column prop="ds0" width="80" align="center">
+        <el-table-column width="80" align="center">
           <template slot="header">
             <p title="Lama Kerja" class="truncate">
               Lama Kerja
@@ -92,7 +92,7 @@
         </el-table-column>
       </el-table-column>
       <el-table-column label="Uang Pesangon" align="center">
-        <el-table-column prop="du0" width="80" align="right">
+        <el-table-column width="80" align="right">
           <template slot="header">
             <p title="Lama Kerja" class="truncate">
               Lama Kerja
@@ -109,7 +109,7 @@
         </el-table-column>
       </el-table-column>
       <el-table-column label="Uang Penghargaan Masa Kerja" align="center">
-        <el-table-column prop="dw0" width="80" align="right">
+        <el-table-column width="80" align="right">
           <template slot="header">
             <p title="Lama Kerja" class="truncate">
               Lama Kerja

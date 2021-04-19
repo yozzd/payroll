@@ -46,6 +46,16 @@ const {
 } = require('./input.type');
 const auth = require('../auth/service');
 
+const countHR = (tgl1, tgl2) => {
+  const { years, months, days } = intervalToDuration({
+    start: new Date(tgl1), end: new Date(tgl2),
+  });
+
+  if (years > 0) return 12;
+  if (years === 0 && days >= 15) return months + 1;
+  return months;
+};
+
 const group = {
   _id: '$_id',
   period: { $first: '$period' },
@@ -204,7 +214,7 @@ const spAllowQ = async (id) => {
 
   return p[0];
 };
-      
+
 const Query = {
   payrollAll: {
     type: new GraphQLList(PayrollType),
@@ -878,7 +888,7 @@ const Mutation = {
           },
         },
       ]);
-      
+
       const s = await genAccCheck(p[0]);
       return s;
     }),
@@ -1196,37 +1206,28 @@ const Mutation = {
         px.typeHR = 0;
         px.tglHR = '';
 
-        // const arr = px.employee.map((o) => {
-        //   const v = o;
-        //   return v
-        // });
+        px.employee.map((o) => {
+          const v = o;
+          v.bw0 = 0;
+          v.bx0 = 0;
 
-        // Object.assign(px.employee, arr);
+          return v;
+        });
       } else {
         px.typeHR = typeHR;
         px.tglHR = tglHR;
 
-        // let arr1 = [];
-        // if (typeHR === 1) {
-        //   arr1 = px.employee.filter((v) => v.et0 === 'Islam');
-        // } else {
-        //   arr1 = px.employee.filter((v) => v.et0 !== 'Islam');
-        // }
+        px.employee.map((o) => {
+          const v = o;
 
-        // const arr2 = arr1.map((o) => {
-        //   const v = o;
+          if (typeHR === 1) {
+            if (v.et0 === 'Islam') v.bw0 = countHR(v.i0, tglHR);
+            else v.bw0 = 0;
+          } else if (v.et0 !== 'Islam') v.bw0 = countHR(v.i0, tglHR);
+          else v.bw0 = 0;
 
-        //   let c = 0;
-        //   const { years, months, days } = intervalToDuration({ start: new Date(v.i0), end: new Date(tglHR) });
-        //   if (years > 0) c = 12;
-        //   else if (years === 0 && days >= 15) c = months + 1;
-        //   else c = months;
-
-        //   v.bw0 = c;
-        //   return v
-        // });
-
-        // Object.assign(px.employee, arr2);
+          return v;
+        });
       }
 
       const s = await px.save();

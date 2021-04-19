@@ -847,7 +847,7 @@
         <el-button @click="handleHariRayaDialogClose">Cancel</el-button>
         <el-button
           type="primary"
-          :loading="loading"
+          :loading="loadingHariRaya"
           @click="handleHariRaya('formHariRaya')"
         >
           Update
