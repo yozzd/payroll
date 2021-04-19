@@ -16,6 +16,7 @@ const {
   genPayrollXLS,
   genAccCheck,
   genFinal,
+  genPDFSpAllowQ,
 } = require('./method');
 const {
   CloneEmployeeInputType,
@@ -163,6 +164,9 @@ const spAllowQ = async (id) => {
     {
       $group: {
         _id: '$_id',
+        period: { $first: '$period' },
+        year: { $first: '$year' },
+        dir: { $first: '$dir' },
         freeze: { $first: '$freeze' },
         employee: {
           $push: {
@@ -186,6 +190,14 @@ const spAllowQ = async (id) => {
             spAllowRem: '$employee.spAllowRem',
           },
         },
+        am0Sum: { $sum: '$employee.am0' },
+        am0rSum: { $sum: '$employee.am0r' },
+        as0Sum: { $sum: '$employee.as0' },
+        as0rSum: { $sum: '$employee.as0r' },
+        at0Sum: { $sum: '$employee.at0' },
+        at0rSum: { $sum: '$employee.at0r' },
+        au0Sum: { $sum: '$employee.au0' },
+        au0rSum: { $sum: '$employee.au0r' },
       },
     },
   ]);
@@ -1312,6 +1324,17 @@ const Mutation = {
       await updateEmployee(_id, employee, Payroll);
 
       const s = await spAllowQ(_id);
+      return s;
+    }),
+  },
+  genPDFSpAllow: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('user', async (_, { id }) => {
+      const p = await spAllowQ(id);
+      const s = await genPDFSpAllowQ(p);
       return s;
     }),
   },

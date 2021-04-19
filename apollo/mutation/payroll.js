@@ -505,6 +505,8 @@ export const EditSpAllow = gql`
   mutation editSpAllow($input: EditSpAllowInputType) {
     editSpAllow(input: $input) {
       _id
+      dir
+      freeze
       employee {
         _id
         d0
@@ -525,6 +527,14 @@ export const EditSpAllow = gql`
         au0p
         spAllowRem
       }
+    }
+  }
+`;
+
+export const GenPDFSpAllow = gql`
+  mutation genPDFSpAllow($id: String!) {
+    genPDFSpAllow(id: $id) {
+      sStatus
     }
   }
 `;

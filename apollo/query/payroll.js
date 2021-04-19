@@ -481,6 +481,7 @@ export const PayrollSpAllow = gql`
   query payrollSpAllow($id: String!) {
     payrollSpAllow(id: $id) {
       _id
+      dir
       freeze
       employee {
         _id

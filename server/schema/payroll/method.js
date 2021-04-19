@@ -6,7 +6,13 @@ const XLSX = require('xlsx');
 const { getDate, getMonth } = require('date-fns');
 
 const {
-  intpre0, intpre0v2, floatpre2, floatpre2v2, floatpre3, floatpre4, floatpre4v2,
+  intpre0,
+  intpre0v2,
+  floatpre2,
+  floatpre2v2,
+  floatpre3,
+  floatpre4,
+  floatpre4v2,
 } = require('../scalar/number');
 const { gDateFormat, idDateFormat, dateDiff } = require('../scalar/date');
 const smtp = require('../../config/smtp');
@@ -1472,6 +1478,205 @@ const genFinal = async (p) => {
   }
 };
 
+const genPDFSpAllowQ = async (p) => {
+  try {
+    const { employee } = p;
+    await fs.ensureDir(`static/report/${p.dir}`);
+
+    const vw1 = [
+      [
+        {
+          text: 'No', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'No Karyawan', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Nama Karyawan', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Department', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Tj. Tetap Fungsional', bold: true, alignment: 'center', colSpan: 3,
+        }, '', '',
+        {
+          text: 'Tj. Tetap Fungsional Variable', bold: true, alignment: 'center', colSpan: 3,
+        }, '', '',
+        {
+          text: 'Tj. Tetap Posisi Variable', bold: true, alignment: 'center', colSpan: 3,
+        }, '', '',
+        {
+          text: 'Tj. Tetap Acting / PLT', bold: true, alignment: 'center', colSpan: 3,
+        }, '', '',
+        {
+          text: 'Keterangan', bold: true, alignment: 'center', rowSpan: 2,
+        },
+      ],
+      [
+        '', '', '', '',
+        {
+          text: 'Full', bold: true, alignment: 'center',
+        },
+        {
+          text: '%', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Actual', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Full', bold: true, alignment: 'center',
+        },
+        {
+          text: '%', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Actual', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Full', bold: true, alignment: 'center',
+        },
+        {
+          text: '%', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Actual', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Full', bold: true, alignment: 'center',
+        },
+        {
+          text: '%', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Actual', bold: true, alignment: 'center',
+        },
+        '',
+      ],
+    ];
+    
+    employee.map((e, i) => {
+      vw1.push([
+        { text: (i + 1), alignment: 'center' }, { text: e.e0, alignment: 'center' },
+        e.d0, e.u0,
+        { text: intpre0(e.am0).format(), alignment: 'right' },
+        { text: floatpre2(e.am0p).format(), alignment: 'right' },
+        { text: intpre0(e.am0r).format(), alignment: 'right' },
+        { text: intpre0(e.at0).format(), alignment: 'right' },
+        { text: floatpre2(e.at0p).format(), alignment: 'right' },
+        { text: intpre0(e.at0r).format(), alignment: 'right' },
+        { text: intpre0(e.as0).format(), alignment: 'right' },
+        { text: floatpre2(e.as0p).format(), alignment: 'right' },
+        { text: intpre0(e.as0r).format(), alignment: 'right' },
+        { text: intpre0(e.au0).format(), alignment: 'right' },
+        { text: floatpre2(e.au0p).format(), alignment: 'right' },
+        { text: intpre0(e.au0r).format(), alignment: 'right' },
+        e.spAllowRem ? e.spAllowRem : '',
+      ]);
+
+      return true;
+    });
+
+    vw1.push([
+      '', '', '', '',
+      { text: intpre0(p.am0rSum).format(), alignment: 'right' },
+      '',
+      { text: intpre0(p.am0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.at0rSum).format(), alignment: 'right' },
+      '',
+      { text: intpre0(p.at0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.as0rSum).format(), alignment: 'right' },
+      '',
+      { text: intpre0(p.as0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.au0rSum).format(), alignment: 'right' },
+      '',
+      { text: intpre0(p.au0Sum).format(), alignment: 'right' },
+      '',
+    ]);
+
+    const docDefinition = {
+      pageOrientation: 'landscape',
+      footer: (currentPage, pageCount) => ({
+        columns: [
+          { text: `${currentPage.toString()} / ${pageCount}`, fontSize: 8, margin: [20, 0] },
+        ],
+      }),
+      content: [
+        {
+          style: 'tbl1',
+          table: {
+            widths: [170, 200, 200, 135],
+            body: [
+              [{
+                image: 'static/images/logo.png', width: 60, rowSpan: 2, border: [false, false, false, false],
+              }, { text: '', border: [false, false, false, false] }, {
+                text: 'PT. LABTECH PENTA INTERNATIONAL', bold: true, fontSize: 8, border: [false, false, false, true],
+              }, {
+                text: 'SPECIAL ALLOWANCE', bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, true],
+              }],
+              ['', { text: '', border: [false, false, false, false] }, { text: 'Kawasan Industri Sekupang Kav. 34 Batam - Indonesia', border: [false, false, false, false] }, {
+                text: '', border: [false, false, false, false],
+              }],
+            ],
+          },
+        },
+        {
+          style: 'tbl2',
+          table: {
+            widths: [110, 412],
+            body: [
+              [{
+                text: `Special Allowance - Periode Payroll ${p.period} ${p.year}`, colSpan: 2, fontSize: 10, bold: true, margin: [0, 15, 0, 10],
+              }, ''],
+            ],
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl3',
+          table: {
+            widths: [
+              15, 30, 80, 80, 30, 30, 30,
+              30, 30, 30, 30, 30, 30, 30,
+              30, 30, 60,
+            ],
+            body: vw1,
+          },
+        },
+      ],
+      styles: {
+        tbl1: {
+          fontSize: 8,
+          margin: [-10, -10, -10, 0],
+        },
+        tbl2: {
+          fontSize: 8,
+          margin: [-10, 40, -10, 10],
+        },
+        tbl3: {
+          fontSize: 6,
+          margin: [-10, -10, -10, 0],
+        },
+      },
+    };
+
+    return new Promise((resolve) => {
+      const pdfDoc = printer.createPdfKitDocument(docDefinition);
+      pdfDoc.pipe(fs.createWriteStream(`static/report/${p.dir}/${p.dir}_sp_allow.pdf`));
+      pdfDoc.on('end', () => {
+        resolve({ sStatus: 1 });
+      });
+      pdfDoc.end();
+    });
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
+};
+
 module.exports = {
   updateEmployee,
   generateReportPayroll,
@@ -1480,4 +1685,5 @@ module.exports = {
   generateSlip,
   sendSlip,
   genFinal,
+  genPDFSpAllowQ,
 };

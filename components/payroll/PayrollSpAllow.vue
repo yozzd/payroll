@@ -8,6 +8,19 @@
       <div class="flex-1">
         <span class="text-green-500">Total {{ items.length }} items</span>
       </div>
+      <el-dropdown
+        trigger="click"
+        @command="c => handleExport(c, dir)"
+      >
+        <span class="el-dropdown-link">
+          Export<i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="pdf">
+            PDF
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
       <div class="w-64">
         <el-input
           v-model="search"
@@ -197,7 +210,7 @@
 <script>
 import MiniSearch from 'minisearch';
 import { PayrollSpAllow } from '../../apollo/query/payroll';
-import { EditSpAllow } from '../../apollo/mutation/payroll';
+import { EditSpAllow, GenPDFSpAllow } from '../../apollo/mutation/payroll';
 import mix from '../../mixins/payroll';
 
 export default {
@@ -206,7 +219,9 @@ export default {
     return {
       showEditDialog: false,
       form: {},
+      loadSpAllow: false,
       loading: false,
+      dir: '',
       freeze: false,
       miniSearch: new MiniSearch({
         idField: '_id',
@@ -267,6 +282,27 @@ export default {
         }
       });
     },
+    handleExport(c, dir) {
+      if (c === 'pdf') this.genPDFSpAllow(dir);
+    },
+    async genPDFSpAllow(dir) {
+      try {
+        this.loadSpAllow = true;
+        await this.$apollo.mutate({
+          mutation: GenPDFSpAllow,
+          variables: {
+            id: this.$route.params.id,
+          },
+        });
+
+        this.loadSpAllow = false;
+        window.open(`/report/${dir}/${dir}_sp_allow.pdf`);
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
+    },
   },
   apollo: {
     payrollSpAllow: {
@@ -279,7 +315,8 @@ export default {
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const { freeze, employee } = data.payrollSpAllow;
+          const { dir, freeze, employee } = data.payrollSpAllow;
+          this.dir = dir;
           this.freeze = freeze;
           this.items = employee;
           this.miniSearch.removeAll();
