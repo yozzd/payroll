@@ -47,6 +47,8 @@ const {
 const auth = require('../auth/service');
 
 const countHR = (tgl1, tgl2) => {
+  if (!tgl1) return 0;
+
   const { years, months, days } = intervalToDuration({
     start: new Date(tgl1), end: new Date(tgl2),
   });
@@ -213,6 +215,77 @@ const spAllowQ = async (id) => {
   ]);
 
   return p[0];
+};
+
+const thrCat = async (id) => {
+  const payroll = await Payroll.aggregate([
+    { $match: { _id: id } },
+    { $unwind: '$employee' },
+    {
+      $match: {
+        $or: [
+          {
+            $and: [
+              { typeHR: { $eq: 1 } },
+              { 'employee.et0': { $eq: 'Islam' } },
+            ],
+          },
+          {
+            $and: [
+              { typeHR: { $eq: 2 } },
+              { 'employee.et0': { $ne: 'Islam' } },
+            ],
+          },
+        ],
+      },
+    },
+    {
+      $group: {
+        _id: '$_id',
+        period: { $first: '$period' },
+        year: { $first: '$year' },
+        tglHR: { $first: '$tglHR' },
+        employee: {
+          $push: {
+            _id: '$employee._id',
+            d0: '$employee.d0',
+            e0: '$employee.e0',
+            g0: '$employee.g0',
+            h0: '$employee.h0',
+            i0: '$employee.i0',
+            aj0: '$employee.aj0',
+            ak0: '$employee.ak0',
+            al0: '$employee.al0',
+            am0: '$employee.am0',
+            an0: '$employee.an0',
+            ao0: '$employee.ao0',
+            ap0: '$employee.ap0',
+            aq0: '$employee.aq0',
+            ar0: '$employee.ar0',
+            as0: '$employee.as0',
+            at0: '$employee.at0',
+            au0: '$employee.au0',
+            ax0: '$employee.ax0',
+            bw0: '$employee.bw0',
+            bx0: '$employee.bx0',
+            cz0: '$employee.cz0',
+            da0: '$employee.da0',
+            db0: '$employee.db0',
+            ax0F: {
+              $function: {
+                body: `function(v) {
+                  return Math.floor(v / 100) * 100;
+                }`,
+                args: ['$employee.ax0'],
+                lang: 'js',
+              },
+            },
+          },
+        },
+      },
+    },
+  ]);
+  return payroll[0];
 };
 
 const Query = {
@@ -770,6 +843,16 @@ const Query = {
     resolve: auth.hasRole('user', async (_, { id }) => {
       const s = await spAllowQ(id);
       return s;
+    }),
+  },
+  payrollThr: {
+    type: PayrollType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('user', async (_, { id }) => {
+      const p = await thrCat(id);
+      return p;
     }),
   },
 };

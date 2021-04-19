@@ -92,7 +92,7 @@
         </el-table-column>
       </el-table-column>
       <el-table-column label="Uang Pesangon" align="center">
-        <el-table-column width="80" align="right">
+        <el-table-column width="80" align="center">
           <template slot="header">
             <p title="Lama Kerja" class="truncate">
               Lama Kerja
@@ -109,7 +109,7 @@
         </el-table-column>
       </el-table-column>
       <el-table-column label="Uang Penghargaan Masa Kerja" align="center">
-        <el-table-column width="80" align="right">
+        <el-table-column width="80" align="center">
           <template slot="header">
             <p title="Lama Kerja" class="truncate">
               Lama Kerja

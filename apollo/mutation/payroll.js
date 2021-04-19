@@ -538,3 +538,11 @@ export const GenPDFSpAllow = gql`
     }
   }
 `;
+
+export const GenPDFThr = gql`
+  mutation genPDFThr($id: String!) {
+    genPDFThr(id: $id) {
+      sStatus
+    }
+  }
+`;

@@ -506,3 +506,40 @@ export const PayrollSpAllow = gql`
     }
   }
 `;
+
+export const PayrollThr = gql`
+  query payrollThr($id: String!) {
+    payrollThr(id: $id) {
+      _id
+      freeze
+      period
+      year
+      tglHR
+      employee {
+        _id
+        d0
+        e0
+        g0
+        h0
+        i0
+        aj0
+        ak0
+        al0
+        am0
+        an0
+        ao0
+        ap0
+        aq0
+        ar0
+        as0
+        at0
+        au0
+        ax0
+        ax0F
+        bw0
+        bx0
+        trfThr
+      }
+    }
+  }
+`;

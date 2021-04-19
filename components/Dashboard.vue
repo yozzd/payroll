@@ -242,7 +242,13 @@
                 <el-menu-item index="f">
                   Pph21
                 </el-menu-item>
-                <el-menu-item index="g">
+                <el-menu-item
+                  v-if="scope.row.typeHR"
+                  index="g"
+                >
+                  THR
+                </el-menu-item>
+                <el-menu-item index="h">
                   Slip
                 </el-menu-item>
               </el-submenu>
@@ -1052,7 +1058,8 @@ export default {
       else if (c === 'd') this.$router.push({ name: 'payroll-kesehatan-id', params: { id } });
       else if (c === 'e') this.$router.push({ name: 'payroll-trf-id', params: { id } });
       else if (c === 'f') this.$router.push({ name: 'payroll-pph-id', params: { id } });
-      else if (c === 'g') this.$router.push({ name: 'payroll-slip-id', params: { id } });
+      else if (c === 'g') this.$router.push({ name: 'payroll-thr-id', params: { id } });
+      else if (c === 'h') this.$router.push({ name: 'payroll-slip-id', params: { id } });
     },
     handleActionCommand(c, r) {
       const {
