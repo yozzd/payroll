@@ -259,6 +259,7 @@ const EmployeeType = new GraphQLObjectType({
     pph: { type: PphCheckType },
     spAllowRem: { type: GraphQLString },
     trfThr: { type: GraphQLFloat },
+    cshThr: { type: GraphQLFloat },
   }),
 });
 

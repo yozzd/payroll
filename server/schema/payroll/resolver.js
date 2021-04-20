@@ -280,6 +280,46 @@ const thrCat = async (id) => {
                 lang: 'js',
               },
             },
+            trfThr: {
+              $cond: {
+                if: { $ne: ['$employee.e0', 'X.0010'] },
+                then: {
+                  $subtract: [
+                    {
+                      $function: {
+                        body: `function(v) {
+                          return Math.floor(v / 100) * 100;
+                        }`,
+                        args: ['$employee.ax0'],
+                        lang: 'js',
+                      },
+                    },
+                    '$employee.db0',
+                  ],
+                },
+                else: 0,
+              },
+            },
+            cshThr: {
+              $cond: {
+                if: { $eq: ['$employee.e0', 'X.0010'] },
+                then: {
+                  $subtract: [
+                    {
+                      $function: {
+                        body: `function(v) {
+                          return Math.floor(v / 100) * 100;
+                        }`,
+                        args: ['$employee.ax0'],
+                        lang: 'js',
+                      },
+                    },
+                    '$employee.db0',
+                  ],
+                },
+                else: 0,
+              },
+            },
           },
         },
       },
@@ -1239,6 +1279,12 @@ const Mutation = {
         v.ab0 = 0;
         v.ad0 = 0;
         v.af0 = 0;
+        v.bb0 = 0;
+        v.bb0r = 0;
+        v.bc0 = 0;
+        v.bc0r = 0;
+        v.bd0 = 0;
+        v.bd0r = 0;
         v.bl0 = 0;
         v.bm0 = 0;
         v.bn0 = 0;

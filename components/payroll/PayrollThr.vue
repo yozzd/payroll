@@ -32,7 +32,7 @@
       element-loading-spinner="el-icon-loading"
       :data="tableData"
       size="small"
-      max-height="500"
+      max-height="600"
       border
       show-summary
       :summary-method="summaries"
@@ -48,9 +48,7 @@
         </template>
       </el-table-column>
       <el-table-column label="Hari Raya" width="100">
-        <template>
-          {{ tglHR }}
-        </template>
+        {{ tglHR }}
       </el-table-column>
       <el-table-column label="Long Service" width="180">
         <template slot-scope="scope">
@@ -166,6 +164,16 @@
           <span>{{ scope.row.trfThr | currency }}</span>
         </template>
       </el-table-column>
+      <el-table-column prop="cshThr" width="120" align="right">
+        <template slot="header">
+          <p title="Total Thr By Cash" class="truncate">
+            Total Thr By Cash
+          </p>
+        </template>
+        <template slot-scope="scope">
+          <span>{{ scope.row.cshThr | currency }}</span>
+        </template>
+      </el-table-column>
       <el-table-column min-width="120"></el-table-column>
     </el-table>
   </div>
@@ -184,7 +192,6 @@ export default {
     return {
       content: '',
       tglHR: '',
-      multipleSelection: [],
       loadingGen: false,
       percentage: 0,
       miniSearch: new MiniSearch({
@@ -194,7 +201,8 @@ export default {
           '_id', 'd0', 'e0', 'h0', 'i0', 'tglHR',
           'bw0', 'bx0', 'g0', 'aj0', 'ak0', 'al0',
           'am0', 'ao0', 'ap0', 'aq0', 'as0', 'at0',
-          'au0', 'ax0', 'ax0F',
+          'au0', 'ax0', 'ax0F', 'cz0', 'da0',
+          'trfThr', 'cshThr',
         ],
       }),
     };

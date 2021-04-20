@@ -469,34 +469,73 @@ EmployeeSchema.pre('save', async function fn(next) {
     'K/2': this.ownerDocument().rate.b10,
     'K/3': this.ownerDocument().rate.b11,
   };
-  const bruto = this.l0
-    + this.bk0
-    + this.ai0
-    + this.cb0
-    + this.cc0
-    + this.cq0
-    + this.bu0
-    + this.dr0
-    + this.bz0
-    - (this.df0 + this.cy0);
-  let biayaJabatan;
-  if (bruto * 0.05 >= 500000) {
-    biayaJabatan = 500000;
+
+  const pph21t = () => {
+    const bruto = this.l0
+      + this.bk0
+      + this.ai0
+      + this.cb0
+      + this.cc0
+      + this.cq0
+      + this.bu0
+      + this.dr0
+      + this.bz0
+      - (this.df0 + this.cy0);
+    let biayaJabatan;
+    if (bruto * 0.05 >= 500000) {
+      biayaJabatan = 500000;
+    } else {
+      biayaJabatan = Math.round(bruto * 0.05);
+    }
+    const pengurang = biayaJabatan + this.ce0 + this.cj0;
+    const netoSebulan = bruto - pengurang;
+    // const netoSetahun = Math.floor((netoSebulan * this.ea0) / 1000) * 1000;
+    const netoSetahun = netoSebulan * this.ea0;
+    const ptkp = ptkpObject[this.r0];
+    const pSetahun = netoSetahun - ptkp;
+    const pkpSetahun = pSetahun <= 0 ? 0 : Math.floor(pSetahun / 1000) * 1000;
+    const pph21Tahunan = Math.min(Math.max(0, pkpSetahun), 50000000) * 0.05
+      + Math.min(Math.max(0, pkpSetahun - 50000000), 200000000) * 0.15
+      + Math.min(Math.max(0, pkpSetahun - 250000000), 250000000) * 0.25
+      + Math.max(0, pkpSetahun - 500000000) * 0.3;
+    return pph21Tahunan;
+  };
+
+  let pph21 = 0;
+  if ((this.ownerDocument().typeHR === 1 && this.et0 === 'Islam') || (this.ownerDocument().typeHR === 2 && this.et0 !== 'Islam')) {
+    const bruto = (this.l0 * this.ea0)
+      + (this.bk0 * this.ea0)
+      + (this.ai0 * this.ea0)
+      + (this.cb0 * this.ea0)
+      + (this.cc0 * this.ea0)
+      + (this.cq0 * this.ea0)
+      + (this.bu0 * this.ea0)
+      + this.bx0
+      + this.dr0
+      + (this.bz0 * this.ea0)
+      - (this.df0 + (this.cy0 * this.ea0));
+    let biayaJabatan;
+    if (bruto * 0.05 >= 6000000) {
+      biayaJabatan = 6000000;
+    } else {
+      biayaJabatan = Math.round(bruto * 0.05);
+    }
+    const pengurang = biayaJabatan + (this.ce0 * this.ea0) + (this.cj0 * this.ea0);
+    const netoSetahun = bruto - pengurang;
+    const ptkp = ptkpObject[this.r0];
+    const pSetahun = netoSetahun - ptkp;
+    const pkpSetahun = pSetahun <= 0 ? 0 : Math.floor(pSetahun / 1000) * 1000;
+    const pph21T1 = Math.min(Math.max(0, pkpSetahun), 50000000) * 0.05
+      + Math.min(Math.max(0, pkpSetahun - 50000000), 200000000) * 0.15
+      + Math.min(Math.max(0, pkpSetahun - 250000000), 250000000) * 0.25
+      + Math.max(0, pkpSetahun - 500000000) * 0.3;
+    const pph21T2 = pph21t();
+    const pph21Tahunan = pph21T1 - pph21T2;
+    pph21 = pph21Tahunan === 0 ? 0 : Math.round(pph21Tahunan);
   } else {
-    biayaJabatan = Math.round(bruto * 0.05);
+    const pph21Tahunan = pph21t();
+    pph21 = pph21Tahunan === 0 ? 0 : Math.round(pph21Tahunan / this.ea0);
   }
-  const pengurang = biayaJabatan + this.ce0 + this.cj0;
-  const netoSebulan = bruto - pengurang;
-  // const netoSetahun = Math.floor((netoSebulan * this.ea0) / 1000) * 1000;
-  const netoSetahun = netoSebulan * this.ea0;
-  const ptkp = ptkpObject[this.r0];
-  const pSetahun = netoSetahun - ptkp;
-  const pkpSetahun = pSetahun <= 0 ? 0 : Math.floor(pSetahun / 1000) * 1000;
-  const pph21Tahunan = Math.min(Math.max(0, pkpSetahun), 50000000) * 0.05
-    + Math.min(Math.max(0, pkpSetahun - 50000000), 200000000) * 0.15
-    + Math.min(Math.max(0, pkpSetahun - 250000000), 250000000) * 0.25
-    + Math.max(0, pkpSetahun - 500000000) * 0.3;
-  const pph21Bulanan = pph21Tahunan === 0 ? 0 : Math.round(pph21Tahunan / this.ea0);
 
   if (this.fc0 && this.p0 === 'Yes') {
     this.cz0 = this.fc0;
@@ -505,12 +544,12 @@ EmployeeSchema.pre('save', async function fn(next) {
     this.cz0 = 0;
     this.da0 = this.fc0;
   } else if (!this.fc0 && this.p0 === 'Yes') {
-    const v = Math.floor(pph21Bulanan / 100) * 100;
+    const v = Math.floor(pph21 / 100) * 100;
     this.cz0 = v <= 200 ? 0 : v;
     this.da0 = 0;
   } else {
     this.cz0 = 0;
-    this.da0 = Math.floor((pph21Bulanan * 1.2) / 100) * 100;
+    this.da0 = Math.floor((pph21 * 1.2) / 100) * 100;
   }
 
   this.db0 = this.cz0 + this.da0;

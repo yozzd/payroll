@@ -538,7 +538,10 @@ export const PayrollThr = gql`
         ax0F
         bw0
         bx0
+        cz0
+        da0
         trfThr
+        cshThr
       }
     }
   }
