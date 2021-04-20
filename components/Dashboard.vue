@@ -228,7 +228,7 @@
                   Journal
                 </el-menu-item>
                 <el-menu-item index="b">
-                  Tax
+                  Tax 21 Kelebihan / Kurang Bayar
                 </el-menu-item>
                 <el-menu-item index="c">
                   Ketenagakerjaan
@@ -240,13 +240,13 @@
                   By Transfer
                 </el-menu-item>
                 <el-menu-item index="f">
-                  Pph21
+                  Pph21 Bulanan
                 </el-menu-item>
                 <el-menu-item
                   v-if="scope.row.typeHR"
                   index="g"
                 >
-                  THR
+                  List THR
                 </el-menu-item>
                 <el-menu-item index="h">
                   Slip

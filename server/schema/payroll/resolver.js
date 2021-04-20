@@ -18,6 +18,7 @@ const {
   genFinal,
   genPDFSpAllowQ,
   genPDFThrQ,
+  genXLSThrQ,
 } = require('./method');
 const {
   CloneEmployeeInputType,
@@ -1500,6 +1501,17 @@ const Mutation = {
     resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await thrCat(id);
       const s = await genPDFThrQ(p);
+      return s;
+    }),
+  },
+  genXLSThr: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('user', async (_, { id }) => {
+      const p = await thrCat(id);
+      const s = await genXLSThrQ(p);
       return s;
     }),
   },

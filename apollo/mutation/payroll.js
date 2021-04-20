@@ -546,3 +546,11 @@ export const GenPDFThr = gql`
     }
   }
 `;
+
+export const GenXLSThr = gql`
+  mutation genXLSThr($id: String!) {
+    genXLSThr(id: $id) {
+      sStatus
+    }
+  }
+`;

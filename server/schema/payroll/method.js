@@ -3,6 +3,7 @@ const PdfPrinter = require('pdfmake');
 const fs = require('fs-extra');
 const nodemailer = require('nodemailer');
 const XLSX = require('xlsx');
+// const XlsxPopulate = require('xlsx-populate');
 const { getDate, getMonth } = require('date-fns');
 
 const {
@@ -1004,7 +1005,7 @@ const generateSlip = async (p) => {
     if (e.dx0) ctbl1.push(['Uang Penghargaan Masa Kerja', '', '', { text: intpre0(e.dx0).format(), alignment: 'right' }]);
     if (e.dv0) ctbl1.push(['Uang Pesangon', '', '', { text: intpre0(e.dv0).format(), alignment: 'right' }]);
     if (e.dy0) ctbl1.push(['Uang Penggantian Hak', '', '15%', { text: intpre0(e.dy0).format(), alignment: 'right' }]);
-    if (e.dr0) ctbl1.push(['Bonus', '', '', { text: intpre0(e.dr0).format(), alignment: 'right' }]);
+    if (e.bv0) ctbl1.push(['Bonus', '', '', { text: intpre0(e.dr0).format(), alignment: 'right' }]);
     ctbl1.push([{ text: 'Other additions are not taxable', colSpan: 2 }, '', '', { text: intpre0(e.bv0).format(), alignment: 'right' }]);
     ctbl1.push([{ text: 'TOTAL EARNINGS', bold: true, alignment: 'right' }, '', '', {
       text: intpre0(e.ca0).format(), bold: true, alignment: 'right', fillColor: '#EEEEEE',
@@ -1050,7 +1051,7 @@ const generateSlip = async (p) => {
     }
 
     const docDefinition = {
-      userPassword: e.slip.pw,
+      // userPassword: e.slip.pw,
       content: [
         {
           style: 'tbl1',
@@ -1781,7 +1782,7 @@ const genPDFThrQ = async (p) => {
         { text: (i + 1), alignment: 'center' }, { text: e.e0, alignment: 'center' },
         e.d0, e.h0,
         { text: e.i0 ? gDateFormat(e.i0, 'yyyy-MM-dd') : null },
-        { text: gDateFormat(p.tglHR,'yyyy-MM-dd') },
+        { text: gDateFormat(p.tglHR, 'yyyy-MM-dd') },
         { text: e.i0 ? dateDiff(e.i0, p.tglHR) : null },
         { text: e.bw0, alignment: 'center' },
         { text: intpre0(e.bx0).format(), alignment: 'right' },
@@ -1913,6 +1914,151 @@ const genPDFThrQ = async (p) => {
     }
   }
 };
+const genXLSThrQ = async (p) => {
+  try {
+    const { employee: e } = p;
+    await fs.ensureDir(`static/report/${p.dir}`);
+
+    const len = e.length + 5;
+    const wb = {
+      SheetNames: ['Sheet1'],
+      Sheets: {
+        Sheet1: {
+          '!ref': `A1:J3${len}`,
+          A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
+          A2: { t: 's', v: `Thr List - Periode Payroll: ${p.period} ${p.year}` },
+          A3: { t: 's', v: 'No' },
+          B3: { t: 's', v: 'Nama Karyawan' },
+          C3: { t: 's', v: 'No Karyawan' },
+          D3: { t: 's', v: 'Status' },
+          E3: { t: 's', v: 'Hired Date' },
+          F3: { t: 's', v: 'Hari Raya' },
+          G3: { t: 's', v: 'Long Service' },
+          H3: { t: 's', v: 'Thr Prorate' },
+          H4: { t: 's', v: 'Months' },
+          I4: { t: 's', v: 'Amount' },
+          J3: { t: 's', v: 'Basic Salary' },
+          // K4: { t: 's', v: 'Tj. Tetap Komunikasi' },
+          // L4: { t: 's', v: 'Tj. Tetap Expertisi' },
+          // M4: { t: 's', v: 'Tj. Tetap Honorarium' },
+          // N4: { t: 's', v: 'Tj. Tetap Posisi Variable' },
+          // O4: { t: 's', v: 'Tj. Tetap Fungsional Variable' },
+          // P4: { t: 's', v: 'Tj. Tetap Acting / PLT' },
+          // Q4: { t: 's', v: 'Tj. Tetap Others' },
+          // R3: { t: 's', v: 'Total Tunjangan Tetap' },
+          // S3: { t: 's', v: 'Upah (Gaji Pokok + Tj. Tetap)' },
+          // T3: { t: 's', v: 'Tunjangan Tidak Tetap' },
+          // T4: { t: 's', v: 'Tj. Tidak Tetap Fungsional' },
+          // U4: { t: 's', v: 'Tj. Tidak Tetap Shift' },
+          // V4: { t: 's', v: 'Tj. Tidak Tetap Tig Welding' },
+          // W4: { t: 's', v: 'Tj. Tidak Tetap Operator Plasma' },
+          // X4: { t: 's', v: 'Tj. Tidak Tetap LKS' },
+          // Y4: { t: 's', v: 'Tj. Tidak Tetap Koperasi' },
+          // Z4: { t: 's', v: 'Tj. Tidak Tetap Quality System' },
+          // AA4: { t: 's', v: 'Tj. Tidak Tetap Penghargaan Masa Kerja' },
+          // AB4: { t: 's', v: 'Tj. Tidak Tetap Others' },
+          // AC3: { t: 's', v: 'Total Tunjangan Tidak Tetap' },
+          // AD3: { t: 's', v: 'Total Salary' },
+          '!merges': [
+            { s: { r: 0, c: 0 }, e: { r: 0, c: 9 } },
+            { s: { r: 1, c: 0 }, e: { r: 1, c: 9 } },
+            { s: { r: 2, c: 0 }, e: { r: 3, c: 0 } },
+            { s: { r: 2, c: 1 }, e: { r: 3, c: 1 } },
+            { s: { r: 2, c: 2 }, e: { r: 3, c: 2 } },
+            { s: { r: 2, c: 3 }, e: { r: 3, c: 3 } },
+            { s: { r: 2, c: 4 }, e: { r: 3, c: 4 } },
+            { s: { r: 2, c: 5 }, e: { r: 3, c: 5 } },
+            { s: { r: 2, c: 6 }, e: { r: 3, c: 6 } },
+            { s: { r: 2, c: 7 }, e: { r: 2, c: 8 } },
+            { s: { r: 2, c: 9 }, e: { r: 3, c: 9 } },
+          ],
+        },
+      },
+    };
+
+    let row = 4;
+    for (let i = 0; i < e.length; i += 1) {
+      row += 1;
+      wb.Sheets.Sheet1[`A${row}`] = { t: 'n', v: i + 1 };
+      wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: e[i].d0 };
+      wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: e[i].e0 };
+      wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: e[i].h0 };
+      wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: e[i].i0 ? gDateFormat(e[i].i0, 'yyyy-MM-dd') : '' };
+      wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: gDateFormat(p.tglHR, 'yyyy-MM-dd') };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 's', v: e[i].i0 ? dateDiff(e[i].i0, p.tglHR) : '' };
+      wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: e[i].bw0 };
+      wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: intpre0v2(e[i].bx0).format() };
+      wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: intpre0v2(e[i].g0).format() };
+      // wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: intpre0v2(e[i].ap0).format() };
+      // wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: intpre0v2(e[i].aq0).format() };
+      // wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: intpre0v2(e[i].ar0).format() };
+      // wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: intpre0v2(e[i].as0).format() };
+      // wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: intpre0v2(e[i].at0).format() };
+      // wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: intpre0v2(e[i].au0).format() };
+      // wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: intpre0v2(e[i].av0).format() };
+      // wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: intpre0v2(e[i].aw0).format() };
+      // wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: intpre0v2(e[i].ax0).format() };
+      // wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: intpre0v2(e[i].ba0).format() };
+      // wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: intpre0v2(e[i].bb0).format() };
+      // wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: intpre0v2(e[i].bc0).format() };
+      // wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: intpre0v2(e[i].bd0).format() };
+      // wb.Sheets.Sheet1[`X${row}`] = { t: 'n', v: intpre0v2(e[i].be0).format() };
+      // wb.Sheets.Sheet1[`Y${row}`] = { t: 'n', v: intpre0v2(e[i].bf0).format() };
+      // wb.Sheets.Sheet1[`Z${row}`] = { t: 'n', v: intpre0v2(e[i].bg0).format() };
+      // wb.Sheets.Sheet1[`AA${row}`] = { t: 'n', v: intpre0v2(e[i].bh0).format() };
+      // wb.Sheets.Sheet1[`AB${row}`] = { t: 'n', v: intpre0v2(e[i].bi0).format() };
+      // wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: intpre0v2(e[i].bj0).format() };
+      // wb.Sheets.Sheet1[`AD${row}`] = { t: 'n', v: intpre0v2(e[i].ax0 + e[i].bj0).format() };
+    }
+
+    row += 1;
+    wb.Sheets.Sheet1[`A${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`G${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`H${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: intpre0v2(p.bx0Sum).format() };
+    wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: intpre0v2(p.g0Sum).format() };
+    // wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: intpre0v2(p.ap0Sum).format() };
+    // wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: intpre0v2(p.aq0Sum).format() };
+    // wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: intpre0v2(p.ar0Sum).format() };
+    // wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: intpre0v2(p.as0Sum).format() };
+    // wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: intpre0v2(p.at0Sum).format() };
+    // wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: intpre0v2(p.au0Sum).format() };
+    // wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: intpre0v2(p.av0Sum).format() };
+    // wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: intpre0v2(p.aw0Sum).format() };
+    // wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: intpre0v2(p.ax0Sum).format() };
+    // wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: intpre0v2(p.ba0Sum).format() };
+    // wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: intpre0v2(p.bb0Sum).format() };
+    // wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: intpre0v2(p.bc0Sum).format() };
+    // wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: intpre0v2(p.bd0Sum).format() };
+    // wb.Sheets.Sheet1[`X${row}`] = { t: 'n', v: intpre0v2(p.be0Sum).format() };
+    // wb.Sheets.Sheet1[`Y${row}`] = { t: 'n', v: intpre0v2(p.bf0Sum).format() };
+    // wb.Sheets.Sheet1[`Z${row}`] = { t: 'n', v: intpre0v2(p.bg0Sum).format() };
+    // wb.Sheets.Sheet1[`AA${row}`] = { t: 'n', v: intpre0v2(p.bh0Sum).format() };
+    // wb.Sheets.Sheet1[`AB${row}`] = { t: 'n', v: intpre0v2(p.bi0Sum).format() };
+    // wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: intpre0v2(p.bj0Sum).format() };
+    // wb.Sheets.Sheet1[`AD${row}`] = { t: 'n', v: intpre0v2(p.ax0Sum + p.bj0Sum).format() };
+
+    const fn = `static/report/${p.dir}/${p.dir}_thr_list.xlsx`;
+    const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
+    fs.writeFileSync(fn, content);
+    return ({ sStatus: 1 });
+
+    // return XlsxPopulate.fromFileAsync(fn)
+    //   .then((workbook) => workbook.toFileAsync(fn, { password: 'secret' })
+    //     .then(() => ({ sStatus: 1 })));
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
+};
 
 module.exports = {
   updateEmployee,
@@ -1924,4 +2070,5 @@ module.exports = {
   genFinal,
   genPDFSpAllowQ,
   genPDFThrQ,
+  genXLSThrQ,
 };

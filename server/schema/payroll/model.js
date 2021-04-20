@@ -384,6 +384,7 @@ EmployeeSchema.pre('save', async function fn(next) {
     + this.bx0
     + this.bz0
     + this.bv0
+    + this.dr0
     + this.dt0
     + this.dv0
     + this.dx0
@@ -568,7 +569,7 @@ EmployeeSchema.pre('save', async function fn(next) {
     + this.dn0;
 
   this.dp0 = this.ca0 - this.do0;
-  this.eb0 = this.dp0 + this.dr0;
+  this.eb0 = this.dp0;
 
   if (this.fa0 || this.p0 === 'No') {
     this.es0 = 0;
@@ -584,10 +585,8 @@ EmployeeSchema.pre('save', async function fn(next) {
   if (byCash.includes(this.e0) || this.ex0 || this.ff0 || this.fg0) {
     this.ec0 = 0;
     this.ed0 = this.dp0 + this.dr0 + this.dt0 + this.dx0 + this.dy0 + this.es0;
-    // this.ed0 = this.dp0 + this.dr0 + this.es0;
   } else {
-    this.ec0 = this.dp0 + this.dr0 + this.dt0 + this.dx0 + this.dy0 + this.es0;
-    // this.ec0 = this.dp0 + this.dr0 + this.es0;
+    this.ec0 = this.dp0 + this.es0;
     this.ed0 = 0;
   }
 

@@ -46,7 +46,7 @@
     />
     <el-table
       ref="thrTable"
-      v-loading="$apollo.loading"
+      v-loading="$apollo.loading || loadPDFThr || loadXLSThr"
       element-loading-text="Loading..."
       element-loading-spinner="el-icon-loading"
       :data="tableData"
@@ -202,7 +202,7 @@
 import MiniSearch from 'minisearch';
 import { intervalToDuration } from 'date-fns';
 import { PayrollThr } from '../../apollo/query/payroll';
-import { GenPDFThr } from '../../apollo/mutation/payroll';
+import { GenPDFThr, GenXLSThr } from '../../apollo/mutation/payroll';
 import mix from '../../mixins/payroll';
 
 export default {
@@ -213,6 +213,7 @@ export default {
       content: '',
       tglHR: '',
       loadPDFThr: false,
+      loadXLSThr: false,
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -249,6 +250,26 @@ export default {
 
         this.loadPDFThr = false;
         window.open(`/report/${dir}/${dir}_thr_list.pdf`);
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
+    },
+    async genXLSThr(dir) {
+      try {
+        this.loadXLSThr = true;
+        const { data: { genXLSThr: { sStatus } } } = await this.$apollo.mutate({
+          mutation: GenXLSThr,
+          variables: {
+            id: this.$route.params.id,
+          },
+        });
+
+        if (sStatus) {
+          this.loadXLSThr = false;
+          window.open(`/report/${dir}/${dir}_thr_list.xlsx`);
+        }
         return true;
       } catch ({ graphQLErrors, networkError }) {
         this.errors = graphQLErrors || networkError.result.errors;

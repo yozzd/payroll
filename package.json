@@ -41,7 +41,8 @@
     "passport-local": "^1.0.0",
     "pdfmake": "^0.1.71",
     "vue-currency-filter": "^5.2.0",
-    "xlsx": "^0.16.9"
+    "xlsx": "^0.16.9",
+    "xlsx-populate": "^1.21.0"
   },
   "devDependencies": {
     "@ava/babel": "^1.0.1",
