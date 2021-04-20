@@ -17,6 +17,7 @@ const {
   genAccCheck,
   genFinal,
   genPDFSpAllowQ,
+  genPDFThrQ,
 } = require('./method');
 const {
   CloneEmployeeInputType,
@@ -242,6 +243,7 @@ const thrCat = async (id) => {
     {
       $group: {
         _id: '$_id',
+        dir: { $first: '$dir' },
         period: { $first: '$period' },
         year: { $first: '$year' },
         tglHR: { $first: '$tglHR' },
@@ -322,6 +324,28 @@ const thrCat = async (id) => {
             },
           },
         },
+      },
+    },
+    {
+      $addFields: {
+        bx0Sum: { $sum: '$employee.bx0' },
+        g0Sum: { $sum: '$employee.g0' },
+        aj0Sum: { $sum: '$employee.aj0' },
+        ak0Sum: { $sum: '$employee.ak0' },
+        al0Sum: { $sum: '$employee.al0' },
+        am0Sum: { $sum: '$employee.am0' },
+        ao0Sum: { $sum: '$employee.ao0' },
+        ap0Sum: { $sum: '$employee.ap0' },
+        aq0Sum: { $sum: '$employee.aq0' },
+        as0Sum: { $sum: '$employee.as0' },
+        at0Sum: { $sum: '$employee.at0' },
+        au0Sum: { $sum: '$employee.au0' },
+        ax0Sum: { $sum: '$employee.ax0' },
+        ax0FSum: { $sum: '$employee.ax0F' },
+        cz0Sum: { $sum: '$employee.cz0' },
+        da0Sum: { $sum: '$employee.da0' },
+        trfThrSum: { $sum: '$employee.trfThr' },
+        cshThrSum: { $sum: '$employee.cshThr' },
       },
     },
   ]);
@@ -1465,6 +1489,17 @@ const Mutation = {
     resolve: auth.hasRole('user', async (_, { id }) => {
       const p = await spAllowQ(id);
       const s = await genPDFSpAllowQ(p);
+      return s;
+    }),
+  },
+  genPDFThr: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('user', async (_, { id }) => {
+      const p = await thrCat(id);
+      const s = await genPDFThrQ(p);
       return s;
     }),
   },

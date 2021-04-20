@@ -511,6 +511,7 @@ export const PayrollThr = gql`
   query payrollThr($id: String!) {
     payrollThr(id: $id) {
       _id
+      dir
       freeze
       period
       year

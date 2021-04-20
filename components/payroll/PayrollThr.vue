@@ -13,6 +13,25 @@
         {{ content }}
         &bull; <span class="text-green-500">Total {{ items.length }} items</span>
       </div>
+      <el-dropdown
+        trigger="click"
+        @command="c => handleExport(c, dir)"
+      >
+        <span class="el-dropdown-link">
+          Export<i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="pdf">
+            PDF
+          </el-dropdown-item>
+          <el-dropdown-item
+            v-if="$auth.hasRole('admin')"
+            command="xls"
+          >
+            XLS
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
       <div class="w-64">
         <el-input
           v-model="search"
@@ -72,7 +91,7 @@
           <span>{{ scope.row.g0 | currency }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Tj. Tetap" align="center">
+      <el-table-column label="Tunjangan Tetap" align="center">
         <el-table-column prop="aj0" label="Living" width="120" align="right">
           <template slot-scope="scope">
             <span>{{ scope.row.aj0 | currency }}</span>
@@ -183,17 +202,17 @@
 import MiniSearch from 'minisearch';
 import { intervalToDuration } from 'date-fns';
 import { PayrollThr } from '../../apollo/query/payroll';
-// import { GenPDFThr } from '../../apollo/mutation/payroll';
+import { GenPDFThr } from '../../apollo/mutation/payroll';
 import mix from '../../mixins/payroll';
 
 export default {
   mixins: [mix],
   data() {
     return {
+      dir: '',
       content: '',
       tglHR: '',
-      loadingGen: false,
-      percentage: 0,
+      loadPDFThr: false,
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -214,6 +233,28 @@ export default {
       } = intervalToDuration({ start: new Date(d1), end: new Date(d2) });
       return `${years} years ${months} months ${days} days`;
     },
+    handleExport(c, dir) {
+      if (c === 'pdf') this.genPDFThr(dir);
+      else if (c === 'xls') this.genXLSThr(dir);
+    },
+    async genPDFThr(dir) {
+      try {
+        this.loadPDFThr = true;
+        await this.$apollo.mutate({
+          mutation: GenPDFThr,
+          variables: {
+            id: this.$route.params.id,
+          },
+        });
+
+        this.loadPDFThr = false;
+        window.open(`/report/${dir}/${dir}_thr_list.pdf`);
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
+    },
   },
   apollo: {
     payrollThr: {
@@ -227,8 +268,9 @@ export default {
       result({ data, loading }) {
         if (!loading) {
           const {
-            period, year, tglHR, employee,
+            dir, period, year, tglHR, employee,
           } = data.payrollThr;
+          this.dir = dir;
           this.content = `${period} ${year}`;
           this.items = employee;
           this.tglHR = tglHR;

@@ -1677,6 +1677,243 @@ const genPDFSpAllowQ = async (p) => {
   }
 };
 
+const genPDFThrQ = async (p) => {
+  try {
+    const { employee } = p;
+    await fs.ensureDir(`static/report/${p.dir}`);
+
+    const vw1 = [
+      [
+        {
+          text: 'No', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'No Karyawan', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Nama Karyawan', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Status', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Hired Date', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Hari Raya', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Long Service', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Thr Prorate', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'Basic Salary', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Tunjagan Tetap', bold: true, alignment: 'center', colSpan: 10,
+        }, '', '', '', '', '', '', '', '', '',
+        {
+          text: 'Total Upah', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Thr Prorate', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Pajak Penghargaan Ber-NPWP', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Pajak Tambahan Non-NPWP', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Total Thr By Transfer', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Total Thr By Cash', bold: true, alignment: 'center', rowSpan: 2,
+        },
+      ],
+      [
+        '', '', '', '', '', '', '',
+        {
+          text: 'Months', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Amount', bold: true, alignment: 'center',
+        },
+        '',
+        {
+          text: 'Living', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Perumahan', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Posisi Fix', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Fungsional Fix', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Transport', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Komunikasi', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Expertisi', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Posisi Variable', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Fungsional Variable', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Acting / PLT', bold: true, alignment: 'center',
+        },
+        '', '', '', '', '', '',
+      ],
+    ];
+
+    employee.map((e, i) => {
+      vw1.push([
+        { text: (i + 1), alignment: 'center' }, { text: e.e0, alignment: 'center' },
+        e.d0, e.h0,
+        { text: e.i0 ? gDateFormat(e.i0, 'yyyy-MM-dd') : null },
+        { text: gDateFormat(p.tglHR,'yyyy-MM-dd') },
+        { text: e.i0 ? dateDiff(e.i0, p.tglHR) : null },
+        { text: e.bw0, alignment: 'center' },
+        { text: intpre0(e.bx0).format(), alignment: 'right' },
+        { text: intpre0(e.g0).format(), alignment: 'right' },
+        { text: intpre0(e.aj0).format(), alignment: 'right' },
+        { text: intpre0(e.ak0).format(), alignment: 'right' },
+        { text: intpre0(e.al0).format(), alignment: 'right' },
+        { text: intpre0(e.am0).format(), alignment: 'right' },
+        { text: intpre0(e.ao0).format(), alignment: 'right' },
+        { text: intpre0(e.ap0).format(), alignment: 'right' },
+        { text: intpre0(e.aq0).format(), alignment: 'right' },
+        { text: intpre0(e.as0).format(), alignment: 'right' },
+        { text: intpre0(e.at0).format(), alignment: 'right' },
+        { text: intpre0(e.au0).format(), alignment: 'right' },
+        { text: intpre0(e.ax0).format(), alignment: 'right' },
+        { text: intpre0(e.ax0F).format(), alignment: 'right' },
+        { text: intpre0(e.cz0).format(), alignment: 'right' },
+        { text: intpre0(e.da0).format(), alignment: 'right' },
+        { text: intpre0(e.trfThr).format(), alignment: 'right' },
+        { text: intpre0(e.cshThr).format(), alignment: 'right' },
+      ]);
+
+      return true;
+    });
+
+    vw1.push([
+      '', '', '', '', '', '', '', '',
+      { text: intpre0(p.bx0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.g0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.aj0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.ak0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.al0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.am0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.ao0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.ap0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.aq0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.as0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.at0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.au0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.ax0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.ax0FSum).format(), alignment: 'right' },
+      { text: intpre0(p.cz0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.da0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.trfThrSum).format(), alignment: 'right' },
+      { text: intpre0(p.cshThrSum).format(), alignment: 'right' },
+    ]);
+
+    const docDefinition = {
+      pageSize: 'A3',
+      pageOrientation: 'landscape',
+      footer: (currentPage, pageCount) => ({
+        columns: [
+          { text: `${currentPage.toString()} / ${pageCount}`, fontSize: 8, margin: [20, 0] },
+        ],
+      }),
+      content: [
+        {
+          style: 'tbl1',
+          table: {
+            widths: [170, 580, 200, 135],
+            body: [
+              [{
+                image: 'static/images/logo.png', width: 60, rowSpan: 2, border: [false, false, false, false],
+              }, { text: '', border: [false, false, false, false] }, {
+                text: 'PT. LABTECH PENTA INTERNATIONAL', bold: true, fontSize: 8, border: [false, false, false, true],
+              }, {
+                text: 'THR LIST', bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, true],
+              }],
+              ['', { text: '', border: [false, false, false, false] }, { text: 'Kawasan Industri Sekupang Kav. 34 Batam - Indonesia', border: [false, false, false, false] }, {
+                text: '', border: [false, false, false, false],
+              }],
+            ],
+          },
+        },
+        {
+          style: 'tbl2',
+          table: {
+            widths: [110, 412],
+            body: [
+              [{
+                text: `Thr List - Periode Payroll ${p.period} ${p.year}`, colSpan: 2, fontSize: 10, bold: true, margin: [0, 15, 0, 10],
+              }, ''],
+            ],
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl3',
+          table: {
+            widths: [
+              15, 20, 50, 30, 35, 35, 50,
+              25, 35, 35, 35, 35, 35, 35,
+              35, 35, 35, 35, 35, 35, 35,
+              35, 35, 35, 35, 35,
+            ],
+            body: vw1,
+          },
+        },
+      ],
+      styles: {
+        tbl1: {
+          fontSize: 8,
+          margin: [-10, -10, -10, 0],
+        },
+        tbl2: {
+          fontSize: 8,
+          margin: [-10, 40, -10, 10],
+        },
+        tbl3: {
+          fontSize: 5,
+          margin: [-10, -10, -10, -30],
+        },
+      },
+    };
+
+    return new Promise((resolve) => {
+      const pdfDoc = printer.createPdfKitDocument(docDefinition);
+      pdfDoc.pipe(fs.createWriteStream(`static/report/${p.dir}/${p.dir}_thr_list.pdf`));
+      pdfDoc.on('end', () => {
+        resolve({ sStatus: 1 });
+      });
+      pdfDoc.end();
+    });
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
+};
+
 module.exports = {
   updateEmployee,
   generateReportPayroll,
@@ -1686,4 +1923,5 @@ module.exports = {
   sendSlip,
   genFinal,
   genPDFSpAllowQ,
+  genPDFThrQ,
 };
