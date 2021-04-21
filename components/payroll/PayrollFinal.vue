@@ -18,14 +18,16 @@
             clearable
           />
         </div>
-        <el-button
-          type="primary"
-          :loading="loadingGen"
-          :disabled="!multipleSelection.length"
-          @click="generate"
-        >
-          Generate
-        </el-button>
+        <div v-if="!freeze && $auth.hasRole('user')">
+          <el-button
+            type="primary"
+            :loading="loadingGen"
+            :disabled="!multipleSelection.length"
+            @click="generate"
+          >
+            Generate
+          </el-button>
+        </div>
       </div>
       <el-progress
         :text-inside="true"
@@ -45,6 +47,7 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column
+          v-if="!freeze && $auth.hasRole('user')"
           type="selection"
           width="50"
           align="center"
@@ -54,7 +57,7 @@
         <el-table-column label="Nama Karyawan" width="300" fixed>
           <template slot-scope="scope">
             <el-link
-              v-if="!freeze"
+              v-if="!freeze && $auth.hasRole('user')"
               type="primary"
               class="font-sm"
               :underline="false"
