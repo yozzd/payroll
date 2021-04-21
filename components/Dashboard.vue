@@ -26,7 +26,7 @@
     </div>
     <div>
       <el-table
-        v-loading="$apollo.loading || genRpPy || genAcc || loadXLSPy"
+        v-loading="$apollo.loading || genRpPy || genAcc || loadXLSPy || loadXLSNoFin"
         :data="payrollAll"
         :element-loading-text="'Loading...'"
         element-loading-spinner="el-icon-loading"
@@ -196,10 +196,7 @@
                   <el-menu-item index="ab">
                     XLS
                   </el-menu-item>
-                  <el-menu-item
-                    v-if="$auth.hasRole('admin')"
-                    index="ac"
-                  >
+                  <el-menu-item index="ac">
                     XLS (No Final Payment)
                   </el-menu-item>
                 </el-submenu>
@@ -913,6 +910,7 @@ export default {
       genRpPy: false,
       genAcc: false,
       loadXLSPy: false,
+      loadXLSNoFin: false,
       dpt: [],
       sct: [],
       form: {
@@ -1282,14 +1280,18 @@ export default {
     },
     async genPayrollXLSNoFin(id, dir) {
       try {
-        await this.$apollo.mutate({
+        this.loadXLSNoFin = true;
+        const { data: { genPayrollXLSNoFin: { sStatus } } } = await this.$apollo.mutate({
           mutation: GenPayrollXLSNoFin,
           variables: {
             id,
           },
         });
 
-        window.open(`/report/${dir}/${dir}_payroll.xls`);
+        if (sStatus) {
+          this.loadXLSNoFin = false;
+          window.open(`/report/${dir}/${dir}_payroll.xlsx`);
+        }
         return true;
       } catch ({ graphQLErrors, networkError }) {
         this.errors = graphQLErrors || networkError.result.errors;
