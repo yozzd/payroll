@@ -178,7 +178,7 @@ const genXLS = async (p) => {
     wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: intpre0v2(p.sum1).format() };
     wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: intpre0v2(p.sum2).format() };
 
-    const fn = `static/report/${p.dir}/${p.dir}_trf.xls`;
+    const fn = `static/report/${p.dir}/${p.dir}_trf.xlsx`;
     const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
     fs.writeFileSync(fn, content);
 

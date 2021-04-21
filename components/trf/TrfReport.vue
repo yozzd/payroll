@@ -145,7 +145,7 @@ export default {
 
         if (sStatus) {
           this.loadXLSTrf = false;
-          window.open(`/report/${dir}/${dir}_trf.xls`);
+          window.open(`/report/${dir}/${dir}_trf.xlsx`);
         }
         return true;
       } catch ({ graphQLErrors, networkError }) {
