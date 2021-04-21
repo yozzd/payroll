@@ -71,7 +71,7 @@
       <el-form
         ref="formAdd"
         :model="formAdd"
-        :rules="rulesAdd"
+        :rules="rules"
         :hide-required-asterisk="true"
         label-position="top"
       >
