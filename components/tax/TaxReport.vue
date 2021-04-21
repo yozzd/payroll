@@ -24,10 +24,7 @@
           <el-dropdown-item command="pdf">
             PDF
           </el-dropdown-item>
-          <el-dropdown-item
-            v-if="$auth.hasRole('admin')"
-            command="xls"
-          >
+          <el-dropdown-item command="xls">
             XLS
           </el-dropdown-item>
         </el-dropdown-menu>
@@ -45,7 +42,7 @@
       :errors="errors"
     />
     <el-table
-      v-loading="$apollo.loading || loadTax"
+      v-loading="$apollo.loading || loadTax || loadXLSTax"
       element-loading-text="Loading..."
       element-loading-spinner="el-icon-loading"
       :data="tableData"
@@ -212,6 +209,7 @@ export default {
       content: '',
       dir: '',
       loadTax: false,
+      loadXLSTax: false,
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -249,14 +247,18 @@ export default {
     },
     async genXLSTax(dir) {
       try {
-        await this.$apollo.mutate({
+        this.loadXLSTax = true;
+        const { data: { genXLSTax: { sStatus } } } = await this.$apollo.mutate({
           mutation: GenXLSTax,
           variables: {
             id: this.$route.params.id,
           },
         });
 
-        window.open(`/report/${dir}/${dir}_tax.xls`);
+        if (sStatus) {
+          this.loadXLSTax = false;
+          window.open(`/report/${dir}/${dir}_tax.xls`);
+        }
         return true;
       } catch ({ graphQLErrors, networkError }) {
         this.errors = graphQLErrors || networkError.result.errors;

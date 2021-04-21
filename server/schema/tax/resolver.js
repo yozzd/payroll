@@ -138,7 +138,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('user', async (_, { id }) => {
+    resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await taxR(id);
       return p;
     }),
@@ -195,7 +195,7 @@ const Mutation = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('user', async (_, { id }) => {
+    resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await taxR(id);
       const s = await genPDF(p);
       return s;
@@ -206,7 +206,7 @@ const Mutation = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('user', async (_, { id }) => {
+    resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await taxR(id);
       const s = await genXLS(p);
       return s;

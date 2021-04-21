@@ -3,6 +3,8 @@ const PdfPrinter = require('pdfmake');
 const fs = require('fs-extra');
 const nodemailer = require('nodemailer');
 const XLSX = require('xlsx');
+const XlsxPopulate = require('xlsx-populate');
+const { xlsPass } = require('../../config');
 
 const { intpre0, intpre0v2 } = require('../scalar/number');
 const { gDateFormat } = require('../scalar/date');
@@ -484,7 +486,13 @@ const genXLS = async (p) => {
     wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: intpre0v2(p.sum15).format() };
     wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: intpre0v2(p.sum16).format() };
 
-    XLSX.writeFile(wb, `static/report/${p.dir}/${p.dir}_tax.xls`);
+    const fn = `static/report/${p.dir}/${p.dir}_tax.xls`;
+    const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
+    fs.writeFileSync(fn, content);
+
+    return XlsxPopulate.fromFileAsync(fn)
+      .then((workbook) => workbook.toFileAsync(fn, { password: xlsPass })
+        .then(() => ({ sStatus: 1 })));
   } catch (err) {
     if (typeof err === 'string') {
       throw new GraphQLError(err);
