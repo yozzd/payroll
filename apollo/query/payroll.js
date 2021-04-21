@@ -543,6 +543,11 @@ export const PayrollThr = gql`
         da0
         trfThr
         cshThr
+        thr {
+          name
+          dir
+          check
+        }
       }
     }
   }

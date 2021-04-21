@@ -236,12 +236,20 @@
                 <el-menu-item index="f">
                   Pph21 Bulanan
                 </el-menu-item>
-                <el-menu-item
+                <el-submenu
                   v-if="scope.row.typeHR"
                   index="g"
                 >
-                  List THR
-                </el-menu-item>
+                  <template slot="title">
+                    THR
+                  </template>
+                  <el-menu-item index="ga">
+                    List
+                  </el-menu-item>
+                  <el-menu-item index="gb">
+                    Slip
+                  </el-menu-item>
+                </el-submenu>
                 <el-menu-item index="h">
                   Slip
                 </el-menu-item>
@@ -1054,7 +1062,8 @@ export default {
       else if (c === 'd') this.$router.push({ name: 'payroll-kesehatan-id', params: { id } });
       else if (c === 'e') this.$router.push({ name: 'payroll-trf-id', params: { id } });
       else if (c === 'f') this.$router.push({ name: 'payroll-pph-id', params: { id } });
-      else if (c === 'g') this.$router.push({ name: 'payroll-thr-id', params: { id } });
+      else if (c === 'ga') this.$router.push({ name: 'payroll-thr-id', params: { id } });
+      else if (c === 'gb') this.$router.push({ name: 'payroll-thrSlip-id', params: { id } });
       else if (c === 'h') this.$router.push({ name: 'payroll-slip-id', params: { id } });
     },
     handleActionCommand(c, r) {

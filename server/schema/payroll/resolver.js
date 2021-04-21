@@ -19,6 +19,7 @@ const {
   genPDFSpAllowQ,
   genPDFThrQ,
   genXLSThrQ,
+  genThrSlipQ,
 } = require('./method');
 const {
   CloneEmployeeInputType,
@@ -219,6 +220,124 @@ const spAllowQ = async (id) => {
   return p[0];
 };
 
+const thrCatGroup = {
+  _id: '$_id',
+  dir: { $first: '$dir' },
+  period: { $first: '$period' },
+  year: { $first: '$year' },
+  tglHR: { $first: '$tglHR' },
+  employee: {
+    $push: {
+      _id: '$employee._id',
+      d0: '$employee.d0',
+      e0: '$employee.e0',
+      g0: '$employee.g0',
+      h0: '$employee.h0',
+      i0: '$employee.i0',
+      t0: '$employee.t0',
+      u0: '$employee.u0',
+      v0: '$employee.v0',
+      y0: '$employee.y0',
+      aj0: '$employee.aj0',
+      ak0: '$employee.ak0',
+      al0: '$employee.al0',
+      am0: '$employee.am0',
+      an0: '$employee.an0',
+      ao0: '$employee.ao0',
+      ap0: '$employee.ap0',
+      aq0: '$employee.aq0',
+      ar0: '$employee.ar0',
+      as0: '$employee.as0',
+      at0: '$employee.at0',
+      au0: '$employee.au0',
+      av0: '$employee.av0',
+      ax0: '$employee.ax0',
+      bw0: '$employee.bw0',
+      bx0: '$employee.bx0',
+      cz0: '$employee.cz0',
+      da0: '$employee.da0',
+      db0: '$employee.db0',
+      ax0F: {
+        $function: {
+          body: `function(v) {
+            return Math.floor(v / 100) * 100;
+          }`,
+          args: ['$employee.ax0'],
+          lang: 'js',
+        },
+      },
+      trfThr: {
+        $cond: {
+          if: { $ne: ['$employee.e0', 'X.0010'] },
+          then: {
+            $subtract: [
+              {
+                $function: {
+                  body: `function(v) {
+                    return Math.floor(v / 100) * 100;
+                  }`,
+                  args: ['$employee.ax0'],
+                  lang: 'js',
+                },
+              },
+              '$employee.db0',
+            ],
+          },
+          else: 0,
+        },
+      },
+      cshThr: {
+        $cond: {
+          if: { $eq: ['$employee.e0', 'X.0010'] },
+          then: {
+            $subtract: [
+              {
+                $function: {
+                  body: `function(v) {
+                    return Math.floor(v / 100) * 100;
+                  }`,
+                  args: ['$employee.ax0'],
+                  lang: 'js',
+                },
+              },
+              '$employee.db0',
+            ],
+          },
+          else: 0,
+        },
+      },
+      thr: {
+        name: '$employee.slip.name',
+        pw: '$employee.slip.pw',
+        dir: '$dir',
+      },
+    },
+  },
+};
+
+const thrCatAdd = {
+  bx0Sum: { $sum: '$employee.bx0' },
+  g0Sum: { $sum: '$employee.g0' },
+  aj0Sum: { $sum: '$employee.aj0' },
+  ak0Sum: { $sum: '$employee.ak0' },
+  al0Sum: { $sum: '$employee.al0' },
+  am0Sum: { $sum: '$employee.am0' },
+  ao0Sum: { $sum: '$employee.ao0' },
+  ap0Sum: { $sum: '$employee.ap0' },
+  ar0Sum: { $sum: '$employee.ar0' },
+  aq0Sum: { $sum: '$employee.aq0' },
+  as0Sum: { $sum: '$employee.as0' },
+  at0Sum: { $sum: '$employee.at0' },
+  au0Sum: { $sum: '$employee.au0' },
+  av0Sum: { $sum: '$employee.av0' },
+  ax0Sum: { $sum: '$employee.ax0' },
+  ax0FSum: { $sum: '$employee.ax0F' },
+  cz0Sum: { $sum: '$employee.cz0' },
+  da0Sum: { $sum: '$employee.da0' },
+  trfThrSum: { $sum: '$employee.trfThr' },
+  cshThrSum: { $sum: '$employee.cshThr' },
+};
+
 const thrCat = async (id) => {
   const payroll = await Payroll.aggregate([
     { $match: { _id: id } },
@@ -242,112 +361,22 @@ const thrCat = async (id) => {
       },
     },
     {
-      $group: {
-        _id: '$_id',
-        dir: { $first: '$dir' },
-        period: { $first: '$period' },
-        year: { $first: '$year' },
-        tglHR: { $first: '$tglHR' },
-        employee: {
-          $push: {
-            _id: '$employee._id',
-            d0: '$employee.d0',
-            e0: '$employee.e0',
-            g0: '$employee.g0',
-            h0: '$employee.h0',
-            i0: '$employee.i0',
-            aj0: '$employee.aj0',
-            ak0: '$employee.ak0',
-            al0: '$employee.al0',
-            am0: '$employee.am0',
-            an0: '$employee.an0',
-            ao0: '$employee.ao0',
-            ap0: '$employee.ap0',
-            aq0: '$employee.aq0',
-            ar0: '$employee.ar0',
-            as0: '$employee.as0',
-            at0: '$employee.at0',
-            au0: '$employee.au0',
-            ax0: '$employee.ax0',
-            bw0: '$employee.bw0',
-            bx0: '$employee.bx0',
-            cz0: '$employee.cz0',
-            da0: '$employee.da0',
-            db0: '$employee.db0',
-            ax0F: {
-              $function: {
-                body: `function(v) {
-                  return Math.floor(v / 100) * 100;
-                }`,
-                args: ['$employee.ax0'],
-                lang: 'js',
-              },
-            },
-            trfThr: {
-              $cond: {
-                if: { $ne: ['$employee.e0', 'X.0010'] },
-                then: {
-                  $subtract: [
-                    {
-                      $function: {
-                        body: `function(v) {
-                          return Math.floor(v / 100) * 100;
-                        }`,
-                        args: ['$employee.ax0'],
-                        lang: 'js',
-                      },
-                    },
-                    '$employee.db0',
-                  ],
-                },
-                else: 0,
-              },
-            },
-            cshThr: {
-              $cond: {
-                if: { $eq: ['$employee.e0', 'X.0010'] },
-                then: {
-                  $subtract: [
-                    {
-                      $function: {
-                        body: `function(v) {
-                          return Math.floor(v / 100) * 100;
-                        }`,
-                        args: ['$employee.ax0'],
-                        lang: 'js',
-                      },
-                    },
-                    '$employee.db0',
-                  ],
-                },
-                else: 0,
-              },
-            },
-          },
-        },
-      },
+      $group: thrCatGroup,
     },
     {
-      $addFields: {
-        bx0Sum: { $sum: '$employee.bx0' },
-        g0Sum: { $sum: '$employee.g0' },
-        aj0Sum: { $sum: '$employee.aj0' },
-        ak0Sum: { $sum: '$employee.ak0' },
-        al0Sum: { $sum: '$employee.al0' },
-        am0Sum: { $sum: '$employee.am0' },
-        ao0Sum: { $sum: '$employee.ao0' },
-        ap0Sum: { $sum: '$employee.ap0' },
-        aq0Sum: { $sum: '$employee.aq0' },
-        as0Sum: { $sum: '$employee.as0' },
-        at0Sum: { $sum: '$employee.at0' },
-        au0Sum: { $sum: '$employee.au0' },
-        ax0Sum: { $sum: '$employee.ax0' },
-        ax0FSum: { $sum: '$employee.ax0F' },
-        cz0Sum: { $sum: '$employee.cz0' },
-        da0Sum: { $sum: '$employee.da0' },
-        trfThrSum: { $sum: '$employee.trfThr' },
-        cshThrSum: { $sum: '$employee.cshThr' },
-      },
+      $addFields: thrCatAdd,
+    },
+  ]);
+  return payroll[0];
+};
+
+const thrCatPerson = async (id, eId) => {
+  const payroll = await Payroll.aggregate([
+    { $match: { _id: id } },
+    { $unwind: '$employee' },
+    { $match: { 'employee._id': eId } },
+    {
+      $group: thrCatGroup,
     },
   ]);
   return payroll[0];
@@ -1512,6 +1541,18 @@ const Mutation = {
     resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await thrCat(id);
       const s = await genXLSThrQ(p);
+      return s;
+    }),
+  },
+  genThrSlip: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLString },
+      eId: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('guest', async (_, { id, eId }) => {
+      const p = await thrCatPerson(id, eId);
+      const s = await genThrSlipQ(p);
       return s;
     }),
   },

@@ -554,3 +554,11 @@ export const GenXLSThr = gql`
     }
   }
 `;
+
+export const GenThrSlip = gql`
+  mutation genThrSlip($id: String!, $eId: String!) {
+    genThrSlip(id: $id, eId: $eId) {
+      sStatus
+    }
+  }
+`;

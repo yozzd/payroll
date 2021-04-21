@@ -69,6 +69,26 @@ const PphCheckType = new GraphQLObjectType({
   }),
 });
 
+const ThrSlipCheckType = new GraphQLObjectType({
+  name: 'ThrSlipCheckType',
+  fields: () => ({
+    name: { type: GraphQLString },
+    dir: { type: GraphQLString },
+    check: {
+      type: GraphQLBoolean,
+      resolve: async (p) => {
+        try {
+          await fs.access(`static/thrSlip/${p.dir}/${p.name}.pdf`);
+          return true;
+        } catch (err) {
+          if (err) return false;
+          return false;
+        }
+      },
+    },
+  }),
+});
+
 const EmployeeType = new GraphQLObjectType({
   name: 'EmployeeType',
   fields: () => ({
@@ -260,6 +280,7 @@ const EmployeeType = new GraphQLObjectType({
     spAllowRem: { type: GraphQLString },
     trfThr: { type: GraphQLFloat },
     cshThr: { type: GraphQLFloat },
+    thr: { type: ThrSlipCheckType },
   }),
 });
 

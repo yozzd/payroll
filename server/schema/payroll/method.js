@@ -2061,6 +2061,175 @@ const genXLSThrQ = async (p) => {
   }
 };
 
+const genThrSlipQ = async (p) => {
+  try {
+    const [e] = p.employee;
+    await fs.ensureDir(`static/thrSlip/${p.dir}`);
+
+    const ctbl1 = [
+      [{ text: 'BASIC THR CALCULATION :', colSpan: 2 }, ''],
+      ['Basic Salary', { text: intpre0(e.g0).format(), alignment: 'right' }],
+      [{ text: 'FIXED ALLOWANCES :', colSpan: 2 }, ''],
+    ]
+    
+    if (e.aj0) ctbl1.push(['Living Allowance', { text: intpre0(e.aj0).format(), alignment: 'right' }]);
+    if (e.ak0) ctbl1.push(['Housing Allowance', { text: intpre0(e.ak0).format(), alignment: 'right' }]);
+    if (e.al0) ctbl1.push(['Functional Position Allowance', { text: intpre0(e.al0).format(), alignment: 'right' }]);
+    if (e.am0) ctbl1.push(['Functional Allowance', { text: intpre0(e.am0).format(), alignment: 'right' }]);
+    if (e.an0) ctbl1.push(['Coordinator Allowance', { text: intpre0(e.an0).format(), alignment: 'right' }]);
+    if (e.ao0) ctbl1.push(['Transport Allowance', { text: intpre0(e.ao0).format(), alignment: 'right' }]);
+    if (e.ap0) ctbl1.push(['Communication Allowance', { text: intpre0(e.ap0).format(), alignment: 'right' }]);
+    if (e.aq0) ctbl1.push(['Expertise Allowance', { text: intpre0(e.aq0).format(), alignment: 'right' }]);
+    if (e.ar0) ctbl1.push(['Honorarium Allowance', { text: intpre0(e.ar0).format(), alignment: 'right' }]);
+    if (e.as0) ctbl1.push(['Position Variable Allowance', { text: intpre0(e.as0).format(), alignment: 'right' }]);
+    if (e.at0) ctbl1.push(['Functional Variable Allowance', { text: intpre0(e.at0).format(), alignment: 'right' }]);
+    if (e.au0) ctbl1.push(['Acting/PLT Allowance', { text: intpre0(e.au0).format(), alignment: 'right' }]);
+    if (e.av0) ctbl1.push(['Others Allowance', { text: intpre0(e.av0).format(), alignment: 'right' }]);
+    
+    ctbl1.push([{ text: 'TOTAL >>>', alignment: 'right', bold: true }, { text: intpre0(e.ax0).format(), alignment: 'right', bold: true }]);
+
+    const ctbl2 = [
+      ['', '', ''],
+      [{ text: 'THR Prorate :', colSpan: 3 }, '', ''],
+      ['THR', `${e.bw0}/12`, { text: intpre0(e.ax0F).format(), alignment: 'right' }],
+      ['Pph21', '', { text: intpre0(e.cz0).format(), alignment: 'right' }],
+      [{ text: 'THR THIS MONTH >>>', colSpan: 2, alignment: 'right', bold: true }, '', { text: intpre0(e.trfThr).format(), alignment: 'right', bold: true }],
+    ];
+    
+    const notes = [
+      ['', 'Note :', '', ''],
+      ['', '', 'Approved by,', 'Received by,'],
+      ['', '', { text: 'PT. LABTECH PENTA INTERNATIONAL', bold: true }, { text: e.d0, bold: true }],
+    ];
+
+    const docDefinition = {
+      userPassword: e.thr.pw,
+      content: [
+        {
+          style: 'tbl1',
+          table: {
+            widths: [170, 200, 135],
+            body: [
+              [{
+                image: 'static/images/logo.png', width: 60, rowSpan: 2, border: [false, false, false, false],
+              }, {
+                text: 'PT. LABTECH PENTA INTERNATIONAL', bold: true, fontSize: 8, border: [false, false, false, true],
+              }, {
+                text: 'SLIP THR', bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, true],
+              }],
+              ['', { text: 'Kawasan Industri Sekupang Kav. 34 Batam - Indonesia', border: [false, false, false, false] }, { text: '', border: [false, false, false, false] }],
+            ],
+          },
+        },
+        {
+          style: 'tbl2',
+          table: {
+            widths: [110, 148, 110, 148],
+            body: [
+              ['Employee No.', { text: e.e0, bold: true }, '', ''],
+              ['Employee Name', { text: e.d0, bold: true }, '', ''],
+              ['Bank Account', `MANDIRI / ${e.t0}`, '', ''],
+              ['Department', e.u0, '', ''],
+              ['Section', e.v0, '', ''],
+              ['Position', e.y0, '', ''],
+            ],
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl3',
+          table: {
+            widths: [522],
+            heights: [12],
+            body: [['']],
+          },
+          layout: 'noBorders',
+        },
+        {
+          columns: [
+            {
+              style: 'tbl4',
+              table: {
+                widths: [110, 50],
+                heights: 12,
+                body: ctbl1,
+              },
+              layout: 'noBorders',
+            },
+            {
+              style: 'tbl5',
+              table: {
+                widths: [110, 75, 50],
+                heights: 12,
+                body: ctbl2,
+              },
+              layout: 'noBorders',
+            },
+          ],
+        },
+        {
+          style: 'tbl3',
+          table: {
+            widths: [522],
+            heights: [12],
+            body: [['']],
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl2',
+          table: {
+            widths: [2, 168, 170, 160],
+            body: notes,
+          },
+          layout: 'noBorders',
+        },
+      ],
+      styles: {
+        tbl1: {
+          fontSize: 8,
+          margin: [-10, -10, -10, 0],
+        },
+        tbl2: {
+          fontSize: 8,
+          margin: [-10, 40, -10, 0],
+        },
+        tbl3: {
+          fontSize: 8,
+          bold: true,
+          fillColor: '#EEEEEE',
+          margin: [-10, 10, -10, 0],
+        },
+        tbl4: {
+          fontSize: 8,
+          margin: [-10, 10, 0, 0],
+        },
+        tbl5: {
+          fontSize: 8,
+          margin: [7, 10, -10, 0],
+        },
+      },
+    };
+
+    return new Promise((resolve) => {
+      const pdfDoc = printer.createPdfKitDocument(docDefinition);
+      pdfDoc.pipe(fs.createWriteStream(`static/thrSlip/${p.dir}/${e.thr.name}.pdf`));
+      pdfDoc.on('end', () => {
+        resolve({ sStatus: 1 });
+      });
+      pdfDoc.end();
+    });
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
+};
+
+
+
 module.exports = {
   updateEmployee,
   generateReportPayroll,
@@ -2072,4 +2241,5 @@ module.exports = {
   genPDFSpAllowQ,
   genPDFThrQ,
   genXLSThrQ,
+  genThrSlipQ,
 };
