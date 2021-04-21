@@ -33,7 +33,7 @@
       <el-table-column prop="d0" label="Nama Karyawan" width="300" fixed>
         <template slot-scope="scope">
           <el-link
-            v-if="!freeze"
+            v-if="!freeze && $auth.hasRole('user')"
             type="primary"
             class="font-sm"
             :underline="false"
