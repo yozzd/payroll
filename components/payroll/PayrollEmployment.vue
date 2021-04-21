@@ -5,7 +5,7 @@
         <span class="text-green-500">Total {{ items.length }} items</span>
         &bull; <span class="text-pink-500">{{ multipleSelection.length }} item(s) selected</span>
       </div>
-      <div>
+      <div v-if="!freeze && $auth.hasRole('user')">
         <el-link
           type="primary"
           :underline="false"
@@ -39,7 +39,7 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column
-        v-if="!freeze"
+        v-if="!freeze && $auth.hasRole('user')"
         type="selection"
         width="40"
         align="center"
@@ -50,7 +50,7 @@
       <el-table-column label="Nama Karyawan" width="300" fixed>
         <template slot-scope="scope">
           <el-link
-            v-if="!freeze"
+            v-if="!freeze && $auth.hasRole('user')"
             type="primary"
             class="font-sm"
             :underline="false"

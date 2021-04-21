@@ -122,9 +122,6 @@ export default {
     };
   },
   methods: {
-    goBack() {
-      this.$router.push({ path: '/dashboard/' });
-    },
     selectDisable(r) {
       return r.ew0 !== '';
     },
