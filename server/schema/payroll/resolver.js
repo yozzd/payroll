@@ -661,7 +661,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('user', async (_, { id }) => {
+    resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await Payroll.findOne({ _id: id })
         .select({
           _id: 1,
