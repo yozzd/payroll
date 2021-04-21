@@ -257,7 +257,7 @@ export default {
 
         if (sStatus) {
           this.loadXLSTax = false;
-          window.open(`/report/${dir}/${dir}_tax.xls`);
+          window.open(`/report/${dir}/${dir}_tax.xlsx`);
         }
         return true;
       } catch ({ graphQLErrors, networkError }) {
