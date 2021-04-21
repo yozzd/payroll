@@ -973,7 +973,7 @@ const Mutation = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('user', async (_, { id }) => {
+    resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await a3Report(id);
       const s = await generateReportPayroll(p);
       return s;
@@ -984,7 +984,7 @@ const Mutation = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('user', async (_, { id }) => {
+    resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await a3Report(id);
       const s = await genPayrollXLS(p);
       return s;
@@ -1006,7 +1006,7 @@ const Mutation = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('user', async (_, { id }) => {
+    resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await Payroll.aggregate([
         { $match: { _id: id } },
         { $unwind: '$employee' },

@@ -26,9 +26,9 @@
     </div>
     <div>
       <el-table
-        v-loading="$apollo.loading || genRpPy || genAcc"
+        v-loading="$apollo.loading || genRpPy || genAcc || loadXLSPy"
         :data="payrollAll"
-        :element-loading-text="genRpPy || genAcc ? 'Processing...' : 'Loading...'"
+        :element-loading-text="'Loading...'"
         element-loading-spinner="el-icon-loading"
         height="600"
       >
@@ -912,6 +912,7 @@ export default {
       loadingAgama: false,
       genRpPy: false,
       genAcc: false,
+      loadXLSPy: false,
       dpt: [],
       sct: [],
       form: {
@@ -1261,14 +1262,18 @@ export default {
     },
     async generatePayrollXLS(id, dir) {
       try {
-        await this.$apollo.mutate({
+        this.loadXLSPy = true;
+        const { data: { generatePayrollXLS: { sStatus } } } = await this.$apollo.mutate({
           mutation: GeneratePayrollXLS,
           variables: {
             id,
           },
         });
 
-        window.open(`/report/${dir}/${dir}_payroll.xls`);
+        if (sStatus) {
+          this.loadXLSPy = false;
+          window.open(`/report/${dir}/${dir}_payroll.xls`);
+        }
         return true;
       } catch ({ graphQLErrors, networkError }) {
         this.errors = graphQLErrors || networkError.result.errors;
