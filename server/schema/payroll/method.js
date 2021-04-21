@@ -845,7 +845,7 @@ const genPayrollXLS = async (p) => {
     wb.Sheets.Sheet3[`V${row}`] = { t: 'n', v: intpre0v2(p.dm0Sum).format() };
     wb.Sheets.Sheet3[`W${row}`] = { t: 'n', v: intpre0v2(p.dn0Sum).format() };
 
-    const fn = `static/report/${p.dir}/${p.dir}_payroll.xls`;
+    const fn = `static/report/${p.dir}/${p.dir}_payroll.xlsx`;
     const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
     fs.writeFileSync(fn, content);
 

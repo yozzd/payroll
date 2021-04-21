@@ -1272,7 +1272,7 @@ export default {
 
         if (sStatus) {
           this.loadXLSPy = false;
-          window.open(`/report/${dir}/${dir}_payroll.xls`);
+          window.open(`/report/${dir}/${dir}_payroll.xlsx`);
         }
         return true;
       } catch ({ graphQLErrors, networkError }) {
