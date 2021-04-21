@@ -629,8 +629,16 @@ const processImportAgama = async ({ _id, file }) => {
           if (ft[i]['Emp No']) {
             const idx = px.employee.findIndex((v) => v.e0 === ft[i]['Emp No']);
             if (idx >= 0) {
+              let agama = '';
+              if (ft[i].Agama === 'Kristen Protestan' || ft[i].Agama === 'Kristen Katholik') {
+                agama = 'Kristen';
+              } else {
+                agama = ft[i].Agama;
+              }
+
               Object.assign(px.employee[idx], {
-                et0: capitalize(ft[i].Agama.toLowerCase()),
+                i0: ft[i]['Hire Date'],
+                et0: capitalize(agama.toLowerCase()),
               });
             }
           }

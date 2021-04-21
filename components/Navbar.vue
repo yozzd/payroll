@@ -1,7 +1,7 @@
 <template>
   <div class="flex px-12 pt-5 h-20 space-x-8 items-baseline">
     <Brand />
-    <nuxt-link to="/dashboard/">
+    <nuxt-link to="/dashboard/" class="text-pink-500">
       Dashboard
     </nuxt-link>
     <div class="flex-1"></div>

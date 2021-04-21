@@ -169,7 +169,7 @@
                   index="e"
                   :disabled="scope.row.freeze"
                 >
-                  Agama
+                  Agama / Hire Date
                 </el-menu-item>
               </el-submenu>
             </el-menu>
