@@ -905,7 +905,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('user', async (_, { id }) => {
+    resolve: auth.hasRole('guest', async (_, { id }) => {
       const s = await spAllowQ(id);
       return s;
     }),
@@ -1487,7 +1487,7 @@ const Mutation = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('user', async (_, { id }) => {
+    resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await spAllowQ(id);
       const s = await genPDFSpAllowQ(p);
       return s;
