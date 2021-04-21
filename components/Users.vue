@@ -85,6 +85,7 @@
           <el-select v-model="formAdd.role" filterable>
             <el-option label="Admin" value="admin"></el-option>
             <el-option label="User" value="user"></el-option>
+            <el-option label="Guest" value="guest"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -120,6 +121,7 @@
           <el-select v-model="formEdit.role" filterable>
             <el-option label="Admin" value="admin"></el-option>
             <el-option label="User" value="user"></el-option>
+            <el-option label="Guest" value="guest"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -146,6 +148,7 @@ export default {
       roles: {
         admin: 'Admin',
         user: 'User',
+        guest: 'Guest',
       },
       showAdd: false,
       showEdit: false,

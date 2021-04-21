@@ -42,7 +42,7 @@
       :errors="errors"
     />
     <el-table
-      v-loading="$apollo.loading || loadTrf"
+      v-loading="$apollo.loading || loadTrf || loadXLSTrf"
       element-loading-text="Loading..."
       element-loading-spinner="el-icon-loading"
       :data="tableData"
@@ -100,6 +100,7 @@ export default {
       content: '',
       dir: '',
       loadTrf: false,
+      loadXLSTrf: false,
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -134,14 +135,18 @@ export default {
     },
     async genXLSTrf(dir) {
       try {
-        await this.$apollo.mutate({
+        this.loadXLSTrf = true;
+        const { data: { genXLSTrf: { sStatus } } } = await this.$apollo.mutate({
           mutation: GenXLSTrf,
           variables: {
             id: this.$route.params.id,
           },
         });
 
-        window.open(`/report/${dir}/${dir}_trf.xls`);
+        if (sStatus) {
+          this.loadXLSTrf = false;
+          window.open(`/report/${dir}/${dir}_trf.xls`);
+        }
         return true;
       } catch ({ graphQLErrors, networkError }) {
         this.errors = graphQLErrors || networkError.result.errors;

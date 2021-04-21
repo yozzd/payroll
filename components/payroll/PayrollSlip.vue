@@ -21,22 +21,24 @@
           clearable
         />
       </div>
-      <el-button
-        type="primary"
-        :loading="loadingGen"
-        :disabled="!multipleSelection.length || loadingSend"
-        @click="generate"
-      >
-        Generate
-      </el-button>
-      <el-button
-        type="primary"
-        :loading="loadingSend"
-        :disabled="!multipleSelection.length || loadingGen"
-        @click="send"
-      >
-        Send
-      </el-button>
+      <div v-if="$auth.hasRole('user')">
+        <el-button
+          type="primary"
+          :loading="loadingGen"
+          :disabled="!multipleSelection.length || loadingSend"
+          @click="generate"
+        >
+          Generate
+        </el-button>
+        <el-button
+          type="primary"
+          :loading="loadingSend"
+          :disabled="!multipleSelection.length || loadingGen"
+          @click="send"
+        >
+          Send
+        </el-button>
+      </div>
     </div>
     <el-progress
       :text-inside="true"
@@ -60,6 +62,7 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column
+        v-if="$auth.hasRole('user')"
         type="selection"
         width="50"
         align="center"

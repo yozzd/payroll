@@ -3,7 +3,8 @@ const PdfPrinter = require('pdfmake');
 const fs = require('fs-extra');
 const nodemailer = require('nodemailer');
 const XLSX = require('xlsx');
-// const XlsxPopulate = require('xlsx-populate');
+const XlsxPopulate = require('xlsx-populate');
+const { xlsPass } = require('../../config');
 const { getDate, getMonth } = require('date-fns');
 
 const {
@@ -1051,7 +1052,7 @@ const generateSlip = async (p) => {
     }
 
     const docDefinition = {
-      // userPassword: e.slip.pw,
+      userPassword: e.slip.pw,
       content: [
         {
           style: 'tbl1',
@@ -1713,7 +1714,7 @@ const genPDFThrQ = async (p) => {
           text: 'Basic Salary', bold: true, alignment: 'center', rowSpan: 2,
         },
         {
-          text: 'Tunjagan Tetap', bold: true, alignment: 'center', colSpan: 10,
+          text: 'Tunjangan Tetap', bold: true, alignment: 'center', colSpan: 10,
         }, '', '', '', '', '', '', '', '', '',
         {
           text: 'Total Upah', bold: true, alignment: 'center', rowSpan: 2,
@@ -2049,7 +2050,7 @@ const genXLSThrQ = async (p) => {
     return ({ sStatus: 1 });
 
     // return XlsxPopulate.fromFileAsync(fn)
-    //   .then((workbook) => workbook.toFileAsync(fn, { password: 'secret' })
+    //   .then((workbook) => workbook.toFileAsync(fn, { password: xlsPass })
     //     .then(() => ({ sStatus: 1 })));
   } catch (err) {
     if (typeof err === 'string') {

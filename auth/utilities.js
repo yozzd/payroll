@@ -1,4 +1,4 @@
-export const userRoles = ['guest1', 'guest2', 'user', 'admin', 'root'];
+export const userRoles = ['', 'guest', 'user', 'admin', 'root'];
 
 export const isUnset = (o) => typeof o === 'undefined' || o === null;
 

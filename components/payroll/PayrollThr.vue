@@ -24,10 +24,7 @@
           <el-dropdown-item command="pdf">
             PDF
           </el-dropdown-item>
-          <el-dropdown-item
-            v-if="$auth.hasRole('admin')"
-            command="xls"
-          >
+          <el-dropdown-item command="xls">
             XLS
           </el-dropdown-item>
         </el-dropdown-menu>

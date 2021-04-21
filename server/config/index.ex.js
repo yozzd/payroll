@@ -6,6 +6,7 @@ const consola = require('consola');
 const config = {
   userRoles: ['guest', 'user', 'admin'],
   secret: { session: 'my-secret-session' },
+  xlsPass: 'xlspassword',
   mongo: {
     connect: async () => {
       try {

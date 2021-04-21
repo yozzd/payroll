@@ -359,7 +359,7 @@ const Query = {
     args: {
       year: { type: GraphQLInt },
     },
-    resolve: auth.hasRole('user', async (_, { year }) => {
+    resolve: auth.hasRole('guest', async (_, { year }) => {
       const p = await Payroll.find({ year }).sort('-month');
       return p;
     }),
@@ -784,7 +784,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('user', async (_, { id }) => {
+    resolve: auth.hasRole('guest', async (_, { id }) => {
       const payroll = await Payroll.aggregate([
         { $match: { _id: id } },
         { $unwind: '$employee' },
@@ -915,7 +915,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('user', async (_, { id }) => {
+    resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await thrCat(id);
       return p;
     }),
@@ -1498,7 +1498,7 @@ const Mutation = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('user', async (_, { id }) => {
+    resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await thrCat(id);
       const s = await genPDFThrQ(p);
       return s;
@@ -1509,7 +1509,7 @@ const Mutation = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('user', async (_, { id }) => {
+    resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await thrCat(id);
       const s = await genXLSThrQ(p);
       return s;

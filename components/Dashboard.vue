@@ -130,7 +130,7 @@
           width="60"
         >
         </el-table-column>
-        <el-table-column>
+        <el-table-column v-if="$auth.hasRole('user')">
           <template slot-scope="scope">
             <el-menu
               mode="horizontal"
@@ -193,10 +193,7 @@
                   <el-menu-item index="aa">
                     PDF
                   </el-menu-item>
-                  <el-menu-item
-                    v-if="$auth.hasRole('admin')"
-                    index="ab"
-                  >
+                  <el-menu-item index="ab">
                     XLS
                   </el-menu-item>
                   <el-menu-item
@@ -255,7 +252,7 @@
             </el-menu>
           </template>
         </el-table-column>
-        <el-table-column min-width="60">
+        <el-table-column v-if="$auth.hasRole('user')" min-width="60">
           <template slot-scope="scope">
             <el-menu
               mode="horizontal"
