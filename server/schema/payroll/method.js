@@ -2070,8 +2070,8 @@ const genThrSlipQ = async (p) => {
       [{ text: 'BASIC THR CALCULATION :', colSpan: 2 }, ''],
       ['Basic Salary', { text: intpre0(e.g0).format(), alignment: 'right' }],
       [{ text: 'FIXED ALLOWANCES :', colSpan: 2 }, ''],
-    ]
-    
+    ];
+
     if (e.aj0) ctbl1.push(['Living Allowance', { text: intpre0(e.aj0).format(), alignment: 'right' }]);
     if (e.ak0) ctbl1.push(['Housing Allowance', { text: intpre0(e.ak0).format(), alignment: 'right' }]);
     if (e.al0) ctbl1.push(['Functional Position Allowance', { text: intpre0(e.al0).format(), alignment: 'right' }]);
@@ -2085,23 +2085,38 @@ const genThrSlipQ = async (p) => {
     if (e.at0) ctbl1.push(['Functional Variable Allowance', { text: intpre0(e.at0).format(), alignment: 'right' }]);
     if (e.au0) ctbl1.push(['Acting/PLT Allowance', { text: intpre0(e.au0).format(), alignment: 'right' }]);
     if (e.av0) ctbl1.push(['Others Allowance', { text: intpre0(e.av0).format(), alignment: 'right' }]);
-    
-    ctbl1.push([{ text: 'TOTAL >>>', alignment: 'right', bold: true }, { text: intpre0(e.ax0).format(), alignment: 'right', bold: true }]);
+
+    ctbl1.push([{ text: 'TOTAL', alignment: 'right', bold: true }, { text: intpre0(e.ax0).format(), alignment: 'right', bold: true }]);
 
     const ctbl2 = [
       ['', '', ''],
       [{ text: 'THR Prorate :', colSpan: 3 }, '', ''],
       ['THR', `${e.bw0}/12`, { text: intpre0(e.ax0F).format(), alignment: 'right' }],
-      ['Pph21', '', { text: intpre0(e.cz0).format(), alignment: 'right' }],
-      [{ text: 'THR THIS MONTH >>>', colSpan: 2, alignment: 'right', bold: true }, '', { text: intpre0(e.trfThr).format(), alignment: 'right', bold: true }],
     ];
+
+    if (e.p0 === 'Yes') {
+      ctbl2.push(['Pajak Penghasilan Ber-NPWP', '', { text: intpre0(e.cz0).format(), alignment: 'right' }]);
+    } else {
+      ctbl2.push(['Pajak Tambahan Non-NPWP', '', { text: intpre0(e.da0).format(), alignment: 'right' }]);
+    }
+
+    ctbl2.push([{
+      text: 'THR THIS MONTH', colSpan: 2, alignment: 'right', bold: true,
+    }, '', { text: intpre0(e.trfThr).format(), alignment: 'right', bold: true }]);
     
     const notes = [
       ['', 'Note :', '', ''],
       ['', '', 'Approved by,', 'Received by,'],
-      ['', '', { text: 'PT. LABTECH PENTA INTERNATIONAL', bold: true }, { text: e.d0, bold: true }],
+      ['-', 'This is computer generated letter, no signature is required', { text: 'PT. LABTECH PENTA INTERNATIONAL', bold: true }, { text: e.d0, bold: true }],
     ];
 
+    let tag = '';
+		if (p.typeHR === 1) {
+  		tag = 'SELAMAT HARI RAYA IDUL FITRI';
+		} else if (p.typeHR === 2) {
+  		tag = 'SELAMAT HARI NATAL & TAHUN BARU';
+		}
+		
     const docDefinition = {
       userPassword: e.thr.pw,
       content: [
@@ -2132,6 +2147,9 @@ const genThrSlipQ = async (p) => {
               ['Department', e.u0, '', ''],
               ['Section', e.v0, '', ''],
               ['Position', e.y0, '', ''],
+              [{
+                text: tag, colSpan: 4, alignment: 'center', fontSize: 10, bold: true, margin: [0, 15, 0, 10],
+              }, '', '', ''],
             ],
           },
           layout: 'noBorders',
@@ -2139,7 +2157,7 @@ const genThrSlipQ = async (p) => {
         {
           style: 'tbl3',
           table: {
-            widths: [522],
+            widths: [530],
             heights: [12],
             body: [['']],
           },
@@ -2170,7 +2188,7 @@ const genThrSlipQ = async (p) => {
         {
           style: 'tbl3',
           table: {
-            widths: [522],
+            widths: [530],
             heights: [12],
             body: [['']],
           },
@@ -2227,8 +2245,6 @@ const genThrSlipQ = async (p) => {
     }
   }
 };
-
-
 
 module.exports = {
   updateEmployee,
