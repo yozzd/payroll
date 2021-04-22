@@ -199,6 +199,7 @@ const thrCatGroup = {
       cz0: '$employee.cz0',
       da0: '$employee.da0',
       db0: '$employee.db0',
+      ew0: '$employee.ew0',
       ax0F: {
         $function: {
           body: `function(v) {

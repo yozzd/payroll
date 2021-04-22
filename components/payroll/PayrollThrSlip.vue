@@ -25,10 +25,18 @@
         <el-button
           type="primary"
           :loading="loadingGen"
-          :disabled="!multipleSelection.length"
+          :disabled="!multipleSelection.length || loadingSend"
           @click="generate"
         >
           Generate
+        </el-button>
+        <el-button
+          type="primary"
+          :loading="loadingSend"
+          :disabled="!multipleSelection.length || loadingGen"
+          @click="send"
+        >
+          Send
         </el-button>
       </div>
     </div>
@@ -82,7 +90,7 @@
           </el-link>
         </template>
       </el-table-column>
-      <el-table-column label="" min-width="120"></el-table-column>
+      <el-table-column min-width="120"></el-table-column>
     </el-table>
   </div>
 </template>
@@ -90,7 +98,7 @@
 <script>
 import MiniSearch from 'minisearch';
 import { PayrollThr } from '../../apollo/query/payroll';
-import { GenThrSlip } from '../../apollo/mutation/payroll';
+import { GenThrSlip, SendThrSlip } from '../../apollo/mutation/payroll';
 import mix from '../../mixins/payroll';
 
 export default {
@@ -100,6 +108,7 @@ export default {
       content: '',
       multipleSelection: [],
       loadingGen: false,
+      loadingSend: false,
       percentage: 0,
       miniSearch: new MiniSearch({
         idField: '_id',
@@ -158,6 +167,43 @@ export default {
         );
 
         this.loadingGen = false;
+        this.multipleSelection = [];
+        this.$refs.thrTable.clearSelection();
+        this.$message({
+          type: 'success',
+          message: 'Completed',
+        });
+
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
+    },
+    async send() {
+      try {
+        this.loadingSend = true;
+        let count = 0;
+        const len = this.multipleSelection.length;
+        this.percentage = 0;
+
+        await Promise.all(
+          this.multipleSelection.map(async (v) => {
+            const { data } = await this.$apollo.mutate({
+              mutation: SendThrSlip,
+              variables: {
+                id: this.$route.params.id,
+                eId: v,
+              },
+            });
+            if (data.sendThrSlip.accepted.length) {
+              count += 1;
+              this.percentage = Math.floor((count / len) * 100);
+            }
+          }),
+        );
+
+        this.loadingSend = false;
         this.multipleSelection = [];
         this.$refs.thrTable.clearSelection();
         this.$message({

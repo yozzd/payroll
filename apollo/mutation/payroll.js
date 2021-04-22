@@ -562,3 +562,12 @@ export const GenThrSlip = gql`
     }
   }
 `;
+
+export const SendThrSlip = gql`
+  mutation sendThrSlip($id: String!, $eId: String!) {
+    sendThrSlip(id: $id, eId: $eId) {
+      accepted
+      rejected
+    }
+  }
+`;

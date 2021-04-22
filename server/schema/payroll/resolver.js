@@ -20,6 +20,7 @@ const {
   genPDFThrQ,
   genXLSThrQ,
   genThrSlipQ,
+  sendThrSlip,
 } = require('./method');
 const {
   CloneEmployeeInputType,
@@ -1239,6 +1240,18 @@ const Mutation = {
     resolve: auth.hasRole('guest', async (_, { id, eId }) => {
       const p = await thrCatPerson(id, eId);
       const s = await genThrSlipQ(p);
+      return s;
+    }),
+  },
+  sendThrSlip: {
+    type: SendType,
+    args: {
+      id: { type: GraphQLString },
+      eId: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('user', async (_, { id, eId }) => {
+      const p = await thrCatPerson(id, eId);
+      const s = await sendThrSlip(p);
       return s;
     }),
   },
