@@ -222,7 +222,7 @@
                   Journal
                 </el-menu-item>
                 <el-menu-item index="b">
-                  Tax 21 Kelebihan / Kurang Bayar
+                  Tax 21 Kurang / Lebih Bayar
                 </el-menu-item>
                 <el-menu-item index="c">
                   Ketenagakerjaan

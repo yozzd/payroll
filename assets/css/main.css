@@ -180,3 +180,11 @@ button:focus,
 .el-breadcrumb__item {
   float: none;
 }
+
+.el-dialog {
+  @apply rounded-xl;
+}
+
+.el-dialog__wrapper {
+  z-index: 9999999999 !important;
+}
