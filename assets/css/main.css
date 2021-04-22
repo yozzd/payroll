@@ -188,3 +188,24 @@ button:focus,
 .el-dialog__wrapper {
   z-index: 9999999999 !important;
 }
+
+.el-button--primary {
+  @apply bg-pink-500 border-pink-500;
+}
+
+.el-button--primary:focus,
+.el-button--primary:hover {
+  @apply bg-pink-400 border-pink-400;
+}
+
+.el-button--primary.is-disabled,
+.el-button--primary.is-disabled:active,
+.el-button--primary.is-disabled:focus,
+.el-button--primary.is-disabled:hover {
+  @apply bg-pink-300 border-pink-300;
+}
+
+.el-button:focus,
+.el-button:hover {
+  @apply text-pink-500 bg-pink-100 border-pink-300;
+}
