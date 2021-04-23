@@ -8,9 +8,7 @@
         :errors="errors"
       />
       <div class="flex space-x-4 items-center">
-        <div class="flex-1">
-          <span class="text-green-500">Total {{ items.length }} items</span>
-        </div>
+        <div class="flex-1"></div>
         <div class="w-64">
           <el-input
             v-model="search"
@@ -88,6 +86,18 @@
         </el-table-column>
         <el-table-column min-width="200"></el-table-column>
       </el-table>
+      <el-pagination
+        :current-page.sync="page"
+        :page-sizes="pageSizes"
+        :page-size="pageSize"
+        :total="items.length"
+        :pager-count="pagerCount"
+        layout="total, sizes, prev, pager, next"
+        class="flex justify-end"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      >
+      </el-pagination>
 
       <el-dialog
         title="Edit Employee"
