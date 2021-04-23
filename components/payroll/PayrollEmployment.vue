@@ -2,8 +2,7 @@
   <div class="space-y-2">
     <div class="flex space-x-4 items-center">
       <div class="flex-1">
-        <span class="text-green-500">Total {{ items.length }} items</span>
-        &bull; <span class="text-pink-500">{{ multipleSelection.length }} item(s) selected</span>
+        <span class="text-pink-500">{{ multipleSelection.length }} item(s) selected</span>
       </div>
       <div v-if="!freeze && $auth.hasRole('user')">
         <el-link
@@ -86,10 +85,11 @@
       :page-sizes="pageSizes"
       :page-size="pageSize"
       :total="items.length"
-      layout="sizes, prev, pager, next"
+      :pager-count="pagerCount"
+      layout="total, sizes, prev, pager, next"
+      class="flex justify-end"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      class="flex justify-end"
     >
     </el-pagination>
 
