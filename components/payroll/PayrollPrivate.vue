@@ -305,6 +305,7 @@ export default {
           this.miniSearch.addAll(this.items);
           this.banks = [...new Set(this.items.map((v) => v.s0))].sort();
           this.rlg = [...new Set(this.items.map((v) => v.et0))].sort();
+          this.pageSizes.push(this.items.length);
         }
       },
       error({ graphQLErrors, networkError }) {

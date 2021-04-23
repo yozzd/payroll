@@ -13,7 +13,7 @@ export default {
   computed: {
     tableData() {
       if (this.search) {
-        return this.miniSearch.search(this.search, { prefix: true });
+        return this.miniSearch.search(this.search, { prefix: true }).slice(0, this.pageSize);
       }
       return this.items.slice(this.pageSize * this.page - this.pageSize, this.pageSize * this.page);
     },
