@@ -11,7 +11,6 @@
     <div class="flex space-x-4 items-center">
       <div class="flex-1">
         {{ content }}
-        &bull; <span class="text-green-500">Total {{ items.length }} items</span>
       </div>
       <el-dropdown
         trigger="click"
@@ -193,6 +192,18 @@
       </el-table-column>
       <el-table-column min-width="120"></el-table-column>
     </el-table>
+    <el-pagination
+      :current-page.sync="page"
+      :page-sizes="pageSizes"
+      :page-size="pageSize"
+      :total="items.length"
+      :pager-count="pagerCount"
+      layout="total, sizes, prev, pager, next"
+      class="flex justify-end"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    >
+    </el-pagination>
   </div>
 </template>
 
@@ -284,6 +295,7 @@ export default {
           this.miniSearch.addAll(this.items);
           this.content = `${period} ${year}`;
           this.dir = dir;
+          this.pageSizes.push(this.items.length);
         }
       },
       error({ graphQLErrors, networkError }) {

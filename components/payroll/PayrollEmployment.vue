@@ -2,8 +2,7 @@
   <div class="space-y-2">
     <div class="flex space-x-4 items-center">
       <div class="flex-1">
-        <span class="text-green-500">Total {{ items.length }} items</span>
-        &bull; <span class="text-pink-500">{{ multipleSelection.length }} item(s) selected</span>
+        <span class="text-pink-500">{{ multipleSelection.length }} item(s) selected</span>
       </div>
       <div v-if="!freeze && $auth.hasRole('user')">
         <el-link
@@ -81,6 +80,18 @@
       <el-table-column prop="y0" label="Jabatan" width="200"></el-table-column>
       <el-table-column min-width="120"></el-table-column>
     </el-table>
+    <el-pagination
+      :current-page.sync="page"
+      :page-sizes="pageSizes"
+      :page-size="pageSize"
+      :total="items.length"
+      :pager-count="pagerCount"
+      layout="total, sizes, prev, pager, next"
+      class="flex justify-end"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    >
+    </el-pagination>
 
     <el-dialog
       title="Edit Employee"
@@ -210,6 +221,7 @@ export default {
   mixins: [mix],
   data() {
     return {
+      currentPage: 1,
       showEditDialog: false,
       form: {},
       loading: false,
@@ -346,6 +358,7 @@ export default {
           this.scd = [...new Set(this.items.map((v) => v.w0))].sort();
           this.grd = [...new Set(this.items.map((v) => v.x0))].sort();
           this.jbt = [...new Set(this.items.map((v) => v.y0))].sort();
+          this.pageSizes.push(this.items.length);
         }
       },
       error({ graphQLErrors, networkError }) {
