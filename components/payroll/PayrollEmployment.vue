@@ -81,6 +81,17 @@
       <el-table-column prop="y0" label="Jabatan" width="200"></el-table-column>
       <el-table-column min-width="120"></el-table-column>
     </el-table>
+    <el-pagination
+      :current-page.sync="page"
+      :page-sizes="pageSizes"
+      :page-size="pageSize"
+      :total="items.length"
+      layout="sizes, prev, pager, next"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      class="flex justify-end"
+    >
+    </el-pagination>
 
     <el-dialog
       title="Edit Employee"
@@ -210,6 +221,7 @@ export default {
   mixins: [mix],
   data() {
     return {
+      currentPage: 1,
       showEditDialog: false,
       form: {},
       loading: false,
@@ -346,6 +358,7 @@ export default {
           this.scd = [...new Set(this.items.map((v) => v.w0))].sort();
           this.grd = [...new Set(this.items.map((v) => v.x0))].sort();
           this.jbt = [...new Set(this.items.map((v) => v.y0))].sort();
+          this.pageSizes.push(this.items.length);
         }
       },
       error({ graphQLErrors, networkError }) {

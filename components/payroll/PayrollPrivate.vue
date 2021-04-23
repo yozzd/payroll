@@ -76,6 +76,17 @@
       <el-table-column prop="ew0" label="Email" min-width="240"></el-table-column>
       <el-table-column min-width="120"></el-table-column>
     </el-table>
+    <el-pagination
+      :current-page.sync="page"
+      :page-sizes="pageSizes"
+      :page-size="pageSize"
+      :total="items.length"
+      layout="sizes, prev, pager, next"
+      class="flex justify-end"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    >
+    </el-pagination>
 
     <el-dialog
       title="Edit Employee"

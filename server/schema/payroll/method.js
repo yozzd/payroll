@@ -2103,7 +2103,7 @@ const genThrSlipQ = async (p) => {
     ctbl2.push([{
       text: 'THR THIS MONTH', colSpan: 2, alignment: 'right', bold: true,
     }, '', { text: intpre0(e.trfThr).format(), alignment: 'right', bold: true }]);
-    
+
     const notes = [
       ['', 'Note :', '', ''],
       ['', '', 'Approved by,', 'Received by,'],
@@ -2111,12 +2111,12 @@ const genThrSlipQ = async (p) => {
     ];
 
     let tag = '';
-		if (p.typeHR === 1) {
+    if (p.typeHR === 1) {
   		tag = 'SELAMAT HARI RAYA IDUL FITRI';
-		} else if (p.typeHR === 2) {
+    } else if (p.typeHR === 2) {
   		tag = 'SELAMAT HARI NATAL & TAHUN BARU';
-		}
-		
+    }
+
     const docDefinition = {
       userPassword: e.thr.pw,
       content: [
