@@ -638,6 +638,7 @@ const processImportAgama = async ({ _id, file }) => {
 
               Object.assign(px.employee[idx], {
                 i0: ft[i]['Hire Date'],
+                k0: ft[i]['Finish Date'],
                 et0: capitalize(agama.toLowerCase()),
               });
             }
