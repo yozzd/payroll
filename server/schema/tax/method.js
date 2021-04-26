@@ -2,6 +2,7 @@ const { GraphQLError } = require('graphql');
 const PdfPrinter = require('pdfmake');
 const fs = require('fs-extra');
 const nodemailer = require('nodemailer');
+const { getMonth } = require('date-fns');
 const XLSX = require('xlsx');
 const XlsxPopulate = require('xlsx-populate');
 const { xlsPass } = require('../../config');
@@ -24,17 +25,34 @@ const generateTax = async (p) => {
     const { employee: e } = p;
     await fs.ensureDir(`static/tax/${p.dir}`);
 
+    const months = [
+      'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember',
+    ];
+    
     const ctbl1 = [
       [{ text: e.h0, bold: true }, '', { text: intpre0(Math.abs(e.i0)).format(), alignment: 'right', fontSize: 10 }],
+      [`Installment ${p.year} :`, '', ''],
     ];
 
     const notes = [
       ['', 'Note :', ''],
       ['-', 'Jika nominal "Kurang Bayar" maka akan dicicil 6 kali tiap bulan', ''],
       ['-', 'Jika nominal "Lebih Bayar" maka akan diberikan sekaligus', ''],
-      ['-', 'Karyawan akan menandatangani surat pernyataan yang diberikan secara hardcopy dan dikembalikan ke HRD', ''],
-      ['-', 'Pengembalian form surat pernyataan paling lambat hari Senin tanggal 19 April jam 12.00', ''],
+      ['-', e.p0, ''],
+      // ['-', 'Karyawan akan menandatangani surat pernyataan yang diberikan secara hardcopy dan dikembalikan ke HRD', ''],
+      // ['-', 'Pengembalian form surat pernyataan paling lambat hari Senin tanggal 19 April jam 12.00', ''],
     ];
+
+    const start = getMonth(p.from);
+    const end = getMonth(p.to);
+    const ds = [e.j0, e.k0, e.l0, e.m0, e.n0, e.o0];
+
+    for (let i = start; i <= end; i += 1) {
+      ctbl1.push([
+        '', months[i], { text: intpre0(Math.abs(ds[i - start])).format(), alignment: 'right'},
+        ]);
+      }
 
     const docDefinition = {
       userPassword: e.slip.pw,
@@ -76,7 +94,7 @@ const generateTax = async (p) => {
         {
           style: 'tbl3',
           table: {
-            widths: [100, 10, 60],
+            widths: [100, 60, 60],
             body: ctbl1,
           },
           layout: 'noBorders',
