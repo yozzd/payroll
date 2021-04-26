@@ -959,7 +959,7 @@ const genAccCheck = async (p) => {
   }
 };
 
-const generateSlip = async (p) => {
+const generateSlip = async (p, payPass) => {
   try {
     const { employee: e } = p;
     await fs.ensureDir(`static/slip/${p.dir}`);
@@ -1058,7 +1058,7 @@ const generateSlip = async (p) => {
     }
 
     const docDefinition = {
-      userPassword: e.slip.pw,
+      userPassword: !payPass ? false : e.slip.pw,
       content: [
         {
           style: 'tbl1',

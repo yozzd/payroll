@@ -521,6 +521,7 @@ const Query = {
                   name: '$employee.slip.name',
                   dir: '$dir',
                 },
+                payPass: true,
               },
             },
           },
@@ -657,14 +658,15 @@ const Mutation = {
     args: {
       id: { type: GraphQLString },
       eId: { type: GraphQLString },
+      payPass: { type: GraphQLBoolean },
     },
-    resolve: auth.hasRole('user', async (_, { id, eId }) => {
+    resolve: auth.hasRole('user', async (_, { id, eId, payPass }) => {
       const p = await Payroll.aggregate([
         { $match: { _id: id } },
         { $unwind: '$employee' },
         { $match: { 'employee._id': eId } },
       ]);
-      const s = await generateSlip(p[0]);
+      const s = await generateSlip(p[0], payPass);
       return s;
     }),
   },

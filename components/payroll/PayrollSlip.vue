@@ -58,6 +58,7 @@
       height="500"
       border
       :row-class-name="finalRow"
+      @select="handleSelect"
       @selection-change="handleSelectionChange"
     >
       <el-table-column
@@ -68,12 +69,18 @@
         :selectable="selectDisable"
       ></el-table-column>
       <el-table-column type="index" width="50" align="center"></el-table-column>
+      <el-table-column label="Password" width="100" align="center">
+        <template slot-scope="scope">
+          <el-checkbox
+            v-model="scope.row.payPass"
+            :disabled="!scope.row.disabled"
+          ></el-checkbox>
+        </template>
+      </el-table-column>
       <el-table-column prop="e0" label="No. Karyawan" width="100"></el-table-column>
       <el-table-column prop="d0" label="Nama Karyawan" width="300">
         <template slot-scope="scope">
-          <p>
-            {{ scope.row.d0 }}
-          </p>
+          {{ scope.row.d0 }}
         </template>
       </el-table-column>
       <el-table-column prop="ew0" label="Email" width="300"></el-table-column>
@@ -136,8 +143,12 @@ export default {
     selectDisable(r) {
       return r.ew0 !== '';
     },
+    handleSelect(v, r) {
+      const t = r;
+      t.disabled = !t.disabled;
+    },
     handleSelectionChange(a) {
-      this.multipleSelection = a.map((v) => v._id);
+      this.multipleSelection = a.map((v) => v);
     },
     async generate() {
       try {
@@ -152,7 +163,8 @@ export default {
               mutation: GenerateSlip,
               variables: {
                 id: this.$route.params.id,
-                eId: v,
+                eId: v._id,
+                payPass: v.payPass,
               },
               update: (store) => {
                 const cdata = store.readQuery({
@@ -161,7 +173,9 @@ export default {
                     id: this.$route.params.id,
                   },
                 });
-                const index = cdata.payrollSlip.employee.findIndex((e) => e._id === v);
+                const index = cdata.payrollSlip.employee.findIndex((e) => e._id === v._id);
+                cdata.payrollSlip.employee[index].payPass = true;
+                cdata.payrollSlip.employee[index].disabled = false;
                 if (cdata.payrollSlip.employee[index].slip.check === false) {
                   cdata.payrollSlip.employee[index].slip.check = true;
                   this.miniSearch.removeAll();

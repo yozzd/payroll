@@ -281,6 +281,7 @@ const EmployeeType = new GraphQLObjectType({
     trfThr: { type: GraphQLFloat },
     cshThr: { type: GraphQLFloat },
     thr: { type: ThrSlipCheckType },
+    payPass: { type: GraphQLBoolean },
   }),
 });
 

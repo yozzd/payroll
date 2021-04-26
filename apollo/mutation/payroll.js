@@ -9,8 +9,8 @@ export const PayrollDelete = gql`
 `;
 
 export const GenerateSlip = gql`
-  mutation generateSlip($id: String!, $eId: String!) {
-    generateSlip(id: $id, eId: $eId) {
+  mutation generateSlip($id: String!, $eId: String!, $payPass: Boolean!) {
+    generateSlip(id: $id, eId: $eId, payPass: $payPass) {
       sStatus
     }
   }

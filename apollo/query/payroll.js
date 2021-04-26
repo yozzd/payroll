@@ -405,6 +405,7 @@ export const PayrollSlip = gql`
           dir
           check
         }
+        payPass
       }
     }
   }
