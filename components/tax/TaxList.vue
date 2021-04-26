@@ -88,6 +88,18 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-pagination
+        :current-page.sync="page"
+        :page-sizes="pageSizes"
+        :page-size="pageSize"
+        :total="items.length"
+        :pager-count="pagerCount"
+        layout="total, sizes, prev, pager, next"
+        class="flex justify-end"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      >
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -237,6 +249,7 @@ export default {
           this.items = employee;
           this.content = `${period} ${year}`;
           this.miniSearch.addAll(this.items);
+          this.pageSizes.push(this.items.length);
         }
       },
       error({ graphQLErrors, networkError }) {
