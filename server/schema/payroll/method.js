@@ -783,13 +783,13 @@ const genPayrollXLS = async (p) => {
       wb.Sheets.Sheet3[`U${row}`] = { t: 'n', v: intpre0v2(e[i].dl0).format() };
       wb.Sheets.Sheet3[`V${row}`] = { t: 'n', v: intpre0v2(e[i].dm0).format() };
       wb.Sheets.Sheet3[`W${row}`] = { t: 'n', v: intpre0v2(e[i].dn0).format() };
-      
+
       wb.Sheets.Sheet4[`A${row}`] = { t: 'n', v: i + 1 };
       wb.Sheets.Sheet4[`B${row}`] = { t: 's', v: e[i].d0 };
       wb.Sheets.Sheet4[`C${row}`] = { t: 's', v: e[i].e0 };
-      wb.Sheets.Sheet4[`D${row}`] = { t: 's', v: e[i].i0 ? gDateFormat(e[i].i0, 'dd-MM-yyyy'): '' };
+      wb.Sheets.Sheet4[`D${row}`] = { t: 's', v: e[i].i0 ? gDateFormat(e[i].i0, 'dd-MM-yyyy') : '' };
       wb.Sheets.Sheet4[`E${row}`] = { t: 'n', v: e[i].j0 };
-      wb.Sheets.Sheet4[`F${row}`] = { t: 's', v: e[i].k0 ? gDateFormat(e[i].k0, 'dd-MM-yyyy'): '' };
+      wb.Sheets.Sheet4[`F${row}`] = { t: 's', v: e[i].k0 ? gDateFormat(e[i].k0, 'dd-MM-yyyy') : '' };
       wb.Sheets.Sheet4[`G${row}`] = { t: 's', v: e[i].n0 };
       wb.Sheets.Sheet4[`H${row}`] = { t: 's', v: e[i].p0 };
       wb.Sheets.Sheet4[`I${row}`] = { t: 's', v: e[i].q0 };
@@ -797,7 +797,7 @@ const genPayrollXLS = async (p) => {
       wb.Sheets.Sheet4[`K${row}`] = { t: 's', v: e[i].s0 };
       wb.Sheets.Sheet4[`L${row}`] = { t: 's', v: e[i].t0 };
       wb.Sheets.Sheet4[`M${row}`] = { t: 's', v: e[i].ew0 };
-      wb.Sheets.Sheet4[`N${row}`] = { t: 's', v: e[i].o0 ? gDateFormat(e[i].o0, 'dd-MM-yyyy'): '' };
+      wb.Sheets.Sheet4[`N${row}`] = { t: 's', v: e[i].o0 ? gDateFormat(e[i].o0, 'dd-MM-yyyy') : '' };
     }
 
     row += 1;

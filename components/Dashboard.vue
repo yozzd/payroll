@@ -888,10 +888,10 @@ import {
   HariRaya,
   PayrollFreeze,
 } from '../apollo/mutation/payroll';
-import depsec from '../mixins/depsec';
+import position from '../mixins/position';
 
 export default {
-  mixins: [depsec],
+  mixins: [position],
   data() {
     const year = getYear(new Date());
     const initY = 2020;

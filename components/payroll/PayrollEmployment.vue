@@ -144,7 +144,7 @@
             <el-form-item label="Department">
               <el-select v-model="form.u0" filterable>
                 <el-option
-                  v-for="d in dpt"
+                  v-for="d in department"
                   :key="d"
                   :label="d"
                   :value="d"
@@ -154,7 +154,7 @@
             <el-form-item label="Section">
               <el-select v-model="form.v0" filterable>
                 <el-option
-                  v-for="s in sct"
+                  v-for="s in section"
                   :key="s"
                   :label="s"
                   :value="s"
@@ -164,7 +164,7 @@
             <el-form-item label="Section Code">
               <el-select v-model="form.w0" filterable>
                 <el-option
-                  v-for="s in scd"
+                  v-for="s in sectionCode"
                   :key="s"
                   :label="s"
                   :value="s"
@@ -176,7 +176,7 @@
             <el-form-item label="Grade">
               <el-select v-model="form.x0" filterable>
                 <el-option
-                  v-for="g in grd"
+                  v-for="g in grade"
                   :key="g"
                   :label="g"
                   :value="g"
@@ -186,7 +186,7 @@
             <el-form-item label="Jabatan">
               <el-select v-model="form.y0" filterable>
                 <el-option
-                  v-for="j in jbt"
+                  v-for="j in jabatan"
                   :key="j"
                   :label="j"
                   :value="j"
@@ -216,9 +216,10 @@ import MiniSearch from 'minisearch';
 import { PayrollEmployment } from '../../apollo/query/payroll';
 import { EditEmployment, EmployeeDelete } from '../../apollo/mutation/payroll';
 import mix from '../../mixins/payroll';
+import position from '../../mixins/position';
 
 export default {
-  mixins: [mix],
+  mixins: [mix, position],
   data() {
     return {
       currentPage: 1,
@@ -226,11 +227,6 @@ export default {
       form: {},
       loading: false,
       freeze: false,
-      dpt: [],
-      sct: [],
-      scd: [],
-      grd: [],
-      jbt: [],
       multipleSelection: [],
       cachedMultipleSelection: [],
       miniSearch: new MiniSearch({
@@ -353,11 +349,6 @@ export default {
           this.items = employee;
           this.miniSearch.removeAll();
           this.miniSearch.addAll(this.items);
-          this.dpt = [...new Set(this.items.map((v) => v.u0))].sort();
-          this.sct = [...new Set(this.items.map((v) => v.v0))].sort();
-          this.scd = [...new Set(this.items.map((v) => v.w0))].sort();
-          this.grd = [...new Set(this.items.map((v) => v.x0))].sort();
-          this.jbt = [...new Set(this.items.map((v) => v.y0))].sort();
           this.pageSizes.push(this.items.length);
         }
       },
