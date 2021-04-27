@@ -528,7 +528,7 @@ const genPayrollXLS = async (p) => {
 
     const len = e.length + 5;
     const wb = {
-      SheetNames: ['Sheet1', 'Sheet2', 'Sheet3'],
+      SheetNames: ['Sheet1', 'Sheet2', 'Sheet3', 'Sheet4'],
       Sheets: {
         Sheet1: {
           '!ref': `A1:AD${len}`,
@@ -681,6 +681,25 @@ const genPayrollXLS = async (p) => {
             { s: { r: 2, c: 22 }, e: { r: 3, c: 22 } },
           ],
         },
+        Sheet4: {
+          '!ref': `A1:N${len}`,
+          A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
+          A2: { t: 's', v: `PERIODE PAYROLL: ${p.period} ${p.year}` },
+          A3: { t: 's', v: 'No' },
+          B3: { t: 's', v: 'Nama Karyawan' },
+          C3: { t: 's', v: 'No Karyawan' },
+          D3: { t: 's', v: 'Hired Date' },
+          E3: { t: 's', v: 'Hari Kerja' },
+          F3: { t: 's', v: 'Resign / Finish Date' },
+          G3: { t: 's', v: 'Jenis Kelamin' },
+          H3: { t: 's', v: 'Status NPWP' },
+          I3: { t: 's', v: 'No NPWP' },
+          J3: { t: 's', v: 'Status Tanggungan' },
+          K3: { t: 's', v: 'Bank' },
+          L3: { t: 's', v: 'No Rekening' },
+          M3: { t: 's', v: 'Email' },
+          N3: { t: 's', v: 'Birthday' },
+        },
       },
     };
 
@@ -764,6 +783,21 @@ const genPayrollXLS = async (p) => {
       wb.Sheets.Sheet3[`U${row}`] = { t: 'n', v: intpre0v2(e[i].dl0).format() };
       wb.Sheets.Sheet3[`V${row}`] = { t: 'n', v: intpre0v2(e[i].dm0).format() };
       wb.Sheets.Sheet3[`W${row}`] = { t: 'n', v: intpre0v2(e[i].dn0).format() };
+      
+      wb.Sheets.Sheet4[`A${row}`] = { t: 'n', v: i + 1 };
+      wb.Sheets.Sheet4[`B${row}`] = { t: 's', v: e[i].d0 };
+      wb.Sheets.Sheet4[`C${row}`] = { t: 's', v: e[i].e0 };
+      wb.Sheets.Sheet4[`D${row}`] = { t: 's', v: e[i].i0 ? gDateFormat(e[i].i0, 'dd-MM-yyyy'): '' };
+      wb.Sheets.Sheet4[`E${row}`] = { t: 'n', v: e[i].j0 };
+      wb.Sheets.Sheet4[`F${row}`] = { t: 's', v: e[i].k0 ? gDateFormat(e[i].k0, 'dd-MM-yyyy'): '' };
+      wb.Sheets.Sheet4[`G${row}`] = { t: 's', v: e[i].n0 };
+      wb.Sheets.Sheet4[`H${row}`] = { t: 's', v: e[i].p0 };
+      wb.Sheets.Sheet4[`I${row}`] = { t: 's', v: e[i].q0 };
+      wb.Sheets.Sheet4[`J${row}`] = { t: 's', v: e[i].r0 };
+      wb.Sheets.Sheet4[`K${row}`] = { t: 's', v: e[i].s0 };
+      wb.Sheets.Sheet4[`L${row}`] = { t: 's', v: e[i].t0 };
+      wb.Sheets.Sheet4[`M${row}`] = { t: 's', v: e[i].ew0 };
+      wb.Sheets.Sheet4[`N${row}`] = { t: 's', v: e[i].o0 ? gDateFormat(e[i].o0, 'dd-MM-yyyy'): '' };
     }
 
     row += 1;
