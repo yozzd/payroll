@@ -701,7 +701,7 @@
             <el-form-item label="Department" prop="u0">
               <el-select v-model="formAddEmployee.u0" filterable>
                 <el-option
-                  v-for="d in dpt"
+                  v-for="d in department"
                   :key="d"
                   :label="d"
                   :value="d"
@@ -711,7 +711,7 @@
             <el-form-item label="Section" prop="v0">
               <el-select v-model="formAddEmployee.v0" filterable>
                 <el-option
-                  v-for="s in sct"
+                  v-for="s in section"
                   :key="s"
                   :label="s"
                   :value="s"
@@ -888,8 +888,10 @@ import {
   HariRaya,
   PayrollFreeze,
 } from '../apollo/mutation/payroll';
+import depsec from '../mixins/depsec';
 
 export default {
+  mixins: [depsec],
   data() {
     const year = getYear(new Date());
     const initY = 2020;
@@ -919,8 +921,6 @@ export default {
       genAcc: false,
       loadXLSPy: false,
       loadXLSNoFin: false,
-      dpt: [],
-      sct: [],
       form: {
         period: [],
         file: null,
@@ -1660,14 +1660,6 @@ export default {
         };
       },
       prefetch: false,
-      result({ data, loading }) {
-        if (!loading) {
-          const len = data.payrollAll.length;
-          const { employee } = data.payrollAll[len - 1];
-          this.dpt = [...new Set(employee.map((v) => v.u0))].sort();
-          this.sct = [...new Set(employee.map((v) => v.v0))].sort();
-        }
-      },
       error({ graphQLErrors, networkError }) {
         this.errors = graphQLErrors || networkError.result.errors;
       },

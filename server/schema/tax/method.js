@@ -29,7 +29,7 @@ const generateTax = async (p) => {
       'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
       'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember',
     ];
-    
+
     const ctbl1 = [
       [{ text: e.h0, bold: true }, '', { text: intpre0(Math.abs(e.i0)).format(), alignment: 'right', fontSize: 10 }],
       [`Installment ${p.year} :`, '', ''],
@@ -50,9 +50,9 @@ const generateTax = async (p) => {
 
     for (let i = start; i <= end; i += 1) {
       ctbl1.push([
-        '', months[i], { text: intpre0(Math.abs(ds[i - start])).format(), alignment: 'right'},
-        ]);
-      }
+        '', months[i], { text: intpre0(Math.abs(ds[i - start])).format(), alignment: 'right' },
+      ]);
+    }
 
     const docDefinition = {
       userPassword: e.slip.pw,

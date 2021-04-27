@@ -76,7 +76,17 @@ const Query = {
       year: { type: GraphQLInt },
     },
     resolve: auth.hasRole('guest', async (_, { year }) => {
-      const p = await Payroll.find({ year }).sort('-month');
+      const p = await Payroll.find({ year }).sort('-month')
+        .select({
+          _id: 1,
+          year: 1,
+          month: 1,
+          period: 1,
+          dir: 1,
+          freeze: 1,
+          typeHR: 1,
+          tglHR: 1,
+        });
       return p;
     }),
   },

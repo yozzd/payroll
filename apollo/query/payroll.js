@@ -11,10 +11,6 @@ export const PayrollAll = gql`
       freeze
       typeHR
       tglHR
-      employee {
-        u0
-        v0
-      }
     }
   }
 `;
