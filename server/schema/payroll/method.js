@@ -2146,9 +2146,9 @@ const genThrSlipQ = async (p) => {
 
     let tag = '';
     if (p.typeHR === 1) {
-  		tag = 'SELAMAT HARI RAYA IDUL FITRI';
+      tag = 'SELAMAT HARI RAYA IDUL FITRI';
     } else if (p.typeHR === 2) {
-  		tag = 'SELAMAT HARI NATAL & TAHUN BARU';
+      tag = 'SELAMAT HARI NATAL & TAHUN BARU';
     }
 
     const docDefinition = {
