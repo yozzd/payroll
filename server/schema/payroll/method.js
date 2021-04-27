@@ -682,7 +682,7 @@ const genPayrollXLS = async (p) => {
           ],
         },
         Sheet4: {
-          '!ref': `A1:N${len}`,
+          '!ref': `A1:P${len}`,
           A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
           A2: { t: 's', v: `PERIODE PAYROLL: ${p.period} ${p.year}` },
           A3: { t: 's', v: 'No' },
@@ -699,6 +699,8 @@ const genPayrollXLS = async (p) => {
           L3: { t: 's', v: 'No Rekening' },
           M3: { t: 's', v: 'Email' },
           N3: { t: 's', v: 'Birthday' },
+          O3: { t: 's', v: 'Periode Pajak' },
+          P3: { t: 's', v: 'Total Bulan' },
         },
       },
     };
@@ -798,6 +800,8 @@ const genPayrollXLS = async (p) => {
       wb.Sheets.Sheet4[`L${row}`] = { t: 's', v: e[i].t0 };
       wb.Sheets.Sheet4[`M${row}`] = { t: 's', v: e[i].ew0 };
       wb.Sheets.Sheet4[`N${row}`] = { t: 's', v: e[i].o0 ? gDateFormat(e[i].o0, 'dd-MM-yyyy') : '' };
+      wb.Sheets.Sheet4[`O${row}`] = { t: 's', v: e[i].dz0 };
+      wb.Sheets.Sheet4[`P${row}`] = { t: 'n', v: e[i].ea0 };
     }
 
     row += 1;
