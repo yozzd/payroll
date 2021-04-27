@@ -135,6 +135,7 @@ export default {
         fields: ['d0', 'e0'],
         storeFields: [
           '_id', 'd0', 'e0', 'ew0', 'slip',
+          'payPass', 'disabled',
         ],
       }),
     };
