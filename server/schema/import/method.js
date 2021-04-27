@@ -586,7 +586,7 @@ const processImportTax21 = async ({ _id, file }) => {
             const idx = px.employee.findIndex((v) => v.e0 === ft[i]['Emp No']);
             if (idx >= 0) {
               Object.assign(px.employee[idx], {
-                dg0: ft[i].Pemotongan || 0,
+                dn0: ft[i].Pemotongan || 0,
                 bv0: ft[i].Pembetulan || 0,
               });
             }
