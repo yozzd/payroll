@@ -796,8 +796,12 @@ const Mutation = {
         r0,
         u0,
         v0,
+        z0: '',
+        aa0: '',
         ay0: g0,
+        ck0: '',
         co0,
+        ct0: '',
         ew0,
       });
       await px.save();
