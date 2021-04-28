@@ -228,7 +228,7 @@ export default {
           '_id', 'd0', 'e0', 'i0', 'l0', 'q0',
           'u0', 'y0', 'ai0', 'bk0', 'bu0', 'cn0',
           'cy0', 'cz0', 'da0', 'db0', 'df0', 'en0',
-          'eq0', 'er0', 'es0', 'gross0', 'ttax',
+          'eq0', 'er0', 'es0', 'gross', 'ttax',
         ],
       }),
     };
