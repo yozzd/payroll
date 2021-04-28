@@ -8,4 +8,10 @@ export const GenPDFKtg = gql`
   }
 `;
 
-export const faker = '';
+export const GenXLSKtg = gql`
+  mutation genXLSKtg($id: String!) {
+    genXLSKtg(id: $id) {
+      sStatus
+    }
+  }
+`;

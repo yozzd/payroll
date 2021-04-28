@@ -1,8 +1,11 @@
 const { GraphQLError } = require('graphql');
 const PdfPrinter = require('pdfmake');
 const fs = require('fs-extra');
+const XLSX = require('xlsx');
+const XlsxPopulate = require('xlsx-populate');
+const { xlsPass } = require('../../config');
 
-const { intpre0 } = require('../scalar/number');
+const { intpre0, intpre0v2 } = require('../scalar/number');
 const { gDateFormat } = require('../scalar/date');
 
 const fonts = {
@@ -193,6 +196,110 @@ const genPDF = async (p) => {
   }
 };
 
+const genXLS = async (p) => {
+  try {
+    const { employee: e } = p;
+    await fs.ensureDir(`static/report/${p.dir}`);
+
+    const len = e.length + 4;
+    const wb = {
+      SheetNames: ['Sheet1'],
+      Sheets: {
+        Sheet1: {
+          '!ref': `A1:O${len}`,
+          A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
+          A2: { t: 's', v: `TAX - PERIODE PAYROLL: ${p.period} ${p.year}` },
+          A3: { t: 's', v: 'No' },
+          B3: { t: 's', v: 'No Karyawan' },
+          C3: { t: 's', v: 'Nama Karyawan' },
+          D3: { t: 's', v: 'No KPJ' },
+          E3: { t: 's', v: 'No BPJS Kesehatan' },
+          F3: { t: 's', v: 'Tanggal Lahir' },
+          G3: { t: 's', v: 'Upah' },
+          H3: { t: 's', v: 'Iuran JKK' },
+          I3: { t: 's', v: 'Iuran JKM' },
+          J3: { t: 's', v: 'Iuran JHT Tenaga Kerja' },
+          J4: { t: 's', v: 'Pemberi Kerja' },
+          K4: { t: 's', v: 'Tenaga Kerja' },
+          L3: { t: 's', v: 'Iuran Jaminan Pensiun' },
+          L4: { t: 's', v: 'Pemberi Kerja' },
+          M4: { t: 's', v: 'Tenaga Kerja' },
+          N3: { t: 's', v: 'Total Iuran' },
+          O3: { t: 's', v: 'Catatan' },
+          '!merges': [
+            { s: { r: 0, c: 0 }, e: { r: 0, c: 14 } },
+            { s: { r: 1, c: 0 }, e: { r: 1, c: 14 } },
+            { s: { r: 2, c: 0 }, e: { r: 3, c: 0 } },
+            { s: { r: 2, c: 1 }, e: { r: 3, c: 1 } },
+            { s: { r: 2, c: 2 }, e: { r: 3, c: 2 } },
+            { s: { r: 2, c: 3 }, e: { r: 3, c: 3 } },
+            { s: { r: 2, c: 4 }, e: { r: 3, c: 4 } },
+            { s: { r: 2, c: 5 }, e: { r: 3, c: 5 } },
+            { s: { r: 2, c: 6 }, e: { r: 3, c: 6 } },
+            { s: { r: 2, c: 7 }, e: { r: 3, c: 7 } },
+            { s: { r: 2, c: 8 }, e: { r: 3, c: 8 } },
+            { s: { r: 2, c: 9 }, e: { r: 2, c: 10 } },
+            { s: { r: 2, c: 11 }, e: { r: 2, c: 12 } },
+            { s: { r: 2, c: 13 }, e: { r: 3, c: 13 } },
+            { s: { r: 2, c: 14 }, e: { r: 3, c: 14 } },
+          ],
+        },
+      },
+    };
+
+    let row = 4;
+    for (let i = 0; i < e.length; i += 1) {
+      row += 1;
+      wb.Sheets.Sheet1[`A${row}`] = { t: 'n', v: i + 1 };
+      wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: e[i].e0 };
+      wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: e[i].d0 };
+      wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: e[i].z0 ? e[i].z0 : '' };
+      wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: e[i].aa0 ? e[i].aa0 : '' };
+      wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: e[i].o0 ? gDateFormat(e[i].o0, 'dd-MM-yyyy') : '' };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: intpre0v2(e[i].ay0).format() };
+      wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: intpre0v2(e[i].cb0).format() };
+      wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: intpre0v2(e[i].cc0).format() };
+      wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: intpre0v2(e[i].cd0).format() };
+      wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: intpre0v2(e[i].ce0).format() };
+      wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: intpre0v2(e[i].ci0).format() };
+      wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: intpre0v2(e[i].cj0).format() };
+      wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: intpre0v2(e[i].cm0).format() };
+      wb.Sheets.Sheet1[`O${row}`] = { t: 's', v: e[i].ck0 ? e[i].ck0 : '' };
+    }
+
+    wb.Sheets.Sheet1[`A${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: intpre0v2(p.sum1).format() };
+    wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: intpre0v2(p.sum2).format() };
+    wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: intpre0v2(p.sum3).format() };
+    wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: intpre0v2(p.sum4).format() };
+    wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: intpre0v2(p.sum5).format() };
+    wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: intpre0v2(p.sum6).format() };
+    wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: intpre0v2(p.sum7).format() };
+    wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: intpre0v2(p.sum8).format() };
+    wb.Sheets.Sheet1[`O${row}`] = { t: 's', v: '' };
+
+    const fn = `static/report/${p.dir}/${p.dir}_ktg.xlsx`;
+    const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
+    fs.writeFileSync(fn, content);
+
+    return XlsxPopulate.fromFileAsync(fn)
+      .then((workbook) => workbook.toFileAsync(fn, { password: xlsPass })
+        .then(() => ({ sStatus: 1 })));
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
+};
+
 module.exports = {
   genPDF,
+  genXLS,
 };

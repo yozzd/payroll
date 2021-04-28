@@ -23,6 +23,9 @@
           <el-dropdown-item command="pdf">
             PDF
           </el-dropdown-item>
+          <el-dropdown-item command="xls">
+            XLS
+          </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <div class="w-64">
@@ -38,7 +41,7 @@
       :errors="errors"
     />
     <el-table
-      v-loading="$apollo.loading || loadKtg"
+      v-loading="$apollo.loading || loadKtg || loadXLSKtg"
       element-loading-text="Loading..."
       element-loading-spinner="el-icon-loading"
       :data="tableData"
@@ -141,7 +144,7 @@
 <script>
 import MiniSearch from 'minisearch';
 import { KetenagakerjaanReport } from '../../apollo/query/ketenagakerjaan';
-import { GenPDFKtg } from '../../apollo/mutation/ketenagakerjaan';
+import { GenPDFKtg, GenXLSKtg } from '../../apollo/mutation/ketenagakerjaan';
 import mix from '../../mixins/payroll';
 
 export default {
@@ -151,6 +154,7 @@ export default {
       content: '',
       dir: '',
       loadKtg: false,
+      loadXLSKtg: false,
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -165,6 +169,7 @@ export default {
   methods: {
     handleExport(c, dir) {
       if (c === 'pdf') this.genPDFKtg(dir);
+      else if (c === 'xls') this.genXLSKtg(dir);
     },
     async genPDFKtg(dir) {
       try {
@@ -178,6 +183,26 @@ export default {
 
         this.loadKtg = false;
         window.open(`/report/${dir}/${dir}_ktg.pdf`);
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
+    },
+    async genXLSKtg(dir) {
+      try {
+        this.loadXLSKtg = true;
+        const { data: { genXLSKtg: { sStatus } } } = await this.$apollo.mutate({
+          mutation: GenXLSKtg,
+          variables: {
+            id: this.$route.params.id,
+          },
+        });
+
+        if (sStatus) {
+          this.loadXLSKtg = false;
+          window.open(`/report/${dir}/${dir}_ktg.xlsx`);
+        }
         return true;
       } catch ({ graphQLErrors, networkError }) {
         this.errors = graphQLErrors || networkError.result.errors;
