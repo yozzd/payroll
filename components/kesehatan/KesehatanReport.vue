@@ -23,6 +23,9 @@
           <el-dropdown-item command="pdf">
             PDF
           </el-dropdown-item>
+          <el-dropdown-item command="xls">
+            XLS
+          </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <div class="w-64">
@@ -38,7 +41,7 @@
       :errors="errors"
     />
     <el-table
-      v-loading="$apollo.loading || loadKes"
+      v-loading="$apollo.loading || loadKes || loadXLSKes"
       element-loading-text="Loading..."
       element-loading-spinner="el-icon-loading"
       :data="tableData"
@@ -124,7 +127,7 @@
 <script>
 import MiniSearch from 'minisearch';
 import { KesehatanReport } from '../../apollo/query/kesehatan';
-import { GenPDFKes } from '../../apollo/mutation/kesehatan';
+import { GenPDFKes, GenXLSKes } from '../../apollo/mutation/kesehatan';
 import mix from '../../mixins/payroll';
 
 export default {
@@ -134,6 +137,7 @@ export default {
       content: '',
       dir: '',
       loadKes: false,
+      loadXLSKes: false,
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -147,6 +151,7 @@ export default {
   methods: {
     handleExport(c, dir) {
       if (c === 'pdf') this.genPDFKes(dir);
+      else if (c === 'xls') this.genXLSKes(dir);
     },
     async genPDFKes(dir) {
       try {
@@ -160,6 +165,26 @@ export default {
 
         this.loadKes = false;
         window.open(`/report/${dir}/${dir}_kes.pdf`);
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
+    },
+    async genXLSKes(dir) {
+      try {
+        this.loadXLSKes = true;
+        const { data: { genXLSKes: { sStatus } } } = await this.$apollo.mutate({
+          mutation: GenXLSKes,
+          variables: {
+            id: this.$route.params.id,
+          },
+        });
+
+        if (sStatus) {
+          this.loadXLSKes = false;
+          window.open(`/report/${dir}/${dir}_kes.xlsx`);
+        }
         return true;
       } catch ({ graphQLErrors, networkError }) {
         this.errors = graphQLErrors || networkError.result.errors;

@@ -2,7 +2,7 @@ const { GraphQLString } = require('graphql');
 const Payroll = require('../payroll/model');
 const { PayrollType, GenType } = require('../payroll/type');
 const auth = require('../auth/service');
-const { genPDF } = require('./method');
+const { genPDF, genXLS } = require('./method');
 
 const kes = async (id) => {
   const p = await Payroll.aggregate([
@@ -64,6 +64,17 @@ const Mutation = {
     resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await kes(id);
       const s = await genPDF(p);
+      return s;
+    }),
+  },
+  genXLSKes: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('guest', async (_, { id }) => {
+      const p = await kes(id);
+      const s = await genXLS(p);
       return s;
     }),
   },
