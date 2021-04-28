@@ -8,7 +8,18 @@ const byTansfer = async (id) => {
   const p = await Payroll.aggregate([
     { $match: { _id: id } },
     { $unwind: '$employee' },
-    { $match: { 'employee.ex0': false } },
+    {
+      $match: {
+        $or: [
+          {
+            $and: [
+              { 'employee.ex0': { $eq: false } },
+              { 'employee.e0': { $ne: 'X.0010' } },
+            ],
+          },
+        ],
+      },
+    },
     {
       $group: {
         _id: '$_id',
