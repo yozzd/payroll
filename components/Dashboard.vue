@@ -222,7 +222,7 @@
                   Journal
                 </el-menu-item>
                 <el-menu-item index="b">
-                  Tax
+                  Tax 21
                 </el-menu-item>
                 <el-menu-item index="c">
                   Ketenagakerjaan
