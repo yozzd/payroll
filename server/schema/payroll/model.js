@@ -49,6 +49,8 @@ const EmployeeSchema = new Schema({
   ak0r: { type: Number, default: 0 }, // Tunjangan Tetap Perumahan
   al0: { type: Number, default: 0 }, // Tunjangan Tetap Posisi Fix
   al0r: { type: Number, default: 0 }, // Tunjangan Tetap Posisi Fix
+  al0f: { type: Number, default: 0 }, // Tunjangan Tetap Posisi Fix Flag
+  al0p: { type: Number, default: 0 }, // Tunjangan Tetap Posisi Fix Percentage
   am0: { type: Number, default: 0 }, // Tunjangan Tetap Fungsional Fix
   am0r: { type: Number, default: 0 }, // Tunjangan Tetap Fungsional Fix
   am0f: { type: Boolean, default: false }, // Tunjangan Tetap Fungsional Fix Flag
@@ -288,6 +290,10 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.bi0 = (this.bi0r / 21) * this.j0;
 
   if (!this.fl0) {
+    this.al0f = false;
+    this.al0p = null;
+    this.al0 = (this.al0r / 21) * this.j0;
+
     this.am0f = false;
     this.am0p = null;
     this.am0 = (this.am0r / 21) * this.j0;
@@ -305,6 +311,10 @@ EmployeeSchema.pre('save', async function fn(next) {
     this.au0 = (this.au0r / 21) * this.j0;
   }
 
+  if (this.fl0 && this.al0f && this.al0p > 0) {
+    const v = this.al0;
+    this.al0 = (100 / this.al0p) * v;
+  }
   if (this.fl0 && this.am0f && this.am0p > 0) {
     const v = this.am0;
     this.am0 = (100 / this.am0p) * v;

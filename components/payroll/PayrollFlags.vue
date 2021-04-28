@@ -218,6 +218,23 @@
             <div class="flex pl-6 items-baseline">
               <div class="w-3/4">
                 <el-checkbox
+                  v-model="form.al0f"
+                  :disabled="!form.fl0"
+                >
+                  Tj. Tetap Posisi Fix
+                </el-checkbox>
+              </div>
+              <div class="w-1/4">
+                <el-input
+                  v-model="form.al0p"
+                  size="medium"
+                  :disabled="!form.fl0 || !form.al0f"
+                ></el-input>
+              </div>
+            </div>
+            <div class="flex pl-6 items-baseline">
+              <div class="w-3/4">
+                <el-checkbox
                   v-model="form.as0f"
                   :disabled="!form.fl0"
                 >
@@ -320,6 +337,8 @@ export default {
                     fb0: this.form.fb0,
                     fj0: this.form.fj0,
                     fl0: this.form.fl0,
+                    al0f: this.form.al0f,
+                    al0p: this.form.al0f ? parseFloat(this.form.al0p) : null,
                     am0f: this.form.am0f,
                     am0p: this.form.am0f ? parseFloat(this.form.am0p) : null,
                     as0f: this.form.as0f,

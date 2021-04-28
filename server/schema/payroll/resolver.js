@@ -559,6 +559,8 @@ const Query = {
           'employee.fb0': 1,
           'employee.fj0': 1,
           'employee.fl0': 1,
+          'employee.al0f': 1,
+          'employee.al0p': 1,
           'employee.am0f': 1,
           'employee.am0p': 1,
           'employee.as0f': 1,

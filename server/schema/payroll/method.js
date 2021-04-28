@@ -1551,6 +1551,9 @@ const genPDFSpAllowQ = async (p) => {
           text: 'Tj. Tetap Fungsional Variable', bold: true, alignment: 'center', colSpan: 3,
         }, '', '',
         {
+          text: 'Tj. Tetap Posisi Fix', bold: true, alignment: 'center', colSpan: 3,
+        }, '', '',
+        {
           text: 'Tj. Tetap Posisi Variable', bold: true, alignment: 'center', colSpan: 3,
         }, '', '',
         {
@@ -1562,6 +1565,15 @@ const genPDFSpAllowQ = async (p) => {
       ],
       [
         '', '', '', '',
+        {
+          text: 'Full', bold: true, alignment: 'center',
+        },
+        {
+          text: '%', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Actual', bold: true, alignment: 'center',
+        },
         {
           text: 'Full', bold: true, alignment: 'center',
         },
@@ -1612,6 +1624,9 @@ const genPDFSpAllowQ = async (p) => {
         { text: intpre0(e.at0).format(), alignment: 'right' },
         { text: floatpre2(e.at0p).format(), alignment: 'right' },
         { text: intpre0(e.at0r).format(), alignment: 'right' },
+        { text: intpre0(e.al0).format(), alignment: 'right' },
+        { text: floatpre2(e.al0p).format(), alignment: 'right' },
+        { text: intpre0(e.al0r).format(), alignment: 'right' },
         { text: intpre0(e.as0).format(), alignment: 'right' },
         { text: floatpre2(e.as0p).format(), alignment: 'right' },
         { text: intpre0(e.as0r).format(), alignment: 'right' },
@@ -1632,6 +1647,9 @@ const genPDFSpAllowQ = async (p) => {
       { text: intpre0(p.at0rSum).format(), alignment: 'right' },
       '',
       { text: intpre0(p.at0Sum).format(), alignment: 'right' },
+      { text: intpre0(p.al0rSum).format(), alignment: 'right' },
+      '',
+      { text: intpre0(p.al0Sum).format(), alignment: 'right' },
       { text: intpre0(p.as0rSum).format(), alignment: 'right' },
       '',
       { text: intpre0(p.as0Sum).format(), alignment: 'right' },
@@ -1683,9 +1701,9 @@ const genPDFSpAllowQ = async (p) => {
           style: 'tbl3',
           table: {
             widths: [
-              15, 30, 80, 80, 30, 30, 30,
-              30, 30, 30, 30, 30, 30, 30,
-              30, 30, 60,
+              10, 25, 60, 60, 25, 25, 25,
+              25, 25, 25, 25, 25, 25, 25,
+              25, 25, 25, 25, 25, 60,
             ],
             body: vw1,
           },
@@ -1701,7 +1719,7 @@ const genPDFSpAllowQ = async (p) => {
           margin: [-10, 40, -10, 10],
         },
         tbl3: {
-          fontSize: 6,
+          fontSize: 4,
           margin: [-10, -10, -10, 0],
         },
       },
