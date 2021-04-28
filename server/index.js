@@ -32,6 +32,14 @@ app.use(
 
 app.use(passport.initialize());
 
+app.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    res.status(err.status).send({ message: err.message });
+    return;
+  }
+  next();
+});
+
 async function start() {
   await mongo.connect();
   app.listen(port, host);
