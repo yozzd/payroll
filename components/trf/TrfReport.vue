@@ -73,15 +73,23 @@
       </el-table-column>
       <el-table-column prop="ec0" label="Take Home Pay" width="120" align="right">
         <template slot-scope="scope">
-          <span>{{ scope.row.ec0 | currency }}</span>
+          <span
+            :class="{ 'text-red-500': scope.row.ec0 < 0 }"
+          >
+            {{ scope.row.ec0 | currency }}
+          </span>
         </template>
       </el-table-column>
       <el-table-column prop="ec0F" label="THP for Bank" width="120" align="right">
         <template slot-scope="scope">
-          <span>{{ scope.row.ec0F | currency }}</span>
+          <span
+            :class="{ 'text-red-500': scope.row.ec0F < 0 }"
+          >
+            {{ scope.row.ec0F | currency }}
+          </span>
         </template>
       </el-table-column>
-      <el-table-column label="" min-width="120"></el-table-column>
+      <el-table-column min-width="120"></el-table-column>
     </el-table>
     <el-pagination
       :current-page.sync="page"
