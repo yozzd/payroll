@@ -5,7 +5,11 @@
       Dashboard
     </nuxt-link>
     <div class="flex-1"></div>
-    <el-dropdown trigger="click" @command="handleCommand">
+    <el-dropdown
+      v-if="$auth.hasRole('admin')"
+      trigger="click"
+      @command="handleCommand"
+    >
       <span class="el-dropdown-link">
         Extras<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
