@@ -297,6 +297,7 @@ const generateReportPayroll = async (p) => {
     ];
 
     const tbl5 = [
+      [{ text: `Batam, ${idDateFormat(new Date(), 'dd-MM-yyyy')}`, colSpan: 5 }, '', '', '', ''],
       ['Prepared By,', 'Checked By,', 'Reviewed By,', 'Knowledge By,', 'Approved By,'],
       ['', '', '', '', ''],
       ['Ayu Fatimah', 'Ronal P. Siahaan', 'Hendra SP / Yutin Sudarni', 'Gusti Very Wealthy', 'Eko Hernanto'],
@@ -491,7 +492,7 @@ const generateReportPayroll = async (p) => {
           margin: [10, 40, 0, 0],
           table: {
             widths: [95, 95, 95, 95, 95],
-            heights: [5, 20, 5, 5],
+            heights: [5, 5, 20, 5, 5],
             body: tbl5,
           },
           layout: 'noBorders',
