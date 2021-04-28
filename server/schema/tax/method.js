@@ -286,7 +286,8 @@ const genPDF = async (p) => {
       vw1.push([
         { text: (i + 1), alignment: 'center' }, { text: e.e0, alignment: 'center' }, e.d0,
         { text: gDateFormat(e.i0, 'yyyy-MM-dd'), alignment: 'right' },
-        e.y0, e.u0, e.q0,
+        e.y0, e.u0,
+        e.q0 ? e.q0 : '',
         { text: intpre0(e.l0).format(), alignment: 'right' },
         { text: intpre0(e.ai0).format(), alignment: 'right' },
         { text: intpre0(e.bk0).format(), alignment: 'right' },
