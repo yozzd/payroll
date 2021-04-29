@@ -471,9 +471,9 @@ const genXLS = async (p) => {
       wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: intpre0v2(e[i].en0).format() };
       wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: intpre0v2(e[i].eq0).format() };
       wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: intpre0v2(e[i].df0).format() };
-      wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: intpre0v2(e[i].cy0).format() };
-      wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: intpre0v2(e[i].gross).format() };
-      wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: intpre0v2(e[i].er0).format() };
+      wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: intpre0v2(e[i].cy0).format() };
+      wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: intpre0v2(e[i].gross).format() };
+      wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: intpre0v2(e[i].er0).format() };
       wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: intpre0v2(e[i].cz0).format() };
       wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: intpre0v2(e[i].da0).format() };
       wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: intpre0v2(e[i].db0).format() };
