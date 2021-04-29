@@ -96,7 +96,7 @@ const Query = {
       id: { type: GraphQLString },
     },
     resolve: auth.hasRole('guest', async (_, { id }) => {
-      const p = await Payroll.findOne({ _id: id }).select('period year');
+      const p = await Payroll.findOne({ _id: id }).select('period year dir');
       return p;
     }),
   },

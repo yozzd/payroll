@@ -56,7 +56,7 @@
           <td>Production - Labor Cost</td>
           <td>(OT)</td>
           <td class="text-right">
-            {{ production.ot| currency }}
+            {{ production.ot | currency }}
           </td>
           <td></td>
           <td></td>
@@ -104,7 +104,7 @@
         <tr>
           <td>51030</td>
           <td>Production - Labor Cost</td>
-          <td>(Posiotion / Functional)</td>
+          <td>(Position / Functional)</td>
           <td class="text-right">
             {{ production.posfunc | currency }}
           </td>
@@ -233,7 +233,7 @@
         </tr>
         <tr>
           <td>61001</td>
-          <td>Payroll Exp - Administration</td>
+          <td>Administration - Payroll Exp</td>
           <td>(Salary)</td>
           <td class="text-right">
             {{ administration.salary | currency }}
@@ -243,7 +243,7 @@
         </tr>
         <tr>
           <td>61001</td>
-          <td>Payroll Exp - Administration</td>
+          <td>Administration - Payroll Exp</td>
           <td>(Salary - Retro)</td>
           <td class="text-right">
             {{ administration.retro | currency }}
@@ -253,7 +253,7 @@
         </tr>
         <tr>
           <td>61002</td>
-          <td>Payroll Exp - Administration</td>
+          <td>Administration - Payroll Exp</td>
           <td>(OT)</td>
           <td class="text-right">
             {{ administration.ot | currency }}
@@ -263,7 +263,7 @@
         </tr>
         <tr>
           <td>61011</td>
-          <td>Payroll Exp - Administration</td>
+          <td>Administration - Payroll Exp</td>
           <td>(Accident)</td>
           <td class="text-right">
             {{ administration.accident | currency }}
@@ -273,7 +273,7 @@
         </tr>
         <tr>
           <td>61012</td>
-          <td>Payroll Exp - Administration</td>
+          <td>Administration - Payroll Exp</td>
           <td>(Death)</td>
           <td class="text-right">
             {{ administration.death | currency }}
@@ -283,7 +283,7 @@
         </tr>
         <tr>
           <td>61013</td>
-          <td>Payroll Exp - Administration</td>
+          <td>Administration - Payroll Exp</td>
           <td>(Medical)</td>
           <td class="text-right">
             {{ administration.medical | currency }}
@@ -293,7 +293,7 @@
         </tr>
         <tr>
           <td>61014</td>
-          <td>Payroll Exp - Administration</td>
+          <td>Administration - Payroll Exp</td>
           <td>(Pension)</td>
           <td class="text-right">
             {{ administration.pension | currency }}
@@ -303,8 +303,8 @@
         </tr>
         <tr>
           <td>61020</td>
-          <td>Payroll Exp - Administration</td>
-          <td>(Posiotion / Functional)</td>
+          <td>Administration - Payroll Exp</td>
+          <td>(Position / Functional)</td>
           <td class="text-right">
             {{ administration.posfunc | currency }}
           </td>
@@ -313,7 +313,7 @@
         </tr>
         <tr>
           <td>61030</td>
-          <td>Payroll Exp - Administration</td>
+          <td>Administration - Payroll Exp</td>
           <td>(Housing)</td>
           <td class="text-right">
             {{ administration.housing | currency }}
@@ -323,7 +323,7 @@
         </tr>
         <tr>
           <td>61040</td>
-          <td>Payroll Exp - Administration</td>
+          <td>Administration - Payroll Exp</td>
           <td>(Transport)</td>
           <td class="text-right">
             {{ administration.transport | currency }}
@@ -333,7 +333,7 @@
         </tr>
         <tr>
           <td>61050</td>
-          <td>Payroll Exp - Administration</td>
+          <td>Administration - Payroll Exp</td>
           <td>(Incentive)</td>
           <td class="text-right">
             {{ administration.incentive | currency }}
@@ -343,7 +343,7 @@
         </tr>
         <tr>
           <td>61051</td>
-          <td>Payroll Exp - Administration</td>
+          <td>Administration - Payroll Exp</td>
           <td>(Communication)</td>
           <td class="text-right">
             {{ administration.communication | currency }}
@@ -353,7 +353,7 @@
         </tr>
         <tr>
           <td>61052</td>
-          <td>Payroll Exp - Administration</td>
+          <td>Administration - Payroll Exp</td>
           <td>(Living)</td>
           <td class="text-right">
             {{ administration.living | currency }}
@@ -363,7 +363,7 @@
         </tr>
         <tr>
           <td>61060</td>
-          <td>Payroll Exp - Administration</td>
+          <td>Administration - Payroll Exp</td>
           <td>(Meals)</td>
           <td class="text-right">
             {{ administration.meals | currency }}
@@ -373,7 +373,7 @@
         </tr>
         <tr>
           <td>61070</td>
-          <td>Payroll Exp - Administration</td>
+          <td>Administration - Payroll Exp</td>
           <td>(THR)</td>
           <td class="text-right">
             {{ administration.thr | currency }}
@@ -383,7 +383,7 @@
         </tr>
         <tr>
           <td>61080</td>
-          <td>Payroll Exp - Administration</td>
+          <td>Administration - Payroll Exp</td>
           <td>(Termination)</td>
           <td class="text-right">
             {{ administration.termination | currency }}
@@ -393,7 +393,7 @@
         </tr>
         <tr>
           <td>61090</td>
-          <td>Payroll Exp - Administration</td>
+          <td>Administration - Payroll Exp</td>
           <td>(Other Allowance Taxable)</td>
           <td class="text-right">
             {{ administration.other | currency }}
@@ -403,7 +403,7 @@
         </tr>
         <tr>
           <td></td>
-          <td>Payroll Exp - Administration</td>
+          <td>Administration - Payroll Exp</td>
           <td>(Tax 21 Returned)</td>
           <td class="text-right">
             {{ administration.taxReturn | currency }}
@@ -413,7 +413,7 @@
         </tr>
         <tr>
           <td></td>
-          <td>Payroll Exp - Administration</td>
+          <td>Administration - Payroll Exp</td>
           <td>(Pengembalian Pajak DTP)</td>
           <td class="text-right">
             {{ administration.dtp | currency }}
@@ -523,7 +523,7 @@
         </tr>
         <tr>
           <td>21619</td>
-          <td>Kopkar</td>
+          <td>Koperasi Karyawan</td>
           <td></td>
           <td></td>
           <td class="text-right">
@@ -553,7 +553,7 @@
         </tr>
         <tr>
           <td>21310</td>
-          <td>Tax Payable PPH 21</td>
+          <td>Tax Payable Pph 21</td>
           <td></td>
           <td></td>
           <td class="text-right">
@@ -563,7 +563,7 @@
         </tr>
         <tr>
           <td></td>
-          <td>PPH 21 Kurang Bayar</td>
+          <td>Pph 21 Kurang Bayar</td>
           <td></td>
           <td></td>
           <td class="text-right">
@@ -595,7 +595,7 @@
         </tr>
         <tr>
           <td>61014</td>
-          <td>Payroll Exp - Administration</td>
+          <td>Administration - Payroll Exp</td>
           <td>(Pension)</td>
           <td class="text-right">
             {{ journalBalance.pensionAdm | currency }}

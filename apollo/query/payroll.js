@@ -20,6 +20,7 @@ export const PayrollPeriod = gql`
     payrollPeriod(id: $id) {
       period
       year
+      dir
     }
   }
 `;

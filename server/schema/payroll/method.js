@@ -593,7 +593,7 @@ const genPayrollXLS = async (p) => {
           E3: { t: 's', v: 'Lembur Upah / 173' },
           E4: { t: 's', v: 'Lembur Normal' },
           G3: { t: 's', v: 'Lembur Upah / 173' },
-          G4: { t: 's', v: 'Lembur Normal' },
+          G4: { t: 's', v: 'Lembur Dinas' },
           I3: { t: 's', v: 'Insentif Lembur' },
           I4: { t: 's', v: 'Jam / Hari' },
           K4: { t: 's', v: 'Jam / Hari * Insentif' },
@@ -1079,7 +1079,7 @@ const generateSlip = async (p, payPass) => {
 
     const notes = [
       ['', 'Note :', '', ''],
-      ['-', e.dq0, 'Approved by,', 'Received by,'],
+      ['-', e.dq0 ? e.dq0 : '', 'Approved by,', 'Received by,'],
       ['-', { text: 'If there is correction on the limit of complaint on the 15th of each month', rowSpan: 2 }, { text: 'PT. LABTECH PENTA INTERNATIONAL', bold: true }, { text: e.d0, bold: true }],
       ['', '', e.fh0, ''],
     ];

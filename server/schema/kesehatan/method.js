@@ -190,7 +190,7 @@ const genXLS = async (p) => {
         Sheet1: {
           '!ref': `A1:L${len}`,
           A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
-          A2: { t: 's', v: `TAX - PERIODE PAYROLL: ${p.period} ${p.year}` },
+          A2: { t: 's', v: `BPJS KESEHATAN - PERIODE PAYROLL: ${p.period} ${p.year}` },
           A3: { t: 's', v: 'No' },
           B3: { t: 's', v: 'No Karyawan' },
           C3: { t: 's', v: 'Nama Karyawan' },
