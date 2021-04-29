@@ -6,7 +6,7 @@ const XlsxPopulate = require('xlsx-populate');
 const { xlsPass } = require('../../config');
 
 const { intpre0, intpre0v2 } = require('../scalar/number');
-const { gDateFormat } = require('../scalar/date');
+const { gDateFormat, idDateFormat } = require('../scalar/date');
 
 const fonts = {
   Roboto: {
@@ -114,6 +114,14 @@ const genPDF = async (p) => {
       '',
     ]);
 
+    const vw2 = [
+      [{ text: `Batam, ${idDateFormat(new Date(), 'dd-MM-yyyy')}`, colSpan: 5 }, '', '', '', ''],
+      ['Prepared By,', 'Checked By,', 'Reviewed By,', 'Knowledge By,', 'Approved By,'],
+      ['', '', '', '', ''],
+      ['Ayu Fatimah', 'Ronal P. Siahaan', 'Hendra SP / Yutin Sudarni', 'Gusti Very Wealthy', 'Eko Hernanto'],
+      [{ text: 'Personel', bold: true }, { text: 'Payroll Controller', bold: true }, { text: 'HR & GA Dept. / Finance Dept.', bold: true }, { text: 'Finance & HRGA Division', bold: true }, { text: 'Management PT. Labtech Penta International', bold: true }],
+    ];
+
     const docDefinition = {
       pageOrientation: 'landscape',
       footer: (currentPage, pageCount) => ({
@@ -161,6 +169,16 @@ const genPDF = async (p) => {
             ],
             body: vw1,
           },
+        },
+        {
+          style: 'tbl3',
+          margin: [10, 40, 0, 0],
+          table: {
+            widths: [95, 95, 95, 95, 95],
+            heights: [5, 5, 20, 5, 5],
+            body: vw2,
+          },
+          layout: 'noBorders',
         },
       ],
       styles: {
