@@ -587,10 +587,6 @@ EmployeeSchema.pre('save', async function fn(next) {
     this.es0 = this.db0;
   }
 
-  if (this.e0 === 'B.2054' || this.e0 === 'B.2057') {
-    this.es0 = this.db0;
-  }
-
   const byCash = ['X.0008', 'X.0010'];
   if (byCash.includes(this.e0) || this.ex0 || this.ff0 || this.fg0) {
     this.ec0 = 0;
