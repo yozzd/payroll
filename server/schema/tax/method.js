@@ -454,33 +454,36 @@ const genXLS = async (p) => {
     };
 
     let row = 3;
-    for (let i = 0; i < e.length; i += 1) {
+    e.map((t, i) => {
       row += 1;
       wb.Sheets.Sheet1[`A${row}`] = { t: 'n', v: i + 1 };
-      wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: e[i].e0 };
-      wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: e[i].d0 };
-      wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: gDateFormat(e[i].i0, 'yyyy-MM-dd') };
-      wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: e[i].y0 };
-      wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: e[i].u0 };
-      wb.Sheets.Sheet1[`G${row}`] = { t: 's', v: e[i].q0 };
-      wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: intpre0v2(e[i].l0).format() };
-      wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: intpre0v2(e[i].ai0).format() };
-      wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: intpre0v2(e[i].bk0).format() };
-      wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: intpre0v2(e[i].cn0).format() };
-      wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: intpre0v2(e[i].bu0).format() };
-      wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: intpre0v2(e[i].en0).format() };
-      wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: intpre0v2(e[i].eq0).format() };
-      wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: intpre0v2(e[i].df0).format() };
-      wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: intpre0v2(e[i].cy0).format() };
-      wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: intpre0v2(e[i].gross).format() };
-      wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: intpre0v2(e[i].er0).format() };
-      wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: intpre0v2(e[i].cz0).format() };
-      wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: intpre0v2(e[i].da0).format() };
-      wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: intpre0v2(e[i].db0).format() };
-      wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: intpre0v2(e[i].es0).format() };
-      wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: intpre0v2(e[i].ttax).format() };
-    }
+      wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: t.e0 };
+      wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: t.d0 };
+      wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: gDateFormat(t.i0, 'yyyy-MM-dd') };
+      wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: t.y0 };
+      wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: t.u0 };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 's', v: t.q0 };
+      wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: intpre0v2(t.l0).format() };
+      wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: intpre0v2(t.ai0).format() };
+      wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: intpre0v2(t.bk0).format() };
+      wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: intpre0v2(t.cn0).format() };
+      wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: intpre0v2(t.bu0).format() };
+      wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: intpre0v2(t.en0).format() };
+      wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: intpre0v2(t.eq0).format() };
+      wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: intpre0v2(t.df0).format() };
+      wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: intpre0v2(t.cy0).format() };
+      wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: intpre0v2(t.gross).format() };
+      wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: intpre0v2(t.er0).format() };
+      wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: intpre0v2(t.cz0).format() };
+      wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: intpre0v2(t.da0).format() };
+      wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: intpre0v2(t.db0).format() };
+      wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: intpre0v2(t.es0).format() };
+      wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: intpre0v2(t.ttax).format() };
 
+      return true;
+    });
+      
+    row += 1;
     wb.Sheets.Sheet1[`A${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: '' };

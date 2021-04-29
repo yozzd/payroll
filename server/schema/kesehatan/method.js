@@ -183,7 +183,7 @@ const genXLS = async (p) => {
     const { employee: e } = p;
     await fs.ensureDir(`static/report/${p.dir}`);
 
-    const len = e.length + 4;
+    const len = e.length + 5;
     const wb = {
       SheetNames: ['Sheet1'],
       Sheets: {
@@ -224,22 +224,25 @@ const genXLS = async (p) => {
     };
 
     let row = 4;
-    for (let i = 0; i < e.length; i += 1) {
+    e.map((t, i) => {
       row += 1;
       wb.Sheets.Sheet1[`A${row}`] = { t: 'n', v: i + 1 };
-      wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: e[i].e0 };
-      wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: e[i].d0 };
-      wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: e[i].z0 ? e[i].z0 : '' };
-      wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: e[i].aa0 ? e[i].aa0 : '' };
-      wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: e[i].o0 ? gDateFormat(e[i].o0, 'dd-MM-yyyy') : '' };
-      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: intpre0v2(e[i].co0).format() };
-      wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: intpre0v2(e[i].cq0).format() };
-      wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: intpre0v2(e[i].cr0).format() };
-      wb.Sheets.Sheet1[`J${row}`] = { t: 's', v: e[i].cs0 ? e[i].cs0 : '' };
-      wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: intpre0v2(e[i].cu0).format() };
-      wb.Sheets.Sheet1[`L${row}`] = { t: 's', v: e[i].ct0 ? e[i].ct0 : '' };
-    }
+      wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: t.e0 };
+      wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: t.d0 };
+      wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: t.z0 ? t.z0 : '' };
+      wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: t.aa0 ? t.aa0 : '' };
+      wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: t.o0 ? gDateFormat(t.o0, 'dd-MM-yyyy') : '' };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: intpre0v2(t.co0).format() };
+      wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: intpre0v2(t.cq0).format() };
+      wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: intpre0v2(t.cr0).format() };
+      wb.Sheets.Sheet1[`J${row}`] = { t: 's', v: t.cs0 ? t.cs0 : '' };
+      wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: intpre0v2(t.cu0).format() };
+      wb.Sheets.Sheet1[`L${row}`] = { t: 's', v: t.ct0 ? t.ct0 : '' };
+      
+      return true;
+    });
 
+    row += 1;
     wb.Sheets.Sheet1[`A${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: '' };

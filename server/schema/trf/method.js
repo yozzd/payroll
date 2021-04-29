@@ -159,17 +159,20 @@ const genXLS = async (p) => {
     };
 
     let row = 3;
-    for (let i = 0; i < e.length; i += 1) {
+    e.map((t, i) => {
       row += 1;
       wb.Sheets.Sheet1[`A${row}`] = { t: 'n', v: i + 1 };
-      wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: e[i].e0 };
-      wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: e[i].d0 };
-      wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: e[i].t0 };
-      wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: e[i].s0 };
-      wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: intpre0v2(e[i].ec0).format() };
-      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: intpre0v2(e[i].ec0F).format() };
-    }
+      wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: t.e0 };
+      wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: t.d0 };
+      wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: t.t0 };
+      wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: t.s0 };
+      wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: intpre0v2(t.ec0).format() };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: intpre0v2(t.ec0F).format() };
+      
+      return true;
+    });
 
+    row += 1;
     wb.Sheets.Sheet1[`A${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: '' };
