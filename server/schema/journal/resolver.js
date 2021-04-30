@@ -13,7 +13,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('user', async (_, { id }) => {
+    resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await Payroll.aggregate([
         { $match: { _id: id } },
         { $unwind: '$employee' },
@@ -66,7 +66,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('user', async (_, { id }) => {
+    resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await Payroll.aggregate([
         { $match: { _id: id } },
         { $unwind: '$employee' },
@@ -119,7 +119,7 @@ const Query = {
     args: {
       id: { type: GraphQLString },
     },
-    resolve: auth.hasRole('user', async (_, { id }) => {
+    resolve: auth.hasRole('guest', async (_, { id }) => {
       const j = journal(id);
       return j;
     }),
