@@ -300,8 +300,8 @@ const generateReportPayroll = async (p) => {
       [{ text: `Batam, ${idDateFormat(new Date(), 'dd-MM-yyyy')}`, colSpan: 5 }, '', '', '', ''],
       ['Prepared By,', 'Checked By,', 'Reviewed By,', 'Knowledge By,', 'Approved By,'],
       ['', '', '', '', ''],
-      ['Ayu Fatimah', 'Ronal P. Siahaan', 'Hendra SP / Yutin Sudarni', 'Gusti Very Wealthy', 'Eko Hernanto'],
-      [{ text: 'Personel', bold: true }, { text: 'Payroll Controller', bold: true }, { text: 'HR & GA Dept. / Finance Dept.', bold: true }, { text: 'Finance & HRGA Division', bold: true }, { text: 'Management PT. Labtech Penta International', bold: true }],
+      ['Ayu Fatimah / Hendra SP.', 'Yutin Sudarni / Ronal P. Siahaan', 'Ignatius Daud P. / Ratnawati', 'Gusti Very Wealthy', 'Eko Hernanto'],
+      [{ text: 'Personnel / HR & GA Dept.', bold: true }, { text: 'Finance Dept. / Payroll Controller', bold: true }, { text: 'IT Dept.', bold: true }, { text: 'Finance & HRGA Division', bold: true }, { text: 'Management PT. Labtech Penta International', bold: true }],
     ];
 
     employee.map((e, i) => {
@@ -488,7 +488,7 @@ const generateReportPayroll = async (p) => {
           },
         },
         {
-          style: 'tbl',
+          style: 'tbl2',
           margin: [10, 40, 0, 0],
           table: {
             widths: [95, 95, 95, 95, 95],
@@ -501,6 +501,10 @@ const generateReportPayroll = async (p) => {
       styles: {
         tbl: {
           fontSize: 4,
+        },
+        tbl2: {
+          fontSize: 6,
+          margin: [-10, -10, -10, 0],
         },
       },
     };
