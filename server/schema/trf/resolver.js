@@ -15,6 +15,7 @@ const byTansfer = async (id) => {
             $and: [
               { 'employee.ex0': { $eq: false } },
               { 'employee.e0': { $ne: 'X.0010' } },
+              { 'employee.ec0': { $gt: 0 } },
             ],
           },
         ],
