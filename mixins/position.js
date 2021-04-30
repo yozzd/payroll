@@ -17,7 +17,7 @@ export default {
         'Mechanical Production',
         'Product Development & Control',
         'Production Division',
-        'QUALITY ASSURANCE',
+        'Quality Assurance',
         'R&D DAQ & Control',
         'R&D Electronic',
         'R&D HVAC/Electrical',
