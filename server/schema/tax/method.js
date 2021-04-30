@@ -379,12 +379,18 @@ const genPDF = async (p) => {
           style: 'tbl3',
           table: {
             widths: [
-              10, 20, 50, 25, 25, 25, 25,
-              25, 25, 25, 25, 25, 25, 25,
-              25, 25, 25, 25, 25, 25, 25,
-              25, 25,
+              15, 20, 50, 30, 30, 30, 30,
+              35, 30, 30, 30, 30, 30, 30,
+              30, 30, 35, 30, 30, 30, 30,
+              30, 30,
             ],
             body: vw1,
+          },
+          layout: {
+            paddingLeft() { return 1; },
+            paddingRight() { return 1; },
+            paddingTop() { return 1; },
+            paddingBottom() { return 1; },
           },
         },
         {
@@ -408,7 +414,7 @@ const genPDF = async (p) => {
           margin: [-10, 20, -10, 10],
         },
         tbl3: {
-          fontSize: 4,
+          fontSize: 5,
           margin: [-10, -10, -10, 0],
         },
         tbl4: {
