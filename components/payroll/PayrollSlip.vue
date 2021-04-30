@@ -224,7 +224,7 @@ export default {
               mutation: SendSlip,
               variables: {
                 id: this.$route.params.id,
-                eId: v,
+                eId: v._id,
               },
             });
             if (data.sendSlip.accepted.length) {

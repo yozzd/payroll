@@ -414,15 +414,19 @@ const generateReportPayroll = async (p) => {
           style: 'tbl',
           table: {
             widths: [
-              10, 60, 25, 30, 30, 20, 50, 20, 30, 20,
-              30, 20, 30, 30, 30, 30, 30, 30, 30, 30,
-              30, 30, 30, 30, 30, 30, 30, 30, 30, 30,
+              15, 60, 25, 40, 35, 20, 50, 25, 35, 20,
+              35, 20, 35, 35, 35, 35, 35, 35, 35, 35,
+              35, 35, 35, 35, 35, 35, 35, 35, 35, 40,
             ],
             headerRows: 2,
             body: tbl1,
           },
           layout: {
             fillColor: (rowIndex) => (rowIndex === employee.length + 2 ? '#eeeeee' : null),
+            paddingLeft() { return 1; },
+            paddingRight() { return 1; },
+            paddingTop() { return 1; },
+            paddingBottom() { return 1; },
           },
         },
         {
@@ -435,15 +439,19 @@ const generateReportPayroll = async (p) => {
           style: 'tbl',
           table: {
             widths: [
-              10, 60, 25, 30, 50, 30, 30, 30, 30, 30,
-              30, 30, 30, 30, 30, 30, 30, 30, 30, 30,
-              30, 30, 30, 30, 30,
+              15, 60, 25, 40, 50, 35, 35, 35, 35, 35,
+              35, 35, 35, 35, 35, 35, 35, 35, 35, 35,
+              35, 35, 35, 35, 35,
             ],
             headerRows: 2,
             body: tbl2,
           },
           layout: {
             fillColor: (rowIndex) => (rowIndex === employee.length + 2 ? '#eeeeee' : null),
+            paddingLeft() { return 1; },
+            paddingRight() { return 1; },
+            paddingTop() { return 1; },
+            paddingBottom() { return 1; },
           },
         },
         {
@@ -456,15 +464,19 @@ const generateReportPayroll = async (p) => {
           style: 'tbl',
           table: {
             widths: [
-              10, 60, 25, 30, 30, 30, 30, 30, 30, 30,
-              30, 30, 30, 30, 30, 30, 30, 30, 30, 30,
-              30, 30, 30, 30, 30, 30,
+              15, 60, 25, 40, 35, 35, 35, 35, 35, 40,
+              35, 35, 35, 35, 35, 35, 35, 35, 35, 35,
+              35, 35, 35, 35, 35, 40,
             ],
             headerRows: 2,
             body: tbl3,
           },
           layout: {
             fillColor: (rowIndex) => (rowIndex === employee.length + 2 ? '#eeeeee' : null),
+            paddingLeft() { return 1; },
+            paddingRight() { return 1; },
+            paddingTop() { return 1; },
+            paddingBottom() { return 1; },
           },
         },
         {
@@ -477,14 +489,18 @@ const generateReportPayroll = async (p) => {
           style: 'tbl',
           table: {
             widths: [
-              10, 60, 25, 30, 30, 30, 30, 30, 30, 30,
-              30, 30, 30, 30, 30, 30, 30,
+              15, 60, 25, 40, 35, 35, 35, 35, 35, 35,
+              35, 35, 35, 35, 40, 40, 40,
             ],
             headerRows: 2,
             body: tbl4,
           },
           layout: {
             fillColor: (rowIndex) => (rowIndex === employee.length + 2 ? '#eeeeee' : null),
+            paddingLeft() { return 1; },
+            paddingRight() { return 1; },
+            paddingTop() { return 1; },
+            paddingBottom() { return 1; },
           },
         },
         {
@@ -500,7 +516,7 @@ const generateReportPayroll = async (p) => {
       ],
       styles: {
         tbl: {
-          fontSize: 4,
+          fontSize: 6,
         },
         tbl2: {
           fontSize: 6,
