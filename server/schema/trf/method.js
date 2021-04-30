@@ -187,7 +187,7 @@ const genXLS = async (p) => {
       wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: t.s0 };
       wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: intpre0v2(t.ec0).format() };
       wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: intpre0v2(t.ec0F).format() };
-      
+
       return true;
     });
 

@@ -256,7 +256,7 @@ const genXLS = async (p) => {
       wb.Sheets.Sheet1[`J${row}`] = { t: 's', v: t.cs0 ? t.cs0 : '' };
       wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: intpre0v2(t.cu0).format() };
       wb.Sheets.Sheet1[`L${row}`] = { t: 's', v: t.ct0 ? t.ct0 : '' };
-      
+
       return true;
     });
 
