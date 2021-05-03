@@ -5,8 +5,8 @@ const { format, getYear, getMonth } = require('date-fns');
 const prod = [
   'Production Division', 'Electronic', 'Mechanical Production', 'Product Development & Control',
   'R&D DAQ & Control', 'R&D Electronic', 'R&D HVAC/Electrical', 'R&D Mechanical',
-  'R&D Software & Product Development', 'Information Technology', 'HVAC-ELECTRICAL',
-  'Material Requirement Planning', 'QUALITY ASSURANCE', 'Building Infrastructure & Service',
+  'R&D Software & Product Development', 'Information Technology', 'HVAC/Electrical',
+  'Material Requirement Planning', 'Quality Assurance', 'Building Infrastructure & Service',
 ];
 
 const EmployeeSchema = new Schema({
