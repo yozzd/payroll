@@ -420,6 +420,7 @@ export const PayrollFlags = gql`
         ex0
         ey0
         ez0
+        fa0
         fb0
         fj0
         fl0

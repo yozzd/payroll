@@ -268,6 +268,7 @@ const EmployeeType = new GraphQLObjectType({
     ex0: { type: GraphQLBoolean },
     ey0: { type: GraphQLBoolean },
     ez0: { type: GraphQLBoolean },
+    fa0: { type: GraphQLBoolean },
     fb0: { type: GraphQLBoolean },
     fc0: { type: GraphQLFloat },
     fe0: { type: GraphQLFloat },

@@ -77,6 +77,18 @@
       </el-table-column>
       <el-table-column width="120" align="center">
         <template slot="header">
+          <p title="Pengembalian Pajak DTP" class="truncate">
+            Pengembalian Pajak DTP
+          </p>
+        </template>
+        <template slot-scope="scope">
+          <p v-if="scope.row.fa0">
+            X
+          </p>
+        </template>
+      </el-table-column>
+      <el-table-column width="120" align="center">
+        <template slot="header">
           <p title="Tidak Dapat Relaksasi JKK & JK" class="truncate">
             Tidak Dapat Relaksasi JKK & JK
           </p>
@@ -168,6 +180,9 @@
               </el-checkbox>
               <el-checkbox v-model="form.ez0">
                 Tidak Ikut BPJS
+              </el-checkbox>
+              <el-checkbox v-model="form.fa0">
+                Pengembalian Pajak DTP
               </el-checkbox>
               <el-checkbox v-model="form.fb0">
                 Tidak Dapat Relaksasi JKK & JK
@@ -302,7 +317,7 @@ export default {
         fields: ['d0', 'e0'],
         storeFields: [
           '_id', 'd0', 'e0', 'ex0', 'ey0',
-          'ez0', 'fb0', 'fj0', 'fl0',
+          'ez0', 'fa0', 'fb0', 'fj0', 'fl0',
           'am0f', 'am0p', 'as0f', 'as0p',
           'at0f', 'at0p', 'au0f', 'au0p',
         ],
@@ -334,6 +349,7 @@ export default {
                     ex0: this.form.ex0,
                     ey0: this.form.ey0,
                     ez0: this.form.ez0,
+                    fa0: this.form.fa0,
                     fb0: this.form.fb0,
                     fj0: this.form.fj0,
                     fl0: this.form.fl0,
