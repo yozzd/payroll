@@ -37,7 +37,11 @@
           </p>
         </template>
       </el-table-column>
-      <el-table-column prop="w0" label="Code" width="80" align="center"></el-table-column>
+      <el-table-column label="Code" width="80" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.w0 }}</span>
+        </template>
+      </el-table-column>
       <el-table-column prop="l0" label="Basic" width="120" align="right">
         <template slot-scope="scope">
           <span>{{ scope.row.l0 | currency }}</span>
