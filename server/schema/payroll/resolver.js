@@ -968,7 +968,7 @@ const Mutation = {
     args: {
       input: { type: EditFeeInputType },
     },
-    resolve: auth.hasRole('user', async (_, { input }) => {
+    resolve: auth.hasRole('guest2', async (_, { input }) => {
       const { _id, employee } = input;
       const s = updateEmployee(_id, employee, Payroll);
       return s;
