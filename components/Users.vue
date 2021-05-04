@@ -165,6 +165,7 @@ export default {
         admin: 'Admin',
         user: 'User',
         guest: 'Guest',
+        guest2: 'Guest 2',
       },
       showAdd: false,
       showEdit: false,

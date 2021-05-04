@@ -175,7 +175,7 @@
             </el-menu>
           </template>
         </el-table-column>
-        <el-table-column>
+        <el-table-column v-if="$auth.$state.user.role !== 'guest2'">
           <template slot-scope="scope">
             <el-menu
               mode="horizontal"
