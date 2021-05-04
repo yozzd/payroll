@@ -218,10 +218,16 @@
                 <template slot="title">
                   Report
                 </template>
-                <el-menu-item index="a">
+                <el-menu-item
+                  v-if="$auth.$state.user.role !== 'guest2'"
+                  index="a"
+                >
                   Journal
                 </el-menu-item>
-                <el-menu-item index="b">
+                <el-menu-item
+                  v-if="$auth.$state.user.role !== 'guest2'"
+                  index="b"
+                >
                   Tax 21
                 </el-menu-item>
                 <el-menu-item index="c">
@@ -230,14 +236,20 @@
                 <el-menu-item index="d">
                   Kesehatan
                 </el-menu-item>
-                <el-menu-item index="e">
+                <el-menu-item
+                  v-if="$auth.$state.user.role !== 'guest2'"
+                  index="e"
+                >
                   By Transfer
                 </el-menu-item>
-                <el-menu-item index="f">
+                <el-menu-item
+                  v-if="$auth.$state.user.role !== 'guest2'"
+                  index="f"
+                >
                   Pph21 Bulanan
                 </el-menu-item>
                 <el-submenu
-                  v-if="scope.row.typeHR"
+                  v-if="scope.row.typeHR && $auth.$state.user.role !== 'guest2'"
                   index="g"
                 >
                   <template slot="title">
@@ -250,7 +262,10 @@
                     Slip
                   </el-menu-item>
                 </el-submenu>
-                <el-menu-item index="h">
+                <el-menu-item
+                  v-if="$auth.$state.user.role !== 'guest2'"
+                  index="h"
+                >
                   Slip
                 </el-menu-item>
               </el-submenu>
