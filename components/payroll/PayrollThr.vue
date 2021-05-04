@@ -53,9 +53,9 @@
       :summary-method="summaries"
       :row-class-name="finalRow"
     >
-      <el-table-column type="index" width="50" align="center"></el-table-column>
-      <el-table-column prop="e0" label="No. Karyawan" width="100"></el-table-column>
-      <el-table-column prop="d0" label="Nama Karyawan" width="300"></el-table-column>
+      <el-table-column type="index" width="50" align="center" fixed></el-table-column>
+      <el-table-column prop="e0" label="No. Karyawan" width="100" fixed></el-table-column>
+      <el-table-column prop="d0" label="Nama Karyawan" width="300" fixed></el-table-column>
       <el-table-column prop="h0" label="Status" width="100"></el-table-column>
       <el-table-column label="Hired Date" width="100">
         <template slot-scope="scope">
