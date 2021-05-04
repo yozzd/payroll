@@ -297,12 +297,14 @@ const thrCat = async (id) => {
             $and: [
               { typeHR: { $eq: 1 } },
               { 'employee.et0': { $eq: 'Islam' } },
+              { 'employee.bw0': { $gt: 0 } },
             ],
           },
           {
             $and: [
               { typeHR: { $eq: 2 } },
               { 'employee.et0': { $ne: 'Islam' } },
+              { 'employee.bw0': { $gt: 0 } },
             ],
           },
         ],

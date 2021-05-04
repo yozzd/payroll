@@ -65,7 +65,8 @@ const countHR = (tgl1, tgl2) => {
   });
 
   if (years > 0) return 12;
-  if (years === 0 && days >= 15) return months + 1;
+  if (years === 0 && months < 1) return 0;
+  if (years === 0 && months > 1 && days >= 15) return months + 1;
   return months;
 };
 
