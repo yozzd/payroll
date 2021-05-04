@@ -29,7 +29,7 @@
       <el-table-column label="Nama Karyawan" width="300" fixed>
         <template slot-scope="scope">
           <el-link
-            v-if="!freeze && $auth.hasRole('user')"
+            v-if="!freeze && $auth.hasRole('guest2')"
             type="primary"
             class="font-sm"
             :underline="false"
@@ -318,8 +318,9 @@ export default {
         storeFields: [
           '_id', 'd0', 'e0', 'ex0', 'ey0',
           'ez0', 'fa0', 'fb0', 'fj0', 'fl0',
-          'am0f', 'am0p', 'as0f', 'as0p',
-          'at0f', 'at0p', 'au0f', 'au0p',
+          'al0f', 'al0p', 'am0f', 'am0p',
+          'as0f', 'as0p', 'at0f', 'at0p',
+          'au0f', 'au0p',
         ],
       }),
     };

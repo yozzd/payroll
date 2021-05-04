@@ -130,7 +130,7 @@ const EmployeeType = new GraphQLObjectType({
     ak0r: { type: GraphQLFloat },
     al0: { type: GraphQLFloat },
     al0r: { type: GraphQLFloat },
-    al0f: { type: GraphQLFloat },
+    al0f: { type: GraphQLBoolean },
     al0p: { type: GraphQLFloat },
     am0: { type: GraphQLFloat },
     am0r: { type: GraphQLFloat },
