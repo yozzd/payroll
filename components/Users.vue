@@ -57,8 +57,20 @@
           {{ roles[scope.row.role] }}
         </template>
       </el-table-column>
-      <el-table-column label="" min-width="120"></el-table-column>
+      <el-table-column min-width="120"></el-table-column>
     </el-table>
+    <el-pagination
+      :current-page.sync="page"
+      :page-sizes="pageSizes"
+      :page-size="pageSize"
+      :total="users.length"
+      :pager-count="pagerCount"
+      layout="total, sizes, prev, pager, next"
+      class="flex justify-end"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    >
+    </el-pagination>
 
     <el-dialog
       title="Add User"
@@ -86,6 +98,7 @@
             <el-option label="Admin" value="admin"></el-option>
             <el-option label="User" value="user"></el-option>
             <el-option label="Guest" value="guest"></el-option>
+            <el-option label="Guest 2" value="guest2"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -141,10 +154,13 @@
 import pullAllBy from 'lodash/pullAllBy';
 import { Users } from '../apollo/query/user';
 import { UserCreate, UserEdit, UserDelete } from '../apollo/mutation/user';
+import mix from '../mixins/payroll';
 
 export default {
+  mixins: [mix],
   data() {
     return {
+      users: [],
       roles: {
         admin: 'Admin',
         user: 'User',
