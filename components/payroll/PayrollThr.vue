@@ -269,7 +269,8 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'h0', 'i0', 'tglHR',
+          '_id', 'd0', 'e0', 'h0', 'i0', 'o0',
+          'ew0', 't0', 'u0', 'v0', 'y0', 'q0', 'tglHR',
           'bw0', 'bx0', 'g0', 'aj0', 'ak0', 'al0',
           'am0', 'ao0', 'ap0', 'aq0', 'as0', 'at0',
           'au0', 'ax0', 'ax0F', 'cz0', 'da0',
