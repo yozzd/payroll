@@ -2008,7 +2008,7 @@ const genXLSThrQ = async (p) => {
       SheetNames: ['Sheet1'],
       Sheets: {
         Sheet1: {
-          '!ref': `A1:Z${len}`,
+          '!ref': `A1:AG${len}`,
           A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
           A2: { t: 's', v: `Thr List - Periode Payroll: ${p.period} ${p.year}` },
           A3: { t: 's', v: 'No' },
@@ -2018,30 +2018,37 @@ const genXLSThrQ = async (p) => {
           E3: { t: 's', v: 'Hired Date' },
           F3: { t: 's', v: 'Hari Raya' },
           G3: { t: 's', v: 'Long Service' },
-          H3: { t: 's', v: 'Thr Prorate' },
-          H4: { t: 's', v: 'Months' },
-          I4: { t: 's', v: 'Amount' },
-          J3: { t: 's', v: 'Basic Salary' },
-          K3: { t: 's', v: 'Tunjangan Tetap' },
-          K4: { t: 's', v: 'Living' },
-          L4: { t: 's', v: 'Perumahan' },
-          M4: { t: 's', v: 'Posisi Fix' },
-          N4: { t: 's', v: 'Fungsional Fix' },
-          O4: { t: 's', v: 'Transport' },
-          P4: { t: 's', v: 'Komunikasi' },
-          Q4: { t: 's', v: 'Expertisi' },
-          R4: { t: 's', v: 'Posisi Variable' },
-          S4: { t: 's', v: 'Fungsional Variable' },
-          T4: { t: 's', v: 'Acting / PLT' },
-          U3: { t: 's', v: 'Total Upah' },
-          V3: { t: 's', v: 'Thr Prorate' },
-          W3: { t: 's', v: 'Pajak Penghasilan Ber-NPWP' },
-          X3: { t: 's', v: 'Pajak Tambahan Non-NPWP' },
-          Y3: { t: 's', v: 'Total Thr By Transfer' },
-          Z3: { t: 's', v: 'Total Thr By Cash' },
+          H3: { t: 's', v: 'Birthday' },
+          I3: { t: 's', v: 'Email' },
+          J3: { t: 's', v: 'Bank Account' },
+          K3: { t: 's', v: 'Department' },
+          L3: { t: 's', v: 'Section' },
+          M3: { t: 's', v: 'Position' },
+          N3: { t: 's', v: 'NPWP' },
+          O3: { t: 's', v: 'Thr Prorate' },
+          O4: { t: 's', v: 'Months' },
+          P4: { t: 's', v: 'Amount' },
+          Q3: { t: 's', v: 'Basic Salary' },
+          R3: { t: 's', v: 'Tunjangan Tetap' },
+          R4: { t: 's', v: 'Living' },
+          S4: { t: 's', v: 'Perumahan' },
+          T4: { t: 's', v: 'Posisi Fix' },
+          U4: { t: 's', v: 'Fungsional Fix' },
+          V4: { t: 's', v: 'Transport' },
+          W4: { t: 's', v: 'Komunikasi' },
+          X4: { t: 's', v: 'Expertisi' },
+          Y4: { t: 's', v: 'Posisi Variable' },
+          Z4: { t: 's', v: 'Fungsional Variable' },
+          AA4: { t: 's', v: 'Acting / PLT' },
+          AB3: { t: 's', v: 'Total Upah' },
+          AC3: { t: 's', v: 'Thr Prorate' },
+          AD3: { t: 's', v: 'Pajak Penghasilan Ber-NPWP' },
+          AE3: { t: 's', v: 'Pajak Tambahan Non-NPWP' },
+          AF3: { t: 's', v: 'Total Thr By Transfer' },
+          AG3: { t: 's', v: 'Total Thr By Cash' },
           '!merges': [
-            { s: { r: 0, c: 0 }, e: { r: 0, c: 25 } },
-            { s: { r: 1, c: 0 }, e: { r: 1, c: 25 } },
+            { s: { r: 0, c: 0 }, e: { r: 0, c: 32 } },
+            { s: { r: 1, c: 0 }, e: { r: 1, c: 32 } },
             { s: { r: 2, c: 0 }, e: { r: 3, c: 0 } },
             { s: { r: 2, c: 1 }, e: { r: 3, c: 1 } },
             { s: { r: 2, c: 2 }, e: { r: 3, c: 2 } },
@@ -2049,15 +2056,22 @@ const genXLSThrQ = async (p) => {
             { s: { r: 2, c: 4 }, e: { r: 3, c: 4 } },
             { s: { r: 2, c: 5 }, e: { r: 3, c: 5 } },
             { s: { r: 2, c: 6 }, e: { r: 3, c: 6 } },
-            { s: { r: 2, c: 7 }, e: { r: 2, c: 8 } },
+            { s: { r: 2, c: 7 }, e: { r: 3, c: 7 } },
+            { s: { r: 2, c: 8 }, e: { r: 3, c: 8 } },
             { s: { r: 2, c: 9 }, e: { r: 3, c: 9 } },
-            { s: { r: 2, c: 10 }, e: { r: 2, c: 19 } },
-            { s: { r: 2, c: 20 }, e: { r: 3, c: 20 } },
-            { s: { r: 2, c: 21 }, e: { r: 3, c: 21 } },
-            { s: { r: 2, c: 22 }, e: { r: 3, c: 22 } },
-            { s: { r: 2, c: 23 }, e: { r: 3, c: 23 } },
-            { s: { r: 2, c: 24 }, e: { r: 3, c: 24 } },
-            { s: { r: 2, c: 25 }, e: { r: 3, c: 25 } },
+            { s: { r: 2, c: 10 }, e: { r: 3, c: 10 } },
+            { s: { r: 2, c: 11 }, e: { r: 3, c: 11 } },
+            { s: { r: 2, c: 12 }, e: { r: 3, c: 12 } },
+            { s: { r: 2, c: 13 }, e: { r: 3, c: 13 } },
+            { s: { r: 2, c: 14 }, e: { r: 2, c: 15 } },
+            { s: { r: 2, c: 16 }, e: { r: 3, c: 16 } },
+            { s: { r: 2, c: 17 }, e: { r: 2, c: 26 } },
+            { s: { r: 2, c: 27 }, e: { r: 3, c: 27 } },
+            { s: { r: 2, c: 28 }, e: { r: 3, c: 28 } },
+            { s: { r: 2, c: 29 }, e: { r: 3, c: 29 } },
+            { s: { r: 2, c: 30 }, e: { r: 3, c: 30 } },
+            { s: { r: 2, c: 31 }, e: { r: 3, c: 31 } },
+            { s: { r: 2, c: 32 }, e: { r: 3, c: 32 } },
           ],
         },
       },
@@ -2073,25 +2087,32 @@ const genXLSThrQ = async (p) => {
       wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: e[i].i0 ? gDateFormat(e[i].i0, 'yyyy-MM-dd') : '' };
       wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: gDateFormat(p.tglHR, 'yyyy-MM-dd') };
       wb.Sheets.Sheet1[`G${row}`] = { t: 's', v: e[i].i0 ? dateDiff(e[i].i0, p.tglHR) : '' };
-      wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: e[i].bw0 };
-      wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: intpre0v2(e[i].bx0).format() };
-      wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: intpre0v2(e[i].g0).format() };
-      wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: intpre0v2(e[i].aj0).format() };
-      wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: intpre0v2(e[i].ak0).format() };
-      wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: intpre0v2(e[i].al0).format() };
-      wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: intpre0v2(e[i].am0).format() };
-      wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: intpre0v2(e[i].ao0).format() };
-      wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: intpre0v2(e[i].ap0).format() };
-      wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: intpre0v2(e[i].aq0).format() };
-      wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: intpre0v2(e[i].as0).format() };
-      wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: intpre0v2(e[i].at0).format() };
-      wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: intpre0v2(e[i].au0).format() };
-      wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: intpre0v2(e[i].ax0).format() };
-      wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: intpre0v2(e[i].ax0F).format() };
-      wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: intpre0v2(e[i].cz0).format() };
-      wb.Sheets.Sheet1[`X${row}`] = { t: 'n', v: intpre0v2(e[i].da0).format() };
-      wb.Sheets.Sheet1[`Y${row}`] = { t: 'n', v: intpre0v2(e[i].trfThr).format() };
-      wb.Sheets.Sheet1[`Z${row}`] = { t: 'n', v: intpre0v2(e[i].cshThr).format() };
+      wb.Sheets.Sheet1[`H${row}`] = { t: 's', v: e[i].o0 ? gDateFormat(e[i].o0, 'yyyy-MM-dd') : '' };
+      wb.Sheets.Sheet1[`I${row}`] = { t: 's', v: e[i].ew0 };
+      wb.Sheets.Sheet1[`J${row}`] = { t: 's', v: e[i].t0 };
+      wb.Sheets.Sheet1[`K${row}`] = { t: 's', v: e[i].u0 };
+      wb.Sheets.Sheet1[`L${row}`] = { t: 's', v: e[i].v0 };
+      wb.Sheets.Sheet1[`M${row}`] = { t: 's', v: e[i].y0 };
+      wb.Sheets.Sheet1[`N${row}`] = { t: 's', v: e[i].q0 };
+      wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: e[i].bw0 };
+      wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: intpre0v2(e[i].bx0).format() };
+      wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: intpre0v2(e[i].g0).format() };
+      wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: intpre0v2(e[i].aj0).format() };
+      wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: intpre0v2(e[i].ak0).format() };
+      wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: intpre0v2(e[i].al0).format() };
+      wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: intpre0v2(e[i].am0).format() };
+      wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: intpre0v2(e[i].ao0).format() };
+      wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: intpre0v2(e[i].ap0).format() };
+      wb.Sheets.Sheet1[`X${row}`] = { t: 'n', v: intpre0v2(e[i].aq0).format() };
+      wb.Sheets.Sheet1[`Y${row}`] = { t: 'n', v: intpre0v2(e[i].as0).format() };
+      wb.Sheets.Sheet1[`Z${row}`] = { t: 'n', v: intpre0v2(e[i].at0).format() };
+      wb.Sheets.Sheet1[`AA${row}`] = { t: 'n', v: intpre0v2(e[i].au0).format() };
+      wb.Sheets.Sheet1[`AB${row}`] = { t: 'n', v: intpre0v2(e[i].ax0).format() };
+      wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: intpre0v2(e[i].ax0F).format() };
+      wb.Sheets.Sheet1[`AD${row}`] = { t: 'n', v: intpre0v2(e[i].cz0).format() };
+      wb.Sheets.Sheet1[`AE${row}`] = { t: 'n', v: intpre0v2(e[i].da0).format() };
+      wb.Sheets.Sheet1[`AF${row}`] = { t: 'n', v: intpre0v2(e[i].trfThr).format() };
+      wb.Sheets.Sheet1[`AG${row}`] = { t: 'n', v: intpre0v2(e[i].cshThr).format() };
     }
 
     row += 1;
@@ -2103,24 +2124,31 @@ const genXLSThrQ = async (p) => {
     wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`G${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`H${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: intpre0v2(p.bx0Sum).format() };
-    wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: intpre0v2(p.g0Sum).format() };
-    wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: intpre0v2(p.aj0Sum).format() };
-    wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: intpre0v2(p.ak0Sum).format() };
-    wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: intpre0v2(p.al0Sum).format() };
-    wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: intpre0v2(p.am0Sum).format() };
-    wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: intpre0v2(p.ao0Sum).format() };
-    wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: intpre0v2(p.ap0Sum).format() };
-    wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: intpre0v2(p.aq0Sum).format() };
-    wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: intpre0v2(p.as0Sum).format() };
-    wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: intpre0v2(p.at0Sum).format() };
-    wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: intpre0v2(p.au0Sum).format() };
-    wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: intpre0v2(p.ax0Sum).format() };
-    wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: intpre0v2(p.ax0FSum).format() };
-    wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: intpre0v2(p.cz0Sum).format() };
-    wb.Sheets.Sheet1[`X${row}`] = { t: 'n', v: intpre0v2(p.da0Sum).format() };
-    wb.Sheets.Sheet1[`Y${row}`] = { t: 'n', v: intpre0v2(p.trfThrSum).format() };
-    wb.Sheets.Sheet1[`Z${row}`] = { t: 'n', v: intpre0v2(p.cshThrSum).format() };
+    wb.Sheets.Sheet1[`I${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`J${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`K${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`L${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`M${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`N${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`O${row}`] = { t: 's', v: '' };
+    wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: intpre0v2(p.bx0Sum).format() };
+    wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: intpre0v2(p.g0Sum).format() };
+    wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: intpre0v2(p.aj0Sum).format() };
+    wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: intpre0v2(p.ak0Sum).format() };
+    wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: intpre0v2(p.al0Sum).format() };
+    wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: intpre0v2(p.am0Sum).format() };
+    wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: intpre0v2(p.ao0Sum).format() };
+    wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: intpre0v2(p.ap0Sum).format() };
+    wb.Sheets.Sheet1[`X${row}`] = { t: 'n', v: intpre0v2(p.aq0Sum).format() };
+    wb.Sheets.Sheet1[`Y${row}`] = { t: 'n', v: intpre0v2(p.as0Sum).format() };
+    wb.Sheets.Sheet1[`Z${row}`] = { t: 'n', v: intpre0v2(p.at0Sum).format() };
+    wb.Sheets.Sheet1[`AA${row}`] = { t: 'n', v: intpre0v2(p.au0Sum).format() };
+    wb.Sheets.Sheet1[`AB${row}`] = { t: 'n', v: intpre0v2(p.ax0Sum).format() };
+    wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: intpre0v2(p.ax0FSum).format() };
+    wb.Sheets.Sheet1[`AD${row}`] = { t: 'n', v: intpre0v2(p.cz0Sum).format() };
+    wb.Sheets.Sheet1[`AE${row}`] = { t: 'n', v: intpre0v2(p.da0Sum).format() };
+    wb.Sheets.Sheet1[`AF${row}`] = { t: 'n', v: intpre0v2(p.trfThrSum).format() };
+    wb.Sheets.Sheet1[`AG${row}`] = { t: 'n', v: intpre0v2(p.cshThrSum).format() };
 
     const fn = `static/report/${p.dir}/${p.dir}_thr_list.xlsx`;
     const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });

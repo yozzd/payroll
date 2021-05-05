@@ -70,6 +70,49 @@
           {{ scope.row.i0 ? dateDiff(scope.row.i0, tglHR): null }}
         </template>
       </el-table-column>
+      <el-table-column label="Birthday" width="100">
+        <template slot-scope="scope">
+          <span>{{ scope.row.o0 }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="Email" width="180">
+        <template slot-scope="scope">
+          <p :title="scope.row.ew0" class="truncate">
+            {{ scope.row.ew0 }}
+          </p>
+        </template>
+      </el-table-column>
+      <el-table-column label="Bank Account" width="140">
+        <template slot-scope="scope">
+          <span>{{ scope.row.t0 }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="Department" width="180">
+        <template slot-scope="scope">
+          <p :title="scope.row.u0" class="truncate">
+            {{ scope.row.u0 }}
+          </p>
+        </template>
+      </el-table-column>
+      <el-table-column label="Section" width="180">
+        <template slot-scope="scope">
+          <p :title="scope.row.v0" class="truncate">
+            {{ scope.row.v0 }}
+          </p>
+        </template>
+      </el-table-column>
+      <el-table-column label="Position" width="180">
+        <template slot-scope="scope">
+          <p :title="scope.row.y0" class="truncate">
+            {{ scope.row.y0 }}
+          </p>
+        </template>
+      </el-table-column>
+      <el-table-column label="NPWP" width="150">
+        <template slot-scope="scope">
+          <span>{{ scope.row.q0 }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="THR Prorate" align="center">
         <el-table-column label="Months" width="80" align="center">
           <template slot-scope="scope">
