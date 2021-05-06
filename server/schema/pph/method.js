@@ -246,7 +246,7 @@ const genPDF = async (p) => {
         text: intpre0(p.t9b).format(), border: [false, false, false, false], alignment: 'right',
       }],
       [{ text: '', border: [false, false, false, false] }, { text: 'Pph21 Tahunan', border: [false, false, false, false] }, {
-        text: intpre0(p.t9a).format(), border: [false, false, false, false], alignment: 'right',
+        text: intpre0(p.t9c).format(), border: [false, false, false, false], alignment: 'right',
       }],
       [{ text: '', border: [false, false, false, false] }, { text: 'Pajak Atas Thr', border: [false, false, false, false] }, {
         text: intpre0(p.t12b).format(), border: [false, true, false, false], alignment: 'right',

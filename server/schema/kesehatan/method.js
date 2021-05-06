@@ -237,6 +237,9 @@ const genXLS = async (p) => {
             { s: { r: 2, c: 10 }, e: { r: 3, c: 10 } },
             { s: { r: 2, c: 11 }, e: { r: 3, c: 11 } },
           ],
+          '!cols': [
+            { wch: 4 }, { wch: 8 }, { wch: 20 }
+          ],
         },
       },
     };
@@ -250,8 +253,8 @@ const genXLS = async (p) => {
       wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: t.z0 ? t.z0 : '' };
       wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: t.aa0 ? t.aa0 : '' };
       wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: t.o0 ? gDateFormat(t.o0, 'dd-MM-yyyy') : '' };
-      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: t.co0, z: '#,###' };
-      wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: intpre0v2(t.cq0).format() };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: t.co0, z: '#,##0' };
+      wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: t.cq0, z: '#,##0' };
       wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: intpre0v2(t.cr0).format() };
       wb.Sheets.Sheet1[`J${row}`] = { t: 's', v: t.cs0 ? t.cs0 : '' };
       wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: intpre0v2(t.cu0).format() };

@@ -293,7 +293,7 @@ const Mutation = {
                 lang: 'js',
               },
             },
-            t12b: { $subtract: ['$t9b', '$t9a'] },
+            t12b: { $subtract: ['$t9b', '$t9c'] },
           },
         },
         {
