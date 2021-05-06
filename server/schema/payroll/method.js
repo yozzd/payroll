@@ -2012,8 +2012,8 @@ const genXLSThrQ = async (p) => {
           A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
           A2: { t: 's', v: `Thr List - Periode Payroll: ${p.period} ${p.year}` },
           A3: { t: 's', v: 'No' },
-          B3: { t: 's', v: 'Nama Karyawan' },
-          C3: { t: 's', v: 'No Karyawan' },
+          B3: { t: 's', v: 'No Karyawan' },
+          C3: { t: 's', v: 'Nama Karyawan' },
           D3: { t: 's', v: 'Status' },
           E3: { t: 's', v: 'Hired Date' },
           F3: { t: 's', v: 'Hari Raya' },
@@ -2073,6 +2073,17 @@ const genXLSThrQ = async (p) => {
             { s: { r: 2, c: 31 }, e: { r: 3, c: 31 } },
             { s: { r: 2, c: 32 }, e: { r: 3, c: 32 } },
           ],
+          '!cols': [
+            { wpx: 26 }, { wpx: 72 }, { wpx: 234 }, { wpx: 58 },
+            { wpx: 62 }, { wpx: 62 }, { wpx: 137 }, { wpx: 62 },
+            { wpx: 205 }, { wpx: 95 }, { wpx: 188 }, { wpx: 188 },
+            { wpx: 112 }, { wpx: 111 }, { wpx: 42 }, { wpx: 75 },
+            { wpx: 75 }, { wpx: 60 }, { wpx: 62 }, { wpx: 55 },
+            { wpx: 77 }, { wpx: 60 }, { wpx: 63 }, { wpx: 55 },
+            { wpx: 77 }, { wpx: 101 }, { wpx: 63 }, { wpx: 75 },
+            { wpx: 75 }, { wpx: 148 }, { wpx: 142 }, { wpx: 103 },
+            { wpx: 90 },
+          ],
         },
       },
     };
@@ -2081,8 +2092,8 @@ const genXLSThrQ = async (p) => {
     for (let i = 0; i < e.length; i += 1) {
       row += 1;
       wb.Sheets.Sheet1[`A${row}`] = { t: 'n', v: i + 1 };
-      wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: e[i].d0 };
-      wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: e[i].e0 };
+      wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: e[i].e0 };
+      wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: e[i].d0 };
       wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: e[i].h0 };
       wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: e[i].i0 ? gDateFormat(e[i].i0, 'yyyy-MM-dd') : '' };
       wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: gDateFormat(p.tglHR, 'yyyy-MM-dd') };
@@ -2095,24 +2106,24 @@ const genXLSThrQ = async (p) => {
       wb.Sheets.Sheet1[`M${row}`] = { t: 's', v: e[i].y0 };
       wb.Sheets.Sheet1[`N${row}`] = { t: 's', v: e[i].q0 };
       wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: e[i].bw0 };
-      wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: intpre0v2(e[i].bx0).format() };
-      wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: intpre0v2(e[i].g0).format() };
-      wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: intpre0v2(e[i].aj0).format() };
-      wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: intpre0v2(e[i].ak0).format() };
-      wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: intpre0v2(e[i].al0).format() };
-      wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: intpre0v2(e[i].am0).format() };
-      wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: intpre0v2(e[i].ao0).format() };
-      wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: intpre0v2(e[i].ap0).format() };
-      wb.Sheets.Sheet1[`X${row}`] = { t: 'n', v: intpre0v2(e[i].aq0).format() };
-      wb.Sheets.Sheet1[`Y${row}`] = { t: 'n', v: intpre0v2(e[i].as0).format() };
-      wb.Sheets.Sheet1[`Z${row}`] = { t: 'n', v: intpre0v2(e[i].at0).format() };
-      wb.Sheets.Sheet1[`AA${row}`] = { t: 'n', v: intpre0v2(e[i].au0).format() };
-      wb.Sheets.Sheet1[`AB${row}`] = { t: 'n', v: intpre0v2(e[i].ax0).format() };
-      wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: intpre0v2(e[i].bx0).format() };
-      wb.Sheets.Sheet1[`AD${row}`] = { t: 'n', v: intpre0v2(e[i].cz0).format() };
-      wb.Sheets.Sheet1[`AE${row}`] = { t: 'n', v: intpre0v2(e[i].da0).format() };
-      wb.Sheets.Sheet1[`AF${row}`] = { t: 'n', v: intpre0v2(e[i].trfThr).format() };
-      wb.Sheets.Sheet1[`AG${row}`] = { t: 'n', v: intpre0v2(e[i].cshThr).format() };
+      wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: e[i].bx0, z: '#,##0' };
+      wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: e[i].g0, z: '#,##0' };
+      wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: e[i].aj0, z: '#,##0' };
+      wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: e[i].ak0, z: '#,##0' };
+      wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: e[i].al0, z: '#,##0' };
+      wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: e[i].am0, z: '#,##0' };
+      wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: e[i].ao0, z: '#,##0' };
+      wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: e[i].ap0, z: '#,##0' };
+      wb.Sheets.Sheet1[`X${row}`] = { t: 'n', v: e[i].aq0, z: '#,##0' };
+      wb.Sheets.Sheet1[`Y${row}`] = { t: 'n', v: e[i].as0, z: '#,##0' };
+      wb.Sheets.Sheet1[`Z${row}`] = { t: 'n', v: e[i].at0, z: '#,##0' };
+      wb.Sheets.Sheet1[`AA${row}`] = { t: 'n', v: e[i].au0, z: '#,##0' };
+      wb.Sheets.Sheet1[`AB${row}`] = { t: 'n', v: e[i].ax0, z: '#,##0' };
+      wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: e[i].bx0, z: '#,##0' };
+      wb.Sheets.Sheet1[`AD${row}`] = { t: 'n', v: e[i].cz0, z: '#,##0' };
+      wb.Sheets.Sheet1[`AE${row}`] = { t: 'n', v: e[i].da0, z: '#,##0' };
+      wb.Sheets.Sheet1[`AF${row}`] = { t: 'n', v: e[i].trfThr, z: '#,##0' };
+      wb.Sheets.Sheet1[`AG${row}`] = { t: 'n', v: e[i].cshThr, z: '#,##0' };
     }
 
     row += 1;
@@ -2131,24 +2142,24 @@ const genXLSThrQ = async (p) => {
     wb.Sheets.Sheet1[`M${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`N${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`O${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: intpre0v2(p.bx0Sum).format() };
-    wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: intpre0v2(p.g0Sum).format() };
-    wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: intpre0v2(p.aj0Sum).format() };
-    wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: intpre0v2(p.ak0Sum).format() };
-    wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: intpre0v2(p.al0Sum).format() };
-    wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: intpre0v2(p.am0Sum).format() };
-    wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: intpre0v2(p.ao0Sum).format() };
-    wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: intpre0v2(p.ap0Sum).format() };
-    wb.Sheets.Sheet1[`X${row}`] = { t: 'n', v: intpre0v2(p.aq0Sum).format() };
-    wb.Sheets.Sheet1[`Y${row}`] = { t: 'n', v: intpre0v2(p.as0Sum).format() };
-    wb.Sheets.Sheet1[`Z${row}`] = { t: 'n', v: intpre0v2(p.at0Sum).format() };
-    wb.Sheets.Sheet1[`AA${row}`] = { t: 'n', v: intpre0v2(p.au0Sum).format() };
-    wb.Sheets.Sheet1[`AB${row}`] = { t: 'n', v: intpre0v2(p.ax0Sum).format() };
-    wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: intpre0v2(p.bx0Sum).format() };
-    wb.Sheets.Sheet1[`AD${row}`] = { t: 'n', v: intpre0v2(p.cz0Sum).format() };
-    wb.Sheets.Sheet1[`AE${row}`] = { t: 'n', v: intpre0v2(p.da0Sum).format() };
-    wb.Sheets.Sheet1[`AF${row}`] = { t: 'n', v: intpre0v2(p.trfThrSum).format() };
-    wb.Sheets.Sheet1[`AG${row}`] = { t: 'n', v: intpre0v2(p.cshThrSum).format() };
+    wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: p.bx0Sum, z: '#,##0' };
+    wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: p.g0Sum, z: '#,##0' };
+    wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: p.aj0Sum, z: '#,##0' };
+    wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: p.ak0Sum, z: '#,##0' };
+    wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: p.al0Sum, z: '#,##0' };
+    wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: p.am0Sum, z: '#,##0' };
+    wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: p.ao0Sum, z: '#,##0' };
+    wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: p.ap0Sum, z: '#,##0' };
+    wb.Sheets.Sheet1[`X${row}`] = { t: 'n', v: p.aq0Sum, z: '#,##0' };
+    wb.Sheets.Sheet1[`Y${row}`] = { t: 'n', v: p.as0Sum, z: '#,##0' };
+    wb.Sheets.Sheet1[`Z${row}`] = { t: 'n', v: p.at0Sum, z: '#,##0' };
+    wb.Sheets.Sheet1[`AA${row}`] = { t: 'n', v: p.au0Sum, z: '#,##0' };
+    wb.Sheets.Sheet1[`AB${row}`] = { t: 'n', v: p.ax0Sum, z: '#,##0' };
+    wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: p.bx0Sum, z: '#,##0' };
+    wb.Sheets.Sheet1[`AD${row}`] = { t: 'n', v: p.cz0Sum, z: '#,##0' };
+    wb.Sheets.Sheet1[`AE${row}`] = { t: 'n', v: p.da0Sum, z: '#,##0' };
+    wb.Sheets.Sheet1[`AF${row}`] = { t: 'n', v: p.trfThrSum, z: '#,##0' };
+    wb.Sheets.Sheet1[`AG${row}`] = { t: 'n', v: p.cshThrSum, z: '#,##0' };
 
     const fn = `static/report/${p.dir}/${p.dir}_thr_list.xlsx`;
     const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
