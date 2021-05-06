@@ -187,9 +187,9 @@
           <span>{{ scope.row.ax0 | currency }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="ax0F" label="Thr Prorate" width="120" align="right">
+      <el-table-column prop="bx0" label="Thr Prorate" width="120" align="right">
         <template slot-scope="scope">
-          <span>{{ scope.row.ax0F | currency }}</span>
+          <span>{{ scope.row.bx0 | currency }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="cz0" width="120" align="right">

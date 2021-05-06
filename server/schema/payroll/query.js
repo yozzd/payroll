@@ -207,31 +207,17 @@ const thrCatGroup = {
       da0: '$employee.da0',
       db0: '$employee.db0',
       ew0: '$employee.ew0',
-      ax0F: {
-        $function: {
-          body: `function(v) {
-            return Math.floor(v / 100) * 100;
-          }`,
-          args: ['$employee.ax0'],
-          lang: 'js',
-        },
-      },
       trfThr: {
         $cond: {
           if: { $ne: ['$employee.e0', 'X.0010'] },
           then: {
-            $subtract: [
-              {
-                $function: {
-                  body: `function(v) {
-                    return Math.floor(v / 100) * 100;
-                  }`,
-                  args: ['$employee.ax0'],
-                  lang: 'js',
-                },
-              },
-              '$employee.db0',
-            ],
+            $function: {
+              body: `function(a, b) {
+                return Math.floor((a - b) / 100) * 100;
+              }`,
+              args: ['$employee.bx0', '$employee.db0'],
+              lang: 'js',
+            },
           },
           else: 0,
         },
@@ -240,18 +226,13 @@ const thrCatGroup = {
         $cond: {
           if: { $eq: ['$employee.e0', 'X.0010'] },
           then: {
-            $subtract: [
-              {
-                $function: {
-                  body: `function(v) {
-                    return Math.floor(v / 100) * 100;
-                  }`,
-                  args: ['$employee.ax0'],
-                  lang: 'js',
-                },
-              },
-              '$employee.db0',
-            ],
+            $function: {
+              body: `function(a, b) {
+                return Math.floor((a - b) / 100) * 100;
+              }`,
+              args: ['$employee.bx0', '$employee.db0'],
+              lang: 'js',
+            },
           },
           else: 0,
         },
@@ -281,7 +262,6 @@ const thrCatAdd = {
   au0Sum: { $sum: '$employee.au0' },
   av0Sum: { $sum: '$employee.av0' },
   ax0Sum: { $sum: '$employee.ax0' },
-  ax0FSum: { $sum: '$employee.ax0F' },
   cz0Sum: { $sum: '$employee.cz0' },
   da0Sum: { $sum: '$employee.da0' },
   trfThrSum: { $sum: '$employee.trfThr' },

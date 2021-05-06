@@ -547,7 +547,6 @@ export const PayrollThr = gql`
         at0
         au0
         ax0
-        ax0F
         bw0
         bx0
         cz0

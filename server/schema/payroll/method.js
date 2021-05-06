@@ -1882,7 +1882,7 @@ const genPDFThrQ = async (p) => {
         { text: intpre0(e.at0).format(), alignment: 'right' },
         { text: intpre0(e.au0).format(), alignment: 'right' },
         { text: intpre0(e.ax0).format(), alignment: 'right' },
-        { text: intpre0(e.ax0F).format(), alignment: 'right' },
+        { text: intpre0(e.bx0).format(), alignment: 'right' },
         { text: intpre0(e.cz0).format(), alignment: 'right' },
         { text: intpre0(e.da0).format(), alignment: 'right' },
         { text: intpre0(e.trfThr).format(), alignment: 'right' },
@@ -1907,7 +1907,7 @@ const genPDFThrQ = async (p) => {
       { text: intpre0(p.at0Sum).format(), alignment: 'right' },
       { text: intpre0(p.au0Sum).format(), alignment: 'right' },
       { text: intpre0(p.ax0Sum).format(), alignment: 'right' },
-      { text: intpre0(p.ax0FSum).format(), alignment: 'right' },
+      { text: intpre0(p.bx0Sum).format(), alignment: 'right' },
       { text: intpre0(p.cz0Sum).format(), alignment: 'right' },
       { text: intpre0(p.da0Sum).format(), alignment: 'right' },
       { text: intpre0(p.trfThrSum).format(), alignment: 'right' },
@@ -2108,7 +2108,7 @@ const genXLSThrQ = async (p) => {
       wb.Sheets.Sheet1[`Z${row}`] = { t: 'n', v: intpre0v2(e[i].at0).format() };
       wb.Sheets.Sheet1[`AA${row}`] = { t: 'n', v: intpre0v2(e[i].au0).format() };
       wb.Sheets.Sheet1[`AB${row}`] = { t: 'n', v: intpre0v2(e[i].ax0).format() };
-      wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: intpre0v2(e[i].ax0F).format() };
+      wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: intpre0v2(e[i].bx0).format() };
       wb.Sheets.Sheet1[`AD${row}`] = { t: 'n', v: intpre0v2(e[i].cz0).format() };
       wb.Sheets.Sheet1[`AE${row}`] = { t: 'n', v: intpre0v2(e[i].da0).format() };
       wb.Sheets.Sheet1[`AF${row}`] = { t: 'n', v: intpre0v2(e[i].trfThr).format() };
@@ -2144,7 +2144,7 @@ const genXLSThrQ = async (p) => {
     wb.Sheets.Sheet1[`Z${row}`] = { t: 'n', v: intpre0v2(p.at0Sum).format() };
     wb.Sheets.Sheet1[`AA${row}`] = { t: 'n', v: intpre0v2(p.au0Sum).format() };
     wb.Sheets.Sheet1[`AB${row}`] = { t: 'n', v: intpre0v2(p.ax0Sum).format() };
-    wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: intpre0v2(p.ax0FSum).format() };
+    wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: intpre0v2(p.bx0Sum).format() };
     wb.Sheets.Sheet1[`AD${row}`] = { t: 'n', v: intpre0v2(p.cz0Sum).format() };
     wb.Sheets.Sheet1[`AE${row}`] = { t: 'n', v: intpre0v2(p.da0Sum).format() };
     wb.Sheets.Sheet1[`AF${row}`] = { t: 'n', v: intpre0v2(p.trfThrSum).format() };

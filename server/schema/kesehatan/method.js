@@ -250,7 +250,7 @@ const genXLS = async (p) => {
       wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: t.z0 ? t.z0 : '' };
       wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: t.aa0 ? t.aa0 : '' };
       wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: t.o0 ? gDateFormat(t.o0, 'dd-MM-yyyy') : '' };
-      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: intpre0v2(t.co0).format() };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: t.co0, z: '#,###' };
       wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: intpre0v2(t.cq0).format() };
       wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: intpre0v2(t.cr0).format() };
       wb.Sheets.Sheet1[`J${row}`] = { t: 's', v: t.cs0 ? t.cs0 : '' };
@@ -277,10 +277,11 @@ const genXLS = async (p) => {
     const fn = `static/report/${p.dir}/${p.dir}_kes.xlsx`;
     const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
     fs.writeFileSync(fn, content);
+    return({ sStatus: 1 });
 
-    return XlsxPopulate.fromFileAsync(fn)
-      .then((workbook) => workbook.toFileAsync(fn, { password: xlsPass })
-        .then(() => ({ sStatus: 1 })));
+    // return XlsxPopulate.fromFileAsync(fn)
+    //   .then((workbook) => workbook.toFileAsync(fn, { password: xlsPass })
+    //     .then(() => ({ sStatus: 1 })));
   } catch (err) {
     if (typeof err === 'string') {
       throw new GraphQLError(err);
