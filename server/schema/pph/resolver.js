@@ -101,7 +101,7 @@ const Mutation = {
         {
           $addFields: {
             t1b: { $subtract: [{ $sum: ['$t0b', '$bk0b', '$ai0b', '$cb0b', '$cc0b', '$cq0b', '$bu0b', '$dr0', '$bz0', '$bx0'] }, { $sum: ['$df0', '$cy0b'] }] },
-            t1c: { $subtract: [{ $sum: ['$t0b', '$bk0b', '$ai0b', '$cb0b', '$cc0b', '$cq0b', '$bu0b', '$dr0'] }, { $sum: ['$df0b', '$cy0b'] }] },
+            t1c: { $subtract: [{ $sum: ['$t0b', '$bk0b', '$ai0b', '$cb0b', '$cc0b', '$cq0b', '$bu0b'] }, { $sum: ['$df0b', '$cy0b'] }] },
             t2a: {
               $function: {
                 body: `function(v) {
