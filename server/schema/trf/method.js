@@ -177,6 +177,10 @@ const genXLS = async (p) => {
           E3: { t: 's', v: 'Bank Name' },
           F3: { t: 's', v: 'Take Home Pay' },
           G3: { t: 's', v: 'THP for Bank' },
+          '!cols': [
+            { wpx: 26 }, { wpx: 72 }, { wpx: 234 }, { wpx: 95 },
+            { wpx: 63 }, { wpx: 81 }, { wpx: 75 },
+          ],
         },
       },
     };
@@ -189,8 +193,8 @@ const genXLS = async (p) => {
       wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: t.d0 };
       wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: t.t0 };
       wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: t.s0 };
-      wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: intpre0v2(t.ec0).format() };
-      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: intpre0v2(t.ec0F).format() };
+      wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: t.ec0, z: '#,##0' };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: t.ec0F, z: '#,##0' };
 
       return true;
     });
@@ -201,8 +205,8 @@ const genXLS = async (p) => {
     wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: intpre0v2(p.sum1).format() };
-    wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: intpre0v2(p.sum2).format() };
+    wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: p.sum1, z: '#,##0' };
+    wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: p.sum2, z: '#,##0' };
 
     const fn = `static/report/${p.dir}/${p.dir}_trf.xlsx`;
     const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
