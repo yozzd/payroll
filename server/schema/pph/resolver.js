@@ -94,15 +94,14 @@ const Mutation = {
             cj0b: { $multiply: ['$cj0', '$ea0'] },
             cq0b: { $multiply: ['$cq0', '$ea0'] },
             cy0b: { $multiply: ['$cy0', '$ea0'] },
-            dr0b: { $multiply: ['$dr0', '$ea0'] },
             t0b: { $multiply: ['$l0', '$ea0'] },
             t1a: { $subtract: [{ $sum: ['$l0', '$bk0', '$ai0', '$cb0', '$cc0', '$cq0', '$bu0', '$dr0', '$bz0', 'bx0'] }, { $sum: ['$df0', '$cy0'] }] },
           },
         },
         {
           $addFields: {
-            t1b: { $subtract: [{ $sum: ['$t0b', '$bk0b', '$ai0b', '$cb0b', '$cc0b', '$cq0b', '$bu0b', '$dr0b', '$bz0', '$bx0'] }, { $sum: ['$df0', '$cy0b'] }] },
-            t1c: { $subtract: [{ $sum: ['$t0b', '$bk0b', '$ai0b', '$cb0b', '$cc0b', '$cq0b', '$bu0b', '$dr0b'] }, { $sum: ['$df0b', '$cy0b'] }] },
+            t1b: { $subtract: [{ $sum: ['$t0b', '$bk0b', '$ai0b', '$cb0b', '$cc0b', '$cq0b', '$bu0b', '$dr0', '$bz0', '$bx0'] }, { $sum: ['$df0', '$cy0b'] }] },
+            t1c: { $subtract: [{ $sum: ['$t0b', '$bk0b', '$ai0b', '$cb0b', '$cc0b', '$cq0b', '$bu0b', '$dr0'] }, { $sum: ['$df0b', '$cy0b'] }] },
             t2a: {
               $function: {
                 body: `function(v) {
