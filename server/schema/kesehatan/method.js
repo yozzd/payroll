@@ -238,7 +238,9 @@ const genXLS = async (p) => {
             { s: { r: 2, c: 11 }, e: { r: 3, c: 11 } },
           ],
           '!cols': [
-            { wch: 4 }, { wch: 8 }, { wch: 20 }
+            { wpx: 26 }, { wpx: 72 }, { wpx: 234 }, { wpx: 83 },
+            { wpx: 102 }, { wpx: 72 }, { wpx: 75 }, { wpx: 74 },
+            { wpx: 70 }, { wpx: 66 }, { wpx: 60 },
           ],
         },
       },
@@ -255,9 +257,9 @@ const genXLS = async (p) => {
       wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: t.o0 ? gDateFormat(t.o0, 'dd-MM-yyyy') : '' };
       wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: t.co0, z: '#,##0' };
       wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: t.cq0, z: '#,##0' };
-      wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: intpre0v2(t.cr0).format() };
+      wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: t.cr0, z: '#,##0' };
       wb.Sheets.Sheet1[`J${row}`] = { t: 's', v: t.cs0 ? t.cs0 : '' };
-      wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: intpre0v2(t.cu0).format() };
+      wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: t.cu0, z: '#,##0' };
       wb.Sheets.Sheet1[`L${row}`] = { t: 's', v: t.ct0 ? t.ct0 : '' };
 
       return true;
@@ -270,21 +272,20 @@ const genXLS = async (p) => {
     wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: intpre0v2(p.sum1).format() };
-    wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: intpre0v2(p.sum2).format() };
-    wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: intpre0v2(p.sum3).format() };
+    wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: p.sum1, z: '#,##0' };
+    wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: p.sum2, z: '#,##0' };
+    wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: p.sum3, z: '#,##0' };
     wb.Sheets.Sheet1[`J${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: intpre0v2(p.sum4).format() };
+    wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: p.sum4, z: '#,##0' };
     wb.Sheets.Sheet1[`L${row}`] = { t: 's', v: '' };
 
     const fn = `static/report/${p.dir}/${p.dir}_kes.xlsx`;
     const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
     fs.writeFileSync(fn, content);
-    return({ sStatus: 1 });
 
-    // return XlsxPopulate.fromFileAsync(fn)
-    //   .then((workbook) => workbook.toFileAsync(fn, { password: xlsPass })
-    //     .then(() => ({ sStatus: 1 })));
+    return XlsxPopulate.fromFileAsync(fn)
+      .then((workbook) => workbook.toFileAsync(fn, { password: xlsPass })
+        .then(() => ({ sStatus: 1 })));
   } catch (err) {
     if (typeof err === 'string') {
       throw new GraphQLError(err);
