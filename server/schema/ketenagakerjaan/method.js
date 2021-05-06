@@ -261,6 +261,12 @@ const genXLS = async (p) => {
             { s: { r: 2, c: 13 }, e: { r: 3, c: 13 } },
             { s: { r: 2, c: 14 }, e: { r: 3, c: 14 } },
           ],
+          '!cols': [
+            { wpx: 26 }, { wpx: 72 }, { wpx: 234 }, { wpx: 83 },
+            { wpx: 102 }, { wpx: 72 }, { wpx: 75 }, { wpx: 55 },
+            { wpx: 56 }, { wpx: 74 }, { wpx: 70 }, { wpx: 74 },
+            { wpx: 70 }, { wpx: 66 },
+          ],
         },
       },
     };
@@ -274,14 +280,14 @@ const genXLS = async (p) => {
       wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: t.z0 ? t.z0 : '' };
       wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: t.aa0 ? t.aa0 : '' };
       wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: t.o0 ? gDateFormat(t.o0, 'dd-MM-yyyy') : '' };
-      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: intpre0v2(t.ay0).format() };
-      wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: intpre0v2(t.cb0).format() };
-      wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: intpre0v2(t.cc0).format() };
-      wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: intpre0v2(t.cd0).format() };
-      wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: intpre0v2(t.ce0).format() };
-      wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: intpre0v2(t.ci0).format() };
-      wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: intpre0v2(t.cj0).format() };
-      wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: intpre0v2(t.cm0).format() };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: t.ay0, z: '#,##0' };
+      wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: t.cb0, z: '#,##0' };
+      wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: t.cc0, z: '#,##0' };
+      wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: t.cd0, z: '#,##0' };
+      wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: t.ce0, z: '#,##0' };
+      wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: t.ci0, z: '#,##0' };
+      wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: t.cj0, z: '#,##0' };
+      wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: t.cm0, z: '#,##0' };
       wb.Sheets.Sheet1[`O${row}`] = { t: 's', v: t.ck0 ? t.ck0 : '' };
 
       return true;
@@ -294,14 +300,14 @@ const genXLS = async (p) => {
     wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: intpre0v2(p.sum1).format() };
-    wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: intpre0v2(p.sum2).format() };
-    wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: intpre0v2(p.sum3).format() };
-    wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: intpre0v2(p.sum4).format() };
-    wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: intpre0v2(p.sum5).format() };
-    wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: intpre0v2(p.sum6).format() };
-    wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: intpre0v2(p.sum7).format() };
-    wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: intpre0v2(p.sum8).format() };
+    wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: p.sum1, z: '#,##0' };
+    wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: p.sum2, z: '#,##0' };
+    wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: p.sum3, z: '#,##0' };
+    wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: p.sum4, z: '#,##0' };
+    wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: p.sum5, z: '#,##0' };
+    wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: p.sum6, z: '#,##0' };
+    wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: p.sum7, z: '#,##0' };
+    wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: p.sum8, z: '#,##0' };
     wb.Sheets.Sheet1[`O${row}`] = { t: 's', v: '' };
 
     const fn = `static/report/${p.dir}/${p.dir}_ktg.xlsx`;
