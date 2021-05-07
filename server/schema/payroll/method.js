@@ -2499,6 +2499,66 @@ const genXLSMaster = async (p) => {
           W3: { t: 's', v: 'Jabatan' },
           X3: { t: 's', v: 'JPK No. (Kartu Peserta Jamsostek)' },
           Y3: { t: 's', v: 'No. BPJS Kesehatan' },
+          Z3: { t: 's', v: 'Lembur Normal' },
+          Z4: { t: 's', v: 'Jam' },
+          AA4: { t: 's', v: 'Amount' },
+          AB3: { t: 's', v: 'Lembur Dinas Luar' },
+          AB4: { t: 's', v: 'Jam' },
+          AC4: { t: 's', v: 'Amount' },
+          AD3: { t: 's', v: 'Insentif Lembur' },
+          AD4: { t: 's', v: 'Jam' },
+          AE4: { t: 's', v: 'Rate' },
+          AF4: { t: 's', v: 'Amount' },
+          AG3: { t: 's', v: 'Total Lembur & Insentif' },
+          AH3: { t: 's', v: 'Tunjangan Tetap' },
+          AH4: { t: 's', v: 'Tj. Tetap Living' },
+          AI4: { t: 's', v: 'Tj. Tetap Perumahan' },
+          AJ4: { t: 's', v: 'Tj. Tetap Posisi Fix' },
+          AK4: { t: 's', v: 'Tj. Tetap Fungsional Fix' },
+          AL4: { t: 's', v: 'Tj. Tetap Koordinator' },
+          AM4: { t: 's', v: 'Tj. Tetap Transport' },
+          AN4: { t: 's', v: 'Tj. Tetap Komunikasi' },
+          AO4: { t: 's', v: 'Tj. Tetap Expertisi' },
+          AP4: { t: 's', v: 'Tj. Tetap Honorarium' },
+          AQ4: { t: 's', v: 'Tj. Tetap Posisi Variable' },
+          AR4: { t: 's', v: 'Tj. Tetap Fungsional Variable' },
+          AS4: { t: 's', v: 'Tj. Tetap Acting / PLT' },
+          AT4: { t: 's', v: 'Tj. Tetap Others' },
+          AU3: { t: 's', v: 'Total Tujangan Tetap' },
+          AV3: { t: 's', v: 'Upah (Gaji Pokok + Tunjangan Tetap)' },
+          AW3: { t: 's', v: 'Upah Normal' },
+          AX3: { t: 's', v: 'Selisih Upah' },
+          AY3: { t: 's', v: 'Tunjangan Tidak Tetap' },
+          AY4: { t: 's', v: 'Tj. Tidak Tetap Fungsional' },
+          AZ4: { t: 's', v: 'Tj. Tidak Tetap Shift' },
+          BA4: { t: 's', v: 'Tj. Tidak Tetap Tig Welding' },
+          BB4: { t: 's', v: 'Tj. Tidak Tetap Operator Plasma' },
+          BC4: { t: 's', v: 'Tj. Tidak Tetap LKS' },
+          BD4: { t: 's', v: 'Tj. Tidak Tetap Koperasi' },
+          BE4: { t: 's', v: 'Tj. Tidak Tetap Quality System' },
+          BF4: { t: 's', v: 'Tj. Tidak Tetap Penghargaan Masa Kerja' },
+          BG4: { t: 's', v: 'Tj. Tidak Tetap Others' },
+          BH3: { t: 's', v: 'Total Tunjangan Tidak Tetap' },
+          BI3: { t: 's', v: 'Total Tunjangan Tetap & Tunjangan Tidak Tetap' },
+          BJ3: { t: 's', v: 'Pembetulan Pembayaran' },
+          BJ4: { t: 's', v: 'Koreksi Absen' },
+          BK4: { t: 's', v: 'Koreksi Gaji & Hari Kerja' },
+          BL4: { t: 's', v: 'Koreksi OT' },
+          BM4: { t: 's', v: 'Tunjangan' },
+          BN4: { t: 's', v: 'Insentif' },
+          BO4: { t: 's', v: 'THR' },
+          BP4: { t: 's', v: 'Allowance' },
+          BQ4: { t: 's', v: 'Uang Makan Security' },
+          BR4: { t: 's', v: 'Others' },
+          BS3: { t: 's', v: 'Total Pembetulan Pembayaran' },
+          BT3: { t: 's', v: 'Tambahan Lain Tidak Kena Pajak' },
+          BU3: { t: 's', v: 'THR Prorate' },
+          BU4: { t: 's', v: 'Months' },
+          BV4: { t: 's', v: 'Amount' },
+          BW3: { t: 's', v: 'Cuti (Leave)' },
+          BW4: { t: 's', v: 'Months' },
+          BX4: { t: 's', v: 'Amount' },
+          BY3: { t: 's', v: 'Pendapatan Kotor' },
           '!merges': [
             { s: { r: 0, c: 0 }, e: { r: 0, c: 27 } },
             { s: { r: 1, c: 0 }, e: { r: 1, c: 27 } },
@@ -2524,15 +2584,46 @@ const genXLSMaster = async (p) => {
             { s: { r: 2, c: 22 }, e: { r: 3, c: 22 } },
             { s: { r: 2, c: 23 }, e: { r: 3, c: 23 } },
             { s: { r: 2, c: 24 }, e: { r: 3, c: 24 } },
+            { s: { r: 2, c: 25 }, e: { r: 2, c: 26 } },
+            { s: { r: 2, c: 27 }, e: { r: 2, c: 28 } },
+            { s: { r: 2, c: 29 }, e: { r: 2, c: 31 } },
+            { s: { r: 2, c: 32 }, e: { r: 3, c: 32 } },
+            { s: { r: 2, c: 33 }, e: { r: 2, c: 45 } },
+            { s: { r: 2, c: 46 }, e: { r: 3, c: 46 } },
+            { s: { r: 2, c: 47 }, e: { r: 3, c: 47 } },
+            { s: { r: 2, c: 48 }, e: { r: 3, c: 48 } },
+            { s: { r: 2, c: 49 }, e: { r: 3, c: 49 } },
+            { s: { r: 2, c: 50 }, e: { r: 2, c: 58 } },
+            { s: { r: 2, c: 59 }, e: { r: 3, c: 59 } },
+            { s: { r: 2, c: 60 }, e: { r: 3, c: 60 } },
+            { s: { r: 2, c: 61 }, e: { r: 2, c: 69 } },
+            { s: { r: 2, c: 70 }, e: { r: 3, c: 70 } },
+            { s: { r: 2, c: 71 }, e: { r: 3, c: 71 } },
+            { s: { r: 2, c: 72 }, e: { r: 2, c: 73 } },
+            { s: { r: 2, c: 74 }, e: { r: 2, c: 75 } },
+            { s: { r: 2, c: 76 }, e: { r: 3, c: 76 } },
           ],
           '!cols': [
             { wpx: 26 }, { wpx: 72 }, { wpx: 234 }, { wpx: 85 },
             { wpx: 85 }, { wpx: 87 }, { wpx: 64 }, { wpx: 54 },
             { wpx: 64 }, { wpx: 85 }, { wpx: 107 }, { wpx: 74 },
             { wpx: 64 }, { wpx: 30 }, { wpx: 113 }, { wpx: 30 },
-            { wpx: 52 }, { wpx: 96 }, { wpx: 188 }, { wpx: 233 },
+            { wpx: 52 }, { wpx: 96 }, { wpx: 188 }, { wpx: 188},
             { wpx: 38 }, { wpx: 38 }, { wpx: 92 }, { wpx: 76 },
-            { wpx: 86 },
+            { wpx: 86 }, { wpx: 47 }, { wpx: 85 }, { wpx: 47 },
+            { wpx: 85 }, { wpx: 47 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 42 }, { wpx: 85 }, { wpx: 47 }, { wpx: 85 },
+            { wpx: 85 },
           ],
         },
       },
@@ -2566,6 +2657,58 @@ const genXLSMaster = async (p) => {
       wb.Sheets.Master[`W${row}`] = { t: 's', v: t.y0 };
       wb.Sheets.Master[`X${row}`] = { t: 's', v: t.z0 };
       wb.Sheets.Master[`Y${row}`] = { t: 's', v: t.aa0 };
+      wb.Sheets.Master[`Z${row}`] = { t: 'n', v: t.ab0, z: '0.00' };
+      wb.Sheets.Master[`AA${row}`] = { t: 'n', v: t.ac0, z: '#,##0' };
+      wb.Sheets.Master[`AB${row}`] = { t: 'n', v: t.ad0, z: '0.00' };
+      wb.Sheets.Master[`AC${row}`] = { t: 'n', v: t.ae0, z: '#,##0' };
+      wb.Sheets.Master[`AD${row}`] = { t: 'n', v: t.af0, z: '0.00' };
+      wb.Sheets.Master[`AE${row}`] = { t: 'n', v: t.ag0, z: '#,##0' };
+      wb.Sheets.Master[`AF${row}`] = { t: 'n', v: t.ah0, z: '#,##0' };
+      wb.Sheets.Master[`AG${row}`] = { t: 'n', v: t.ai0, z: '#,##0' };
+      wb.Sheets.Master[`AH${row}`] = { t: 'n', v: t.aj0, z: '#,##0' };
+      wb.Sheets.Master[`AI${row}`] = { t: 'n', v: t.ak0, z: '#,##0' };
+      wb.Sheets.Master[`AJ${row}`] = { t: 'n', v: t.al0, z: '#,##0' };
+      wb.Sheets.Master[`AK${row}`] = { t: 'n', v: t.am0, z: '#,##0' };
+      wb.Sheets.Master[`AL${row}`] = { t: 'n', v: t.an0, z: '#,##0' };
+      wb.Sheets.Master[`AM${row}`] = { t: 'n', v: t.ao0, z: '#,##0' };
+      wb.Sheets.Master[`AN${row}`] = { t: 'n', v: t.ap0, z: '#,##0' };
+      wb.Sheets.Master[`AO${row}`] = { t: 'n', v: t.aq0, z: '#,##0' };
+      wb.Sheets.Master[`AP${row}`] = { t: 'n', v: t.ar0, z: '#,##0' };
+      wb.Sheets.Master[`AQ${row}`] = { t: 'n', v: t.as0, z: '#,##0' };
+      wb.Sheets.Master[`AR${row}`] = { t: 'n', v: t.at0, z: '#,##0' };
+      wb.Sheets.Master[`AS${row}`] = { t: 'n', v: t.au0, z: '#,##0' };
+      wb.Sheets.Master[`AT${row}`] = { t: 'n', v: t.av0, z: '#,##0' };
+      wb.Sheets.Master[`AU${row}`] = { t: 'n', v: t.aw0, z: '#,##0' };
+      wb.Sheets.Master[`AV${row}`] = { t: 'n', v: t.ax0, z: '#,##0' };
+      wb.Sheets.Master[`AW${row}`] = { t: 'n', v: t.ay0, z: '#,##0' };
+      wb.Sheets.Master[`AX${row}`] = { t: 'n', v: t.az0, z: '#,##0' };
+      wb.Sheets.Master[`AY${row}`] = { t: 'n', v: t.ba0, z: '#,##0' };
+      wb.Sheets.Master[`AZ${row}`] = { t: 'n', v: t.bb0, z: '#,##0' };
+      wb.Sheets.Master[`BA${row}`] = { t: 'n', v: t.bc0, z: '#,##0' };
+      wb.Sheets.Master[`BB${row}`] = { t: 'n', v: t.bd0, z: '#,##0' };
+      wb.Sheets.Master[`BC${row}`] = { t: 'n', v: t.be0, z: '#,##0' };
+      wb.Sheets.Master[`BD${row}`] = { t: 'n', v: t.bf0, z: '#,##0' };
+      wb.Sheets.Master[`BE${row}`] = { t: 'n', v: t.bg0, z: '#,##0' };
+      wb.Sheets.Master[`BF${row}`] = { t: 'n', v: t.bh0, z: '#,##0' };
+      wb.Sheets.Master[`BG${row}`] = { t: 'n', v: t.bi0, z: '#,##0' };
+      wb.Sheets.Master[`BH${row}`] = { t: 'n', v: t.bj0, z: '#,##0' };
+      wb.Sheets.Master[`BI${row}`] = { t: 'n', v: t.bk0, z: '#,##0' };
+      wb.Sheets.Master[`BJ${row}`] = { t: 'n', v: t.bl0, z: '#,##0' };
+      wb.Sheets.Master[`BK${row}`] = { t: 'n', v: t.bm0, z: '#,##0' };
+      wb.Sheets.Master[`BL${row}`] = { t: 'n', v: t.bn0, z: '#,##0' };
+      wb.Sheets.Master[`BM${row}`] = { t: 'n', v: t.bo0, z: '#,##0' };
+      wb.Sheets.Master[`BN${row}`] = { t: 'n', v: t.bp0, z: '#,##0' };
+      wb.Sheets.Master[`BO${row}`] = { t: 'n', v: t.bq0, z: '#,##0' };
+      wb.Sheets.Master[`BP${row}`] = { t: 'n', v: t.br0, z: '#,##0' };
+      wb.Sheets.Master[`BQ${row}`] = { t: 'n', v: t.bs0, z: '#,##0' };
+      wb.Sheets.Master[`BR${row}`] = { t: 'n', v: t.bt0, z: '#,##0' };
+      wb.Sheets.Master[`BS${row}`] = { t: 'n', v: t.bu0, z: '#,##0' };
+      wb.Sheets.Master[`BT${row}`] = { t: 'n', v: t.bv0, z: '#,##0' };
+      wb.Sheets.Master[`BU${row}`] = { t: 'n', v: t.bw0 };
+      wb.Sheets.Master[`BV${row}`] = { t: 'n', v: t.bx0, z: '#,##0' };
+      wb.Sheets.Master[`BW${row}`] = { t: 'n', v: t.by0, z: '0.00' };
+      wb.Sheets.Master[`BX${row}`] = { t: 'n', v: t.bz0, z: '#,##0' };
+      wb.Sheets.Master[`BY${row}`] = { t: 'n', v: t.ca0, z: '#,##0' };
 
       return true;
     });
@@ -2575,6 +2718,57 @@ const genXLSMaster = async (p) => {
     wb.Sheets.Master[`D${row}`] = { t: 'n', v: p.f0Sum, z: '#,##0' };
     wb.Sheets.Master[`E${row}`] = { t: 'n', v: p.g0Sum, z: '#,##0' };
     wb.Sheets.Master[`J${row}`] = { t: 'n', v: p.l0Sum, z: '#,##0' };
+    wb.Sheets.Master[`Z${row}`] = { t: 'n', v: p.ab0Sum, z: '0.00' };
+    wb.Sheets.Master[`AA${row}`] = { t: 'n', v: p.ac0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AB${row}`] = { t: 'n', v: p.ad0Sum, z: '0.00' };
+    wb.Sheets.Master[`AC${row}`] = { t: 'n', v: p.ae0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AD${row}`] = { t: 'n', v: p.af0Sum, z: '0.00' };
+    wb.Sheets.Master[`AE${row}`] = { t: 'n', v: p.ag0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AF${row}`] = { t: 'n', v: p.ah0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AG${row}`] = { t: 'n', v: p.ai0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AH${row}`] = { t: 'n', v: p.aj0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AI${row}`] = { t: 'n', v: p.ak0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AJ${row}`] = { t: 'n', v: p.al0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AK${row}`] = { t: 'n', v: p.am0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AL${row}`] = { t: 'n', v: p.an0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AM${row}`] = { t: 'n', v: p.ao0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AN${row}`] = { t: 'n', v: p.ap0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AO${row}`] = { t: 'n', v: p.aq0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AP${row}`] = { t: 'n', v: p.ar0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AQ${row}`] = { t: 'n', v: p.as0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AR${row}`] = { t: 'n', v: p.at0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AS${row}`] = { t: 'n', v: p.au0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AT${row}`] = { t: 'n', v: p.av0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AU${row}`] = { t: 'n', v: p.aw0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AV${row}`] = { t: 'n', v: p.ax0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AW${row}`] = { t: 'n', v: p.ay0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AX${row}`] = { t: 'n', v: p.az0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AY${row}`] = { t: 'n', v: p.ba0Sum, z: '#,##0' };
+    wb.Sheets.Master[`AZ${row}`] = { t: 'n', v: p.bb0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BA${row}`] = { t: 'n', v: p.bc0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BB${row}`] = { t: 'n', v: p.bd0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BC${row}`] = { t: 'n', v: p.be0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BD${row}`] = { t: 'n', v: p.bf0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BE${row}`] = { t: 'n', v: p.bg0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BF${row}`] = { t: 'n', v: p.bh0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BG${row}`] = { t: 'n', v: p.bi0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BH${row}`] = { t: 'n', v: p.bj0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BI${row}`] = { t: 'n', v: p.bk0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BJ${row}`] = { t: 'n', v: p.bl0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BK${row}`] = { t: 'n', v: p.bm0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BL${row}`] = { t: 'n', v: p.bn0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BM${row}`] = { t: 'n', v: p.bo0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BN${row}`] = { t: 'n', v: p.bp0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BO${row}`] = { t: 'n', v: p.bq0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BP${row}`] = { t: 'n', v: p.br0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BQ${row}`] = { t: 'n', v: p.bs0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BR${row}`] = { t: 'n', v: p.bt0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BS${row}`] = { t: 'n', v: p.bu0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BT${row}`] = { t: 'n', v: p.bv0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BV${row}`] = { t: 'n', v: p.bx0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BW${row}`] = { t: 'n', v: p.by0Sum, z: '0.00' };
+    wb.Sheets.Master[`BX${row}`] = { t: 'n', v: p.bz0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BY${row}`] = { t: 'n', v: p.ca0Sum, z: '#,##0' };
 
     const fn = `static/report/${p.dir}/${p.dir}_payroll_master.xlsx`;
     const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
