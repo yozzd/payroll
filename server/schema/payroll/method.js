@@ -11,10 +11,8 @@ const {
   intpre0,
   intpre0v2,
   floatpre2,
-  floatpre2v2,
   floatpre3,
   floatpre4,
-  floatpre4v2,
 } = require('../scalar/number');
 const { gDateFormat, idDateFormat, dateDiff } = require('../scalar/date');
 const smtp = require('../../config/smtp');
@@ -2718,7 +2716,7 @@ const genXLSMaster = async (p) => {
             { wpx: 85 }, { wpx: 87 }, { wpx: 64 }, { wpx: 54 },
             { wpx: 64 }, { wpx: 85 }, { wpx: 107 }, { wpx: 74 },
             { wpx: 64 }, { wpx: 30 }, { wpx: 113 }, { wpx: 30 },
-            { wpx: 52 }, { wpx: 96 }, { wpx: 188 }, { wpx: 188},
+            { wpx: 52 }, { wpx: 96 }, { wpx: 188 }, { wpx: 188 },
             { wpx: 38 }, { wpx: 38 }, { wpx: 92 }, { wpx: 76 },
             { wpx: 86 }, { wpx: 47 }, { wpx: 85 }, { wpx: 47 },
             { wpx: 85 }, { wpx: 47 }, { wpx: 85 }, { wpx: 85 },
@@ -2890,7 +2888,6 @@ const genXLSMaster = async (p) => {
 
       return true;
     });
-
 
     row += 1;
     wb.Sheets.Master[`D${row}`] = { t: 'n', v: p.f0Sum, z: '#,##0' };

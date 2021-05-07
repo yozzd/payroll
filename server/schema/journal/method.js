@@ -4,8 +4,6 @@ const XLSX = require('xlsx');
 const XlsxPopulate = require('xlsx-populate');
 const { xlsPass } = require('../../config');
 
-const { intpre0v2 } = require('../scalar/number');
-
 const genXLS = async (p) => {
   try {
     const {

@@ -5,7 +5,7 @@ const XLSX = require('xlsx');
 const XlsxPopulate = require('xlsx-populate');
 const { xlsPass } = require('../../config');
 
-const { intpre0, intpre0v2 } = require('../scalar/number');
+const { intpre0 } = require('../scalar/number');
 const { idDateFormat } = require('../scalar/date');
 
 const fonts = {
