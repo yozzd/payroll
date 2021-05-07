@@ -200,11 +200,6 @@ const genXLS = async (p) => {
     });
 
     row += 1;
-    wb.Sheets.Sheet1[`A${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: p.sum1, z: '#,##0' };
     wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: p.sum2, z: '#,##0' };
 
