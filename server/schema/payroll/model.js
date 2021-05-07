@@ -465,6 +465,7 @@ EmployeeSchema.pre('save', async function fn(next) {
   }
   this.cu0 = this.cq0 + this.cr0;
   this.cl0 = this.ci0 + this.cj0 + this.cq0 + this.cr0;
+  this.cv0 = this.cb0 + this.cc0 + this.cd0 + this.ci0;
 
   this.df0 = this.dc0 + this.dd0 + this.de0;
   this.dj0 = this.dc0 + this.dd0 + this.de0 + this.dg0 + this.dh0 + this.di0;

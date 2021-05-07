@@ -2469,7 +2469,7 @@ const genXLSMaster = async (p) => {
       SheetNames: ['Master'],
       Sheets: {
         Master: {
-          '!ref': `A1:ED${len}`,
+          '!ref': `A1:EB${len}`,
           A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
           A2: { t: 's', v: `PERIODE PAYROLL: ${p.period} ${p.year}` },
           A3: { t: 's', v: 'No' },
@@ -2559,6 +2559,71 @@ const genXLSMaster = async (p) => {
           BW4: { t: 's', v: 'Months' },
           BX4: { t: 's', v: 'Amount' },
           BY3: { t: 's', v: 'Pendapatan Kotor' },
+          BZ3: { t: 's', v: 'Ditanggung Perusahaan' },
+          BZ4: { t: 's', v: 'JKK 0.54%' },
+          CA4: { t: 's', v: 'JK 0.30%' },
+          CB3: { t: 's', v: 'Iuran Jaminan Jari Tua / JHT' },
+          CB4: { t: 's', v: 'Perusahaan 3.70%' },
+          CC4: { t: 's', v: 'Karyawan 2.00%' },
+          CD3: { t: 's', v: 'Total BPJS, JKK, JK, JHT Perusahaan & Karyawan' },
+          CE3: { t: 's', v: 'Total Pensiun Perusahaan & JHT Perusahaan' },
+          CF3: { t: 's', v: 'Standar Upah Pensiun' },
+          CG3: { t: 's', v: 'Iuran Pensiun' },
+          CG4: { t: 's', v: 'Perusahaan 2.00%' },
+          CH4: { t: 's', v: 'Karyawan 1.00%' },
+          CI3: { t: 's', v: 'Description (BPJS Ketenagakerjaan)' },
+          CJ3: { t: 's', v: 'Total Iuran Pensiun & Kesehatan Perusahaan & Karyawan' },
+          CK3: { t: 's', v: 'Total BPJS, JKK, JK, JHT, Pensiun Perusahaan & Karyawan' },
+          CL3: { t: 's', v: 'Total JKK, JK, Medical Perusahaan' },
+          CM3: { t: 's', v: 'Upah untuk Pelaporan BPJS Kesehatan' },
+          CN3: { t: 's', v: 'Standar Gaji Iuran BPJS Kesehatan' },
+          CO3: { t: 's', v: 'Iuran BPJS Kesehatan' },
+          CO4: { t: 's', v: 'Perusahaan 4.00%' },
+          CP4: { t: 's', v: 'Karyawan 1.00%' },
+          CQ3: { t: 's', v: 'Kelas Rawat' },
+          CR3: { t: 's', v: 'Description Medical' },
+          CS3: { t: 's', v: 'Total Medical Perusahaan & Karyawan' },
+          CT3: { t: 's', v: 'Total JKK, JK, JHT, Pensiun Perusahaan' },
+          CU3: { t: 's', v: 'Absent / Day Basic' },
+          CU4: { t: 's', v: 'Absent' },
+          CV4: { t: 's', v: 'Amount' },
+          CW3: { t: 's', v: 'Total Absen Aktual & Koreksi Absen' },
+          CX3: { t: 's', v: 'Pajak Penghasilan Ber-NPWP' },
+          CY3: { t: 's', v: 'Pajak Tambahan Non-NPWP' },
+          CZ3: { t: 's', v: 'Total Pajak NPWP & Non-NPWP' },
+          DA3: { t: 's', v: 'Pemotongan Kelebihan Bayar Gaji & Koreksi Absen' },
+          DB3: { t: 's', v: 'Pemotongan Kelebihan Bayar OT' },
+          DC3: { t: 's', v: 'Pemotongan Prorate Absen' },
+          DD3: { t: 's', v: 'Total Pemotongan (Gaji, OT, Tunjangan)' },
+          DE3: { t: 's', v: 'Pemotongan' },
+          DF3: { t: 's', v: 'Pemotongan Toolroom' },
+          DG3: { t: 's', v: 'Pemotongan Lain' },
+          DH3: { t: 's', v: 'Total Semua Pemotongan' },
+          DI3: { t: 's', v: 'Dana Pinjaman' },
+          DJ3: { t: 's', v: 'Kantin' },
+          DK3: { t: 's', v: 'Kopkar dan BMI' },
+          DL3: { t: 's', v: 'Pph21 Kurang Bayar' },
+          DM3: { t: 's', v: 'Jumlah Pemotongan' },
+          DN3: { t: 's', v: 'Penghasilan' },
+          DO3: { t: 's', v: 'Periode Potongan Kantin' },
+          DP3: { t: 's', v: 'Bonus' },
+          DQ3: { t: 's', v: 'Uang Pisah' },
+          DQ4: { t: 's', v: 'Lama Kerja Prorate Tahun' },
+          DR4: { t: 's', v: 'Amount' },
+          DS3: { t: 's', v: 'Uang Pesangon' },
+          DS4: { t: 's', v: 'Lama Kerja Prorate Tahun' },
+          DT4: { t: 's', v: 'Amount' },
+          DU3: { t: 's', v: 'Uang P. Masa Kerja' },
+          DU4: { t: 's', v: 'Lama Kerja Prorate Tahun' },
+          DV4: { t: 's', v: 'Amount' },
+          DW3: { t: 's', v: 'Uang Penggantian Hak' },
+          DW4: { t: 's', v: 'Pesangon + P. Masa kerja *15%' },
+          DX3: { t: 's', v: 'Periode Pajak' },
+          DX4: { t: 's', v: 'Bulan' },
+          DY4: { t: 's', v: 'Total Bulan' },
+          DZ3: { t: 's', v: 'Take Home Pay' },
+          EA3: { t: 's', v: 'Total Transfer By Mandiri' },
+          EB3: { t: 's', v: 'Total by Cash (For Expat & Final Payment)' },
           '!merges': [
             { s: { r: 0, c: 0 }, e: { r: 0, c: 27 } },
             { s: { r: 1, c: 0 }, e: { r: 1, c: 27 } },
@@ -2602,6 +2667,51 @@ const genXLSMaster = async (p) => {
             { s: { r: 2, c: 72 }, e: { r: 2, c: 73 } },
             { s: { r: 2, c: 74 }, e: { r: 2, c: 75 } },
             { s: { r: 2, c: 76 }, e: { r: 3, c: 76 } },
+            { s: { r: 2, c: 77 }, e: { r: 2, c: 78 } },
+            { s: { r: 2, c: 79 }, e: { r: 2, c: 80 } },
+            { s: { r: 2, c: 81 }, e: { r: 3, c: 81 } },
+            { s: { r: 2, c: 82 }, e: { r: 3, c: 82 } },
+            { s: { r: 2, c: 83 }, e: { r: 3, c: 83 } },
+            { s: { r: 2, c: 84 }, e: { r: 2, c: 85 } },
+            { s: { r: 2, c: 86 }, e: { r: 3, c: 86 } },
+            { s: { r: 2, c: 87 }, e: { r: 3, c: 87 } },
+            { s: { r: 2, c: 88 }, e: { r: 3, c: 88 } },
+            { s: { r: 2, c: 89 }, e: { r: 3, c: 89 } },
+            { s: { r: 2, c: 90 }, e: { r: 3, c: 90 } },
+            { s: { r: 2, c: 91 }, e: { r: 3, c: 91 } },
+            { s: { r: 2, c: 92 }, e: { r: 2, c: 93 } },
+            { s: { r: 2, c: 94 }, e: { r: 3, c: 94 } },
+            { s: { r: 2, c: 95 }, e: { r: 3, c: 95 } },
+            { s: { r: 2, c: 96 }, e: { r: 3, c: 96 } },
+            { s: { r: 2, c: 97 }, e: { r: 3, c: 97 } },
+            { s: { r: 2, c: 98 }, e: { r: 2, c: 99 } },
+            { s: { r: 2, c: 100 }, e: { r: 3, c: 100 } },
+            { s: { r: 2, c: 101 }, e: { r: 3, c: 101 } },
+            { s: { r: 2, c: 102 }, e: { r: 3, c: 102 } },
+            { s: { r: 2, c: 103 }, e: { r: 3, c: 103 } },
+            { s: { r: 2, c: 104 }, e: { r: 3, c: 104 } },
+            { s: { r: 2, c: 105 }, e: { r: 3, c: 105 } },
+            { s: { r: 2, c: 106 }, e: { r: 3, c: 106 } },
+            { s: { r: 2, c: 107 }, e: { r: 3, c: 107 } },
+            { s: { r: 2, c: 108 }, e: { r: 3, c: 108 } },
+            { s: { r: 2, c: 109 }, e: { r: 3, c: 109 } },
+            { s: { r: 2, c: 110 }, e: { r: 3, c: 110 } },
+            { s: { r: 2, c: 111 }, e: { r: 3, c: 111 } },
+            { s: { r: 2, c: 112 }, e: { r: 3, c: 112 } },
+            { s: { r: 2, c: 113 }, e: { r: 3, c: 113 } },
+            { s: { r: 2, c: 114 }, e: { r: 3, c: 114 } },
+            { s: { r: 2, c: 115 }, e: { r: 3, c: 115 } },
+            { s: { r: 2, c: 116 }, e: { r: 3, c: 116 } },
+            { s: { r: 2, c: 117 }, e: { r: 3, c: 117 } },
+            { s: { r: 2, c: 118 }, e: { r: 3, c: 118 } },
+            { s: { r: 2, c: 119 }, e: { r: 3, c: 119 } },
+            { s: { r: 2, c: 120 }, e: { r: 2, c: 121 } },
+            { s: { r: 2, c: 122 }, e: { r: 2, c: 123 } },
+            { s: { r: 2, c: 124 }, e: { r: 2, c: 125 } },
+            { s: { r: 2, c: 127 }, e: { r: 2, c: 128 } },
+            { s: { r: 2, c: 129 }, e: { r: 3, c: 129 } },
+            { s: { r: 2, c: 130 }, e: { r: 3, c: 130 } },
+            { s: { r: 2, c: 131 }, e: { r: 3, c: 131 } },
           ],
           '!cols': [
             { wpx: 26 }, { wpx: 72 }, { wpx: 234 }, { wpx: 85 },
@@ -2623,7 +2733,20 @@ const genXLSMaster = async (p) => {
             { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
             { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
             { wpx: 42 }, { wpx: 85 }, { wpx: 47 }, { wpx: 85 },
-            { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 100 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 47 }, { wpx: 100 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 100 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 85 }, { wpx: 85 }, { wpx: 65 },
+            { wpx: 60 }, { wpx: 85 }, { wpx: 85 }, { wpx: 85 },
           ],
         },
       },
@@ -2709,6 +2832,61 @@ const genXLSMaster = async (p) => {
       wb.Sheets.Master[`BW${row}`] = { t: 'n', v: t.by0, z: '0.00' };
       wb.Sheets.Master[`BX${row}`] = { t: 'n', v: t.bz0, z: '#,##0' };
       wb.Sheets.Master[`BY${row}`] = { t: 'n', v: t.ca0, z: '#,##0' };
+      wb.Sheets.Master[`BZ${row}`] = { t: 'n', v: t.cb0, z: '#,##0' };
+      wb.Sheets.Master[`CA${row}`] = { t: 'n', v: t.cc0, z: '#,##0' };
+      wb.Sheets.Master[`CB${row}`] = { t: 'n', v: t.cd0, z: '#,##0' };
+      wb.Sheets.Master[`CC${row}`] = { t: 'n', v: t.ce0, z: '#,##0' };
+      wb.Sheets.Master[`CD${row}`] = { t: 'n', v: t.cf0, z: '#,##0' };
+      wb.Sheets.Master[`CE${row}`] = { t: 'n', v: t.cg0, z: '#,##0' };
+      wb.Sheets.Master[`CF${row}`] = { t: 'n', v: t.ch0, z: '#,##0' };
+      wb.Sheets.Master[`CG${row}`] = { t: 'n', v: t.ci0, z: '#,##0' };
+      wb.Sheets.Master[`CH${row}`] = { t: 'n', v: t.cj0, z: '#,##0' };
+      wb.Sheets.Master[`CI${row}`] = { t: 's', v: t.ck0 };
+      wb.Sheets.Master[`CJ${row}`] = { t: 'n', v: t.cl0, z: '#,##0' };
+      wb.Sheets.Master[`CK${row}`] = { t: 'n', v: t.cm0, z: '#,##0' };
+      wb.Sheets.Master[`CL${row}`] = { t: 'n', v: t.cn0, z: '#,##0' };
+      wb.Sheets.Master[`CM${row}`] = { t: 'n', v: t.co0, z: '#,##0' };
+      wb.Sheets.Master[`CN${row}`] = { t: 'n', v: t.cp0, z: '#,##0' };
+      wb.Sheets.Master[`CO${row}`] = { t: 'n', v: t.cq0, z: '#,##0' };
+      wb.Sheets.Master[`CP${row}`] = { t: 'n', v: t.cr0, z: '#,##0' };
+      wb.Sheets.Master[`CQ${row}`] = { t: 'n', v: t.cs0 };
+      wb.Sheets.Master[`CR${row}`] = { t: 's', v: t.ct0 };
+      wb.Sheets.Master[`CS${row}`] = { t: 'n', v: t.cu0, z: '#,##0' };
+      wb.Sheets.Master[`CT${row}`] = { t: 'n', v: t.cv0, z: '#,##0' };
+      wb.Sheets.Master[`CU${row}`] = { t: 'n', v: t.cw0, z: '0.0000' };
+      wb.Sheets.Master[`CV${row}`] = { t: 'n', v: t.cx0, z: '#,##0' };
+      wb.Sheets.Master[`CW${row}`] = { t: 'n', v: t.cy0, z: '#,##0' };
+      wb.Sheets.Master[`CX${row}`] = { t: 'n', v: t.cz0, z: '#,##0' };
+      wb.Sheets.Master[`CY${row}`] = { t: 'n', v: t.da0, z: '#,##0' };
+      wb.Sheets.Master[`CZ${row}`] = { t: 'n', v: t.db0, z: '#,##0' };
+      wb.Sheets.Master[`DA${row}`] = { t: 'n', v: t.dc0, z: '#,##0' };
+      wb.Sheets.Master[`DB${row}`] = { t: 'n', v: t.dd0, z: '#,##0' };
+      wb.Sheets.Master[`DC${row}`] = { t: 'n', v: t.de0, z: '#,##0' };
+      wb.Sheets.Master[`DD${row}`] = { t: 'n', v: t.df0, z: '#,##0' };
+      wb.Sheets.Master[`DE${row}`] = { t: 'n', v: t.dg0, z: '#,##0' };
+      wb.Sheets.Master[`DF${row}`] = { t: 'n', v: t.dh0, z: '#,##0' };
+      wb.Sheets.Master[`DG${row}`] = { t: 'n', v: t.di0, z: '#,##0' };
+      wb.Sheets.Master[`DH${row}`] = { t: 'n', v: t.dj0, z: '#,##0' };
+      wb.Sheets.Master[`DI${row}`] = { t: 'n', v: t.dk0, z: '#,##0' };
+      wb.Sheets.Master[`DJ${row}`] = { t: 'n', v: t.dl0, z: '#,##0' };
+      wb.Sheets.Master[`DK${row}`] = { t: 'n', v: t.dm0, z: '#,##0' };
+      wb.Sheets.Master[`DL${row}`] = { t: 'n', v: t.dn0, z: '#,##0' };
+      wb.Sheets.Master[`DM${row}`] = { t: 'n', v: t.do0, z: '#,##0' };
+      wb.Sheets.Master[`DN${row}`] = { t: 'n', v: t.dp0, z: '#,##0' };
+      wb.Sheets.Master[`DO${row}`] = { t: 's', v: t.dq0 };
+      wb.Sheets.Master[`DP${row}`] = { t: 'n', v: t.dr0, z: '#,##0' };
+      wb.Sheets.Master[`DQ${row}`] = { t: 'n', v: t.ds0, z: '#,##0' };
+      wb.Sheets.Master[`DR${row}`] = { t: 'n', v: t.dt0, z: '#,##0' };
+      wb.Sheets.Master[`DS${row}`] = { t: 'n', v: t.du0, z: '#,##0' };
+      wb.Sheets.Master[`DT${row}`] = { t: 'n', v: t.dv0, z: '#,##0' };
+      wb.Sheets.Master[`DU${row}`] = { t: 'n', v: t.dw0, z: '#,##0' };
+      wb.Sheets.Master[`DV${row}`] = { t: 'n', v: t.dx0, z: '#,##0' };
+      wb.Sheets.Master[`DW${row}`] = { t: 'n', v: t.dy0, z: '#,##0' };
+      wb.Sheets.Master[`DX${row}`] = { t: 's', v: t.dz0 };
+      wb.Sheets.Master[`DY${row}`] = { t: 's', v: t.ea0 };
+      wb.Sheets.Master[`DZ${row}`] = { t: 'n', v: t.eb0, z: '#,##0' };
+      wb.Sheets.Master[`EA${row}`] = { t: 'n', v: t.ec0, z: '#,##0' };
+      wb.Sheets.Master[`EB${row}`] = { t: 'n', v: t.ed0, z: '#,##0' };
 
       return true;
     });
@@ -2769,15 +2947,63 @@ const genXLSMaster = async (p) => {
     wb.Sheets.Master[`BW${row}`] = { t: 'n', v: p.by0Sum, z: '0.00' };
     wb.Sheets.Master[`BX${row}`] = { t: 'n', v: p.bz0Sum, z: '#,##0' };
     wb.Sheets.Master[`BY${row}`] = { t: 'n', v: p.ca0Sum, z: '#,##0' };
+    wb.Sheets.Master[`BZ${row}`] = { t: 'n', v: p.cb0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CA${row}`] = { t: 'n', v: p.cc0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CB${row}`] = { t: 'n', v: p.cd0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CC${row}`] = { t: 'n', v: p.ce0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CD${row}`] = { t: 'n', v: p.cf0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CE${row}`] = { t: 'n', v: p.cg0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CF${row}`] = { t: 'n', v: p.ch0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CG${row}`] = { t: 'n', v: p.ci0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CH${row}`] = { t: 'n', v: p.cj0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CJ${row}`] = { t: 'n', v: p.cl0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CK${row}`] = { t: 'n', v: p.cm0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CL${row}`] = { t: 'n', v: p.cn0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CM${row}`] = { t: 'n', v: p.co0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CN${row}`] = { t: 'n', v: p.cp0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CO${row}`] = { t: 'n', v: p.cq0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CP${row}`] = { t: 'n', v: p.cr0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CS${row}`] = { t: 'n', v: p.cu0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CT${row}`] = { t: 'n', v: p.cv0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CU${row}`] = { t: 'n', v: p.cw0Sum, z: '0.0000' };
+    wb.Sheets.Master[`CV${row}`] = { t: 'n', v: p.cx0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CW${row}`] = { t: 'n', v: p.cy0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CX${row}`] = { t: 'n', v: p.cz0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CY${row}`] = { t: 'n', v: p.da0Sum, z: '#,##0' };
+    wb.Sheets.Master[`CZ${row}`] = { t: 'n', v: p.db0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DA${row}`] = { t: 'n', v: p.dc0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DB${row}`] = { t: 'n', v: p.dd0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DC${row}`] = { t: 'n', v: p.de0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DD${row}`] = { t: 'n', v: p.df0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DE${row}`] = { t: 'n', v: p.dg0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DF${row}`] = { t: 'n', v: p.dh0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DG${row}`] = { t: 'n', v: p.di0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DH${row}`] = { t: 'n', v: p.dj0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DI${row}`] = { t: 'n', v: p.dk0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DJ${row}`] = { t: 'n', v: p.dl0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DK${row}`] = { t: 'n', v: p.dm0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DL${row}`] = { t: 'n', v: p.dn0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DM${row}`] = { t: 'n', v: p.do0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DN${row}`] = { t: 'n', v: p.dp0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DP${row}`] = { t: 'n', v: p.dr0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DQ${row}`] = { t: 'n', v: p.ds0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DR${row}`] = { t: 'n', v: p.dt0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DS${row}`] = { t: 'n', v: p.du0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DT${row}`] = { t: 'n', v: p.dv0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DU${row}`] = { t: 'n', v: p.dw0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DV${row}`] = { t: 'n', v: p.dx0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DW${row}`] = { t: 'n', v: p.dy0Sum, z: '#,##0' };
+    wb.Sheets.Master[`DZ${row}`] = { t: 'n', v: p.eb0Sum, z: '#,##0' };
+    wb.Sheets.Master[`EA${row}`] = { t: 'n', v: p.ec0Sum, z: '#,##0' };
+    wb.Sheets.Master[`EB${row}`] = { t: 'n', v: p.ed0Sum, z: '#,##0' };
 
     const fn = `static/report/${p.dir}/${p.dir}_payroll_master.xlsx`;
     const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
     fs.writeFileSync(fn, content);
-    return({ sStatus: 1 });
 
-    // return XlsxPopulate.fromFileAsync(fn)
-    //   .then((workbook) => workbook.toFileAsync(fn, { password: xlsPass })
-    //     .then(() => ({ sStatus: 1 })));
+    return XlsxPopulate.fromFileAsync(fn)
+      .then((workbook) => workbook.toFileAsync(fn, { password: xlsPass })
+        .then(() => ({ sStatus: 1 })));
   } catch (err) {
     if (typeof err === 'string') {
       throw new GraphQLError(err);
