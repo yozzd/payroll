@@ -856,9 +856,6 @@ const genPayrollXLS = async (p) => {
     }
 
     row += 1;
-    wb.Sheets.Sheet1[`A${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`D${row}`] = { t: 'n', v: p.g0Sum, z: '#,##0' };
     wb.Sheets.Sheet1[`E${row}`] = { t: 'n', v: p.aj0Sum, z: '#,##0' };
     wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: p.ak0Sum, z: '#,##0' };
@@ -887,9 +884,6 @@ const genPayrollXLS = async (p) => {
     wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: p.bj0Sum, z: '#,##0' };
     wb.Sheets.Sheet1[`AD${row}`] = { t: 'n', v: p.ax0Sum + p.bj0Sum, z: '#,##0' };
 
-    wb.Sheets.Sheet2[`A${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet2[`B${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet2[`C${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet2[`D${row}`] = { t: 'n', v: p.g0Sum, z: '#,##0' };
     wb.Sheets.Sheet2[`E${row}`] = { t: 'n', v: p.ab0Sum, z: '0.00' };
     wb.Sheets.Sheet2[`F${row}`] = { t: 'n', v: p.ac0Sum, z: '#,##0' };
@@ -910,9 +904,6 @@ const genPayrollXLS = async (p) => {
     wb.Sheets.Sheet2[`U${row}`] = { t: 'n', v: p.bt0Sum, z: '#,##0' };
     wb.Sheets.Sheet2[`V${row}`] = { t: 'n', v: p.bu0Sum, z: '#,##0' };
 
-    wb.Sheets.Sheet3[`A${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet3[`B${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet3[`C${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet3[`D${row}`] = { t: 'n', v: p.g0Sum, z: '#,##0' };
     wb.Sheets.Sheet3[`E${row}`] = { t: 'n', v: p.bv0Sum, z: '#,##0' };
     wb.Sheets.Sheet3[`F${row}`] = { t: 'n', v: p.bw0Sum, z: '#,##0' };
@@ -2157,21 +2148,6 @@ const genXLSThrQ = async (p) => {
     }
 
     row += 1;
-    wb.Sheets.Sheet1[`A${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`G${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`H${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`I${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`J${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`K${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`L${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`M${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`N${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`O${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: p.bx0Sum, z: '#,##0' };
     wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: p.g0Sum, z: '#,##0' };
     wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: p.aj0Sum, z: '#,##0' };
