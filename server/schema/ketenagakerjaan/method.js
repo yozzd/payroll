@@ -294,12 +294,6 @@ const genXLS = async (p) => {
     });
 
     row += 1;
-    wb.Sheets.Sheet1[`A${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: p.sum1, z: '#,##0' };
     wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: p.sum2, z: '#,##0' };
     wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: p.sum3, z: '#,##0' };
@@ -308,7 +302,6 @@ const genXLS = async (p) => {
     wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: p.sum6, z: '#,##0' };
     wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: p.sum7, z: '#,##0' };
     wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: p.sum8, z: '#,##0' };
-    wb.Sheets.Sheet1[`O${row}`] = { t: 's', v: '' };
 
     const fn = `static/report/${p.dir}/${p.dir}_ktg.xlsx`;
     const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
