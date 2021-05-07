@@ -266,18 +266,10 @@ const genXLS = async (p) => {
     });
 
     row += 1;
-    wb.Sheets.Sheet1[`A${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: '' };
-    wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: p.sum1, z: '#,##0' };
     wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: p.sum2, z: '#,##0' };
     wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: p.sum3, z: '#,##0' };
-    wb.Sheets.Sheet1[`J${row}`] = { t: 's', v: '' };
     wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: p.sum4, z: '#,##0' };
-    wb.Sheets.Sheet1[`L${row}`] = { t: 's', v: '' };
 
     const fn = `static/report/${p.dir}/${p.dir}_kes.xlsx`;
     const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
