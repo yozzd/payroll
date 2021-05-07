@@ -2459,10 +2459,145 @@ const sendThrSlip = async (p) => {
   }
 };
 
+const genXLSMaster = async (p) => {
+  try {
+    const { employee: e } = p;
+    await fs.ensureDir(`static/report/${p.dir}`);
+
+    const len = e.length + 5;
+    const wb = {
+      SheetNames: ['Master'],
+      Sheets: {
+        Master: {
+          '!ref': `A1:ED${len}`,
+          A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
+          A2: { t: 's', v: `PERIODE PAYROLL: ${p.period} ${p.year}` },
+          A3: { t: 's', v: 'No' },
+          B3: { t: 's', v: 'No Karyawan' },
+          C3: { t: 's', v: 'Nama Karyawan' },
+          D3: { t: 's', v: 'Selisih GP dari Hari Kerja Normal' },
+          E3: { t: 's', v: 'Gaji Pokok' },
+          F3: { t: 's', v: 'Status Karyawan' },
+          G3: { t: 's', v: 'Hired Date' },
+          H3: { t: 's', v: 'Hari Kerja' },
+          I3: { t: 's', v: 'Resign / Finish Contract Date' },
+          J3: { t: 's', v: 'Gaji Berdasarkan Hari Kerja Normal' },
+          K3: { t: 's', v: 'Note' },
+          L3: { t: 's', v: 'Jenis Kelamin' },
+          M3: { t: 's', v: 'Birthday' },
+          N3: { t: 's', v: 'NPWP' },
+          N4: { t: 's', v: 'Status NPWP' },
+          O4: { t: 's', v: 'No NPWP' },
+          P4: { t: 's', v: 'Status Tanggungan' },
+          Q3: { t: 's', v: 'Bank' },
+          Q4: { t: 's', v: 'Name' },
+          R4: { t: 's', v: 'No Rekening' },
+          S3: { t: 's', v: 'Department' },
+          T3: { t: 's', v: 'Section' },
+          U3: { t: 's', v: 'Section Code' },
+          V3: { t: 's', v: 'Grade' },
+          W3: { t: 's', v: 'Jabatan' },
+          X3: { t: 's', v: 'JPK No. (Kartu Peserta Jamsostek)' },
+          Y3: { t: 's', v: 'No. BPJS Kesehatan' },
+          '!merges': [
+            { s: { r: 0, c: 0 }, e: { r: 0, c: 27 } },
+            { s: { r: 1, c: 0 }, e: { r: 1, c: 27 } },
+            { s: { r: 2, c: 0 }, e: { r: 3, c: 0 } },
+            { s: { r: 2, c: 1 }, e: { r: 3, c: 1 } },
+            { s: { r: 2, c: 2 }, e: { r: 3, c: 2 } },
+            { s: { r: 2, c: 3 }, e: { r: 3, c: 3 } },
+            { s: { r: 2, c: 4 }, e: { r: 3, c: 4 } },
+            { s: { r: 2, c: 5 }, e: { r: 3, c: 5 } },
+            { s: { r: 2, c: 6 }, e: { r: 3, c: 6 } },
+            { s: { r: 2, c: 7 }, e: { r: 3, c: 7 } },
+            { s: { r: 2, c: 8 }, e: { r: 3, c: 8 } },
+            { s: { r: 2, c: 9 }, e: { r: 3, c: 9 } },
+            { s: { r: 2, c: 10 }, e: { r: 3, c: 10 } },
+            { s: { r: 2, c: 11 }, e: { r: 3, c: 11 } },
+            { s: { r: 2, c: 12 }, e: { r: 3, c: 12 } },
+            { s: { r: 2, c: 13 }, e: { r: 2, c: 15 } },
+            { s: { r: 2, c: 16 }, e: { r: 2, c: 17 } },
+            { s: { r: 2, c: 18 }, e: { r: 3, c: 18 } },
+            { s: { r: 2, c: 19 }, e: { r: 3, c: 19 } },
+            { s: { r: 2, c: 20 }, e: { r: 3, c: 20 } },
+            { s: { r: 2, c: 21 }, e: { r: 3, c: 21 } },
+            { s: { r: 2, c: 22 }, e: { r: 3, c: 22 } },
+            { s: { r: 2, c: 23 }, e: { r: 3, c: 23 } },
+            { s: { r: 2, c: 24 }, e: { r: 3, c: 24 } },
+          ],
+          '!cols': [
+            { wpx: 26 }, { wpx: 72 }, { wpx: 234 }, { wpx: 85 },
+            { wpx: 85 }, { wpx: 87 }, { wpx: 64 }, { wpx: 54 },
+            { wpx: 64 }, { wpx: 85 }, { wpx: 107 }, { wpx: 74 },
+            { wpx: 64 }, { wpx: 30 }, { wpx: 113 }, { wpx: 30 },
+            { wpx: 52 }, { wpx: 96 }, { wpx: 188 }, { wpx: 233 },
+            { wpx: 38 }, { wpx: 38 }, { wpx: 92 }, { wpx: 76 },
+            { wpx: 86 },
+          ],
+        },
+      },
+    };
+
+    let row = 4;
+    e.map((t, i) => {
+      row += 1;
+      wb.Sheets.Master[`A${row}`] = { t: 'n', v: i + 1 };
+      wb.Sheets.Master[`B${row}`] = { t: 's', v: t.e0 };
+      wb.Sheets.Master[`C${row}`] = { t: 's', v: t.d0 };
+      wb.Sheets.Master[`D${row}`] = { t: 'n', v: t.f0, z: '#,##0' };
+      wb.Sheets.Master[`E${row}`] = { t: 'n', v: t.g0, z: '#,##0' };
+      wb.Sheets.Master[`F${row}`] = { t: 's', v: t.h0 };
+      wb.Sheets.Master[`G${row}`] = { t: 's', v: t.i0 ? gDateFormat(t.i0, 'dd-MM-yyyy') : '' };
+      wb.Sheets.Master[`H${row}`] = { t: 'n', v: t.j0 };
+      wb.Sheets.Master[`I${row}`] = { t: 's', v: t.k0 ? gDateFormat(t.k0, 'dd-MM-yyyy') : '' };
+      wb.Sheets.Master[`J${row}`] = { t: 'n', v: t.l0, z: '#,##0' };
+      wb.Sheets.Master[`K${row}`] = { t: 's', v: t.m0 };
+      wb.Sheets.Master[`L${row}`] = { t: 's', v: t.n0 };
+      wb.Sheets.Master[`M${row}`] = { t: 's', v: t.o0 ? gDateFormat(t.o0, 'dd-MM-yyyy') : '' };
+      wb.Sheets.Master[`N${row}`] = { t: 's', v: t.p0 };
+      wb.Sheets.Master[`O${row}`] = { t: 's', v: t.q0 };
+      wb.Sheets.Master[`P${row}`] = { t: 's', v: t.r0 };
+      wb.Sheets.Master[`Q${row}`] = { t: 's', v: t.s0 };
+      wb.Sheets.Master[`R${row}`] = { t: 's', v: t.t0 };
+      wb.Sheets.Master[`S${row}`] = { t: 's', v: t.u0 };
+      wb.Sheets.Master[`T${row}`] = { t: 's', v: t.v0 };
+      wb.Sheets.Master[`U${row}`] = { t: 's', v: t.w0 };
+      wb.Sheets.Master[`V${row}`] = { t: 's', v: t.x0 };
+      wb.Sheets.Master[`W${row}`] = { t: 's', v: t.y0 };
+      wb.Sheets.Master[`X${row}`] = { t: 's', v: t.z0 };
+      wb.Sheets.Master[`Y${row}`] = { t: 's', v: t.aa0 };
+
+      return true;
+    });
+
+
+    row += 1;
+    wb.Sheets.Master[`D${row}`] = { t: 'n', v: p.f0Sum, z: '#,##0' };
+    wb.Sheets.Master[`E${row}`] = { t: 'n', v: p.g0Sum, z: '#,##0' };
+    wb.Sheets.Master[`J${row}`] = { t: 'n', v: p.l0Sum, z: '#,##0' };
+
+    const fn = `static/report/${p.dir}/${p.dir}_payroll_master.xlsx`;
+    const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
+    fs.writeFileSync(fn, content);
+    return({ sStatus: 1 });
+
+    // return XlsxPopulate.fromFileAsync(fn)
+    //   .then((workbook) => workbook.toFileAsync(fn, { password: xlsPass })
+    //     .then(() => ({ sStatus: 1 })));
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
+};
+
 module.exports = {
   updateEmployee,
   generateReportPayroll,
   genPayrollXLS,
+  genXLSMaster,
   genAccCheck,
   generateSlip,
   sendSlip,

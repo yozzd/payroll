@@ -49,6 +49,14 @@ export const GenPayrollXLSNoFin = gql`
   }
 `;
 
+export const GenPayrollXLSMaster = gql`
+  mutation genPayrollXLSMaster($id: String!) {
+    genPayrollXLSMaster(id: $id) {
+      sStatus
+    }
+  }
+`;
+
 export const GenerateAccCheck = gql`
   mutation generateAccCheck($id: String!) {
     generateAccCheck(id: $id) {

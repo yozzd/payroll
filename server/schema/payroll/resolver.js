@@ -14,6 +14,7 @@ const {
   sendSlip,
   generateReportPayroll,
   genPayrollXLS,
+  genXLSMaster,
   genAccCheck,
   genFinal,
   genPDFSpAllowQ,
@@ -66,7 +67,7 @@ const countHR = (tgl1, tgl2) => {
 
   if (years > 0) return 12;
   if (years === 0 && months < 1) return 0;
-  if (years === 0 && months > 1 && days >= 15) return months + 1;
+  if (years === 0 && months >= 1 && days >= 15) return months + 1;
   return months;
 };
 
@@ -730,6 +731,17 @@ const Mutation = {
     resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await a3ReportNoFin(id);
       const s = await genPayrollXLS(p);
+      return s;
+    }),
+  },
+  genPayrollXLSMaster: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('guest', async (_, { id }) => {
+      const p = await a3Report(id);
+      const s = await genXLSMaster(p);
       return s;
     }),
   },

@@ -26,7 +26,7 @@
     </div>
     <div>
       <el-table
-        v-loading="$apollo.loading || genRpPy || genAcc || loadXLSPy || loadXLSNoFin"
+        v-loading="$apollo.loading || genRpPy || genAcc || loadXLS"
         :data="payrollAll"
         :element-loading-text="'Loading...'"
         element-loading-spinner="el-icon-loading"
@@ -198,6 +198,9 @@
                   </el-menu-item>
                   <el-menu-item index="ac">
                     XLS (No Final Payment)
+                  </el-menu-item>
+                  <el-menu-item index="ad">
+                    XLS (Master)
                   </el-menu-item>
                 </el-submenu>
                 <el-menu-item index="b">
@@ -896,6 +899,7 @@ import {
   GenerateReportPayroll,
   GeneratePayrollXLS,
   GenPayrollXLSNoFin,
+  GenPayrollXLSMaster,
   GenerateAccCheck,
   AddEmployee,
   CloneEmployee,
@@ -934,8 +938,7 @@ export default {
       loadingAgama: false,
       genRpPy: false,
       genAcc: false,
-      loadXLSPy: false,
-      loadXLSNoFin: false,
+      loadXLS: false,
       form: {
         period: [],
         file: null,
@@ -1068,6 +1071,7 @@ export default {
       if (c === 'aa') this.generateReportPayroll(id, dir);
       else if (c === 'ab') this.generatePayrollXLS(id, dir);
       else if (c === 'ac') this.genPayrollXLSNoFin(id, dir);
+      else if (c === 'ad') this.genPayrollXLSMaster(id, dir);
       else if (c === 'b') this.generateAccCheck(id, dir);
     },
     handleReportCommand(c, id) {
@@ -1284,7 +1288,7 @@ export default {
     },
     async generatePayrollXLS(id, dir) {
       try {
-        this.loadXLSPy = true;
+        this.loadXLS = true;
         const { data: { generatePayrollXLS: { sStatus } } } = await this.$apollo.mutate({
           mutation: GeneratePayrollXLS,
           variables: {
@@ -1293,7 +1297,7 @@ export default {
         });
 
         if (sStatus) {
-          this.loadXLSPy = false;
+          this.loadXLS = false;
           window.open(`/report/${dir}/${dir}_payroll.xlsx`);
         }
         return true;
@@ -1304,7 +1308,7 @@ export default {
     },
     async genPayrollXLSNoFin(id, dir) {
       try {
-        this.loadXLSNoFin = true;
+        this.loadXLS = true;
         const { data: { genPayrollXLSNoFin: { sStatus } } } = await this.$apollo.mutate({
           mutation: GenPayrollXLSNoFin,
           variables: {
@@ -1313,8 +1317,28 @@ export default {
         });
 
         if (sStatus) {
-          this.loadXLSNoFin = false;
+          this.loadXLS = false;
           window.open(`/report/${dir}/${dir}_payroll.xlsx`);
+        }
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
+    },
+    async genPayrollXLSMaster(id, dir) {
+      try {
+        this.loadXLS = true;
+        const { data: { genPayrollXLSMaster: { sStatus } } } = await this.$apollo.mutate({
+          mutation: GenPayrollXLSMaster,
+          variables: {
+            id,
+          },
+        });
+
+        if (sStatus) {
+          this.loadXLS = false;
+          window.open(`/report/${dir}/${dir}_payroll_master.xlsx`);
         }
         return true;
       } catch ({ graphQLErrors, networkError }) {
