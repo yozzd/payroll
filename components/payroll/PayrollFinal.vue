@@ -231,7 +231,9 @@
               </el-form-item>
             </div>
           </div>
-          <div class="mt-8 text-lg">Tunjangan Tetap</div>
+          <div class="mt-8 text-lg">
+            Tunjangan Tetap
+          </div>
           <div class="flex space-x-4">
             <div class="flex-1">
               <el-form-item label="Tj. Tetap Living">
@@ -281,7 +283,9 @@
               </el-form-item>
             </div>
           </div>
-          <div class="mt-8 text-lg">Tunjangan Tidak Tetap</div>
+          <div class="mt-8 text-lg">
+            Tunjangan Tidak Tetap
+          </div>
           <div class="flex space-x-4">
             <div class="flex-1">
               <el-form-item label="Tj. Tidak Tetap Fungsional">
