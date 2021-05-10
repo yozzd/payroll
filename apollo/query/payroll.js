@@ -467,7 +467,49 @@ export const PayrollFinal = gql`
         _id
         d0
         e0
+        g0
+        h0
+        i0
+        j0
+        k0
+        y0
+        ab0
+        ad0
+        af0
+        bv0
+        bw0
+        by0
+        cw0
+        dh0
+        dk0
+        dl0
+        dm0
+        dn0
+        ds0
+        fe0
         fDate
+        aj0r
+        ak0r
+        al0r
+        am0r
+        an0r
+        ao0r
+        ap0r
+        aq0r
+        ar0r
+        as0r
+        at0r
+        au0r
+        av0r
+        ba0r
+        bb0r
+        bc0r
+        bd0r
+        be0r
+        bf0r
+        bg0r
+        bh0r
+        bi0r
         final {
           name
           dir

@@ -55,6 +55,7 @@ const {
   spAllowQ,
   thrCat,
   thrCatPerson,
+  finalPayment,
 } = require('./query');
 const auth = require('../auth/service');
 
@@ -602,34 +603,8 @@ const Query = {
       id: { type: GraphQLString },
     },
     resolve: auth.hasRole('guest', async (_, { id }) => {
-      const p = await Payroll.aggregate([
-        { $match: { _id: id } },
-        { $unwind: '$employee' },
-        { $match: { 'employee.ex0': true } },
-        { $sort: { 'employee.e0': 1 } },
-        {
-          $group: {
-            _id: '$_id',
-            period: { $first: '$period' },
-            year: { $first: '$year' },
-            freeze: { $first: '$freeze' },
-            employee: {
-              $push: {
-                _id: '$employee._id',
-                d0: '$employee.d0',
-                e0: '$employee.e0',
-                fDate: '$employee.fDate',
-                final: {
-                  name: '$employee.final.name',
-                  dir: '$dir',
-                },
-              },
-            },
-          },
-        },
-      ]);
-
-      return p[0];
+      const p = await finalPayment(id);
+      return p;
     }),
   },
   payrollSpAllow: {
@@ -1190,31 +1165,8 @@ const Mutation = {
     resolve: auth.hasRole('user', async (_, { input }) => {
       const { _id, employee } = input;
       await updateEmployee(_id, employee, Payroll);
-      const p = await Payroll.aggregate([
-        { $match: { _id } },
-        { $unwind: '$employee' },
-        { $match: { 'employee.ex0': true } },
-        { $sort: { 'employee.e0': 1 } },
-        {
-          $group: {
-            _id: '$_id',
-            freeze: { $first: '$freeze' },
-            employee: {
-              $push: {
-                _id: '$employee._id',
-                d0: '$employee.d0',
-                e0: '$employee.e0',
-                fDate: '$employee.fDate',
-                final: {
-                  name: '$employee.final.name',
-                  dir: '$dir',
-                },
-              },
-            },
-          },
-        },
-      ]);
-      return p[0];
+      const p = await finalPayment(_id);
+      return p;
     }),
   },
   editSpAllow: {

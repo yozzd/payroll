@@ -341,10 +341,84 @@ const thrCatPerson = async (id, eId) => {
   return payroll[0];
 };
 
+const finalPayment = async (id) => {
+  const p = await Payroll.aggregate([
+    { $match: { _id: id } },
+    { $unwind: '$employee' },
+    { $match: { 'employee.ex0': true } },
+    { $sort: { 'employee.e0': 1 } },
+    {
+      $group: {
+        _id: '$_id',
+        period: { $first: '$period' },
+        year: { $first: '$year' },
+        freeze: { $first: '$freeze' },
+        employee: {
+          $push: {
+            _id: '$employee._id',
+            d0: '$employee.d0',
+            e0: '$employee.e0',
+            g0: '$employee.g0',
+            h0: '$employee.h0',
+            i0: '$employee.i0',
+            j0: '$employee.j0',
+            k0: '$employee.k0',
+            y0: '$employee.y0',
+            ab0: '$employee.ab0',
+            ad0: '$employee.ad0',
+            af0: '$employee.af0',
+            bv0: '$employee.bv0',
+            bw0: '$employee.bw0',
+            by0: '$employee.by0',
+            cw0: '$employee.cw0',
+            dh0: '$employee.dh0',
+            dk0: '$employee.dk0',
+            dl0: '$employee.dl0',
+            dm0: '$employee.dm0',
+            dn0: '$employee.dn0',
+            ds0: '$employee.ds0',
+            fe0: '$employee.fe0',
+            fDate: '$employee.fDate',
+            aj0r: '$employee.aj0r',
+            ak0r: '$employee.ak0r',
+            al0r: '$employee.al0r',
+            am0r: '$employee.am0r',
+            an0r: '$employee.an0r',
+            ao0r: '$employee.ao0r',
+            ap0r: '$employee.ap0r',
+            aq0r: '$employee.aq0r',
+            ar0r: '$employee.ar0r',
+            as0r: '$employee.as0r',
+            at0r: '$employee.at0r',
+            au0r: '$employee.au0r',
+            av0r: '$employee.av0r',
+            ba0r: '$employee.ba0r',
+            bb0r: '$employee.bb0r',
+            bc0r: '$employee.bc0r',
+            bd0r: '$employee.bd0r',
+            be0r: '$employee.be0r',
+            bf0r: '$employee.bf0r',
+            bg0r: '$employee.bg0r',
+            bh0r: '$employee.bh0r',
+            bi0r: '$employee.bi0r',
+            final: {
+              name: '$employee.final.name',
+              dir: '$dir',
+            },
+          },
+        },
+      },
+    },
+  ]);
+
+  return p[0];
+};
+
 module.exports = {
   a3Report,
   a3ReportNoFin,
   spAllowQ,
   thrCat,
   thrCatPerson,
+  finalPayment,
 };

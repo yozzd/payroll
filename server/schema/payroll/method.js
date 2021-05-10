@@ -1398,7 +1398,7 @@ const genFinal = async (p) => {
     ];
 
     if (e.ad0) vw2.push(['Dinas Luar', { text: ms, colSpan: 2 }, '', { text: e.ad0, alignment: 'right' }, 'Hours', ':', { text: intpre0(e.ae0).format(), alignment: 'right' }]); income += e.ae0;
-    if (e.af0) vw2.push(['Insentif', { text: ms, colSpan: 2 }, '', { text: e.ad0, alignment: 'right' }, 'Hours', ':', { text: intpre0(e.ah0).format(), alignment: 'right' }]); income += e.ah0;
+    if (e.af0) vw2.push(['Insentif', { text: ms, colSpan: 2 }, '', { text: e.af0, alignment: 'right' }, 'Hours', ':', { text: intpre0(e.ah0).format(), alignment: 'right' }]); income += e.ah0;
 
     vw2.push([{ text: 'Leave Right', colSpan: 3 }, '', '', { text: e.by0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.bz0).format(), alignment: 'right' }]);
 

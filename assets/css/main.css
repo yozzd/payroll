@@ -34,6 +34,7 @@ html {
   font-size: 12px;
 }
 
+.el-dialog__body,
 .el-pagination__total,
 .el-input__inner,
 .el-button,
@@ -184,4 +185,9 @@ button:focus,
 
 .el-dialog {
   @apply rounded-xl;
+}
+
+.el-dialog__body {
+  max-height: 600px;
+  overflow-y: scroll;
 }
