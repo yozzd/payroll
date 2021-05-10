@@ -59,7 +59,11 @@ const generateThr = async (p) => {
     const ds = [e.ac0, e.ad0, e.ae0, e.af0, e.ag0, e.ah0];
 
     for (let i = start; i <= end; i += 1) {
-      if (ds[i - start]) {
+      if (ds[i - start] && i === end) {
+        ctbl2.push([
+          `${months[i]} ${p.year} + 5%`, { text: intpre0(ds[i - start]).format(), alignment: 'right' }, '',
+        ]);
+      } else {
         ctbl2.push([
           `${months[i]} ${p.year}`, { text: intpre0(ds[i - start]).format(), alignment: 'right' }, '',
         ]);
