@@ -5,6 +5,7 @@ const nodemailer = require('nodemailer');
 
 const { intpre0 } = require('../scalar/number');
 const { idDateFormat } = require('../scalar/date');
+const { getMonth, getYear } = require('date-fns');
 
 const smtp = require('../../config/smtp');
 
@@ -21,6 +22,11 @@ const generateThr = async (p) => {
     const { employee: e } = p;
     await fs.ensureDir(`static/thr/${p.dir}`);
 
+    const months = [
+      'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember',
+    ];
+    
     const ctbl1 = [
       [{ text: 'BASIC THR CALCULATION :', colSpan: 2 }, ''],
       ['Basic Salary', { text: intpre0(e.k0).format(), alignment: 'right' }],
@@ -48,12 +54,18 @@ const generateThr = async (p) => {
       [{ text: 'Installment Time :', colSpan: 3 }, '', ''],
     ];
 
-    if (e.ac0 > 0) ctbl2.push(['December 2020', { text: intpre0(e.ac0).format(), alignment: 'right' }, '']);
-    if (e.ad0 > 0) ctbl2.push(['January 2021', { text: intpre0(e.ad0).format(), alignment: 'right' }, '']);
-    if (e.ae0 > 0) ctbl2.push(['February 2021', { text: intpre0(e.ae0).format(), alignment: 'right' }, '']);
-    if (e.af0 > 0) ctbl2.push(['March 2021', { text: intpre0(e.af0).format(), alignment: 'right' }, '']);
-    if (e.ag0 > 0) ctbl2.push(['April 2021', { text: intpre0(e.ag0).format(), alignment: 'right' }, '']);
-    if (e.ah0 > 0) ctbl2.push(['May 2021', { text: intpre0(e.ah0).format(), alignment: 'right' }, '']);
+    const start = getMonth(p.from);
+    const end = getMonth(p.to);
+    const ds = [e.ac0, e.ad0, e.ae0, e.af0, e.ag0, e.ah0];
+
+    for (let i = start; i <= end; i += 1) {
+      if (ds[i - start]) {
+        ctbl2.push([
+          `${months[i]} ${p.year}`, { text: intpre0(ds[i - start]).format(), alignment: 'right' }, '',
+        ]);
+      }
+    }
+    
     ctbl2.push([{
       text: 'THR THIS MONTH >>>', colSpan: 2, alignment: 'right', bold: true,
     }, '', { text: intpre0(e.ac0).format(), alignment: 'right', bold: true }]);
@@ -61,7 +73,7 @@ const generateThr = async (p) => {
     const notes = [
       ['Note :', 'Approved By', 'Received By'],
       [`Installment Time : ${e.ab0} Months`, '', ''],
-      ['Tax on THR is calculated at the end of December 2020', 'PT. LABTECH', e.c0],
+      ['Tax on THR is calculated at the end of December 2021', 'PT. LABTECH', e.c0],
       ['The Installment value is recalculated if Resign / Finish after this THR', e.ai0, e.j0],
       ['This is computer generated letter, no signature is required', '', ''],
     ];
@@ -79,10 +91,10 @@ const generateThr = async (p) => {
               }, {
                 text: 'PT. LABTECH PENTA INTERNATIONAL', bold: true, fontSize: 8, border: [false, false, false, true],
               }, {
-                text: 'THR NON MUSLIM SLIP', bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, true],
+                text: 'THR MUSLIM SLIP', bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, true],
               }],
               ['', { text: 'Kawasan Industri Sekupang Kav. 34 Batam - Indonesia', border: [false, false, false, false] }, {
-                text: idDateFormat(p.to, 'MMMM yyyy'), bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, false],
+                text: idDateFormat(p.from, 'MMMM yyyy'), bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, false],
               }],
             ],
           },
@@ -97,7 +109,10 @@ const generateThr = async (p) => {
               ['Bank', 'MANDIRI', '/', e.f0],
               ['Position', e.i0, '/', e.g0],
               [{
-                text: 'SELAMAT HARI NATAL & TAHUN BARU', colSpan: 4, alignment: 'center', fontSize: 10, bold: true, margin: [0, 15, 0, 10],
+                text: 'SELAMAT HARI RAYA IDUL FITRI', colSpan: 4, alignment: 'center', fontSize: 10, bold: true, margin: [0, 15, 0, 0],
+              }, '', '', ''],
+              [{
+                text: 'MOHON MAAF LAHIR & BATHIN', colSpan: 4, alignment: 'center', fontSize: 10, bold: true, margin: [0, 0, 0, 10],
               }, '', '', ''],
             ],
           },
