@@ -238,6 +238,7 @@ const FinalInputType = new GraphQLInputObjectType({
     by0: { type: GraphQLFloat },
     cw0: { type: GraphQLFloat },
     dh0: { type: GraphQLInt },
+    di0: { type: GraphQLInt },
     dk0: { type: GraphQLInt },
     dl0: { type: GraphQLInt },
     dm0: { type: GraphQLInt },

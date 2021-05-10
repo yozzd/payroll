@@ -229,6 +229,9 @@
               <el-form-item label="Pph21 Kurang Bayar">
                 <el-input v-model="form.dn0"></el-input>
               </el-form-item>
+              <el-form-item label="Pemotongan Lain">
+                <el-input v-model="form.di0"></el-input>
+              </el-form-item>
             </div>
           </div>
           <div class="mt-8 text-lg">
@@ -465,6 +468,7 @@ export default {
                     by0: parseFloat(this.form.by0),
                     cw0: parseFloat(this.form.cw0),
                     dh0: parseInt(this.form.dh0, 10),
+                    di0: parseInt(this.form.di0, 10),
                     dk0: parseInt(this.form.dk0, 10),
                     dl0: parseInt(this.form.dl0, 10),
                     dm0: parseInt(this.form.dm0, 10),

@@ -1442,7 +1442,7 @@ const genFinal = async (p) => {
     }, '', ':', { text: intpre0(income).format(), alignment: 'right', bold: true }]);
 
     const tax = e.cz0 ? e.cz0 : e.da0;
-    const deduction = e.cx0 + e.dl0 + e.dm0 + e.dk0 + tax + e.ce0 + e.cj0 + e.cr0 + e.dh0 + e.dn0;
+    const deduction = e.cx0 + e.dl0 + e.dm0 + e.dk0 + tax + e.ce0 + e.cj0 + e.cr0 + e.dh0 + e.dn0 + e.di0;
     const vw3 = [
       [{ text: 'Absensi', colSpan: 3 }, '', '', { text: floatpre4(e.cw0).format(), alignment: 'right' }, 'Days', ':', { text: intpre0(e.cx0).format(), alignment: 'right' }],
       ['Potongan Kupon', { text: e.dq0, colSpan: 2 }, '', { text: `${e.dl0 / 7000} Kupon`, alignment: 'right' }, '7000', ':', { text: intpre0(e.dl0).format(), alignment: 'right' }],
@@ -1454,6 +1454,7 @@ const genFinal = async (p) => {
       [{ text: 'Iuran Kesehatan Karyawan', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.cr0).format(), alignment: 'right' }],
       [{ text: 'Pemotongan Toolroom', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.dh0).format(), alignment: 'right' }],
       [{ text: 'Pemotongan Kurang Bayar Pph21', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.dn0).format(), alignment: 'right' }],
+      [{ text: 'Pemotongan Lain', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.di0).format(), alignment: 'right' }],
       ['', '', '', {
         text: 'Total Deductions', colSpan: 2, alignment: 'right', bold: true,
       }, '', ':', { text: intpre0(deduction).format(), alignment: 'right', bold: true }],

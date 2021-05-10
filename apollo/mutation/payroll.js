@@ -496,6 +496,7 @@ export const EditFinalEmployee = gql`
         by0
         cw0
         dh0
+        di0
         dk0
         dl0
         dm0
