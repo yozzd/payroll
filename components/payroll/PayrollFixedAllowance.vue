@@ -239,7 +239,7 @@
             <el-form-item label="Tj. Tetap Posisi Fix">
               <el-input v-model="form.al0r"></el-input>
             </el-form-item>
-            <el-form-item label="Tj. Tetap Funsional Fix">
+            <el-form-item label="Tj. Tetap Fungsional Fix">
               <el-input v-model="form.am0r"></el-input>
             </el-form-item>
             <el-form-item label="Tj. Tetap Koordinator">
@@ -264,7 +264,7 @@
             </el-form-item>
           </div>
           <div class="flex-1">
-            <el-form-item label="Tj. Funsional Variable">
+            <el-form-item label="Tj. Fungsional Variable">
               <el-input v-model="form.at0r"></el-input>
             </el-form-item>
             <el-form-item label="Tj. Tetap Acting / PLT">
