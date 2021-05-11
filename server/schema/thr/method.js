@@ -3,9 +3,9 @@ const PdfPrinter = require('pdfmake');
 const fs = require('fs-extra');
 const nodemailer = require('nodemailer');
 
+const { getMonth } = require('date-fns');
 const { intpre0 } = require('../scalar/number');
 const { idDateFormat } = require('../scalar/date');
-const { getMonth, getYear } = require('date-fns');
 
 const smtp = require('../../config/smtp');
 
@@ -26,7 +26,7 @@ const generateThr = async (p) => {
       'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
       'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember',
     ];
-    
+
     const ctbl1 = [
       [{ text: 'BASIC THR CALCULATION :', colSpan: 2 }, ''],
       ['Basic Salary', { text: intpre0(e.k0).format(), alignment: 'right' }],
@@ -69,7 +69,7 @@ const generateThr = async (p) => {
         ]);
       }
     }
-    
+
     ctbl2.push([{
       text: 'THR THIS MONTH >>>', colSpan: 2, alignment: 'right', bold: true,
     }, '', { text: intpre0(e.ac0).format(), alignment: 'right', bold: true }]);

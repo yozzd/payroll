@@ -1475,6 +1475,39 @@ const genFinal = async (p) => {
       [{ text: 'Personel', bold: true }, { text: 'Payroll Controller', bold: true }, { text: 'HR & GA Dept. / Finance Dept.', bold: true }, { text: 'Finance & HRGA Division', bold: true }, { text: 'Management PT. Labtech Penta International', bold: true }],
     ];
 
+    const vw5 = [
+      ['Name', '', '', ':', e.d0],
+      ['Emp No', '', '', ':', e.e0],
+      ['Date of Hire', '', '', ':', { text: gDateFormat(e.i0, 'dd MMMM yyyy') }],
+      ['Status', '', '', ':', e.h0],
+      ['Position', '', '', ':', e.y0],
+      ['Resign / Termination Date', '', '', ':', { text: gDateFormat(e.k0, 'dd MMMM yyyy') }],
+      [{ text: 'List Amount', bold: true, margin: [0, 30, 0, 0] }, '', '', '', ''],
+      ['Bank Muammalat Indonesia (BMI)', ':', '', '', ''],
+      ['Koperasi Perusahaan', ':', '', '', ''],
+      [{ text: 'Total', bold: true, alignment: 'right' }, ':', '', '', ''],
+      [{ text: `Batam, ${idDateFormat(e.fDate, 'dd MMMM yyyy')}`, margin: [0, 30, 0, 0] }, '', '', '', ''],
+      ['Prepared By,', '', 'Checked By,', '', ''],
+      [{ text: 'Temmy Saputri', margin: [0, 50, 0, 0] }, '', { text: 'David Riatmanto', margin: [0, 50, 0, 0] }, '', ''],
+      ['Bendahara Koperasi', '', 'Ketua Koperasi', '', ''],
+    ];
+
+    const vw6 = [
+      ['Name', '', '', ':', e.d0],
+      ['Emp No', '', '', ':', e.e0],
+      ['Date of Hire', '', '', ':', { text: gDateFormat(e.i0, 'dd MMMM yyyy') }],
+      ['Status', '', '', ':', e.h0],
+      ['Position', '', '', ':', e.y0],
+      ['Resign / Termination Date', '', '', ':', { text: gDateFormat(e.k0, 'dd MMMM yyyy') }],
+      [{ text: 'List Amount', bold: true, margin: [0, 30, 0, 0] }, '', '', '', ''],
+      ['PT Labtech Penta International', ':', '', '', ''],
+      [{ text: 'Total', bold: true, alignment: 'right' }, ':', '', '', ''],
+      [{ text: `Batam, ${idDateFormat(e.fDate, 'dd MMMM yyyy')}`, margin: [0, 30, 0, 0] }, '', '', '', ''],
+      ['Prepared By,', '', 'Checked By,', '', ''],
+      [{ text: 'Temmy Saputri', margin: [0, 50, 0, 0] }, '', { text: 'Yutin Sudarni', margin: [0, 50, 0, 0] }, '', ''],
+      ['Finance & Administration', '', 'Finance Manager', '', ''],
+    ];
+
     const wd = [80, 40, 40, 40, 40, 10, 150];
     const docDefinition = {
       // userPassword: e.final.pw,
@@ -1534,6 +1567,50 @@ const genFinal = async (p) => {
             widths: [95, 95, 95, 95, 95],
             heights: [10, 10, 40, 10, 10],
             body: vw4,
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl1',
+          table: {
+            widths: [170, 160],
+            body: [
+              [{
+                image: 'static/images/logo.png', width: 60, pageBreak: 'before',
+              }, {
+                text: 'AMOUNT DUE TO KOPERASI FORM', bold: true, pageBreak: 'before',
+              }],
+            ],
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl2',
+          table: {
+            widths: [150, 5, 95, 5, 200],
+            body: vw5,
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl1',
+          table: {
+            widths: [170, 160],
+            body: [
+              [{
+                image: 'static/images/logo.png', width: 60, pageBreak: 'before',
+              }, {
+                text: 'AMOUNT DUE TO COMPANY FORM', bold: true, pageBreak: 'before',
+              }],
+            ],
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl2',
+          table: {
+            widths: [150, 5, 95, 5, 200],
+            body: vw6,
           },
           layout: 'noBorders',
         },
