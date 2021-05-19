@@ -17,6 +17,7 @@ const {
   genXLSMaster,
   genAccCheck,
   genFinal,
+  genPDFFinalQ,
   genXLSFinalQ,
   genPDFSpAllowQ,
   genPDFThrQ,
@@ -1168,6 +1169,17 @@ const Mutation = {
       await updateEmployee(_id, employee, Payroll);
       const p = await finalPayment(_id);
       return p;
+    }),
+  },
+  genPDFFinal: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLString },
+    },
+    resolve: auth.hasRole('guest', async (_, { id }) => {
+      const p = await finalPayment(id);
+      const s = await genPDFFinalQ(p);
+      return s;
     }),
   },
   genXLSFinal: {

@@ -17,6 +17,9 @@
             Export<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="pdf">
+              PDF
+            </el-dropdown-item>
             <el-dropdown-item command="xls">
               XLS
             </el-dropdown-item>
@@ -47,7 +50,7 @@
       ></el-progress>
       <el-table
         ref="finalTable"
-        v-loading="$apollo.loading || loadXLSFinal"
+        v-loading="$apollo.loading || loadPDFFinal || loadXLSFinal"
         element-loading-text="Loading..."
         element-loading-spinner="el-icon-loading"
         :data="tableData"
@@ -357,7 +360,9 @@
 <script>
 import MiniSearch from 'minisearch';
 import { PayrollFinal } from '../../apollo/query/payroll';
-import { GenerateFinal, EditFinalEmployee, GenXLSFinal } from '../../apollo/mutation/payroll';
+import {
+  GenerateFinal, EditFinalEmployee, GenPDFFinal, GenXLSFinal,
+} from '../../apollo/mutation/payroll';
 import mix from '../../mixins/payroll';
 import position from '../../mixins/position';
 
@@ -373,6 +378,7 @@ export default {
       form: {},
       loading: false,
       freeze: false,
+      loadPDFFinal: false,
       loadXLSFinal: false,
       percentage: 0,
       miniSearch: new MiniSearch({
@@ -531,7 +537,26 @@ export default {
       });
     },
     handleExport(c, dir) {
-      if (c === 'xls') this.genXLSFinal(dir);
+      if (c === 'pdf') this.genPDFFinal(dir);
+      else if (c === 'xls') this.genXLSFinal(dir);
+    },
+    async genPDFFinal(dir) {
+      try {
+        this.loadPDFFinal = true;
+        await this.$apollo.mutate({
+          mutation: GenPDFFinal,
+          variables: {
+            id: this.$route.params.id,
+          },
+        });
+
+        this.loadPDFFinal = false;
+        window.open(`/report/${dir}/${dir}_final.pdf`);
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
     },
     async genXLSFinal(dir) {
       try {

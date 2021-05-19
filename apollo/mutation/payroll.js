@@ -536,6 +536,14 @@ export const EditFinalEmployee = gql`
   }
 `;
 
+export const GenPDFFinal = gql`
+  mutation genPDFFinal($id: String!) {
+    genPDFFinal(id: $id) {
+      sStatus
+    }
+  }
+`;
+
 export const GenXLSFinal = gql`
   mutation genXLSFinal($id: String!) {
     genXLSFinal(id: $id) {
