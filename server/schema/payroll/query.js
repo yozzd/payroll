@@ -353,6 +353,7 @@ const finalPayment = async (id) => {
         period: { $first: '$period' },
         year: { $first: '$year' },
         freeze: { $first: '$freeze' },
+        dir: { $first: '$dir' },
         employee: {
           $push: {
             _id: '$employee._id',
@@ -363,6 +364,8 @@ const finalPayment = async (id) => {
             i0: '$employee.i0',
             j0: '$employee.j0',
             k0: '$employee.k0',
+            s0: '$employee.s0',
+            t0: '$employee.t0',
             y0: '$employee.y0',
             ab0: '$employee.ab0',
             ad0: '$employee.ad0',
@@ -402,12 +405,28 @@ const finalPayment = async (id) => {
             bg0r: '$employee.bg0r',
             bh0r: '$employee.bh0r',
             bi0r: '$employee.bi0r',
+            ed0: '$employee.ed0',
+            ed0F: {
+              $function: {
+                body: `function(v) {
+                  return Math.floor(v / 100) * 100;
+                }`,
+                args: ['$employee.ed0'],
+                lang: 'js',
+              },
+            },
             final: {
               name: '$employee.final.name',
               dir: '$dir',
             },
           },
         },
+        sum1: { $sum: '$employee.ed0' },
+      },
+    },
+    {
+      $addFields: {
+        sum2: { $sum: '$employee.ed0F' },
       },
     },
   ]);

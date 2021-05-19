@@ -536,6 +536,14 @@ export const EditFinalEmployee = gql`
   }
 `;
 
+export const GenXLSFinal = gql`
+  mutation genXLSFinal($id: String!) {
+    genXLSFinal(id: $id) {
+      sStatus
+    }
+  }
+`;
+
 export const HariRaya = gql`
   mutation hariRaya($id: String, $typeHR: Int, $tglHR: String) {
     hariRaya(id: $id, typeHR: $typeHR, tglHR: $tglHR) {

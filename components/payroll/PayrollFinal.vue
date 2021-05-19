@@ -9,6 +9,19 @@
       />
       <div class="flex space-x-4 items-center">
         <div class="flex-1"></div>
+        <el-dropdown
+          trigger="click"
+          @command="c => handleExport(c, dir)"
+        >
+          <span class="el-dropdown-link">
+            Export<i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="xls">
+              XLS
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
         <div class="w-64">
           <el-input
             v-model="search"
@@ -34,7 +47,7 @@
       ></el-progress>
       <el-table
         ref="finalTable"
-        v-loading="$apollo.loading"
+        v-loading="$apollo.loading || loadXLSFinal"
         element-loading-text="Loading..."
         element-loading-spinner="el-icon-loading"
         :data="tableData"
@@ -344,7 +357,7 @@
 <script>
 import MiniSearch from 'minisearch';
 import { PayrollFinal } from '../../apollo/query/payroll';
-import { GenerateFinal, EditFinalEmployee } from '../../apollo/mutation/payroll';
+import { GenerateFinal, EditFinalEmployee, GenXLSFinal } from '../../apollo/mutation/payroll';
 import mix from '../../mixins/payroll';
 import position from '../../mixins/position';
 
@@ -353,12 +366,14 @@ export default {
   data() {
     return {
       content: '',
+      dir: '',
       multipleSelection: [],
       loadingGen: false,
       showEditDialog: false,
       form: {},
       loading: false,
       freeze: false,
+      loadXLSFinal: false,
       percentage: 0,
       miniSearch: new MiniSearch({
         idField: '_id',
@@ -515,6 +530,29 @@ export default {
         }
       });
     },
+    handleExport(c, dir) {
+      if (c === 'xls') this.genXLSFinal(dir);
+    },
+    async genXLSFinal(dir) {
+      try {
+        this.loadXLSFinal = true;
+        const { data: { genXLSFinal: { sStatus } } } = await this.$apollo.mutate({
+          mutation: GenXLSFinal,
+          variables: {
+            id: this.$route.params.id,
+          },
+        });
+
+        if (sStatus) {
+          this.loadXLSFinal = false;
+          window.open(`/report/${dir}/${dir}_final.xlsx`);
+        }
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
+    },
   },
   apollo: {
     payrollFinal: {
@@ -528,10 +566,11 @@ export default {
       result({ data, loading }) {
         if (!loading) {
           const {
-            freeze, employee, period, year,
+            freeze, employee, period, year, dir,
           } = data.payrollFinal;
           this.freeze = freeze;
           this.items = employee;
+          this.dir = dir;
           this.miniSearch.removeAll();
           this.miniSearch.addAll(this.items);
           this.content = `${period} ${year}`;

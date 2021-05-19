@@ -463,6 +463,7 @@ export const PayrollFinal = gql`
       freeze
       period
       year
+      dir
       employee {
         _id
         d0

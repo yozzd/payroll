@@ -1644,6 +1644,68 @@ const genFinal = async (p) => {
   }
 };
 
+const genXLSFinalQ = async (p) => {
+  try {
+    const { employee: e } = p;
+    await fs.ensureDir(`static/report/${p.dir}`);
+
+    const len = e.length + 4;
+    const wb = {
+      SheetNames: ['Sheet1'],
+      Sheets: {
+        Sheet1: {
+          '!ref': `A1:G${len}`,
+          A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
+          A2: { t: 's', v: `FINAL PAYMENT - PERIODE PAYROLL: ${p.period} ${p.year}` },
+          A3: { t: 's', v: 'No' },
+          B3: { t: 's', v: 'No Karyawan' },
+          C3: { t: 's', v: 'Nama Karyawan' },
+          D3: { t: 's', v: 'Bank No.' },
+          E3: { t: 's', v: 'Bank Name' },
+          F3: { t: 's', v: 'Take Home Pay' },
+          G3: { t: 's', v: 'THP for Bank' },
+          '!cols': [
+            { wpx: 26 }, { wpx: 72 }, { wpx: 234 }, { wpx: 95 },
+            { wpx: 63 }, { wpx: 81 }, { wpx: 75 },
+          ],
+        },
+      },
+    };
+
+    let row = 3;
+    e.map((t, i) => {
+      row += 1;
+      wb.Sheets.Sheet1[`A${row}`] = { t: 'n', v: i + 1 };
+      wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: t.e0 };
+      wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: t.d0 };
+      wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: t.t0 };
+      wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: t.s0 };
+      wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: t.ed0, z: '#,##0' };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: t.ed0F, z: '#,##0' };
+
+      return true;
+    });
+
+    row += 1;
+    wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: p.sum1, z: '#,##0' };
+    wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: p.sum2, z: '#,##0' };
+
+    const fn = `static/report/${p.dir}/${p.dir}_final.xlsx`;
+    const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
+    fs.writeFileSync(fn, content);
+
+    return XlsxPopulate.fromFileAsync(fn)
+      .then((workbook) => workbook.toFileAsync(fn, { password: xlsPass })
+        .then(() => ({ sStatus: 1 })));
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
+};
+
 const genPDFSpAllowQ = async (p) => {
   try {
     const { employee } = p;
@@ -3073,6 +3135,7 @@ module.exports = {
   generateSlip,
   sendSlip,
   genFinal,
+  genXLSFinalQ,
   genPDFSpAllowQ,
   genPDFThrQ,
   genXLSThrQ,
