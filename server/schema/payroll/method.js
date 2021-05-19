@@ -1488,7 +1488,7 @@ const genFinal = async (p) => {
       [{ text: 'Total', bold: true, alignment: 'right' }, ':', '', '', ''],
       [{ text: `Batam, ${idDateFormat(e.fDate, 'dd MMMM yyyy')}`, margin: [0, 30, 0, 0] }, '', '', '', ''],
       ['Prepared By,', '', 'Checked By,', '', ''],
-      [{ text: 'Zunaidi', margin: [0, 50, 0, 0] }, '', { text: 'David Riatmanto', margin: [0, 50, 0, 0] }, '', ''],
+      [{ text: 'Zunaidi', margin: [0, 40, 0, 0] }, '', { text: 'David Riatmanto', margin: [0, 40, 0, 0] }, '', ''],
       ['Bendahara Koperasi', '', 'Ketua Koperasi', '', ''],
     ];
 
@@ -1504,7 +1504,7 @@ const genFinal = async (p) => {
       [{ text: 'Total', bold: true, alignment: 'right' }, ':', '', '', ''],
       [{ text: `Batam, ${idDateFormat(e.fDate, 'dd MMMM yyyy')}`, margin: [0, 30, 0, 0] }, '', '', '', ''],
       ['Prepared By,', '', 'Checked By,', '', ''],
-      [{ text: 'Temmy Saputri', margin: [0, 50, 0, 0] }, '', { text: 'Yutin Sudarni', margin: [0, 50, 0, 0] }, '', ''],
+      [{ text: 'Temmy Saputri', margin: [0, 40, 0, 0] }, '', { text: 'Yutin Sudarni', margin: [0, 40, 0, 0] }, '', ''],
       ['Finance & Administration', '', 'Finance Manager', '', ''],
     ];
 
@@ -1578,14 +1578,14 @@ const genFinal = async (p) => {
               [{
                 image: 'static/images/logo.png', width: 60, pageBreak: 'before',
               }, {
-                text: 'AMOUNT DUE TO KOPERASI FORM', bold: true, pageBreak: 'before',
+                text: 'AMOUNT DUE TO KOPERASI FORM', fontSize: 9, bold: true, pageBreak: 'before',
               }],
             ],
           },
           layout: 'noBorders',
         },
         {
-          style: 'tbl2',
+          style: 'tbl3',
           table: {
             widths: [150, 5, 95, 5, 200],
             body: vw5,
@@ -1595,19 +1595,26 @@ const genFinal = async (p) => {
         {
           style: 'tbl1',
           table: {
+            widths: [512],
+            body: [[{ text: '', border: [false, false, false, true] }]],
+          },
+        },
+        {
+          style: 'tbl1',
+          table: {
             widths: [170, 160],
             body: [
               [{
-                image: 'static/images/logo.png', width: 60, pageBreak: 'before',
+                image: 'static/images/logo.png', width: 60, margin: [0, 20, 0, 0],
               }, {
-                text: 'AMOUNT DUE TO COMPANY FORM', bold: true, pageBreak: 'before',
+                text: 'AMOUNT DUE TO COMPANY FORM', fontSize: 9, bold: true, margin: [0, 20, 0, 0],
               }],
             ],
           },
           layout: 'noBorders',
         },
         {
-          style: 'tbl2',
+          style: 'tbl3',
           table: {
             widths: [150, 5, 95, 5, 200],
             body: vw6,
@@ -1622,6 +1629,10 @@ const genFinal = async (p) => {
         },
         tbl2: {
           fontSize: 8,
+          margin: [10, 10, 0, 10],
+        },
+        tbl3: {
+          fontSize: 9,
           margin: [10, 10, 0, 10],
         },
       },
