@@ -1488,7 +1488,7 @@ const genFinal = async (p) => {
       [{ text: 'Total', bold: true, alignment: 'right' }, ':', '', '', ''],
       [{ text: `Batam, ${idDateFormat(e.fDate, 'dd MMMM yyyy')}`, margin: [0, 30, 0, 0] }, '', '', '', ''],
       ['Prepared By,', '', 'Checked By,', '', ''],
-      [{ text: 'Temmy Saputri', margin: [0, 50, 0, 0] }, '', { text: 'David Riatmanto', margin: [0, 50, 0, 0] }, '', ''],
+      [{ text: 'Zunaidi', margin: [0, 50, 0, 0] }, '', { text: 'David Riatmanto', margin: [0, 50, 0, 0] }, '', ''],
       ['Bendahara Koperasi', '', 'Ketua Koperasi', '', ''],
     ];
 
