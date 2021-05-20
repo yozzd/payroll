@@ -6,7 +6,7 @@
     </nuxt-link>
     <div class="flex-1"></div>
     <el-dropdown
-      v-if="$auth.hasRole('admin')"
+      v-if="$auth.hasRole('user')"
       trigger="click"
       @command="handleCommand"
     >
