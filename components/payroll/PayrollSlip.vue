@@ -149,7 +149,20 @@ export default {
       t.disabled = !t.disabled;
     },
     handleSelectionChange(a) {
-      this.multipleSelection = a.map((v) => v);
+      if (a.length) {
+        this.multipleSelection = a.map((v) => {
+          const t = v;
+          t.disabled = !t.disabled;
+          return t;
+        });
+      } else {
+        this.items.map((v) => {
+          const t = v;
+          t.disabled = false;
+          return t;
+        });
+        this.multipleSelection = [];
+      }
     },
     async generate() {
       try {

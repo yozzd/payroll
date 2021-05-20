@@ -1434,6 +1434,7 @@ const genFinal = async (p) => {
     if (e.bh0) vw2.push(['Penghargaan Masa Kerja Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.bh0).format(), alignment: 'right' }]); income += e.bh0;
     if (e.bi0) vw2.push(['Others Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.bi0).format(), alignment: 'right' }]); income += e.bi0;
 
+    if (e.dr0) vw2.push([{ text: 'Bonus', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.dr0).format(), alignment: 'right' }]); income += e.dr0;
     if (e.dt0) vw2.push([{ text: 'Uang Pisah', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.dt0).format(), alignment: 'right' }]); income += (e.dt0 / 21) * e.j0;
     vw2.push([{ text: 'Tambahan Lain Tidak Kena Pajak', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bv0).format(), alignment: 'right' }]);
     if (e.fe0) vw2.push(['Uang Pesangon', '', '', '', '', ':', { text: intpre0(e.fe0).format(), alignment: 'right' }]); income += e.fe0;
