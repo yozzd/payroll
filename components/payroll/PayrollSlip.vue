@@ -152,12 +152,13 @@ export default {
       if (a.length) {
         this.multipleSelection = a.map((v) => {
           const t = v;
-          t.disabled = !t.disabled;
+          t.disabled = true;
           return t;
         });
       } else {
         this.items.map((v) => {
           const t = v;
+          t.payPass = true;
           t.disabled = false;
           return t;
         });
