@@ -178,11 +178,11 @@
                   type="date"
                 ></el-date-picker>
               </el-form-item>
-            </div>
-            <div class="flex-1">
               <el-form-item label="Hari Kerja">
                 <el-input v-model="form.j0"></el-input>
               </el-form-item>
+            </div>
+            <div class="flex-1">
               <el-form-item label="Resign / Finish Date">
                 <el-date-picker
                   v-model="form.k0"
@@ -208,14 +208,14 @@
               <el-form-item label="Hour (Insentif)">
                 <el-input v-model="form.af0"></el-input>
               </el-form-item>
-            </div>
-            <div class="flex-1">
               <el-form-item label="Tambahan Lain Tidak Kena Pajak">
                 <el-input v-model="form.bv0"></el-input>
               </el-form-item>
               <el-form-item label="Months (THR Prorate)">
                 <el-input v-model="form.bw0"></el-input>
               </el-form-item>
+            </div>
+            <div class="flex-1">
               <el-form-item label="Cuti (Days)">
                 <el-input v-model="form.by0"></el-input>
               </el-form-item>
@@ -225,17 +225,20 @@
               <el-form-item label="Pemotongan Toolroom">
                 <el-input v-model="form.dh0"></el-input>
               </el-form-item>
+              <el-form-item label="Bonus">
+                <el-input v-model="form.dr0"></el-input>
+              </el-form-item>
               <el-form-item label="Lama Kerja (Uang Pisah)">
                 <el-input v-model="form.ds0"></el-input>
               </el-form-item>
-            </div>
-            <div class="flex-1">
               <el-form-item label="Pesangon">
                 <el-input v-model="form.fe0"></el-input>
               </el-form-item>
               <el-form-item label="Dana Pinjaman">
                 <el-input v-model="form.dk0"></el-input>
               </el-form-item>
+            </div>
+            <div class="flex-1">
               <el-form-item label="Kanteen">
                 <el-input v-model="form.dl0"></el-input>
               </el-form-item>
@@ -494,6 +497,7 @@ export default {
                     dl0: parseInt(this.form.dl0, 10),
                     dm0: parseInt(this.form.dm0, 10),
                     dn0: parseInt(this.form.dn0, 10),
+                    dr0: parseInt(this.form.dr0, 10),
                     ds0: parseInt(this.form.ds0, 10),
                     fe0: parseInt(this.form.fe0, 10),
                     fDate: this.form.fDate,

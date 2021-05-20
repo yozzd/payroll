@@ -243,6 +243,7 @@ const FinalInputType = new GraphQLInputObjectType({
     dl0: { type: GraphQLInt },
     dm0: { type: GraphQLInt },
     dn0: { type: GraphQLInt },
+    dr0: { type: GraphQLInt },
     ds0: { type: GraphQLInt },
     fe0: { type: GraphQLInt },
     fDate: { type: GraphQLString },

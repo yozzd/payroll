@@ -380,6 +380,7 @@ const finalPayment = async (id) => {
             dl0: '$employee.dl0',
             dm0: '$employee.dm0',
             dn0: '$employee.dn0',
+            dr0: '$employee.dr0',
             ds0: '$employee.ds0',
             fe0: '$employee.fe0',
             fDate: '$employee.fDate',
