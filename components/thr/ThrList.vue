@@ -13,7 +13,8 @@
     />
     <div class="flex space-x-4 items-center">
       <div class="flex-1">
-        {{ multipleSelection.length }} item(s) selected
+        {{ content }}
+        &bull; <span class="text-pink-500">{{ multipleSelection.length }} item(s) selected</span>
       </div>
       <div class="w-64">
         <el-input
@@ -51,6 +52,7 @@
         size="small"
         height="500"
         border
+        @select="handleSelect"
         @selection-change="handleSelectionChange"
       >
         <el-table-column
@@ -60,6 +62,14 @@
           :selectable="selectDisable"
         ></el-table-column>
         <el-table-column type="index" width="50" align="center"></el-table-column>
+        <el-table-column label="Password" width="100" align="center">
+          <template slot-scope="scope">
+            <el-checkbox
+              v-model="scope.row.thrPass"
+              :disabled="!scope.row.disabled"
+            ></el-checkbox>
+          </template>
+        </el-table-column>
         <el-table-column prop="b0" label="No. Karyawan" width="100"></el-table-column>
         <el-table-column label="Nama Karyawan" width="300">
           <template slot-scope="scope">
@@ -123,7 +133,10 @@ export default {
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['b0', 'c0', 'e0'],
-        storeFields: ['_id', 'b0', 'c0', 'e0', 'slip'],
+        storeFields: [
+          '_id', 'b0', 'c0', 'e0', 'slip',
+          'thrPass', 'disabled',
+        ],
       }),
     };
   },
@@ -134,8 +147,26 @@ export default {
     selectDisable(r) {
       return r.e0 !== '';
     },
+    handleSelect(v, r) {
+      const t = r;
+      t.disabled = !t.disabled;
+    },
     handleSelectionChange(a) {
-      this.multipleSelection = a.map((v) => v._id);
+      if (a.length) {
+        this.multipleSelection = a.map((v) => {
+          const t = v;
+          t.disabled = true;
+          return t;
+        });
+      } else {
+        this.items.map((v) => {
+          const t = v;
+          t.payPass = true;
+          t.disabled = false;
+          return t;
+        });
+        this.multipleSelection = [];
+      }
     },
     handleChange(e, { column }) {
       if (e) this.headerCol = column.property;
@@ -153,7 +184,8 @@ export default {
               mutation: GenerateThr,
               variables: {
                 id: this.$route.params.id,
-                eId: v,
+                eId: v._id,
+                thrPass: v.thrPass,
               },
               update: (store) => {
                 const cdata = store.readQuery({
@@ -162,7 +194,9 @@ export default {
                     id: this.$route.params.id,
                   },
                 });
-                const index = cdata.employeeThr.employee.findIndex((e) => e._id === v);
+                const index = cdata.employeeThr.employee.findIndex((e) => e._id === v._id);
+                cdata.employeeThr.employee[index].thrPass = true;
+                cdata.employeeThr.employee[index].disabled = false;
                 if (cdata.employeeThr.employee[index].slip.check === false) {
                   cdata.employeeThr.employee[index].slip.check = true;
                   this.miniSearch.removeAll();
@@ -210,7 +244,7 @@ export default {
               mutation: SendThr,
               variables: {
                 id: this.$route.params.id,
-                eId: v,
+                eId: v._id,
               },
             });
             if (data.sendThr.accepted.length) {
@@ -249,6 +283,7 @@ export default {
           const { employee, period, year } = data.employeeThr;
           this.items = employee;
           this.content = `${period} ${year}`;
+          this.miniSearch.removeAll();
           this.miniSearch.addAll(this.items);
           this.pageSizes.push(this.items.length);
         }

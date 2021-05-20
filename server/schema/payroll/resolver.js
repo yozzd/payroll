@@ -532,11 +532,11 @@ const Query = {
                 e0: '$employee.e0',
                 ew0: '$employee.ew0',
                 ex0: '$employee.ex0',
+                payPass: true,
                 slip: {
                   name: '$employee.slip.name',
                   dir: '$dir',
                 },
-                payPass: true,
               },
             },
           },

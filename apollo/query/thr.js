@@ -21,6 +21,7 @@ export const EmployeeThr = gql`
         b0
         c0
         e0
+        thrPass
         slip {
           name
           dir

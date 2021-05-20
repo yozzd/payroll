@@ -35,6 +35,7 @@ const EmployeeThrType = new GraphQLObjectType({
     b0: { type: GraphQLString },
     c0: { type: GraphQLString },
     e0: { type: GraphQLString },
+    thrPass: { type: GraphQLBoolean },
     slip: { type: SlipThrCheckType },
   }),
 });

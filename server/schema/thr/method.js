@@ -17,7 +17,7 @@ const fonts = {
 };
 const printer = new PdfPrinter(fonts);
 
-const generateThr = async (p) => {
+const generateThr = async (p, thrPass) => {
   try {
     const { employee: e } = p;
     await fs.ensureDir(`static/thr/${p.dir}`);
@@ -83,7 +83,7 @@ const generateThr = async (p) => {
     ];
 
     const docDefinition = {
-      userPassword: e.slip.pw,
+      userPassword: !thrPass ? false : e.slip.pw,
       content: [
         {
           style: 'tbl1',

@@ -9,8 +9,8 @@ export const ThrDelete = gql`
 `;
 
 export const GenerateThr = gql`
-  mutation generateThr($id: String!, $eId: String!) {
-    generateThr(id: $id, eId: $eId) {
+  mutation generateThr($id: String!, $eId: String!, $thrPass: Boolean!) {
+    generateThr(id: $id, eId: $eId, thrPass: $thrPass) {
       sStatus
     }
   }

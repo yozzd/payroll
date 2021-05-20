@@ -3,6 +3,7 @@ const {
   GraphQLList,
   GraphQLInt,
   GraphQLString,
+  GraphQLBoolean,
 } = require('graphql');
 const Thr = require('./model.js');
 const { ThrType } = require('./type');
@@ -41,6 +42,7 @@ const Query = {
                 b0: '$employee.b0',
                 c0: '$employee.c0',
                 e0: '$employee.e0',
+                thrPass: true,
                 slip: {
                   name: '$employee.slip.name',
                   dir: '$dir',
@@ -73,14 +75,15 @@ const Mutation = {
     args: {
       id: { type: GraphQLString },
       eId: { type: GraphQLString },
+      thrPass: { type: GraphQLBoolean },
     },
-    resolve: auth.hasRole('user', async (_, { id, eId }) => {
+    resolve: auth.hasRole('user', async (_, { id, eId, thrPass }) => {
       const p = await Thr.aggregate([
         { $match: { _id: id } },
         { $unwind: '$employee' },
         { $match: { 'employee._id': eId } },
       ]);
-      const s = await generateThr(p[0]);
+      const s = await generateThr(p[0], thrPass);
       return s;
     }),
   },
