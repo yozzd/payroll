@@ -32,6 +32,7 @@
         Generate
       </el-button>
       <el-button
+        v-if="$auth.hasRole('admin')"
         type="primary"
         :loading="loadingSend"
         :disabled="!multipleSelection.length || loadingGen"
