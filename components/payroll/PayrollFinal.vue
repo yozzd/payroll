@@ -251,6 +251,12 @@
               <el-form-item label="Pemotongan Lain">
                 <el-input v-model="form.di0"></el-input>
               </el-form-item>
+              <el-form-item label="Periode Pajak (Bulan)">
+                <el-input v-model="form.dz0"></el-input>
+              </el-form-item>
+              <el-form-item label="Periode Pajak (Total)">
+                <el-input v-model="form.ea0"></el-input>
+              </el-form-item>
             </div>
           </div>
           <div class="mt-8 text-lg">
@@ -499,6 +505,8 @@ export default {
                     dn0: parseInt(this.form.dn0, 10),
                     dr0: parseInt(this.form.dr0, 10),
                     ds0: parseInt(this.form.ds0, 10),
+                    dz0: this.form.dz0,
+                    ea0: parseInt(this.form.ea0, 10),
                     fe0: parseInt(this.form.fe0, 10),
                     fDate: this.form.fDate,
                     aj0r: parseInt(this.form.aj0r, 10),

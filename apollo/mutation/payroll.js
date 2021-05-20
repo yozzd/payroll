@@ -503,6 +503,8 @@ export const EditFinalEmployee = gql`
         dn0
         dr0
         ds0
+        dz0
+        ea0
         fe0
         fDate
         aj0r
