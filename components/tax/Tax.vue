@@ -3,6 +3,7 @@
     <div class="flex items-center space-x-8">
       <div>
         <el-link
+          v-if="$auth.hasRole('admin')"
           :underline="false"
           type="primary"
           icon="el-icon-download"
