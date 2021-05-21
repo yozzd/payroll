@@ -61,7 +61,7 @@ const generateThr = async (p, thrPass) => {
     for (let i = start; i <= end; i += 1) {
       if (ds[i - start] && i === end) {
         ctbl2.push([
-          `${months[i]} ${p.year} + 5%`, { text: intpre0(ds[i - start]).format(), alignment: 'right' }, '',
+          'Penalty 5%', { text: intpre0(ds[i - start]).format(), alignment: 'right' }, '',
         ]);
       } else {
         ctbl2.push([
