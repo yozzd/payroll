@@ -239,7 +239,7 @@
               </el-form-item>
             </div>
             <div class="flex-1">
-              <el-form-item label="Kanteen">
+              <el-form-item label="Kantin">
                 <el-input v-model="form.dl0"></el-input>
               </el-form-item>
               <el-form-item label="Kopkar dan BMI">

@@ -658,14 +658,14 @@
                 v-model="formAddEmployee.j0"
               ></el-input>
             </el-form-item>
-          </div>
-          <div class="flex-1">
             <el-form-item label="Jenis Kelamin" prop="n0">
               <el-select v-model="formAddEmployee.n0" filterable>
                 <el-option label="Female" value="Female"></el-option>
                 <el-option label="Male" value="Male"></el-option>
               </el-select>
             </el-form-item>
+          </div>
+          <div class="flex-1">
             <el-form-item label="Birthday" prop="o0">
               <el-date-picker
                 v-model="formAddEmployee.o0"
@@ -690,8 +690,6 @@
                 <el-option label="TK/3" value="TK/3"></el-option>
               </el-select>
             </el-form-item>
-          </div>
-          <div class="flex-1">
             <el-form-item label="Status Karyawan" prop="h0">
               <el-select v-model="formAddEmployee.h0" filterable>
                 <el-option label="Expat" value="Expat"></el-option>
@@ -705,6 +703,8 @@
                 type="date"
               ></el-date-picker>
             </el-form-item>
+          </div>
+          <div class="flex-1">
             <el-form-item label="Resign / Finish Date">
               <el-date-picker
                 v-model="formAddEmployee.k0"
@@ -714,8 +714,6 @@
             <el-form-item label="Upah untuk Pelaporan BPJS Kesehatan" prop="co0">
               <el-input v-model="formAddEmployee.co0"></el-input>
             </el-form-item>
-          </div>
-          <div class="flex-1">
             <el-form-item label="Department" prop="u0">
               <el-select v-model="formAddEmployee.u0" filterable>
                 <el-option
@@ -738,6 +736,14 @@
             </el-form-item>
             <el-form-item label="Email" prop="ew0">
               <el-input v-model="formAddEmployee.ew0"></el-input>
+            </el-form-item>
+          </div>
+          <div class="flex-1">
+            <el-form-item label="Periode Pajak (Bulan)">
+              <el-input v-model="formAddEmployee.dz0"></el-input>
+            </el-form-item>
+            <el-form-item label="Periode Pajak (Total)" prop="ea0">
+              <el-input v-model="formAddEmployee.ea0"></el-input>
             </el-form-item>
           </div>
         </div>
@@ -961,6 +967,8 @@ export default {
         v0: '',
         co0: '',
         ew0: '',
+        dz0: '',
+        ea0: '',
       },
       formCloneEmployee: {
         id: '',
@@ -1016,6 +1024,7 @@ export default {
         v0: [{ required: true, message: 'Required', trigger: 'change' }],
         co0: [{ required: true, message: 'Required' }],
         ew0: [{ required: true, message: 'Required' }],
+        ea0: [{ required: true, message: 'Required' }],
       },
       rulesCloneEmployee: {
         e0: [{ required: true, message: 'Required' }],
@@ -1215,6 +1224,8 @@ export default {
                   v0: this.formAddEmployee.v0,
                   co0: parseInt(this.formAddEmployee.co0, 10),
                   ew0: this.formAddEmployee.ew0,
+                  dz0: this.formAddEmployee.dz0,
+                  ea0: parseInt(this.formAddEmployee.ea0, 10),
                 },
               },
             });

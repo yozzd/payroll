@@ -771,7 +771,7 @@ const Mutation = {
       const {
         _id, d0, e0, g0, h0, i0, j0,
         k0, n0, o0, p0, r0, u0, v0,
-        co0, ew0,
+        co0, ew0, dz0, ea0,
       } = input;
       const px = await Payroll.findOne({ _id });
 
@@ -796,6 +796,8 @@ const Mutation = {
         co0,
         ct0: '',
         ew0,
+        dz0,
+        ea0,
       });
       await px.save();
       return { sStatus: 1 };
