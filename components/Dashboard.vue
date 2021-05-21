@@ -678,6 +678,9 @@
                 <el-option label="Yes" value="Yes"></el-option>
               </el-select>
             </el-form-item>
+            <el-form-item label="No. (NPWP)">
+              <el-input v-model="formAddEmployee.q0"></el-input>
+            </el-form-item>
             <el-form-item label="Status Tanggungan (NPWP)" prop="r0">
               <el-select v-model="formAddEmployee.r0" filterable>
                 <el-option label="K/0" value="K/0"></el-option>
@@ -697,14 +700,14 @@
                 <el-option label="Permanent" value="Permanent"></el-option>
               </el-select>
             </el-form-item>
+          </div>
+          <div class="flex-1">
             <el-form-item label="Hired Date" prop="i0">
               <el-date-picker
                 v-model="formAddEmployee.i0"
                 type="date"
               ></el-date-picker>
             </el-form-item>
-          </div>
-          <div class="flex-1">
             <el-form-item label="Resign / Finish Date">
               <el-date-picker
                 v-model="formAddEmployee.k0"
@@ -734,11 +737,11 @@
                 ></el-option>
               </el-select>
             </el-form-item>
+          </div>
+          <div class="flex-1">
             <el-form-item label="Email" prop="ew0">
               <el-input v-model="formAddEmployee.ew0"></el-input>
             </el-form-item>
-          </div>
-          <div class="flex-1">
             <el-form-item label="Periode Pajak (Bulan)">
               <el-input v-model="formAddEmployee.dz0"></el-input>
             </el-form-item>
@@ -962,6 +965,7 @@ export default {
         n0: '',
         o0: '',
         p0: '',
+        q0: '',
         r0: '',
         u0: '',
         v0: '',
@@ -1219,6 +1223,7 @@ export default {
                   n0: this.formAddEmployee.n0,
                   o0: this.formAddEmployee.o0,
                   p0: this.formAddEmployee.p0,
+                  q0: this.formAddEmployee.q0,
                   r0: this.formAddEmployee.r0,
                   u0: this.formAddEmployee.u0,
                   v0: this.formAddEmployee.v0,
