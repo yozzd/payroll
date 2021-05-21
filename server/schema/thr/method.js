@@ -79,6 +79,8 @@ const generateThr = async (p, thrPass) => {
       [`Installment Time : ${e.ab0} Months`, '', ''],
       ['Tax on THR is calculated at the end of December 2021', 'PT. LABTECH', e.c0],
       ['The Installment value is recalculated if Resign / Finish after this THR', e.ai0, e.j0],
+      ['Nilai Penalty sebesar 5% akan ditambahkan pada pembayaran ke tiga cicilan THR ini', '', ''],
+      ['Nilai Cicilan ketiga pada bulan Juli belum termasuk Penalty 5%', '', ''],
       ['This is computer generated letter, no signature is required', '', ''],
     ];
 
