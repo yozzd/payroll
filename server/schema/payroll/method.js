@@ -1622,6 +1622,116 @@ const genFinal = async (p) => {
           },
           layout: 'noBorders',
         },
+        {
+          style: 'tbl1',
+          table: {
+            widths: [530],
+            body: [
+              [{
+                image: 'static/images/fpheader.jpg', width: 530, height: 30, border: [false, false, false, false], pageBreak: 'before',
+              }],
+            ],
+          },
+        },
+        {
+          style: 'tbl4',
+          table: {
+            widths: [160, 160, 160],
+            body: [
+              [{ text: '', border: [false, false, false, false] }, {
+                text: 'PEMUTUSAN HUBUNGAN KERJA', bold: true, alignment: 'center', fontSize: 10, border: [false, false, false, false],
+              }, { text: '', border: [false, false, false, false] }],
+              [{ text: '', border: [false, false, false, false] }, {
+                text: 'TERMINATION OF EMPLOYMENT', alignment: 'center', fontSize: 10, border: [false, true, false, false],
+              }, { text: '', border: [false, false, false, false] }],
+            ],
+          },
+        },
+        {
+          style: 'tbl4',
+          table: {
+            widths: [100, 120, 40, 120, 100],
+            body: [
+              ['', { text: 'No. Karyawan' }, { text: ':', alignment: 'center' }, { text: e.e0 }, ''],
+              ['', { text: 'Nama Karyawan' }, { text: ':', alignment: 'center' }, { text: e.d0 }, ''],
+              ['', { text: 'Tanggal Mulai Kerja' }, { text: ':', alignment: 'center' }, { text: idDateFormat(e.i0, 'dd MMMM yyyy') }, ''],
+              ['', { text: 'Tanggal Terakhir Kerja' }, { text: ':', alignment: 'center' }, { text: idDateFormat(e.k0, 'dd MMMM yyyy') }, ''],
+              ['', { text: 'Department' }, { text: ':', alignment: 'center' }, { text: e.u0 }, ''],
+            ],
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl4',
+          table: {
+            widths: [220, 40, 220],
+            body: [
+              [{ text: 'Surat ini menyatakan bahwa saudara seperti tersebut di atas telah berakhir masa kerjanya di PT. Labtech Penta International pada tanggal seperti tersebut di atas. Semua barang/perlengkapan milik perusahaan yang dipakai karyawan yang bersangkutan harus dikembalikan kepada PT. Labtech Penta International.' }, '',
+                { text: 'This letter is to confirm that the employee named as above has finished his employment services with PT. Labtech Penta International on above date. Any and all company property remaining with the employee shall be returned to PT. Labtech Penta International.' }],
+            ],
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl4',
+          table: {
+            widths: [100, 280, 100],
+            body: [
+              [{ text: '', border: [false, false, false, true] }, {
+                text: `Pembayaran sebesar / Total payment of Rp. ${intpre0(e.ed0).format()}`, bold: true, alignment: 'center', border: [false, false, false, true],
+              }, { text: '', border: [false, false, false, true] }],
+            ],
+          },
+        },
+        {
+          style: 'tbl4',
+          table: {
+            widths: [220, 40, 220],
+            body: [
+              [{ text: 'Telah diberikan kepada karyawan yang bersangkutan sebagai gaji (pembayaran) terakhir atas segala jasa-jasanya pada PT. Labtech Penta International, dan kedua belah pihak setuju tidak akan ada pembayaran lain lagi tidak akan ada tuntutan apapun di kemudian hari.' }, '',
+                { text: 'Has been given to the employees for final payment of his services at PT. Labtech Penta International, and both parties agree that there will be no other payment and no claim in any form in the future.' }],
+              [{ text: 'Telah disepakati bahwa karyawan yang bekerja di PT. Labtech dan mendapatkan pengetahuan berupa informasi atau rahasia perusahaan tidak boleh menjadi pesaing PT. Labtech dan tidak boleh menggunakan desain alat peraga pendidikan milik PT. Labtech Penta International untuk mendirikan usaha yang sama.' }, '',
+                { text: 'It also agreed that former employees who have worked at PT. Labtech and gained knowledge about out business are to treat the information or confidential and can not engage on the production of educational trainers using our designs and information for similar business.' }],
+            ],
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl4',
+          table: {
+            widths: [220, 40, 220],
+            heights: [5, 5, 20, 5, 5],
+            body: [
+              [{ text: `Batam, ${idDateFormat(e.trDate, 'dd MMMM yyyy')}` }, '', ''],
+              ['Disetujui oleh,', '', ''],
+              ['', '', ''],
+              ['Eko Hernanto', '', e.d0],
+              ['PT. Labtech Penta International', '', 'Employee'],
+            ],
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl4',
+          table: {
+            widths: [512],
+            body: [
+              [{ text: '', border: [false, false, false, true], margin: [0, 120, 0, 0] }],
+              [{
+                text: 'PT. LABTECH PENTA INTERNATIONAL ---- http://www.labtech.org', bold: true, alignment: 'center', border: [false, false, false, false],
+              }],
+              [{
+                text: 'MAILING ADDRESS: P.O. BOX 120, SEKUPANG, PULAU BATAM, RIAU, INDONESIA 29422. Email: batam@labtech.org', fontSize: 6, alignment: 'center', border: [false, false, false, false],
+              }],
+              [{
+                text: 'FACTORY LOCATION: KAWASAN INDUSTRI SEKUPANG PULAU BATAM 29422 - INDONESIA TEL. (62-778) 321330, 321057 FAX: (62-778) 321414', fontSize: 6, alignment: 'center', border: [false, false, false, false],
+              }],
+              [{
+                text: 'SINGAPORE: 163 PENANG ROAD NO. 02-01 WINSLAND HOUSE II, SINGAPORE 238463 TEL: (65) 64636192, 67261419 FAX: (65) 64620160 Email: singapore@labtech.org', fontSize: 6, alignment: 'center', border: [false, false, false, false],
+              }],
+            ],
+          },
+        },
       ],
       styles: {
         tbl1: {
@@ -1635,6 +1745,10 @@ const genFinal = async (p) => {
         tbl3: {
           fontSize: 9,
           margin: [10, 10, 0, 10],
+        },
+        tbl4: {
+          fontSize: 8,
+          margin: [-10, 20, -10, 0],
         },
       },
     };

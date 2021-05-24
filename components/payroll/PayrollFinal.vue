@@ -149,6 +149,7 @@
           ref="form"
           :model="form"
           :hide-required-asterisk="true"
+          :rules="rules"
           label-position="top"
           class="flexi flex-col spaxe-y-4"
         >
@@ -166,11 +167,25 @@
                   :disabled="true"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="Tanggal Pembuatan Berkas">
+              <el-form-item label="Tanggal Pembuatan Berkas" prop="fDate">
                 <el-date-picker
                   v-model="form.fDate"
                   type="date"
                 ></el-date-picker>
+              </el-form-item>
+              <el-form-item label="Tanggal Pemutusan Hubungan Kerja" prop="trDate">
+                <el-date-picker
+                  v-model="form.trDate"
+                  type="date"
+                ></el-date-picker>
+              </el-form-item>
+              <el-form-item label="Reason for Leaving" prop="lvReason">
+                <el-select v-model="form.lvReason" filterable>
+                  <el-option label="Finish Contract" value="Finis Contract"></el-option>
+                  <el-option label="PHK" value="PHK"></el-option>
+                  <el-option label="Resign" value="Resign"></el-option>
+                  <el-option label="Mangkir" value="Mangkir"></el-option>
+                </el-select>
               </el-form-item>
               <el-form-item label="Basic Salary">
                 <el-input v-model="form.g0"></el-input>
@@ -188,11 +203,11 @@
                   type="date"
                 ></el-date-picker>
               </el-form-item>
+            </div>
+            <div class="flex-1">
               <el-form-item label="Hari Kerja">
                 <el-input v-model="form.j0"></el-input>
               </el-form-item>
-            </div>
-            <div class="flex-1">
               <el-form-item label="Resign / Finish Date">
                 <el-date-picker
                   v-model="form.k0"
@@ -247,11 +262,11 @@
               <el-form-item label="Dana Pinjaman">
                 <el-input v-model="form.dk0"></el-input>
               </el-form-item>
-            </div>
-            <div class="flex-1">
               <el-form-item label="Kantin">
                 <el-input v-model="form.dl0"></el-input>
               </el-form-item>
+            </div>
+            <div class="flex-1">
               <el-form-item label="Kopkar dan BMI">
                 <el-input v-model="form.dm0"></el-input>
               </el-form-item>
@@ -407,6 +422,11 @@ export default {
           '_id', 'd0', 'e0', 'final',
         ],
       }),
+      rules: {
+        fDate: [{ required: true, message: 'Required' }],
+        trDate: [{ required: true, message: 'Required' }],
+        lvReason: [{ required: true, message: 'Required', trigger: 'change' }],
+      },
     };
   },
   methods: {
@@ -516,6 +536,8 @@ export default {
                     ea0: parseInt(this.form.ea0, 10),
                     fe0: parseInt(this.form.fe0, 10),
                     fDate: this.form.fDate,
+                    trDate: this.form.trDate,
+                    lvReason: this.form.lvReason,
                     aj0r: parseInt(this.form.aj0r, 10),
                     ak0r: parseInt(this.form.ak0r, 10),
                     al0r: parseInt(this.form.al0r, 10),

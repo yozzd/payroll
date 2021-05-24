@@ -278,6 +278,8 @@ const EmployeeType = new GraphQLObjectType({
     gross: { type: GraphQLFloat },
     ttax: { type: GraphQLFloat },
     fDate: { type: DateFormat },
+    trDate: { type: DateFormat },
+    lvReason: { type: GraphQLString },
     pph: { type: PphCheckType },
     spAllowRem: { type: GraphQLString },
     trfThr: { type: GraphQLFloat },

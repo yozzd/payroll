@@ -205,7 +205,9 @@ const EmployeeSchema = new Schema({
   fk0: { type: Boolean, default: false }, // BPJS Kesehatan Dibayarkan Flag
   fl0: { type: Boolean, default: false }, // Special Allowance Flag
   category: Number, // 0 = Administration, 1 = Production
-  fDate: Date,
+  fDate: Date, // Final Payment Date Form
+  trDate: Date, // Termination Date Form
+  lvReason: { type: String, trim: true }, // Leaving Reason
   spAllowRem: { type: String, trim: true }, // Special Allowance Remark
   slip: {
     name: { type: String, default: () => nanoid(6) },

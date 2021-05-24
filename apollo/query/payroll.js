@@ -493,6 +493,8 @@ export const PayrollFinal = gql`
         ea0
         fe0
         fDate
+        trDate
+        lvReason
         aj0r
         ak0r
         al0r
