@@ -62,11 +62,11 @@ const genPDF = async (p) => {
     vw1.push(['', '', '', '', '', { text: intpre0(p.sum1).format(), alignment: 'right' }, { text: intpre0(p.sum2).format(), alignment: 'right' }]);
 
     const vw2 = [
-      [{ text: `Batam, ${idDateFormat(new Date(), 'dd-MM-yyyy')}`, colSpan: 5 }, '', '', '', ''],
-      ['Prepared By,', 'Checked By,', 'Reviewed By,', 'Knowledge By,', 'Approved By,'],
-      ['', '', '', '', ''],
-      ['Ayu Fatimah / Hendra SP.', 'Yutin Sudarni / Ronal P. Siahaan', 'Ignatius Daud P. / Ratnawati', 'Gusti Very Wealthy', 'Eko Hernanto'],
-      [{ text: 'Personnel / HR & GA Dept.', bold: true }, { text: 'Finance Dept. / Payroll Controller', bold: true }, { text: 'IT Dept.', bold: true }, { text: 'Finance & HRGA Division', bold: true }, { text: 'Management PT. Labtech Penta International', bold: true }],
+      [{ text: `Batam, ${idDateFormat(new Date(), 'dd-MM-yyyy')}`, colSpan: 4 }, '', '', ''],
+      ['Prepared By,', 'Checked By,', 'Knowledge By,', 'Approved By,'],
+      ['', '', '', ''],
+      ['Ayu Fatimah / Hendra SP.', 'Yutin Sudarni / Ronal P.', 'Gusti Very Wealthy', 'Eko Hernanto'],
+      [{ text: 'Personnel / HR & GA Dept.', bold: true }, { text: 'Finance Dept. / Payroll Controller', bold: true }, { text: 'Finance & HRGA Division', bold: true }, { text: 'Management PT. Labtech Penta International', bold: true }],
     ];
 
     const docDefinition = {
@@ -114,11 +114,11 @@ const genPDF = async (p) => {
           },
         },
         {
-          style: 'tbl3',
+          style: 'tbl2',
           margin: [10, 40, 0, 0],
           table: {
-            widths: [95, 95, 95, 95, 95],
-            heights: [5, 5, 20, 5, 5],
+            widths: [115, 115, 115, 115],
+            heights: [10, 10, 20, 10, 10],
             body: vw2,
           },
           layout: 'noBorders',
@@ -132,10 +132,6 @@ const genPDF = async (p) => {
         tbl2: {
           fontSize: 8,
           margin: [-10, 40, -10, 10],
-        },
-        tbl3: {
-          fontSize: 6,
-          margin: [-10, -10, -10, 0],
         },
       },
     };
