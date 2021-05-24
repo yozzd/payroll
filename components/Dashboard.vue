@@ -117,9 +117,6 @@
                 <el-menu-item index="g">
                   Manual
                 </el-menu-item>
-                <el-menu-item index="h">
-                  Final Payment
-                </el-menu-item>
               </el-submenu>
             </el-menu>
           </template>
@@ -265,9 +262,12 @@
                     Slip
                   </el-menu-item>
                 </el-submenu>
+                <el-menu-item index="h">
+                  Final Payment
+                </el-menu-item>
                 <el-menu-item
                   v-if="$auth.$state.user.role !== 'guest2'"
-                  index="h"
+                  index="i"
                 >
                   Slip
                 </el-menu-item>
@@ -1055,8 +1055,6 @@ export default {
     handleSelect(key, keyPath, id) {
       if (keyPath.length > 2) {
         this.$router.push({ name: 'payroll-list-id', params: { id }, query: { t1: keyPath[1], t2: keyPath[2] } });
-      } else if (key === 'h') {
-        this.$router.push({ name: 'payroll-final-id', params: { id } });
       } else {
         this.$router.push({ name: 'payroll-list-id', params: { id }, query: { t1: key } });
       }
@@ -1096,7 +1094,8 @@ export default {
       else if (c === 'f') this.$router.push({ name: 'payroll-pph-id', params: { id } });
       else if (c === 'ga') this.$router.push({ name: 'payroll-thr-id', params: { id } });
       else if (c === 'gb') this.$router.push({ name: 'payroll-thrSlip-id', params: { id } });
-      else if (c === 'h') this.$router.push({ name: 'payroll-slip-id', params: { id } });
+      else if (c === 'h') this.$router.push({ name: 'payroll-final-id', params: { id } });
+      else if (c === 'i') this.$router.push({ name: 'payroll-slip-id', params: { id } });
     },
     handleActionCommand(c, r) {
       const {

@@ -1,13 +1,19 @@
 <template>
   <div class="flex flex-col space-y-4 mt-4 mb-8 px-12">
-    <el-page-header :content="content" @back="goBack">
-    </el-page-header>
+    <el-breadcrumb separator="/">
+      <el-breadcrumb-item :to="{ path: '/dashboard' }">
+        Home
+      </el-breadcrumb-item>
+      <el-breadcrumb-item class="text-xl">
+        Final Payment
+      </el-breadcrumb-item>
+    </el-breadcrumb>
     <div class="space-y-2">
-      <ErrorHandler
-        v-if="errors"
-        :errors="errors"
-      />
       <div class="flex space-x-4 items-center">
+        <div class="flex-1">
+          {{ content }}
+          &bull; <span class="text-pink-500">{{ multipleSelection.length }} item(s) selected</span>
+        </div>
         <div class="flex-1"></div>
         <el-dropdown
           trigger="click"
@@ -48,6 +54,10 @@
         :stroke-width="16"
         :percentage="percentage"
       ></el-progress>
+      <ErrorHandler
+        v-if="errors"
+        :errors="errors"
+      />
       <el-table
         ref="finalTable"
         v-loading="$apollo.loading || loadPDFFinal || loadXLSFinal"
@@ -400,9 +410,6 @@ export default {
     };
   },
   methods: {
-    goBack() {
-      this.$router.push({ path: '/dashboard/' });
-    },
     handleSelectionChange(a) {
       this.multipleSelection = a.map((v) => v._id);
     },
