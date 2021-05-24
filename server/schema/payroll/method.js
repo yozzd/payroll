@@ -1725,15 +1725,20 @@ const genFinal = async (p) => {
                 text: 'PT. LABTECH PENTA INTERNATIONAL ---- http://www.labtech.org', bold: true, alignment: 'center', color: 'blue', border: [false, false, false, false],
               }],
               [{
-                text: 'MAILING ADDRESS: P.O. BOX 120, SEKUPANG, PULAU BATAM, RIAU, INDONESIA 29422. Email: batam@labtech.org', fontSize: 6, alignment: 'center', border: [false, false, false, false],
+                text: 'MAILING ADDRESS: P.O. BOX 120, SEKUPANG, PULAU BATAM, RIAU, INDONESIA 29422. Email: batam@labtech.org', fontSize: 6, alignment: 'center', color: 'blue', border: [false, false, false, false],
               }],
               [{
-                text: 'FACTORY LOCATION: KAWASAN INDUSTRI SEKUPANG PULAU BATAM 29422 - INDONESIA TEL. (62-778) 321330, 321057 FAX: (62-778) 321414', fontSize: 6, alignment: 'center', border: [false, false, false, false],
+                text: 'FACTORY LOCATION: KAWASAN INDUSTRI SEKUPANG PULAU BATAM 29422 - INDONESIA TEL. (62-778) 321330, 321057 FAX: (62-778) 321414', fontSize: 6, alignment: 'center', color: 'blue', border: [false, false, false, false],
               }],
               [{
-                text: 'SINGAPORE: 163 PENANG ROAD NO. 02-01 WINSLAND HOUSE II, SINGAPORE 238463 TEL: (65) 64636192, 67261419 FAX: (65) 64620160 Email: singapore@labtech.org', fontSize: 6, alignment: 'center', border: [false, false, false, false],
+                text: 'SINGAPORE: 163 PENANG ROAD NO. 02-01 WINSLAND HOUSE II, SINGAPORE 238463 TEL: (65) 64636192, 67261419 FAX: (65) 64620160 Email: singapore@labtech.org', fontSize: 6, alignment: 'center', color: 'blue', border: [false, false, false, false],
               }],
             ],
+          },
+          layout: {
+            hLineColor(i, node) {
+              return (i === 0 || i === node.table.widths.length) ? 'blue' : 'black';
+            },
           },
         },
         {
@@ -1810,15 +1815,20 @@ const genFinal = async (p) => {
                 text: 'PT. LABTECH PENTA INTERNATIONAL ---- http://www.labtech.org', bold: true, alignment: 'center', color: 'blue', border: [false, false, false, false],
               }],
               [{
-                text: 'MAILING ADDRESS: P.O. BOX 120, SEKUPANG, PULAU BATAM, RIAU, INDONESIA 29422. Email: batam@labtech.org', fontSize: 6, alignment: 'center', border: [false, false, false, false],
+                text: 'MAILING ADDRESS: P.O. BOX 120, SEKUPANG, PULAU BATAM, RIAU, INDONESIA 29422. Email: batam@labtech.org', fontSize: 6, alignment: 'center', color: 'blue', border: [false, false, false, false],
               }],
               [{
-                text: 'FACTORY LOCATION: KAWASAN INDUSTRI SEKUPANG PULAU BATAM 29422 - INDONESIA TEL. (62-778) 321330, 321057 FAX: (62-778) 321414', fontSize: 6, alignment: 'center', border: [false, false, false, false],
+                text: 'FACTORY LOCATION: KAWASAN INDUSTRI SEKUPANG PULAU BATAM 29422 - INDONESIA TEL. (62-778) 321330, 321057 FAX: (62-778) 321414', fontSize: 6, alignment: 'center', color: 'blue', border: [false, false, false, false],
               }],
               [{
-                text: 'SINGAPORE: 163 PENANG ROAD NO. 02-01 WINSLAND HOUSE II, SINGAPORE 238463 TEL: (65) 64636192, 67261419 FAX: (65) 64620160 Email: singapore@labtech.org', fontSize: 6, alignment: 'center', border: [false, false, false, false],
+                text: 'SINGAPORE: 163 PENANG ROAD NO. 02-01 WINSLAND HOUSE II, SINGAPORE 238463 TEL: (65) 64636192, 67261419 FAX: (65) 64620160 Email: singapore@labtech.org', fontSize: 6, alignment: 'center', color: 'blue', border: [false, false, false, false],
               }],
             ],
+          },
+          layout: {
+            hLineColor(i, node) {
+              return (i === 0 || i === node.table.widths.length) ? 'blue' : 'black';
+            },
           },
         },
       ],
