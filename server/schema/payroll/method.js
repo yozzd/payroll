@@ -1472,7 +1472,7 @@ const genFinal = async (p) => {
       [{ text: `Batam, ${idDateFormat(e.fDate, 'dd MMMM yyyy')}`, colSpan: 5 }, '', '', '', ''],
       ['Prepared By,', 'Checked By,', 'Reviewed By,', 'Knowledge By,', 'Approved By,'],
       ['', '', '', '', ''],
-      ['Ayu Fatimah', 'Ronal P. Siahaan', 'Hendra SP / Yutin Sudarni', 'Gusti Very Wealthy', 'Eko Hernanto'],
+      [{ text: 'Ayu Fatimah', decoration: 'underline', decorationStyle: 'solid' }, { text: 'Ronal P. Siahaan', decoration: 'underline', decorationStyle: 'solid' }, { text: 'Hendra SP / Yutin Sudarni', decoration: 'underline', decorationStyle: 'solid' }, { text: 'Gusti Very Wealthy', decoration: 'underline', decorationStyle: 'solid' }, { text: 'Eko Hernanto', decoration: 'underline', decorationStyle: 'solid' }],
       [{ text: 'Personel', bold: true }, { text: 'Payroll Controller', bold: true }, { text: 'HR & GA Dept. / Finance Dept.', bold: true }, { text: 'Finance & HRGA Division', bold: true }, { text: 'Management PT. Labtech Penta International', bold: true }],
     ];
 
@@ -1489,7 +1489,11 @@ const genFinal = async (p) => {
       [{ text: 'Total', bold: true, alignment: 'right' }, ':', '', '', ''],
       [{ text: `Batam, ${idDateFormat(e.fDate, 'dd MMMM yyyy')}`, margin: [0, 30, 0, 0] }, '', '', '', ''],
       ['Prepared By,', '', 'Checked By,', '', ''],
-      [{ text: 'Zunaidi', margin: [0, 40, 0, 0] }, '', { text: 'David Riatmanto', margin: [0, 40, 0, 0] }, '', ''],
+      [{
+        text: 'Zunaidi', decoration: 'underline', decorationStyle: 'solid', margin: [0, 40, 0, 0],
+      }, '', {
+        text: 'David Riatmanto', decoration: 'underline', decorationStyle: 'solid', margin: [0, 40, 0, 0],
+      }, '', ''],
       ['Bendahara Koperasi', '', 'Ketua Koperasi', '', ''],
     ];
 
@@ -1505,7 +1509,11 @@ const genFinal = async (p) => {
       [{ text: 'Total', bold: true, alignment: 'right' }, ':', '', '', ''],
       [{ text: `Batam, ${idDateFormat(e.fDate, 'dd MMMM yyyy')}`, margin: [0, 30, 0, 0] }, '', '', '', ''],
       ['Prepared By,', '', 'Checked By,', '', ''],
-      [{ text: 'Temmy Saputri', margin: [0, 40, 0, 0] }, '', { text: 'Yutin Sudarni', margin: [0, 40, 0, 0] }, '', ''],
+      [{
+        text: 'Temmy Saputri', decoration: 'underline', decorationStyle: 'solid', margin: [0, 40, 0, 0],
+      }, '', {
+        text: 'Yutin Sudarni', decoration: 'underline', decorationStyle: 'solid', margin: [0, 40, 0, 0],
+      }, '', ''],
       ['Finance & Administration', '', 'Finance Manager', '', ''],
     ];
 
@@ -1640,16 +1648,17 @@ const genFinal = async (p) => {
         {
           style: 'tbl4',
           table: {
-            widths: [160, 160, 160],
+            widths: [480],
             body: [
-              [{ text: '', border: [false, false, false, false] }, {
-                text: 'PEMUTUSAN HUBUNGAN KERJA', bold: true, alignment: 'center', fontSize: 10, border: [false, false, false, false],
-              }, { text: '', border: [false, false, false, false] }],
-              [{ text: '', border: [false, false, false, false] }, {
-                text: 'TERMINATION OF EMPLOYMENT', alignment: 'center', fontSize: 10, border: [false, true, false, false],
-              }, { text: '', border: [false, false, false, false] }],
+              [{
+                text: 'PEMUTUSAN HUBUNGAN KERJA', bold: true, alignment: 'center', fontSize: 12, decoration: 'underline', decorationStyle: 'solid',
+              }],
+              [{
+                text: 'TERMINATION OF EMPLOYMENT', alignment: 'center', fontSize: 10,
+              }],
             ],
           },
+          layout: 'noBorders',
         },
         {
           style: 'tbl4',
@@ -1670,8 +1679,8 @@ const genFinal = async (p) => {
           table: {
             widths: [220, 40, 220],
             body: [
-              [{ text: 'Surat ini menyatakan bahwa saudara seperti tersebut di atas telah berakhir masa kerjanya di PT. Labtech Penta International pada tanggal seperti tersebut di atas. Semua barang/perlengkapan milik perusahaan yang dipakai karyawan yang bersangkutan harus dikembalikan kepada PT. Labtech Penta International.' }, '',
-                { text: 'This letter is to confirm that the employee named as above has finished his employment services with PT. Labtech Penta International on above date. Any and all company property remaining with the employee shall be returned to PT. Labtech Penta International.' }],
+              [{ text: 'Surat ini menyatakan bahwa saudara seperti tersebut di atas telah berakhir masa kerjanya di PT. Labtech Penta International pada tanggal seperti tersebut di atas. Semua barang/perlengkapan milik perusahaan yang dipakai karyawan yang bersangkutan harus dikembalikan kepada PT. Labtech Penta International.', alignment: 'justify' }, '',
+                { text: 'This letter is to confirm that the employee named as above has finished his employment services with PT. Labtech Penta International on above date. Any and all company property remaining with the employee shall be returned to PT. Labtech Penta International.', alignment: 'justify' }],
             ],
           },
           layout: 'noBorders',
@@ -1692,10 +1701,10 @@ const genFinal = async (p) => {
           table: {
             widths: [220, 40, 220],
             body: [
-              [{ text: 'Telah diberikan kepada karyawan yang bersangkutan sebagai gaji (pembayaran) terakhir atas segala jasa-jasanya pada PT. Labtech Penta International, dan kedua belah pihak setuju tidak akan ada pembayaran lain lagi tidak akan ada tuntutan apapun di kemudian hari.' }, '',
-                { text: 'Has been given to the employees for final payment of his services at PT. Labtech Penta International, and both parties agree that there will be no other payment and no claim in any form in the future.' }],
-              [{ text: 'Telah disepakati bahwa karyawan yang bekerja di PT. Labtech dan mendapatkan pengetahuan berupa informasi atau rahasia perusahaan tidak boleh menjadi pesaing PT. Labtech dan tidak boleh menggunakan desain alat peraga pendidikan milik PT. Labtech Penta International untuk mendirikan usaha yang sama.' }, '',
-                { text: 'It also agreed that former employees who have worked at PT. Labtech and gained knowledge about out business are to treat the information or confidential and can not engage on the production of educational trainers using our designs and information for similar business.' }],
+              [{ text: 'Telah diberikan kepada karyawan yang bersangkutan sebagai gaji (pembayaran) terakhir atas segala jasa-jasanya pada PT. Labtech Penta International, dan kedua belah pihak setuju tidak akan ada pembayaran lain lagi tidak akan ada tuntutan apapun di kemudian hari.', alignment: 'justify' }, '',
+                { text: 'Has been given to the employees for final payment of his services at PT. Labtech Penta International, and both parties agree that there will be no other payment and no claim in any form in the future.', alignment: 'justify' }],
+              [{ text: 'Telah disepakati bahwa karyawan yang bekerja di PT. Labtech dan mendapatkan pengetahuan berupa informasi atau rahasia perusahaan tidak boleh menjadi pesaing PT. Labtech dan tidak boleh menggunakan desain alat peraga pendidikan milik PT. Labtech Penta International untuk mendirikan usaha yang sama.', alignment: 'justify' }, '',
+                { text: 'It also agreed that former employees who have worked at PT. Labtech and gained knowledge about out business are to treat the information or confidential and can not engage on the production of educational trainers using our designs and information for similar business.', alignment: 'justify' }],
             ],
           },
           layout: 'noBorders',
@@ -1709,7 +1718,7 @@ const genFinal = async (p) => {
               [{ text: `Batam, ${idDateFormat(e.trDate, 'dd MMMM yyyy')}` }, '', ''],
               ['Disetujui oleh,', '', ''],
               ['', '', ''],
-              ['Eko Hernanto', '', e.d0],
+              [{ text: 'Eko Hernanto', decoration: 'underline', decorationStyle: 'solid' }, '', { text: e.d0, decoration: 'underline', decorationStyle: 'solid' }],
               ['PT. Labtech Penta International', '', 'Employee'],
             ],
           },
@@ -1755,13 +1764,14 @@ const genFinal = async (p) => {
         {
           style: 'tbl4',
           table: {
-            widths: [160, 160, 160],
+            widths: [480],
             body: [
-              [{ text: '', border: [false, false, false, false], margin: [0, 40, 0, 0] }, {
-                text: 'TO WHOM IT MAY CONCERN', bold: true, alignment: 'center', fontSize: 10, border: [false, false, false, true], margin: [0, 40, 0, 0],
-              }, { text: '', border: [false, false, false, false], margin: [0, 40, 0, 0] }],
+              [{
+                text: 'TO WHOM IT MAY CONCERN', bold: true, alignment: 'center', fontSize: 12, decoration: 'underline', decorationStyle: 'solid', margin: [0, 40, 0, 0],
+              }],
             ],
           },
+          layout: 'noBorders',
         },
         {
           style: 'tbl4',
@@ -1799,7 +1809,9 @@ const genFinal = async (p) => {
               [{ text: `Labtech would like to take this opportunity to thank for ${h1} contribution that ${h2} has made during ${h1} employment.`, margin: [0, 10, 0, 0] }],
               [{ text: `We wish ${h3} all the best in future career endeavors.`, margin: [0, 10, 0, 0] }],
               [{ text: 'PT. Labtech Penta International', margin: [0, 20, 0, 0] }],
-              [{ text: 'Hendra Syahputra', margin: [0, 60, 0, 0] }],
+              [{
+                text: 'Hendra Syahputra', decoration: 'underline', decorationStyle: 'solid', margin: [0, 60, 0, 0],
+              }],
               ['HR & GA Dept. Head'],
             ],
           },
@@ -1810,7 +1822,7 @@ const genFinal = async (p) => {
           table: {
             widths: [512],
             body: [
-              [{ text: '', border: [false, false, false, true], margin: [0, 100, 0, 0] }],
+              [{ text: '', border: [false, false, false, true], margin: [0, 90, 0, 0] }],
               [{
                 text: 'PT. LABTECH PENTA INTERNATIONAL ---- http://www.labtech.org', bold: true, alignment: 'center', color: 'blue', border: [false, false, false, false],
               }],
