@@ -1509,6 +1509,10 @@ const genFinal = async (p) => {
       ['Finance & Administration', '', 'Finance Manager', '', ''],
     ];
 
+    const h1 = e.n0 === 'Male' ? 'his' : 'her';
+    const h2 = e.n0 === 'Male' ? 'he' : 'she';
+    const h3 = e.n0 === 'Male' ? 'him' : 'her';
+
     const wd = [80, 40, 40, 40, 40, 10, 150];
     const docDefinition = {
       // userPassword: e.final.pw,
@@ -1628,7 +1632,7 @@ const genFinal = async (p) => {
             widths: [530],
             body: [
               [{
-                image: 'static/images/fpheader.jpg', width: 530, height: 30, border: [false, false, false, false], pageBreak: 'before',
+                image: 'static/images/fpheader.jpg', width: 530, border: [false, false, false, false], pageBreak: 'before',
               }],
             ],
           },
@@ -1716,9 +1720,94 @@ const genFinal = async (p) => {
           table: {
             widths: [512],
             body: [
-              [{ text: '', border: [false, false, false, true], margin: [0, 120, 0, 0] }],
+              [{ text: '', border: [false, false, false, true], margin: [0, 30, 0, 0] }],
               [{
-                text: 'PT. LABTECH PENTA INTERNATIONAL ---- http://www.labtech.org', bold: true, alignment: 'center', border: [false, false, false, false],
+                text: 'PT. LABTECH PENTA INTERNATIONAL ---- http://www.labtech.org', bold: true, alignment: 'center', color: 'blue', border: [false, false, false, false],
+              }],
+              [{
+                text: 'MAILING ADDRESS: P.O. BOX 120, SEKUPANG, PULAU BATAM, RIAU, INDONESIA 29422. Email: batam@labtech.org', fontSize: 6, alignment: 'center', border: [false, false, false, false],
+              }],
+              [{
+                text: 'FACTORY LOCATION: KAWASAN INDUSTRI SEKUPANG PULAU BATAM 29422 - INDONESIA TEL. (62-778) 321330, 321057 FAX: (62-778) 321414', fontSize: 6, alignment: 'center', border: [false, false, false, false],
+              }],
+              [{
+                text: 'SINGAPORE: 163 PENANG ROAD NO. 02-01 WINSLAND HOUSE II, SINGAPORE 238463 TEL: (65) 64636192, 67261419 FAX: (65) 64620160 Email: singapore@labtech.org', fontSize: 6, alignment: 'center', border: [false, false, false, false],
+              }],
+            ],
+          },
+        },
+        {
+          style: 'tbl1',
+          table: {
+            widths: [530],
+            body: [
+              [{
+                image: 'static/images/fpheader.jpg', width: 530, border: [false, false, false, false], pageBreak: 'before',
+              }],
+            ],
+          },
+        },
+        {
+          style: 'tbl4',
+          table: {
+            widths: [160, 160, 160],
+            body: [
+              [{ text: '', border: [false, false, false, false], margin: [0, 40, 0, 0] }, {
+                text: 'TO WHOM IT MAY CONCERN', bold: true, alignment: 'center', fontSize: 10, border: [false, false, false, true], margin: [0, 40, 0, 0],
+              }, { text: '', border: [false, false, false, false], margin: [0, 40, 0, 0] }],
+            ],
+          },
+        },
+        {
+          style: 'tbl4',
+          table: {
+            widths: [480],
+            body: [
+              [{ text: 'This is to certify that:', margin: [0, 20, 0, 0] }],
+            ],
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl4',
+          table: {
+            widths: [160, 20, 300],
+            body: [
+              ['Name', { text: ':', alignment: 'center' }, e.d0],
+              ['Emp. No.', { text: ':', alignment: 'center' }, e.e0],
+              ['Department', { text: ':', alignment: 'center' }, e.u0],
+              ['Section', { text: ':', alignment: 'center' }, e.v0],
+              ['Reason for leaving', { text: ':', alignment: 'center' }, e.lvReason],
+            ],
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl4',
+          table: {
+            widths: [480],
+            body: [
+              ['Has been employed by PT. Labtech Penta International from:'],
+              [{ text: `${gDateFormat(e.i0, 'MMMM do, yyyy')} to ${gDateFormat(e.k0, 'MMMM do, yyyy')}`, alignment: 'center', margin: [0, 10, 0, 0] }],
+              [{ text: `Last position as ${e.y0}`, alignment: 'center' }],
+              [{ text: `We found during ${h1} employment at Labtech ${h2} has shown good attitude, reliable and well behaved worker.`, margin: [0, 10, 0, 0] }],
+              [{ text: `Labtech would like to take this opportunity to thank for ${h1} contribution that ${h2} has made during ${h1} employment.`, margin: [0, 10, 0, 0] }],
+              [{ text: `We wish ${h3} all the best in future career endeavors.`, margin: [0, 10, 0, 0] }],
+              [{ text: 'PT. Labtech Penta International', margin: [0, 20, 0, 0] }],
+              [{ text: 'Hendra Syahputra', margin: [0, 60, 0, 0] }],
+              ['HR & GA Dept. Head'],
+            ],
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl4',
+          table: {
+            widths: [512],
+            body: [
+              [{ text: '', border: [false, false, false, true], margin: [0, 100, 0, 0] }],
+              [{
+                text: 'PT. LABTECH PENTA INTERNATIONAL ---- http://www.labtech.org', bold: true, alignment: 'center', color: 'blue', border: [false, false, false, false],
               }],
               [{
                 text: 'MAILING ADDRESS: P.O. BOX 120, SEKUPANG, PULAU BATAM, RIAU, INDONESIA 29422. Email: batam@labtech.org', fontSize: 6, alignment: 'center', border: [false, false, false, false],
@@ -1747,7 +1836,7 @@ const genFinal = async (p) => {
           margin: [10, 10, 0, 10],
         },
         tbl4: {
-          fontSize: 8,
+          fontSize: 9,
           margin: [-10, 20, -10, 0],
         },
       },
