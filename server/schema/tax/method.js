@@ -253,6 +253,9 @@ const genPDF = async (p) => {
           text: 'THR, Leave', bold: true, alignment: 'center',
         },
         {
+          text: 'Bonus', bold: true, alignment: 'center',
+        },
+        {
           text: 'Deduction', bold: true, alignment: 'center',
         },
         {
@@ -295,6 +298,7 @@ const genPDF = async (p) => {
         { text: intpre0(e.bu0).format(), alignment: 'right' },
         { text: intpre0(e.en0).format(), alignment: 'right' },
         { text: intpre0(e.eq0).format(), alignment: 'right' },
+        { text: intpre0(e.dr0).format(), alignment: 'right' },
         { text: intpre0(e.df0).format(), alignment: 'right' },
         { text: intpre0(e.cy0).format(), alignment: 'right' },
         { text: intpre0(e.gross).format(), alignment: 'right' },
@@ -327,6 +331,7 @@ const genPDF = async (p) => {
       { text: intpre0(p.sum14).format(), alignment: 'right' },
       { text: intpre0(p.sum15).format(), alignment: 'right' },
       { text: intpre0(p.sum16).format(), alignment: 'right' },
+      { text: intpre0(p.sum17).format(), alignment: 'right' },
     ]);
 
     const vw2 = [
@@ -381,8 +386,8 @@ const genPDF = async (p) => {
             widths: [
               15, 20, 50, 30, 30, 30, 30,
               35, 30, 30, 30, 30, 30, 30,
-              30, 30, 35, 30, 30, 30, 30,
-              30, 30,
+              30, 30, 35, 35, 30, 30, 30,
+              30, 30, 30,
             ],
             body: vw1,
           },
@@ -415,7 +420,7 @@ const genPDF = async (p) => {
         },
         tbl3: {
           fontSize: 5,
-          margin: [-10, -10, -10, 0],
+          margin: [-20, -10, -10, 0],
         },
         tbl4: {
           fontSize: 6,

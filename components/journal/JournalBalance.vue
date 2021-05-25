@@ -221,6 +221,16 @@
           <td></td>
           <td></td>
         </tr>
+        <tr>
+          <td></td>
+          <td>Production - Labor Cost</td>
+          <td>(Bonus)</td>
+          <td class="text-right">
+            {{ production.bonus | currency }}
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
         <tr class="bg-blue-100">
           <td></td>
           <td></td>
@@ -417,6 +427,16 @@
           <td>(Pengembalian Pajak DTP)</td>
           <td class="text-right">
             {{ administration.dtp | currency }}
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Administration - Payroll Exp</td>
+          <td>(Bonus)</td>
+          <td class="text-right">
+            {{ administration.bonus | currency }}
           </td>
           <td></td>
           <td></td>

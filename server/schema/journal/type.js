@@ -31,6 +31,7 @@ const JournalEmpType = new GraphQLObjectType({
     termination: { type: GraphQLFloat },
     taxReturn: { type: GraphQLFloat },
     dtp: { type: GraphQLFloat },
+    bonus: { type: GraphQLFloat },
   }),
 });
 

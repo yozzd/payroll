@@ -62,6 +62,7 @@ const journalBalanceFragment = {
         termination
         taxReturn
         dtp
+        bonus
       }
     `,
   },

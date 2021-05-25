@@ -21,6 +21,7 @@ const journal = async (id) => {
         en0: { $sum: '$employee.en0' },
         eq0: { $sum: '$employee.eq0' },
         dn0: { $sum: '$employee.dn0' },
+        bonus: { $sum: '$employee.dr0' },
         retro: { $sum: '$employee.bu0' },
         ot: { $sum: '$employee.ai0' },
         accident: { $sum: '$employee.cb0' },
@@ -60,7 +61,7 @@ const journal = async (id) => {
         expat: { $subtract: ['$ed0', { $sum: ['$finalPay', '$pesangonPay', '$mangkirPay'] }] },
         gross: {
           $subtract: [
-            { $sum: ['$l0', '$ot', '$bk0', '$cn0', '$retro', '$en0', '$eq0'] },
+            { $sum: ['$l0', '$ot', '$bk0', '$cn0', '$retro', '$en0', '$eq0', '$bonus'] },
             { $sum: ['$cy0', '$df0'] },
           ],
         },
@@ -94,6 +95,7 @@ const journal = async (id) => {
             termination: '$termination',
             taxReturn: '$taxReturn',
             dtp: '$dtp',
+            bonus: '$bonus',
           },
         },
         totMandiri: { $sum: '$ec0' },
@@ -166,7 +168,7 @@ const journal = async (id) => {
             '$production.salary', '$production.retro', '$production.ot', '$production.accident', '$production.death', '$production.medical',
             '$production.pension', '$production.posfunc', '$production.housing', '$production.transport', '$production.incentive',
             '$production.meals', '$production.living', '$production.communication', '$production.other', '$production.thr', '$production.termination',
-            '$production.taxReturn', '$production.dtp',
+            '$production.taxReturn', '$production.dtp', '$production.bonus',
           ],
         },
         totAdministration: {
@@ -174,7 +176,7 @@ const journal = async (id) => {
             '$administration.salary', '$administration.retro', '$administration.ot', '$administration.accident', '$administration.death', '$administration.medical',
             '$administration.pension', '$administration.posfunc', '$administration.housing', '$administration.transport', '$administration.incentive',
             '$administration.meals', '$administration.living', '$administration.communication', '$administration.other', '$administration.thr', '$administration.termination',
-            '$administration.taxReturn', '$administration.dtp',
+            '$administration.taxReturn', '$administration.dtp', '$administration.bonus',
           ],
         },
         tot2: '$tot2',
