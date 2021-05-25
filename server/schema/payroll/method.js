@@ -298,7 +298,7 @@ const generateReportPayroll = async (p) => {
       [{ text: `Batam, ${idDateFormat(new Date(), 'dd-MM-yyyy')}`, colSpan: 4 }, '', '', ''],
       ['Prepared By,', 'Checked By,', 'Knowledge By,', 'Approved By,'],
       ['', '', '', ''],
-      ['Ayu Fatimah / Hendra SP.', 'Yutin Sudarni / Ronal P.', 'Gusti Very Wealthy', 'Eko Hernanto'],
+      [{ text: 'Ayu Fatimah / Hendra SP', decoration: 'underline', decorationStyle: 'solid' }, { text: 'Yutin Sudarni / Ronal P.', decoration: 'underline', decorationStyle: 'solid' }, { text: 'Gusti Very Wealthy', decoration: 'underline', decorationStyle: 'solid' }, { text: 'Eko Hernanto', decoration: 'underline', decorationStyle: 'solid' }],
       [{ text: 'Personnel / HR & GA Dept.', bold: true }, { text: 'Finance Dept. / Payroll Controller', bold: true }, { text: 'Finance & HRGA Division', bold: true }, { text: 'Management PT. Labtech Penta International', bold: true }],
     ];
 
@@ -1929,7 +1929,7 @@ const genPDFFinalQ = async (p) => {
       [{ text: `Batam, ${idDateFormat(new Date(), 'dd-MM-yyyy')}`, colSpan: 4 }, '', '', ''],
       ['Prepared By,', 'Checked By,', 'Knowledge By,', 'Approved By,'],
       ['', '', '', ''],
-      ['Ayu Fatimah / Hendra SP.', 'Yutin Sudarni / Ronal P.', 'Gusti Very Wealthy', 'Eko Hernanto'],
+      [{ text: 'Ayu Fatimah / Hendra SP.', decoration: 'underline', decorationStyle: 'solid' }, { text: 'Yutin Sudarni / Ronal P.', decoration: 'underline', decorationStyle: 'solid' }, { text: 'Gusti Very Wealthy', decoration: 'underline', decorationStyle: 'solid' }, { text: 'Eko Hernanto', decoration: 'underline', decorationStyle: 'solid' }],
       [{ text: 'Personnel / HR & GA Dept.', bold: true }, { text: 'Finance Dept. / Payroll Controller', bold: true }, { text: 'Finance & HRGA Division', bold: true }, { text: 'Management PT. Labtech Penta International', bold: true }],
     ];
 
