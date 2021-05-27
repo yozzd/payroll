@@ -981,7 +981,7 @@ const genAccCheck = async (p) => {
         { text: intpre0(e.dk0).format(), alignment: 'right' },
         { text: intpre0(e.dl0).format(), alignment: 'right' },
         { text: intpre0(e.dm0).format(), alignment: 'right' },
-        { text: intpre0(e.dg0).format(), alignment: 'right' },
+        { text: intpre0(e.dn0).format(), alignment: 'right' },
         { text: intpre0(e.bv0).format(), alignment: 'right' },
       ]);
 
@@ -993,7 +993,7 @@ const genAccCheck = async (p) => {
       { text: intpre0(p.dk0sum).format(), alignment: 'right' },
       { text: intpre0(p.dl0sum).format(), alignment: 'right' },
       { text: intpre0(p.dm0sum).format(), alignment: 'right' },
-      { text: intpre0(p.dg0sum).format(), alignment: 'right' },
+      { text: intpre0(p.dn0sum).format(), alignment: 'right' },
       { text: intpre0(p.bv0sum).format(), alignment: 'right' },
     ]);
 
