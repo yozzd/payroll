@@ -601,7 +601,9 @@
           <td class="text-right">
             <strong>{{ journalBalance.tot2 | currency }}</strong>
           </td>
-          <td></td>
+          <td class="text-right">
+            <strong>{{ journalBalance.tot3 | currency }}</strong>
+          </td>
         </tr>
         <tr>
           <td>51024</td>
