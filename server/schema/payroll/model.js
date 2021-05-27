@@ -593,7 +593,7 @@ EmployeeSchema.pre('save', async function fn(next) {
   const byCash = ['X.0008', 'X.0010'];
   if (byCash.includes(this.e0) || this.ex0 || this.ff0 || this.fg0) {
     this.ec0 = 0;
-    this.ed0 = this.eb0;
+    this.ed0 = this.eb0 + this.es0;
     // this.ed0 = this.dp0 + this.dr0 + this.dt0 + this.dx0 + this.dy0 + this.es0;
   } else {
     this.ec0 = this.dp0 + this.es0;
