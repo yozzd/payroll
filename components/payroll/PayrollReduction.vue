@@ -154,7 +154,7 @@
                 :disabled="true"
               ></el-input>
             </el-form-item>
-            <el-form-item label="Pemotongan Kelebihan Bayar Gaji & Koreksi Absen">
+            <el-form-item label="Pemotongan Kelebihan Bayar Gaji, Koreksi Absen & BPJS">
               <el-input v-model="form.dc0"></el-input>
             </el-form-item>
             <el-form-item label="Pemotongan Kelebihan Bayar OT">
@@ -165,13 +165,13 @@
             <el-form-item label="Pemotongan Prorate Absen">
               <el-input v-model="form.de0"></el-input>
             </el-form-item>
-            <el-form-item label="Pemotongan">
+            <el-form-item label="Pemotongan (No Tax 21)">
               <el-input v-model="form.dg0"></el-input>
             </el-form-item>
-            <el-form-item label="Pemotongan Toolroom">
+            <el-form-item label="Pemotongan Toolroom (No Tax 21)">
               <el-input v-model="form.dh0"></el-input>
             </el-form-item>
-            <el-form-item label="Pemotongan Lain">
+            <el-form-item label="Pemotongan Lain (No Tax 21)">
               <el-input v-model="form.di0"></el-input>
             </el-form-item>
           </div>
