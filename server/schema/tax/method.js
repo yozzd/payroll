@@ -456,7 +456,7 @@ const genXLS = async (p) => {
       SheetNames: ['Sheet1'],
       Sheets: {
         Sheet1: {
-          '!ref': `A1:W${len}`,
+          '!ref': `A1:X${len}`,
           A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
           A2: { t: 's', v: `TAX - PERIODE PAYROLL: ${p.period} ${p.year}` },
           A3: { t: 's', v: 'No' },
@@ -473,22 +473,23 @@ const genXLS = async (p) => {
           L3: { t: 's', v: 'Retro Fill' },
           M3: { t: 's', v: 'Pesangon, Serv.' },
           N3: { t: 's', v: 'THR, Leave' },
-          O3: { t: 's', v: 'Deduction' },
-          P3: { t: 's', v: 'Absent' },
-          Q3: { t: 's', v: 'Gross' },
-          R3: { t: 's', v: 'Ins. Paid By Employee' },
-          S3: { t: 's', v: 'Pajak Penghasilan Ber NPWP' },
-          T3: { t: 's', v: 'Pajak Penghasilan Non NPWP' },
-          U3: { t: 's', v: 'Total Tax' },
-          V3: { t: 's', v: 'Pengembalian Pajak DTP' },
-          W3: { t: 's', v: 'Total All' },
+          O3: { t: 's', v: 'Bonus' },
+          P3: { t: 's', v: 'Deduction' },
+          Q3: { t: 's', v: 'Absent' },
+          R3: { t: 's', v: 'Gross' },
+          S3: { t: 's', v: 'Ins. Paid By Employee' },
+          T3: { t: 's', v: 'Pajak Penghasilan Ber NPWP' },
+          U3: { t: 's', v: 'Pajak Penghasilan Non NPWP' },
+          V3: { t: 's', v: 'Total Tax' },
+          W3: { t: 's', v: 'Pengembalian Pajak DTP' },
+          X3: { t: 's', v: 'Total All' },
           '!cols': [
             { wpx: 26 }, { wpx: 72 }, { wpx: 234 }, { wpx: 62 },
             { wpx: 92 }, { wpx: 188 }, { wpx: 113 }, { wpx: 75 },
             { wpx: 66 }, { wpx: 66 }, { wpx: 110 }, { wpx: 66 },
             { wpx: 84 }, { wpx: 75 }, { wpx: 66 }, { wpx: 66 },
-            { wpx: 75 }, { wpx: 112 }, { wpx: 147 }, { wpx: 150 },
-            { wpx: 60 }, { wpx: 126 }, { wpx: 55 },
+            { wpx: 66 }, { wpx: 75 }, { wpx: 112 }, { wpx: 147 },
+            { wpx: 150 }, { wpx: 60 }, { wpx: 126 }, { wpx: 55 },
           ],
         },
       },
@@ -511,15 +512,16 @@ const genXLS = async (p) => {
       wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: t.bu0, z: '#,##0' };
       wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: t.en0, z: '#,##0' };
       wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: t.eq0, z: '#,##0' };
-      wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: t.df0, z: '#,##0' };
-      wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: t.cy0, z: '#,##0' };
-      wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: t.gross, z: '#,##0' };
-      wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: t.er0, z: '#,##0' };
-      wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: t.cz0, z: '#,##0' };
-      wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: t.da0, z: '#,##0' };
-      wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: t.db0, z: '#,##0' };
-      wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: t.es0, z: '#,##0' };
-      wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: t.ttax, z: '#,##0' };
+      wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: t.dr0, z: '#,##0' };
+      wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: t.df0, z: '#,##0' };
+      wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: t.cy0, z: '#,##0' };
+      wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: t.gross, z: '#,##0' };
+      wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: t.er0, z: '#,##0' };
+      wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: t.cz0, z: '#,##0' };
+      wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: t.da0, z: '#,##0' };
+      wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: t.db0, z: '#,##0' };
+      wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: t.es0, z: '#,##0' };
+      wb.Sheets.Sheet1[`X${row}`] = { t: 'n', v: t.ttax, z: '#,##0' };
 
       return true;
     });
@@ -541,6 +543,7 @@ const genXLS = async (p) => {
     wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: p.sum14, z: '#,##0' };
     wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: p.sum15, z: '#,##0' };
     wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: p.sum16, z: '#,##0' };
+    wb.Sheets.Sheet1[`X${row}`] = { t: 'n', v: p.sum17, z: '#,##0' };
 
     const fn = `static/report/${p.dir}/${p.dir}_tax.xlsx`;
     const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
