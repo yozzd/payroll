@@ -125,6 +125,11 @@
           <span>{{ scope.row.eq0 | currency }}</span>
         </template>
       </el-table-column>
+      <el-table-column prop="dr0" label="Bonus" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.dr0 | currency }}</span>
+        </template>
+      </el-table-column>
       <el-table-column prop="df0" label="Deduction" width="120" align="right">
         <template slot-scope="scope">
           <span>{{ scope.row.df0 | currency }}</span>

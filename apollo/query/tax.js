@@ -25,6 +25,7 @@ export const TaxReport = gql`
         da0
         db0
         df0
+        dr0
         en0
         eq0
         er0
