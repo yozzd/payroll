@@ -52,6 +52,7 @@ export default {
       default: '@/apollo/client/default.js',
       upload: '@/apollo/client/upload.js',
     },
+    tokenName: 'payroll-apollo-token',
     errorHandler: '@/apollo/error-handler.js',
   },
   currencyFilter: [
