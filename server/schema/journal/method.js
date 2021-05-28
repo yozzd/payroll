@@ -137,7 +137,7 @@ const genXLS = async (p) => {
     wb.Sheets.Sheet1.B22 = { t: 's', v: 'Production - Labor Cost' };
     wb.Sheets.Sheet1.C22 = { t: 's', v: '(Pengembalian Pajak DTP)' };
     wb.Sheets.Sheet1.D22 = { t: 'n', v: production.dtp, z: '#,##0' };
-    
+
     wb.Sheets.Sheet1.A23 = { t: 's', v: '' };
     wb.Sheets.Sheet1.B23 = { t: 's', v: 'Production - Labor Cost' };
     wb.Sheets.Sheet1.C23 = { t: 's', v: '(Bonus)' };
@@ -240,7 +240,7 @@ const genXLS = async (p) => {
     wb.Sheets.Sheet1.B43 = { t: 's', v: 'Administration - Payroll Exp' };
     wb.Sheets.Sheet1.C43 = { t: 's', v: '(Pengembalian Pajak DTP)' };
     wb.Sheets.Sheet1.D43 = { t: 'n', v: administration.dtp, z: '#,##0' };
-    
+
     wb.Sheets.Sheet1.B44 = { t: 's', v: 'Administration - Payroll Exp' };
     wb.Sheets.Sheet1.C44 = { t: 's', v: '(Bonus)' };
     wb.Sheets.Sheet1.D44 = { t: 'n', v: administration.bonus, z: '#,##0' };

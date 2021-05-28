@@ -679,7 +679,10 @@
               </el-select>
             </el-form-item>
             <el-form-item label="No. (NPWP)">
-              <el-input v-model="formAddEmployee.q0"></el-input>
+              <el-input
+                v-model="formAddEmployee.q0"
+                :disabled="formAddEmployee.p0 === 'No'"
+              ></el-input>
             </el-form-item>
             <el-form-item label="Status Tanggungan (NPWP)" prop="r0">
               <el-select v-model="formAddEmployee.r0" filterable>
@@ -964,7 +967,7 @@ export default {
         k0: '',
         n0: '',
         o0: '',
-        p0: '',
+        p0: 'No',
         q0: '',
         r0: '',
         u0: '',
@@ -1222,7 +1225,7 @@ export default {
                   n0: this.formAddEmployee.n0,
                   o0: this.formAddEmployee.o0,
                   p0: this.formAddEmployee.p0,
-                  q0: this.formAddEmployee.q0,
+                  q0: this.formAddEmployee.q0 || '-',
                   r0: this.formAddEmployee.r0,
                   u0: this.formAddEmployee.u0,
                   v0: this.formAddEmployee.v0,
