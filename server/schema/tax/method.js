@@ -454,7 +454,7 @@ const genXLS = async (p) => {
       SheetNames: ['Sheet1'],
       Sheets: {
         Sheet1: {
-          '!ref': `A1:X${len}`,
+          '!ref': `A1:Y${len}`,
           A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
           A2: { t: 's', v: `TAX - PERIODE PAYROLL: ${p.period} ${p.year}` },
           A3: { t: 's', v: 'No' },
@@ -481,6 +481,7 @@ const genXLS = async (p) => {
           V3: { t: 's', v: 'Total Tax' },
           W3: { t: 's', v: 'Pengembalian Pajak DTP' },
           X3: { t: 's', v: 'Total All' },
+          Y3: { t: 's', v: 'Note' },
           '!cols': [
             { wpx: 26 }, { wpx: 72 }, { wpx: 234 }, { wpx: 62 },
             { wpx: 92 }, { wpx: 188 }, { wpx: 113 }, { wpx: 75 },
@@ -488,6 +489,7 @@ const genXLS = async (p) => {
             { wpx: 84 }, { wpx: 75 }, { wpx: 66 }, { wpx: 66 },
             { wpx: 66 }, { wpx: 75 }, { wpx: 112 }, { wpx: 147 },
             { wpx: 150 }, { wpx: 60 }, { wpx: 126 }, { wpx: 55 },
+            { wpx: 100 },
           ],
         },
       },
@@ -520,6 +522,7 @@ const genXLS = async (p) => {
       wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: t.db0, z: '#,##0' };
       wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: t.es0, z: '#,##0' };
       wb.Sheets.Sheet1[`X${row}`] = { t: 'n', v: t.ttax, z: '#,##0' };
+      wb.Sheets.Sheet1[`Y${row}`] = { t: 's', v: t.ex0 ? 'Final Payment' : '' };
 
       return true;
     });
