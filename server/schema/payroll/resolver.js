@@ -6,7 +6,7 @@ const {
   GraphQLString,
   GraphQLBoolean,
 } = require('graphql');
-const Payroll = require('./model.js');
+const Payroll = require('./model');
 const { PayrollType, GenType, SendType } = require('./type');
 const {
   updateEmployee,
@@ -45,7 +45,7 @@ const {
   EditManualEmployeeInputType,
   EditFinalEmployeeInputType,
   EditSpAllowInputType,
-} = require('./employee.input.type.js');
+} = require('./employee.input.type');
 const {
   AddEmployeeInputType,
   ClonePayrollInputType,

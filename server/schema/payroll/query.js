@@ -1,4 +1,4 @@
-const Payroll = require('./model.js');
+const Payroll = require('./model');
 
 const a3Group = {
   _id: '$_id',

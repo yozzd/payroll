@@ -1,4 +1,4 @@
-const Payroll = require('../payroll/model.js');
+const Payroll = require('../payroll/model');
 
 const journal = async (id) => {
   const p = await Payroll.aggregate([

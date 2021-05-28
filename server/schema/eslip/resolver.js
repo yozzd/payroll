@@ -4,7 +4,7 @@ const {
   GraphQLInt,
   GraphQLString,
 } = require('graphql');
-const ESlip = require('./model.js');
+const ESlip = require('./model');
 const { ESlipType, SlipType, MailType } = require('./type');
 const auth = require('../auth/service');
 const { generateESlip, sendESlip } = require('./method');

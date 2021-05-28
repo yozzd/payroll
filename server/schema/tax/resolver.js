@@ -5,7 +5,7 @@ const {
   GraphQLString,
 } = require('graphql');
 const Payroll = require('../payroll/model');
-const Tax = require('./model.js');
+const Tax = require('./model');
 const { TaxType } = require('./type');
 const { PayrollType, GenType, SendType } = require('../payroll/type');
 const auth = require('../auth/service');

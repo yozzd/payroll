@@ -5,7 +5,7 @@ const {
   GraphQLString,
   GraphQLBoolean,
 } = require('graphql');
-const Thr = require('./model.js');
+const Thr = require('./model');
 const { ThrType } = require('./type');
 const { GenType, SendType } = require('../payroll/type');
 const auth = require('../auth/service');
