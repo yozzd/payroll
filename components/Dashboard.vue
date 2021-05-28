@@ -678,7 +678,7 @@
                 <el-option label="Yes" value="Yes"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="No. (NPWP)">
+            <el-form-item label="No. (NPWP)" prop="q0">
               <el-input
                 v-model="formAddEmployee.q0"
                 :disabled="formAddEmployee.p0 === 'No'"
@@ -927,6 +927,11 @@ export default {
     const year = getYear(new Date());
     const initY = 2020;
 
+    const checkNpwp = (r, v, c) => {
+      if (this.formAddEmployee.p0 === 'Yes' && v === '') c(new Error('Required'));
+      else c();
+    };
+
     return {
       showDialog: false,
       showAddEmployeeDialog: false,
@@ -967,7 +972,7 @@ export default {
         k0: '',
         n0: '',
         o0: '',
-        p0: 'No',
+        p0: 'Yes',
         q0: '',
         r0: '',
         u0: '',
@@ -1026,6 +1031,7 @@ export default {
         n0: [{ required: true, message: 'Required', trigger: 'change' }],
         o0: [{ required: true, message: 'Required' }],
         p0: [{ required: true, message: 'Required', trigger: 'change' }],
+        q0: [{ validator: checkNpwp }],
         r0: [{ required: true, message: 'Required', trigger: 'change' }],
         u0: [{ required: true, message: 'Required', trigger: 'change' }],
         v0: [{ required: true, message: 'Required', trigger: 'change' }],
