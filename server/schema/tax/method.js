@@ -504,7 +504,7 @@ const genXLS = async (p) => {
       wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: gDateFormat(t.i0, 'yyyy-MM-dd') };
       wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: t.y0 };
       wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: t.u0 };
-      wb.Sheets.Sheet1[`G${row}`] = { t: 's', v: t.q0 };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 's', v: t.q0 ? t.q0 : '-' };
       wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: t.l0, z: '#,##0' };
       wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: t.ai0, z: '#,##0' };
       wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: t.bk0, z: '#,##0' };
