@@ -54,7 +54,7 @@ const EmployeeSchema = new Schema({
   aw0: Number, // UangMasa
   ax0: Number, // UangPesangon
   ay0: Number, // UangHak
-  az0: Number, // Bonus
+  az0: Number, // Other Income
   ba0: Number, // OtherNonTax
   bb0: Number, // AbsenHour
   bc0: Number, // Absen

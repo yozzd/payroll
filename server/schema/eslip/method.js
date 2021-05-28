@@ -65,7 +65,7 @@ const generateESlip = async (p, e) => {
     if (e.aw0) ctbl1.push(['Uang Penghargaan Masa Kerja', '', '', { text: intpre0(e.aw0).format(), alignment: 'right' }]);
     if (e.ax0) ctbl1.push(['Uang Pesangon', '', '', { text: intpre0(e.ax0).format(), alignment: 'right' }]);
     if (e.ay0) ctbl1.push(['Uang Penggantian Hak', '', '15%', { text: intpre0(e.ay0).format(), alignment: 'right' }]);
-    if (e.az0) ctbl1.push(['Bonus', '', '', { text: intpre0(e.az0).format(), alignment: 'right' }]);
+    if (e.az0) ctbl1.push(['Other Income', '', '', { text: intpre0(e.az0).format(), alignment: 'right' }]);
     ctbl1.push([{ text: 'Other additions are not taxable', colSpan: 2 }, '', '', { text: intpre0(e.ba0).format(), alignment: 'right' }]);
     ctbl1.push([{ text: 'TOTAL EARNINGS', bold: true, alignment: 'right' }, '', '', {
       text: intpre0(e.br0).format(), bold: true, alignment: 'right', fillColor: '#EEEEEE',

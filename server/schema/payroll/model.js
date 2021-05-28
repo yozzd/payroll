@@ -161,7 +161,7 @@ const EmployeeSchema = new Schema({
   do0: { type: Number, default: 0 }, // Jumlah Pemotongan
   dp0: { type: Number, default: 0 }, // Penghasilan
   dq0: { type: String, trim: true }, // Periode Potongan Kantin
-  dr0: { type: Number, default: 0 }, // Bonus
+  dr0: { type: Number, default: 0 }, // Other Income
   ds0: { type: Number, default: 0 }, // Uang Pisah Prorate
   dt0: { type: Number, default: 0 }, // Uang Pisah Amount
   du0: { type: Number, default: 0 }, // Uang Pesangon Prorate

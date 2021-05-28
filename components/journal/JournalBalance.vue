@@ -224,7 +224,7 @@
         <tr>
           <td></td>
           <td>Production - Labor Cost</td>
-          <td>(Bonus)</td>
+          <td>(Other Income)</td>
           <td class="text-right">
             {{ production.bonus | currency }}
           </td>
@@ -434,7 +434,7 @@
         <tr>
           <td></td>
           <td>Administration - Payroll Exp</td>
-          <td>(Bonus)</td>
+          <td>(Other Income)</td>
           <td class="text-right">
             {{ administration.bonus | currency }}
           </td>

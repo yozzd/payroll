@@ -251,7 +251,7 @@ const genPDF = async (p) => {
           text: 'THR, Leave', bold: true, alignment: 'center',
         },
         {
-          text: 'Bonus', bold: true, alignment: 'center',
+          text: 'Other Income', bold: true, alignment: 'center',
         },
         {
           text: 'Deduction', bold: true, alignment: 'center',
@@ -471,7 +471,7 @@ const genXLS = async (p) => {
           L3: { t: 's', v: 'Retro Fill' },
           M3: { t: 's', v: 'Pesangon, Serv.' },
           N3: { t: 's', v: 'THR, Leave' },
-          O3: { t: 's', v: 'Bonus' },
+          O3: { t: 's', v: 'Other Income' },
           P3: { t: 's', v: 'Deduction' },
           Q3: { t: 's', v: 'Absent' },
           R3: { t: 's', v: 'Gross' },

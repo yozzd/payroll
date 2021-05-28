@@ -67,7 +67,7 @@
           </template>
         </el-table-column>
       </el-table-column>
-      <el-table-column prop="dr0" label="Bonus" width="120" align="right">
+      <el-table-column prop="dr0" label="Other Income" width="120" align="right">
         <template slot-scope="scope">
           <span>{{ scope.row.dr0 | currency }}</span>
         </template>
@@ -189,7 +189,7 @@
             </el-form-item>
           </div>
           <div class="flex-1">
-            <el-form-item label="Bonus">
+            <el-form-item label="Other Income">
               <el-input v-model="form.dr0"></el-input>
             </el-form-item>
             <el-form-item label="Lama Kerja (Uang Pisah)">

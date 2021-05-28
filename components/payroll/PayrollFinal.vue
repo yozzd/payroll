@@ -250,7 +250,7 @@
               <el-form-item label="Pemotongan Toolroom">
                 <el-input v-model="form.dh0"></el-input>
               </el-form-item>
-              <el-form-item label="Bonus">
+              <el-form-item label="Other Income">
                 <el-input v-model="form.dr0"></el-input>
               </el-form-item>
               <el-form-item label="Lama Kerja (Uang Pisah)">

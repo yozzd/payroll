@@ -147,7 +147,7 @@ const processImportPayroll = async ({ file, from, to }) => {
             dm0: ft[i].__EMPTY_116 || 0, // Kopkar & BMI
             dn0: ft[i].__EMPTY_117 || 0, // Pph21 Kurang Bayar
             dq0: ft[i].__EMPTY_120 || '', // Periode Potongan Kantin
-            dr0: ft[i].__EMPTY_121 || 0, // Bonus
+            dr0: ft[i].__EMPTY_121 || 0, // Other Income
             ds0: ft[i].__EMPTY_122 || 0, // Uang Pisah Prorate
             // du0: ft[i].__EMPTY_124 || 0, // Uang Pesangon Prorate
             dv0: ft[i].__EMPTY_125 || 0, // Uang Pesangon Amount
@@ -261,7 +261,7 @@ const processImportESlip = async ({ file, from, to }) => {
             aw0: ft[i].__EMPTY_48 || 0, // UangMasa
             ax0: ft[i].__EMPTY_49 || 0, // UangPesangon
             ay0: ft[i].__EMPTY_50 || 0, // UangHak
-            az0: ft[i].__EMPTY_51 || 0, // Bonus
+            az0: ft[i].__EMPTY_51 || 0, // Other Income
             ba0: ft[i].__EMPTY_52 || 0, // OtherNonTax
             bb0: ft[i].__EMPTY_53 || 0, // AbsenHour
             bc0: ft[i].__EMPTY_54 || 0, // Absen

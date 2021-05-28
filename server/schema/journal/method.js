@@ -140,7 +140,7 @@ const genXLS = async (p) => {
 
     wb.Sheets.Sheet1.A23 = { t: 's', v: '' };
     wb.Sheets.Sheet1.B23 = { t: 's', v: 'Production - Labor Cost' };
-    wb.Sheets.Sheet1.C23 = { t: 's', v: '(Bonus)' };
+    wb.Sheets.Sheet1.C23 = { t: 's', v: '(Other Income)' };
     wb.Sheets.Sheet1.D23 = { t: 'n', v: production.bonus, z: '#,##0' };
 
     wb.Sheets.Sheet1.F24 = { t: 'n', v: totProduction, z: '#,##0' };
@@ -242,7 +242,7 @@ const genXLS = async (p) => {
     wb.Sheets.Sheet1.D43 = { t: 'n', v: administration.dtp, z: '#,##0' };
 
     wb.Sheets.Sheet1.B44 = { t: 's', v: 'Administration - Payroll Exp' };
-    wb.Sheets.Sheet1.C44 = { t: 's', v: '(Bonus)' };
+    wb.Sheets.Sheet1.C44 = { t: 's', v: '(Other Income)' };
     wb.Sheets.Sheet1.D44 = { t: 'n', v: administration.bonus, z: '#,##0' };
 
     wb.Sheets.Sheet1.F45 = { t: 'n', v: totAdministration, z: '#,##0' };

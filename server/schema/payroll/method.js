@@ -259,7 +259,7 @@ const generateReportPayroll = async (p) => {
           text: 'Gaji Pokok', bold: true, alignment: 'center', rowSpan: 2,
         },
         {
-          text: 'Bonus', bold: true, alignment: 'center', rowSpan: 2,
+          text: 'Other Income', bold: true, alignment: 'center', rowSpan: 2,
         },
         {
           text: 'Uang Pisah', bold: true, alignment: 'center', colSpan: 2,
@@ -1092,7 +1092,7 @@ const generateSlip = async (p, payPass) => {
     if (e.dx0) ctbl1.push(['Uang Penghargaan Masa Kerja', '', '', { text: intpre0(e.dx0).format(), alignment: 'right' }]);
     if (e.dv0) ctbl1.push(['Uang Pesangon', '', '', { text: intpre0(e.dv0).format(), alignment: 'right' }]);
     if (e.dy0) ctbl1.push(['Uang Penggantian Hak', '', '15%', { text: intpre0(e.dy0).format(), alignment: 'right' }]);
-    if (e.dr0) ctbl1.push(['Bonus', '', '', { text: intpre0(e.dr0).format(), alignment: 'right' }]);
+    if (e.dr0) ctbl1.push(['Other Income', '', '', { text: intpre0(e.dr0).format(), alignment: 'right' }]);
     ctbl1.push([{ text: 'Other additions are not taxable', colSpan: 2 }, '', '', { text: intpre0(e.bv0).format(), alignment: 'right' }]);
     ctbl1.push([{ text: 'TOTAL EARNINGS', bold: true, alignment: 'right' }, '', '', {
       text: intpre0(e.ca0).format(), bold: true, alignment: 'right', fillColor: '#EEEEEE',
@@ -1434,7 +1434,7 @@ const genFinal = async (p) => {
     if (e.bh0) vw2.push(['Penghargaan Masa Kerja Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.bh0).format(), alignment: 'right' }]); income += e.bh0;
     if (e.bi0) vw2.push(['Others Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.bi0).format(), alignment: 'right' }]); income += e.bi0;
 
-    if (e.dr0) vw2.push([{ text: 'Bonus', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.dr0).format(), alignment: 'right' }]); income += e.dr0;
+    if (e.dr0) vw2.push([{ text: 'Other Income', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.dr0).format(), alignment: 'right' }]); income += e.dr0;
     if (e.dt0) vw2.push([{ text: 'Uang Pisah', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.dt0).format(), alignment: 'right' }]); income += e.dt0;
     vw2.push([{ text: 'Tambahan Lain Tidak Kena Pajak', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bv0).format(), alignment: 'right' }]);
     if (e.fe0) vw2.push(['Uang Pesangon', '', '', '', '', ':', { text: intpre0(e.fe0).format(), alignment: 'right' }]); income += e.fe0;
@@ -3093,7 +3093,7 @@ const genXLSMaster = async (p) => {
           DM3: { t: 's', v: 'Jumlah Pemotongan' },
           DN3: { t: 's', v: 'Penghasilan' },
           DO3: { t: 's', v: 'Periode Potongan Kantin' },
-          DP3: { t: 's', v: 'Bonus' },
+          DP3: { t: 's', v: 'Other Income' },
           DQ3: { t: 's', v: 'Uang Pisah' },
           DQ4: { t: 's', v: 'Lama Kerja Prorate Tahun' },
           DR4: { t: 's', v: 'Amount' },
