@@ -25,6 +25,11 @@ const percentage = async (id) => {
       },
     },
     {
+      $addFields: {
+        percentage: { $multiply: [{ $divide: ['$ot', '$upah'] }, 100] },
+      },
+    },
+    {
       $group: {
         _id: '$_id.id',
         period: { $first: '$period' },
@@ -37,11 +42,12 @@ const percentage = async (id) => {
             ot: '$ot',
             active: '$active',
             finalPay: '$finalPay',
-            percentage: { $divide: ['$ot', '$upah'] },
+            percentage: '$percentage',
           },
         },
         totUpah: { $sum: '$upah' },
         totOt: { $sum: '$ot' },
+        totPercentage: { $sum: '$percentage' },
         totActive: { $sum: '$active' },
         totFinalPay: { $sum: '$finalPay' },
       },

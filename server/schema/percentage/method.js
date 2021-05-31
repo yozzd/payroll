@@ -72,7 +72,7 @@ const genPDF = async (p) => {
       '', '',
       { text: intpre0(p.totUpah).format(), alignment: 'right' },
       { text: intpre0(p.totOt).format(), alignment: 'right' },
-      '',
+      { text: `${floatpre2(p.totPercentage).format()}%`, alignment: 'right' },
       { text: intpre0(p.totActive).format(), alignment: 'right' },
       { text: intpre0(p.totFinalPay).format(), alignment: 'right' },
     ]);
@@ -208,6 +208,7 @@ const genXLS = async (p) => {
     row += 1;
     wb.Sheets.Sheet1[`C${row}`] = { t: 'n', v: p.totUpah, z: '#,##0' };
     wb.Sheets.Sheet1[`D${row}`] = { t: 'n', v: p.totOt, z: '#,##0' };
+    wb.Sheets.Sheet1[`E${row}`] = { t: 'n', v: p.totPercentage, z: '0.00' };
     wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: p.totActive };
     wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: p.totFinalPay };
 

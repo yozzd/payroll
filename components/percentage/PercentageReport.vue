@@ -65,7 +65,7 @@
           <span>{{ scope.row.ot | currency }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Percentage" width="120" align="right">
+      <el-table-column prop="percentage" label="Percentage" width="120" align="right">
         <template slot-scope="scope">
           <span>{{ scope.row.percentage | frac2 }}%</span>
         </template>
