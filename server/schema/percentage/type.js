@@ -6,7 +6,6 @@ const {
   GraphQLFloat,
 } = require('graphql');
 
-
 const PercentageCategoryType = new GraphQLObjectType({
   name: 'PercentageCategoryType',
   fields: () => ({

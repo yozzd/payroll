@@ -6,7 +6,6 @@ const XlsxPopulate = require('xlsx-populate');
 const { xlsPass } = require('../../config');
 
 const { intpre0, floatpre2 } = require('../scalar/number');
-const { gDateFormat, idDateFormat } = require('../scalar/date');
 
 const fonts = {
   Roboto: {
