@@ -5,7 +5,7 @@ const XLSX = require('xlsx');
 const XlsxPopulate = require('xlsx-populate');
 const { xlsPass } = require('../../config');
 
-const { intpre0 } = require('../scalar/number');
+const { intpre0, floatpre2 } = require('../scalar/number');
 const { gDateFormat, idDateFormat } = require('../scalar/date');
 
 const fonts = {
@@ -19,7 +19,7 @@ const printer = new PdfPrinter(fonts);
 
 const genPDF = async (p) => {
   try {
-    const { employee } = p;
+    const { category } = p;
     await fs.ensureDir(`static/report/${p.dir}`);
 
     const vw1 = [
@@ -28,101 +28,69 @@ const genPDF = async (p) => {
           text: 'No', bold: true, alignment: 'center', rowSpan: 2,
         },
         {
-          text: 'No Karyawan', bold: true, alignment: 'center', rowSpan: 2,
-        },
-        {
-          text: 'Nama Karyawan', bold: true, alignment: 'center', rowSpan: 2,
-        },
-        {
-          text: 'No. KPJ', bold: true, alignment: 'center', rowSpan: 2,
-        },
-        {
-          text: 'No. BPJS Kesehatan', bold: true, alignment: 'center', rowSpan: 2,
-        },
-        {
-          text: 'Tanggal Lahir', bold: true, alignment: 'center', rowSpan: 2,
+          text: 'Department', bold: true, alignment: 'center', rowSpan: 2,
         },
         {
           text: 'Upah', bold: true, alignment: 'center', rowSpan: 2,
         },
         {
-          text: 'Iuran BPJS Kesehatan', bold: true, alignment: 'center', colSpan: 2,
-        }, '',
-        {
-          text: 'Kelas Rawat', bold: true, alignment: 'center', rowSpan: 2,
+          text: 'OT', bold: true, alignment: 'center', rowSpan: 2,
         },
         {
-          text: 'Total Iuran', bold: true, alignment: 'center', rowSpan: 2,
+          text: 'Percentage', bold: true, alignment: 'center', rowSpan: 2,
         },
         {
-          text: 'Catatan', bold: true, alignment: 'center', rowSpan: 2,
+          text: 'Jumlah Karyawan', bold: true, alignment: 'center', colSpan: 2,
         },
+        '',
       ],
       [
-        '', '', '', '', '', '', '',
+        '', '', '', '', '',
         {
-          text: 'Pemberi Kerja', bold: true, alignment: 'center',
+          text: 'Active', bold: true, alignment: 'center',
         },
         {
-          text: 'Tenaga Kerja', bold: true, alignment: 'center',
+          text: 'Final Payment', bold: true, alignment: 'center',
         },
-        '', '', '',
       ],
     ];
 
-    employee.map((e, i) => {
+    category.map((e, i) => {
       vw1.push([
-        { text: (i + 1), alignment: 'center' }, { text: e.e0, alignment: 'center' },
-        e.d0, e.z0, e.aa0,
-        { text: gDateFormat(e.o0, 'yyyy-MM-dd'), alignment: 'right' },
-        { text: intpre0(e.co0).format(), alignment: 'right' },
-        { text: intpre0(e.cq0).format(), alignment: 'right' },
-        { text: intpre0(e.cr0).format(), alignment: 'right' },
-        { text: e.cs0, alignment: 'center' },
-        { text: intpre0(e.cu0).format(), alignment: 'right' },
-        e.ct0,
+        { text: (i + 1), alignment: 'center' },
+        { text: e.department },
+        { text: intpre0(e.upah).format(), alignment: 'right' },
+        { text: intpre0(e.ot).format(), alignment: 'right' },
+        { text: `${floatpre2(e.percentage).format()}%`, alignment: 'right' },
+        { text: e.active, alignment: 'right' },
+        { text: e.finalPay, alignment: 'right' },
       ]);
 
       return true;
     });
 
     vw1.push([
-      '', '', '', '', '', '',
-      { text: intpre0(p.sum1).format(), alignment: 'right' },
-      { text: intpre0(p.sum2).format(), alignment: 'right' },
-      { text: intpre0(p.sum3).format(), alignment: 'right' },
+      '', '',
+      { text: intpre0(p.totUpah).format(), alignment: 'right' },
+      { text: intpre0(p.totOt).format(), alignment: 'right' },
       '',
-      { text: intpre0(p.sum4).format(), alignment: 'right' },
-      '',
+      { text: intpre0(p.totActive).format(), alignment: 'right' },
+      { text: intpre0(p.totFinalPay).format(), alignment: 'right' },
     ]);
 
-    const vw2 = [
-      [{ text: `Batam, ${idDateFormat(new Date(), 'dd-MM-yyyy')}`, colSpan: 4 }, '', '', ''],
-      ['Prepared By,', 'Checked By,', 'Knowledge By,', 'Approved By,'],
-      ['', '', '', ''],
-      [{ text: 'Ayu Fatimah / Hendra SP.', decoration: 'underline', decorationStyle: 'solid' }, { text: 'Yutin Sudarni / Ronal P.', decoration: 'underline', decorationStyle: 'solid' }, { text: 'Gusti Very Wealthy', decoration: 'underline', decorationStyle: 'solid' }, { text: 'Eko Hernanto', decoration: 'underline', decorationStyle: 'solid' }],
-      [{ text: 'Personnel / HR & GA Dept.', bold: true }, { text: 'Finance Dept. / Payroll Controller', bold: true }, { text: 'Finance & HRGA Division', bold: true }, { text: 'Management PT. Labtech Penta International', bold: true }],
-    ];
-
     const docDefinition = {
-      pageOrientation: 'landscape',
-      footer: (currentPage, pageCount) => ({
-        columns: [
-          { text: `${currentPage.toString()} / ${pageCount}`, fontSize: 8, margin: [20, 0] },
-        ],
-      }),
       content: [
         {
           style: 'tbl1',
           table: {
-            widths: [170, 200, 200, 135],
+            widths: [170, 0, 200, 125],
             body: [
               [{
                 image: 'static/images/logo.png', width: 60, rowSpan: 2, border: [false, false, false, false],
               }, { text: '', border: [false, false, false, false] }, {
                 text: 'PT. LABTECH PENTA INTERNATIONAL', bold: true, fontSize: 8, border: [false, false, false, true],
               }, {
-                text: 'BPJS KESEHATAN', bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, true],
+                text: 'PERCENTAGE OT', bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, true],
               }],
               ['', { text: '', border: [false, false, false, false] }, { text: 'Kawasan Industri Sekupang Kav. 34 Batam - Indonesia', border: [false, false, false, false] }, {
                 text: '', border: [false, false, false, false],
@@ -136,7 +104,7 @@ const genPDF = async (p) => {
             widths: [110, 412],
             body: [
               [{
-                text: `BPJS Kesehatan - Periode Payroll ${p.period} ${p.year}`, colSpan: 2, fontSize: 10, bold: true, margin: [0, 15, 0, 10],
+                text: `Percentage OT - Periode Payroll ${p.period} ${p.year}`, colSpan: 2, fontSize: 10, bold: true, margin: [0, 15, 0, 10],
               }, ''],
             ],
           },
@@ -146,21 +114,10 @@ const genPDF = async (p) => {
           style: 'tbl3',
           table: {
             widths: [
-              15, 30, 120, 40, 60, 40, 40,
-              40, 40, 40, 40, 60,
+              15, 120, 60, 60, 60, 60, 60,
             ],
             body: vw1,
           },
-        },
-        {
-          style: 'tbl1',
-          margin: [10, 40, 0, 0],
-          table: {
-            widths: [115, 115, 115, 115],
-            heights: [5, 5, 20, 5, 5],
-            body: vw2,
-          },
-          layout: 'noBorders',
         },
       ],
       styles: {
@@ -181,7 +138,7 @@ const genPDF = async (p) => {
 
     return new Promise((resolve) => {
       const pdfDoc = printer.createPdfKitDocument(docDefinition);
-      pdfDoc.pipe(fs.createWriteStream(`static/report/${p.dir}/${p.dir}_kes.pdf`));
+      pdfDoc.pipe(fs.createWriteStream(`static/report/${p.dir}/${p.dir}_percentage.pdf`));
       pdfDoc.on('end', () => {
         resolve({ sStatus: 1 });
       });
