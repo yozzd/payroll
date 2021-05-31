@@ -3262,8 +3262,8 @@ const genXLSMaster = async (p) => {
       wb.Sheets.Master[`R${row}`] = { t: 's', v: t.t0 };
       wb.Sheets.Master[`S${row}`] = { t: 's', v: t.u0 };
       wb.Sheets.Master[`T${row}`] = { t: 's', v: t.v0 };
-      wb.Sheets.Master[`U${row}`] = { t: 's', v: t.w0 };
-      wb.Sheets.Master[`V${row}`] = { t: 's', v: t.x0 };
+      wb.Sheets.Master[`U${row}`] = { t: 's', v: t.w0 || '' };
+      wb.Sheets.Master[`V${row}`] = { t: 's', v: t.x0 || '' };
       wb.Sheets.Master[`W${row}`] = { t: 's', v: t.y0 };
       wb.Sheets.Master[`X${row}`] = { t: 's', v: t.z0 };
       wb.Sheets.Master[`Y${row}`] = { t: 's', v: t.aa0 };
