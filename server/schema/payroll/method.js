@@ -1923,7 +1923,7 @@ const genPDFFinalQ = async (p) => {
       return true;
     });
 
-    vw1.push(['', '', '', '', '', { text: intpre0(p.sum1).format(), alignment: 'right' }/*, { text: intpre0(p.sum2).format(), alignment: 'right' }*/]);
+    vw1.push(['', '', '', '', '', { text: intpre0(p.sum1).format(), alignment: 'right' }/* , { text: intpre0(p.sum2).format(), alignment: 'right' } */]);
 
     const vw2 = [
       [{ text: `Batam, ${idDateFormat(new Date(), 'dd-MM-yyyy')}`, colSpan: 4 }, '', '', ''],
@@ -1973,7 +1973,7 @@ const genPDFFinalQ = async (p) => {
         {
           style: 'tbl1',
           table: {
-            widths: [15, 40, 220, 70, 40, 60, /*60*/],
+            widths: [15, 40, 220, 70, 40, 60],
             body: vw1,
           },
         },
