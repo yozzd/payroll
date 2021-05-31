@@ -86,6 +86,7 @@ export const PayrollBasic = gql`
         g0
         j0
         l0
+        m0
         ay0
         ex0
       }

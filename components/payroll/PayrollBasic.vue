@@ -71,6 +71,11 @@
           <span>{{ scope.row.j0 }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="Note" width="160" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.m0 }}</span>
+        </template>
+      </el-table-column>
       <el-table-column min-width="200"></el-table-column>
     </el-table>
     <el-pagination
@@ -92,7 +97,7 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :before-close="handleEditDialogClose"
-      width="30%"
+      width="40%"
     >
       <ErrorHandler
         v-if="errors"
@@ -105,27 +110,36 @@
         :hide-required-asterisk="true"
         label-position="top"
       >
-        <el-form-item label="No. Karyawan">
-          <el-input
-            v-model="form.e0"
-            :disabled="true"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="Nama Karyawan">
-          <el-input
-            v-model="form.d0"
-            :disabled="true"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="Gaji Pokok">
-          <el-input v-model="form.g0"></el-input>
-        </el-form-item>
-        <el-form-item label="Upah Normal">
-          <el-input v-model="form.ay0"></el-input>
-        </el-form-item>
-        <el-form-item label="Hari Kerja">
-          <el-input v-model="form.j0"></el-input>
-        </el-form-item>
+        <div class="flex space-x-4">
+          <div class="flex-1">
+            <el-form-item label="No. Karyawan">
+              <el-input
+                v-model="form.e0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Nama Karyawan">
+              <el-input
+                v-model="form.d0"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Gaji Pokok">
+              <el-input v-model="form.g0"></el-input>
+            </el-form-item>
+            <el-form-item label="Upah Normal">
+              <el-input v-model="form.ay0"></el-input>
+            </el-form-item>
+          </div>
+          <div class="flex-1">
+            <el-form-item label="Hari Kerja">
+              <el-input v-model="form.j0"></el-input>
+            </el-form-item>
+            <el-form-item label="Note">
+              <el-input v-model="form.m0" type="textarea"></el-input>
+            </el-form-item>
+          </div>
+        </div>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="handleEditDialogClose">Cancel</el-button>
@@ -159,7 +173,7 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'g0', 'j0', 'l0', 'ay0',
+          '_id', 'd0', 'e0', 'g0', 'j0', 'l0', 'm0', 'ay0',
         ],
       }),
     };
@@ -188,6 +202,7 @@ export default {
                     _id: this.form._id,
                     g0: parseInt(this.form.g0, 10),
                     j0: parseInt(this.form.j0, 10),
+                    m0: this.form.m0,
                     ay0: parseInt(this.form.ay0, 10),
                   },
                 },

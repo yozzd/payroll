@@ -176,6 +176,7 @@ const Query = {
           'employee.g0': 1,
           'employee.j0': 1,
           'employee.l0': 1,
+          'employee.m0': 1,
           'employee.ay0': 1,
           'employee.ex0': 1,
         });
@@ -1029,6 +1030,7 @@ const Mutation = {
       const arr2 = arr1.map((o) => {
         const v = o;
         v.j0 = 21;
+        v.m0 = '';
         v.ab0 = 0;
         v.ad0 = 0;
         v.af0 = 0;
