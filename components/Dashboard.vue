@@ -265,9 +265,12 @@
                 <el-menu-item index="h">
                   Final Payment
                 </el-menu-item>
+                <el-menu-item index="i">
+                  Percentage OT
+                </el-menu-item>
                 <el-menu-item
                   v-if="$auth.$state.user.role !== 'guest2'"
-                  index="i"
+                  index="j"
                 >
                   Slip
                 </el-menu-item>
@@ -1104,7 +1107,8 @@ export default {
       else if (c === 'ga') this.$router.push({ name: 'payroll-thr-id', params: { id } });
       else if (c === 'gb') this.$router.push({ name: 'payroll-thrSlip-id', params: { id } });
       else if (c === 'h') this.$router.push({ name: 'payroll-final-id', params: { id } });
-      else if (c === 'i') this.$router.push({ name: 'payroll-slip-id', params: { id } });
+      else if (c === 'i') this.$router.push({ name: 'payroll-percentage-id', params: { id } });
+      else if (c === 'j') this.$router.push({ name: 'payroll-slip-id', params: { id } });
     },
     handleActionCommand(c, r) {
       const {

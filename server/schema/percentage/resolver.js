@@ -1,8 +1,9 @@
 const { GraphQLString } = require('graphql');
 const Payroll = require('../payroll/model');
-const { PayrollType, GenType } = require('../payroll/type');
+const { GenType } = require('../payroll/type');
 const auth = require('../auth/service');
 const { genPDF, genXLS } = require('./method');
+const { PercentageType } = require('./type');
 
 const percentage = async (id) => {
   const p = await Payroll.aggregate([
@@ -46,12 +47,13 @@ const percentage = async (id) => {
       },
     },
   ]);
+
   return p[0];
 };
 
 const Query = {
   percentageReport: {
-    type: PayrollType,
+    type: PercentageType,
     args: {
       id: { type: GraphQLString },
     },

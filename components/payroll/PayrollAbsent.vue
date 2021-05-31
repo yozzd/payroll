@@ -57,7 +57,7 @@
           </template>
         </el-table-column>
       </el-table-column>
-      <el-table-column label="" min-width="120"></el-table-column>
+      <el-table-column min-width="120"></el-table-column>
     </el-table>
     <el-pagination
       :current-page.sync="page"
