@@ -155,7 +155,7 @@ const genPDF = async (p) => {
 
 const genXLS = async (p) => {
   try {
-    const { employee: e } = p;
+    const { category: e } = p;
     await fs.ensureDir(`static/report/${p.dir}`);
 
     const len = e.length + 5;
@@ -163,41 +163,30 @@ const genXLS = async (p) => {
       SheetNames: ['Sheet1'],
       Sheets: {
         Sheet1: {
-          '!ref': `A1:L${len}`,
+          '!ref': `A1:G${len}`,
           A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
-          A2: { t: 's', v: `BPJS KESEHATAN - PERIODE PAYROLL: ${p.period} ${p.year}` },
+          A2: { t: 's', v: `PERCENTAGE OT - PERIODE PAYROLL: ${p.period} ${p.year}` },
           A3: { t: 's', v: 'No' },
-          B3: { t: 's', v: 'No Karyawan' },
-          C3: { t: 's', v: 'Nama Karyawan' },
-          D3: { t: 's', v: 'No KPJ' },
-          E3: { t: 's', v: 'No BPJS Kesehatan' },
-          F3: { t: 's', v: 'Tanggal Lahir' },
-          G3: { t: 's', v: 'Upah' },
-          H3: { t: 's', v: 'Iuran BPJS Kesehatan' },
-          H4: { t: 's', v: 'Pemberi Kerja' },
-          I4: { t: 's', v: 'Tenaga Kerja' },
-          J3: { t: 's', v: 'Kelas Rawat' },
-          K3: { t: 's', v: 'Total Iuran' },
-          L3: { t: 's', v: 'Catatan' },
+          B3: { t: 's', v: 'Department' },
+          C3: { t: 's', v: 'Upah' },
+          D3: { t: 's', v: 'OT' },
+          E3: { t: 's', v: 'Percentage' },
+          F3: { t: 's', v: 'Jumlah Karyawan' },
+          F4: { t: 's', v: 'Active' },
+          G4: { t: 's', v: 'Final Payment' },
           '!merges': [
-            { s: { r: 0, c: 0 }, e: { r: 0, c: 11 } },
-            { s: { r: 1, c: 0 }, e: { r: 1, c: 11 } },
+            { s: { r: 0, c: 0 }, e: { r: 0, c: 5 } },
+            { s: { r: 1, c: 0 }, e: { r: 1, c: 5 } },
             { s: { r: 2, c: 0 }, e: { r: 3, c: 0 } },
             { s: { r: 2, c: 1 }, e: { r: 3, c: 1 } },
             { s: { r: 2, c: 2 }, e: { r: 3, c: 2 } },
             { s: { r: 2, c: 3 }, e: { r: 3, c: 3 } },
             { s: { r: 2, c: 4 }, e: { r: 3, c: 4 } },
-            { s: { r: 2, c: 5 }, e: { r: 3, c: 5 } },
-            { s: { r: 2, c: 6 }, e: { r: 3, c: 6 } },
-            { s: { r: 2, c: 7 }, e: { r: 2, c: 8 } },
-            { s: { r: 2, c: 9 }, e: { r: 3, c: 9 } },
-            { s: { r: 2, c: 10 }, e: { r: 3, c: 10 } },
-            { s: { r: 2, c: 11 }, e: { r: 3, c: 11 } },
+            { s: { r: 2, c: 5 }, e: { r: 2, c: 6 } },
           ],
           '!cols': [
-            { wpx: 26 }, { wpx: 72 }, { wpx: 234 }, { wpx: 83 },
-            { wpx: 102 }, { wpx: 72 }, { wpx: 75 }, { wpx: 74 },
-            { wpx: 70 }, { wpx: 66 }, { wpx: 60 },
+            { wpx: 26 }, { wpx: 200 }, { wpx: 75 }, { wpx: 75 },
+            { wpx: 75 }, { wpx: 75 }, { wpx: 75 },
           ],
         },
       },
@@ -207,28 +196,23 @@ const genXLS = async (p) => {
     e.map((t, i) => {
       row += 1;
       wb.Sheets.Sheet1[`A${row}`] = { t: 'n', v: i + 1 };
-      wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: t.e0 };
-      wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: t.d0 };
-      wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: t.z0 ? t.z0 : '' };
-      wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: t.aa0 ? t.aa0 : '' };
-      wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: t.o0 ? gDateFormat(t.o0, 'dd-MM-yyyy') : '' };
-      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: t.co0, z: '#,##0' };
-      wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: t.cq0, z: '#,##0' };
-      wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: t.cr0, z: '#,##0' };
-      wb.Sheets.Sheet1[`J${row}`] = { t: 's', v: t.cs0 ? t.cs0 : '' };
-      wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: t.cu0, z: '#,##0' };
-      wb.Sheets.Sheet1[`L${row}`] = { t: 's', v: t.ct0 ? t.ct0 : '' };
+      wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: t.department };
+      wb.Sheets.Sheet1[`C${row}`] = { t: 'n', v: t.upah, z: '#,##0' };
+      wb.Sheets.Sheet1[`D${row}`] = { t: 'n', v: t.ot, z: '#,##0' };
+      wb.Sheets.Sheet1[`E${row}`] = { t: 'n', v: t.percentage, z: '0.00' };
+      wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: t.active };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: t.finalPay };
 
       return true;
     });
 
     row += 1;
-    wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: p.sum1, z: '#,##0' };
-    wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: p.sum2, z: '#,##0' };
-    wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: p.sum3, z: '#,##0' };
-    wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: p.sum4, z: '#,##0' };
+    wb.Sheets.Sheet1[`C${row}`] = { t: 'n', v: p.totUpah, z: '#,##0' };
+    wb.Sheets.Sheet1[`D${row}`] = { t: 'n', v: p.totOt, z: '#,##0' };
+    wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: p.totActive };
+    wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: p.totFinalPay };
 
-    const fn = `static/report/${p.dir}/${p.dir}_kes.xlsx`;
+    const fn = `static/report/${p.dir}/${p.dir}_percentage.xlsx`;
     const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
     fs.writeFileSync(fn, content);
 
