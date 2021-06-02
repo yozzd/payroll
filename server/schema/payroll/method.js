@@ -23,6 +23,12 @@ const fonts = {
     bold: 'static/font/Roboto-Medium.ttf',
     bolditalics: 'static/font/Roboto-MediumItalic.ttf',
   },
+  Times: {
+    normal: 'static/font/times-new-roman.ttf',
+    bold: 'static/font/times-new-roman-bold.ttf',
+    italics: 'static/font//times-new-roman-italic.ttf',
+    bolditalics: 'static/font/times-new-roman-bold-italic.ttf',
+  },
 };
 const printer = new PdfPrinter(fonts);
 
@@ -1648,13 +1654,13 @@ const genFinal = async (p) => {
         {
           style: 'tbl4',
           table: {
-            widths: [480],
+            widths: [520],
             body: [
               [{
-                text: 'PEMUTUSAN HUBUNGAN KERJA', bold: true, alignment: 'center', fontSize: 12, decoration: 'underline', decorationStyle: 'solid',
+                text: 'PEMUTUSAN HUBUNGAN KERJA', bold: true, alignment: 'center', fontSize: 16, decoration: 'underline', decorationStyle: 'solid',
               }],
               [{
-                text: 'TERMINATION OF EMPLOYMENT', alignment: 'center', fontSize: 10,
+                text: 'TERMINATION OF EMPLOYMENT', alignment: 'center', fontSize: 12,
               }],
             ],
           },
@@ -1663,7 +1669,7 @@ const genFinal = async (p) => {
         {
           style: 'tbl4',
           table: {
-            widths: [100, 120, 40, 120, 100],
+            widths: [100, 130, 40, 130, 100],
             body: [
               ['', { text: 'No. Karyawan' }, { text: ':', alignment: 'center' }, { text: e.e0 }, ''],
               ['', { text: 'Nama Karyawan' }, { text: ':', alignment: 'center' }, { text: e.d0 }, ''],
@@ -1677,7 +1683,7 @@ const genFinal = async (p) => {
         {
           style: 'tbl4',
           table: {
-            widths: [220, 40, 220],
+            widths: [260, 5, 260],
             body: [
               [{ text: 'Surat ini menyatakan bahwa saudara seperti tersebut di atas telah berakhir masa kerjanya di PT. Labtech Penta International pada tanggal seperti tersebut di atas. Semua barang/perlengkapan milik perusahaan yang dipakai karyawan yang bersangkutan harus dikembalikan kepada PT. Labtech Penta International.', alignment: 'justify' }, '',
                 { text: 'This letter is to confirm that the employee named as above has finished his employment services with PT. Labtech Penta International on above date. Any and all company property remaining with the employee shall be returned to PT. Labtech Penta International.', alignment: 'justify' }],
@@ -1688,7 +1694,7 @@ const genFinal = async (p) => {
         {
           style: 'tbl4',
           table: {
-            widths: [100, 280, 100],
+            widths: [110, 280, 110],
             body: [
               [{ text: '', border: [false, false, false, true] }, {
                 text: `Pembayaran sebesar / Total payment of Rp. ${intpre0(e.ed0).format()}`, bold: true, alignment: 'center', border: [false, false, false, true],
@@ -1699,7 +1705,7 @@ const genFinal = async (p) => {
         {
           style: 'tbl4',
           table: {
-            widths: [220, 40, 220],
+            widths: [260, 5, 260],
             body: [
               [{ text: 'Telah diberikan kepada karyawan yang bersangkutan sebagai gaji (pembayaran) terakhir atas segala jasa-jasanya pada PT. Labtech Penta International, dan kedua belah pihak setuju tidak akan ada pembayaran lain lagi tidak akan ada tuntutan apapun di kemudian hari.', alignment: 'justify' }, '',
                 { text: 'Has been given to the employees for final payment of his services at PT. Labtech Penta International, and both parties agree that there will be no other payment and no claim in any form in the future.', alignment: 'justify' }],
@@ -1713,9 +1719,9 @@ const genFinal = async (p) => {
           style: 'tbl4',
           table: {
             widths: [220, 40, 220],
-            heights: [5, 5, 20, 5, 5],
+            heights: [5, 5, 40, 5, 5],
             body: [
-              [{ text: `Batam, ${idDateFormat(e.trDate, 'dd MMMM yyyy')}` }, '', ''],
+              [{ text: `Batam, ${idDateFormat(e.trDate, 'dd MMMM yyyy')}`, margin: [0, 30, 0, 0] }, '', ''],
               ['Disetujui oleh,', '', ''],
               ['', '', ''],
               [{ text: 'Eko Hernanto', decoration: 'underline', decorationStyle: 'solid' }, '', { text: e.d0, decoration: 'underline', decorationStyle: 'solid' }],
@@ -1729,9 +1735,9 @@ const genFinal = async (p) => {
           table: {
             widths: [512],
             body: [
-              [{ text: '', border: [false, false, false, true], margin: [0, 30, 0, 0] }],
+              [{ text: '', border: [false, false, false, true], margin: [0, 10, 0, 0] }],
               [{
-                text: 'PT. LABTECH PENTA INTERNATIONAL ---- http://www.labtech.org', bold: true, alignment: 'center', color: 'blue', border: [false, false, false, false],
+                text: 'PT. LABTECH PENTA INTERNATIONAL ---- http://www.labtech.org', bold: true, fontSize: 10, alignment: 'center', color: 'blue', border: [false, false, false, false],
               }],
               [{
                 text: 'MAILING ADDRESS: P.O. BOX 120, SEKUPANG, PULAU BATAM, RIAU, INDONESIA 29422. Email: batam@labtech.org', fontSize: 6, alignment: 'center', color: 'blue', border: [false, false, false, false],
@@ -1748,6 +1754,8 @@ const genFinal = async (p) => {
             hLineColor(i, node) {
               return (i === 0 || i === node.table.widths.length) ? 'blue' : 'black';
             },
+            paddingTop() { return 0.5; },
+            paddingBottom() { return 0.5; },
           },
         },
         {
@@ -1764,10 +1772,10 @@ const genFinal = async (p) => {
         {
           style: 'tbl4',
           table: {
-            widths: [480],
+            widths: [520],
             body: [
               [{
-                text: 'TO WHOM IT MAY CONCERN', bold: true, alignment: 'center', fontSize: 12, decoration: 'underline', decorationStyle: 'solid', margin: [0, 40, 0, 0],
+                text: 'TO WHOM IT MAY CONCERN', bold: true, alignment: 'center', fontSize: 16, decoration: 'underline', decorationStyle: 'solid',
               }],
             ],
           },
@@ -1776,7 +1784,7 @@ const genFinal = async (p) => {
         {
           style: 'tbl4',
           table: {
-            widths: [480],
+            widths: [520],
             body: [
               [{ text: 'This is to certify that:', margin: [0, 20, 0, 0] }],
             ],
@@ -1822,9 +1830,9 @@ const genFinal = async (p) => {
           table: {
             widths: [512],
             body: [
-              [{ text: '', border: [false, false, false, true], margin: [0, 90, 0, 0] }],
+              [{ text: '', border: [false, false, false, true], margin: [0, 150, 0, 0] }],
               [{
-                text: 'PT. LABTECH PENTA INTERNATIONAL ---- http://www.labtech.org', bold: true, alignment: 'center', color: 'blue', border: [false, false, false, false],
+                text: 'PT. LABTECH PENTA INTERNATIONAL ---- http://www.labtech.org', bold: true, fontSize: 10, alignment: 'center', color: 'blue', border: [false, false, false, false],
               }],
               [{
                 text: 'MAILING ADDRESS: P.O. BOX 120, SEKUPANG, PULAU BATAM, RIAU, INDONESIA 29422. Email: batam@labtech.org', fontSize: 6, alignment: 'center', color: 'blue', border: [false, false, false, false],
@@ -1841,6 +1849,8 @@ const genFinal = async (p) => {
             hLineColor(i, node) {
               return (i === 0 || i === node.table.widths.length) ? 'blue' : 'black';
             },
+            paddingTop() { return 0.5; },
+            paddingBottom() { return 0.5; },
           },
         },
       ],
@@ -1858,8 +1868,9 @@ const genFinal = async (p) => {
           margin: [10, 10, 0, 10],
         },
         tbl4: {
-          fontSize: 9,
-          margin: [-10, 20, -10, 0],
+          font: 'Times',
+          fontSize: 12,
+          margin: [-10, 10, -10, 0],
         },
       },
     };
