@@ -1694,7 +1694,7 @@ const genFinal = async (p) => {
         {
           style: 'tbl4',
           table: {
-            widths: [110, 280, 110],
+            widths: [115, 280, 115],
             body: [
               [{ text: '', border: [false, false, false, true] }, {
                 text: `Pembayaran sebesar / Total payment of Rp. ${intpre0(e.ed0).format()}`, bold: true, alignment: 'center', border: [false, false, false, true],
@@ -1735,9 +1735,9 @@ const genFinal = async (p) => {
           table: {
             widths: [512],
             body: [
-              [{ text: '', border: [false, false, false, true], margin: [0, 10, 0, 0] }],
+              [{ text: '', border: [false, false, false, true], margin: [0, 20, 0, 0] }],
               [{
-                text: 'PT. LABTECH PENTA INTERNATIONAL ---- http://www.labtech.org', bold: true, fontSize: 10, alignment: 'center', color: 'blue', border: [false, false, false, false],
+                text: 'PT. LABTECH PENTA INTERNATIONAL ---- Website: http://www.labtech.org', bold: true, fontSize: 8, alignment: 'center', color: 'blue', border: [false, false, false, false],
               }],
               [{
                 text: 'MAILING ADDRESS: P.O. BOX 120, SEKUPANG, PULAU BATAM, RIAU, INDONESIA 29422. Email: batam@labtech.org', fontSize: 6, alignment: 'center', color: 'blue', border: [false, false, false, false],
@@ -1830,9 +1830,9 @@ const genFinal = async (p) => {
           table: {
             widths: [512],
             body: [
-              [{ text: '', border: [false, false, false, true], margin: [0, 150, 0, 0] }],
+              [{ text: '', border: [false, false, false, true], margin: [0, 160, 0, 0] }],
               [{
-                text: 'PT. LABTECH PENTA INTERNATIONAL ---- http://www.labtech.org', bold: true, fontSize: 10, alignment: 'center', color: 'blue', border: [false, false, false, false],
+                text: 'PT. LABTECH PENTA INTERNATIONAL ---- Website: http://www.labtech.org', bold: true, fontSize: 8, alignment: 'center', color: 'blue', border: [false, false, false, false],
               }],
               [{
                 text: 'MAILING ADDRESS: P.O. BOX 120, SEKUPANG, PULAU BATAM, RIAU, INDONESIA 29422. Email: batam@labtech.org', fontSize: 6, alignment: 'center', color: 'blue', border: [false, false, false, false],
