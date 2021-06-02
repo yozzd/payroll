@@ -1683,7 +1683,7 @@ const genFinal = async (p) => {
         {
           style: 'tbl4',
           table: {
-            widths: [260, 5, 260],
+            widths: [250, 5, 250],
             body: [
               [{ text: 'Surat ini menyatakan bahwa saudara seperti tersebut di atas telah berakhir masa kerjanya di PT. Labtech Penta International pada tanggal seperti tersebut di atas. Semua barang/perlengkapan milik perusahaan yang dipakai karyawan yang bersangkutan harus dikembalikan kepada PT. Labtech Penta International.', alignment: 'justify' }, '',
                 { text: 'This letter is to confirm that the employee named as above has finished his employment services with PT. Labtech Penta International on above date. Any and all company property remaining with the employee shall be returned to PT. Labtech Penta International.', alignment: 'justify' }],
@@ -1694,7 +1694,7 @@ const genFinal = async (p) => {
         {
           style: 'tbl4',
           table: {
-            widths: [115, 280, 115],
+            widths: [105, 280, 105],
             body: [
               [{ text: '', border: [false, false, false, true] }, {
                 text: `Pembayaran sebesar / Total payment of Rp. ${intpre0(e.ed0).format()}`, bold: true, alignment: 'center', border: [false, false, false, true],
@@ -1705,7 +1705,7 @@ const genFinal = async (p) => {
         {
           style: 'tbl4',
           table: {
-            widths: [260, 5, 260],
+            widths: [250, 5, 250],
             body: [
               [{ text: 'Telah diberikan kepada karyawan yang bersangkutan sebagai gaji (pembayaran) terakhir atas segala jasa-jasanya pada PT. Labtech Penta International, dan kedua belah pihak setuju tidak akan ada pembayaran lain lagi tidak akan ada tuntutan apapun di kemudian hari.', alignment: 'justify' }, '',
                 { text: 'Has been given to the employees for final payment of his services at PT. Labtech Penta International, and both parties agree that there will be no other payment and no claim in any form in the future.', alignment: 'justify' }],
@@ -1719,9 +1719,9 @@ const genFinal = async (p) => {
           style: 'tbl4',
           table: {
             widths: [220, 40, 220],
-            heights: [5, 5, 40, 5, 5],
+            heights: [5, 5, 30, 5, 5],
             body: [
-              [{ text: `Batam, ${idDateFormat(e.trDate, 'dd MMMM yyyy')}`, margin: [0, 30, 0, 0] }, '', ''],
+              [{ text: `Batam, ${idDateFormat(e.trDate, 'dd MMMM yyyy')}`, margin: [0, 10, 0, 0] }, '', ''],
               ['Disetujui oleh,', '', ''],
               ['', '', ''],
               [{ text: 'Eko Hernanto', decoration: 'underline', decorationStyle: 'solid' }, '', { text: e.d0, decoration: 'underline', decorationStyle: 'solid' }],
@@ -1735,7 +1735,7 @@ const genFinal = async (p) => {
           table: {
             widths: [512],
             body: [
-              [{ text: '', border: [false, false, false, true], margin: [0, 20, 0, 0] }],
+              [{ text: '', border: [false, false, false, true], margin: [0, 10, 0, 0] }],
               [{
                 text: 'PT. LABTECH PENTA INTERNATIONAL ---- Website: http://www.labtech.org', bold: true, fontSize: 8, alignment: 'center', color: 'blue', border: [false, false, false, false],
               }],
@@ -1775,7 +1775,7 @@ const genFinal = async (p) => {
             widths: [520],
             body: [
               [{
-                text: 'TO WHOM IT MAY CONCERN', bold: true, alignment: 'center', fontSize: 16, decoration: 'underline', decorationStyle: 'solid',
+                text: 'TO WHOM IT MAY CONCERN', bold: true, alignment: 'center', fontSize: 16, decoration: 'underline', decorationStyle: 'solid', margin: [0, 10, 0, 0],
               }],
             ],
           },
@@ -1808,13 +1808,13 @@ const genFinal = async (p) => {
         {
           style: 'tbl4',
           table: {
-            widths: [480],
+            widths: [520],
             body: [
               ['Has been employed by PT. Labtech Penta International from:'],
               [{ text: `${gDateFormat(e.i0, 'MMMM do, yyyy')} to ${gDateFormat(e.k0, 'MMMM do, yyyy')}`, alignment: 'center', margin: [0, 10, 0, 0] }],
               [{ text: `Last position as ${e.y0}`, alignment: 'center' }],
-              [{ text: `We found during ${h1} employment at Labtech ${h2} has shown good attitude, reliable and well behaved worker.`, margin: [0, 10, 0, 0] }],
-              [{ text: `Labtech would like to take this opportunity to thank for ${h1} contribution that ${h2} has made during ${h1} employment.`, margin: [0, 10, 0, 0] }],
+              [{ text: `We found during ${h1} employment at Labtech ${h2} has shown good attitude, reliable and well behaved worker.`, alignment: 'justify', margin: [0, 20, 0, 0] }],
+              [{ text: `Labtech would like to take this opportunity to thank for ${h1} contribution that ${h2} has made during ${h1} employment.`, alignment: 'justify', margin: [0, 10, 0, 0] }],
               [{ text: `We wish ${h3} all the best in future career endeavors.`, margin: [0, 10, 0, 0] }],
               [{ text: 'PT. Labtech Penta International', margin: [0, 20, 0, 0] }],
               [{
@@ -1830,7 +1830,7 @@ const genFinal = async (p) => {
           table: {
             widths: [512],
             body: [
-              [{ text: '', border: [false, false, false, true], margin: [0, 160, 0, 0] }],
+              [{ text: '', border: [false, false, false, true], margin: [0, 140, 0, 0] }],
               [{
                 text: 'PT. LABTECH PENTA INTERNATIONAL ---- Website: http://www.labtech.org', bold: true, fontSize: 8, alignment: 'center', color: 'blue', border: [false, false, false, false],
               }],
@@ -1870,7 +1870,7 @@ const genFinal = async (p) => {
         tbl4: {
           font: 'Times',
           fontSize: 12,
-          margin: [-10, 10, -10, 0],
+          margin: [0, 10, -10, 0],
         },
       },
     };
