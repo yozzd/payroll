@@ -25,6 +25,7 @@ const percentage = async (id) => {
         finalPay: { $sum: { $cond: { if: { $eq: ['$employee.ex0', true] }, then: 1, else: 0 } } },
       },
     },
+    { $sort: { '_id.dept': 1 } },
     {
       $addFields: {
         percentage: { $multiply: [{ $divide: ['$ot', '$upah'] }, 100] },
