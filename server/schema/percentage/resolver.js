@@ -14,6 +14,7 @@ const percentage = async (id) => {
         _id: {
           id: '$_id',
           dept: '$employee.u0',
+          count: { $sum: 1 },
         },
         period: { $first: '$period' },
         year: { $first: '$year' },
@@ -47,9 +48,15 @@ const percentage = async (id) => {
         },
         totUpah: { $sum: '$upah' },
         totOt: { $sum: '$ot' },
-        totPercentage: { $sum: '$percentage' },
         totActive: { $sum: '$active' },
         totFinalPay: { $sum: '$finalPay' },
+        count: { $sum: '$_id.count' },
+        tp: { $sum: '$percentage' },
+      },
+    },
+    {
+      $addFields: {
+        totPercentage: { $divide: ['$tp', '$count'] },
       },
     },
   ]);

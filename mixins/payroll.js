@@ -30,10 +30,18 @@ export default {
       const { columns, data } = param;
       const sums = [];
       columns.forEach((column, index) => {
-        const c = columns[index].property === 'percentage' ? 'frac2' : 'currency';
         const values = data.map((item) => Number(item[column.property]));
-        if (!values.every((value) => Number.isNaN(Number(value)))) {
-          sums[index] = this.$options.filters[c](values.reduce((prev, curr) => {
+        if (!values.every((value) => Number.isNaN(Number(value))) && column.property === 'percentage') {
+          const s = values.reduce((prev, curr) => {
+            const value = Number(curr);
+            if (!Number.isNaN(Number(value))) {
+              return prev + curr;
+            }
+            return prev;
+          }, 0);
+          sums[index] = `${this.$options.filters.frac2(s / data.length)}%`;
+        } else if (!values.every((value) => Number.isNaN(Number(value))) && column.property !== 'percentage') {
+          sums[index] = this.$options.filters.currency(values.reduce((prev, curr) => {
             const value = Number(curr);
             if (!Number.isNaN(Number(value))) {
               return prev + curr;
