@@ -181,7 +181,7 @@
               </el-form-item>
               <el-form-item label="Reason for Leaving" prop="lvReason">
                 <el-select v-model="form.lvReason" filterable>
-                  <el-option label="Finish Contract" value="Finis Contract"></el-option>
+                  <el-option label="Finish Contract" value="Finish Contract"></el-option>
                   <el-option label="PHK" value="PHK"></el-option>
                   <el-option label="Resign" value="Resign"></el-option>
                   <el-option label="Mangkir" value="Mangkir"></el-option>

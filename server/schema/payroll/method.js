@@ -1786,7 +1786,7 @@ const genFinal = async (p) => {
           table: {
             widths: [520],
             body: [
-              [{ text: 'This is to certify that:', margin: [0, 20, 0, 0] }],
+              [{ text: 'This is to certify that :', margin: [0, 20, 0, 0] }],
             ],
           },
           layout: 'noBorders',
