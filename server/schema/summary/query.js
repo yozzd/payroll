@@ -72,6 +72,11 @@ const sBasic = async (id) => {
         totDes: { $sum: '$des' },
       },
     },
+    {
+      $addFields: {
+        totAM: { $sum: ['$totJan', '$totFeb', '$totMar', '$totApr', '$totMei', '$totJun', '$totJul', '$totAgu', '$totSep', '$totOkt', '$totNov', '$totDes'] },
+      },
+    },
   ]);
 
   return p[0];

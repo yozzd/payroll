@@ -14,7 +14,7 @@
       </div>
       <el-dropdown
         trigger="click"
-        @command="c => handleExport(c, dir)"
+        @command="c => handleExport(c)"
       >
         <span class="el-dropdown-link">
           Export<i class="el-icon-arrow-down el-icon--right"></i>
@@ -161,7 +161,7 @@
 <script>
 import MiniSearch from 'minisearch';
 import { SummaryBasic } from '../../apollo/query/summary';
-// import { GenPDFSummary, GenXLSSummary } from '../../apollo/mutation/summary';
+import { GenPDFSummaryBasic, GenXLSSummaryBasic } from '../../apollo/mutation/summary';
 import mix from '../../mixins/payroll';
 
 export default {
@@ -182,48 +182,50 @@ export default {
     };
   },
   methods: {
-    handleExport(c, dir) {
-      if (c === 'pdf') this.genPDFSummary(dir);
-      else if (c === 'xls') this.genXLSSummary(dir);
+    handleExport(c) {
+      if (c === 'pdf') this.genPDFSummary();
+      else if (c === 'xls') this.genXLSSummary();
     },
-    // async genPDFSummary(dir) {
-    //   try {
-    //     this.loadPDFSummary = true;
-    //     await this.$apollo.mutate({
-    //       mutation: GenPDFSummary,
-    //       variables: {
-    //         id: this.$route.params.id,
-    //       },
-    //     });
+    async genPDFSummary() {
+      try {
+        this.loadPDFSummary = true;
+        const y = this.$route.params.id;
+        await this.$apollo.mutate({
+          mutation: GenPDFSummaryBasic,
+          variables: {
+            id: parseInt(this.$route.params.id, 10),
+          },
+        });
 
-    //     this.loadPDFSummary = false;
-    //     window.open(`/summary/${dir}/${dir}_basic.pdf`);
-    //     return true;
-    //   } catch ({ graphQLErrors, networkError }) {
-    //     this.errors = graphQLErrors || networkError.result.errors;
-    //     return false;
-    //   }
-    // },
-    // async genXLSSummary(dir) {
-    //   try {
-    //     this.loadXLSSummary = true;
-    //     const { data: { genXLSSummary: { sStatus } } } = await this.$apollo.mutate({
-    //       mutation: GenXLSSummary,
-    //       variables: {
-    //         id: this.$route.params.id,
-    //       },
-    //     });
+        this.loadPDFSummary = false;
+        window.open(`/summary/${y}/${y}_sum_basic.pdf`);
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
+    },
+    async genXLSSummary() {
+      try {
+        this.loadXLSSummary = true;
+        const y = this.$route.params.id;
+        const { data: { genXLSSummaryBasic: { sStatus } } } = await this.$apollo.mutate({
+          mutation: GenXLSSummaryBasic,
+          variables: {
+            id: parseInt(this.$route.params.id, 10),
+          },
+        });
 
-    //     if (sStatus) {
-    //       this.loadXLSSummary = false;
-    //       window.open(`/summary/${dir}/${dir}_basic.xlsx`);
-    //     }
-    //     return true;
-    //   } catch ({ graphQLErrors, networkError }) {
-    //     this.errors = graphQLErrors || networkError.result.errors;
-    //     return false;
-    //   }
-    // },
+        if (sStatus) {
+          this.loadXLSSummary = false;
+          window.open(`/summary/${y}/${y}_sum_basic.xlsx`);
+        }
+        return true;
+      } catch ({ graphQLErrors, networkError }) {
+        this.errors = graphQLErrors || networkError.result.errors;
+        return false;
+      }
+    },
   },
   apollo: {
     summaryBasic: {

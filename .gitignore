@@ -100,5 +100,6 @@ static/tax
 static/final
 static/prorate
 static/pph
+static/summary
 apollo/client/default.js
 apollo/client/upload.js

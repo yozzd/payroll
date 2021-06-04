@@ -1,8 +1,8 @@
-const { GraphQLString, GraphQLInt } = require('graphql');
+const { GraphQLInt } = require('graphql');
 const Payroll = require('../payroll/model');
 const { PayrollType, GenType } = require('../payroll/type');
 const auth = require('../auth/service');
-const { genPDF, genXLS } = require('./method');
+const { genPDFSumBasic, genXLSSumBasic } = require('./method');
 const { sBasic } = require('./query');
 
 const Query = {
@@ -19,25 +19,25 @@ const Query = {
 };
 
 const Mutation = {
-  genPDFTrf: {
+  genPDFSummaryBasic: {
     type: GenType,
     args: {
-      id: { type: GraphQLString },
+      id: { type: GraphQLInt },
     },
     resolve: auth.hasRole('guest', async (_, { id }) => {
-      const p = await byTansfer(id);
-      const s = await genPDF(p);
+      const p = await sBasic(id);
+      const s = await genPDFSumBasic(p, id);
       return s;
     }),
   },
-  genXLSTrf: {
+  genXLSSummaryBasic: {
     type: GenType,
     args: {
-      id: { type: GraphQLString },
+      id: { type: GraphQLInt },
     },
     resolve: auth.hasRole('guest', async (_, { id }) => {
-      const p = await byTansfer(id);
-      const s = await genXLS(p);
+      const p = await sBasic(id);
+      const s = await genXLSSumBasic(p, id);
       return s;
     }),
   },
