@@ -628,10 +628,10 @@ EmployeeSchema.pre('save', async function fn(next) {
 });
 
 PayrollSchema.pre('save', async function fn(next) {
-  const year = getYear(new Date(this.from));
-  const month = getMonth(new Date(this.from));
+  const year = getYear(new Date(this.to));
+  const month = getMonth(new Date(this.to));
 
-  if (this.isModified('from')) {
+  if (this.isModified('to')) {
     const count = await this.constructor.find({ month, year }).countDocuments();
     if (count === 1) {
       return next('Period has been registered, please select another period');
@@ -643,7 +643,7 @@ PayrollSchema.pre('save', async function fn(next) {
   this.year = year;
   this.month = month;
   this.period = `${format(new Date(this.from), 'dd MMM')} - ${format(new Date(this.to), 'dd MMM')}`;
-  this.dir = format(new Date(this.from), 'yyyyMM');
+  this.dir = format(new Date(this.to), 'yyyyMM');
 
   return next();
 });
