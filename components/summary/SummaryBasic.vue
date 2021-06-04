@@ -5,12 +5,12 @@
         Home
       </el-breadcrumb-item>
       <el-breadcrumb-item class="text-xl">
-        By Transfer
+        Summary Basic
       </el-breadcrumb-item>
     </el-breadcrumb>
     <div class="flex space-x-4 items-center">
       <div class="flex-1">
-        {{ content }}
+        January - December {{ $route.params.id }}
       </div>
       <el-dropdown
         trigger="click"
@@ -41,7 +41,7 @@
       :errors="errors"
     />
     <el-table
-      v-loading="$apollo.loading || loadSummary || loadXLSSummary"
+      v-loading="$apollo.loading || loadPDFSummary || loadXLSSummary"
       element-loading-text="Loading..."
       element-loading-spinner="el-icon-loading"
       :data="tableData"
@@ -61,32 +61,84 @@
           </p>
         </template>
       </el-table-column>
-      <el-table-column label="Bank No." width="140">
+      <el-table-column label="Hire Date" width="100" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.t0 }}</span>
+          <span>{{ scope.row.i0 }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Bank Name" width="120">
+      <el-table-column label="Position" width="200">
         <template slot-scope="scope">
-          <span>{{ scope.row.s0 }}</span>
+          <span>{{ scope.row.y0 }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="ec0" label="Take Home Pay" width="120" align="right">
+      <el-table-column label="Department" width="280">
         <template slot-scope="scope">
-          <span
-            :class="{ 'text-red-500': scope.row.ec0 < 0 }"
-          >
-            {{ scope.row.ec0 | currency }}
-          </span>
+          <span>{{ scope.row.u0 }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="ec0F" label="THP for Bank" width="120" align="right">
+      <el-table-column label="January" prop="jan" width="120" align="right">
         <template slot-scope="scope">
-          <span
-            :class="{ 'text-red-500': scope.row.ec0F < 0 }"
-          >
-            {{ scope.row.ec0F | currency }}
-          </span>
+          <span>{{ scope.row.jan | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="February" prop="feb" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.feb | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="March" prop="mar" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.mar | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="April" prop="apr" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.apr | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="May" prop="mei" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.mei | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="June" prop="jun" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.jun | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="July" prop="jul" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.jul | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="August" prop="agu" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.agu | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="September" prop="sep" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.sep | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="October" prop="okt" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.okt | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="November" prop="nov" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.nov | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="December" prop="dec" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.dec | currency }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="Total" prop="totM" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.totM | currency }}</span>
         </template>
       </el-table-column>
       <el-table-column min-width="120"></el-table-column>
@@ -116,15 +168,15 @@ export default {
   mixins: [mix],
   data() {
     return {
-      content: '',
-      dir: '',
-      loadSummary: false,
+      loadPDFSummary: false,
       loadXLSSummary: false,
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 's0', 't0', 'ec0', 'ec0F',
+          '_id', 'd0', 'e0', 'i0', 'y0', 'u0',
+          'jan', 'feb', 'mar', 'apr', 'mei', 'jun',
+          'jul', 'agu', 'sep', 'okt', 'nov', 'des', 'totM',
         ],
       }),
     };
@@ -136,7 +188,7 @@ export default {
     },
     // async genPDFSummary(dir) {
     //   try {
-    //     this.loadSummary = true;
+    //     this.loadPDFSummary = true;
     //     await this.$apollo.mutate({
     //       mutation: GenPDFSummary,
     //       variables: {
@@ -144,7 +196,7 @@ export default {
     //       },
     //     });
 
-    //     this.loadSummary = false;
+    //     this.loadPDFSummary = false;
     //     window.open(`/summary/${dir}/${dir}_basic.pdf`);
     //     return true;
     //   } catch ({ graphQLErrors, networkError }) {
@@ -178,19 +230,15 @@ export default {
       query: SummaryBasic,
       variables() {
         return {
-          id: this.$route.params.id,
+          id: parseInt(this.$route.params.id, 10),
         };
       },
       prefetch: false,
       result({ data, loading }) {
         if (!loading) {
-          const {
-            period, year, dir, employee,
-          } = data.summaryBasic;
+          const { employee } = data.summaryBasic;
           this.items = employee;
           this.miniSearch.addAll(this.items);
-          this.content = `${period} ${year}`;
-          this.dir = dir;
           this.pageSizes.push(this.items.length);
         }
       },

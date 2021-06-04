@@ -9,6 +9,7 @@ const Payroll = require('./payroll/resolver');
 const Percentage = require('./percentage/resolver');
 const Pph = require('./pph/resolver');
 const Prorate = require('./prorate/resolver');
+const Summary = require('./summary/resolver');
 const Tax = require('./tax/resolver');
 const Thr = require('./thr/resolver');
 const Trf = require('./trf/resolver');
@@ -26,6 +27,7 @@ const query = new GraphQLObjectType({
     ...Percentage.Query,
     ...Pph.Query,
     ...Prorate.Query,
+    ...Summary.Query,
     ...Tax.Query,
     ...Thr.Query,
     ...Trf.Query,
@@ -45,6 +47,7 @@ const mutation = new GraphQLObjectType({
     ...Percentage.Mutation,
     ...Pph.Mutation,
     ...Prorate.Mutation,
+    ...Summary.Mutation,
     ...Tax.Mutation,
     ...Thr.Mutation,
     ...Trf.Mutation,
