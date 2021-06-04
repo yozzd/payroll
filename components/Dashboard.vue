@@ -12,6 +12,25 @@
         </el-link>
       </div>
       <div class="flex-1"></div>
+      <div>
+        <el-menu
+          mode="horizontal"
+          class="dropmenu"
+          @select="c => handleSummary(c, form.year)"
+        >
+          <el-submenu index="1">
+            <template slot="title">
+              Summary
+            </template>
+            <el-menu-item index="a">
+              Basic
+            </el-menu-item>
+            <el-menu-item index="b">
+              OT
+            </el-menu-item>
+          </el-submenu>
+        </el-menu>
+      </div>
       <div class="w-32">
         <el-select v-model="form.year" @change="handleChange">
           <el-option
@@ -1119,6 +1138,10 @@ export default {
       else if (c === 'c') this.showHariRaya(_id, typeHR, tglHR);
       else if (c === 'd') this.handleFreeze(_id, freeze);
       else if (c === 'e') this.handleConfirm(_id);
+    },
+    handleSummary(c, y) {
+      if (c === 'a') this.$router.push({ name: 'summary-basic-id', params: { y } });
+      else if (c === 'b') this.$router.push({ name: 'summary-ot-id', params: { y } });
     },
     handleConfirm(id) {
       this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
