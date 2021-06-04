@@ -207,29 +207,44 @@ const genPDFSumBasic = async (p, y) => {
   }
 };
 
-const genXLSSumBasic = async (p) => {
+const genXLSSumBasic = async (p, y) => {
   try {
     const { employee: e } = p;
-    await fs.ensureDir(`static/report/${p.dir}`);
+    await fs.ensureDir(`static/summary/${y}`);
 
     const len = e.length + 4;
     const wb = {
       SheetNames: ['Sheet1'],
       Sheets: {
         Sheet1: {
-          '!ref': `A1:G${len}`,
+          '!ref': `A1:S${len}`,
           A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
-          A2: { t: 's', v: `BY TRANSFER - PERIODE PAYROLL: ${p.period} ${p.year}` },
+          A2: { t: 's', v: `Summary Basic - January - December ${y}` },
           A3: { t: 's', v: 'No' },
           B3: { t: 's', v: 'No Karyawan' },
           C3: { t: 's', v: 'Nama Karyawan' },
-          D3: { t: 's', v: 'Bank No.' },
-          E3: { t: 's', v: 'Bank Name' },
-          F3: { t: 's', v: 'Take Home Pay' },
-          G3: { t: 's', v: 'THP for Bank' },
+          D3: { t: 's', v: 'Hired Date.' },
+          E3: { t: 's', v: 'Position' },
+          F3: { t: 's', v: 'Department' },
+          G3: { t: 's', v: 'January' },
+          H3: { t: 's', v: 'February'},
+          I3: { t: 's', v: 'March' },
+          J3: { t: 's', v: 'April' },
+          K3: { t: 's', v: 'May' },
+          L3: { t: 's', v: 'June' },
+          M3: { t: 's', v: 'July' },
+          N3: { t: 's', v: 'August' },
+          O3: { t: 's', v: 'September' },
+          P3: { t: 's', v: 'October' },
+          Q3: { t: 's', v: 'November' },
+          R3: { t: 's', v: 'December' },
+          S3: { t: 's', v: 'Total' },
           '!cols': [
-            { wpx: 26 }, { wpx: 72 }, { wpx: 234 }, { wpx: 95 },
-            { wpx: 63 }, { wpx: 81 }, { wpx: 75 },
+            { wpx: 26 }, { wpx: 65 }, { wpx: 240 }, { wpx: 65 },
+            { wpx: 120 }, { wpx: 200 }, { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 }, { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 }, { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 }, { wpx: 90 },
           ],
         },
       },
@@ -241,19 +256,42 @@ const genXLSSumBasic = async (p) => {
       wb.Sheets.Sheet1[`A${row}`] = { t: 'n', v: i + 1 };
       wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: t.e0 };
       wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: t.d0 };
-      wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: t.t0 };
-      wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: t.s0 };
-      wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: t.ec0, z: '#,##0' };
-      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: t.ec0F, z: '#,##0' };
+      wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: idDateFormat(t.i0, 'dd-MM-yyyy') };
+      wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: t.y0 };
+      wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: t.u0 };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: t.jan, z: '#,##0' };
+      wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: t.feb, z: '#,##0' };
+      wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: t.mar, z: '#,##0' };
+      wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: t.apr, z: '#,##0' };
+      wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: t.mei, z: '#,##0' };
+      wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: t.jun, z: '#,##0' };
+      wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: t.jul, z: '#,##0' };
+      wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: t.agu, z: '#,##0' };
+      wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: t.sep, z: '#,##0' };
+      wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: t.okt, z: '#,##0' };
+      wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: t.nov, z: '#,##0' };
+      wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: t.des, z: '#,##0' };
+      wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: t.totM, z: '#,##0' };
 
       return true;
     });
 
     row += 1;
-    wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: p.sum1, z: '#,##0' };
-    wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: p.sum2, z: '#,##0' };
+    wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: p.totJan, z: '#,##0' };
+    wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: p.totFeb, z: '#,##0' };
+    wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: p.totMar, z: '#,##0' };
+    wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: p.totApr, z: '#,##0' };
+    wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: p.totMei, z: '#,##0' };
+    wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: p.totJun, z: '#,##0' };
+    wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: p.totJul, z: '#,##0' };
+    wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: p.totAgu, z: '#,##0' };
+    wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: p.totSep, z: '#,##0' };
+    wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: p.totOkt, z: '#,##0' };
+    wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: p.totNov, z: '#,##0' };
+    wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: p.totDes, z: '#,##0' };
+    wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: p.totAM, z: '#,##0' };
 
-    const fn = `static/report/${p.dir}/${p.dir}_trf.xlsx`;
+    const fn = `static/summary/${y}/${y}_sum_basic.xlsx`;
     const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
     fs.writeFileSync(fn, content);
 
