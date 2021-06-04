@@ -41,7 +41,7 @@
       :errors="errors"
     />
     <el-table
-      v-loading="$apollo.loading || loadTrf || loadXLSTrf"
+      v-loading="$apollo.loading || loadSummary || loadXLSSummary"
       element-loading-text="Loading..."
       element-loading-spinner="el-icon-loading"
       :data="tableData"
@@ -108,8 +108,8 @@
 
 <script>
 import MiniSearch from 'minisearch';
-import { TrfReport } from '../../apollo/query/trf';
-import { GenPDFTrf, GenXLSTrf } from '../../apollo/mutation/trf';
+import { SummaryBasic } from '../../apollo/query/summary';
+// import { GenPDFSummary, GenXLSSummary } from '../../apollo/mutation/summary';
 import mix from '../../mixins/payroll';
 
 export default {
@@ -118,8 +118,8 @@ export default {
     return {
       content: '',
       dir: '',
-      loadTrf: false,
-      loadXLSTrf: false,
+      loadSummary: false,
+      loadXLSSummary: false,
       miniSearch: new MiniSearch({
         idField: '_id',
         fields: ['d0', 'e0'],
@@ -131,51 +131,51 @@ export default {
   },
   methods: {
     handleExport(c, dir) {
-      if (c === 'pdf') this.genPDFTrf(dir);
-      else if (c === 'xls') this.genXLSTrf(dir);
+      if (c === 'pdf') this.genPDFSummary(dir);
+      else if (c === 'xls') this.genXLSSummary(dir);
     },
-    async genPDFTrf(dir) {
-      try {
-        this.loadTrf = true;
-        await this.$apollo.mutate({
-          mutation: GenPDFTrf,
-          variables: {
-            id: this.$route.params.id,
-          },
-        });
+    // async genPDFSummary(dir) {
+    //   try {
+    //     this.loadSummary = true;
+    //     await this.$apollo.mutate({
+    //       mutation: GenPDFSummary,
+    //       variables: {
+    //         id: this.$route.params.id,
+    //       },
+    //     });
 
-        this.loadTrf = false;
-        window.open(`/report/${dir}/${dir}_trf.pdf`);
-        return true;
-      } catch ({ graphQLErrors, networkError }) {
-        this.errors = graphQLErrors || networkError.result.errors;
-        return false;
-      }
-    },
-    async genXLSTrf(dir) {
-      try {
-        this.loadXLSTrf = true;
-        const { data: { genXLSTrf: { sStatus } } } = await this.$apollo.mutate({
-          mutation: GenXLSTrf,
-          variables: {
-            id: this.$route.params.id,
-          },
-        });
+    //     this.loadSummary = false;
+    //     window.open(`/summary/${dir}/${dir}_basic.pdf`);
+    //     return true;
+    //   } catch ({ graphQLErrors, networkError }) {
+    //     this.errors = graphQLErrors || networkError.result.errors;
+    //     return false;
+    //   }
+    // },
+    // async genXLSSummary(dir) {
+    //   try {
+    //     this.loadXLSSummary = true;
+    //     const { data: { genXLSSummary: { sStatus } } } = await this.$apollo.mutate({
+    //       mutation: GenXLSSummary,
+    //       variables: {
+    //         id: this.$route.params.id,
+    //       },
+    //     });
 
-        if (sStatus) {
-          this.loadXLSTrf = false;
-          window.open(`/report/${dir}/${dir}_trf.xlsx`);
-        }
-        return true;
-      } catch ({ graphQLErrors, networkError }) {
-        this.errors = graphQLErrors || networkError.result.errors;
-        return false;
-      }
-    },
+    //     if (sStatus) {
+    //       this.loadXLSSummary = false;
+    //       window.open(`/summary/${dir}/${dir}_basic.xlsx`);
+    //     }
+    //     return true;
+    //   } catch ({ graphQLErrors, networkError }) {
+    //     this.errors = graphQLErrors || networkError.result.errors;
+    //     return false;
+    //   }
+    // },
   },
   apollo: {
-    trfReport: {
-      query: TrfReport,
+    summaryBasic: {
+      query: SummaryBasic,
       variables() {
         return {
           id: this.$route.params.id,
@@ -186,7 +186,7 @@ export default {
         if (!loading) {
           const {
             period, year, dir, employee,
-          } = data.trfReport;
+          } = data.summaryBasic;
           this.items = employee;
           this.miniSearch.addAll(this.items);
           this.content = `${period} ${year}`;

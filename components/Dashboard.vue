@@ -1139,9 +1139,9 @@ export default {
       else if (c === 'd') this.handleFreeze(_id, freeze);
       else if (c === 'e') this.handleConfirm(_id);
     },
-    handleSummary(c, y) {
-      if (c === 'a') this.$router.push({ name: 'summary-basic-id', params: { y } });
-      else if (c === 'b') this.$router.push({ name: 'summary-ot-id', params: { y } });
+    handleSummary(c, id) {
+      if (c === 'a') this.$router.push({ name: 'summary-basic-id', params: { id } });
+      else if (c === 'b') this.$router.push({ name: 'summary-ot-id', params: { id } });
     },
     handleConfirm(id) {
       this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
