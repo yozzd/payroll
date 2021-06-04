@@ -87,7 +87,7 @@ const genPDFSumBasic = async (p, y) => {
     employee.map((e, i) => {
       vw1.push([
         { text: (i + 1), alignment: 'center' }, { text: e.e0, alignment: 'center' },
-        e.d0, { text: idDateFormat(e.i0, 'dd-MM-yyyy'), alignment: 'center' } , e.y0, e.u0,
+        e.d0, { text: idDateFormat(e.i0, 'dd-MM-yyyy'), alignment: 'center' }, e.y0, e.u0,
         { text: intpre0(e.jan).format(), alignment: 'right' },
         { text: intpre0(e.feb).format(), alignment: 'right' },
         { text: intpre0(e.mar).format(), alignment: 'right' },

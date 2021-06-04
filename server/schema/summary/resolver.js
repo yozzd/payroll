@@ -1,5 +1,4 @@
 const { GraphQLInt } = require('graphql');
-const Payroll = require('../payroll/model');
 const { PayrollType, GenType } = require('../payroll/type');
 const auth = require('../auth/service');
 const { genPDFSumBasic, genXLSSumBasic } = require('./method');
