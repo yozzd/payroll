@@ -1,12 +1,13 @@
 const { GraphQLInt } = require('graphql');
-const { PayrollType, GenType } = require('../payroll/type');
+const { GenType } = require('../payroll/type');
 const auth = require('../auth/service');
+const { SummaryType } = require('./type');
 const { genPDFSumBasic, genXLSSumBasic } = require('./method');
 const { sBasic } = require('./query');
 
 const Query = {
   summaryBasic: {
-    type: PayrollType,
+    type: SummaryType,
     args: {
       id: { type: GraphQLInt },
     },

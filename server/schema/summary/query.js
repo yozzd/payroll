@@ -9,9 +9,6 @@ const sBasic = async (id) => {
         _id: {
           e0: '$employee.e0',
         },
-        period: { $first: '$period' },
-        year: { $first: '$year' },
-        dir: { $first: '$dir' },
         d0: { $first: '$employee.d0' },
         e0: { $first: '$employee.e0' },
         i0: { $last: '$employee.i0' },
