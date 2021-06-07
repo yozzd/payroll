@@ -2,12 +2,9 @@ const {
   GraphQLObjectType,
   GraphQLList,
   GraphQLString,
-  GraphQLInt,
   GraphQLFloat,
-  GraphQLBoolean,
 } = require('graphql');
 
-const fs = require('fs-extra');
 const { DateFormat } = require('../scalar/date');
 
 const EmpSummaryType = new GraphQLObjectType({
