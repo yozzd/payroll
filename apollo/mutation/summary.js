@@ -31,3 +31,19 @@ export const GenXLSSummaryOT = gql`
     }
   }
 `;
+
+export const GenPDFSummaryAllow = gql`
+  mutation genPDFSummaryAllow($id: Int!) {
+    genPDFSummaryAllow(id: $id) {
+      sStatus
+    }
+  }
+`;
+
+export const GenXLSSummaryAllow = gql`
+  mutation genXLSSummaryAllow($id: Int!) {
+    genXLSSummaryAllow(id: $id) {
+      sStatus
+    }
+  }
+`;

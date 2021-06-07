@@ -55,3 +55,31 @@ export const SummaryOT = gql`
     }
   }
 `;
+
+export const SummaryAllow = gql`
+  query summaryAllow($id: Int!) {
+    summaryAllow(id: $id) {
+      employee {
+        _id
+        d0
+        e0
+        i0
+        u0
+        y0
+        jan
+        feb
+        mar
+        apr
+        mei
+        jun
+        jul
+        agu
+        sep
+        okt
+        nov
+        des
+        tAllow
+      }
+    }
+  }
+`;
