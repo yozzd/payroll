@@ -198,7 +198,7 @@ export default {
         });
 
         this.loadPDFSummary = false;
-        window.open(`/summary/${y}/${y}_sum_ot.pdf`);
+        window.open(`/summary/${y}/${y}_sum_allow.pdf`);
         return true;
       } catch ({ graphQLErrors, networkError }) {
         this.errors = graphQLErrors || networkError.result.errors;
@@ -218,7 +218,7 @@ export default {
 
         if (sStatus) {
           this.loadXLSSummary = false;
-          window.open(`/summary/${y}/${y}_sum_ot.xlsx`);
+          window.open(`/summary/${y}/${y}_sum_allow.xlsx`);
         }
         return true;
       } catch ({ graphQLErrors, networkError }) {
