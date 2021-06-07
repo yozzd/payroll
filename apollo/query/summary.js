@@ -28,4 +28,30 @@ export const SummaryBasic = gql`
   }
 `;
 
-export const faker = '';
+export const SummaryOT = gql`
+  query summaryOT($id: Int!) {
+    summaryOT(id: $id) {
+      employee {
+        _id
+        d0
+        e0
+        i0
+        u0
+        y0
+        jan
+        feb
+        mar
+        apr
+        mei
+        jun
+        jul
+        agu
+        sep
+        okt
+        nov
+        des
+        tOT
+      }
+    }
+  }
+`;

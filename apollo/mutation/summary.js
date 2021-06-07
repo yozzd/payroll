@@ -15,3 +15,19 @@ export const GenXLSSummaryBasic = gql`
     }
   }
 `;
+
+export const GenPDFSummaryOT = gql`
+  mutation genPDFSummaryOT($id: Int!) {
+    genPDFSummaryOT(id: $id) {
+      sStatus
+    }
+  }
+`;
+
+export const GenXLSSummaryOT = gql`
+  mutation genXLSSummaryOT($id: Int!) {
+    genXLSSummaryOT(id: $id) {
+      sStatus
+    }
+  }
+`;
