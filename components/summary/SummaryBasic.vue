@@ -131,14 +131,14 @@
           <span>{{ scope.row.nov | currency }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="December" prop="dec" width="120" align="right">
+      <el-table-column label="December" prop="des" width="120" align="right">
         <template slot-scope="scope">
-          <span>{{ scope.row.dec | currency }}</span>
+          <span>{{ scope.row.des | currency }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Total" prop="totM" width="120" align="right">
+      <el-table-column label="Total" prop="tBasic" width="120" align="right">
         <template slot-scope="scope">
-          <span>{{ scope.row.totM | currency }}</span>
+          <span>{{ scope.row.tBasic | currency }}</span>
         </template>
       </el-table-column>
       <el-table-column min-width="120"></el-table-column>
@@ -176,7 +176,7 @@ export default {
         storeFields: [
           '_id', 'd0', 'e0', 'i0', 'y0', 'u0',
           'jan', 'feb', 'mar', 'apr', 'mei', 'jun',
-          'jul', 'agu', 'sep', 'okt', 'nov', 'des', 'totM',
+          'jul', 'agu', 'sep', 'okt', 'nov', 'des', 'tBasic',
         ],
       }),
     };

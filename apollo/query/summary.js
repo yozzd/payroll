@@ -22,7 +22,7 @@ export const SummaryBasic = gql`
         okt
         nov
         des
-        totM
+        tBasic
       }
     }
   }

@@ -3,7 +3,7 @@ const { GenType } = require('../payroll/type');
 const auth = require('../auth/service');
 const { SummaryType } = require('./type');
 const { genPDFSumBasic, genXLSSumBasic } = require('./method');
-const { sumBasic } = require('./query');
+const { sumBasic, sumOT } = require('./query');
 
 const Query = {
   summaryBasic: {
@@ -13,6 +13,16 @@ const Query = {
     },
     resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await sumBasic(id);
+      return p;
+    }),
+  },
+  summaryOT: {
+    type: SummaryType,
+    args: {
+      id: { type: GraphQLInt },
+    },
+    resolve: auth.hasRole('guest', async (_, { id }) => {
+      const p = await sumOT(id);
       return p;
     }),
   },

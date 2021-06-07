@@ -100,7 +100,7 @@ const genPDFSumBasic = async (p, y) => {
         { text: intpre0(e.okt).format(), alignment: 'right' },
         { text: intpre0(e.nov).format(), alignment: 'right' },
         { text: intpre0(e.des).format(), alignment: 'right' },
-        { text: intpre0(e.totM).format(), alignment: 'right' },
+        { text: intpre0(e.tBasic).format(), alignment: 'right' },
       ]);
 
       return true;
@@ -120,7 +120,7 @@ const genPDFSumBasic = async (p, y) => {
       { text: intpre0(p.totOkt).format(), alignment: 'right' },
       { text: intpre0(p.totNov).format(), alignment: 'right' },
       { text: intpre0(p.totDes).format(), alignment: 'right' },
-      { text: intpre0(p.totAM).format(), alignment: 'right' },
+      { text: intpre0(p.sBasic).format(), alignment: 'right' },
     ]);
 
     const docDefinition = {
@@ -271,7 +271,7 @@ const genXLSSumBasic = async (p, y) => {
       wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: t.okt, z: '#,##0' };
       wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: t.nov, z: '#,##0' };
       wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: t.des, z: '#,##0' };
-      wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: t.totM, z: '#,##0' };
+      wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: t.tBasic, z: '#,##0' };
 
       return true;
     });
@@ -289,7 +289,7 @@ const genXLSSumBasic = async (p, y) => {
     wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: p.totOkt, z: '#,##0' };
     wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: p.totNov, z: '#,##0' };
     wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: p.totDes, z: '#,##0' };
-    wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: p.totAM, z: '#,##0' };
+    wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: p.sBasic, z: '#,##0' };
 
     const fn = `static/summary/${y}/${y}_sum_basic.xlsx`;
     const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
