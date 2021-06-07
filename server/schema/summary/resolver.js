@@ -2,7 +2,12 @@ const { GraphQLInt } = require('graphql');
 const { GenType } = require('../payroll/type');
 const auth = require('../auth/service');
 const { SummaryType } = require('./type');
-const { genPDFSumBasic, genXLSSumBasic } = require('./method');
+const {
+  genPDFSumBasic,
+  genXLSSumBasic,
+  genPDFSumOT,
+  genXLSSumOT,
+} = require('./method');
 const { sumBasic, sumOT } = require('./query');
 
 const Query = {
@@ -48,6 +53,28 @@ const Mutation = {
     resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await sumBasic(id);
       const s = await genXLSSumBasic(p, id);
+      return s;
+    }),
+  },
+  genPDFSummaryOT: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLInt },
+    },
+    resolve: auth.hasRole('guest', async (_, { id }) => {
+      const p = await sumOT(id);
+      const s = await genPDFSumOT(p, id);
+      return s;
+    }),
+  },
+  genXLSSummaryOT: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLInt },
+    },
+    resolve: auth.hasRole('guest', async (_, { id }) => {
+      const p = await sumOT(id);
+      const s = await genXLSSumOT(p, id);
       return s;
     }),
   },
