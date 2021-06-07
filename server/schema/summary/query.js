@@ -1,6 +1,6 @@
 const Payroll = require('../payroll/model');
 
-const sBasic = async (id) => {
+const sumBasic = async (id) => {
   const p = await Payroll.aggregate([
     { $match: { year: id } },
     { $unwind: '$employee' },
@@ -80,5 +80,5 @@ const sBasic = async (id) => {
 };
 
 module.exports = {
-  sBasic,
+  sumBasic,
 };
