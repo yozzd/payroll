@@ -47,3 +47,19 @@ export const GenXLSSummaryAllow = gql`
     }
   }
 `;
+
+export const GenPDFSummaryOAllow = gql`
+  mutation genPDFSummaryOAllow($id: Int!) {
+    genPDFSummaryOAllow(id: $id) {
+      sStatus
+    }
+  }
+`;
+
+export const GenXLSSummaryOAllow = gql`
+  mutation genXLSSummaryOAllow($id: Int!) {
+    genXLSSummaryOAllow(id: $id) {
+      sStatus
+    }
+  }
+`;

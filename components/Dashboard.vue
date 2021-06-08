@@ -31,6 +31,9 @@
             <el-menu-item index="c">
               Allowance
             </el-menu-item>
+            <el-menu-item index="d">
+              Other Allowance
+            </el-menu-item>
           </el-submenu>
         </el-menu>
       </div>
@@ -1146,6 +1149,7 @@ export default {
       if (c === 'a') this.$router.push({ name: 'summary-basic-id', params: { id } });
       else if (c === 'b') this.$router.push({ name: 'summary-ot-id', params: { id } });
       else if (c === 'c') this.$router.push({ name: 'summary-allowance-id', params: { id } });
+      else if (c === 'd') this.$router.push({ path: `/summary/other-allowance/${id}` });
     },
     handleConfirm(id) {
       this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
