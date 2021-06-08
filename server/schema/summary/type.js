@@ -32,6 +32,7 @@ const EmpSummaryType = new GraphQLObjectType({
     tOT: { type: GraphQLFloat },
     tAllow: { type: GraphQLFloat },
     tOAllow: { type: GraphQLFloat },
+    tPesangon: { type: GraphQLFloat },
   }),
 });
 

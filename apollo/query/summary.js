@@ -111,3 +111,31 @@ export const SummaryOAllow = gql`
     }
   }
 `;
+
+export const SummaryPesangon = gql`
+  query summaryPesangon($id: Int!) {
+    summaryPesangon(id: $id) {
+      employee {
+        _id
+        d0
+        e0
+        i0
+        u0
+        y0
+        jan
+        feb
+        mar
+        apr
+        mei
+        jun
+        jul
+        agu
+        sep
+        okt
+        nov
+        des
+        tPesangon
+      }
+    }
+  }
+`;

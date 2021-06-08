@@ -63,3 +63,19 @@ export const GenXLSSummaryOAllow = gql`
     }
   }
 `;
+
+export const GenPDFSummaryPesangon = gql`
+  mutation genPDFSummaryPesangon($id: Int!) {
+    genPDFSummaryPesangon(id: $id) {
+      sStatus
+    }
+  }
+`;
+
+export const GenXLSSummaryPesangon = gql`
+  mutation genXLSSummaryPesangon($id: Int!) {
+    genXLSSummaryPesangon(id: $id) {
+      sStatus
+    }
+  }
+`;
