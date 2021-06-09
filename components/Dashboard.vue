@@ -40,6 +40,9 @@
             <el-menu-item index="f">
               Thr, Leave
             </el-menu-item>
+            <el-menu-item index="g">
+              Other Income
+            </el-menu-item>
           </el-submenu>
         </el-menu>
       </div>
@@ -1158,6 +1161,7 @@ export default {
       else if (c === 'd') this.$router.push({ path: `/summary/other-allowance/${id}` });
       else if (c === 'e') this.$router.push({ name: 'summary-pesangon-id', params: { id } });
       else if (c === 'f') this.$router.push({ path: `/summary/thr-leave/${id}` });
+      else if (c === 'g') this.$router.push({ path: `/summary/other-income/${id}` });
     },
     handleConfirm(id) {
       this.$confirm('This will permanently delete the file. Continue?', 'Warning', {

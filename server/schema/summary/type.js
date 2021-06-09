@@ -34,6 +34,7 @@ const EmpSummaryType = new GraphQLObjectType({
     tOAllow: { type: GraphQLFloat },
     tPesangon: { type: GraphQLFloat },
     tThr: { type: GraphQLFloat },
+    tOIncome: { type: GraphQLFloat },
   }),
 });
 

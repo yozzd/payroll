@@ -95,3 +95,19 @@ export const GenXLSSummaryThr = gql`
     }
   }
 `;
+
+export const GenPDFSummaryOIncome = gql`
+  mutation genPDFSummaryOIncome($id: Int!) {
+    genPDFSummaryOIncome(id: $id) {
+      sStatus
+    }
+  }
+`;
+
+export const GenXLSSummaryOIncome = gql`
+  mutation genXLSSummaryOIncome($id: Int!) {
+    genXLSSummaryOIncome(id: $id) {
+      sStatus
+    }
+  }
+`;
