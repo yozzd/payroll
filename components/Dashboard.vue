@@ -46,6 +46,9 @@
             <el-menu-item index="h">
               Absent
             </el-menu-item>
+            <el-menu-item index="i">
+              Other Deduction
+            </el-menu-item>
           </el-submenu>
         </el-menu>
       </div>
@@ -1166,6 +1169,7 @@ export default {
       else if (c === 'f') this.$router.push({ path: `/summary/thr-leave/${id}` });
       else if (c === 'g') this.$router.push({ path: `/summary/other-income/${id}` });
       else if (c === 'h') this.$router.push({ name: 'summary-absent-id', params: { id } });
+      else if (c === 'i') this.$router.push({ path: `/summary/other-deduction/${id}` });
     },
     handleConfirm(id) {
       this.$confirm('This will permanently delete the file. Continue?', 'Warning', {

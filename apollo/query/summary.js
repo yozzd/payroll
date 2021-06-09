@@ -223,3 +223,31 @@ export const SummaryAbsent = gql`
     }
   }
 `;
+
+export const SummaryODeduction = gql`
+  query summaryODeduction($id: Int!) {
+    summaryODeduction(id: $id) {
+      employee {
+        _id
+        d0
+        e0
+        i0
+        u0
+        y0
+        jan
+        feb
+        mar
+        apr
+        mei
+        jun
+        jul
+        agu
+        sep
+        okt
+        nov
+        des
+        tODeduction
+      }
+    }
+  }
+`;

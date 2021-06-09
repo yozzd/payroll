@@ -127,3 +127,19 @@ export const GenXLSSummaryAbsent = gql`
     }
   }
 `;
+
+export const GenPDFSummaryODeduction = gql`
+  mutation genPDFSummaryODeduction($id: Int!) {
+    genPDFSummaryODeduction(id: $id) {
+      sStatus
+    }
+  }
+`;
+
+export const GenXLSSummaryODeduction = gql`
+  mutation genXLSSummaryODeduction($id: Int!) {
+    genXLSSummaryODeduction(id: $id) {
+      sStatus
+    }
+  }
+`;
