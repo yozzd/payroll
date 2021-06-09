@@ -79,3 +79,19 @@ export const GenXLSSummaryPesangon = gql`
     }
   }
 `;
+
+export const GenPDFSummaryThr = gql`
+  mutation genPDFSummaryThr($id: Int!) {
+    genPDFSummaryThr(id: $id) {
+      sStatus
+    }
+  }
+`;
+
+export const GenXLSSummaryThr = gql`
+  mutation genXLSSummaryThr($id: Int!) {
+    genXLSSummaryThr(id: $id) {
+      sStatus
+    }
+  }
+`;
