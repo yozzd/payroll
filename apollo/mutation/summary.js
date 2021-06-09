@@ -111,3 +111,19 @@ export const GenXLSSummaryOIncome = gql`
     }
   }
 `;
+
+export const GenPDFSummaryAbsent = gql`
+  mutation genPDFSummaryAbsent($id: Int!) {
+    genPDFSummaryAbsent(id: $id) {
+      sStatus
+    }
+  }
+`;
+
+export const GenXLSSummaryAbsent = gql`
+  mutation genXLSSummaryAbsent($id: Int!) {
+    genXLSSummaryAbsent(id: $id) {
+      sStatus
+    }
+  }
+`;
