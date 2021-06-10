@@ -3424,7 +3424,7 @@ const genXLSSumTax = async (p, y) => {
       SheetNames: ['Sheet1'],
       Sheets: {
         Sheet1: {
-          '!ref': `A1:S${len}`,
+          '!ref': `A1:AF${len}`,
           A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
           A2: { t: 's', v: `Summary Tax - January - December ${y}` },
           A3: { t: 's', v: 'No' },
@@ -3434,24 +3434,82 @@ const genXLSSumTax = async (p, y) => {
           E3: { t: 's', v: 'Position' },
           F3: { t: 's', v: 'Department' },
           G3: { t: 's', v: 'January' },
-          H3: { t: 's', v: 'February' },
-          I3: { t: 's', v: 'March' },
-          J3: { t: 's', v: 'April' },
-          K3: { t: 's', v: 'May' },
-          L3: { t: 's', v: 'June' },
-          M3: { t: 's', v: 'July' },
-          N3: { t: 's', v: 'August' },
-          O3: { t: 's', v: 'September' },
-          P3: { t: 's', v: 'October' },
-          Q3: { t: 's', v: 'November' },
-          R3: { t: 's', v: 'December' },
-          S3: { t: 's', v: 'Total' },
+          G4: { t: 's', v: 'DTP' },
+          H4: { t: 's', v: 'Non DTP' },
+          I3: { t: 's', v: 'February' },
+          I4: { t: 's', v: 'DTP' },
+          J4: { t: 's', v: 'Non DTP' },
+          K3: { t: 's', v: 'March' },
+          K4: { t: 's', v: 'DTP' },
+          L4: { t: 's', v: 'Non DTP' },
+          M3: { t: 's', v: 'April' },
+          M4: { t: 's', v: 'DTP' },
+          N4: { t: 's', v: 'Non DTP' },
+          O3: { t: 's', v: 'May' },
+          O4: { t: 's', v: 'DTP' },
+          P4: { t: 's', v: 'Non DTP' },
+          Q3: { t: 's', v: 'June' },
+          Q4: { t: 's', v: 'DTP' },
+          R4: { t: 's', v: 'Non DTP' },
+          S3: { t: 's', v: 'July' },
+          S4: { t: 's', v: 'DTP' },
+          T4: { t: 's', v: 'Non DTP' },
+          U3: { t: 's', v: 'August' },
+          U4: { t: 's', v: 'DTP' },
+          V4: { t: 's', v: 'Non DTP' },
+          W3: { t: 's', v: 'September' },
+          W4: { t: 's', v: 'DTP' },
+          X4: { t: 's', v: 'Non DTP' },
+          Y3: { t: 's', v: 'October' },
+          Y4: { t: 's', v: 'DTP' },
+          Z4: { t: 's', v: 'Non DTP' },
+          AA3: { t: 's', v: 'November' },
+          AA4: { t: 's', v: 'DTP' },
+          AB4: { t: 's', v: 'Non DTP' },
+          AC3: { t: 's', v: 'December' },
+          AC4: { t: 's', v: 'DTP' },
+          AD4: { t: 's', v: 'Non DTP' },
+          AE3: { t: 's', v: 'Total' },
+          AE4: { t: 's', v: 'DTP' },
+          AF4: { t: 's', v: 'Non DTP' },
+          '!merges': [
+            { s: { r: 0, c: 0 }, e: { r: 0, c: 31 } },
+            { s: { r: 1, c: 0 }, e: { r: 1, c: 31 } },
+            { s: { r: 2, c: 0 }, e: { r: 3, c: 0 } },
+            { s: { r: 2, c: 1 }, e: { r: 3, c: 1 } },
+            { s: { r: 2, c: 2 }, e: { r: 3, c: 2 } },
+            { s: { r: 2, c: 3 }, e: { r: 3, c: 3 } },
+            { s: { r: 2, c: 4 }, e: { r: 3, c: 4 } },
+            { s: { r: 2, c: 5 }, e: { r: 3, c: 5 } },
+            { s: { r: 2, c: 6 }, e: { r: 2, c: 7 } },
+            { s: { r: 2, c: 8 }, e: { r: 2, c: 9 } },
+            { s: { r: 2, c: 10 }, e: { r: 2, c: 11 } },
+            { s: { r: 2, c: 12 }, e: { r: 2, c: 13 } },
+            { s: { r: 2, c: 14 }, e: { r: 2, c: 15 } },
+            { s: { r: 2, c: 16 }, e: { r: 2, c: 17 } },
+            { s: { r: 2, c: 18 }, e: { r: 2, c: 19 } },
+            { s: { r: 2, c: 20 }, e: { r: 2, c: 21 } },
+            { s: { r: 2, c: 22 }, e: { r: 2, c: 23 } },
+            { s: { r: 2, c: 24 }, e: { r: 2, c: 25 } },
+            { s: { r: 2, c: 26 }, e: { r: 2, c: 27 } },
+            { s: { r: 2, c: 28 }, e: { r: 2, c: 29 } },
+            { s: { r: 2, c: 30 }, e: { r: 2, c: 31 } },
+          ],
           '!cols': [
             { wpx: 26 }, { wpx: 65 }, { wpx: 240 }, { wpx: 65 },
             { wpx: 120 }, { wpx: 200 }, { wpx: 90 }, { wpx: 90 },
-            { wpx: 90 }, { wpx: 90 }, { wpx: 90 }, { wpx: 90 },
-            { wpx: 90 }, { wpx: 90 }, { wpx: 90 }, { wpx: 90 },
-            { wpx: 90 }, { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 },
           ],
         },
       },
@@ -3466,37 +3524,63 @@ const genXLSSumTax = async (p, y) => {
       wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: idDateFormat(t.i0, 'dd-MM-yyyy') };
       wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: t.y0 };
       wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: t.u0 };
-      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: t.jan, z: '#,##0' };
-      wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: t.feb, z: '#,##0' };
-      wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: t.mar, z: '#,##0' };
-      wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: t.apr, z: '#,##0' };
-      wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: t.mei, z: '#,##0' };
-      wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: t.jun, z: '#,##0' };
-      wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: t.jul, z: '#,##0' };
-      wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: t.agu, z: '#,##0' };
-      wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: t.sep, z: '#,##0' };
-      wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: t.okt, z: '#,##0' };
-      wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: t.nov, z: '#,##0' };
-      wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: t.des, z: '#,##0' };
-      wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: t.tTax, z: '#,##0' };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: t.jan1, z: '#,##0' };
+      wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: t.jan2, z: '#,##0' };
+      wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: t.feb1, z: '#,##0' };
+      wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: t.feb2, z: '#,##0' };
+      wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: t.mar1, z: '#,##0' };
+      wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: t.mar2, z: '#,##0' };
+      wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: t.apr1, z: '#,##0' };
+      wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: t.apr2, z: '#,##0' };
+      wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: t.mei1, z: '#,##0' };
+      wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: t.mei2, z: '#,##0' };
+      wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: t.jun1, z: '#,##0' };
+      wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: t.jun2, z: '#,##0' };
+      wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: t.jul1, z: '#,##0' };
+      wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: t.jul2, z: '#,##0' };
+      wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: t.agu1, z: '#,##0' };
+      wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: t.agu2, z: '#,##0' };
+      wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: t.sep1, z: '#,##0' };
+      wb.Sheets.Sheet1[`X${row}`] = { t: 'n', v: t.sep2, z: '#,##0' };
+      wb.Sheets.Sheet1[`Y${row}`] = { t: 'n', v: t.okt1, z: '#,##0' };
+      wb.Sheets.Sheet1[`Z${row}`] = { t: 'n', v: t.okt2, z: '#,##0' };
+      wb.Sheets.Sheet1[`AA${row}`] = { t: 'n', v: t.nov1, z: '#,##0' };
+      wb.Sheets.Sheet1[`AB${row}`] = { t: 'n', v: t.nov2, z: '#,##0' };
+      wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: t.des1, z: '#,##0' };
+      wb.Sheets.Sheet1[`AD${row}`] = { t: 'n', v: t.des2, z: '#,##0' };
+      wb.Sheets.Sheet1[`AE${row}`] = { t: 'n', v: t.tTax1, z: '#,##0' };
+      wb.Sheets.Sheet1[`AF${row}`] = { t: 'n', v: t.tTax2, z: '#,##0' };
 
       return true;
     });
 
     row += 1;
-    wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: p.totJan, z: '#,##0' };
-    wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: p.totFeb, z: '#,##0' };
-    wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: p.totMar, z: '#,##0' };
-    wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: p.totApr, z: '#,##0' };
-    wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: p.totMei, z: '#,##0' };
-    wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: p.totJun, z: '#,##0' };
-    wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: p.totJul, z: '#,##0' };
-    wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: p.totAgu, z: '#,##0' };
-    wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: p.totSep, z: '#,##0' };
-    wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: p.totOkt, z: '#,##0' };
-    wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: p.totNov, z: '#,##0' };
-    wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: p.totDes, z: '#,##0' };
-    wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: p.sTax, z: '#,##0' };
+    wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: p.totJan1, z: '#,##0' };
+    wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: p.totJan2, z: '#,##0' };
+    wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: p.totFeb1, z: '#,##0' };
+    wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: p.totFeb2, z: '#,##0' };
+    wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: p.totMar1, z: '#,##0' };
+    wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: p.totMar2, z: '#,##0' };
+    wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: p.totApr1, z: '#,##0' };
+    wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: p.totApr2, z: '#,##0' };
+    wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: p.totMei1, z: '#,##0' };
+    wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: p.totMei2, z: '#,##0' };
+    wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: p.totJun1, z: '#,##0' };
+    wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: p.totJun2, z: '#,##0' };
+    wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: p.totJul1, z: '#,##0' };
+    wb.Sheets.Sheet1[`T${row}`] = { t: 'n', v: p.totJul2, z: '#,##0' };
+    wb.Sheets.Sheet1[`U${row}`] = { t: 'n', v: p.totAgu1, z: '#,##0' };
+    wb.Sheets.Sheet1[`V${row}`] = { t: 'n', v: p.totAgu2, z: '#,##0' };
+    wb.Sheets.Sheet1[`W${row}`] = { t: 'n', v: p.totSep1, z: '#,##0' };
+    wb.Sheets.Sheet1[`X${row}`] = { t: 'n', v: p.totSep2, z: '#,##0' };
+    wb.Sheets.Sheet1[`Y${row}`] = { t: 'n', v: p.totOkt1, z: '#,##0' };
+    wb.Sheets.Sheet1[`Z${row}`] = { t: 'n', v: p.totOkt2, z: '#,##0' };
+    wb.Sheets.Sheet1[`AA${row}`] = { t: 'n', v: p.totNov1, z: '#,##0' };
+    wb.Sheets.Sheet1[`AB${row}`] = { t: 'n', v: p.totNov2, z: '#,##0' };
+    wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: p.totDes1, z: '#,##0' };
+    wb.Sheets.Sheet1[`AD${row}`] = { t: 'n', v: p.totDes2, z: '#,##0' };
+    wb.Sheets.Sheet1[`AE${row}`] = { t: 'n', v: p.sTax1, z: '#,##0' };
+    wb.Sheets.Sheet1[`AF${row}`] = { t: 'n', v: p.sTax2, z: '#,##0' };
 
     const fn = `static/summary/${y}/${y}_sum_tax.xlsx`;
     const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
