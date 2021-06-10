@@ -307,3 +307,44 @@ export const SummaryIEmp = gql`
     }
   }
 `;
+
+export const SummaryTax = gql`
+  query summaryTax($id: Int!) {
+    summaryTax(id: $id) {
+      employee {
+        _id
+        d0
+        e0
+        i0
+        u0
+        y0
+        jan1
+        feb1
+        mar1
+        apr1
+        mei1
+        jun1
+        jul1
+        agu1
+        sep1
+        okt1
+        nov1
+        des1
+        jan2
+        feb2
+        mar2
+        apr2
+        mei2
+        jun2
+        jul2
+        agu2
+        sep2
+        okt2
+        nov2
+        des2
+        tTax1
+        tTax2
+      }
+    }
+  }
+`;
