@@ -3207,6 +3207,313 @@ const genXLSSumIEmp = async (p, y) => {
   }
 };
 
+const genPDFSumTax = async (p, y) => {
+  try {
+    const { employee } = p;
+    await fs.ensureDir(`static/summary/${y}`);
+
+    const vw1 = [
+      [
+        {
+          text: 'No', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'No Karyawan', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Nama Karyawan', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Hire Date', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Position', bold: true, alignment: 'center', rowSpan: 2,
+        },
+        {
+          text: 'Department', bold: true, alignment: 'center', rowSpan: 2
+        },
+        {
+          text: 'January', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'February', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'March', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'April', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'May', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'June', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'July', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'August', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'September', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'October', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'November', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'December', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+        {
+          text: 'Total', bold: true, alignment: 'center', colSpan: 2,
+        }, '',
+      ],
+      [
+        '', '', '', '', '', '',
+        { text: 'DTP', bold: true, alignment: 'center' }, { text: 'Non DTP', bold: true, alignment: 'center' },
+        { text: 'DTP', bold: true, alignment: 'center' }, { text: 'Non DTP', bold: true, alignment: 'center' },
+        { text: 'DTP', bold: true, alignment: 'center' }, { text: 'Non DTP', bold: true, alignment: 'center' },
+        { text: 'DTP', bold: true, alignment: 'center' }, { text: 'Non DTP', bold: true, alignment: 'center' },
+        { text: 'DTP', bold: true, alignment: 'center' }, { text: 'Non DTP', bold: true, alignment: 'center' },
+        { text: 'DTP', bold: true, alignment: 'center' }, { text: 'Non DTP', bold: true, alignment: 'center' },
+        { text: 'DTP', bold: true, alignment: 'center' }, { text: 'Non DTP', bold: true, alignment: 'center' },
+        { text: 'DTP', bold: true, alignment: 'center' }, { text: 'Non DTP', bold: true, alignment: 'center' },
+        { text: 'DTP', bold: true, alignment: 'center' }, { text: 'Non DTP', bold: true, alignment: 'center' },
+        { text: 'DTP', bold: true, alignment: 'center' }, { text: 'Non DTP', bold: true, alignment: 'center' },
+        { text: 'DTP', bold: true, alignment: 'center' }, { text: 'Non DTP', bold: true, alignment: 'center' },
+        { text: 'DTP', bold: true, alignment: 'center' }, { text: 'Non DTP', bold: true, alignment: 'center' },
+        { text: 'DTP', bold: true, alignment: 'center' }, { text: 'Non DTP', bold: true, alignment: 'center' },
+      ],
+    ];
+
+    employee.map((e, i) => {
+      vw1.push([
+        { text: (i + 1), alignment: 'center' }, { text: e.e0, alignment: 'center' },
+        e.d0, { text: idDateFormat(e.i0, 'dd-MM-yyyy'), alignment: 'center' }, e.y0, e.u0,
+        { text: intpre0(e.jan1).format(), alignment: 'right' }, { text: intpre0(e.jan2).format(), alignment: 'right' },
+        { text: intpre0(e.feb1).format(), alignment: 'right' }, { text: intpre0(e.feb2).format(), alignment: 'right' },
+        { text: intpre0(e.mar1).format(), alignment: 'right' }, { text: intpre0(e.mar2).format(), alignment: 'right' },
+        { text: intpre0(e.apr1).format(), alignment: 'right' }, { text: intpre0(e.apr2).format(), alignment: 'right' },
+        { text: intpre0(e.mei1).format(), alignment: 'right' }, { text: intpre0(e.mei2).format(), alignment: 'right' },
+        { text: intpre0(e.jun1).format(), alignment: 'right' }, { text: intpre0(e.jun2).format(), alignment: 'right' },
+        { text: intpre0(e.jul1).format(), alignment: 'right' }, { text: intpre0(e.jul2).format(), alignment: 'right' },
+        { text: intpre0(e.agu1).format(), alignment: 'right' }, { text: intpre0(e.agu2).format(), alignment: 'right' },
+        { text: intpre0(e.sep1).format(), alignment: 'right' }, { text: intpre0(e.sep2).format(), alignment: 'right' },
+        { text: intpre0(e.okt1).format(), alignment: 'right' }, { text: intpre0(e.okt2).format(), alignment: 'right' },
+        { text: intpre0(e.nov1).format(), alignment: 'right' }, { text: intpre0(e.nov2).format(), alignment: 'right' },
+        { text: intpre0(e.des1).format(), alignment: 'right' }, { text: intpre0(e.des2).format(), alignment: 'right' },
+        { text: intpre0(e.tTax1).format(), alignment: 'right' }, { text: intpre0(e.tTax2).format(), alignment: 'right' },
+      ]);
+
+      return true;
+    });
+
+    vw1.push([
+      '', '', '', '', '', '',
+      { text: intpre0(p.totJan1).format(), alignment: 'right' }, { text: intpre0(p.totJan2).format(), alignment: 'right' },
+      { text: intpre0(p.totFeb1).format(), alignment: 'right' }, { text: intpre0(p.totFeb2).format(), alignment: 'right' },
+      { text: intpre0(p.totMar1).format(), alignment: 'right' }, { text: intpre0(p.totMar2).format(), alignment: 'right' },
+      { text: intpre0(p.totApr1).format(), alignment: 'right' }, { text: intpre0(p.totApr2).format(), alignment: 'right' },
+      { text: intpre0(p.totMei1).format(), alignment: 'right' }, { text: intpre0(p.totMei2).format(), alignment: 'right' },
+      { text: intpre0(p.totJun1).format(), alignment: 'right' }, { text: intpre0(p.totJun2).format(), alignment: 'right' },
+      { text: intpre0(p.totJul1).format(), alignment: 'right' }, { text: intpre0(p.totJul2).format(), alignment: 'right' },
+      { text: intpre0(p.totAgu1).format(), alignment: 'right' }, { text: intpre0(p.totAgu2).format(), alignment: 'right' },
+      { text: intpre0(p.totSep1).format(), alignment: 'right' }, { text: intpre0(p.totSep2).format(), alignment: 'right' },
+      { text: intpre0(p.totOkt1).format(), alignment: 'right' }, { text: intpre0(p.totOkt2).format(), alignment: 'right' },
+      { text: intpre0(p.totNov1).format(), alignment: 'right' }, { text: intpre0(p.totNov2).format(), alignment: 'right' },
+      { text: intpre0(p.totDes1).format(), alignment: 'right' }, { text: intpre0(p.totDes2).format(), alignment: 'right' },
+      { text: intpre0(p.sTax1).format(), alignment: 'right' }, { text: intpre0(p.sTax2).format(), alignment: 'right' },
+    ]);
+
+    const docDefinition = {
+      pageSize: 'A3',
+      pageOrientation: 'landscape',
+      footer: (currentPage, pageCount) => ({
+        columns: [
+          { text: `${currentPage.toString()} / ${pageCount}`, fontSize: 8, margin: [20, 0] },
+        ],
+      }),
+      content: [
+        {
+          style: 'tbl1',
+          table: {
+            widths: [170, 540, 200, 135],
+            body: [
+              [{
+                image: 'static/images/logo.png', width: 60, rowSpan: 2, border: [false, false, false, false],
+              }, { text: '', border: [false, false, false, false] }, {
+                text: 'PT. LABTECH PENTA INTERNATIONAL', bold: true, fontSize: 8, border: [false, false, false, true],
+              }, {
+                text: 'Summary Tax', bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, true],
+              }],
+              ['', { text: '', border: [false, false, false, false] }, { text: 'Kawasan Industri Sekupang Kav. 34 Batam - Indonesia', border: [false, false, false, false] }, {
+                text: '', border: [false, false, false, false],
+              }],
+            ],
+          },
+        },
+        {
+          style: 'tbl2',
+          table: {
+            widths: [110, 412],
+            body: [
+              [{
+                text: `Summary Tax - January - December ${y}`, colSpan: 2, fontSize: 10, bold: true, margin: [0, 15, 0, 10],
+              }, ''],
+            ],
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl3',
+          table: {
+            widths: [
+              10, 20, 60, 25, 40, 40, 25, 25,
+              25, 25, 25, 25, 25, 25, 25, 25,
+              25, 25, 25, 25, 25, 25, 25, 25,
+              25, 25, 25, 25, 25, 25, 25, 25,
+            ],
+            body: vw1,
+          },
+        },
+      ],
+      styles: {
+        tbl1: {
+          fontSize: 8,
+          margin: [-10, -10, -10, 0],
+        },
+        tbl2: {
+          fontSize: 8,
+          margin: [-10, 40, -10, 10],
+        },
+        tbl3: {
+          fontSize: 4,
+          margin: [-10, -10, -10, 0],
+        },
+      },
+    };
+
+    return new Promise((resolve) => {
+      const pdfDoc = printer.createPdfKitDocument(docDefinition);
+      pdfDoc.pipe(fs.createWriteStream(`static/summary/${y}/${y}_sum_tax.pdf`));
+      pdfDoc.on('end', () => {
+        resolve({ sStatus: 1 });
+      });
+      pdfDoc.end();
+    });
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
+};
+
+const genXLSSumTax = async (p, y) => {
+  try {
+    const { employee: e } = p;
+    await fs.ensureDir(`static/summary/${y}`);
+
+    const len = e.length + 4;
+    const wb = {
+      SheetNames: ['Sheet1'],
+      Sheets: {
+        Sheet1: {
+          '!ref': `A1:S${len}`,
+          A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
+          A2: { t: 's', v: `Summary Tax - January - December ${y}` },
+          A3: { t: 's', v: 'No' },
+          B3: { t: 's', v: 'No Karyawan' },
+          C3: { t: 's', v: 'Nama Karyawan' },
+          D3: { t: 's', v: 'Hired Date.' },
+          E3: { t: 's', v: 'Position' },
+          F3: { t: 's', v: 'Department' },
+          G3: { t: 's', v: 'January' },
+          H3: { t: 's', v: 'February' },
+          I3: { t: 's', v: 'March' },
+          J3: { t: 's', v: 'April' },
+          K3: { t: 's', v: 'May' },
+          L3: { t: 's', v: 'June' },
+          M3: { t: 's', v: 'July' },
+          N3: { t: 's', v: 'August' },
+          O3: { t: 's', v: 'September' },
+          P3: { t: 's', v: 'October' },
+          Q3: { t: 's', v: 'November' },
+          R3: { t: 's', v: 'December' },
+          S3: { t: 's', v: 'Total' },
+          '!cols': [
+            { wpx: 26 }, { wpx: 65 }, { wpx: 240 }, { wpx: 65 },
+            { wpx: 120 }, { wpx: 200 }, { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 }, { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 }, { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 }, { wpx: 90 },
+          ],
+        },
+      },
+    };
+
+    let row = 3;
+    e.map((t, i) => {
+      row += 1;
+      wb.Sheets.Sheet1[`A${row}`] = { t: 'n', v: i + 1 };
+      wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: t.e0 };
+      wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: t.d0 };
+      wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: idDateFormat(t.i0, 'dd-MM-yyyy') };
+      wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: t.y0 };
+      wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: t.u0 };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: t.jan, z: '#,##0' };
+      wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: t.feb, z: '#,##0' };
+      wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: t.mar, z: '#,##0' };
+      wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: t.apr, z: '#,##0' };
+      wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: t.mei, z: '#,##0' };
+      wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: t.jun, z: '#,##0' };
+      wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: t.jul, z: '#,##0' };
+      wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: t.agu, z: '#,##0' };
+      wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: t.sep, z: '#,##0' };
+      wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: t.okt, z: '#,##0' };
+      wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: t.nov, z: '#,##0' };
+      wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: t.des, z: '#,##0' };
+      wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: t.tTax, z: '#,##0' };
+
+      return true;
+    });
+
+    row += 1;
+    wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: p.totJan, z: '#,##0' };
+    wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: p.totFeb, z: '#,##0' };
+    wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: p.totMar, z: '#,##0' };
+    wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: p.totApr, z: '#,##0' };
+    wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: p.totMei, z: '#,##0' };
+    wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: p.totJun, z: '#,##0' };
+    wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: p.totJul, z: '#,##0' };
+    wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: p.totAgu, z: '#,##0' };
+    wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: p.totSep, z: '#,##0' };
+    wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: p.totOkt, z: '#,##0' };
+    wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: p.totNov, z: '#,##0' };
+    wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: p.totDes, z: '#,##0' };
+    wb.Sheets.Sheet1[`S${row}`] = { t: 'n', v: p.sTax, z: '#,##0' };
+
+    const fn = `static/summary/${y}/${y}_sum_tax.xlsx`;
+    const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
+    fs.writeFileSync(fn, content);
+
+    return XlsxPopulate.fromFileAsync(fn)
+      .then((workbook) => workbook.toFileAsync(fn, { password: xlsPass })
+        .then(() => ({ sStatus: 1 })));
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
+};
+
 module.exports = {
   genPDFSumBasic,
   genXLSSumBasic,
@@ -3230,4 +3537,6 @@ module.exports = {
   genXLSSumICo,
   genPDFSumIEmp,
   genXLSSumIEmp,
+  genPDFSumTax,
+  genXLSSumTax,
 };
