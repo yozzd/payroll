@@ -21,6 +21,8 @@ const {
   genXLSSumAbsent,
   genPDFSumODeduction,
   genXLSSumODeduction,
+  genPDFSumICo,
+  genXLSSumICo,
 } = require('./method');
 const {
   sumBasic,
@@ -31,7 +33,8 @@ const {
   sumThr,
   sumOIncome,
   sumAbsent,
-  sumODeduction
+  sumODeduction,
+  sumICo,
 } = require('./query');
 
 const Query = {
@@ -122,6 +125,16 @@ const Query = {
     },
     resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await sumODeduction(id);
+      return p;
+    }),
+  },
+  summaryICo: {
+    type: SummaryType,
+    args: {
+      id: { type: GraphQLInt },
+    },
+    resolve: auth.hasRole('guest', async (_, { id }) => {
+      const p = await sumICo(id);
       return p;
     }),
   },
@@ -323,6 +336,28 @@ const Mutation = {
     resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await sumODeduction(id);
       const s = await genXLSSumODeduction(p, id);
+      return s;
+    }),
+  },
+  genPDFSummaryICo: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLInt },
+    },
+    resolve: auth.hasRole('guest', async (_, { id }) => {
+      const p = await sumICo(id);
+      const s = await genPDFSumICo(p, id);
+      return s;
+    }),
+  },
+  genXLSSummaryICo: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLInt },
+    },
+    resolve: auth.hasRole('guest', async (_, { id }) => {
+      const p = await sumICo(id);
+      const s = await genXLSSumICo(p, id);
       return s;
     }),
   },

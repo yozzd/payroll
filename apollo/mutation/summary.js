@@ -143,3 +143,19 @@ export const GenXLSSummaryODeduction = gql`
     }
   }
 `;
+
+export const GenPDFSummaryICo = gql`
+  mutation genPDFSummaryICo($id: Int!) {
+    genPDFSummaryICo(id: $id) {
+      sStatus
+    }
+  }
+`;
+
+export const GenXLSSummaryICo = gql`
+  mutation genXLSSummaryICo($id: Int!) {
+    genXLSSummaryICo(id: $id) {
+      sStatus
+    }
+  }
+`;
