@@ -52,6 +52,9 @@
             <el-menu-item index="j">
               Ins Paid By Company
             </el-menu-item>
+            <el-menu-item index="k">
+              Ins Paid By Employee
+            </el-menu-item>
           </el-submenu>
         </el-menu>
       </div>
@@ -1174,6 +1177,7 @@ export default {
       else if (c === 'h') this.$router.push({ name: 'summary-absent-id', params: { id } });
       else if (c === 'i') this.$router.push({ path: `/summary/other-deduction/${id}` });
       else if (c === 'j') this.$router.push({ path: `/summary/ins-co/${id}` });
+      else if (c === 'k') this.$router.push({ path: `/summary/ins-emp/${id}` });
     },
     handleConfirm(id) {
       this.$confirm('This will permanently delete the file. Continue?', 'Warning', {

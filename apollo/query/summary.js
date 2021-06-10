@@ -279,3 +279,31 @@ export const SummaryICo = gql`
     }
   }
 `;
+
+export const SummaryIEmp = gql`
+  query summaryIEmp($id: Int!) {
+    summaryIEmp(id: $id) {
+      employee {
+        _id
+        d0
+        e0
+        i0
+        u0
+        y0
+        jan
+        feb
+        mar
+        apr
+        mei
+        jun
+        jul
+        agu
+        sep
+        okt
+        nov
+        des
+        tIEmp
+      }
+    }
+  }
+`;
