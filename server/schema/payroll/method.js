@@ -1414,7 +1414,7 @@ const genFinal = async (p) => {
     } else {
       bw = '';
     }
-    vw2.push(['THR Prorate', { text: bw, colSpan: 2 }, '', `${e.bw0}/12`, '', ':', { text: intpre0(e.bx0).format(), alignment: 'right' }]);
+    vw2.push(['THR Prorate', { text: bw, colSpan: 2 }, '', { text: e.bw0 ? `${e.bw0}/12` : '' }, '', ':', { text: intpre0(e.bx0).format(), alignment: 'right' }]);
 
     if (e.aj0) vw2.push(['Living Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.aj0).format(), alignment: 'right' }]); income += e.aj0;
     if (e.ak0) vw2.push(['Housing Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.ak0).format(), alignment: 'right' }]); income += e.ak0;
