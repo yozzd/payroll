@@ -450,6 +450,7 @@ export const PayrollManual = gql`
         d0
         e0
         fc0
+        fd0
         fe0
         ex0
       }

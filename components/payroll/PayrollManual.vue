@@ -54,6 +54,11 @@ i<template>
           <span>{{ scope.row.fc0 | currency }}</span>
         </template>
       </el-table-column>
+      <el-table-column prop="fd0" label="THR" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.fd0 | currency }}</span>
+        </template>
+      </el-table-column>
       <el-table-column prop="fe0" label="Pesangon" width="120" align="right">
         <template slot-scope="scope">
           <span>{{ scope.row.fe0 | currency }}</span>
@@ -108,6 +113,9 @@ i<template>
         <el-form-item label="Pajak Penghasilan">
           <el-input v-model="form.fc0"></el-input>
         </el-form-item>
+        <el-form-item label="THR">
+          <el-input v-model="form.fd0"></el-input>
+        </el-form-item>
         <el-form-item label="Pesangon">
           <el-input v-model="form.fe0"></el-input>
         </el-form-item>
@@ -143,7 +151,7 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'fc0', 'fe0',
+          '_id', 'd0', 'e0', 'fc0', 'fd0', 'fe0',
         ],
       }),
     };
@@ -171,6 +179,7 @@ export default {
                   employee: {
                     _id: this.form._id,
                     fc0: parseInt(this.form.fc0, 10),
+                    fd0: parseInt(this.form.fd0, 10),
                     fe0: parseInt(this.form.fe0, 10),
                     ff0: parseInt(this.form.fe0, 10) > 0,
                   },

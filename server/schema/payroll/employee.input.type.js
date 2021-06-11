@@ -216,6 +216,7 @@ const ManualInputType = new GraphQLInputObjectType({
   fields: () => ({
     _id: { type: GraphQLString },
     fc0: { type: GraphQLInt },
+    fd0: { type: GraphQLInt },
     fe0: { type: GraphQLInt },
     ff0: { type: GraphQLBoolean },
   }),
