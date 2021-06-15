@@ -27,6 +27,8 @@ const {
   genXLSSumIEmp,
   genPDFSumTax,
   genXLSSumTax,
+  genPDFSumAll,
+  genXLSSumAll,
 } = require('./method');
 const {
   sumBasic,
@@ -41,6 +43,7 @@ const {
   sumICo,
   sumIEmp,
   sumTax,
+  sumAll,
 } = require('./query');
 
 const Query = {
@@ -161,6 +164,16 @@ const Query = {
     },
     resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await sumTax(id);
+      return p;
+    }),
+  },
+  summaryAll: {
+    type: SummaryType,
+    args: {
+      id: { type: GraphQLInt },
+    },
+    resolve: auth.hasRole('guest', async (_, { id }) => {
+      const p = await sumAll(id);
       return p;
     }),
   },
@@ -428,6 +441,28 @@ const Mutation = {
     resolve: auth.hasRole('guest', async (_, { id }) => {
       const p = await sumTax(id);
       const s = await genXLSSumTax(p, id);
+      return s;
+    }),
+  },
+  genPDFSummaryAll: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLInt },
+    },
+    resolve: auth.hasRole('guest', async (_, { id }) => {
+      const p = await sumAll(id);
+      const s = await genPDFSumAll(p, id);
+      return s;
+    }),
+  },
+  genXLSSummaryAll: {
+    type: GenType,
+    args: {
+      id: { type: GraphQLInt },
+    },
+    resolve: auth.hasRole('guest', async (_, { id }) => {
+      const p = await sumAll(id);
+      const s = await genXLSSumAll(p, id);
       return s;
     }),
   },

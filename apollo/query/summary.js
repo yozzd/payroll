@@ -347,3 +347,30 @@ export const SummaryTax = gql`
     }
   }
 `;
+
+export const SummaryAll = gql`
+  query summaryAll($id: Int!) {
+    summaryAll(id: $id) {
+      employee {
+        _id
+        d0
+        e0
+        i0
+        u0
+        y0
+        tBasic
+        tOT
+        tAllow
+        tOAllow
+        tPesangon
+        tThr
+        tOIncome
+        tAbsent
+        tODeduction
+        tICo
+        tIEmp
+        tTax
+      }
+    }
+  }
+`;

@@ -58,6 +58,9 @@
             <el-menu-item index="l">
               Tax Ready Paid
             </el-menu-item>
+            <el-menu-item index="m">
+              All
+            </el-menu-item>
           </el-submenu>
         </el-menu>
       </div>
@@ -1182,6 +1185,7 @@ export default {
       else if (c === 'j') this.$router.push({ path: `/summary/ins-co/${id}` });
       else if (c === 'k') this.$router.push({ path: `/summary/ins-emp/${id}` });
       else if (c === 'l') this.$router.push({ name: 'summary-tax-id', params: { id } });
+      else if (c === 'm') this.$router.push({ name: 'summary-all-id', params: { id } });
     },
     handleConfirm(id) {
       this.$confirm('This will permanently delete the file. Continue?', 'Warning', {

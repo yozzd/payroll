@@ -984,6 +984,81 @@ const sumTax = async (id) => {
   return p[0];
 };
 
+
+
+const sumAll = async (id) => {
+  const p = await Payroll.aggregate([
+    { $match: { year: id } },
+    { $unwind: '$employee' },
+    {
+      $group: {
+        _id: {
+          e0: '$employee.e0',
+        },
+        d0: { $first: '$employee.d0' },
+        e0: { $first: '$employee.e0' },
+        i0: { $last: '$employee.i0' },
+        u0: { $last: '$employee.u0' },
+        y0: { $last: '$employee.y0' },
+        tBasic: { $sum: '$employee.l0' },
+        tOT: { $sum: '$employee.ai0' },
+        tAllow: { $sum: '$employee.bk0' },
+        tOAllow: { $sum: '$employee.bu0' },
+        tPesangon: { $sum: '$employee.en0' },
+        tThr: { $sum: '$employee.eq0' },
+        tOIncome: { $sum: '$employee.dr0' },
+        tAbsent: { $sum: '$employee.cy0' },
+        tODeduction: { $sum: '$employee.df0' },
+        tICo: { $sum: '$employee.cn0' },
+        tIEmp: { $sum: '$employee.er0' },
+        tTax: { $sum: '$employee.db0' },
+      },
+    },
+    { $sort: { '_id.e0': 1 } },
+    {
+      $group: {
+        _id: 'summary',
+        employee: {
+          $push: {
+            _id: '$e0',
+            d0: '$d0',
+            e0: '$e0',
+            i0: '$i0',
+            u0: '$u0',
+            y0: '$y0',
+            tBasic: '$tBasic',
+            tOT: '$tOT',
+            tAllow: '$tAllow',
+            tOAllow: '$tOAllow',
+            tPesangon: '$tPesangon',
+            tThr: '$tThr',
+            tOIncome: '$tOIncome',
+            tAbsent: '$tAbsent',
+            tODeduction: '$tODeduction',
+            tICo: '$tICo',
+            tIEmp: '$tIEmp',
+            tTax: '$tTax',
+          },
+        },
+        sBasic: { $sum: '$tBasic' },
+        sOT: { $sum: '$tOT' },
+        sAllow: { $sum: '$tAllow' },
+        sOAllow: { $sum: '$tOAllow' },
+        sPesangon: { $sum: '$tPesangon' },
+        sThr: { $sum: '$tThr' },
+        sOIncome: { $sum: '$tOIncome' },
+        sAbsent: { $sum: '$tAbsent' },
+        sODeduction: { $sum: '$tODeduction' },
+        sICo: { $sum: '$tICo' },
+        sIEmp: { $sum: '$tIEmp' },
+        sTax: { $sum: '$tTax' },
+      },
+    },
+  ]);
+
+  return p[0];
+};
+
 module.exports = {
   sumBasic,
   sumOT,
@@ -997,4 +1072,5 @@ module.exports = {
   sumICo,
   sumIEmp,
   sumTax,
+  sumAll,
 };

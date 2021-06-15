@@ -191,3 +191,19 @@ export const GenXLSSummaryTax = gql`
     }
   }
 `;
+
+export const GenPDFSummaryAll = gql`
+  mutation genPDFSummaryAll($id: Int!) {
+    genPDFSummaryAll(id: $id) {
+      sStatus
+    }
+  }
+`;
+
+export const GenXLSSummaryAll = gql`
+  mutation genXLSSummaryAll($id: Int!) {
+    genXLSSummaryAll(id: $id) {
+      sStatus
+    }
+  }
+`;

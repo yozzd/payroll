@@ -3594,6 +3594,288 @@ const genXLSSumTax = async (p, y) => {
   }
 };
 
+const genPDFSumAll = async (p, y) => {
+  try {
+    const { employee } = p;
+    await fs.ensureDir(`static/summary/${y}`);
+
+    const vw1 = [
+      [
+        {
+          text: 'No', bold: true, alignment: 'center',
+        },
+        {
+          text: 'No Karyawan', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Nama Karyawan', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Hire Date', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Position', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Department', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Basic', bold: true, alignment: 'center',
+        },
+        {
+          text: 'OT', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Allowance', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Other Allowance', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Pesangon, Serv.', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Thr, Leave', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Other Income', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Absent', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Other Deduction', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Ins. Paid By Co', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Ins. Paid By Emp', bold: true, alignment: 'center',
+        },
+        {
+          text: 'Tax Ready Paid', bold: true, alignment: 'center',
+        },
+      ],
+    ];
+
+    employee.map((e, i) => {
+      vw1.push([
+        { text: (i + 1), alignment: 'center' }, { text: e.e0, alignment: 'center' },
+        e.d0, { text: idDateFormat(e.i0, 'dd-MM-yyyy'), alignment: 'center' }, e.y0, e.u0,
+        { text: intpre0(e.tBasic).format(), alignment: 'right' },
+        { text: intpre0(e.tOT).format(), alignment: 'right' },
+        { text: intpre0(e.tAllow).format(), alignment: 'right' },
+        { text: intpre0(e.tOAllow).format(), alignment: 'right' },
+        { text: intpre0(e.tPesangon).format(), alignment: 'right' },
+        { text: intpre0(e.tThr).format(), alignment: 'right' },
+        { text: intpre0(e.tOIncome).format(), alignment: 'right' },
+        { text: intpre0(e.tAbsent).format(), alignment: 'right' },
+        { text: intpre0(e.tODeduction).format(), alignment: 'right' },
+        { text: intpre0(e.tICo).format(), alignment: 'right' },
+        { text: intpre0(e.tIEmp).format(), alignment: 'right' },
+        { text: intpre0(e.tTax).format(), alignment: 'right' },
+      ]);
+
+      return true;
+    });
+
+    vw1.push([
+      '', '', '', '', '', '',
+      { text: intpre0(p.sBasic).format(), alignment: 'right' },
+      { text: intpre0(p.sOT).format(), alignment: 'right' },
+      { text: intpre0(p.sAllow).format(), alignment: 'right' },
+      { text: intpre0(p.sOAllow).format(), alignment: 'right' },
+      { text: intpre0(p.sPesangon).format(), alignment: 'right' },
+      { text: intpre0(p.sThr).format(), alignment: 'right' },
+      { text: intpre0(p.sOIncome).format(), alignment: 'right' },
+      { text: intpre0(p.sAbsent).format(), alignment: 'right' },
+      { text: intpre0(p.sODeduction).format(), alignment: 'right' },
+      { text: intpre0(p.sICo).format(), alignment: 'right' },
+      { text: intpre0(p.sIEmp).format(), alignment: 'right' },
+      { text: intpre0(p.sTax).format(), alignment: 'right' },
+    ]);
+
+    const docDefinition = {
+      pageSize: 'A3',
+      pageOrientation: 'landscape',
+      footer: (currentPage, pageCount) => ({
+        columns: [
+          { text: `${currentPage.toString()} / ${pageCount}`, fontSize: 8, margin: [20, 0] },
+        ],
+      }),
+      content: [
+        {
+          style: 'tbl1',
+          table: {
+            widths: [170, 540, 200, 135],
+            body: [
+              [{
+                image: 'static/images/logo.png', width: 60, rowSpan: 2, border: [false, false, false, false],
+              }, { text: '', border: [false, false, false, false] }, {
+                text: 'PT. LABTECH PENTA INTERNATIONAL', bold: true, fontSize: 8, border: [false, false, false, true],
+              }, {
+                text: 'Summary', bold: true, fontSize: 8, alignment: 'right', border: [false, false, false, true],
+              }],
+              ['', { text: '', border: [false, false, false, false] }, { text: 'Kawasan Industri Sekupang Kav. 34 Batam - Indonesia', border: [false, false, false, false] }, {
+                text: '', border: [false, false, false, false],
+              }],
+            ],
+          },
+        },
+        {
+          style: 'tbl2',
+          table: {
+            widths: [110, 412],
+            body: [
+              [{
+                text: `Summary - January - December ${y}`, colSpan: 2, fontSize: 10, bold: true, margin: [0, 15, 0, 10],
+              }, ''],
+            ],
+          },
+          layout: 'noBorders',
+        },
+        {
+          style: 'tbl3',
+          table: {
+            widths: [
+              15, 30, 130, 40, 60, 120, 40, 40,
+              40, 40, 40, 40, 40, 40, 40, 40,
+              40, 40, 40,
+            ],
+            body: vw1,
+          },
+        },
+      ],
+      styles: {
+        tbl1: {
+          fontSize: 8,
+          margin: [-10, -10, -10, 0],
+        },
+        tbl2: {
+          fontSize: 8,
+          margin: [-10, 40, -10, 10],
+        },
+        tbl3: {
+          fontSize: 6,
+          margin: [-10, -10, -10, 0],
+        },
+      },
+    };
+
+    return new Promise((resolve) => {
+      const pdfDoc = printer.createPdfKitDocument(docDefinition);
+      pdfDoc.pipe(fs.createWriteStream(`static/summary/${y}/${y}_sum_all.pdf`));
+      pdfDoc.on('end', () => {
+        resolve({ sStatus: 1 });
+      });
+      pdfDoc.end();
+    });
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
+};
+
+const genXLSSumAll = async (p, y) => {
+  try {
+    const { employee: e } = p;
+    await fs.ensureDir(`static/summary/${y}`);
+
+    const len = e.length + 4;
+    const wb = {
+      SheetNames: ['Sheet1'],
+      Sheets: {
+        Sheet1: {
+          '!ref': `A1:R${len}`,
+          A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
+          A2: { t: 's', v: `Summary - January - December ${y}` },
+          A3: { t: 's', v: 'No' },
+          B3: { t: 's', v: 'No Karyawan' },
+          C3: { t: 's', v: 'Nama Karyawan' },
+          D3: { t: 's', v: 'Hired Date' },
+          E3: { t: 's', v: 'Position' },
+          F3: { t: 's', v: 'Department' },
+          G3: { t: 's', v: 'Basic' },
+          H3: { t: 's', v: 'OT' },
+          I3: { t: 's', v: 'Allowance' },
+          J3: { t: 's', v: 'Other Allowance' },
+          K3: { t: 's', v: 'Pesangon, Serv.' },
+          L3: { t: 's', v: 'Thr, Leave' },
+          M3: { t: 's', v: 'Other Income' },
+          N3: { t: 's', v: 'Absent' },
+          O3: { t: 's', v: 'Other Deduction' },
+          P3: { t: 's', v: 'Ins. Paid By Co' },
+          Q3: { t: 's', v: 'Ins. Paid By Emp' },
+          R3: { t: 's', v: 'Tax Ready Paid' },
+          '!cols': [
+            { wpx: 26 }, { wpx: 65 }, { wpx: 240 }, { wpx: 65 },
+            { wpx: 120 }, { wpx: 200 }, { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 }, { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 }, { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 }, { wpx: 90 },
+          ],
+        },
+      },
+    };
+
+    let row = 3;
+    e.map((t, i) => {
+      row += 1;
+      wb.Sheets.Sheet1[`A${row}`] = { t: 'n', v: i + 1 };
+      wb.Sheets.Sheet1[`B${row}`] = { t: 's', v: t.e0 };
+      wb.Sheets.Sheet1[`C${row}`] = { t: 's', v: t.d0 };
+      wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: idDateFormat(t.i0, 'dd-MM-yyyy') };
+      wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: t.y0 };
+      wb.Sheets.Sheet1[`F${row}`] = { t: 's', v: t.u0 };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: t.tBasic, z: '#,##0' };
+      wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: t.tOT, z: '#,##0' };
+      wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: t.tAllow, z: '#,##0' };
+      wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: t.tOAllow, z: '#,##0' };
+      wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: t.tPesangon, z: '#,##0' };
+      wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: t.tThr, z: '#,##0' };
+      wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: t.tOIncome, z: '#,##0' };
+      wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: t.tAbsent, z: '#,##0' };
+      wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: t.tODeduction, z: '#,##0' };
+      wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: t.tICo, z: '#,##0' };
+      wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: t.tIEmp, z: '#,##0' };
+      wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: t.tTax, z: '#,##0' };
+
+      return true;
+    });
+
+    row += 1;
+    wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: p.sBasic, z: '#,##0' };
+    wb.Sheets.Sheet1[`H${row}`] = { t: 'n', v: p.sOT, z: '#,##0' };
+    wb.Sheets.Sheet1[`I${row}`] = { t: 'n', v: p.sAllow, z: '#,##0' };
+    wb.Sheets.Sheet1[`J${row}`] = { t: 'n', v: p.sOAllow, z: '#,##0' };
+    wb.Sheets.Sheet1[`K${row}`] = { t: 'n', v: p.sPesangon, z: '#,##0' };
+    wb.Sheets.Sheet1[`L${row}`] = { t: 'n', v: p.sThr, z: '#,##0' };
+    wb.Sheets.Sheet1[`M${row}`] = { t: 'n', v: p.sOIncome, z: '#,##0' };
+    wb.Sheets.Sheet1[`N${row}`] = { t: 'n', v: p.sAbsent, z: '#,##0' };
+    wb.Sheets.Sheet1[`O${row}`] = { t: 'n', v: p.sODeduction, z: '#,##0' };
+    wb.Sheets.Sheet1[`P${row}`] = { t: 'n', v: p.sICo, z: '#,##0' };
+    wb.Sheets.Sheet1[`Q${row}`] = { t: 'n', v: p.sIEmp, z: '#,##0' };
+    wb.Sheets.Sheet1[`R${row}`] = { t: 'n', v: p.sTax, z: '#,##0' };
+
+    const fn = `static/summary/${y}/${y}_sum_all.xlsx`;
+    const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
+    fs.writeFileSync(fn, content);
+
+    return XlsxPopulate.fromFileAsync(fn)
+      .then((workbook) => workbook.toFileAsync(fn, { password: xlsPass })
+        .then(() => ({ sStatus: 1 })));
+  } catch (err) {
+    if (typeof err === 'string') {
+      throw new GraphQLError(err);
+    } else {
+      throw new GraphQLError(err.message);
+    }
+  }
+};
+
 module.exports = {
   genPDFSumBasic,
   genXLSSumBasic,
@@ -3619,4 +3901,6 @@ module.exports = {
   genXLSSumIEmp,
   genPDFSumTax,
   genXLSSumTax,
+  genPDFSumAll,
+  genXLSSumAll,
 };
