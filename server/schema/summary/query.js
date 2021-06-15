@@ -945,8 +945,7 @@ const sumTax = async (id) => {
             okt2: '$okt2',
             nov2: '$nov2',
             des2: '$des2',
-            tTax1: { $sum: ['$jan1', '$feb1', '$mar1', '$apr1', '$mei1', '$jun1', '$jul1', '$agu1', '$sep1', '$okt1', '$nov1', '$des1'] },
-            tTax2: { $sum: ['$jan2', '$feb2', '$mar2', '$apr2', '$mei2', '$jun2', '$jul2', '$agu2', '$sep2', '$okt2', '$nov2', '$des2'] },
+            tTax: { $sum: ['$jan1', '$feb1', '$mar1', '$apr1', '$mei1', '$jun1', '$jul1', '$agu1', '$sep1', '$okt1', '$nov1', '$des1', '$jan2', '$feb2', '$mar2', '$apr2', '$mei2', '$jun2', '$jul2', '$agu2', '$sep2', '$okt2', '$nov2', '$des2'] },
           },
         },
         totJan1: { $sum: '$jan1' },
@@ -977,8 +976,7 @@ const sumTax = async (id) => {
     },
     {
       $addFields: {
-        sTax1: { $sum: ['$totJan1', '$totFeb1', '$totMar1', '$totApr1', '$totMei1', '$totJun1', '$totJul1', '$totAgu1', '$totSep1', '$totOkt1', '$totNov1', '$totDes1'] },
-        sTax2: { $sum: ['$totJan2', '$totFeb2', '$totMar2', '$totApr2', '$totMei2', '$totJun2', '$totJul2', '$totAgu2', '$totSep2', '$totOkt2', '$totNov2', '$totDes2'] },
+        sTax: { $sum: ['$totJan1', '$totFeb1', '$totMar1', '$totApr1', '$totMei1', '$totJun1', '$totJul1', '$totAgu1', '$totSep1', '$totOkt1', '$totNov1', '$totDes1', '$totJan2', '$totFeb2', '$totMar2', '$totApr2', '$totMei2', '$totJun2', '$totJul2', '$totAgu2', '$totSep2', '$totOkt2', '$totNov2', '$totDes2'] },
       },
     },
   ]);

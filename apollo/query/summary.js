@@ -342,8 +342,7 @@ export const SummaryTax = gql`
         okt2
         nov2
         des2
-        tTax1
-        tTax2
+        tTax
       }
     }
   }

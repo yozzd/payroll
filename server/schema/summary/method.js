@@ -223,7 +223,7 @@ const genXLSSumBasic = async (p, y) => {
           A3: { t: 's', v: 'No' },
           B3: { t: 's', v: 'No Karyawan' },
           C3: { t: 's', v: 'Nama Karyawan' },
-          D3: { t: 's', v: 'Hired Date.' },
+          D3: { t: 's', v: 'Hired Date' },
           E3: { t: 's', v: 'Position' },
           F3: { t: 's', v: 'Department' },
           G3: { t: 's', v: 'January' },
@@ -513,7 +513,7 @@ const genXLSSumOT = async (p, y) => {
           A3: { t: 's', v: 'No' },
           B3: { t: 's', v: 'No Karyawan' },
           C3: { t: 's', v: 'Nama Karyawan' },
-          D3: { t: 's', v: 'Hired Date.' },
+          D3: { t: 's', v: 'Hired Date' },
           E3: { t: 's', v: 'Position' },
           F3: { t: 's', v: 'Department' },
           G3: { t: 's', v: 'January' },
@@ -803,7 +803,7 @@ const genXLSSumAllow = async (p, y) => {
           A3: { t: 's', v: 'No' },
           B3: { t: 's', v: 'No Karyawan' },
           C3: { t: 's', v: 'Nama Karyawan' },
-          D3: { t: 's', v: 'Hired Date.' },
+          D3: { t: 's', v: 'Hired Date' },
           E3: { t: 's', v: 'Position' },
           F3: { t: 's', v: 'Department' },
           G3: { t: 's', v: 'January' },
@@ -1093,7 +1093,7 @@ const genXLSSumOAllow = async (p, y) => {
           A3: { t: 's', v: 'No' },
           B3: { t: 's', v: 'No Karyawan' },
           C3: { t: 's', v: 'Nama Karyawan' },
-          D3: { t: 's', v: 'Hired Date.' },
+          D3: { t: 's', v: 'Hired Date' },
           E3: { t: 's', v: 'Position' },
           F3: { t: 's', v: 'Department' },
           G3: { t: 's', v: 'January' },
@@ -1383,7 +1383,7 @@ const genXLSSumPesangon = async (p, y) => {
           A3: { t: 's', v: 'No' },
           B3: { t: 's', v: 'No Karyawan' },
           C3: { t: 's', v: 'Nama Karyawan' },
-          D3: { t: 's', v: 'Hired Date.' },
+          D3: { t: 's', v: 'Hired Date' },
           E3: { t: 's', v: 'Position' },
           F3: { t: 's', v: 'Department' },
           G3: { t: 's', v: 'January' },
@@ -1673,7 +1673,7 @@ const genXLSSumThr = async (p, y) => {
           A3: { t: 's', v: 'No' },
           B3: { t: 's', v: 'No Karyawan' },
           C3: { t: 's', v: 'Nama Karyawan' },
-          D3: { t: 's', v: 'Hired Date.' },
+          D3: { t: 's', v: 'Hired Date' },
           E3: { t: 's', v: 'Position' },
           F3: { t: 's', v: 'Department' },
           G3: { t: 's', v: 'January' },
@@ -1963,7 +1963,7 @@ const genXLSSumOIncome = async (p, y) => {
           A3: { t: 's', v: 'No' },
           B3: { t: 's', v: 'No Karyawan' },
           C3: { t: 's', v: 'Nama Karyawan' },
-          D3: { t: 's', v: 'Hired Date.' },
+          D3: { t: 's', v: 'Hired Date' },
           E3: { t: 's', v: 'Position' },
           F3: { t: 's', v: 'Department' },
           G3: { t: 's', v: 'January' },
@@ -2253,7 +2253,7 @@ const genXLSSumAbsent = async (p, y) => {
           A3: { t: 's', v: 'No' },
           B3: { t: 's', v: 'No Karyawan' },
           C3: { t: 's', v: 'Nama Karyawan' },
-          D3: { t: 's', v: 'Hired Date.' },
+          D3: { t: 's', v: 'Hired Date' },
           E3: { t: 's', v: 'Position' },
           F3: { t: 's', v: 'Department' },
           G3: { t: 's', v: 'January' },
@@ -2543,7 +2543,7 @@ const genXLSSumODeduction = async (p, y) => {
           A3: { t: 's', v: 'No' },
           B3: { t: 's', v: 'No Karyawan' },
           C3: { t: 's', v: 'Nama Karyawan' },
-          D3: { t: 's', v: 'Hired Date.' },
+          D3: { t: 's', v: 'Hired Date' },
           E3: { t: 's', v: 'Position' },
           F3: { t: 's', v: 'Department' },
           G3: { t: 's', v: 'January' },
@@ -2833,7 +2833,7 @@ const genXLSSumICo = async (p, y) => {
           A3: { t: 's', v: 'No' },
           B3: { t: 's', v: 'No Karyawan' },
           C3: { t: 's', v: 'Nama Karyawan' },
-          D3: { t: 's', v: 'Hired Date.' },
+          D3: { t: 's', v: 'Hired Date' },
           E3: { t: 's', v: 'Position' },
           F3: { t: 's', v: 'Department' },
           G3: { t: 's', v: 'January' },
@@ -3123,7 +3123,7 @@ const genXLSSumIEmp = async (p, y) => {
           A3: { t: 's', v: 'No' },
           B3: { t: 's', v: 'No Karyawan' },
           C3: { t: 's', v: 'Nama Karyawan' },
-          D3: { t: 's', v: 'Hired Date.' },
+          D3: { t: 's', v: 'Hired Date' },
           E3: { t: 's', v: 'Position' },
           F3: { t: 's', v: 'Department' },
           G3: { t: 's', v: 'January' },
@@ -3269,8 +3269,8 @@ const genPDFSumTax = async (p, y) => {
           text: 'December', bold: true, alignment: 'center', colSpan: 2,
         }, '',
         {
-          text: 'Total', bold: true, alignment: 'center', colSpan: 2,
-        }, '',
+          text: 'Total', bold: true, alignment: 'center', rowSpan: 2,
+        },
       ],
       [
         '', '', '', '', '', '',
@@ -3286,7 +3286,7 @@ const genPDFSumTax = async (p, y) => {
         { text: 'DTP', bold: true, alignment: 'center' }, { text: 'Non DTP', bold: true, alignment: 'center' },
         { text: 'DTP', bold: true, alignment: 'center' }, { text: 'Non DTP', bold: true, alignment: 'center' },
         { text: 'DTP', bold: true, alignment: 'center' }, { text: 'Non DTP', bold: true, alignment: 'center' },
-        { text: 'DTP', bold: true, alignment: 'center' }, { text: 'Non DTP', bold: true, alignment: 'center' },
+        '',
       ],
     ];
 
@@ -3306,7 +3306,7 @@ const genPDFSumTax = async (p, y) => {
         { text: intpre0(e.okt1).format(), alignment: 'right' }, { text: intpre0(e.okt2).format(), alignment: 'right' },
         { text: intpre0(e.nov1).format(), alignment: 'right' }, { text: intpre0(e.nov2).format(), alignment: 'right' },
         { text: intpre0(e.des1).format(), alignment: 'right' }, { text: intpre0(e.des2).format(), alignment: 'right' },
-        { text: intpre0(e.tTax1).format(), alignment: 'right' }, { text: intpre0(e.tTax2).format(), alignment: 'right' },
+        { text: intpre0(e.tTax).format(), alignment: 'right' },
       ]);
 
       return true;
@@ -3326,7 +3326,7 @@ const genPDFSumTax = async (p, y) => {
       { text: intpre0(p.totOkt1).format(), alignment: 'right' }, { text: intpre0(p.totOkt2).format(), alignment: 'right' },
       { text: intpre0(p.totNov1).format(), alignment: 'right' }, { text: intpre0(p.totNov2).format(), alignment: 'right' },
       { text: intpre0(p.totDes1).format(), alignment: 'right' }, { text: intpre0(p.totDes2).format(), alignment: 'right' },
-      { text: intpre0(p.sTax1).format(), alignment: 'right' }, { text: intpre0(p.sTax2).format(), alignment: 'right' },
+      { text: intpre0(p.sTax).format(), alignment: 'right' },
     ]);
 
     const docDefinition = {
@@ -3424,13 +3424,13 @@ const genXLSSumTax = async (p, y) => {
       SheetNames: ['Sheet1'],
       Sheets: {
         Sheet1: {
-          '!ref': `A1:AF${len}`,
+          '!ref': `A1:AE${len}`,
           A1: { t: 's', v: 'PT. LABTECH PENTA INTERNATIONAL' },
           A2: { t: 's', v: `Summary Tax - January - December ${y}` },
           A3: { t: 's', v: 'No' },
           B3: { t: 's', v: 'No Karyawan' },
           C3: { t: 's', v: 'Nama Karyawan' },
-          D3: { t: 's', v: 'Hired Date.' },
+          D3: { t: 's', v: 'Hired Date' },
           E3: { t: 's', v: 'Position' },
           F3: { t: 's', v: 'Department' },
           G3: { t: 's', v: 'January' },
@@ -3470,11 +3470,9 @@ const genXLSSumTax = async (p, y) => {
           AC4: { t: 's', v: 'DTP' },
           AD4: { t: 's', v: 'Non DTP' },
           AE3: { t: 's', v: 'Total' },
-          AE4: { t: 's', v: 'DTP' },
-          AF4: { t: 's', v: 'Non DTP' },
           '!merges': [
-            { s: { r: 0, c: 0 }, e: { r: 0, c: 31 } },
-            { s: { r: 1, c: 0 }, e: { r: 1, c: 31 } },
+            { s: { r: 0, c: 0 }, e: { r: 0, c: 30 } },
+            { s: { r: 1, c: 0 }, e: { r: 1, c: 30 } },
             { s: { r: 2, c: 0 }, e: { r: 3, c: 0 } },
             { s: { r: 2, c: 1 }, e: { r: 3, c: 1 } },
             { s: { r: 2, c: 2 }, e: { r: 3, c: 2 } },
@@ -3493,7 +3491,7 @@ const genXLSSumTax = async (p, y) => {
             { s: { r: 2, c: 24 }, e: { r: 2, c: 25 } },
             { s: { r: 2, c: 26 }, e: { r: 2, c: 27 } },
             { s: { r: 2, c: 28 }, e: { r: 2, c: 29 } },
-            { s: { r: 2, c: 30 }, e: { r: 2, c: 31 } },
+            { s: { r: 2, c: 30 }, e: { r: 3, c: 30 } },
           ],
           '!cols': [
             { wpx: 26 }, { wpx: 65 }, { wpx: 240 }, { wpx: 65 },
@@ -3509,7 +3507,7 @@ const genXLSSumTax = async (p, y) => {
             { wpx: 90 }, { wpx: 90 },
             { wpx: 90 }, { wpx: 90 },
             { wpx: 90 }, { wpx: 90 },
-            { wpx: 90 }, { wpx: 90 },
+            { wpx: 90 },
           ],
         },
       },
@@ -3548,8 +3546,7 @@ const genXLSSumTax = async (p, y) => {
       wb.Sheets.Sheet1[`AB${row}`] = { t: 'n', v: t.nov2, z: '#,##0' };
       wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: t.des1, z: '#,##0' };
       wb.Sheets.Sheet1[`AD${row}`] = { t: 'n', v: t.des2, z: '#,##0' };
-      wb.Sheets.Sheet1[`AE${row}`] = { t: 'n', v: t.tTax1, z: '#,##0' };
-      wb.Sheets.Sheet1[`AF${row}`] = { t: 'n', v: t.tTax2, z: '#,##0' };
+      wb.Sheets.Sheet1[`AE${row}`] = { t: 'n', v: t.tTax, z: '#,##0' };
 
       return true;
     });
@@ -3579,8 +3576,7 @@ const genXLSSumTax = async (p, y) => {
     wb.Sheets.Sheet1[`AB${row}`] = { t: 'n', v: p.totNov2, z: '#,##0' };
     wb.Sheets.Sheet1[`AC${row}`] = { t: 'n', v: p.totDes1, z: '#,##0' };
     wb.Sheets.Sheet1[`AD${row}`] = { t: 'n', v: p.totDes2, z: '#,##0' };
-    wb.Sheets.Sheet1[`AE${row}`] = { t: 'n', v: p.sTax1, z: '#,##0' };
-    wb.Sheets.Sheet1[`AF${row}`] = { t: 'n', v: p.sTax2, z: '#,##0' };
+    wb.Sheets.Sheet1[`AE${row}`] = { t: 'n', v: p.sTax, z: '#,##0' };
 
     const fn = `static/summary/${y}/${y}_sum_tax.xlsx`;
     const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });

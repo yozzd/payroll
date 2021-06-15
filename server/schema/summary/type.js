@@ -63,8 +63,7 @@ const EmpSummaryType = new GraphQLObjectType({
     tODeduction: { type: GraphQLFloat },
     tICo: { type: GraphQLFloat },
     tIEmp: { type: GraphQLFloat },
-    tTax1: { type: GraphQLFloat },
-    tTax2: { type: GraphQLFloat },
+    tTax: { type: GraphQLFloat },
   }),
 });
 

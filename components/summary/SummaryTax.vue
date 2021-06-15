@@ -220,17 +220,10 @@
           </template>
         </el-table-column>
       </el-table-column>
-      <el-table-column label="Total" align="center">
-        <el-table-column label="DTP" prop="tTax1" width="120" align="right">
-          <template slot-scope="scope">
-            <span>{{ scope.row.tTax1 | currency }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="Non DTP" prop="tTax2" width="120" align="right">
-          <template slot-scope="scope">
-            <span>{{ scope.row.tTax2 | currency }}</span>
-          </template>
-        </el-table-column>
+      <el-table-column label="Total" prop="tTax" width="120" align="right">
+        <template slot-scope="scope">
+          <span>{{ scope.row.tTax | currency }}</span>
+        </template>
       </el-table-column>
       <el-table-column min-width="120"></el-table-column>
     </el-table>
@@ -267,9 +260,9 @@ export default {
         storeFields: [
           '_id', 'd0', 'e0', 'i0', 'y0', 'u0',
           'jan1', 'feb1', 'mar1', 'apr1', 'mei1', 'jun1',
-          'jul1', 'agu1', 'sep1', 'okt1', 'nov1', 'des1', 'tTax1',
+          'jul1', 'agu1', 'sep1', 'okt1', 'nov1', 'des1',
           'jan2', 'feb2', 'mar2', 'apr2', 'mei2', 'jun2',
-          'jul2', 'agu2', 'sep2', 'okt2', 'nov2', 'des2', 'tTax2',
+          'jul2', 'agu2', 'sep2', 'okt2', 'nov2', 'des2', 'tTax',
         ],
       }),
     };
