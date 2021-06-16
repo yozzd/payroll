@@ -12,7 +12,7 @@
         </el-link>
       </div>
       <div class="flex-1"></div>
-      <div>
+      <div v-if="$auth.hasRole('admin')">
         <el-menu
           mode="horizontal"
           class="dropmenu"
