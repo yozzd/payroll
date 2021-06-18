@@ -1669,7 +1669,7 @@ const genFinal = async (p) => {
         {
           style: 'tbl4',
           table: {
-            widths: [100, 130, 40, 130, 100],
+            widths: [50, 130, 40, 180, 50],
             body: [
               ['', { text: 'No. Karyawan' }, { text: ':', alignment: 'center' }, { text: e.e0 }, ''],
               ['', { text: 'Nama Karyawan' }, { text: ':', alignment: 'center' }, { text: e.d0 }, ''],
