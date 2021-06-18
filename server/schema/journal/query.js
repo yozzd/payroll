@@ -21,6 +21,8 @@ const journal = async (id) => {
         en0: { $sum: '$employee.en0' },
         eq0: { $sum: '$employee.eq0' },
         dn0: { $sum: '$employee.dn0' },
+        di0: { $sum: '$employee.di0' },
+        dg0: { $sum: '$employee.dg0' },
         bonus: { $sum: '$employee.dr0' },
         retro: { $sum: '$employee.bu0' },
         ot: { $sum: '$employee.ai0' },
@@ -43,7 +45,6 @@ const journal = async (id) => {
         ec0: { $sum: '$employee.ec0' },
         finalPay: { $sum: { $cond: { if: { $and: [{ $eq: ['$employee.ex0', true] }, { $ne: ['$employee.ff0', true] }] }, then: '$employee.ed0', else: 0 } } },
         ed0: { $sum: '$employee.ed0' },
-        retroPay: { $sum: '$employee.di0' },
         toolroom: { $sum: '$employee.dh0' },
         canteen: { $sum: '$employee.dl0' },
         loan: { $sum: '$employee.dk0' },
@@ -57,6 +58,7 @@ const journal = async (id) => {
     },
     {
       $addFields: {
+        retroPay: { $sum: ['$di0', '$dg0'] },
         salary: { $subtract: ['$l0', { $sum: ['$cy0', '$df0'] }] },
         expat: { $subtract: ['$ed0', { $sum: ['$finalPay', '$pesangonPay', '$mangkirPay'] }] },
         gross: {
