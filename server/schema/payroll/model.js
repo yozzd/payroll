@@ -560,7 +560,8 @@ EmployeeSchema.pre('save', async function fn(next) {
     v1 = pph21;
     v2 = pph21 * 1.2;
   } else {
-    v1 = Math.floor(pph21 / 100) * 100;
+    const v0 = Math.floor(pph21 / 100) * 100;
+    v1 = v0 <= 200 ? 0 : v0;
     v2 = Math.floor((pph21 * 1.2) / 100) * 100;
   }
 
@@ -571,7 +572,7 @@ EmployeeSchema.pre('save', async function fn(next) {
     this.cz0 = 0;
     this.da0 = this.fc0;
   } else if (!this.fc0 && this.p0 === 'Yes') {
-    this.cz0 = v1 <= 200 ? 0 : v1;
+    this.cz0 = v1;
     this.da0 = 0;
   } else {
     this.cz0 = 0;

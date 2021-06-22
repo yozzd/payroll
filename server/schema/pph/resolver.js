@@ -281,16 +281,29 @@ const Mutation = {
             },
             t11a: {
               $function: {
-                body: `function(a, b, c) {
+                body: `function(a, b, c, d) {
+                  const dt1 = new Date(d);
+                  const dt2 = new Date('2021-06-21');
+                  
+                  let v1; let
+                    v2 = 0;
+                  if (dt1.getTime() >= dt2.getTime()) {
+                    v1 = c;
+                    v2 = c * 1.2;
+                  } else {
+                    const v0 = Math.floor(c / 100) * 100;
+                    v1 = v0 <= 200 ? 0 : v0;
+                    v2 = Math.floor((c * 1.2) / 100) * 100;
+                  }
+                  
                   if (a) {
                     return a;
                   } if (!a && b === 'Yes') {
-                    const v = Math.floor(c / 100) * 100;
-                    return (v <= 200 ? 0 : v);
+                    return v1;
                   }
-                  return (Math.floor((c * 1.2) / 100) * 100);
+                  return v2;
                 }`,
-                args: ['$fc0', '$p0', '$t10a'],
+                args: ['$fc0', '$p0', '$t10a', '$to'],
                 lang: 'js',
               },
             },
@@ -301,31 +314,57 @@ const Mutation = {
           $addFields: {
             t11b: {
               $function: {
-                body: `function(a, b, c) {
+                body: `function(a, b, c, d) {
+                  const dt1 = new Date(d);
+                  const dt2 = new Date('2021-06-21');
+                  
+                  let v1; let
+                    v2 = 0;
+                  if (dt1.getTime() >= dt2.getTime()) {
+                    v1 = c;
+                    v2 = c * 1.2;
+                  } else {
+                    const v0 = Math.floor(c / 100) * 100;
+                    v1 = v0 <= 200 ? 0 : v0;
+                    v2 = Math.floor((c * 1.2) / 100) * 100;
+                  }
+                  
                   if (a) {
                     return a;
                   } if (!a && b === 'Yes') {
-                    const v = Math.floor(c / 100) * 100;
-                    return (v <= 200 ? 0 : v);
+                    return v1;
                   }
-                  return (Math.floor((c * 1.2) / 100) * 100);
+                  return v2;
                 }`,
-                args: ['$fc0', '$p0', '$t10b'],
+                args: ['$fc0', '$p0', '$t10b', '$to'],
                 lang: 'js',
               },
             },
             t11c: {
               $function: {
-                body: `function(a, b, c) {
+                body: `function(a, b, c, d) {
+                  const dt1 = new Date(d);
+                  const dt2 = new Date('2021-06-21');
+                  
+                  let v1; let
+                    v2 = 0;
+                  if (dt1.getTime() >= dt2.getTime()) {
+                    v1 = c;
+                    v2 = c * 1.2;
+                  } else {
+                    const v0 = Math.floor(c / 100) * 100;
+                    v1 = v0 <= 200 ? 0 : v0;
+                    v2 = Math.floor((c * 1.2) / 100) * 100;
+                  }
+                  
                   if (a) {
                     return a;
                   } if (!a && b === 'Yes') {
-                    const v = Math.floor(c / 100) * 100;
-                    return (v <= 200 ? 0 : v);
+                    return v1;
                   }
-                  return (Math.floor((c * 1.2) / 100) * 100);
+                  return v2;
                 }`,
-                args: ['$fc0', '$p0', '$t10c'],
+                args: ['$fc0', '$p0', '$t10c', '$to'],
                 lang: 'js',
               },
             },
