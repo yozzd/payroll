@@ -3230,7 +3230,7 @@ const genPDFSumTax = async (p, y) => {
           text: 'Position', bold: true, alignment: 'center', rowSpan: 2,
         },
         {
-          text: 'Department', bold: true, alignment: 'center', rowSpan: 2
+          text: 'Department', bold: true, alignment: 'center', rowSpan: 2,
         },
         {
           text: 'January', bold: true, alignment: 'center', colSpan: 2,

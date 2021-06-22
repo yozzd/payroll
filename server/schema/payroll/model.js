@@ -551,6 +551,19 @@ EmployeeSchema.pre('save', async function fn(next) {
     pph21 = pph21Tahunan === 0 ? 0 : Math.round(pph21Tahunan / this.ea0);
   }
 
+  const dt1 = new Date(this.ownerDocument().to);
+  const dt2 = new Date('2021-06-21');
+
+  let v1; let
+    v2 = 0;
+  if (dt1.getTime() >= dt2.getTime()) {
+    v1 = pph21;
+    v2 = pph21 * 1.2;
+  } else {
+    v1 = Math.floor(pph21 / 100) * 100;
+    v2 = Math.floor((pph21 * 1.2) / 100) * 100;
+  }
+
   if (this.fc0 && this.p0 === 'Yes') {
     this.cz0 = this.fc0;
     this.da0 = 0;
@@ -558,12 +571,11 @@ EmployeeSchema.pre('save', async function fn(next) {
     this.cz0 = 0;
     this.da0 = this.fc0;
   } else if (!this.fc0 && this.p0 === 'Yes') {
-    const v = Math.floor(pph21 / 100) * 100;
-    this.cz0 = v <= 200 ? 0 : v;
+    this.cz0 = v1 <= 200 ? 0 : v1;
     this.da0 = 0;
   } else {
     this.cz0 = 0;
-    this.da0 = Math.floor((pph21 * 1.2) / 100) * 100;
+    this.da0 = v2;
   }
 
   this.db0 = this.cz0 + this.da0;

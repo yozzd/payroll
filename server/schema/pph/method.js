@@ -19,6 +19,20 @@ const genPDF = async (p) => {
 
     const widths = [10, 140, 80];
 
+    const dt1 = new Date(p.to);
+    const dt2 = new Date('2021-06-21');
+    let pphm1; let pphm2; let
+      pphm3 = 0;
+    if (dt1.getTime() >= dt2.getTime()) {
+      pphm1 = p.t10a;
+      pphm2 = p.t10b;
+      pphm3 = p.t10c;
+    } else {
+      pphm1 = p.t11a;
+      pphm2 = p.t11b;
+      pphm3 = p.t11c;
+    }
+
     const col1 = [
       [{
         text: 'Pph21 Bulanan', border: [false, false, false, false], colSpan: 3, alignment: 'center', bold: true, fontSize: 8,
@@ -123,7 +137,7 @@ const genPDF = async (p) => {
         text: '', border: [true, false, true, false], colSpan: 3,
       }, '', ''],
       [{ text: '', border: [true, false, false, false] }, { text: 'Pph21 Bulanan', border: [false, false, false, false] }, {
-        text: intpre0(p.t11a).format(), border: [false, false, true, false], alignment: 'right',
+        text: intpre0(pphm1).format(), border: [false, false, true, false], alignment: 'right',
       }],
       [{
         text: '', border: [true, false, true, true], colSpan: 3,
@@ -234,7 +248,7 @@ const genPDF = async (p) => {
         text: '', border: [true, false, true, false], colSpan: 3,
       }, '', ''],
       [{ text: '', border: [true, false, false, false] }, { text: 'Pph21 Bulanan', border: [false, false, false, false] }, {
-        text: intpre0(p.t11b).format(), border: [false, false, true, false], alignment: 'right',
+        text: intpre0(pphm2).format(), border: [false, false, true, false], alignment: 'right',
       }],
       [{
         text: '', border: [true, false, true, true], colSpan: 3,
@@ -357,7 +371,7 @@ const genPDF = async (p) => {
         text: '', border: [true, false, true, false], colSpan: 3,
       }, '', ''],
       [{ text: '', border: [true, false, false, false] }, { text: 'Pph21 Bulanan', border: [false, false, false, false] }, {
-        text: intpre0(p.t11c).format(), border: [false, false, true, false], alignment: 'right',
+        text: intpre0(pphm3).format(), border: [false, false, true, false], alignment: 'right',
       }],
       [{
         text: '', border: [true, false, true, true], colSpan: 3,

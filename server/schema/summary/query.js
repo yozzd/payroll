@@ -984,8 +984,6 @@ const sumTax = async (id) => {
   return p[0];
 };
 
-
-
 const sumAll = async (id) => {
   const p = await Payroll.aggregate([
     { $match: { year: id } },
