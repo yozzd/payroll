@@ -99,6 +99,7 @@
             <el-option label="User" value="user"></el-option>
             <el-option label="Guest" value="guest"></el-option>
             <el-option label="Guest 2" value="guest2"></el-option>
+            <el-option label="Guest 3" value="guest3"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -135,6 +136,8 @@
             <el-option label="Admin" value="admin"></el-option>
             <el-option label="User" value="user"></el-option>
             <el-option label="Guest" value="guest"></el-option>
+            <el-option label="Guest 2" value="guest2"></el-option>
+            <el-option label="Guest 3" value="guest3"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -166,6 +169,7 @@ export default {
         user: 'User',
         guest: 'Guest',
         guest2: 'Guest 2',
+        guest3: 'Guest 3',
       },
       showAdd: false,
       showEdit: false,

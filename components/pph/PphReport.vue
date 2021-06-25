@@ -20,7 +20,7 @@
           clearable
         />
       </div>
-      <div v-if="$auth.hasRole('user')">
+      <div v-if="$auth.hasRole('guest3')">
         <el-button
           type="primary"
           :loading="loadingGen"
@@ -53,7 +53,7 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column
-        v-if="$auth.hasRole('user')"
+        v-if="$auth.hasRole('guest3')"
         type="selection"
         width="50"
         align="center"

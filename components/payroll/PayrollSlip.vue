@@ -20,8 +20,9 @@
           clearable
         />
       </div>
-      <div v-if="$auth.hasRole('user')">
+      <div>
         <el-button
+          v-if="$auth.hasRole('guest3')"
           type="primary"
           :loading="loadingGen"
           :disabled="!multipleSelection.length || loadingSend"
@@ -30,6 +31,7 @@
           Generate
         </el-button>
         <el-button
+          v-if="$auth.hasRole('user')"
           type="primary"
           :loading="loadingSend"
           :disabled="!multipleSelection.length || loadingGen"
@@ -62,7 +64,7 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column
-        v-if="$auth.hasRole('user')"
+        v-if="$auth.hasRole('guest3')"
         type="selection"
         width="50"
         align="center"

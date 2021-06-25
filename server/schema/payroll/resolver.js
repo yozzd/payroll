@@ -654,7 +654,7 @@ const Mutation = {
       eId: { type: GraphQLString },
       payPass: { type: GraphQLBoolean },
     },
-    resolve: auth.hasRole('user', async (_, { id, eId, payPass }) => {
+    resolve: auth.hasRole('guest3', async (_, { id, eId, payPass }) => {
       const p = await Payroll.aggregate([
         { $match: { _id: id } },
         { $unwind: '$employee' },
