@@ -353,6 +353,7 @@ const Query = {
           'employee.d0': 1,
           'employee.e0': 1,
           'employee.bv0': 1,
+          'employee.bv0a': 1,
           'employee.bw0': 1,
           'employee.bx0': 1,
           'employee.dr0': 1,

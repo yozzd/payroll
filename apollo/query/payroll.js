@@ -245,6 +245,7 @@ export const PayrollEarningOthers = gql`
         d0
         e0
         bv0
+        bv0a
         bw0
         bx0
         dr0

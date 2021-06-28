@@ -194,6 +194,7 @@ const EmployeeType = new GraphQLObjectType({
     bt0: { type: GraphQLFloat },
     bu0: { type: GraphQLFloat },
     bv0: { type: GraphQLFloat },
+    bv0a: { type: GraphQLString },
     bw0: { type: GraphQLFloat },
     bx0: { type: GraphQLFloat },
     by0: { type: GraphQLFloat },

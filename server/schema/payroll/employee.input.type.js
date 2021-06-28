@@ -128,6 +128,7 @@ const EarningOthersInputType = new GraphQLInputObjectType({
   fields: () => ({
     _id: { type: GraphQLString },
     bv0: { type: GraphQLInt },
+    bv0a: { type: GraphQLString },
     bw0: { type: GraphQLInt },
     dr0: { type: GraphQLInt },
     ds0: { type: GraphQLInt },

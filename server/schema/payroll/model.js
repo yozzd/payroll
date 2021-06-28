@@ -114,6 +114,7 @@ const EmployeeSchema = new Schema({
   bt0: { type: Number, default: 0 }, // Pembetulan Pembayaran Others
   bu0: { type: Number, default: 0 }, // Total Pembetulan Pembayaran
   bv0: { type: Number, default: 0 }, // Tambahan Lain Tidak Kena Pajak
+  bv0a: { type: String, trim: true }, // Tambahan Lain Tidak Kena Pajak Add
   bw0: { type: Number, default: 0 }, // THR Prorate Months
   bx0: { type: Number, default: 0 }, // THR Prorate Amount
   by0: { type: Number, default: 0 }, // Cuti Days

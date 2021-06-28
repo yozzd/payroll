@@ -22,6 +22,7 @@ import {
   Option,
   PageHeader,
   Pagination,
+  Popover,
   Progress,
   Select,
   Submenu,
@@ -55,6 +56,7 @@ Vue.use(MenuItem);
 Vue.use(Option);
 Vue.use(PageHeader);
 Vue.use(Pagination);
+Vue.use(Popover);
 Vue.use(Progress);
 Vue.use(Select);
 Vue.use(Submenu);

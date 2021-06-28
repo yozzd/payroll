@@ -52,6 +52,15 @@
           </p>
         </template>
         <template slot-scope="scope">
+          <el-popover
+            v-if="scope.row.bv0a"
+            placement="top-start"
+            width="200"
+            trigger="hover"
+            :content="scope.row.bv0a"
+          >
+            <i slot="reference" class="el-icon-chat-dot-square"></i>
+          </el-popover>
           <span>{{ scope.row.bv0 | currency }}</span>
         </template>
       </el-table-column>
@@ -184,6 +193,9 @@
             <el-form-item label="Tambahan Lain Tidak Kena Pajak">
               <el-input v-model="form.bv0"></el-input>
             </el-form-item>
+            <el-form-item label="Keterangan">
+              <el-input v-model="form.bv0a" type="textarea"></el-input>
+            </el-form-item>
             <el-form-item label="Months (THR Prorate)">
               <el-input v-model="form.bw0"></el-input>
             </el-form-item>
@@ -236,9 +248,9 @@ export default {
         idField: '_id',
         fields: ['d0', 'e0'],
         storeFields: [
-          '_id', 'd0', 'e0', 'bv0', 'bw0', 'bx0',
-          'dr0', 'ds0', 'dt0', 'du0',
-          'dv0', 'dw0', 'dx0', 'dy0',
+          '_id', 'd0', 'e0', 'bv0', 'bv0a',
+          'bw0', 'bx0', 'dr0', 'ds0', 'dt0',
+          'du0', 'dv0', 'dw0', 'dx0', 'dy0',
         ],
       }),
     };
@@ -266,6 +278,7 @@ export default {
                   employee: {
                     _id: this.form._id,
                     bv0: parseInt(this.form.bv0, 10),
+                    bv0a: this.form.bv0a,
                     bw0: parseInt(this.form.bw0, 10),
                     dr0: parseInt(this.form.dr0, 10),
                     ds0: parseInt(this.form.ds0, 10),
