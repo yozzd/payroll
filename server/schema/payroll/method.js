@@ -1372,9 +1372,6 @@ const genFinal = async (p) => {
     if (e.av0) vw1.push([{ text: 'Others Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.av0r).format(), alignment: 'right' }]);
 
     if (e.ba0) vw1.push([{ text: 'Functional Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.ba0r).format(), alignment: 'right' }]);
-    if (e.bb0) vw1.push([{ text: 'Shift Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bb0r).format(), alignment: 'right' }]);
-    if (e.bc0) vw1.push([{ text: 'Tig Welding Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bc0r).format(), alignment: 'right' }]);
-    if (e.bd0) vw1.push([{ text: 'Plasma Cutting Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bd0r).format(), alignment: 'right' }]);
     if (e.be0) vw1.push([{ text: 'LKS Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.be0r).format(), alignment: 'right' }]);
     if (e.bf0) vw1.push([{ text: 'Koperasi Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bf0r).format(), alignment: 'right' }]);
     if (e.bg0) vw1.push([{ text: 'Quality System Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bg0r).format(), alignment: 'right' }]);
@@ -1382,7 +1379,7 @@ const genFinal = async (p) => {
     if (e.bi0) vw1.push([{ text: 'Others Allowance', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(e.bi0r).format(), alignment: 'right' }]);
 
     const all1 = e.g0 + e.aj0r + e.ak0r + e.al0r + e.am0r + e.an0r + e.ao0r + e.ap0r + e.aq0r + e.ar0r + e.as0r
-    + e.at0r + e.au0r + e.av0r + e.ba0r + e.bb0r + e.bc0r + e.bd0r + e.be0r + e.bf0r + e.bg0r + e.bh0r + e.bi0r;
+    + e.at0r + e.au0r + e.av0r + e.ba0r + e.be0r + e.bf0r + e.bg0r + e.bh0r + e.bi0r;
 
     vw1.push([{ text: 'Salary All In', colSpan: 5 }, '', '', '', '', ':', { text: intpre0(all1).format(), alignment: 'right' }]);
 
@@ -1431,9 +1428,9 @@ const genFinal = async (p) => {
     if (e.av0) vw2.push(['Others Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.av0).format(), alignment: 'right' }]); income += e.av0;
 
     if (e.ba0) vw2.push(['Functional Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.ba0).format(), alignment: 'right' }]); income += e.ba0;
-    if (e.bb0) vw2.push(['Shift Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.bb0).format(), alignment: 'right' }]); income += e.bb0;
-    if (e.bc0) vw2.push(['Tig Welding Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.bc0).format(), alignment: 'right' }]); income += e.bc0;
-    if (e.bd0) vw2.push(['Plasma Cutting Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.bd0).format(), alignment: 'right' }]); income += e.bd0;
+    if (e.bb0) vw2.push(['Shift Allowance', { text: '', colSpan: 2 }, '', { text: '', alignment: 'right' }, 'Days', ':', { text: intpre0(e.bb0r).format(), alignment: 'right' }]); income += e.bb0r;
+    if (e.bc0) vw2.push(['Tig Welding Allowance', { text: '', colSpan: 2 }, '', { text: '', alignment: 'right' }, 'Days', ':', { text: intpre0(e.bc0r).format(), alignment: 'right' }]); income += e.bc0r;
+    if (e.bd0) vw2.push(['Plasma Cutting Allowance', { text: '', colSpan: 2 }, '', { text: '', alignment: 'right' }, 'Days', ':', { text: intpre0(e.bd0r).format(), alignment: 'right' }]); income += e.bd0r;
     if (e.be0) vw2.push(['LKS Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.be0).format(), alignment: 'right' }]); income += e.be0;
     if (e.bf0) vw2.push(['Koperasi Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.bf0).format(), alignment: 'right' }]); income += e.bf0;
     if (e.bg0) vw2.push(['Quality System Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.bg0).format(), alignment: 'right' }]); income += e.bg0;

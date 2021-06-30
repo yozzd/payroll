@@ -283,9 +283,9 @@ EmployeeSchema.pre('save', async function fn(next) {
   this.av0 = (this.av0r / 21) * this.j0;
 
   this.ba0 = (this.ba0r / 21) * this.j0;
-  this.bb0 = (this.bb0r / 21) * this.j0;
-  this.bc0 = (this.bc0r / 21) * this.j0;
-  this.bd0 = (this.bd0r / 21) * this.j0;
+  this.bb0 = this.bb0r;
+  this.bc0 = this.bc0r;
+  this.bd0 = this.bd0r;
   this.be0 = (this.be0r / 21) * this.j0;
   this.bf0 = (this.bf0r / 21) * this.j0;
   this.bg0 = (this.bg0r / 21) * this.j0;
