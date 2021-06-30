@@ -18,7 +18,7 @@ const parseDate = ({
 const strToDate = (str) => {
   if (str) {
     const d = str.split('-');
-    return new Date(`${d[0]}-${d[1]}-${d[2]}`);
+    return new Date(`${d[2]}-${d[1]}-${d[0]}`);
   }
   return null;
 };
