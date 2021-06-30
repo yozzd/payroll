@@ -1021,14 +1021,43 @@ const Mutation = {
     },
     resolve: auth.hasRole('user', async (_, { input }) => {
       const { _id, from, to } = input;
-      const px = await Payroll.findOne({ _id });
+      
+      const px = await Payroll.aggregate([
+        { $match: { _id } },
+        { $unwind: '$employee' },
+        {
+          $group: {
+            _id: '$_id',
+            period: { $first: '$period' },
+            year: { $first: '$year' },
+            month: { $first: '$month' },
+            dir: { $first: '$dir' },
+            freeze: { $first: '$freeze' },
+            rate: { $first: '$rate' },
+            typeHR: { $first: '$typeHR' },
+            from: { $first: '$from' },
+            to: { $first: '$to' },
+            employee: { $push: '$employee' },
+          },
+        },
+        {
+          $project: {
+            'employee._id': 0,
+            'employee.slip': 0,
+            'employee.final': 0,
+          },
+        },
+
+      ]);
+      
       const pn = new Payroll({
         from,
         to,
         rate: px.rate,
       });
 
-      const arr1 = px.employee.filter((v) => v.fg0 !== true && v.ff0 !== true && v.ex0 !== true);
+      const arr1 = px[0].employee.filter((v) => v.fg0 !== true && v.ff0 !== true && v.ex0 !== true);
+
       const arr2 = arr1.map((o) => {
         const v = o;
         v.j0 = 21;
@@ -1073,9 +1102,11 @@ const Mutation = {
 
         return v;
       });
+
       Object.assign(pn.employee, arr2);
 
       const s = await pn.save();
+
       return s;
     }),
   },
