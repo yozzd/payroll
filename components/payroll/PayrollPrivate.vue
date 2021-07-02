@@ -156,14 +156,10 @@
               </el-select>
             </el-form-item>
             <el-form-item label="Name (Bank)">
-              <el-select v-model="form.s0" filterable>
-                <el-option
-                  v-for="v in banks"
-                  :key="v"
-                  :label="v"
-                  :value="v"
-                ></el-option>
-              </el-select>
+              <el-input
+                v-model="form.s0"
+                :disabled="true"
+              ></el-input>
             </el-form-item>
           </div>
           <div class="flex-1">
@@ -222,7 +218,6 @@ export default {
       form: {},
       loading: false,
       freeze: false,
-      banks: [],
       rlg: [],
       miniSearch: new MiniSearch({
         idField: '_id',
@@ -302,7 +297,6 @@ export default {
           this.items = employee;
           this.miniSearch.removeAll();
           this.miniSearch.addAll(this.items);
-          this.banks = [...new Set(this.items.map((v) => v.s0))].sort();
           this.rlg = [...new Set(this.items.map((v) => v.et0))].sort();
           this.pageSizes.push(this.items.length);
         }
