@@ -1053,7 +1053,7 @@ const Mutation = {
       const pn = new Payroll({
         from,
         to,
-        rate: px.rate,
+        rate: px[0].rate,
       });
 
       const arr1 = px[0].employee.filter((v) => v.fg0 !== true && v.ff0 !== true && v.ex0 !== true);
