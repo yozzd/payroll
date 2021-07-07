@@ -1,6 +1,6 @@
 <template>
   <el-tabs v-model="activeName">
-    <el-tab-pane label="Basic" name="ca">
+    <el-tab-pane label="Basic / Allowance" name="ca">
       <div v-if="activeName==='ca'">
         <PayrollBasic />
       </div>
@@ -10,7 +10,7 @@
         <PayrollOvertime />
       </div>
     </el-tab-pane>
-    <el-tab-pane label="Fixed Allowance" name="cc">
+    <!--<el-tab-pane label="Fixed Allowance" name="cc">
       <div v-if="activeName==='cc'">
         <PayrollFixedAllowance />
       </div>
@@ -19,7 +19,7 @@
       <div v-if="activeName==='cd'">
         <PayrollNonFixedAllowance />
       </div>
-    </el-tab-pane>
+    </el-tab-pane>-->
     <el-tab-pane label="Retro Fill" name="ce">
       <div v-if="activeName==='ce'">
         <PayrollRetroFill />

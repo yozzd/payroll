@@ -116,7 +116,7 @@
                     Earnings
                   </template>
                   <el-menu-item index="ca">
-                    Basic
+                    Basic / Allowance
                   </el-menu-item>
                   <el-menu-item index="cb">
                     Overtime
