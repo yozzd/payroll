@@ -1428,7 +1428,7 @@ const genFinal = async (p) => {
     if (e.av0) vw2.push(['Others Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.av0).format(), alignment: 'right' }]); income += e.av0;
 
     if (e.ba0) vw2.push(['Functional Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.ba0).format(), alignment: 'right' }]); income += e.ba0;
-    if (e.bb0) vw2.push(['Shift Allowance', { text: '', colSpan: 2 }, '', { text: '', alignment: 'right' }, 'Days', ':', { text: intpre0(e.bb0r).format(), alignment: 'right' }]); income += e.bb0r;
+    if (e.bb0) vw2.push(['Shift Allowance', { text: '', colSpan: 2 }, '', { text: '', alignment: 'right' }, '', ':', { text: intpre0(e.bb0r).format(), alignment: 'right' }]); income += e.bb0r;
     if (e.bc0) vw2.push(['Tig Welding Allowance', { text: '', colSpan: 2 }, '', { text: '', alignment: 'right' }, 'Days', ':', { text: intpre0(e.bc0r).format(), alignment: 'right' }]); income += e.bc0r;
     if (e.bd0) vw2.push(['Plasma Cutting Allowance', { text: '', colSpan: 2 }, '', { text: '', alignment: 'right' }, 'Days', ':', { text: intpre0(e.bd0r).format(), alignment: 'right' }]); income += e.bd0r;
     if (e.be0) vw2.push(['LKS Allowance', { text: ms, colSpan: 2 }, '', { text: e.j0, alignment: 'right' }, 'Days', ':', { text: intpre0(e.be0).format(), alignment: 'right' }]); income += e.be0;
