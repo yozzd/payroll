@@ -837,6 +837,7 @@ const Mutation = {
         p0,
         q0,
         r0,
+        s0: 'MANDIRI',
         u0,
         v0,
         z0: '',
