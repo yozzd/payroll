@@ -3419,7 +3419,7 @@ const genXLSSumTax = async (p, y) => {
     const { employee: e } = p;
     await fs.ensureDir(`static/summary/${y}`);
 
-    const len = e.length + 4;
+    const len = e.length + 5;
     const wb = {
       SheetNames: ['Sheet1'],
       Sheets: {
@@ -3513,7 +3513,7 @@ const genXLSSumTax = async (p, y) => {
       },
     };
 
-    let row = 3;
+    let row = 4;
     e.map((t, i) => {
       row += 1;
       wb.Sheets.Sheet1[`A${row}`] = { t: 'n', v: i + 1 };
