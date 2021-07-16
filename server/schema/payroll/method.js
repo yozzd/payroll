@@ -1694,7 +1694,7 @@ const genFinal = async (p) => {
             widths: [105, 280, 105],
             body: [
               [{ text: '', border: [false, false, false, true] }, {
-                text: `Pembayaran sebesar / Total payment of Rp. ${intpre0(e.ed0).format()}`, bold: true, alignment: 'center', border: [false, false, false, true],
+                text: `Pembayaran sebesar / Total payment of Rp. ${intpre0(Math.floor(e.ed0 / 100) * 100).format()}`, bold: true, alignment: 'center', border: [false, false, false, true],
               }, { text: '', border: [false, false, false, true] }],
             ],
           },
@@ -1914,9 +1914,9 @@ const genPDFFinalQ = async (p) => {
         {
           text: 'Take Home Pay', bold: true, alignment: 'center',
         },
-        // {
-        //   text: 'THP for Bank', bold: true, alignment: 'center',
-        // },
+        {
+          text: 'THP for Bank', bold: true, alignment: 'center',
+        },
       ],
     ];
 
@@ -1925,13 +1925,13 @@ const genPDFFinalQ = async (p) => {
         { text: (i + 1), alignment: 'center' }, { text: e.e0, alignment: 'center' },
         e.d0, e.t0, e.s0,
         { text: intpre0(e.ed0).format(), alignment: 'right' },
-        // { text: intpre0(e.ed0F).format(), alignment: 'right' },
+        { text: intpre0(e.ed0F).format(), alignment: 'right' },
       ]);
 
       return true;
     });
 
-    vw1.push(['', '', '', '', '', { text: intpre0(p.sum1).format(), alignment: 'right' }/* , { text: intpre0(p.sum2).format(), alignment: 'right' } */]);
+    vw1.push(['', '', '', '', '', { text: intpre0(p.sum1).format(), alignment: 'right' }, { text: intpre0(p.sum2).format(), alignment: 'right' }]);
 
     const vw2 = [
       [{ text: `Batam, ${idDateFormat(new Date(), 'dd-MM-yyyy')}`, colSpan: 4 }, '', '', ''],
@@ -1981,7 +1981,7 @@ const genPDFFinalQ = async (p) => {
         {
           style: 'tbl1',
           table: {
-            widths: [15, 40, 220, 70, 40, 60],
+            widths: [15, 40, 180, 70, 40, 60, 60],
             body: vw1,
           },
         },
@@ -2044,10 +2044,10 @@ const genXLSFinalQ = async (p) => {
           D3: { t: 's', v: 'Bank No.' },
           E3: { t: 's', v: 'Bank Name' },
           F3: { t: 's', v: 'Take Home Pay' },
-          // G3: { t: 's', v: 'THP for Bank' },
+          G3: { t: 's', v: 'THP for Bank' },
           '!cols': [
             { wpx: 26 }, { wpx: 72 }, { wpx: 234 }, { wpx: 95 },
-            { wpx: 63 }, { wpx: 81 }, { wpx: 75 },
+            { wpx: 63 }, { wpx: 81 }, { wpx: 75 }, { wpx: 75 },
           ],
         },
       },
@@ -2062,14 +2062,14 @@ const genXLSFinalQ = async (p) => {
       wb.Sheets.Sheet1[`D${row}`] = { t: 's', v: t.t0 };
       wb.Sheets.Sheet1[`E${row}`] = { t: 's', v: t.s0 };
       wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: t.ed0, z: '#,##0' };
-      // wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: t.ed0F, z: '#,##0' };
+      wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: t.ed0F, z: '#,##0' };
 
       return true;
     });
 
     row += 1;
     wb.Sheets.Sheet1[`F${row}`] = { t: 'n', v: p.sum1, z: '#,##0' };
-    // wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: p.sum2, z: '#,##0' };
+    wb.Sheets.Sheet1[`G${row}`] = { t: 'n', v: p.sum2, z: '#,##0' };
 
     const fn = `static/report/${p.dir}/${p.dir}_final.xlsx`;
     const content = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', bookSST: false });
